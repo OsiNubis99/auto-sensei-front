@@ -13,7 +13,7 @@
   <div class="py-14 ">
     <div class="grid lg:grid-cols-2 gap-20 px-5  lg:px-20 lg:pb-0 h-full">
       <div class="flex w-full flex-col items-start gap-10">
-        <h3 class="text-left text-5xl font-bold leading-[58px] p ">
+        <h3 class="text-left  text-3xl md:text-5xl font-bold leading-[58px] p ">
           Our Journey
         </h3>
         <p class="text-lg font-normal ">
@@ -46,7 +46,7 @@
       <div class=" rounded bg-white overflow-hidden shadow-lg" @click="redirectLogin('sellers')">
         <img class="w-full" src="../assets/svg/about/Frame2.svg" alt="Sunset in the mountains">
         <div class="px-6 py-4">
-          <div class="text-4xl font-bold mb-2">For Sellers</div>
+          <div class=" text-2xl md:text-4xl font-bold mb-2">For Sellers</div>
           <p class="text-gray-700 text-base">
             We created our platform to ensure clients have the ability to get the best value for their vehicle with their
             busy days & schedules. No more going dealer to dealer looking to see who offers the best price.
@@ -56,7 +56,7 @@
       <div class=" rounded bg-white overflow-hidden shadow-lg" @click="redirectLogin('dealers')">
         <img class="w-full" src="../assets/svg/about/Frame3.svg" alt="Sunset in the mountains">
         <div class="px-6 py-4">
-          <div class="text-4xl font-bold mb-2">For Dealers</div>
+          <div class="text-2xl md:text-4xl font-bold mb-2">For Dealers</div>
           <p class="text-gray-700 text-base">
             Dealers are able to increase their inventory without having to go to their local auctions, or online auctions
             bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
@@ -75,7 +75,7 @@
             tabindex="1">
             <div
               class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-10 relative">
-              <div class="group-focus:text-primary text-lg font-medium transition ease duration-500">
+              <div class="group-focus:text-primary text-sm md:text-lg font-medium transition ease duration-500">
                 Find the Best Value Without the Hassle
               </div>
               <div
@@ -96,7 +96,7 @@
             tabindex="2">
             <div
               class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-10 relative">
-              <div class="group-focus:text-primary text-lg font-medium transition ease duration-500">
+              <div class="group-focus:text-primary text-sm md:text-lg font-medium transition ease duration-500">
                 Attract a Network of Dealers to Bid on Your Vehicle
               </div>
               <div
@@ -117,7 +117,7 @@
             tabindex="2">
             <div
               class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-10 relative">
-              <div class="group-focus:text-primary text-lg font-medium transition ease duration-500">
+              <div class="group-focus:text-primary text-sm md:text-lg font-medium transition ease duration-500">
                 Effortless Access to High-Quality Vehicles
               </div>
               <div
@@ -144,7 +144,7 @@
             tabindex="1">
             <div
               class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-10 relative">
-              <div class="group-focus:text-primary text-lg font-medium transition ease duration-500">
+              <div class="group-focus:text-primary text-sm md:text-lg font-medium transition ease duration-500">
                 Find the Best Value Without the Hassle
               </div>
               <div
@@ -165,7 +165,7 @@
             tabindex="2">
             <div
               class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-10 relative">
-              <div class="group-focus:text-primary text-lg font-medium transition ease duration-500">
+              <div class="group-focus:text-primary text-sm md:text-lg font-medium transition ease duration-500">
                 Attract a Network of Dealers to Bid on Your Vehicle
               </div>
               <div
@@ -186,7 +186,7 @@
             tabindex="2">
             <div
               class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-10 relative">
-              <div class="group-focus:text-primary text-lg font-medium transition ease duration-500">
+              <div class="group-focus:text-primary text-sm md:text-lg font-medium transition ease duration-500">
                 Effortless Access to High-Quality Vehicles
               </div>
               <div

@@ -92,7 +92,7 @@ import iconTwitter from '../../components/icons/redes/iconTwitter.vue'
 import iconYoutube from '../../components/icons/redes/iconYoutube.vue'
 import { useRoute } from 'vue-router'
 import LogoIcon from '../../assets/svg/logo.vue'
-import LogoBlack from '@/assets/svg/LogoBlack.vue'
+import LogoBlack from '../../assets/svg/logoBlack.vue'
 export default {
     components: {
         iconInstagram,

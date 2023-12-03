@@ -10,7 +10,7 @@
             <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark grid  md:grid-cols-2' : 'fixed'), (scrollPosition > 100 ? 'bg-blue-dark z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all')]"
                 class="flex p-4  top-0 z-50 items-center w-full justify-between flex-wrap bg-teal md:px-20 md:py-6">
                 <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
-                    <LogoIcon :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]'  : ''" />
+                    <LogoIcon :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]' : ''" />
                     <p v-if="path == 'login' || path == 'signup'"
                         class="text-primary pl-2  flex items-center md:text-2xl font-normal">
                         <span v-if="route.params.rol == 'sellers'">For Sellers</span>
@@ -26,13 +26,13 @@
                         </svg>
                     </button>
                 </div>
-                <div :class="[(open ? 'block fixed top-0 left-0 h-screen w-[80%] md:w-auto bg-base-black  flex-col ' : 'hidden'), (path == 'login' || path == 'signup' ? 'justify-end' : '')]"
+                <div :class="[(open ? 'block fixed top-0 left-0 h-screen !w-[80%] md:w-auto bg-base-black  flex-col ' : 'hidden'), (path == 'login' || path == 'signup' ? 'justify-end' : '')]"
                     class="w-full flex-grow lg:flex sm:items-center sm:w-auto">
                     <div :class="[(path === 'login' || path === 'signup' ? 'hidden' : 'flex'), (open && 'flex-col p-5')]"
                         class="text-sm gap-6 sm:flex-grow text-white">
                         <p v-if="open" @click="open = false"
                             class="text-2xl absolute right-4 top-2 font-extrabold text-white">X</p>
-                        <RouterLink class="font-medium text-sm" to="/">Home</RouterLink>
+                        <RouterLink class="font-medium text-sm"  to="/">Home</RouterLink>
                         <RouterLink class="font-medium text-sm" to="#">Sold Auctions</RouterLink>
                         <RouterLink class="font-medium text-sm" to="#">How It Works?</RouterLink>
                         <RouterLink class="font-medium text-sm" to="/about">About</RouterLink>
@@ -50,13 +50,14 @@
                             <span class="on">EN</span>
                             <span class="off">ES</span>
                         </div> -->
-                        <RouterLink :to="path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`">
+                        <RouterLink :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
                             <p class="text-white text-sm font-medium">
                                 <span v-if="path == 'login'">Don’t have an account?</span>
                                 <span v-if="path == 'signup'"> Already have an account?</span>
                             </p>
                         </RouterLink>
-                        <RouterLink v-if="path !== 'login'" :to="/login/ + route.params.rol"
+                        <RouterLink v-if="path !== 'login'"
+                            :to="path == 'home' || path == 'about' ? `/login/sellers` : `/login/${route.params.rol}`"
                             :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'" class="btn">
                             <span v-if="path == 'signup'">Sign In</span>
                             <span v-else>Login</span>

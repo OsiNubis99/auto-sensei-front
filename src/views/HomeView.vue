@@ -67,7 +67,7 @@
         best price.
       </p>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 p-20 gap-20 relative lg:px-20 h-full">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 p-4 gap-20 relative lg:px-20 h-full">
       <div v-for="(  item, index  ) in   WhyAutoSensei  " :key="index" class="flex flex-col items-center gap-5">
         <component :is="item.icon"></component>
         <h5 class=" text-2xl text-center font-semibold text-white"> {{ item.title }} </h5>
@@ -88,7 +88,7 @@
     </video>
   </div>
   <div class="bg-base-gray-light py-14">
-    <div class="relative">
+    <div class="relative p-4">
       <Heanding :type="'h2'" :color="'text-base-black'" :msg="'Sold Auction Vehicles'" />
       <p class="text-lg font-normal text-blue-dark text-center">Auction your car to dealers right from your home, for the
         best price.
@@ -98,24 +98,13 @@
       <div class="w-full  p-5 sm:p-0">
         <swiper pagination :modules="modules" :slides-per-view="1" class="mySwiperHome bg-white ">
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t39.30808-6/402650390_10230594910592586_3320395203635743553_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=HLjJnWHTH3cAX_i0w80&_nc_ht=scontent.fccs9-1.fna&oh=00_AfCtYSvCA0hYdzIpabpOaTJq2yUrkS7p39XfHYvJvu-cTw&oe=656022B2"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_978610-MLV73175181347_112023-O.webp" alt="">
           </swiper-slide>
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t39.30808-6/402657261_10230594864791441_5305654713800610995_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=7ywy2Mk3GCwAX_SMZJR&_nc_ht=scontent.fccs9-1.fna&oh=00_AfBQ6kay7jTNwpaZGISVivV9YVtz6Axfj2cJQ6t4D6mFww&oe=65601D55"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_693606-MLV73175191335_112023-O.webp" alt="">
           </swiper-slide>
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t39.30808-6/402631808_10230594865231452_512220745337807809_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=9LrqfTejTrQAX9QJFH6&_nc_ht=scontent.fccs9-1.fna&oh=00_AfDgYMIfGWS3KxpiMDlQ31sqMGUs8mUmy_SlOvgVDG_Xvw&oe=6560398C"
-              alt="">
-          </swiper-slide>
-          <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t39.30808-6/402652031_10230594863831417_3355837870493857108_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=GW_PuflxKPwAX-MrVDt&_nc_ht=scontent.fccs9-1.fna&oh=00_AfD3ROSkl14u5lFw9OBVcpdagIGPjycF3W7ViZzI5_M_mA&oe=655F21B4"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_899275-MLV73092445294_112023-O.webp" alt="">
           </swiper-slide>
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">2008 BMW 528 I</div>
@@ -148,19 +137,13 @@
       <div class="w-full  p-5 sm:p-0">
         <swiper pagination :modules="modules" :slides-per-view="1" class="mySwiperHome bg-white ">
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t45.5328-4/351724424_6486728198122919_6963491804068492186_n.jpg?stp=dst-jpg_s960x960&_nc_cat=106&ccb=1-7&_nc_sid=247b10&_nc_ohc=VYhk0-BIxD4AX-LOuG7&_nc_ht=scontent.fccs9-1.fna&oh=00_AfABKLZzAwFwZSLaLhIiSzsG2EJ_uPNGRLkDFmYVyX0Iag&oe=655F884E"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_978610-MLV73175181347_112023-O.webp" alt="">
           </swiper-slide>
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t45.5328-4/365500063_24327088653545075_6390645693964396919_n.jpg?stp=dst-jpg_s960x960&_nc_cat=108&ccb=1-7&_nc_sid=247b10&_nc_ohc=vvA-Y656QpsAX-AFFp_&_nc_ht=scontent.fccs9-1.fna&oh=00_AfBXyDlZw4nY-h4w0guJgWjg6EwKw7fL78qXYpIaX1574w&oe=65606C4E"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_693606-MLV73175191335_112023-O.webp" alt="">
           </swiper-slide>
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t45.5328-4/366034318_6946749978679045_3715556629228025059_n.jpg?stp=dst-jpg_s960x960&_nc_cat=106&ccb=1-7&_nc_sid=247b10&_nc_ohc=qxrBIKQcFN0AX-pePEt&_nc_ht=scontent.fccs9-1.fna&oh=00_AfA_NPRxYgW2Eqk5-4B00oHziFcxxAzSOD5Jbh7l9BiUuQ&oe=655FBC78"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_899275-MLV73092445294_112023-O.webp" alt="">
           </swiper-slide>
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">2008 BMW 528 I</div>
@@ -193,19 +176,13 @@
       <div class="w-full  p-5 sm:p-0">
         <swiper pagination :modules="modules" :slides-per-view="1" class="mySwiperHome bg-white ">
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t39.30808-6/402117332_10162134017184162_3595495281193056070_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=L4vtAU1aWPIAX8Tgb47&_nc_ht=scontent.fccs9-1.fna&oh=00_AfA3vVref8hQnJvhfP6tfpv_VXK4s9RoIEO8BtGeZBwp8w&oe=655FE844"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_978610-MLV73175181347_112023-O.webp" alt="">
           </swiper-slide>
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t39.30808-6/402858605_10162134013839162_8583008530928023253_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=yoG7N0ycLSMAX8xLywa&_nc_ht=scontent.fccs9-1.fna&oh=00_AfD49WbKG5nGQgc2nIjlRFsbfKBeI7-iKHW8GIFds9XFLg&oe=655F4643"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_693606-MLV73175191335_112023-O.webp" alt="">
           </swiper-slide>
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t39.30808-6/402059321_10162134013999162_1720359447289382942_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=nddIwKrAFz4AX8g99pY&_nc_ht=scontent.fccs9-1.fna&oh=00_AfCFbixEibjQ799OKnnAdgkFEG9tvfE9ZmWBVyDtCIgW6w&oe=65608BAB"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_899275-MLV73092445294_112023-O.webp" alt="">
           </swiper-slide>
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">2008 BMW 528 I</div>
@@ -238,19 +215,13 @@
       <div class="w-full  p-5 sm:p-0">
         <swiper pagination :modules="modules" :slides-per-view="1" class="mySwiperHome bg-white ">
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t45.5328-4/397967047_5136415619815617_3592523180470798098_n.jpg?stp=dst-jpg_s960x960&_nc_cat=110&ccb=1-7&_nc_sid=247b10&_nc_ohc=701lxfu3eisAX-EDNK5&_nc_ht=scontent.fccs9-1.fna&oh=00_AfAPxKk9OXmbWZ-Ci5hFfm0G6rfom5vXQUfINnd0puxATQ&oe=655FE47B"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_978610-MLV73175181347_112023-O.webp" alt="">
           </swiper-slide>
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t45.5328-4/398939038_6942608635828738_1367229765502955313_n.jpg?stp=dst-jpg_s960x960&_nc_cat=106&ccb=1-7&_nc_sid=247b10&_nc_ohc=6QJxSHAYgxsAX_TOq8P&_nc_ht=scontent.fccs9-1.fna&oh=00_AfBS7CiKdzEPE2BS9VOjP667Th6ZMnM9irSFqsJsqea-CA&oe=655FA9C8"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_693606-MLV73175191335_112023-O.webp" alt="">
           </swiper-slide>
           <swiper-slide>
-            <img class="w-full"
-              src="https://scontent.fccs9-1.fna.fbcdn.net/v/t45.5328-4/399047659_6587055898070002_4687430094196525477_n.jpg?stp=dst-jpg_s960x960&_nc_cat=111&ccb=1-7&_nc_sid=247b10&_nc_ohc=lASbwMGKifIAX_q755T&_nc_ht=scontent.fccs9-1.fna&oh=00_AfCFD9FrE5QgZ3jMD_u2gXwTeCsaO97evUgcijRiehzeLw&oe=65607A05"
-              alt="">
+            <img class="w-full" src="https://http2.mlstatic.com/D_NQ_NP_899275-MLV73092445294_112023-O.webp" alt="">
           </swiper-slide>
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">2008 BMW 528 I</div>

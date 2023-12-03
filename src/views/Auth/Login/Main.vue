@@ -18,11 +18,29 @@
             </div>
             <img class="h-auto absolute bottom-0 w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg" alt="" />
         </div>
-        <div class="flex-1 flex flex-col lg:w-1/2 justify-between py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-            <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
+        <div
+            class="flex-1 flex flex-col lg:w-1/2 relative justify-between py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+            <div v-if="isLoadingLogin" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
+                <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
+                    <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+                        <div class="animate-bounce">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
+                                stroke-width="0" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            <div v-else
+                class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
                 <div class="mx-auto w-full ">
                     <div>
-                        <h2 class="mt-6 text-xl md:text-4xl font-bold text-base-black text-center mb-5 ">Welcome to AutoSensei</h2>
+                        <h2 class="mt-6 text-xl md:text-4xl font-bold text-base-black text-center mb-5 ">Welcome to
+                            AutoSensei</h2>
 
                         <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to dealers right from
                             your home.</p>
@@ -35,8 +53,8 @@
                                         Email address
                                     </label>
                                     <div class="mt-1">
-                                        <input id="email" name="email" type="email" autoComplete="email"
-                                            placeholder="your@email.com"
+                                        <input id="email" v-model="payloadData.username" name="email" type="email"
+                                            autoComplete="email" placeholder="your@email.com"
                                             class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                     </div>
                                 </div>
@@ -45,16 +63,17 @@
                                         Password
                                     </label>
                                     <div class="mt-1">
-                                        <input id="password" name="password" type="password" placeholder="*********"
-                                            autoComplete="current-password" required
+                                        <input id="password" v-model="payloadData.password" name="password" type="password"
+                                            placeholder="*********" autoComplete="current-password" required
                                             class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="submit"
+                                    <button @click="getLogin"
                                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Login
                                     </button>
+                                    <p class="mt-4 uppercase text-error text-md font-semibold">{{ messageError }}</p>
                                 </div>
                                 <div class="text-sm mt-6 text-center">
                                     <RouterLink to="#" class="font-medium underline text-indigo-600 hover:text-indigo-500">
@@ -67,7 +86,7 @@
                 </div>
 
             </div>
-            <div class="text-center">
+            <div v-if="!isLoadingLogin" class="text-center">
                 <p class=" text-xs font-normal text-[#666]">
                     By clicking “Log In”, you acknowledge that you have <br>
                     read & agreed to AutoSensei User's
@@ -83,17 +102,51 @@
 <script>
 import { ref, watch, computed, onMounted } from "vue";
 import { useRouter, useRoute } from 'vue-router'
+import { useAuthStore } from "@/stores/auth";
 export default {
     components: {
     },
     setup() {
         const route = useRoute();
+        const router = useRouter()
         let rol = ref()
+        const store = useAuthStore();
+        const messageError = ref('')
+        const isLoadingLogin = ref(false)
+        const payloadData = ref({
+            username: "barryallen1",
+            password: "theFastestManAlive1*"
+        });
+        const getLogin = async () => {
+            try {
+                if (payloadData.value.username == "" || payloadData.value.password == "") {
+                    console.log('Todos los campos son requeridos',)
+                    return;
+                }
+                isLoadingLogin.value = true;
+                let res = await store.login(payloadData.value);
+                if (res.data.access_token) {
+                    router.replace({ path: '/dashboard' })
+                    setInterval(() => {
+                        isLoadingLogin.value = false;
+                    }, 800);
+                  
+                }
+            } catch (error) {
+                messageError.value = error.response.data.message
+                console.log(error);
+                isLoadingLogin.value = false;
+            }
+        };
         onMounted(() => {
             rol.value = route.params.rol
         })
         return {
             rol,
+            getLogin,
+            payloadData,
+            isLoadingLogin,
+            messageError
         };
     },
 };

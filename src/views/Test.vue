@@ -1,18 +1,4 @@
 <template>
-    <!-- <div style=" width: 50%;
-    height: 100vh;
-    overflow: hidden;">
-        <swiper id="cotend" style=" position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: -17px; /* Increase/Decrease this value for cross-browser compatibility */
-    overflow-y: scroll; " :modules="modules" :slidesPerView="3" :direction="'vertical'" :spaceBetween="30"
-            :virtual="true" class="mySwiper" @swiper="setSwiperRef">
-            <swiper-slide v-for="(slideContent, index) in slides" :key="index" :virtualIndex="index">{{ slideContent
-            }}</swiper-slide>
-        </swiper>
-    </div> -->
     
     <div id="container1">
         <div id="container2">
