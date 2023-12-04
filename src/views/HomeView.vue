@@ -272,7 +272,7 @@
 <script>
 import { ref, watch, computed } from "vue";
 import IconCardFree from '../components/icons/home/IconCardFree.vue'
-import IconPlay from '../components/icons/home/IconPlay.vue'
+import IconPlay from '../components/icons/home/iconPlay.vue'
 import iconCheckbox from '../components/icons/home/iconCheckbox.vue'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
