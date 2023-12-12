@@ -1,11 +1,11 @@
 import axios from 'axios'
 import router from '@/router'
 
-const authStore = localStorage.getItem("authStore");
+const authStore = localStorage.getItem("token");
 let token = null;
 
 if (authStore) {
-  token = JSON.parse(authStore).token;
+  token = authStore;
 }
 
 const axiosIns = axios.create({

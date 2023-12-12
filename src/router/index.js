@@ -136,6 +136,12 @@ const routes = [
         component: () => import('../views/Dashboard/config-setting/Main.vue')
 
       },
+      {
+        path: "/faqs",
+        name: "faqs",
+        component: () => import('../views/Dashboard/faqs/Main.vue')
+
+      },
     ],
   },
   {

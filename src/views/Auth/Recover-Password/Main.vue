@@ -49,7 +49,7 @@
                                 include a password that
                                 complies with the rules to ensure security</p>
                         </div>
-                        <p v-if="message" class="text-md font-medium text-error"> {{ message }} </p>
+                      <!--   <p v-if="message" class="text-md font-medium text-error"> {{ message }} </p> -->
                         <button :disabled="loading ? true : false" @click="changePassword"
                             :class="loading ? 'bg-base-gray text-white' : 'bg-primary '"
                             class="inline-flex  items-center justify-center gap-2 px-4 py-3 text-sm font-semibold  transition-all bg-indigo-500 border border-transparent rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Reset
@@ -67,6 +67,7 @@ import { ref, computed, watch, onMounted } from "vue";
 import LogoIcon from '@/assets/svg/logo.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from "@/stores/user";
+import { toast } from "vue3-toastify";
 export default {
     components: {
         LogoIcon,
@@ -84,10 +85,14 @@ export default {
         });
         const changePassword = async () => {
             if (formData.value.password == "" || formData.value.confirmPassword == "") {
-                console.log('Todos los campos son requeridos',)
+                toast("Required field", {
+                    type: "error",
+                });
                 return;
             } else if (formData.value.password !== formData.value.confirmPassword) {
-                console.log('Los password deben ser iguales',)
+                toast("Passwords do not match", {
+                    type: "error",
+                });
                 return
             }
             loading.value = true
@@ -101,7 +106,9 @@ export default {
                 let res = await store.userData(data)
                 if (res.data.message === 'Pasword should be valid') {
                     message.value = res.data.message
-                    console.log('debes ingresar un passwork invalido')
+                    toast("Verify that your password is 8 characters long containing only characters, numeric digits, lower case and capital letters", {
+                        type: "error",
+                    });
                     loading.value = false
                 } else {
                     loading.value = false
