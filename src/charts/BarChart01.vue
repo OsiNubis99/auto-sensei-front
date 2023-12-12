@@ -2,7 +2,7 @@
   <div class="px-5 py-3">
     <ul ref="legend" class="flex flex-wrap"></ul>
   </div>
-  <div class="grow">
+  <div class="grow ">
     <canvas ref="canvas" :data="data" :width="width" :height="height"></canvas>
   </div>
 </template>

@@ -30,17 +30,61 @@ export const useAuthStore = defineStore("authStore", {
           });
       });
     },
+    register(payload) {
+      console.log('payload', payload)
+      return new Promise((resolve, reject) => {
+        axios
+          .post("/user/register", payload)
+          .then((response) => {
+            console.log('register', response)
+            resolve(response);
+          })
+          .catch((error) => {
+            console.log('error', error)
+            reject(error);
+          });
+      });
+    },
+    recoverPassword(payload) {
+      console.log('payload', payload)
+      return new Promise((resolve, reject) => {
+        axios
+          .post("/auth/forgotten-password", payload)
+          .then((response) => {
+            console.log('Recover password', response)
+
+            resolve(response);
+          })
+          .catch((error) => {
+            console.log('error', error)
+            reject(error);
+          });
+      });
+    },
+    authProfile(payload) {
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${payload.token}`
+
+        }
+      };
+      console.log('PERAA', config)
+      return new Promise((resolve, reject) => {
+        axios
+          .get("/auth/profile", config)
+          .then((response) => {
+            this.userData = response.data
+            console.log('authProfile', response)
+            resolve(response);
+          })
+          .catch((error) => {
+            console.log('error', error)
+            reject(error);
+          });
+      });
+    },
+
   },
 });
 
-export const validateToken = () => {
-  return new Promise((resolve, reject) => {
-    axios.get("api/user/auth")
-      .then((response) => {
-        resolve(response);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};

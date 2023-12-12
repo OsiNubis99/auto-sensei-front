@@ -11,8 +11,8 @@
             </div>
             <div v-else class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
                 <h1 class=" text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>
-                <p class="w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and <br>
-                    efficient process. Maximize the value of your car by inviting competitive bids from <br> local
+                <p class="w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and
+                    efficient process. Maximize the value of your car by inviting competitive bids from local
                     dealerships.
                 </p>
             </div>
@@ -47,13 +47,13 @@
                     </div>
                     <div class="mt-8">
                         <div class="mt-6">
-                            <form action="#" method="POST" class="space-y-7">
+                            <div class="space-y-7">
                                 <div>
                                     <label htmlFor="email" class="block text-sm font-medium text-gray-700">
                                         Email address
                                     </label>
                                     <div class="mt-1">
-                                        <input id="email" v-model="payloadData.username" name="email" type="email"
+                                        <input id="email" v-model="payloadData.email" name="email" type="email"
                                             autoComplete="email" placeholder="your@email.com"
                                             class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                     </div>
@@ -64,7 +64,7 @@
                                     </label>
                                     <div class="mt-1">
                                         <input id="password" v-model="payloadData.password" name="password" type="password"
-                                            placeholder="*********" autoComplete="current-password" required
+                                            placeholder="*********" autoComplete="current-password"
                                             class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                     </div>
                                 </div>
@@ -76,11 +76,12 @@
                                     <p class="mt-4 uppercase text-error text-md font-semibold">{{ messageError }}</p>
                                 </div>
                                 <div class="text-sm mt-6 text-center">
-                                    <RouterLink to="#" class="font-medium underline text-indigo-600 hover:text-indigo-500">
+                                    <RouterLink to="/recover-password"
+                                        class="font-medium underline text-indigo-600 hover:text-indigo-500">
                                         Forgot your password?
                                     </RouterLink>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,6 +104,8 @@
 import { ref, watch, computed, onMounted } from "vue";
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from "@/stores/auth";
+import { toast } from "vue3-toastify";
+import { regexEmail } from "../../../utils/Regex";
 export default {
     components: {
     },
@@ -114,26 +117,49 @@ export default {
         const messageError = ref('')
         const isLoadingLogin = ref(false)
         const payloadData = ref({
-            username: "barryallen1",
-            password: "theFastestManAlive1*"
+            email: "",
+            password: ""
         });
         const getLogin = async () => {
+            if (payloadData.value.email == "" || payloadData.value.password == "") {
+                toast("Campos Requerido", {
+                    type: "error",
+                });
+                return;
+            } else if (!regexEmail.test(payloadData.value.email.trim())) {
+                toast("Invalid email", {
+                    type: "error",
+                });
+                return;
+            }
+            isLoadingLogin.value = true;
             try {
-                if (payloadData.value.username == "" || payloadData.value.password == "") {
-                    console.log('Todos los campos son requeridos',)
-                    return;
-                }
-                isLoadingLogin.value = true;
                 let res = await store.login(payloadData.value);
                 if (res.data.access_token) {
-                    router.replace({ path: '/dashboard' })
-                    setInterval(() => {
-                        isLoadingLogin.value = false;
-                    }, 800);
-                  
+                    let resProfile = await store.authProfile({ token: res.data.access_token })
+
+                    if (resProfile.statusText = "OK") {
+                        setInterval(() => {
+                            switch (resProfile.data.type) {
+                                case 0:
+                                    router.push({ path: '/inicio' })
+                                    break;
+                                case 1:
+                                    router.push({ path: '/all' })
+                                    break;
+                                case 2:
+                                    router.push({ path: '/upcoming' })
+                                    break;
+                                default:
+                                    router.push({ name: 'home' })
+                                    break;
+                            }
+                            isLoadingLogin.value = false;
+                        }, 800);
+                    }
                 }
             } catch (error) {
-                messageError.value = error.response.data.message
+                messageError.value = error?.response?.data?.message
                 console.log(error);
                 isLoadingLogin.value = false;
             }

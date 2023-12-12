@@ -1,13 +1,13 @@
 <template>
     <header>
         <div v-if="path == 'login' || path == 'signup'" class="h-10 p-6 flex justify-start  items-center bg-base-black">
-            <div class="flex items-center gap-5" @click="back">
+            <div class="flex items-center gap-5 cursor-pointer" @click="back">
                 <IconArrow class="rotate-90" />
-                <p class="text-sm text-white font-medium" to="/">Back to Home</p>
+                <p class="text-sm text-white font-medium" >Back to Home</p>
             </div>
         </div>
         <div class="font-sans antialiased" id="app">
-            <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark grid  md:grid-cols-2' : 'fixed'), (scrollPosition > 100 ? 'bg-blue-dark z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all')]"
+            <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''), (scrollPosition > 100 ? 'bg-blue-dark z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all')]"
                 class="flex p-4  top-0 z-50 items-center w-full justify-between flex-wrap bg-teal md:px-20 md:py-6">
                 <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
                     <LogoIcon :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]' : ''" />
@@ -32,7 +32,7 @@
                         class="text-sm gap-6 sm:flex-grow text-white">
                         <p v-if="open" @click="open = false"
                             class="text-2xl absolute right-4 top-2 font-extrabold text-white">X</p>
-                        <RouterLink class="font-medium text-sm"  to="/">Home</RouterLink>
+                        <RouterLink class="font-medium text-sm" to="/">Home</RouterLink>
                         <RouterLink class="font-medium text-sm" to="#">Sold Auctions</RouterLink>
                         <RouterLink class="font-medium text-sm" to="#">How It Works?</RouterLink>
                         <RouterLink class="font-medium text-sm" to="/about">About</RouterLink>
@@ -94,13 +94,13 @@ export default {
         const form = storeData.formData
         let open = ref(false)
 
-        watch(open, async (newQuestion, oldQuestion) => {
+       /*  watch(open, async (newQuestion, oldQuestion) => {
             if (newQuestion) {
                 document.documentElement.style.overflow = "hidden";
             } else {
                 document.documentElement.style.overflow = "initial";
             }
-        })
+        }) */
         const handleChangeLang = (e) => {
             console.log(' this.$i18n', i18n)
             if (!e) {
@@ -110,7 +110,7 @@ export default {
             }
         }
         const back = () => {
-            router.go(-1)
+            router.push('/home')
             storeData.formData.name = ''
             storeData.formData.lastName = ''
             storeData.formData.email = ''

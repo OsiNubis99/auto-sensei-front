@@ -11,25 +11,45 @@
             </div>
             <div v-else class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
                 <h1 class=" text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>
-                <p class="w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and <br>
-                    efficient process. Maximize the value of your car by inviting competitive bids from <br> local
+                <p class="w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and 
+                    efficient process. Maximize the value of your car by inviting competitive bids from  local
                     dealerships.
                 </p>
             </div>
             <img class="h-auto absolute bottom-0 w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg" alt="" />
         </div>
+        <template v-if="loading">
+
+            <div class="w-1/2 absolute top-0 right-0  h-full flex justify-center items-center">
+                <div class="text-indigo-700 mt-32">
+                    <div class="h-[80px] w-[80px] ">
+                        <div class="animate-bounce">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
+                                stroke-width="0" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+
         <swiper @swiper="getRef" :pagination="{ type: 'bullets' }" :simulateTouch="false" :modules="modules"
             class="stepsSwiper lg:w-2/4 ">
-            <swiper-slide>
+            <swiper-slide v-if="!loading">
                 <CreateAccount v-if="stepsCurrent == 0" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide v-if="!loading">
                 <CheckYourEmail v-if="stepsCurrent == 1" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide v-if="!loading">
                 <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide v-if="!loading">
                 <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
         </swiper>
@@ -50,6 +70,8 @@ import CreateAccount from './Steps/CreateAccount.vue';
 import CheckYourEmail from './Steps/CheckYourEmail.vue';
 import InfoAccount from './Steps/InfoAccount.vue';
 import VerificationCode from './Steps/VerificationCode.vue';
+import { useAuthStore } from "@/stores/auth";
+import { toast } from "vue3-toastify";
 export default {
     components: {
         Swiper,
@@ -62,6 +84,9 @@ export default {
     setup() {
         const swiper = ref(null)
         const route = useRoute();
+        const router = useRouter()
+        const store = useAuthStore();
+        const loading = ref(false)
         let rol = ref()
         let stepsCurrent = ref(0)
         function getRef(swiperInstance) {
@@ -77,10 +102,51 @@ export default {
             swiper.value.slidePrev() // should work
             stepsCurrent.value = swiper.value.activeIndex
         }
+        const getAuth = async (token) => {
+            loading.value = true
+            try {
+                let res = await store.authProfile(token)
+                if (res.status == 200) {
+                    stepsCurrent.value = 1
+                    swiper.value?.slideTo(1)
+                    toast("Your email has been verified successfully", {
+                        type: "success",
+                    });
+                    localStorage.setItem('updateUser', route.query.token)
+                    router.replace({ query: '' })
+                    setTimeout(() => {
+                        stepsCurrent.value = 2
+                        swiper.value?.slideTo(2)
+                        loading.value = false
+                    }, 3000);
 
+                }
+                console.log('res', res)
+            } catch (error) {
+                console.log('error', error)
+                if (error.response.data.statusCode == 401) {
+                    toast(error.response.data.message, {
+                        type: "error",
+                    });
+                    loading.value = false
+                    stepsCurrent.value = 0
+                    swiper.value.slideTo(0)
+                    router.replace({ query: '' })
+                }
+            }
+        }
 
         onMounted(() => {
             rol.value = route.params.rol
+            console.log('route.params', route.query)
+            if (route.query.token) {
+                getAuth(route.query)
+            } else {
+                stepsCurrent.value = 0
+                swiper.value?.slideTo(0)
+                router.replace({ query: '' })
+            }
+
         })
         return {
             getRef,
@@ -94,7 +160,8 @@ export default {
             },
             modules: [Navigation, Pagination, Scrollbar, A11y],
             rol,
-            stepsCurrent
+            stepsCurrent,
+            loading
         };
     },
 };

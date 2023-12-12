@@ -15,7 +15,12 @@ export const stepsSignUp = defineStore('stepsSignUp', () => {
         registrationNumber: '',
         address: '',
         phoneNumber: '',
-        preview:''
+        preview:'',
+        firtName:'',
+        lastName:'',
+        driverLicense:'',
+        numberCode:''
+
     })
 
     return { formData, formAccount }
