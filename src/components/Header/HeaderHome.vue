@@ -3,14 +3,16 @@
         <div v-if="path == 'login' || path == 'signup'" class="h-10 p-6 flex justify-start  items-center bg-base-black">
             <div class="flex items-center gap-5 cursor-pointer" @click="back">
                 <IconArrow class="rotate-90" />
-                <p class="text-sm text-white font-medium" >Back to Home</p>
+                <p class="text-sm text-white font-medium">Back to Home</p>
             </div>
         </div>
         <div class="font-sans antialiased" id="app">
-            <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''), (scrollPosition > 100 ? 'bg-blue-dark z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all')]"
+            <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
+            (scrollPosition > 100 ? 'bg-blue-dark z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md')]"
                 class="flex p-4  top-0 z-50 items-center w-full justify-between flex-wrap bg-teal md:px-20 md:py-6">
                 <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
-                    <LogoIcon :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]' : ''" />
+                    <LogoBlack class="w-[80%]" v-if="path == 'contact-us' && scrollPosition < 110" />
+                    <LogoIcon v-else :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]' : ''" />
                     <p v-if="path == 'login' || path == 'signup'"
                         class="text-primary pl-2  flex items-center md:text-2xl font-normal">
                         <span v-if="route.params.rol == 'sellers'">For Sellers</span>
@@ -32,15 +34,26 @@
                         class="text-sm gap-6 sm:flex-grow text-white">
                         <p v-if="open" @click="open = false"
                             class="text-2xl absolute right-4 top-2 font-extrabold text-white">X</p>
-                        <RouterLink class="font-medium text-sm" to="/">Home</RouterLink>
-                        <RouterLink class="font-medium text-sm" to="#">Sold Auctions</RouterLink>
-                        <RouterLink class="font-medium text-sm" to="#">How It Works?</RouterLink>
-                        <RouterLink class="font-medium text-sm" to="/about">About</RouterLink>
-                        <RouterLink class="font-medium text-sm" to="#">Contact Us</RouterLink>
-                        <RouterLink class="font-medium text-sm" to="#">Dealer Page</RouterLink>
+                        <RouterLink
+                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'home' && '!text-primary')]"
+                            class="font-medium text-sm" to="/">Home</RouterLink>
+                        <RouterLink
+                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'sold-auctions' && '!text-primary')]"
+                            class="font-medium text-sm" to="/sold-auctions">Sold Auctions</RouterLink>
+                        <RouterLink
+                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'how-it-works' && '!text-primary')]"
+                            class="font-medium text-sm" to="/how-it-works">How It Works?</RouterLink>
+                        <RouterLink
+                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'about' && '!text-primary')]"
+                            class="font-medium text-sm" to="/about">About</RouterLink>
+                        <RouterLink
+                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'contact-us' && '!text-primary')]"
+                            class="font-medium text-sm" to="/contact-us">Contact Us</RouterLink>
+                        <RouterLink :class="[((path == 'contact-us' && scrollPosition < 1) && 'text-base-black')]"
+                            class="font-medium text-sm" to="/login/dealers">Dealer Page</RouterLink>
                     </div>
                     <div class="flex gap-4 items-center pr-7">
-                        <!--  <div class="switch">
+                        <!-- <div class="switch">
                             <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox"
                                 @change="(event) => {
                                     handleChangeLang(event.target.checked);
@@ -50,22 +63,32 @@
                             <span class="on">EN</span>
                             <span class="off">ES</span>
                         </div> -->
-                        <RouterLink :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
-                            <p class="text-white text-sm font-medium">
-                                <span v-if="path == 'login'">Don’t have an account?</span>
-                                <span v-if="path == 'signup'"> Already have an account?</span>
-                            </p>
+
+                        <RouterLink v-if="store?.userData?._id" :to="store?.userData?.type == 0 && '/inicio' ||
+                            store?.userData?.type == 1 && '/all' ||
+                            store?.userData?.type == 2 && '/upcoming'" class="btn bg-primary text-base-black">
+                            Dashboard
                         </RouterLink>
-                        <RouterLink v-if="path !== 'login'"
-                            :to="path == 'home' || path == 'about' ? `/login/sellers` : `/login/${route.params.rol}`"
-                            :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'" class="btn">
-                            <span v-if="path == 'signup'">Sign In</span>
-                            <span v-else>Login</span>
-                        </RouterLink>
-                        <RouterLink v-if="path !== 'signup'" :to="/signup/ + route.params.rol"
-                            class="btn bg-primary text-base-black">
-                            Sign Up
-                        </RouterLink>
+                        <template v-else>
+                            <RouterLink
+                                :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
+                                <p class="text-white text-sm font-medium">
+                                    <span v-if="path == 'login'">Don’t have an account?</span>
+                                    <span v-if="path == 'signup'"> Already have an account?</span>
+                                </p>
+                            </RouterLink>
+                            <RouterLink v-if="path !== 'login'"
+                                :to="path == 'home' || path == 'about' ? `/login/sellers` : `/login/${route.params.rol}`"
+                                :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'" class="btn">
+                                <span v-if="path == 'signup'">Sign In</span>
+                                <span v-else>Login</span>
+                            </RouterLink>
+                            <RouterLink v-if="path !== 'signup'" :to="/signup/ + route.params.rol"
+                                class="btn bg-primary text-base-black">
+                                Sign Up
+                            </RouterLink>
+                        </template>
+
                     </div>
                 </div>
             </nav>
@@ -79,28 +102,37 @@ import LogoIcon from '@/assets/svg/logo.vue'
 import { useRoute, useRouter } from 'vue-router'
 import IconArrow from "../icons/iconArrow.vue";
 import { stepsSignUp } from "@/stores/stepsSignUp";
+import { useAuthStore } from "@/stores/auth";
 import i18n from '../../config/i18n'
+import LogoBlack from '../../assets/svg/logoBlack.vue'
 export default {
     components: {
         LogoIcon,
-        IconArrow
+        IconArrow,
+        LogoBlack
     },
     setup() {
         const route = useRoute();
         const path = ref(computed(() => route.name))
-        const scrollPosition = ref()
+        const scrollPosition = ref(0)
         const router = useRouter()
         const storeData = stepsSignUp()
+        const store = useAuthStore()
         const form = storeData.formData
         let open = ref(false)
 
-       /*  watch(open, async (newQuestion, oldQuestion) => {
+        watch(open, async (newQuestion, oldQuestion) => {
             if (newQuestion) {
                 document.documentElement.style.overflow = "hidden";
             } else {
                 document.documentElement.style.overflow = "initial";
             }
-        }) */
+        })
+        watch(scrollPosition, async (newQuestion, oldQuestion) => {
+
+            console.log('newQuestion', newQuestion)
+        })
+
         const handleChangeLang = (e) => {
             console.log(' this.$i18n', i18n)
             if (!e) {
@@ -110,7 +142,7 @@ export default {
             }
         }
         const back = () => {
-            router.push('/home')
+            router.push('/')
             storeData.formData.name = ''
             storeData.formData.lastName = ''
             storeData.formData.email = ''
@@ -131,6 +163,7 @@ export default {
         }
         onMounted(() => {
             window.addEventListener('scroll', updateScroll);
+            console.log('store', store.userData)
         })
         return {
             LogoIcon,
@@ -141,7 +174,9 @@ export default {
             open,
             route,
             IconArrow,
-            scrollPosition
+            scrollPosition,
+            store,
+            LogoBlack
         };
     },
 };

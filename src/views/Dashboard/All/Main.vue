@@ -1,60 +1,214 @@
 <template>
     <div>
-        <div class="flex w-full justify-center gap-6 items-center h-screen">
-            <div class="flex gap-8 flex-col">
-                <div>
-                    <img class="object-cover " src="../../../assets/svg/vehiculoAll.svg" alt="">
-                </div>
-                <div>
-                    <h1 class="text-5xl font-semibold text-blue-dark ">Get Your Max Profits! <br> Sell Your Car Now</h1>
-                    <p>Let the bids begin, post your auction, sell your car quick as 48 hours.</p>
-                </div>
-                <div class="flex gap-3">
-                    <div class="border-[1px] flex flex-col rounded-[8px] p-5 gap-2 border-[#E0E0E0]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM11.003 16L6.76 11.757L8.174 10.343L11.003 13.172L16.659 7.515L18.074 8.929L11.003 16Z"
-                                fill="#05A54B" />
-                        </svg>
-                        <p class="text-base  font-bold ">Unlock the potential for greater profits.</p>
-                        <p class="text-xs  ">Realize profits of 10-50%</p>
+        <div v-if="activeStep" class="flex w-full flex-col justify-center gap-6 items-center custom-header-all ">
+            <div class="flex gap-20 items-end ">
+                <div class="flex gap-8 flex-col">
+                    <div class="flex w-full justify-start">
+                        <img class="object-cover" src="../../../assets/svg/vehiculoAll.svg" alt="">
                     </div>
-                    <div class="border-[1px] flex flex-col rounded-[8px] p-5 gap-2 border-[#E0E0E0]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM11.003 16L6.76 11.757L8.174 10.343L11.003 13.172L16.659 7.515L18.074 8.929L11.003 16Z"
-                                fill="#05A54B" />
-                        </svg>
-                        <p class="text-base  font-bold ">Unlock the potential for greater profits.</p>
-                        <p class="text-xs  ">Realize profits of 10-50%</p>
+                    <div>
+                        <h1 class="text-5xl font-semibold text-blue-dark ">
+                            Get the best value <br>
+                            for your car with <br> AutoSensei !
+                        </h1>
+                        <p>Let the bids begin, post your auction, sell your car quick as 48 hours.</p>
+                    </div>
+                    <button @click="onSteps"
+                        class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Create My Auction
+                    </button>
+                </div>
+             <div>
+                    <h1 class="font-bold ">Benefits of selling your car on AutoSensei:</h1>
+                    <div class="flex flex-col gap-8 pt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
+                                    fill="none">
+                                    <path
+                                        d="M10.8898 11.9446H3.11198V12.5001C3.11198 12.6475 3.05345 12.7888 2.94926 12.8929C2.84507 12.9971 2.70377 13.0557 2.55642 13.0557H2.00087C1.85353 13.0557 1.71222 12.9971 1.60803 12.8929C1.50384 12.7888 1.44531 12.6475 1.44531 12.5001V7.50011L2.84142 3.77678C2.92083 3.56494 3.06301 3.38239 3.24895 3.25353C3.4349 3.12467 3.65575 3.05564 3.88198 3.05566H10.1198C10.346 3.05564 10.5668 3.12467 10.7528 3.25353C10.9387 3.38239 11.0809 3.56494 11.1603 3.77678L12.5564 7.50011V12.5001C12.5564 12.6475 12.4979 12.7888 12.3937 12.8929C12.2895 12.9971 12.1482 13.0557 12.0009 13.0557H11.4453C11.298 13.0557 11.1567 12.9971 11.0525 12.8929C10.9483 12.7888 10.8898 12.6475 10.8898 12.5001V11.9446ZM2.63198 7.50011H11.3698L10.1198 4.16678H3.88198L2.63198 7.50011ZM3.94531 10.2779C4.16633 10.2779 4.37829 10.1901 4.53457 10.0338C4.69085 9.87753 4.77865 9.66557 4.77865 9.44455C4.77865 9.22354 4.69085 9.01158 4.53457 8.8553C4.37829 8.69902 4.16633 8.61122 3.94531 8.61122C3.7243 8.61122 3.51234 8.69902 3.35606 8.8553C3.19978 9.01158 3.11198 9.22354 3.11198 9.44455C3.11198 9.66557 3.19978 9.87753 3.35606 10.0338C3.51234 10.1901 3.7243 10.2779 3.94531 10.2779ZM10.0564 10.2779C10.2774 10.2779 10.4894 10.1901 10.6457 10.0338C10.802 9.87753 10.8898 9.66557 10.8898 9.44455C10.8898 9.22354 10.802 9.01158 10.6457 8.8553C10.4894 8.69902 10.2774 8.61122 10.0564 8.61122C9.83541 8.61122 9.62345 8.69902 9.46717 8.8553C9.31089 9.01158 9.22309 9.22354 9.22309 9.44455C9.22309 9.66557 9.31089 9.87753 9.46717 10.0338C9.62345 10.1901 9.83541 10.2779 10.0564 10.2779Z"
+                                        fill="#05A54B" />
+                                </svg>
+                            </div>
+                            <p>Sell your car without any cost or fees</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
+                                    fill="none">
+                                    <path
+                                        d="M7.28017 13.0564C4.21183 13.0564 1.72461 10.5692 1.72461 7.50087C1.72461 4.43253 4.21183 1.94531 7.28017 1.94531C10.3485 1.94531 12.8357 4.43253 12.8357 7.50087C12.8357 10.5692 10.3485 13.0564 7.28017 13.0564ZM10.8107 9.69642V9.63809C10.8107 9.12587 10.8107 8.89198 10.4485 8.68476C10.3321 8.61875 10.2125 8.5585 10.0902 8.5042C9.88628 8.41142 9.75128 8.35087 9.56905 8.0842C9.5473 8.05254 9.52582 8.02068 9.50461 7.98865C9.31294 7.69698 9.17461 7.48698 8.64794 7.57031C7.61183 7.73476 7.53517 7.91698 7.48961 8.22476L7.48239 8.27531C7.41517 8.72531 7.40294 8.87642 7.59072 9.07365C8.2935 9.81087 8.71461 10.3425 8.84239 10.6536C8.90461 10.8053 9.06461 11.2648 8.95461 11.7192C9.62896 11.4506 10.2292 11.0245 10.7052 10.4764C10.7663 10.2686 10.8107 10.0098 10.8107 9.69642ZM7.28017 2.96365C5.99294 2.96365 4.83017 3.50031 4.00461 4.36142C4.10294 4.42976 4.1885 4.52587 4.24739 4.65809C4.36072 4.91198 4.36072 5.17365 4.36072 5.40531C4.36072 5.58753 4.36072 5.76087 4.41905 5.88587C4.49905 6.05698 4.84461 6.13031 5.14961 6.19365C5.25905 6.21698 5.37128 6.24031 5.4735 6.26865C5.75461 6.34642 5.97239 6.5992 6.14628 6.80198C6.2185 6.88587 6.32572 7.00976 6.37961 7.04087C6.40739 7.02087 6.49683 6.92365 6.54072 6.7642C6.57516 6.64198 6.56517 6.5342 6.51572 6.47531C6.20461 6.10865 6.22183 5.40309 6.31794 5.14253C6.46905 4.73198 6.94128 4.76253 7.28683 4.78476C7.41572 4.79309 7.53683 4.80142 7.62794 4.78976C7.9735 4.74642 8.08016 4.22031 8.15517 4.11753C8.31739 3.89531 8.81405 3.56031 9.12183 3.35365C8.54211 3.09586 7.91462 2.96298 7.28017 2.96365Z"
+                                        fill="#05A54B" />
+                                </svg>
+                            </div>
+
+                            <p>Skip the hassle of visiting multiple dealers</p>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
+                                    fill="none">
+                                    <path
+                                        d="M3.54588 4.14672C4.4313 3.43731 5.53244 3.05158 6.66699 3.05339C7.84755 3.05339 8.93255 3.46227 9.78811 4.14672L10.5953 3.3395L11.3809 4.12505L10.5737 4.93227C11.1613 5.66791 11.5292 6.55451 11.6352 7.49005C11.7412 8.42558 11.5809 9.37202 11.1727 10.2205C10.7645 11.0689 10.1251 11.7849 9.328 12.2859C8.5309 12.787 7.60851 13.0528 6.66699 13.0528C5.72548 13.0528 4.80309 12.787 4.00599 12.2859C3.20888 11.7849 2.56945 11.0689 2.16128 10.2205C1.75311 9.37202 1.59279 8.42558 1.69877 7.49005C1.80475 6.55451 2.17271 5.66791 2.76033 4.93227L1.95311 4.12561L2.73866 3.34005L3.54588 4.14727V4.14672ZM7.22255 7.49783V4.99505L4.44477 8.60894H6.11144V11.1089L8.88922 7.49783H7.22255ZM4.44477 1.38672H8.88922V2.49783H4.44477V1.38672Z"
+                                        fill="#05A54B" />
+                                </svg>
+                            </div>
+
+                            <p>Sell from your home within just 48 hours</p>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
+                                    fill="none">
+                                    <path
+                                        d="M8.111 11.9448V13.056H1.44434V11.9448H8.111ZM8.43656 1.21484L12.7577 5.53595L11.9721 6.32262L11.3832 6.12595L10.0071 7.5004L13.1499 10.6432L12.3643 11.4287L9.22211 8.28595L7.88656 9.62151L8.04378 10.2504L7.25767 11.036L2.93656 6.71484L3.72267 5.92929L4.35045 6.08596L7.84711 2.58984L7.651 2.00095L8.43656 1.21484Z"
+                                        fill="#05A54B" />
+                                </svg>
+                            </div>
+
+                            <p>No more haggling with disinterested buyers</p>
+                        </div>
                     </div>
                 </div>
-                <button
-                    class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Create My Auction
-                </button>
             </div>
-            <div>
-                <h1>Relax! you will get some of these features</h1>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-                        <path
-                            d="M10.8898 11.9446H3.11198V12.5001C3.11198 12.6475 3.05345 12.7888 2.94926 12.8929C2.84507 12.9971 2.70377 13.0557 2.55642 13.0557H2.00087C1.85353 13.0557 1.71222 12.9971 1.60803 12.8929C1.50384 12.7888 1.44531 12.6475 1.44531 12.5001V7.50011L2.84142 3.77678C2.92083 3.56494 3.06301 3.38239 3.24895 3.25353C3.4349 3.12467 3.65575 3.05564 3.88198 3.05566H10.1198C10.346 3.05564 10.5668 3.12467 10.7528 3.25353C10.9387 3.38239 11.0809 3.56494 11.1603 3.77678L12.5564 7.50011V12.5001C12.5564 12.6475 12.4979 12.7888 12.3937 12.8929C12.2895 12.9971 12.1482 13.0557 12.0009 13.0557H11.4453C11.298 13.0557 11.1567 12.9971 11.0525 12.8929C10.9483 12.7888 10.8898 12.6475 10.8898 12.5001V11.9446ZM2.63198 7.50011H11.3698L10.1198 4.16678H3.88198L2.63198 7.50011ZM3.94531 10.2779C4.16633 10.2779 4.37829 10.1901 4.53457 10.0338C4.69085 9.87753 4.77865 9.66557 4.77865 9.44455C4.77865 9.22354 4.69085 9.01158 4.53457 8.8553C4.37829 8.69902 4.16633 8.61122 3.94531 8.61122C3.7243 8.61122 3.51234 8.69902 3.35606 8.8553C3.19978 9.01158 3.11198 9.22354 3.11198 9.44455C3.11198 9.66557 3.19978 9.87753 3.35606 10.0338C3.51234 10.1901 3.7243 10.2779 3.94531 10.2779ZM10.0564 10.2779C10.2774 10.2779 10.4894 10.1901 10.6457 10.0338C10.802 9.87753 10.8898 9.66557 10.8898 9.44455C10.8898 9.22354 10.802 9.01158 10.6457 8.8553C10.4894 8.69902 10.2774 8.61122 10.0564 8.61122C9.83541 8.61122 9.62345 8.69902 9.46717 8.8553C9.31089 9.01158 9.22309 9.22354 9.22309 9.44455C9.22309 9.66557 9.31089 9.87753 9.46717 10.0338C9.62345 10.1901 9.83541 10.2779 10.0564 10.2779Z"
-                            fill="#05A54B" />
-                    </svg>
-                    <p>Sell your car without any cost or fees</p>
+
+        </div>
+        <div v-else>
+            <div class="absolute w-full h-[190px] bg-[#000]"></div>
+            <div class="relative max-w-[85rem]  mx-auto   z-50 top-[60px] ">
+                <Heanding :type="'h3'" :msg="'Create Auctions'" />
+                <div class="flex justify-center mt-5 gap-7">
+                    <div class="w-2/4  ">
+                        <div class="bg-white p-5 shadow-steps">
+                            <p class="text-[#666] text-sm uppercase ">COMPLETE OUR 3 STEP PROCESS</p>
+                            <div class=" flex justify-between gap-[100px] mt-7 items-center">
+                                <div class="flex hr-custim-1 items-center gap-5 ">
+                                    <div v-if="op.step1 && !checkStep.step1"
+                                        class="flex justify-center bg-[#1F94F0] items-center w-10 h-10 text-white  rounded-full">
+                                        1
+                                    </div>
+                                    <div v-if="(checkStep.step1 && !op.step1) || (op.step1 && op.step2 && op.step3)"
+                                        class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path
+                                                d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
+                                                fill="white" />
+                                        </svg>
+                                    </div>
+                                    <p>General Information</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M13.1717 12.0007L8.22168 7.05072L9.63568 5.63672L15.9997 12.0007L9.63568 18.3647L8.22168 16.9507L13.1717 12.0007Z"
+                                        fill="#858585" />
+                                </svg>
+                            </div>
+                            <div class=" flex justify-between gap-[100px] mt-7 items-center">
+                                <div class="flex items-center hr-custim-2 gap-5 ">
+                                    <div v-if="!checkStep.step2" :class="op.step2 ? 'bg-[#1F94F0]' : 'bg-[#E0E0E0]'"
+                                        class="flex justify-center items-center w-10 h-10 text-white  rounded-full">
+                                        2
+                                    </div>
+                                    <div v-if="(checkStep.step2 && !op.step2) || (op.step1 && op.step2 && op.step3)"
+                                        class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path
+                                                d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
+                                                fill="white" />
+                                        </svg>
+                                    </div>
+                                    <p :class="op.step2 || checkStep.step2 ? 'text-[#000]' : 'text-[#E0E0E0]'">Vehicles
+                                        Details</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M13.1717 12.0007L8.22168 7.05072L9.63568 5.63672L15.9997 12.0007L9.63568 18.3647L8.22168 16.9507L13.1717 12.0007Z"
+                                        fill="#858585" />
+                                </svg>
+                            </div>
+                            <div class=" flex justify-between gap-[100px] mt-7 items-center">
+                                <div class="flex items-center hr-custim-2 gap-5 ">
+                                    <div v-if="!checkStep.step3" :class="op.step3 ? 'bg-[#1F94F0]' : 'bg-[#E0E0E0]'"
+                                        class="flex justify-center items-center w-10 h-10 text-white  rounded-full">
+                                        3
+                                    </div>
+                                    <div v-if="op.step1 && op.step2 && op.step3"
+                                        class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path
+                                                d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
+                                                fill="white" />
+                                        </svg>
+                                    </div>
+                                    <p :class="op.step3 || checkStep.step3 ? 'text-[#000]' : 'text-[#E0E0E0]'">Upload
+                                        Photos
+                                    </p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M13.1717 12.0007L8.22168 7.05072L9.63568 5.63672L15.9997 12.0007L9.63568 18.3647L8.22168 16.9507L13.1717 12.0007Z"
+                                        fill="#858585" />
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="w-full">
+                        <GeneralInformation v-if="op.step1" :op="op" :checkStep="checkStep" />
+                        <VehiclesDetails v-if="op.step2" :op="op" :checkStep="checkStep" />
+                        <UploadPhotos v-if="op.step3" :op="op" :checkStep="checkStep" />
+                    </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </template>
 <script>
+import { ref, onMounted } from "vue";
+import Heanding from "../../../components/Headings/Heanding.vue";
+import GeneralInformation from "../All/steps/GeneralInformation.vue"
+import VehiclesDetails from "./steps/VehiclesDetails.vue";
+import UploadPhotos from "./steps/UploadPhotos.vue";
 export default {
+
     components: {
+        Heanding,
+        GeneralInformation,
+        VehiclesDetails,
+        UploadPhotos
     },
     setup() {
 
+        const activeStep = ref(true)
+        const op = ref({
+            step1: true,
+            step2: false,
+            step3: false,
+        })
+        const checkStep = ref({
+            step1: false,
+            step2: false,
+            step3: false,
+        })
+        const onSteps = () => {
+            activeStep.value = false
+        }
+
         return {
+            activeStep,
+            onSteps,
+            op,
+            checkStep
         };
     },
 };

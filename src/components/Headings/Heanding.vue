@@ -7,7 +7,8 @@
             :class="[(color ? color : 'text-white'), 'text-center pb-5  text-3xl sm:text-4xl md:text-6xl font-bold md:leading-[72px]']">
             {{ msg }}
         </h2>
-        <h3 v-if="type === 'h3'" class="text-left  text-2xl md:text-5xl font-bold leading-[40px] md:leading-[58px]">
+        <h3 v-if="type === 'h3'" :class="color ? color : 'text-white'"
+            class="text-left  text-2xl md:text-5xl font-bold leading-[40px] md:leading-[58px]">
             {{ msg }}
         </h3>
         <h4 v-if="type === 'h4'" class="heading h4">

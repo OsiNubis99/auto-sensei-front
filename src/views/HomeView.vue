@@ -16,46 +16,38 @@
   </div>
   <div class="py-14 ">
     <Heanding :type="'h2'" :color="'text-base-black'" :msg="$t('home.how_it_works')" />
+    <p class="text-lg text-center text-[#666666]">Discover the seamless process of selling your car with AutoSensei</p>
     <div class="grid lg:grid-cols-2 gap-10 md:gap-20 p-5 md:pt-20 lg:px-20 lg:pb-0 h-full">
       <div class="flex w-full flex-col items-start gap-10">
+        <div class="bg-[#E6FCC0] rounded-lg p-5">
+          <p class="text-lg font-semibold  ">
+            Revolutionize Your Car Selling Experience with AutoSensei
+          </p>
+          <p class=" text-sm  ">AutoSensei is a groundbreaking platform that redefines the way you sell your car, offering
+            a swift and
+            hassle-free experience to sell your vehicle, all while ensuring you receive the optimal value for your vehicle
+            through competitive bids from local dealerships.</p>
+        </div>
+        <div>
+          <p class="text-lg font-semibold  ">
+            Effortlessly Begin Your Car Sale with AutoSensei's Guide
+          </p>
+          <p class=" text-sm  ">Getting started is a breeze. Just follow our user-friendly guide to post your car,
+            providing essential vehicle details and the photos that dealerships are eager to see. Keep your driver's
+            license and ownership documents ready for a quick and easy upload.</p>
+        </div>
+        <div>
+          <p class="text-lg font-semibold  ">
+            Store, Start, and Secure Bids with Ease!
+          </p>
+          <p class=" text-sm  ">Once you enter your vehicle's details, they'll be stored in the 'Upcoming Auction' section
+            ready for you to launch. You can kickstart your auction at your convenience, and just relax as the bids roll
+            in. When you're happy with a bid, accept it, and arrange drop-off and payment as agreed.</p>
+        </div>
 
-        <Heanding :type="'h3'" :color="'text-base-black'" :msg="$t('home.revolutionize')" />
-        <p class="text-lg font-normal ">
-          AutoSensei is a groundbreaking platform that redefines the way you sell your car, offering a swift and
-          hassle-free experience to sell your vehicle, all while ensuring you receive the optimal value for your vehicle
-          through competitive bids from local dealerships.
-        </p>
       </div>
       <div class="w-full bg-yellow-light h-full  md:h-[450px] p-6 rounded-2xl relative">
         <img class="w-full object-cover h-full" src="../assets/img//png/Frame.png" alt="">
-      </div>
-    </div>
-    <div class="grid lg:grid-cols-2 gap-10 md:gap-20 p-5 md:pt-20 lg:px-20 lg:pb-0 h-full">
-      <div class="w-full bg-yellow-light h-full md:h-[450px]  p-6 rounded-2xl relative">
-        <img class="w-full object-cover h-full" src="../assets/img//png/Frame2.png" alt="">
-      </div>
-      <div class="flex w-full flex-col items-start gap-10">
-        <Heanding :type="'h3'" :color="'text-base-black'"
-          :msg="`Effortlessly Begin Your Car Sale with AutoSensei's Guide`" />
-        <p class="text-lg font-normal ">
-          Getting started is a breeze. Just follow our user-friendly guide to post your car, providing essential vehicle
-          details and the photos that dealerships are eager to see. Keep your driver's license and ownership documents
-          ready for a quick and easy upload.
-        </p>
-      </div>
-
-    </div>
-    <div class="grid lg:grid-cols-2 gap-10 md:gap-20 p-5 md:pt-20 lg:px-20 lg:pb-0 h-full">
-      <div class="flex w-full flex-col items-start gap-10">
-        <Heanding :type="'h3'" :color="'text-base-black'" :msg="`Store, Start, and Secure Bids with Ease!`" />
-        <p class="text-lg font-normal ">
-          Once you enter your vehicle's details, they'll be stored in the 'Parked' section. You can kickstart your auction
-          at your convenience, and just relax as the bids roll in. When you're happy with a bid, accept it, and arrange
-          drop-off and payment as agreed.
-        </p>
-      </div>
-      <div class="w-full bg-yellow-light h-full  md:h-[450px] p-6 rounded-2xl relative">
-        <img class="w-full object-cover h-full" src="../assets/img//png/Frame3.png" alt="">
       </div>
     </div>
   </div>
@@ -274,14 +266,15 @@ import { ref, watch, computed } from "vue";
 import IconCardFree from '../components/icons/home/IconCardFree.vue'
 import IconPlay from '../components/icons/home/iconPlay.vue'
 import iconCheckbox from '../components/icons/home/iconCheckbox.vue'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
-// Import Swiper Vue.js components
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+
+
 import { WhyAutoSensei } from "../Json/Home";
 import Heanding from "../components/Headings/Heanding.vue";
 export default {

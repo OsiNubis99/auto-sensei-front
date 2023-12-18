@@ -10,7 +10,6 @@ const beforeEnterGuard = (to, from, next) => {
   }
 };
 const beforeEnterTokenEmail = async (to, from, next) => {
-  console.log('to', to.query.token)
   const store = useAuthStore();
   const router = useRouter()
   try {
@@ -30,80 +29,12 @@ const beforeEnterTokenEmail = async (to, from, next) => {
     }
   }
 };
-const beforeGetProfileAdmin = async (to, from, next) => {
-  let token = null;
-  let store = useAuthStore()
-  token = localStorage.getItem('token')
-  if (token) {
-    try {
-      await store.authProfile({ token: token })
-      console.log('BeforeGuardia', store?.userData)
-      if (
 
-        (!to.name == 'inicio' &&
-          !to.name == 'action-list' &&
-          !to.name == 'dealer-list' &&
-          !to.name == 'seller-list' &&
-          !to.name == 'config-setting') &&
-        !store.userData.type == 0
-      ) {
-        next({ name: 'home' })
-      } else next()
-
-    } catch (error) {
-      localStorage.clear()
-      router.push({ path: '/' })
-    }
-  } else {
-    localStorage.clear()
-    router.push({ path: '/' })
-  }
-}
-const beforeGetProfileSeller = async (to, from, next) => {
-  let token = null;
-  let store = useAuthStore()
-  token = localStorage.getItem('token')
-  if (token) {
-    try {
-      await store.authProfile({ token: token })
-      if (!to.name == 'all' && store.userData.type !== 1 && !store.userData.type !== 0 && !store.userData.type !== 2) {
-        next({ name: 'home' })
-      } else next()
-
-    } catch (error) {
-      localStorage.clear()
-      router.push({ path: '/' })
-    }
-  } else {
-    localStorage.clear()
-    router.push({ path: '/' })
-  }
-}
-const beforeGetProfileDealers = async (to, from, next) => {
-  let token = null;
-  let store = useAuthStore()
-  token = localStorage.getItem('token')
-  if (token) {
-    try {
-      await store.authProfile({ token: token })
-      if (to.name == 'upcoming' && store?.userData.type == 2) {
-        next()
-      } else next({ name: 'home' })
-
-    } catch (error) {
-      localStorage.clear()
-      router.push({ path: '/' })
-    }
-  } else {
-    localStorage.clear()
-    router.push({ path: '/' })
-  }
-}
 const routes = [
   {
     path: "/admin",
     component: MenuDasboard,
-    beforeEnter: beforeGetProfileAdmin,
+    meta: { requiresAuth: true, adminAuth: true, sellerAuth: false, dealersAuth: false },
     children: [
       //RUTAS DEL ADMINITRADOR
       {
@@ -147,31 +78,35 @@ const routes = [
   {
     path: "/sellers",
     component: MenuDasboard,
-    beforeEnter: beforeGetProfileSeller,
+
+    meta: { requiresAuth: true, adminAuth: false, sellerAuth: true, dealersAuth: false },
     children: [
       //RUTAS DEL Sellers
       {
         path: "/all",
         name: "all",
         component: () => import('../views/Dashboard/All/Main.vue')
+
       },
     ],
   },
   {
     path: "/dealers",
+
     component: MenuDasboard,
-    beforeEnter: beforeGetProfileDealers,
+    meta: { requiresAuth: true, adminAuth: false, sellerAuth: false, dealersAuth: true },
     children: [
-      //RUTAS DEL Sellers
+      //RUTAS DEL Dealers
       {
         path: "/upcoming",
         name: "upcoming",
         component: () => import('../views/Dashboard/upcoming/Main.vue')
+
       },
     ],
   },
   {
-    path: "/home",
+    path: "/",
     component: MenuHome,
     children: [
       {
@@ -183,6 +118,21 @@ const routes = [
         path: '/about',
         name: 'about',
         component: () => import('../views/AboutView.vue')
+      },
+      {
+        path: '/sold-auctions',
+        name: 'sold-auctions',
+        component: () => import('../views/SoldAuctions.vue')
+      },
+      {
+        path: '/how-it-works',
+        name: 'how-it-works',
+        component: () => import('../views/HowItWorks.vue')
+      },
+      {
+        path: '/contact-us',
+        name: 'contact-us',
+        component: () => import('../views/ContactUs.vue')
       },
       {
         path: '/login/:rol',
@@ -229,19 +179,46 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    return savedPosition || { left: 0, top: 0 };
-  },
 });
 
 
 router.beforeEach((to, from, next) => {
+
   const authStore = localStorage.getItem("token");
   let token = null;
+  let rol = null
   if (authStore) {
     token = authStore;
+    rol = localStorage.getItem('rol')
   }
-  if ((
+  if (to.meta.requiresAuth) {
+    if (!authStore) {
+      next({ name: 'home' })
+    } else if (to.meta.adminAuth) {
+      if (rol == 0) {
+        next()
+      } else {
+        next({ name: 'home' })
+      }
+    } else if (to.meta.sellerAuth) {
+      if (rol == 1) {
+        next()
+      } else {
+        next({ name: 'home' })
+      }
+    } else if (to.meta.dealersAuth) {
+      if (rol == 2) {
+        next()
+      } else {
+        next({ name: 'home' })
+      }
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+  /* if ((
     to.name !== 'login' &&
     to.name !== 'signup' &&
     to.name !== 'home' &&
@@ -251,6 +228,7 @@ router.beforeEach((to, from, next) => {
     to.name !== 'test'
   )
     && !token) next({ name: 'home' })
-  else next()
+  else next() */
 })
 export default router
+

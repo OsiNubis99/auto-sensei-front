@@ -1,331 +1,324 @@
 <template>
-    <section class="pd-5vw">
-        <div class="">
-            <div class="text-size-5-vh dpd-20 text-blue">
-                Dealer List
+    <div class="mx-auto bg-[#F0F0F0] h-screen">
+        <div class="flex justify-between p-5">
+            <div class="w-[20%]  ">
+                <label for="voice-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search about dealer here" required>
+                </div>
             </div>
-            <div class="text-size-10-vh text-purple dpd-20">
-                <strong>
-                    We'll Be Back Soon.
-                </strong>
-            </div>
-        </div>
-        <div class="text-height-1-5 text-grey text-size-18 dpd-20">
-            We're busy upgrading with new technology.
-            We apologize for the inconvenience.
-        </div>
-        <div>
-            You can contact us through one of these channels:
-        </div>
-        <br>
-        <div>
-            <a href="https://twitter.com">Twitter</a> |
-            <a href="https://www.facebook.com">Facebook</a>
-        </div>
-    </section>
+            <div class="flex  items-center gap-3">
+                <button class="flex gap-2 rounded-md py-1 px-2 bg-white items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 16 17" fill="none">
+                        <path
+                            d="M6.66667 12.5H9.33333V11.1667H6.66667V12.5ZM2 4.5V5.83333H14V4.5H2ZM4 9.16667H12V7.83333H4V9.16667Z"
+                            fill="#09121F" />
 
-    <div class="gears-img sm-hide">
-        <svg class="machine" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 645 526" fill="url(#grad1)">
-            <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" class="gears-grd1" />
-                    <stop offset="100%" class="gears-grd2" />
-                </linearGradient>
-            </defs>
-            <defs />
-            <g>
-                <path x="-173,694" y="-173,694" class="large-shadow"
-                    d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
-            </g>
-            <g>
-                <path x="-136,996" y="-136,996" class="medium-shadow"
-                    d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
-            </g>
-            <g>
-                <path x="-100,136" y="-100,136" class="small-shadow"
-                    d="M210 246v-21l-29-4c-2-10-6-18-11-26l18-23 -15-15 -23 18c-8-5-17-9-26-11l-4-29H100l-4 29c-10 2-18 6-26 11l-23-18 -15 15 18 23c-5 8-9 17-11 26L10 225v21l29 4c2 10 6 18 11 26l-18 23 15 15 23-18c8 5 17 9 26 11l4 29h21l4-29c10-2 18-6 26-11l23 18 15-15 -18-23c5-8 9-17 11-26L210 246zM110 272c-20 0-37-17-37-37s17-37 37-37c20 0 37 17 37 37S131 272 110 272z" />
-            </g>
-            <g>
-                <path x="-100,136" y="-100,136" class="small"
-                    d="M200 236v-21l-29-4c-2-10-6-18-11-26l18-23 -15-15 -23 18c-8-5-17-9-26-11l-4-29H90l-4 29c-10 2-18 6-26 11l-23-18 -15 15 18 23c-5 8-9 17-11 26L0 215v21l29 4c2 10 6 18 11 26l-18 23 15 15 23-18c8 5 17 9 26 11l4 29h21l4-29c10-2 18-6 26-11l23 18 15-15 -18-23c5-8 9-17 11-26L200 236zM100 262c-20 0-37-17-37-37s17-37 37-37c20 0 37 17 37 37S121 262 100 262z" />
-            </g>
-            <g>
-                <path x="-173,694" y="-173,694" class="large"
-                    d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
-            </g>
-            <g>
-                <path x="-136,996" y="-136,996" class="medium"
-                    d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
-            </g>
-        </svg>
+                    </svg>
+                    <p class="!m-0">Filter</p>
+                </button>
+                <button class="flex gap-2 rounded-md py-1 px-2 bg-white items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                        <path
+                            d="M12.6667 2.5L15.3333 5.83333H13.3333V13.8333H12V5.83333H10L12.6667 2.5ZM9.33333 12.5V13.8333H2V12.5H9.33333ZM9.33333 7.83333V9.16667H2V7.83333H9.33333ZM8 3.16667V4.5H2V3.16667H8Z"
+                            fill="#09121F" />
+                    </svg>
+                    <p class="!m-0">Sort</p>
+                </button>
+            </div>
+        </div>
+        <template v-if="store?.userDealers?.data?.length == 0">
+            <div style="inline-size: auto;"
+                class="w-full flex  rounded-lg m-5 shadow-xl  bg-white justify-center items-center">
+                <div class=" text-gray-500 capitalize py-12 px-36 ">
+                     there are no users
+                </div>
+            </div>
+        </template>
+        <template v-else>
+            <div v-if="isLoading" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
+                <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
+                    <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+                        <div class="animate-bounce">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
+                                stroke-width="0" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            <div v-else class="flex p-5 flex-col">
+                <div class="overflow-x-auto shadow-md sm:rounded-lg">
+                    <div class="inline-block min-w-full align-middle">
+                        <div class="overflow-hidden ">
+                            <table class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
+                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col" class="p-4">
+                                            <div class="flex items-center">
+                                                <input id="checkbox-all" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="checkbox-all" class="sr-only">checkbox</label>
+                                            </div>
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div class="flex items-center gap-1">
+                                                <p class="!m-0">Dealer</p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
+                                                        fill="#4D4D4D" />
+                                                </svg>
+                                            </div>
+
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div class="flex items-center gap-1">
+                                                <p class="!m-0">Status</p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
+                                                        fill="#4D4D4D" />
+                                                </svg>
+                                            </div>
+
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div class="flex items-center gap-1">
+                                                <p class="!m-0">Total Purchase</p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
+                                                        fill="#4D4D4D" />
+                                                </svg>
+                                            </div>
+
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div class="flex items-center gap-1">
+                                                <p class="!m-0">Success Rate</p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
+                                                        fill="#4D4D4D" />
+                                                </svg>
+                                            </div>
+
+                                        </th>
+                                        <div class="flex justify-center">
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                                History
+                                            </th>
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                                Actions
+                                            </th>
+                                        </div>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-[#E0E0E0] ">
+                                    <tr v-for="user in store?.userDealers.data" :key="user?.id"
+                                        class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <td class="p-4 w-4">
+                                            <div class="flex items-center">
+                                                <input id="checkbox-table-1" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                                            </div>
+                                        </td>
+                                        <td
+                                            class="py-4 px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
+                                            <div class="w-10 h-10">
+                                                <img v-if="user.dealer.picture !== 'url'"
+                                                    class="w-full shadow-md   rounded-full h-full object-contain"
+                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                                                    alt="">
+                                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                                    alt="">
+                                            </div>
+                                            <div class="flex justify-center flex-col">
+                                                <p class="p-0 !m-0"> {{ user?.dealer?.omvic }}</p>
+                                                <p class="p-0 !m-0">5.0 (2.8k)</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
+                                            <div v-if="user.status == 'active'"
+                                                class="relative w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#05A54B14] gap-2">
+                                                <div class="w-2 h-2 rounded-full bg-[#05A54B]"></div>
+                                                <div class="text-[#05A54B]">Active</div>
+                                            </div>
+                                            <div v-else
+                                                class="relative flex py-1 px-2 rounded-md justify-center items-center bg-[#FF333E14] gap-2">
+                                                <div class="w-2 h-2 rounded-full bg-[#FF333E]"></div>
+                                                <div class="text-[#FF333E]">Inactive</div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                            <p class="!m-0">$524,824</p>
+                                            <p class="!m-0"> 102 Vehicles</p>
+
+                                        </td>
+                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                            <p class="!m-0 font-medium ">100%</p>
+                                            <p class="!m-0">From 94 seller</p>
+                                        </td>
+                                        <div class="flex h-full py-4 px-6 justify-center gap-4 ">
+                                            <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                <button
+                                                    class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 16 16" fill="none">
+                                                        <path
+                                                            d="M8.00002 2C11.5947 2 14.5854 4.58667 15.2127 8C14.586 11.4133 11.5947 14 8.00002 14C4.40535 14 1.41469 11.4133 0.787354 8C1.41402 4.58667 4.40535 2 8.00002 2ZM8.00002 12.6667C9.35967 12.6664 10.6789 12.2045 11.7419 11.3568C12.8049 10.509 13.5486 9.32552 13.8514 8C13.5475 6.67554 12.8033 5.49334 11.7404 4.64668C10.6776 3.80003 9.35889 3.33902 8.00002 3.33902C6.64115 3.33902 5.32248 3.80003 4.2596 4.64668C3.19673 5.49334 2.45253 6.67554 2.14869 8C2.45142 9.32552 3.19514 10.509 4.25812 11.3568C5.3211 12.2045 6.64037 12.6664 8.00002 12.6667ZM8.00002 11C7.20437 11 6.44131 10.6839 5.8787 10.1213C5.31609 9.55871 5.00002 8.79565 5.00002 8C5.00002 7.20435 5.31609 6.44129 5.8787 5.87868C6.44131 5.31607 7.20437 5 8.00002 5C8.79567 5 9.55873 5.31607 10.1213 5.87868C10.6839 6.44129 11 7.20435 11 8C11 8.79565 10.6839 9.55871 10.1213 10.1213C9.55873 10.6839 8.79567 11 8.00002 11ZM8.00002 9.66667C8.44205 9.66667 8.86597 9.49107 9.17853 9.17851C9.49109 8.86595 9.66669 8.44203 9.66669 8C9.66669 7.55797 9.49109 7.13405 9.17853 6.82149C8.86597 6.50893 8.44205 6.33333 8.00002 6.33333C7.55799 6.33333 7.13407 6.50893 6.82151 6.82149C6.50895 7.13405 6.33335 7.55797 6.33335 8C6.33335 8.44203 6.50895 8.86595 6.82151 9.17851C7.13407 9.49107 7.55799 9.66667 8.00002 9.66667Z"
+                                                            fill="#0B1107" />
+                                                    </svg>
+                                                    View
+                                                </button>
+                                            </td>
+                                            <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                <button
+                                                    class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 16 16" fill="none">
+                                                        <path
+                                                            d="M8.00008 0.666992L14.3334 4.33366V11.667L8.00008 15.3337L1.66675 11.667V4.33366L8.00008 0.666992ZM8.00008 2.20766L3.00008 5.10232V10.8983L8.00008 13.793L13.0001 10.8983V5.10232L8.00008 2.20766ZM8.00008 10.667C7.29284 10.667 6.61456 10.386 6.11446 9.88594C5.61437 9.38585 5.33341 8.70757 5.33341 8.00033C5.33341 7.29308 5.61437 6.6148 6.11446 6.11471C6.61456 5.61461 7.29284 5.33366 8.00008 5.33366C8.70732 5.33366 9.3856 5.61461 9.8857 6.11471C10.3858 6.6148 10.6667 7.29308 10.6667 8.00033C10.6667 8.70757 10.3858 9.38585 9.8857 9.88594C9.3856 10.386 8.70732 10.667 8.00008 10.667ZM8.00008 9.33366C8.3537 9.33366 8.69284 9.19318 8.94289 8.94313C9.19294 8.69309 9.33341 8.35395 9.33341 8.00033C9.33341 7.6467 9.19294 7.30756 8.94289 7.05752C8.69284 6.80747 8.3537 6.66699 8.00008 6.66699C7.64646 6.66699 7.30732 6.80747 7.05727 7.05752C6.80722 7.30756 6.66675 7.6467 6.66675 8.00033C6.66675 8.35395 6.80722 8.69309 7.05727 8.94313C7.30732 9.19318 7.64646 9.33366 8.00008 9.33366Z"
+                                                            fill="#0B1107" />
+                                                    </svg>
+                                                    Menu
+                                                </button>
+                                            </td>
+                                        </div>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex mt-7 items-center justify-between  rounded-lg bg-white px-4 py-3 sm:px-6">
+                    <div class="flex flex-1 justify-between sm:hidden">
+                        <a href="#"
+                            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+                        <a href="#"
+                            class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+                    </div>
+                    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-700">
+                                Showing
+                                <span class="font-medium">1</span>
+                                to
+                                <span class="font-medium">10</span>
+                                of
+                                <span class="font-medium">97</span>
+                                results
+                            </p>
+                        </div>
+                        <div class="flex gap-3">
+                            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                                <a href="#"
+                                    class="relative mr-2 inline-flex items-center rounded-lg px-2 py-2 text-gray-400 bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                    <span class="sr-only">Previous</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                        fill="none">
+                                        <path
+                                            d="M5.71875 7.83312H13.8334V9.16645H5.71875L9.29475 12.7425L8.35208 13.6851L3.16675 8.49979L8.35208 3.31445L9.29475 4.25712L5.71875 7.83312Z"
+                                            fill="#0B1107" />
+                                    </svg>
+                                </a>
+                                <div>
+                                    <a href="#" aria-current="page"
+                                        class="relative rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 px-4 py-2 bg-base-black text-sm font-semibold text-primary focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">1</a>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</a>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</a>
+                                    <span
+                                        class="relative rounded-lg mr-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 bg-[#F0F0F0] focus:outline-offset-0">...</span>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">8</a>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">9</a>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">10</a>
+                                </div>
+
+                                <a href="#"
+                                    class="relative inline-flex items-center rounded-lg px-2 py-2 text-gray-400  bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                    <span class="sr-only">Next</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                        fill="none">
+                                        <path
+                                            d="M11.2814 7.83312L7.70541 4.25712L8.64808 3.31445L13.8334 8.49979L8.64808 13.6851L7.70541 12.7425L11.2814 9.16645H3.16675V7.83312H11.2814Z"
+                                            fill="#0B1107" />
+                                    </svg>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
     </div>
-
-  
 </template>
 <script>
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stores/user";
 export default {
     components: {
     },
     setup() {
+        const store = useUserStore();
+        const isLoading = ref(false)
 
+        const getUserDealer = async () => {
+            isLoading.value = true
+            try {
+                await store.getUserDealers()
+            } catch (error) {
+                console.log('error', error)
+                isLoading.value = false
+
+            } finally {
+                isLoading.value = false
+            }
+
+        }
+        onMounted(() => {
+            getUserDealer()
+        })
         return {
+            isLoading,
+            store
         };
     },
 };
 </script>
-
-<style>
-.pd-5vw {
-    padding: 5vw;
-}
-
-.dpd-20 {
-    padding-bottom: 20px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-purple {
-    color: #c1f861;
-}
-
-.text-grey {
-    color: #5f7f89;
-}
-
-.text-blue {
-    color: #4fc1ea;
-}
-
-.text-size-20-vh {
-    font-size: 20vh;
-    line-height: normal;
-}
-
-.text-size-10-vh {
-    font-size: 10vh;
-}
-
-.text-size-5-vh {
-    font-size: 5vh;
-}
-
-.text-size-18 {
-    font-size: 18px;
-}
-
-.text-height-1-5 {
-    line-height: 1.5;
-}
-
-.bg-404 {
-    height: 100%;
-    position: relative;
-    background: #eee;
-    background: -moz-linear-gradient(top, rgba(232, 247, 252, 1) 0%, rgba(249, 249, 249, 1) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(232, 247, 252, 1) 0%, rgba(249, 249, 249, 1) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(232, 247, 252, 1) 0%, rgba(249, 249, 249, 1) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e8f7fc', endColorstr='#f9f9f9', GradientType=0);
-    /* IE6-9 */
-}
-
-.bottom-copy {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 140px;
-    text-align: center;
-}
-
-
-.gears-grd1 {
-    stop-color: #4fc1ea;
-    stop-opacity: 1
-}
-
-.gears-grd2 {
-    stop-color: #c1f861;
-    stop-opacity: 1
-}
-
-.gears-img {
-    position: absolute;
-    text-align: right;
-    right: 10vw;
-    bottom: 10vh;
-    width: 40%;
-}
-
-.gears-img img {
-    max-width: 100%;
-}
-
-.machine {
-    width: 60vmin;
-}
-
-.small-shadow,
-.medium-shadow,
-.large-shadow {
-    fill: rgba(0, 0, 0, 0.05);
-}
-
-.small {
-    -webkit-animation: counter-rotation 2.5s infinite linear;
-    -moz-animation: counter-rotation 2.5s infinite linear;
-    -o-animation: counter-rotation 2.5s infinite linear;
-    animation: counter-rotation 2.5s infinite linear;
-    -webkit-transform-origin: 100.136px 225.345px;
-    -ms-transform-origin: 100.136px 225.345px;
-    transform-origin: 100.136px 225.345px;
-}
-
-.small-shadow {
-    -webkit-animation: counter-rotation 2.5s infinite linear;
-    -moz-animation: counter-rotation 2.5s infinite linear;
-    -o-animation: counter-rotation 2.5s infinite linear;
-    animation: counter-rotation 2.5s infinite linear;
-    -webkit-transform-origin: 110.136px 235.345px;
-    -ms-transform-origin: 110.136px 235.345px;
-    transform-origin: 110.136px 235.345px;
-}
-
-.medium {
-    -webkit-animation: rotation 3.75s infinite linear;
-    -moz-animation: rotation 3.75s infinite linear;
-    -o-animation: rotation 3.75s infinite linear;
-    animation: rotation 3.75s infinite linear;
-    -webkit-transform-origin: 254.675px 379.447px;
-    -ms-transform-origin: 254.675px 379.447px;
-    transform-origin: 254.675px 379.447px;
-}
-
-.medium-shadow {
-    -webkit-animation: rotation 3.75s infinite linear;
-    -moz-animation: rotation 3.75s infinite linear;
-    -o-animation: rotation 3.75s infinite linear;
-    animation: rotation 3.75s infinite linear;
-    -webkit-transform-origin: 264.675px 389.447px;
-    -ms-transform-origin: 264.675px 389.447px;
-    transform-origin: 264.675px 389.447px;
-}
-
-.large {
-    -webkit-animation: counter-rotation 5s infinite linear;
-    -moz-animation: counter-rotation 5s infinite linear;
-    -o-animation: counter-rotation 5s infinite linear;
-    animation: counter-rotation 5s infinite linear;
-    -webkit-transform-origin: 461.37px 173.694px;
-    -ms-transform-origin: 461.37px 173.694px;
-    transform-origin: 461.37px 173.694px;
-}
-
-.large-shadow {
-    -webkit-animation: counter-rotation 5s infinite linear;
-    -moz-animation: counter-rotation 5s infinite linear;
-    -o-animation: counter-rotation 5s infinite linear;
-    animation: counter-rotation 5s infinite linear;
-    -webkit-transform-origin: 471.37px 183.694px;
-    -ms-transform-origin: 471.37px 183.694px;
-    transform-origin: 471.37px 183.694px;
-}
-
-@-webkit-keyframes rotation {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-
-    to {
-        -webkit-transform: rotate(359deg);
-    }
-}
-
-@-moz-keyframes rotation {
-    from {
-        -moz-transform: rotate(0deg);
-    }
-
-    to {
-        -moz-transform: rotate(359deg);
-    }
-}
-
-@-o-keyframes rotation {
-    from {
-        -o-transform: rotate(0deg);
-    }
-
-    to {
-        -o-transform: rotate(359deg);
-    }
-}
-
-@keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(359deg);
-    }
-}
-
-@-webkit-keyframes counter-rotation {
-    from {
-        -webkit-transform: rotate(359deg);
-    }
-
-    to {
-        -webkit-transform: rotate(0deg);
-    }
-}
-
-@-moz-keyframes counter-rotation {
-    from {
-        -moz-transform: rotate(359deg);
-    }
-
-    to {
-        -moz-transform: rotate(0deg);
-    }
-}
-
-@-o-keyframes counter-rotation {
-    from {
-        -o-transform: rotate(359deg);
-    }
-
-    to {
-        -o-transform: rotate(0deg);
-    }
-}
-
-@keyframes counter-rotation {
-    from {
-        transform: rotate(359deg);
-    }
-
-    to {
-        transform: rotate(0deg);
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .sm-hide {
-        display: none;
-    }
-
-    .text-size-10-vh {
-        font-size: 6vh;
-    }
-}</style>
-
 
 
   

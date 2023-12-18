@@ -209,16 +209,6 @@
     </div>
 
   </div>
-  <div class="bg-primary relative lg:h-screen pt-14">
-    <div class="relative flex flex-col items-center">
-      <Heanding :type="'h2'" :color="'text-base-black'" :msg="'Sell Your Vehicle'" />
-      <p class="text-lg font-normal text-blue-dark text-center">Our platform strives to create a change that supports
-        customers in a market of inflation.
-      </p>
-      <button class="btn mt-10 bg-base-black text-primary ">Sell Your Car Today</button>
-    </div>
-    <img class=" relative mt-6 lg:absolute  w-full bottom-0 " src="../assets/svg/bannerpeople.svg" alt="">
-  </div>
 </template>
 
 <script >

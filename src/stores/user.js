@@ -4,6 +4,8 @@ import { defineStore } from "pinia";
 export const useUserStore = defineStore("useUserStore", {
     state: () => ({
         userData: {},
+        userDealers: [],
+        userSellers: []
     }),
     actions: {
         userData(payload) {
@@ -46,6 +48,34 @@ export const useUserStore = defineStore("useUserStore", {
                 axios
                     .delete(`/user/${uuid}`)
                     .then((response) => {
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        getUserDealers() {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get("/user/dealers")
+                    .then((response) => {
+                        console.log('pepitooooooooo', response)
+                        this.userDealers = response
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        getUserSellers() {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get("/user/sellers")
+                    .then((response) => {
+                        console.log('pepitooooooooo', response)
+                        this.userSellers = response
                         resolve(response);
                     })
                     .catch((error) => {

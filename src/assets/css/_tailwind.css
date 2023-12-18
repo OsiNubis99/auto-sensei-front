@@ -14,6 +14,113 @@
     box-sizing: border-box;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+label.label-radio {
+    cursor: pointer;
+}
+
+.label-radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-radio {
+    box-shadow: 0px 0px 0px 1px #6d6d6d;
+    font-size: 3em;
+    width: 17px;
+    height: 17px;
+    margin-right: 7px;
+    border: 2px solid #fff;
+    background-clip: border-box;
+    border-radius: 50%;
+    appearance: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+}
+
+.input-radio.on:checked {
+    box-shadow: 0px 0px 0px 2px #000;
+    background-color: #000;
+}
+
+
+label.label-colors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 10px 30px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+
+
+.input-radio.on-white:checked {
+    box-shadow: 0px 0px 0px 2px #000000;
+    background-color: #ffffff;
+}
+
+.input-radio.on-red:checked {
+    box-shadow: 0px 0px 0px 2px #FF333E;
+    background-color: #FF333E;
+}
+
+.input-radio.on-black:checked {
+    box-shadow: 0px 0px 0px 2px #000;
+    background-color: #000;
+}
+
+.input-radio.on-silver:checked {
+    box-shadow: 0px 0px 0px 2px #E0E0E0;
+    background-color: #E0E0E0;
+}
+
+.input-radio.on-grey:checked {
+    box-shadow: 0px 0px 0px 2px #858585;
+    background-color: #858585;
+}
+
+
+.input-radio.on-greendark:checked {
+    box-shadow: 0px 0px 0px 2px #316C40;
+    background-color: #316C40;
+}
+
+.input-radio.on-brown:checked {
+    box-shadow: 0px 0px 0px 2px #AF8E61;
+    background-color: #AF8E61;
+}
+
+.input-radio.on-yellow:checked {
+    box-shadow: 0px 0px 0px 2px #FBDB17;
+    background-color: #FBDB17;
+}
+
+.input-radio.on-green:checked {
+    box-shadow: 0px 0px 0px 2px #05A54B;
+    background-color: #05A54B;
+}
+
+.input-radio.on-blue:checked {
+    box-shadow: 0px 0px 0px 2px #1F94F0;
+    background-color: #1F94F0;
+}
+
+
+
+
+
+
 .mySwiper {
     border-radius: 10px;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)
@@ -306,4 +413,32 @@ input.check-toggle-round-flat:checked+label:after {
 
 .h-custom {
     height: calc(100vh - 56px);
+}
+
+.shadow-steps {
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15), 0px 0px 5px 0px rgba(0, 0, 0, 0.05);
+}
+
+.hr-custim-1,
+.hr-custim-2,
+.hr-custim-3 {
+    position: relative;
+}
+
+.hr-custim-1::after,
+.hr-custim-2::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    bottom: 0;
+    border: 1px solid #E0E0E0;
+    transform: rotate(90deg);
+    left: 10px;
+    bottom: -16px;
+
+}
+
+.custom-header-all {
+    height: calc(100vh - 160px);
 }
