@@ -10,13 +10,14 @@
         <div class="grid grid-cols-2 place-items-center place-content-center gap-4">
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-base " for="">Vehicle Identification Number (VIN)</label>
-                <input class="p-2 rounded-lg border border-[#E0E0E0] " placeholder="Input your VIN number" type="number">
+                <input v-model="form.numberVin" :class="invalid?.numberVin ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 rounded-lg border" placeholder="Input your VIN number" type="number">
                 <p class="text-sm text-[#858585] ">Provide the exact VIN number in order to decode your vehicle accurately.
                 </p>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-base " for="">Vehicle Drop Off Agreement</label>
-                <VueDatePicker class="p-2 rounded-lg" v-model="date">
+                <VueDatePicker class="custom-picker" :class="invalid?.date && 'error-picker'" v-model="form.date">
                     <template #calendar-header="{ index, day }">
                         <div :class="index === 5 || index === 6 ? 'red-color' : ''">
                             {{ day }}
@@ -31,8 +32,8 @@
         <div class="grid w-full grid-cols-3 gap-5">
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-base " for="">Province</label>
-                <select id="countries"
-                    class=" border text-[#858585] p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                <select v-model="form.province" :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
+                    class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option selected>Choose a country</option>
                     <option value="US">United States</option>
                     <option value="CA">Canada</option>
@@ -42,8 +43,8 @@
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-base " for="">City</label>
-                <select id="countries"
-                    class=" border text-[#858585] p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                <select v-model="form.city" :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
+                    class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option selected>Choose a country</option>
                     <option value="US">United States</option>
                     <option value="CA">Canada</option>
@@ -53,8 +54,8 @@
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-base " for="">How many keys?</label>
-                <select id="countries"
-                    class=" border text-[#858585] p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                <select v-model="form.keys" :class="invalid?.keys ? 'border-error' : 'border-[#E0E0E0]'"
+                    class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option selected>Choose a country</option>
                     <option value="US">United States</option>
                     <option value="CA">Canada</option>
@@ -68,13 +69,18 @@
             <p class="text-sm font-semibold ">Is your vehicle currently?</p>
             <div class="flex gap-4 items-center">
                 <label class="label-radio">
-                    <input type="radio" class="input-radio on" checked name="pilih"> Paid Off
+                    <input :class="invalid?.currently ? 'error-currently' : ''" type="radio" value="PaidOff" v-model="form.currently"
+                        class="input-radio on" name="pilih"> Paid
+                    Off
                 </label>
                 <label class="label-radio">
-                    <input type="radio" class="input-radio on" checked name="pilih"> Financed
+                    <input :class="invalid?.currently ? 'error-currently' : ''" type="radio" v-model="form.currently"
+                        value="Financed" class="input-radio on" name="pilih">
+                    Financed
                 </label>
                 <label class="label-radio">
-                    <input type="radio" class="input-radio on" checked name="pilih"> Leased
+                    <input :class="invalid?.currently ? 'error-currently' : ''" type="radio" v-model="form.currently"
+                        value="Leased" class="input-radio on" name="pilih"> Leased
                 </label>
             </div>
 
@@ -84,10 +90,10 @@
             <p class="text-sm text-[#666666] ">Do you know the buyout for your vehicle? (Optional)</p>
             <div class="flex gap-4 items-center">
                 <label class="label-radio">
-                    <input type="radio" class="input-radio on" checked name="pilih-1"> Yes
+                    <input type="radio" v-model="form.buyoutVehicle" value="Yes" class="input-radio on" name="pilih-1"> Yes
                 </label>
                 <label class="label-radio">
-                    <input type="radio" class="input-radio on" checked name="pilih-1"> No
+                    <input type="radio" v-model="form.buyoutVehicle" value="No" class="input-radio on" name="pilih-1"> No
                 </label>
             </div>
 
@@ -96,10 +102,10 @@
             <p class="text-sm text-[#666666] ">Are you currently in the market to buy a new vehicle? (Optional)</p>
             <div class="flex gap-4 items-center">
                 <label class="label-radio">
-                    <input type="radio" class="input-radio on" checked name="pilih-2"> Yes
+                    <input type="radio" v-model="form.newVehicle" value="Yes" class="input-radio on" name="pilih-2"> Yes
                 </label>
                 <label class="label-radio">
-                    <input type="radio" class="input-radio on" checked name="pilih-2"> No
+                    <input type="radio" v-model="form.newVehicle" value="No" class="input-radio on" name="pilih-2"> No
                 </label>
             </div>
 
@@ -112,6 +118,8 @@
 </template>
 <script>
 import { ref, onMounted } from "vue";
+import { generalsInfo } from '../../../../validations/validationCreateAutions'
+import { toast } from "vue3-toastify";
 export default {
     props: {
         op: {
@@ -129,17 +137,48 @@ export default {
     },
     setup(props) {
         const date = ref(new Date());
+        const invalid = ref();
+        const form = ref({
+            numberVin: '',
+            date: '',
+            province: '',
+            city: '',
+            keys: '',
+            currently: '',
+            buyoutVehicle: '',
+            newVehicle: ''
+
+        })
         const next = () => {
-            props.op.step1 = false
-            props.op.step2 = true
-            props.op.step3 = false
-            props.checkStep.step1 = true
-            props.checkStep.step2 = false
-            props.checkStep.step3 = false
+            invalid.value = generalsInfo(form.value);
+            console.log('invalid.value ', invalid.value )
+            if (Object.entries(invalid.value).length > 0) {
+                toast(
+                    invalid?.value?.numberVin ||
+                    invalid?.value?.date ||
+                    invalid?.value?.province ||
+                    invalid?.value?.city ||
+                    invalid.value.keys ||
+                    invalid.value.currently
+                    , {
+                        type: "error",
+                    });
+                return
+            }
+            if (Object.entries(invalid.value).length === 0) {
+                props.op.step1 = false
+                props.op.step2 = true
+                props.op.step3 = false
+                props.checkStep.step1 = true
+                props.checkStep.step2 = false
+                props.checkStep.step3 = false
+            }
         }
         return {
             date,
-            next
+            next,
+            form,
+            invalid
         };
     },
 };

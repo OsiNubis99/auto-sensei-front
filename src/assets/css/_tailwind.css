@@ -44,6 +44,16 @@ label.label-radio {
 
 }
 
+/* .border-gray {
+    box-shadow: 0px 0px 0px 1px #6d6d6d;
+}
+ */
+.error-currently {
+    box-shadow: 0px 0px 0px 1px red;
+}
+.error-driveTrain{
+    box-shadow: 0px 0px 0px 1px red;
+}
 .input-radio.on:checked {
     box-shadow: 0px 0px 0px 2px #000;
     background-color: #000;
@@ -62,7 +72,9 @@ label.label-colors {
     font-weight: 500;
     font-size: 13px;
 }
-
+label.label-colors-error{
+    border: 1px solid red;
+}
 
 
 .input-radio.on-white:checked {
@@ -441,4 +453,13 @@ input.check-toggle-round-flat:checked+label:after {
 
 .custom-header-all {
     height: calc(100vh - 160px);
+}
+
+.custom-picker .dp__input {
+    border-radius: 8px !important;
+    height: 42px !important;
+}
+
+.error-picker .dp__input {
+    border: 1px solid red;
 }
