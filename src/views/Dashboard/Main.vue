@@ -114,9 +114,10 @@ export default {
                     toast(error?.response?.data?.message || "An error has occurred", {
                         type: "error",
                     });
-                    setTimeout(() => {
+                    setTimeout(async () => {
                         localStorage.clear()
-                        router.push({ path: '/' })
+                        await router.push({ path: '/' })
+                        router.go()
                         loading.value = false
                     }, 2500);
                 } finally {

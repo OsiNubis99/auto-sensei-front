@@ -86,7 +86,14 @@ const routes = [
         path: "/all",
         name: "all",
         component: () => import('../views/Dashboard/All/Main.vue')
-
+      },
+      {
+        path: "/all/create",
+        name: "create",
+        component: () => import('../views/Dashboard/All/createAuction/Main.vue'),
+        meta: {
+          hideNavbar: true,
+        }
       },
     ],
   },
@@ -153,6 +160,12 @@ const routes = [
         name: 'recover-password',
         props: true,
         component: () => import('../views/Auth/EmailChangePassword/Main.vue')
+      },
+      {
+        path: '/resend-email',
+        name: 'resend-email',
+        props: true,
+        component: () => import('../views/Auth/ResendEmail/Main.vue')
       },
       {
         path: '/auth/recover-password',

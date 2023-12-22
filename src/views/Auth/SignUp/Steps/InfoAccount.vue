@@ -188,7 +188,7 @@ export default {
         const nextStep = async () => {
             invalid.value = infoAccount(form, rol.value);
             console.log('invalid.value', invalid.value)
-            
+
             if (Object.entries(invalid.value).length === 0) {
                 console.log('form', form)
                 isLoading.value = true

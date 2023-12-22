@@ -49,7 +49,8 @@
                         <RouterLink
                             :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'contact-us' && '!text-primary')]"
                             class="font-medium text-sm" to="/contact-us">Contact Us</RouterLink>
-                        <RouterLink :class="[((path == 'contact-us' && scrollPosition < 1) && 'text-base-black')]"
+                        <RouterLink v-if="!store?.userData?._id"
+                            :class="[((path == 'contact-us' && scrollPosition < 1) && 'text-base-black')]"
                             class="font-medium text-sm" to="/login/dealers">Dealer Page</RouterLink>
                     </div>
                     <div class="flex gap-4 items-center pr-7">
@@ -77,13 +78,20 @@
                                     <span v-if="path == 'signup'"> Already have an account?</span>
                                 </p>
                             </RouterLink>
-                            <RouterLink v-if="path !== 'login'"
-                                :to="path == 'home' || path == 'about' ? `/login/sellers` : `/login/${route.params.rol}`"
+                            <RouterLink v-if="path !== 'login'" :to="path == 'home' || path == 'about' || path == 'sold-auctions' ||
+                                path == 'how-it-works' ||
+                                path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`"
                                 :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'" class="btn">
                                 <span v-if="path == 'signup'">Sign In</span>
                                 <span v-else>Login</span>
                             </RouterLink>
-                            <RouterLink v-if="path !== 'signup'" :to="/signup/ + route.params.rol"
+                            <RouterLink v-if="path !== 'signup'" :to="path == 'home' ||
+                                    path == 'about' ||
+                                    path == 'sold-auctions' ||
+                                    path == 'how-it-works' ||
+                                    path == 'contact-us'
+
+                                    ? `/signup/sellers` : `/signup/${route.params.rol}`"
                                 class="btn bg-primary text-base-black">
                                 Sign Up
                             </RouterLink>
@@ -141,8 +149,7 @@ export default {
                 i18n.global.locale = "es";
             }
         }
-        const back = () => {
-            router.push('/')
+        const back = async () => {
             storeData.formData.name = ''
             storeData.formData.lastName = ''
             storeData.formData.email = ''
@@ -154,16 +161,19 @@ export default {
             storeData.formAccount.address = ''
             storeData.formAccount.phoneNumber = ''
             storeData.formAccount.preview = ''
+            await router.push('/')
+            router.go()
         }
         const toggle = () => {
             open.value = !open.value
         }
         const updateScroll = () => {
             scrollPosition.value = window.scrollY
+            console.log('store', store.userData)
         }
         onMounted(() => {
             window.addEventListener('scroll', updateScroll);
-            console.log('store', store.userData)
+
         })
         return {
             LogoIcon,

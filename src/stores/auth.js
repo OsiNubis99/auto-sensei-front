@@ -61,6 +61,22 @@ export const useAuthStore = defineStore("authStore", {
           });
       });
     },
+    resendEmail(payload) {
+      console.log('payload', payload)
+      return new Promise((resolve, reject) => {
+        axios
+          .post("/auth/send-email-validation", payload)
+          .then((response) => {
+            console.log('send-email-validation', response)
+
+            resolve(response);
+          })
+          .catch((error) => {
+            console.log('error', error)
+            reject(error);
+          });
+      });
+    },
     authProfile(payload) {
       const config = {
         headers: {

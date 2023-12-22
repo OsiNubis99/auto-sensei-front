@@ -29,9 +29,12 @@ token = localStorage.getItem('token')
 console.log('token', token)
 let store = useAuthStore()
 if (token) {
-    store.authProfile({ token: token }).then((response) => {
-        console.log("validateToken response", response);
+    store.authProfile({ token: token }).then((res) => {
+        console.log("validateToken response", res);
     }).catch((error) => {
         console.log("validateToken error", error);
+        if (error.response.data.message == "Unauthorized" || error.response.data.statusCode == 401) {
+            localStorage.clear()
+        }
     });
 }

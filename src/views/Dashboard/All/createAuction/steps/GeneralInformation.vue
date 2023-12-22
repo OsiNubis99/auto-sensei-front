@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
         <div class="flex gap-6">
-            <img src="../../../../assets/svg/imgGenerals.svg" alt="">
+            <img src="../../../../../assets/svg/imgGenerals.svg" alt="">
             <div class="flex flex-col ">
                 <p class=" font-semibold    text-xl  ">General Information</p>
                 <p>Related to your vehicle to help get the right bids !</p>
@@ -10,14 +10,15 @@
         <div class="grid grid-cols-2 place-items-center place-content-center gap-4">
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-base " for="">Vehicle Identification Number (VIN)</label>
-                <input v-model="form.numberVin" :class="invalid?.numberVin ? 'border-error' : 'border-[#E0E0E0]'"
-                    class="p-2 rounded-lg border" placeholder="Input your VIN number" type="number">
+                <input v-model="form.numberVinGenerals"
+                    :class="invalid?.numberVinGenerals ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 rounded-lg border uppercase" placeholder="Input your VIN number" type="text">
                 <p class="text-sm text-[#858585] ">Provide the exact VIN number in order to decode your vehicle accurately.
                 </p>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-base " for="">Vehicle Drop Off Agreement</label>
-                <VueDatePicker class="custom-picker" :class="invalid?.date && 'error-picker'" v-model="form.date">
+                <VueDatePicker  class="custom-picker" :class="invalid?.date && 'error-picker'" v-model="form.date">
                     <template #calendar-header="{ index, day }">
                         <div :class="index === 5 || index === 6 ? 'red-color' : ''">
                             {{ day }}
@@ -69,8 +70,8 @@
             <p class="text-sm font-semibold ">Is your vehicle currently?</p>
             <div class="flex gap-4 items-center">
                 <label class="label-radio">
-                    <input :class="invalid?.currently ? 'error-currently' : ''" type="radio" value="PaidOff" v-model="form.currently"
-                        class="input-radio on" name="pilih"> Paid
+                    <input :class="invalid?.currently ? 'error-currently' : ''" type="radio" value="PaidOff"
+                        v-model="form.currently" class="input-radio on" name="pilih"> Paid
                     Off
                 </label>
                 <label class="label-radio">
@@ -110,16 +111,14 @@
             </div>
 
         </div>
-        <button @click="next"
+        <button v-if="!save" @click="next"
             class=" btn flex justify-center bg-[#303E18] py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Continue
         </button>
     </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
-import { generalsInfo } from '../../../../validations/validationCreateAutions'
-import { toast } from "vue3-toastify";
+import { ref, onMounted,watch } from "vue";
 export default {
     props: {
         op: {
@@ -128,57 +127,36 @@ export default {
         checkStep: {
             type: Object,
         },
+        form: {
+            type: Object,
+        },
         back: {
             type: Function,
         },
-
-    },
-    components: {
+        launch: {
+            type: Boolean,
+        },
+        nextGeneralInformation: {
+            type: Function
+        },
+        invalid: {
+            type: Object
+        },
     },
     setup(props) {
         const date = ref(new Date());
-        const invalid = ref();
-        const form = ref({
-            numberVin: '',
-            date: '',
-            province: '',
-            city: '',
-            keys: '',
-            currently: '',
-            buyoutVehicle: '',
-            newVehicle: ''
-
-        })
+        const form = ref(props.form)
+        const save = ref(props.launch)
+        const invalid = ref(props.invalid)
         const next = () => {
-            invalid.value = generalsInfo(form.value);
-            console.log('invalid.value ', invalid.value )
-            if (Object.entries(invalid.value).length > 0) {
-                toast(
-                    invalid?.value?.numberVin ||
-                    invalid?.value?.date ||
-                    invalid?.value?.province ||
-                    invalid?.value?.city ||
-                    invalid.value.keys ||
-                    invalid.value.currently
-                    , {
-                        type: "error",
-                    });
-                return
-            }
-            if (Object.entries(invalid.value).length === 0) {
-                props.op.step1 = false
-                props.op.step2 = true
-                props.op.step3 = false
-                props.checkStep.step1 = true
-                props.checkStep.step2 = false
-                props.checkStep.step3 = false
-            }
+            props.nextGeneralInformation()
         }
         return {
             date,
             next,
             form,
-            invalid
+            invalid,
+            save
         };
     },
 };

@@ -1,329 +1,336 @@
 <template>
-    <section class="pd-5vw">
-        <div class="">
-            <div class="text-size-5-vh dpd-20 text-blue">
-                Action List
+    <div v-if="loading" class=" flex flex-col h-screen mb-7 gap-5 items-start  p-5 w-full">
+        <div class="  w-full h-full flex justify-center items-center">
+            <div class="text-indigo-700">
+                <div class="h-[80px] w-[80px] ">
+                    <div class="animate-bounce">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
+                            stroke-width="0" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                </div>
             </div>
-            <div class="text-size-10-vh text-purple dpd-20">
-                <strong>
-                    We'll Be Back Soon.
-                </strong>
-            </div>
         </div>
-        <div class="text-height-1-5 text-grey text-size-18 dpd-20">
-            We're busy upgrading with new technology.
-            We apologize for the inconvenience.
-        </div>
-        <div>
-            You can contact us through one of these channels:
-        </div>
-        <br>
-        <div>
-            <a href="https://twitter.com">Twitter</a> |
-            <a href="https://www.facebook.com">Facebook</a>
-        </div>
-    </section>
-
-    <div class="gears-img sm-hide">
-        <svg class="machine" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 645 526" fill="url(#grad1)">
-            <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" class="gears-grd1" />
-                    <stop offset="100%" class="gears-grd2" />
-                </linearGradient>
-            </defs>
-            <defs />
-            <g>
-                <path x="-173,694" y="-173,694" class="large-shadow"
-                    d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
-            </g>
-            <g>
-                <path x="-136,996" y="-136,996" class="medium-shadow"
-                    d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
-            </g>
-            <g>
-                <path x="-100,136" y="-100,136" class="small-shadow"
-                    d="M210 246v-21l-29-4c-2-10-6-18-11-26l18-23 -15-15 -23 18c-8-5-17-9-26-11l-4-29H100l-4 29c-10 2-18 6-26 11l-23-18 -15 15 18 23c-5 8-9 17-11 26L10 225v21l29 4c2 10 6 18 11 26l-18 23 15 15 23-18c8 5 17 9 26 11l4 29h21l4-29c10-2 18-6 26-11l23 18 15-15 -18-23c5-8 9-17 11-26L210 246zM110 272c-20 0-37-17-37-37s17-37 37-37c20 0 37 17 37 37S131 272 110 272z" />
-            </g>
-            <g>
-                <path x="-100,136" y="-100,136" class="small"
-                    d="M200 236v-21l-29-4c-2-10-6-18-11-26l18-23 -15-15 -23 18c-8-5-17-9-26-11l-4-29H90l-4 29c-10 2-18 6-26 11l-23-18 -15 15 18 23c-5 8-9 17-11 26L0 215v21l29 4c2 10 6 18 11 26l-18 23 15 15 23-18c8 5 17 9 26 11l4 29h21l4-29c10-2 18-6 26-11l23 18 15-15 -18-23c5-8 9-17 11-26L200 236zM100 262c-20 0-37-17-37-37s17-37 37-37c20 0 37 17 37 37S121 262 100 262z" />
-            </g>
-            <g>
-                <path x="-173,694" y="-173,694" class="large"
-                    d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
-            </g>
-            <g>
-                <path x="-136,996" y="-136,996" class="medium"
-                    d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
-            </g>
-        </svg>
     </div>
+    <template v-else>
+        <div class="mx-auto bg-[#F0F0F0] h-screen">
+            <div class="flex justify-between p-5">
+                <div class="flex gap-7">
+                    <button class="btn bg-blue-dark text-primary">
+                        Parked
+                    </button>
+                    <button class="btn bg-white text-blue-dark font-semibold shadow-md  ">
+                        Upcoming
+                    </button>
+                    <button class="btn bg-white text-blue-dark font-semibold shadow-md  ">
+                        Live
+                    </button>
+                    <button class="btn bg-white text-blue-dark font-semibold shadow-md  ">
+                        Completed
+                    </button>
+                </div>
+                <div class="flex  items-center gap-3">
+                    <button class="flex gap-2 rounded-md py-1 px-2 bg-white items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 16 17" fill="none">
+                            <path
+                                d="M6.66667 12.5H9.33333V11.1667H6.66667V12.5ZM2 4.5V5.83333H14V4.5H2ZM4 9.16667H12V7.83333H4V9.16667Z"
+                                fill="#09121F" />
+                        </svg>
+                        <p class="!m-0">Filter</p>
+                    </button>
+                    <button class="flex gap-2 rounded-md py-1 px-2 bg-white items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                            <path
+                                d="M12.6667 2.5L15.3333 5.83333H13.3333V13.8333H12V5.83333H10L12.6667 2.5ZM9.33333 12.5V13.8333H2V12.5H9.33333ZM9.33333 7.83333V9.16667H2V7.83333H9.33333ZM8 3.16667V4.5H2V3.16667H8Z"
+                                fill="#09121F" />
+                        </svg>
+                        <p class="!m-0">Sort</p>
+                    </button>
+                </div>
+            </div>
+            <div class="flex p-5 flex-col">
+                <div class="overflow-x-auto shadow-md sm:rounded-lg">
+                    <div class="inline-block min-w-full align-middle">
+                        <div class="overflow-hidden ">
+                            <table class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
+                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col" class="p-4">
+                                            <div class="flex items-center">
+                                                <input id="checkbox-all" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="checkbox-all" class="sr-only">checkbox</label>
+                                            </div>
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div class="flex items-center gap-1">
+                                                <p class="!m-0">Auctions Title</p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
+                                                        fill="#4D4D4D" />
+                                                </svg>
+                                            </div>
+
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div class="flex items-center gap-1">
+                                                <p class="!m-0">Seller</p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
+                                                        fill="#4D4D4D" />
+                                                </svg>
+                                            </div>
+
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div class="flex items-center gap-1">
+                                                <p class="!m-0">Created</p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
+                                                        fill="#4D4D4D" />
+                                                </svg>
+                                            </div>
+
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div class="flex items-center gap-1">
+                                                <p class="!m-0">Status Car</p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
+                                                        fill="#4D4D4D" />
+                                                </svg>
+                                            </div>
+
+                                        </th>
+                                        <div class="flex justify-center">
+
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                                Actions
+                                            </th>
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+
+                                            </th>
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+
+                                            </th>
+                                        </div>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-[#E0E0E0] ">
+                                    <tr v-for="aution in store?.data" :key="aution?.id"
+                                        class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <td class="p-4 w-4">
+                                            <div class="flex items-center">
+                                                <input id="checkbox-table-1" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                                            </div>
+                                        </td>
+                                        <td
+                                            class="py-4 px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
+                                            <div class="w-10 h-10">
+                                                <img v-if="aution?.dealer?.picture !== 'url'"
+                                                    class="w-full shadow-md   rounded-full h-full object-contain"
+                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                                                    alt="">
+                                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                                    alt="">
+                                            </div>
+                                            <div class="flex justify-center flex-col">
+                                                <p class="p-0 !m-0"> {{ aution?.vehicleDetails?.model }}</p>
+                                                <p class="p-0 !m-0">{{ aution?.vin }}</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
+                                            <p class="!m-0 font-extrabold">Emma Smith</p>
+                                            <p class="!m-0">Banff, Alberta</p>
+                                        </td>
+                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+
+                                            <p class="p-0 !m-0"> {{ aution?.createDay }}</p>
+                                            <p class="p-0 !m-0">{{ aution?.createHour }}</p>
+
+                                        </td>
+                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                            <div v-if="aution?.vehicleStatus == 'PaidOff'"
+                                                class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#05A54B14] gap-2">
+                                                <div class="text-[#05A54B] capitalize">PaidOff</div>
+                                            </div>
+                                            <div v-else-if="aution?.vehicleStatus == 'Financed'"
+                                                class="relative w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#6D53B014] gap-2">
+                                                <div class="text-[#6D53B0] capitalize">Financed</div>
+                                            </div>
+                                            <div v-else-if="aution?.vehicleStatus == 'Leased'"
+                                                class="relative  w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#1F94F014] gap-2">
+                                                <div class="text-[#1F94F0] capitalize">Inactive</div>
+                                            </div>
+                                            <div v-else
+                                                class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#7b7b7b14] gap-2">
+                                                <div class="text-[#FF333E] capitalize">there is no state</div>
+                                            </div>
+                                        </td>
+                                        <div class="flex h-full py-4 px-6 justify-center gap-4 ">
+                                            <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                <button
+                                                    class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 16 16" fill="none">
+                                                        <path
+                                                            d="M8.00002 2C11.5947 2 14.5854 4.58667 15.2127 8C14.586 11.4133 11.5947 14 8.00002 14C4.40535 14 1.41469 11.4133 0.787354 8C1.41402 4.58667 4.40535 2 8.00002 2ZM8.00002 12.6667C9.35967 12.6664 10.6789 12.2045 11.7419 11.3568C12.8049 10.509 13.5486 9.32552 13.8514 8C13.5475 6.67554 12.8033 5.49334 11.7404 4.64668C10.6776 3.80003 9.35889 3.33902 8.00002 3.33902C6.64115 3.33902 5.32248 3.80003 4.2596 4.64668C3.19673 5.49334 2.45253 6.67554 2.14869 8C2.45142 9.32552 3.19514 10.509 4.25812 11.3568C5.3211 12.2045 6.64037 12.6664 8.00002 12.6667ZM8.00002 11C7.20437 11 6.44131 10.6839 5.8787 10.1213C5.31609 9.55871 5.00002 8.79565 5.00002 8C5.00002 7.20435 5.31609 6.44129 5.8787 5.87868C6.44131 5.31607 7.20437 5 8.00002 5C8.79567 5 9.55873 5.31607 10.1213 5.87868C10.6839 6.44129 11 7.20435 11 8C11 8.79565 10.6839 9.55871 10.1213 10.1213C9.55873 10.6839 8.79567 11 8.00002 11ZM8.00002 9.66667C8.44205 9.66667 8.86597 9.49107 9.17853 9.17851C9.49109 8.86595 9.66669 8.44203 9.66669 8C9.66669 7.55797 9.49109 7.13405 9.17853 6.82149C8.86597 6.50893 8.44205 6.33333 8.00002 6.33333C7.55799 6.33333 7.13407 6.50893 6.82151 6.82149C6.50895 7.13405 6.33335 7.55797 6.33335 8C6.33335 8.44203 6.50895 8.86595 6.82151 9.17851C7.13407 9.49107 7.55799 9.66667 8.00002 9.66667Z"
+                                                            fill="#0B1107" />
+                                                    </svg>
+                                                    Detail
+                                                </button>
+                                            </td>
+                                            <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                <button @click="deleteUserAuction(aution)"
+                                                    class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 16 16" fill="none">
+                                                        <path
+                                                            d="M2.66659 5.3335H13.3333V14.0002C13.3333 14.177 13.263 14.3465 13.138 14.4716C13.013 14.5966 12.8434 14.6668 12.6666 14.6668H3.33325C3.15644 14.6668 2.98687 14.5966 2.86185 14.4716C2.73682 14.3465 2.66659 14.177 2.66659 14.0002V5.3335ZM3.99992 6.66683V13.3335H11.9999V6.66683H3.99992ZM5.99992 8.00016H7.33325V12.0002H5.99992V8.00016ZM8.66659 8.00016H9.99992V12.0002H8.66659V8.00016ZM4.66659 3.3335V2.00016C4.66659 1.82335 4.73682 1.65378 4.86185 1.52876C4.98687 1.40373 5.15644 1.3335 5.33325 1.3335H10.6666C10.8434 1.3335 11.013 1.40373 11.138 1.52876C11.263 1.65378 11.3333 1.82335 11.3333 2.00016V3.3335H14.6666V4.66683H1.33325V3.3335H4.66659ZM5.99992 2.66683V3.3335H9.99992V2.66683H5.99992Z"
+                                                            fill="#FF333E" />
+                                                    </svg>
+                                                    <p class="text-error">Remove</p>
+                                                </button>
+                                            </td>
+                                        </div>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex mt-7 items-center justify-between  rounded-lg bg-white px-4 py-3 sm:px-6">
+                    <div class="flex flex-1 justify-between sm:hidden">
+                        <a href="#"
+                            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+                        <a href="#"
+                            class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+                    </div>
+                    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-700">
+                                Showing
+                                <span class="font-medium">1</span>
+                                to
+                                <span class="font-medium">10</span>
+                                of
+                                <span class="font-medium">97</span>
+                                results
+                            </p>
+                        </div>
+                        <div class="flex gap-3">
+                            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                                <a href="#"
+                                    class="relative mr-2 inline-flex items-center rounded-lg px-2 py-2 text-gray-400 bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                    <span class="sr-only">Previous</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                        fill="none">
+                                        <path
+                                            d="M5.71875 7.83312H13.8334V9.16645H5.71875L9.29475 12.7425L8.35208 13.6851L3.16675 8.49979L8.35208 3.31445L9.29475 4.25712L5.71875 7.83312Z"
+                                            fill="#0B1107" />
+                                    </svg>
+                                </a>
+                                <div>
+                                    <a href="#" aria-current="page"
+                                        class="relative rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 px-4 py-2 bg-base-black text-sm font-semibold text-primary focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">1</a>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</a>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</a>
+                                    <span
+                                        class="relative rounded-lg mr-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 bg-[#F0F0F0] focus:outline-offset-0">...</span>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">8</a>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">9</a>
+                                    <a href="#"
+                                        class="relative rounded-lg mr-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 bg-[#F0F0F0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">10</a>
+                                </div>
+                                <a href="#"
+                                    class="relative inline-flex items-center rounded-lg px-2 py-2 text-gray-400  bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                    <span class="sr-only">Next</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                        fill="none">
+                                        <path
+                                            d="M11.2814 7.83312L7.70541 4.25712L8.64808 3.31445L13.8334 8.49979L8.64808 13.6851L7.70541 12.7425L11.2814 9.16645H3.16675V7.83312H11.2814Z"
+                                            fill="#0B1107" />
+                                    </svg>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
 </template>
 <script>
+import { ref, watch, computed, onMounted } from "vue";
+import { useAuctionStore } from "@/stores/auctions";
+import { toast } from "vue3-toastify";
 export default {
-    components: {
-    },
     setup() {
+        const store = useAuctionStore()
+        const loading = ref(false)
 
+        const index = async () => {
+            loading.value = true
+            try {
+                await store.index()
+                loading.value = false
+            } catch (error) {
+                toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
+                loading.value = false
+            }
+        }
+        onMounted(() => {
+            index()
+        })
+        const deleteUserAuction = async (item) => {
+            console.log('item', item._id)
+            loading.value = true
+            try {
+                await store.delete(item._id)
+                loading.value = false
+
+            } catch (error) {
+                toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
+                loading.value = false
+            }
+        }
         return {
+            store,
+            deleteUserAuction,
+            loading
         };
     },
 };
 </script>
 
-<style>
-.pd-5vw {
-    padding: 5vw;
-}
 
-.dpd-20 {
-    padding-bottom: 20px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-purple {
-    color: #c1f861;
-}
-
-.text-grey {
-    color: #5f7f89;
-}
-
-.text-blue {
-    color: #4fc1ea;
-}
-
-.text-size-20-vh {
-    font-size: 20vh;
-    line-height: normal;
-}
-
-.text-size-10-vh {
-    font-size: 10vh;
-}
-
-.text-size-5-vh {
-    font-size: 5vh;
-}
-
-.text-size-18 {
-    font-size: 18px;
-}
-
-.text-height-1-5 {
-    line-height: 1.5;
-}
-
-.bg-404 {
-    height: 100%;
-    position: relative;
-    background: #eee;
-    background: -moz-linear-gradient(top, rgba(232, 247, 252, 1) 0%, rgba(249, 249, 249, 1) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(232, 247, 252, 1) 0%, rgba(249, 249, 249, 1) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(232, 247, 252, 1) 0%, rgba(249, 249, 249, 1) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e8f7fc', endColorstr='#f9f9f9', GradientType=0);
-    /* IE6-9 */
-}
-
-.bottom-copy {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 140px;
-    text-align: center;
-}
-
-
-.gears-grd1 {
-    stop-color: #4fc1ea;
-    stop-opacity: 1
-}
-
-.gears-grd2 {
-    stop-color: #c1f861;
-    stop-opacity: 1
-}
-
-.gears-img {
-    position: absolute;
-    text-align: right;
-    right: 10vw;
-    bottom: 10vh;
-    width: 40%;
-}
-
-.gears-img img {
-    max-width: 100%;
-}
-
-.machine {
-    width: 60vmin;
-}
-
-.small-shadow,
-.medium-shadow,
-.large-shadow {
-    fill: rgba(0, 0, 0, 0.05);
-}
-
-.small {
-    -webkit-animation: counter-rotation 2.5s infinite linear;
-    -moz-animation: counter-rotation 2.5s infinite linear;
-    -o-animation: counter-rotation 2.5s infinite linear;
-    animation: counter-rotation 2.5s infinite linear;
-    -webkit-transform-origin: 100.136px 225.345px;
-    -ms-transform-origin: 100.136px 225.345px;
-    transform-origin: 100.136px 225.345px;
-}
-
-.small-shadow {
-    -webkit-animation: counter-rotation 2.5s infinite linear;
-    -moz-animation: counter-rotation 2.5s infinite linear;
-    -o-animation: counter-rotation 2.5s infinite linear;
-    animation: counter-rotation 2.5s infinite linear;
-    -webkit-transform-origin: 110.136px 235.345px;
-    -ms-transform-origin: 110.136px 235.345px;
-    transform-origin: 110.136px 235.345px;
-}
-
-.medium {
-    -webkit-animation: rotation 3.75s infinite linear;
-    -moz-animation: rotation 3.75s infinite linear;
-    -o-animation: rotation 3.75s infinite linear;
-    animation: rotation 3.75s infinite linear;
-    -webkit-transform-origin: 254.675px 379.447px;
-    -ms-transform-origin: 254.675px 379.447px;
-    transform-origin: 254.675px 379.447px;
-}
-
-.medium-shadow {
-    -webkit-animation: rotation 3.75s infinite linear;
-    -moz-animation: rotation 3.75s infinite linear;
-    -o-animation: rotation 3.75s infinite linear;
-    animation: rotation 3.75s infinite linear;
-    -webkit-transform-origin: 264.675px 389.447px;
-    -ms-transform-origin: 264.675px 389.447px;
-    transform-origin: 264.675px 389.447px;
-}
-
-.large {
-    -webkit-animation: counter-rotation 5s infinite linear;
-    -moz-animation: counter-rotation 5s infinite linear;
-    -o-animation: counter-rotation 5s infinite linear;
-    animation: counter-rotation 5s infinite linear;
-    -webkit-transform-origin: 461.37px 173.694px;
-    -ms-transform-origin: 461.37px 173.694px;
-    transform-origin: 461.37px 173.694px;
-}
-
-.large-shadow {
-    -webkit-animation: counter-rotation 5s infinite linear;
-    -moz-animation: counter-rotation 5s infinite linear;
-    -o-animation: counter-rotation 5s infinite linear;
-    animation: counter-rotation 5s infinite linear;
-    -webkit-transform-origin: 471.37px 183.694px;
-    -ms-transform-origin: 471.37px 183.694px;
-    transform-origin: 471.37px 183.694px;
-}
-
-@-webkit-keyframes rotation {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-
-    to {
-        -webkit-transform: rotate(359deg);
-    }
-}
-
-@-moz-keyframes rotation {
-    from {
-        -moz-transform: rotate(0deg);
-    }
-
-    to {
-        -moz-transform: rotate(359deg);
-    }
-}
-
-@-o-keyframes rotation {
-    from {
-        -o-transform: rotate(0deg);
-    }
-
-    to {
-        -o-transform: rotate(359deg);
-    }
-}
-
-@keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(359deg);
-    }
-}
-
-@-webkit-keyframes counter-rotation {
-    from {
-        -webkit-transform: rotate(359deg);
-    }
-
-    to {
-        -webkit-transform: rotate(0deg);
-    }
-}
-
-@-moz-keyframes counter-rotation {
-    from {
-        -moz-transform: rotate(359deg);
-    }
-
-    to {
-        -moz-transform: rotate(0deg);
-    }
-}
-
-@-o-keyframes counter-rotation {
-    from {
-        -o-transform: rotate(359deg);
-    }
-
-    to {
-        -o-transform: rotate(0deg);
-    }
-}
-
-@keyframes counter-rotation {
-    from {
-        transform: rotate(359deg);
-    }
-
-    to {
-        transform: rotate(0deg);
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .sm-hide {
-        display: none;
-    }
-
-    .text-size-10-vh {
-        font-size: 6vh;
-    }
-}
-</style>
 
 
 

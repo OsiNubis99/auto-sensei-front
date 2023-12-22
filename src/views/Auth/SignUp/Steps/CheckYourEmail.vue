@@ -15,7 +15,7 @@
                     <p class=" text-sm mt-6 font-medium mb-5">Click the link in your email to continue</p>
                 </div>
             </div>
-           <!--  <button @click="nextStep"
+            <!--  <button @click="nextStep"
                 class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Create Account
             </button> -->
@@ -23,7 +23,7 @@
         <div class="text-center">
             <p class=" text-xs font-normal text-[#666]  ">
                 Didn’t receive the email?
-            <p @click="backStep" class="font-medium underline text-base-black hover:text-indigo-500">
+            <p @click="sendResendEmail" class="font-medium underline text-base-black hover:text-indigo-500">
                 Resend Email
             </p>
             </p>
@@ -33,6 +33,7 @@
 <script>
 import { stepsSignUp } from "@/stores/stepsSignUp";
 import { onMounted } from "vue";
+import { useRoute, useRouter } from 'vue-router'
 export default {
     props: {
         next: {
@@ -47,9 +48,10 @@ export default {
 
     },
     setup(props) {
-        let rol = props.rol
+        let rol = props.rolf
         const storeData = stepsSignUp()
         const form = storeData.formData
+        const router = useRouter();
         const nextStep = () => {
             props.next()
         }
@@ -59,11 +61,16 @@ export default {
         onMounted(() => {
             console.log('form', form)
         })
+        const sendResendEmail = async () => {
+            await router.push({ name: 'resend-email' })
+            router.go()
+        }
         return {
             nextStep,
             rol,
             form,
-            backStep
+            backStep,
+            sendResendEmail
         };
     },
 };

@@ -138,22 +138,24 @@ export default {
                 if (res.data.access_token) {
                     let resProfile = await store.authProfile({ token: res.data.access_token })
                     localStorage.setItem('rol', resProfile.data.type)
-
-
                     if (resProfile.statusText = "OK") {
-                        setInterval(() => {
+                        setInterval(async () => {
                             switch (resProfile.data.type) {
                                 case 0:
-                                    router.push({ path: '/inicio' })
+                                    await router.push({ path: '/inicio' })
+                                    router.go()
                                     break;
                                 case 1:
-                                    router.push({ path: '/all' })
+                                    await router.push({ path: '/all' })
+                                    router.go()
                                     break;
                                 case 2:
-                                    router.push({ path: '/upcoming' })
+                                    await router.push({ path: '/upcoming' })
+                                    router.go()
                                     break;
                                 default:
-                                    router.push({ name: 'home' })
+                                    await router.push({ name: 'home' })
+                                    router.go()
                                     break;
                             }
                             isLoadingLogin.value = false;

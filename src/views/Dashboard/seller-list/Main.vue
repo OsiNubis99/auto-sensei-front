@@ -38,9 +38,10 @@
             </div>
         </div>
         <template v-if="store.userSellers?.data?.length == 0">
-            <div style="inline-size: auto;" class="w-full flex  rounded-lg m-5 shadow-xl  bg-white justify-center items-center">
+            <div style="inline-size: auto;"
+                class="w-full flex  rounded-lg m-5 shadow-xl  bg-white justify-center items-center">
                 <div class=" text-gray-500 capitalize py-12 px-36 ">
-                     there are no users
+                    there are no users
                 </div>
             </div>
         </template>
@@ -75,9 +76,9 @@
                                             </div>
                                         </th>
                                         <th scope="col"
-                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                             <div class="flex items-center gap-1">
-                                                <p class="!m-0">Dealer</p>
+                                                <p class="!m-0">Seller</p>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
@@ -88,7 +89,7 @@
 
                                         </th>
                                         <th scope="col"
-                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                             <div class="flex items-center gap-1">
                                                 <p class="!m-0">Status</p>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -101,7 +102,7 @@
 
                                         </th>
                                         <th scope="col"
-                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                             <div class="flex items-center gap-1">
                                                 <p class="!m-0">Total Purchase</p>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -114,7 +115,7 @@
 
                                         </th>
                                         <th scope="col"
-                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                             <div class="flex items-center gap-1">
                                                 <p class="!m-0">Success Rate</p>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -128,11 +129,11 @@
                                         </th>
                                         <div class="flex justify-center">
                                             <th scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                                 History
                                             </th>
                                             <th scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                                 Actions
                                             </th>
                                         </div>
@@ -160,8 +161,17 @@
                                                     alt="">
                                             </div>
                                             <div class="flex justify-center flex-col">
-                                                <p class="p-0 !m-0"> {{ user?.seller?.firstName }}</p>
-                                                <p class="p-0 !m-0">5.0 (2.8k)</p>
+                                                <p class="p-0 !m-0 capitalize"> {{ user?.seller?.firstName }}</p>
+                                                <div class=" flex items-center gap-1">
+                                                    <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                        viewBox="0 0 14 13" fill="none">
+                                                        <path
+                                                            d="M6.55778 0.838169C6.74538 0.482596 7.25462 0.482596 7.44222 0.83817L9.02481 3.83773C9.09716 3.97486 9.22902 4.07066 9.38179 4.09709L12.7236 4.67531C13.1197 4.74385 13.2771 5.22817 12.9969 5.51647L10.6332 7.94852C10.5251 8.0597 10.4748 8.21471 10.4968 8.36817L10.9796 11.7251C11.0368 12.123 10.6248 12.4224 10.2641 12.245L7.22062 10.7485C7.0815 10.6801 6.9185 10.6801 6.77938 10.7485L3.73593 12.245C3.37516 12.4224 2.96317 12.123 3.0204 11.7251L3.50316 8.36817C3.52523 8.21471 3.47486 8.0597 3.36681 7.94852L1.0031 5.51647C0.722898 5.22817 0.880263 4.74385 1.27641 4.67531L4.61821 4.09709C4.77098 4.07066 4.90284 3.97486 4.97519 3.83773L6.55778 0.838169Z"
+                                                            fill="#D6C000" />
+                                                    </svg>
+                                                <p class="p-0 !m-0 ">5.0 (2.8k)</p>
+
+                                                </div>
                                             </div>
                                         </td>
                                         <td class="py-4 px-6  text-sm font-medium text-[#000] whitespace-nowrap ">

@@ -33,7 +33,7 @@
                                 <p>Dashboard</p>
                             </RouterLink>
                             <RouterLink to="/action-list"
-                                :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                :class="path == 'action-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Auctions List</p>
                             </RouterLink>
@@ -52,8 +52,7 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Settings</p>
                             </RouterLink>
-                            <RouterLink to="/faqs"
-                                :class="path == 'faqs' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/faqs" :class="path == 'faqs' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Faq</p>
                             </RouterLink>
@@ -65,7 +64,7 @@
         <div v-if="store.userData.type == 1">
             <nav class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
                 <div class=" flex items-center">
-                    <div class="flex gap-5 justify-between items-center ">
+                    <div class="flex gap-8 justify-between items-center ">
                         <div class="relative">
                             <svg class="w-6 h-6 text-gray-700 absolute top-3 left-2" fill="none" stroke="white"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +72,7 @@
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                             <input type="search" placeholder="Search for vehicles by make, model, VIN, etc."
-                                class="border-[1px] rounded-[8px] w-full bg-transparent border-[#FFFFFF] py-3 px-10">
+                                class="border-[1px] rounded-[8px] text-white w-full bg-transparent border-[#d3d3d361] py-3 pl-10 pr-3  ">
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path
@@ -82,7 +81,14 @@
                         </svg>
                         <IconNotifications />
                         <div class="relative ">
-                            <IconUser @click="toggleAccount" class="cursor-pointer" />
+                            <div @click="toggleAccount" class="w-8 h-8 cursor-pointer">
+                                <img v-if="store?.userData?.seller?.picture"
+                                    class="w-full shadow-md   rounded-full h-full object-contain"
+                                    :src="store?.userData?.seller?.picture" alt="">
+                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
+                            </div>
                             <ul :class="openAccount ? 'block' : 'hidden'"
                                 class="absolute z-[1000] top-[30px] -left-[60px] m-0 w-full  min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block">
                                 <li>
@@ -102,10 +108,9 @@
                     <div :class="open ? ' left-[0%]' : 'left-[-100%]'"
                         class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
-
-                            <RouterLink to="/all" :class="path == 'inicio' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/all" :class="path == 'all' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
-                                <p>Seller Bidding</p>
+                                <p>Sell a Car</p>
                             </RouterLink>
                             <RouterLink to="#" :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
@@ -115,15 +120,11 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
                             </RouterLink>
-                            <RouterLink to="#" :class="path == 'seller-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
-                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
-                                <p>How It Works?</p>
-                            </RouterLink>
                         </ul>
                     </div>
                 </div>
             </nav>
-            <nav class="bg-[#22282F] flex items-center gap-6 p-5 ">
+            <nav v-if="!route?.meta?.hideNavbar" class="bg-[#22282F] flex items-center gap-6 p-5 ">
                 <div class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto bg-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
@@ -171,7 +172,7 @@
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                             <input type="search" placeholder="Search for vehicles by make, model, VIN, etc."
-                                class="border-[1px] rounded-[8px] w-full bg-transparent border-[#FFFFFF] py-3 px-10">
+                                class="border-[1px] rounded-[8px] w-full bg-transparent border-[#d3d3d361] py-3 px-10">
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path
@@ -180,7 +181,14 @@
                         </svg>
                         <IconNotifications />
                         <div class="relative ">
-                            <IconUser @click="toggleAccount" class="cursor-pointer" />
+                            <div @click="toggleAccount" class="w-8 h-8 cursor-pointer">
+                                <img v-if="store?.userData?.dealer?.picture"
+                                    class="w-full shadow-md   rounded-full h-full object-contain"
+                                    :src="store?.userData?.dealer?.picture" alt="">
+                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
+                            </div>
                             <ul :class="openAccount ? 'block' : 'hidden'"
                                 class="absolute z-[1000] top-[30px] -left-[60px] m-0 w-full  min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block">
                                 <li>
@@ -289,9 +297,10 @@ export default {
         const toggleAccount = () => {
             openAccount.value = !openAccount.value
         }
-        const logout = () => {
+        const logout = async () => {
             localStorage.clear()
-            router.push({ name: 'home' })
+            await router.push({ name: 'home' })
+            router.go()
 
         }
         onMounted(() => {
@@ -308,7 +317,10 @@ export default {
             toggleAccount,
             openAccount,
             logout,
-            store
+            store,
+            router,
+            route
+
         };
     },
 };

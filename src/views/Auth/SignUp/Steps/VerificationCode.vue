@@ -31,8 +31,7 @@
                                     Code
                                 </label>
                                 <div class="mt-1">
-                                    <input v-model="form.code"  type="text"
-                                        placeholder="Enter the 6-digit code"
+                                    <input v-model="form.code" type="text" placeholder="Enter the 6-digit code"
                                         class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                             </div>
@@ -58,7 +57,7 @@
     </div>
 </template>
 <script>
-import { onMounted, ref,computed } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { stepsSignUp } from "@/stores/stepsSignUp";
 import { toast } from "vue3-toastify";
 import { useRouter, useRoute } from 'vue-router'
@@ -86,8 +85,9 @@ export default {
                 return
             }
             loading.value = true
-            setTimeout(() => {
-                router.push({ path: `/login/${route.params.rol}` })
+            setTimeout(async () => {
+                await router.push({ path: `/login/${route.params.rol}` })
+                router.go()
                 loading.value = false
             }, 2000);
 

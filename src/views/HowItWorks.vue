@@ -9,14 +9,11 @@
         </div>
         <img class="absolute object-cover left-0 w-full h-full -z-10 top-0" src="../assets/img/png/howitworks.png" alt="">
     </div>
-
-
     <div class="container mx-auto w-full h-full">
         <div class="flex w-full flex-col justify-center items-center p-20">
             <Heanding :type="'h3'" color="#000" :msg="'Sell a Car Every Time Everywhere'" />
             <p>Post your car in less than 15 minutes</p>
         </div>
-
         <div class="relative wrap overflow-hidden p-10 h-full">
             <div class="border-[4px] absolute border-opacity-20 border-[#D9D9D9] h-[95%] " style="left: 50%"></div>
             <!-- right timeline -->
