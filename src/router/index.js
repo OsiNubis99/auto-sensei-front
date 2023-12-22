@@ -88,6 +88,14 @@ const routes = [
         component: () => import('../views/Dashboard/All/Main.vue')
       },
       {
+        path: "/account",
+        name: "account",
+        component: () => import('../views/Dashboard/my-account/Main.vue'),
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
         path: "/all/create",
         name: "create",
         component: () => import('../views/Dashboard/All/createAuction/Main.vue'),
