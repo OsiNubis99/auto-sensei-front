@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="w-full  flex flex-col justify-center items-center bg-[#F0F0F0]">
+        <div v-if="store?.data?.length > 0" class="w-full  flex flex-col justify-center items-center bg-[#F0F0F0]">
             <div class="flex justify-center items-center flex-col pt-20 mb-20 ">
                 <h1 class="text-4xl md:text-6xl  font-bold  text-center text-base-black">Frequently asked question</h1>
                 <p class="text-base-black">Let’s us know how we can help</p>

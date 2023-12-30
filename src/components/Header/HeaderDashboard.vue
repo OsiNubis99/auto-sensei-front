@@ -84,7 +84,7 @@
                                 <img v-if="store?.userData?.seller?.picture"
                                     class="w-full shadow-md border border-[#e5e5e5]  rounded-full h-full object-contain"
                                     :src="bucket + store?.userData?.seller?.picture" alt="">
-                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                     alt="">
                             </div>
@@ -186,9 +186,9 @@
                         <div class="relative ">
                             <div @click="toggleAccount" class="w-8 h-8 cursor-pointer">
                                 <img v-if="store?.userData?.dealer?.picture"
-                                    class="w-full shadow-md   rounded-full h-full object-contain"
-                                    :src="store?.userData?.dealer?.picture" alt="">
-                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                    class="w-full shadow-md   rounded-full h-full object-cover"
+                                    :src=" bucket +  store?.userData?.dealer?.picture" alt="">
+                                <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                     alt="">
                             </div>

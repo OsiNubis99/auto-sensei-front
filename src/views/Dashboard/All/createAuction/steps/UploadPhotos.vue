@@ -540,8 +540,7 @@
 
 
                         <video v-if="form?.previewVehicleVideo" ref="videoPlayer" muted loop
-                            class="w-full h-[190px] object-contain" :src="form?.previewVehicleVideo"
-                            @click="paused" />
+                            class="w-full h-[190px] object-contain" :src="form?.previewVehicleVideo" @click="paused" />
                         <svg v-else class="w-[100px] h-[100px]" :fill="invalid?.vehicleVideo ? '#ff000075' : '#6d6d6d42'"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path
@@ -573,17 +572,21 @@
 
         </div>
         <div v-if="!save" class="flex justify-center items-center gap-5 ">
-            <button
+            <!--  <button
                 class=" btn bg-transparent  border-[#E0E0E0] flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save as Draft
-            </button>
+            </button> -->
             <button @click="next"
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Launch Auction
+                Confirmation
             </button>
         </div>
         <div v-else class="flex justify-center items-center gap-5 ">
-            <button @click="createAutions"
+            <button @click="createAutions('draft')"
+                class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Save as Draft
+            </button>
+            <button @click="createAutions('launch')"
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Launch Auction POST
             </button>
@@ -747,8 +750,8 @@ export default {
         const next = () => {
             props.nextUploadPhotos()
         }
-        const createAutions = () => {
-            props.saveData()
+        const createAutions = (string) => {
+            props.saveData(string)
         }
         return {
             date,

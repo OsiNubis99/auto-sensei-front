@@ -165,11 +165,10 @@
                                         <td
                                             class="py-4 px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                             <div class="w-10 h-10">
-                                                <img v-if="user.dealer.picture !== 'url'"
-                                                    class="w-full shadow-md   rounded-full h-full object-contain"
-                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                                    alt="">
-                                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                                <img v-if="user?.dealer?.picture"
+                                                    class="w-full shadow-md   rounded-full h-full object-cover"
+                                                    :src="bucket + user?.dealer?.picture" alt="">
+                                                <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
                                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                                     alt="">
                                             </div>
@@ -191,12 +190,12 @@
                                             <div v-if="user.status == 'active'"
                                                 class="relative w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#05A54B14] gap-2">
                                                 <div class="w-2 h-2 rounded-full bg-[#05A54B]"></div>
-                                                <div class="text-[#05A54B]">Active</div>
+                                                <div class="text-[#05A54B] capitalize ">{{ user.status }}</div>
                                             </div>
                                             <div v-else
                                                 class="relative flex py-1 px-2 rounded-md justify-center items-center bg-[#FF333E14] gap-2">
                                                 <div class="w-2 h-2 rounded-full bg-[#FF333E]"></div>
-                                                <div class="text-[#FF333E]">Inactive</div>
+                                                <div class="text-[#FF333E] capitalize ">{{ user.status }} </div>
                                             </div>
                                         </td>
                                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
@@ -348,12 +347,14 @@
 <script>
 import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/stores/user";
+import { toast } from "vue3-toastify";
 export default {
     setup() {
         const store = useUserStore();
         const isLoading = ref(false)
         const orderName = ref(false)
         const isOpen = ref(false)
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const now = ref(computed(() => store.userDealers.data))
         const getUserDealer = async () => {
             isLoading.value = true
@@ -378,12 +379,30 @@ export default {
 
 
         }
-        const confirmDealer = (user) => {
-            console.log('user confirm', user)
+        const confirmDealer = async (user) => {
+            isLoading.value = true
+            try {
+                await store.activeUser(user._id)
+                isLoading.value = false
+
+            } catch (error) {
+                toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
+                isLoading.value = false
+            }
         }
-        const rejetDealer = (user) => {
-            console.log('user delete', user)
+        const rejetDealer = async (user) => {
+            isLoading.value = true
+            try {
+                await store.inactivateUser(user._id)
+                isLoading.value = false
+
+            } catch (error) {
+                toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
+                isLoading.value = false
+            }
         }
+
+
         onMounted(() => {
             getUserDealer()
         })
@@ -394,7 +413,8 @@ export default {
             now,
             isOpen,
             confirmDealer,
-            rejetDealer
+            rejetDealer,
+            bucket
         };
     },
 };

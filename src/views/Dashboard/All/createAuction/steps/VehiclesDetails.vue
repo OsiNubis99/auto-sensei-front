@@ -63,7 +63,7 @@
             <div class="w-full">
                 <label class="font-medium text-base " for="">Odometer</label>
                 <input :class="invalid?.odometer ? 'border-error' : ''" v-model="form.odometer"
-                    class="p-2 w-full mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="4" type="text">
+                    class="p-2 w-full mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="4" type="number">
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col gap-2">
@@ -120,19 +120,19 @@
             <div class="grid grid-cols-2 place-items-baseline  place-content-center gap-4">
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                        class="input-radio on" value="front-wheel" name="drive-train"> FWD (Front-Wheel Drive)
+                        class="input-radio on" value="Front-Wheel Drive" name="drive-train"> FWD (Front-Wheel Drive)
                 </label>
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                        class="input-radio on" value="all-wheel" name="drive-train"> AWD (All-Wheel Drive)
+                        class="input-radio on" value="All-Wheel Drive" name="drive-train"> AWD (All-Wheel Drive)
                 </label>
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                        class="input-radio on" value="rear-wheel" name="drive-train"> RWD (Rear-Wheel Drive)
+                        class="input-radio on" value="Rear-Wheel Drive" name="drive-train"> RWD (Rear-Wheel Drive)
                 </label>
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                        class="input-radio on" value="four-wheel" name="drive-train"> 4WD (Four-Wheel Drive)
+                        class="input-radio on" value="Four-Wheel Drive" name="drive-train"> 4WD (Four-Wheel Drive)
                 </label>
             </div>
 

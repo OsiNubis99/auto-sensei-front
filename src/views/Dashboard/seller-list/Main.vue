@@ -79,8 +79,9 @@
                                             class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                             <div class="flex items-center gap-1">
                                                 <p class="!m-0">Seller</p>
-                                                <svg @click="order" class="cursor-pointer " xmlns="http://www.w3.org/2000/svg" width="14"
-                                                    height="14" viewBox="0 0 14 14" fill="none">
+                                                <svg @click="order" class="cursor-pointer "
+                                                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
                                                     <path
                                                         d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
                                                         fill="#4D4D4D" />
@@ -140,8 +141,9 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-[#E0E0E0] ">
-                                    <tr v-for="(user,index) in store?.userSellers.data" :key="user?.id"
-                                        class="hover:bg-gray-100 dark:hover:bg-gray-700" :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''">
+                                    <tr v-for="(user, index) in store?.userSellers.data" :key="user?.id"
+                                        class="hover:bg-gray-100 dark:hover:bg-gray-700"
+                                        :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
                                                 <input id="checkbox-table-1" type="checkbox"
@@ -152,11 +154,10 @@
                                         <td
                                             class="py-4 px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                             <div class="w-10 h-10">
-                                                <img v-if="user?.seller?.picture !== 'url'"
-                                                    class="w-full shadow-md   rounded-full h-full object-contain"
-                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                                    alt="">
-                                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                                <img v-if="user?.seller?.picture"
+                                                    class="w-full shadow-md   rounded-full h-full object-cover"
+                                                    :src="bucket + user?.seller?.picture" alt="">
+                                                <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
                                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                                     alt="">
                                             </div>
@@ -304,6 +305,7 @@ export default {
         const isLoading = ref(false)
         const orderName = ref(false)
         const now = ref(computed(() => store.userSellers.data))
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const getUserSeller = async () => {
             isLoading.value = true
             try {
@@ -333,7 +335,8 @@ export default {
             isLoading,
             store,
             order,
-            now
+            now,
+            bucket
         };
     },
 };

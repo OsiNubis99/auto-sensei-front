@@ -60,7 +60,7 @@ export const useUserStore = defineStore("useUserStore", {
                 axios
                     .get("/user/dealers")
                     .then((response) => {
-                        console.log('pepitooooooooo', response)
+                        console.log('USER DEALERS', response)
                         this.userDealers = response
                         resolve(response);
                     })
@@ -76,6 +76,32 @@ export const useUserStore = defineStore("useUserStore", {
                     .then((response) => {
                         console.log('pepitooooooooo', response)
                         this.userSellers = response
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        activeUser(uuid) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/user/activate/${uuid}`)
+                    .then((response) => {
+                        console.log('activate', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        inactivateUser(uuid) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/user/inactivate/${uuid}`)
+                    .then((response) => {
+                        console.log('inactivate', response)
                         resolve(response);
                     })
                     .catch((error) => {

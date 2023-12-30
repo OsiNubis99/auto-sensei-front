@@ -20,18 +20,40 @@
         <div class="mx-auto bg-[#F0F0F0] h-screen">
             <div class="flex justify-between p-5">
                 <div class="flex gap-7">
-                    <button class="btn bg-blue-dark text-primary">
-                        Parked
-                    </button>
-                    <button class="btn bg-white text-blue-dark font-semibold shadow-md  ">
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'drafts' } }" @click="changeSeccion('drafts')"
+                        :class="stateTable == 'drafts' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
+                        class="btn font-semibold ">
+                        Drafts (325)
+                    </RouterLink>
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'unapproved' } }"
+                        @click="changeSeccion('unapproved')"
+                        :class="stateTable == 'unapproved' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
+                        class="btn  font-semibold shadow-md capitalize  ">
+                        Unapproved
+                    </RouterLink>
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'upcoming' } }"
+                        @click="changeSeccion('upcoming')"
+                        :class="stateTable == 'upcoming' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
+                        class="btn  font-semibold shadow-md capitalize  ">
                         Upcoming
-                    </button>
-                    <button class="btn bg-white text-blue-dark font-semibold shadow-md  ">
+                    </RouterLink>
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'live' } }" @click="changeSeccion('live')"
+                        :class="stateTable == 'live' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
+                        class="btn  font-semibold shadow-md capitalize  ">
                         Live
-                    </button>
-                    <button class="btn bg-white text-blue-dark font-semibold shadow-md  ">
+                    </RouterLink>
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'completed' } }"
+                        @click="changeSeccion('completed')"
+                        :class="stateTable == 'completed' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
+                        class="btn  font-semibold shadow-md capitalize  ">
                         Completed
-                    </button>
+                    </RouterLink>
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'canceled' } }"
+                        @click="changeSeccion('canceled')"
+                        :class="stateTable == 'canceled' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
+                        class="btn  font-semibold shadow-md capitalize  ">
+                        Cancelled
+                    </RouterLink>
                 </div>
                 <div class="flex  items-center gap-3">
                     <button class="flex gap-2 rounded-md py-1 px-2 bg-white items-center">
@@ -142,7 +164,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-[#E0E0E0] ">
-                                    <tr v-for="(aution, index) in store?.data" :key="aution?.id"
+                                    <tr v-for="(  aution, index  ) in   dataTable  " :key="aution?.id"
                                         :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''"
                                         class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <td class="p-4 w-4">
@@ -155,22 +177,22 @@
                                         <td
                                             class="py-4 px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                             <div class="w-10 h-10">
-                                                <img v-if="aution?.dealer?.picture !== 'url'"
-                                                    class="w-full shadow-md   rounded-full h-full object-contain"
-                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                                                <img v-if="aution.owner.seller.picture"
+                                                    class="w-full shadow-md   rounded-full h-full object-cover"
+                                                    :src=" bucket + aution.owner.seller.picture"
                                                     alt="">
-                                                <img v-else class="w-full shadow-md  rounded-full h-full object-contain"
+                                                <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
                                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                                     alt="">
                                             </div>
                                             <div class="flex justify-center flex-col">
-                                                <p class="p-0 !m-0"> {{ aution?.vehicleDetails?.model }}</p>
+                                                <p class="p-0 !m-0 capitalize"> {{ aution?.vehicleDetails?.model }}</p>
                                                 <p class="p-0 uppercase font-normal  text-[#4D4D4D] !m-0">{{
                                                     aution?.vehicleDetails?.vin }}</p>
                                             </div>
                                         </td>
                                         <td class="py-4 px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
-                                            <p class="!m-0 font-extrabold">{{ aution.owner.seller.firstName }} {{
+                                            <p class="!m-0 font-extrabold capitalize">{{ aution.owner.seller.firstName }} {{
                                                 aution.owner.seller.lastName }}</p>
                                             <p class="!m-0">Banff, Alberta</p>
                                         </td>
@@ -225,11 +247,13 @@
                                             </td>
                                             <td
                                                 class="w-[50%] justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
-                                                <button @click="confirmAutions(aution)"
+                                                <button
+                                                    v-if="aution.status !== 'upcoming' && aution.status !== 'live' && aution.status !== 'completed'"
+                                                    @click="confirmAutions(aution)"
                                                     class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
                                                     Accept
                                                 </button>
-                                                <button @click="rejetAutions(aution)"
+                                                <button v-if="aution.status !== 'canceled'" @click="rejetAutions(aution)"
                                                     class="flex gap-1 items-center border p-2 bg-error text-white rounded-md border-[#E0E0E0]">
                                                     Reject
                                                 </button>
@@ -311,29 +335,40 @@
 import { ref, watch, computed, onMounted } from "vue";
 import { useAuctionStore } from "@/stores/auctions";
 import { toast } from "vue3-toastify";
+import { useRoute, useRouter } from 'vue-router'
 export default {
     setup() {
+        const router = useRouter()
+        const route = useRoute();
         const store = useAuctionStore()
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const loading = ref(false)
-
+        const dataTable = ref([])
+        const stateTable = ref('drafts')
         const index = async () => {
             loading.value = true
             try {
                 await store.index()
                 loading.value = false
+               /*  stateTable.value == 'drafts' && (dataTable.value = store.draft) */
             } catch (error) {
                 toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
                 loading.value = false
             }
         }
+        watch(route, (to) => {
+            console.log('to', to)
+        }, { flush: 'pre', immediate: true, deep: true })
         onMounted(() => {
             index()
+            console.log('params', route)
+            console.log('router', router.query)
         })
         const deleteUserAuction = async (item) => {
-            console.log('item', item._id)
             loading.value = true
             try {
                 await store.delete(item._id)
+                index()
                 loading.value = false
 
             } catch (error) {
@@ -342,31 +377,60 @@ export default {
             }
         }
         const confirmAutions = async (aution) => {
-            console.log('user confirm', aution)
-            console.log('item', item._id)
             loading.value = true
             try {
                 await store.activeAutions(aution._id)
+                index()
                 loading.value = false
 
             } catch (error) {
                 toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
                 loading.value = false
             }
-
-
         }
         const rejetAutions = async (aution) => {
             console.log('user confirm', aution)
-            console.log('item', item._id)
             loading.value = true
             try {
                 await store.inactivateAutions(aution._id)
+                index()
                 loading.value = false
 
             } catch (error) {
                 toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
                 loading.value = false
+            }
+        }
+        const changeSeccion = (change) => {
+            stateTable.value = change
+            dataTable
+            switch (stateTable.value) {
+                case 'drafts':
+                    dataTable.value = store.draft
+                    index()
+                    break;
+                case 'unapproved':
+                    dataTable.value = store.unapproved
+                    index()
+                    break;
+                case 'upcoming':
+                    dataTable.value = store.upcoming
+                    index()
+                    break;
+                case 'live':
+                    dataTable.value = store.live
+                    index()
+                    break;
+                case 'completed':
+                    dataTable.value = store.completed
+                    index()
+                    break;
+                case 'canceled':
+                    dataTable.value = store.canceled
+                    index()
+                    break;
+                default:
+                    break;
             }
         }
         return {
@@ -374,7 +438,11 @@ export default {
             deleteUserAuction,
             loading,
             confirmAutions,
-            rejetAutions
+            rejetAutions,
+            changeSeccion,
+            dataTable,
+            stateTable,
+            bucket
         };
     },
 };

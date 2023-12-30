@@ -287,7 +287,6 @@ export default {
             }
         }
         const nextVehiclesDetails = async () => {
-
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'vehiclesDetails');
             if (Object.entries(invalid.value).length > 0) {
@@ -370,7 +369,7 @@ export default {
             }
         }
 
-        const postFile = async () => {
+        const postFile = async (string) => {
             let newArrayExterior = []
             let newArrayInterior = []
             let newArrayVehicleDamage = []
@@ -420,16 +419,37 @@ export default {
                         newAdditionalDocuments.push(res.data);
                     })
                 );
+
                 let dataPost = {
+                    vin: formData.value.numberVinGenerals,
+                    dropOffDate: formData.value.date,
+                    city: formData.value.city,
+                    province: formData.value.province,
+                    keysNumber: formData.value.keys,
+                    vehicleStatus: formData.value.currently,
+                    buyout: formData.value.buyoutVehicle,
+                    buyNew: formData.value.newVehicle,
+                    finished: string == 'launch' ? true : false,
                     vehicleDetails: {
+                        odometer: formData.value.odometer,
+                        doors: formData.value.doors,
+                        color: formData.value.color,
+                        driveTrain: formData.value.driveTrain,
+                        aditionals: formData.value.additionalPackages,
+                        tireCondition: formData.value.tireCondition,
+                        tireReplacement: formData.value.lastReplacement,
+                        brakeCondition: formData.value.brakePads,
+                        brakeReplacement: formData.value.lastReplacement2,
+                        rotorCondition: formData.value.rotorCondition,
+                        rotorReplacement: formData.value.lastReplacement3,
                         originalDocument: formData.value.document,
                         driverLicense: formData.value.driverDocument,
                         exteriorPhotos: newArrayExterior,
                         interiorPhotos: newArrayInterior,
                         vehicleDamage: newArrayVehicleDamage,
                         additionalDocuments: newAdditionalDocuments,
-                        vehicleVideo: formData.value.vehicleVideo
-                    }
+                        vehicleVideo: formData.value.vehicleVideo,
+                    },
                 }
                 return dataPost
             }
@@ -475,7 +495,8 @@ export default {
 
             }
         }
-        const saveData = async () => {
+        const saveData = async (string) => {
+            console.log('string', string)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'confirmation');
             console.log('invalid.value', invalid.value)
@@ -528,7 +549,7 @@ export default {
             }
             if (Object.entries(invalid.value).length === 0) {
                 loading.value = true
-                let resFiles = await postFile()
+                let resFiles = await postFile(string)
                 console.log('resFiles', resFiles)
                 if (resFiles) {
                     try {
