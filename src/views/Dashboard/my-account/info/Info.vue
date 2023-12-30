@@ -102,10 +102,10 @@
         <div class="flex justify-between w-full  ">
             <div class="flex gap-4 items-center">
                 <button class="text-white rounded-lg py-2 px-4 bg-[#1F94F0]">Reviewed (12)</button>
-                <button  class=" border borer-[#C2C2C2] py-2 px-4 rounded-lg">Need Review (2)</button>
+                <button class=" border borer-[#C2C2C2] py-2 px-4 rounded-lg">Need Review (2)</button>
             </div>
-          
-       </div>
+
+        </div>
     </div>
 </template>
 <script>

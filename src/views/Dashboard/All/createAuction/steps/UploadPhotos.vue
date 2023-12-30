@@ -101,8 +101,8 @@
                     <div>
                         <img class="w-full h-[190px]  object-contain " v-if="form?.previewFrontPhoto"
                             :src="form?.previewFrontPhoto" alt="">
-                        <img v-else class="w-full h-[190px] object-contain " src="../../../../../assets/img/png/mainphoto.png"
-                            alt="">
+                        <img v-else class="w-full h-[190px] object-contain "
+                            src="../../../../../assets/img/png/mainphoto.png" alt="">
                         <!-- <svg v-else class="w-[100px] h-[100px]" :fill="invalid?.frontPhoto ? '#ff000075' : '#6d6d6d42'"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path
@@ -176,8 +176,8 @@
                     <div>
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewDriverSide"
                             :src="form?.previewDriverSide" alt="">
-                        <img v-else class="w-full h-[190px] object-contain " src="../../../../../assets/img/png/driverside.png"
-                            alt="">
+                        <img v-else class="w-full h-[190px] object-contain "
+                            src="../../../../../assets/img/png/driverside.png" alt="">
                     </div>
                     <div v-if="form?.driverSide?.name" class="flex w-full items-start flex-col justify-start gap-1">
                         <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
@@ -222,7 +222,7 @@
                     </p>
                 </div>
                 <label
-                    class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
+                    class="flex flex-col border border-[#C2C2C2] border-dashed items-center p-3 tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 17 16" fill="none">
                             <path
@@ -241,8 +241,8 @@
                     <div>
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewPassengerSide"
                             :src="form?.previewPassengerSide" alt="">
-                        <img v-else class="w-full h-[190px] object-contain " src="../../../../../assets/img/png/passenger.png"
-                            alt="">
+                        <img v-else class="w-full h-[190px] object-contain "
+                            src="../../../../../assets/img/png/passenger.png" alt="">
                     </div>
                     <div v-if="form?.passengerSide?.name" class="flex w-full items-start flex-col justify-start gap-1">
                         <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
@@ -313,8 +313,8 @@
                     <div>
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewDriversDisplay"
                             :src="form?.previewDriversDisplay" alt="">
-                        <img v-else class="w-full h-[190px] object-contain " src="../../../../../assets/img/png/tacomentro.png"
-                            alt="">
+                        <img v-else class="w-full h-[190px] object-contain "
+                            src="../../../../../assets/img/png/tacomentro.png" alt="">
                     </div>
                     <div v-if="form?.driversDisplay?.name" class="flex w-full items-start flex-col justify-start gap-1">
                         <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
@@ -379,8 +379,8 @@
                     <div>
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewCenterConsole"
                             :src="form?.previewCenterConsole" alt="">
-                        <img v-else class="w-full h-[190px] object-contain " src="../../../../../assets/img/png/tavblero.png"
-                            alt="">
+                        <img v-else class="w-full h-[190px] object-contain "
+                            src="../../../../../assets/img/png/tavblero.png" alt="">
                     </div>
                     <div v-if="form?.centerConsole?.name" class="flex w-full items-start flex-col justify-start gap-1">
                         <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
@@ -525,9 +525,23 @@
                 </p>
                 <div class="border flex flex-col gap-4 items-center p-5"
                     :class="invalid?.vehicleVideo ? 'border-[#ff000075]' : 'border-[#E0E0E0]'">
-                    <div>
-                        <video autoplay muted loop class="w-full h-[190px] object-contain" v-if="form?.previewVehicleVideo"
-                            :src="form?.previewVehicleVideo" />
+                    <div class="relative">
+                        <template v-if="form?.previewVehicleVideo">
+                            <div v-if="!isPlaying" @click="play"
+                                class="w-[40px] cursor-pointer z-50 h-[40px] top-[40%] left-[42%] rounded-full absolute flex justify-center items-center bg-[#ffffffd1]  ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                    fill="none">
+                                    <path
+                                        d="M16.146 10.3468L7.31352 16.2351C7.25077 16.2769 7.17787 16.3008 7.10259 16.3044C7.02731 16.308 6.95246 16.2911 6.88601 16.2555C6.81957 16.22 6.76402 16.167 6.72528 16.1024C6.68654 16.0377 6.66605 15.9638 6.66602 15.8884V4.11176C6.66605 4.0364 6.68654 3.96245 6.72528 3.8978C6.76402 3.83315 6.81957 3.78022 6.88601 3.74465C6.95246 3.70907 7.02731 3.69219 7.10259 3.69579C7.17787 3.69939 7.25077 3.72334 7.31352 3.7651L16.146 9.65343C16.2031 9.69148 16.2499 9.74303 16.2822 9.80351C16.3146 9.86398 16.3315 9.93151 16.3315 10.0001C16.3315 10.0687 16.3146 10.1362 16.2822 10.1967C16.2499 10.2572 16.2031 10.3087 16.146 10.3468Z"
+                                        fill="#05A54B" />
+                                </svg>
+                            </div>
+                        </template>
+
+
+                        <video v-if="form?.previewVehicleVideo" ref="videoPlayer" muted loop
+                            class="w-full h-[190px] object-contain" :src="form?.previewVehicleVideo"
+                            @click="paused" />
                         <svg v-else class="w-[100px] h-[100px]" :fill="invalid?.vehicleVideo ? '#ff000075' : '#6d6d6d42'"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path
@@ -617,6 +631,18 @@ export default {
         const form = ref(props.form)
         const save = ref(props.launch)
         const invalid = ref(props.invalid)
+        let videoPlayer = ref()
+        let isPlaying = ref(false)
+        const play = () => {
+            videoPlayer.value.play();
+            isPlaying.value = true
+        }
+        const paused = () => {
+            console.log('paused')
+            videoPlayer.value.pause();
+            isPlaying.value = false
+        }
+
         const previewImage = (event, string) => {
             var input = event.target;
             let typeFile = input.files[0].type.split("/")
@@ -731,7 +757,11 @@ export default {
             previewImage,
             invalid,
             save,
-            createAutions
+            createAutions,
+            play,
+            paused,
+            isPlaying,
+            videoPlayer
         };
     },
 };

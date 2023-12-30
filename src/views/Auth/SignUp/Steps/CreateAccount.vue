@@ -186,11 +186,9 @@ export default {
         }
         onUpdated(() => {
             rol.value = props.rol
-            console.log('se monto onUpdated')
         })
         onMounted(() => {
             rol.value = props.rol
-            console.log('se monto onMounted')
         })
         return {
             nextStep,

@@ -14,14 +14,20 @@
                 <div class="flex justify-center mt-5 gap-7">
                     <div class="w-2/4  ">
                         <div class="bg-white p-5 shadow-steps">
-                            <div class="flex items-center flex-col gap-6 mb-4  relative cursor-pointer">
-                                <img class="w-36 h-36 rounded-lg"
-                                    src="https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
-                                    alt="">
+                            <div class="flex items-center flex-col gap-6 mb-4 relative">
+                                <div class="flex justify-center items-end gap-4">
+                                    <img class="w-36 h-36 rounded-lg"
+                                        src="https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
+                                        alt="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+                                        fill="none">
+                                        <path
+                                            d="M8.6 5.07206L11.428 7.90072L4.828 14.5001H2V11.6714L8.6 5.07139V5.07206ZM9.54267 4.12939L10.9567 2.71472C11.0817 2.58974 11.2512 2.51953 11.428 2.51953C11.6048 2.51953 11.7743 2.58974 11.8993 2.71472L13.7853 4.60072C13.9103 4.72574 13.9805 4.89528 13.9805 5.07206C13.9805 5.24883 13.9103 5.41837 13.7853 5.54339L12.3707 6.95739L9.54267 4.12939Z"
+                                            fill="#0B1107" />
+                                    </svg>
+                                </div>
                                 <p class=" text-2xl font-semibold ">Marshall Autocar</p>
-
                             </div>
-
                             <div class="flex pt-5 cursor-pointer justify-between py-2">
                                 <div class="flex w-full justify-between items-center">
                                     <div class="flex gap-2">

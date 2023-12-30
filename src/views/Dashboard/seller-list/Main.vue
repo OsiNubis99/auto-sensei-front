@@ -79,8 +79,8 @@
                                             class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                             <div class="flex items-center gap-1">
                                                 <p class="!m-0">Seller</p>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                    viewBox="0 0 14 14" fill="none">
+                                                <svg @click="order" class="cursor-pointer " xmlns="http://www.w3.org/2000/svg" width="14"
+                                                    height="14" viewBox="0 0 14 14" fill="none">
                                                     <path
                                                         d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
                                                         fill="#4D4D4D" />
@@ -140,8 +140,8 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-[#E0E0E0] ">
-                                    <tr v-for="user in store?.userSellers.data" :key="user?.id"
-                                        class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <tr v-for="(user,index) in store?.userSellers.data" :key="user?.id"
+                                        class="hover:bg-gray-100 dark:hover:bg-gray-700" :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
                                                 <input id="checkbox-table-1" type="checkbox"
@@ -163,13 +163,13 @@
                                             <div class="flex justify-center flex-col">
                                                 <p class="p-0 !m-0 capitalize"> {{ user?.seller?.firstName }}</p>
                                                 <div class=" flex items-center gap-1">
-                                                    <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                        viewBox="0 0 14 13" fill="none">
+                                                    <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="15"
+                                                        height="15" viewBox="0 0 14 13" fill="none">
                                                         <path
                                                             d="M6.55778 0.838169C6.74538 0.482596 7.25462 0.482596 7.44222 0.83817L9.02481 3.83773C9.09716 3.97486 9.22902 4.07066 9.38179 4.09709L12.7236 4.67531C13.1197 4.74385 13.2771 5.22817 12.9969 5.51647L10.6332 7.94852C10.5251 8.0597 10.4748 8.21471 10.4968 8.36817L10.9796 11.7251C11.0368 12.123 10.6248 12.4224 10.2641 12.245L7.22062 10.7485C7.0815 10.6801 6.9185 10.6801 6.77938 10.7485L3.73593 12.245C3.37516 12.4224 2.96317 12.123 3.0204 11.7251L3.50316 8.36817C3.52523 8.21471 3.47486 8.0597 3.36681 7.94852L1.0031 5.51647C0.722898 5.22817 0.880263 4.74385 1.27641 4.67531L4.61821 4.09709C4.77098 4.07066 4.90284 3.97486 4.97519 3.83773L6.55778 0.838169Z"
                                                             fill="#D6C000" />
                                                     </svg>
-                                                <p class="p-0 !m-0 ">5.0 (2.8k)</p>
+                                                    <p class="p-0 !m-0 ">5.0 (2.8k)</p>
 
                                                 </div>
                                             </div>
@@ -296,15 +296,14 @@
     </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/stores/user";
 export default {
-    components: {
-    },
     setup() {
         const store = useUserStore();
         const isLoading = ref(false)
-
+        const orderName = ref(false)
+        const now = ref(computed(() => store.userSellers.data))
         const getUserSeller = async () => {
             isLoading.value = true
             try {
@@ -318,12 +317,23 @@ export default {
             }
 
         }
+        const order = (string) => {
+            orderName.value = !orderName.value
+            if (orderName.value) {
+                return now.value.sort((a, b) => (a.seller.firstName > b.seller.firstName ? 1 : -1));
+            } else {
+                return now.value.sort((a, b) => (a.seller.firstName > b.seller.firstName ? -1 : 1));
+            }
+        }
         onMounted(() => {
             getUserSeller()
+            console.log('now.value', now.value)
         })
         return {
             isLoading,
-            store
+            store,
+            order,
+            now
         };
     },
 };

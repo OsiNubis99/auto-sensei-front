@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-6xl mx-auto mt-36"> 
+    <div class="max-w-6xl mx-auto mt-36">
         <div class="flex flex-col">
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle">
@@ -150,11 +150,14 @@
                 </div>
             </div>
         </div>
+        <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driver')">
+        <button class="btn" @click="setFile"> Subir</button>
     </div>
 </template>
 <script>
 import { ref, onMounted, computed } from "vue";
 import { useFaqStore } from "@/stores/faq";
+import { useStoreFile } from "@/stores/uploader";
 import iconArrow from '../components/icons/iconArrow.vue'
 import iconDelete from '../components/icons/iconDelete.vue'
 export default {
@@ -168,8 +171,12 @@ export default {
             question: "",
             answer: ''
         });
+
+        const dataFile = ref('')
         const isLoading = ref(false)
         const store = useFaqStore();
+        const storeFile = useStoreFile()
+
         const people = ref([
             {
                 name: 'Jane Cooper',
@@ -199,6 +206,23 @@ export default {
                     'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
             },
         ])
+        const previewImage = (e) => {
+            console.log('e', e)
+            var input = e.target;
+            dataFile.value = input.files[0]
+
+        }
+        const setFile = async () => {
+
+            try {
+                let res = await storeFile.uploaderFile({ file: dataFile.value, name: new Date(), location: 'test' })
+                console.log('res', res)
+            } catch (error) {
+                console.log('error al subir la media', error)
+
+            }
+
+        }
         const index = async () => {
             try {
                 await store.index();
@@ -266,7 +290,10 @@ export default {
             iconArrow,
             isLoading,
             iconDelete,
-            people
+            people,
+            dataFile,
+            previewImage,
+            setFile
         };
     },
 };

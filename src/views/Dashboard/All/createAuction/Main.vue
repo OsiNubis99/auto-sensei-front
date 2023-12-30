@@ -139,6 +139,9 @@ import UploadPhotos from "./steps/UploadPhotos.vue";
 import { validateData } from '../../../../validations/validationCreateAutions'
 import { toast } from "vue3-toastify";
 import { useAuctionStore } from "@/stores/auctions";
+import { useStoreFile } from "@/stores/uploader";
+import { useRouter, useRoute } from 'vue-router'
+import moment from 'moment';
 export default {
 
     components: {
@@ -155,6 +158,9 @@ export default {
         const loading = ref(false)
         const store = useAuctionStore()
         const id_create = ref(null)
+        const storeFile = useStoreFile()
+        const route = useRoute();
+        const router = useRouter()
         const formData = ref({
             numberVinGenerals: '',
             date: '',
@@ -281,6 +287,7 @@ export default {
             }
         }
         const nextVehiclesDetails = async () => {
+
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'vehiclesDetails');
             if (Object.entries(invalid.value).length > 0) {
@@ -332,14 +339,19 @@ export default {
                         brakeCondition: formData.value.brakePads,
                         brakeReplacement: formData.value.lastReplacement2,
                         rotorCondition: formData.value.rotorCondition,
-                        rotorReplacement: formData.value.lastReplacement3
+                        rotorReplacement: formData.value.lastReplacement3,
                     }
                 }
+                console.log('VEHICULE DETAILS', dataPost)
                 loading.value = true
                 try {
-
                     let res = await store.update({ uuid: id_create.value, payload: dataPost })
-                    if (res) {
+                    if (res.data.status == 401) {
+                        toast(res.data.message || 'Error', {
+                            type: "error",
+                        });
+                        loading.value = false
+                    } else {
                         op.value.step1 = false
                         op.value.step2 = false
                         op.value.step3 = true
@@ -347,7 +359,6 @@ export default {
                         checkStep.value.step2 = true
                         checkStep.value.step3 = false
                         loading.value = false
-
                     }
                 } catch (error) {
                     id_create.value = null
@@ -358,10 +369,75 @@ export default {
 
             }
         }
-        const nextUploadPhotos = () => {
+
+        const postFile = async () => {
+            let newArrayExterior = []
+            let newArrayInterior = []
+            let newArrayVehicleDamage = []
+            let newAdditionalDocuments = []
+            let exterior = [
+                formData.value.frontPhoto,
+                formData.value.front,
+                formData.value.driverSide,
+                formData.value.back,
+                formData.value.passengerSide,
+                formData.value.tireAndRim,
+            ]
+            let interior = [
+                formData.value.driversDisplay,
+                formData.value.driverSide,
+                formData.value.centerConsole,
+                formData.value.rearSeats,
+            ]
+            let vehicleDamage = [
+                formData.value.vehicleDamage,
+            ]
+            let additionalDocuments = [
+                formData.value.additionalDocuments,
+            ]
+            if (exterior.length > 0 && interior.length > 0 && vehicleDamage.length > 0 && additionalDocuments.length > 0) {
+                await Promise.all(
+                    exterior.map(async (file, i) => {
+                        let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                        newArrayExterior.push(res.data);
+                    })
+                )
+                await Promise.all(
+                    interior.map(async (file, i) => {
+                        let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                        newArrayInterior.push(res.data);
+                    })
+                );
+                await Promise.all(
+                    vehicleDamage.map(async (file, i) => {
+                        let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                        newArrayVehicleDamage.push(res.data);
+                    })
+                );
+                await Promise.all(
+                    additionalDocuments.map(async (file, i) => {
+                        let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                        newAdditionalDocuments.push(res.data);
+                    })
+                );
+                let dataPost = {
+                    vehicleDetails: {
+                        originalDocument: formData.value.document,
+                        driverLicense: formData.value.driverDocument,
+                        exteriorPhotos: newArrayExterior,
+                        interiorPhotos: newArrayInterior,
+                        vehicleDamage: newArrayVehicleDamage,
+                        additionalDocuments: newAdditionalDocuments,
+                        vehicleVideo: formData.value.vehicleVideo
+                    }
+                }
+                return dataPost
+            }
+        }
+        const nextUploadPhotos = async () => {
+
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'UploadPhotos');
-            console.log('invalid.value ', invalid.value)
             if (Object.entries(invalid.value).length > 0) {
                 toast(
                     invalid?.value?.document ||
@@ -396,9 +472,10 @@ export default {
                     loading.value = false
                 }, 2000);
 
+
             }
         }
-        const saveData = () => {
+        const saveData = async () => {
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'confirmation');
             console.log('invalid.value', invalid.value)
@@ -450,12 +527,24 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-
                 loading.value = true
+                let resFiles = await postFile()
+                console.log('resFiles', resFiles)
+                if (resFiles) {
+                    try {
+                        let res = await store.update({ uuid: id_create.value, payload: resFiles })
+                        if (res) {
+                            await router.push({ path: '/all' })
+                            router.go()
 
-                setTimeout(() => {
-                    loading.value = false
-                }, 3000);
+                        }
+                    } catch (error) {
+                        id_create.value = null
+                        loading.value = false
+                        toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
+
+                    }
+                }
             }
         }
 

@@ -66,6 +66,32 @@ export const useAuctionStore = defineStore("useAuctionStore", {
                     });
             });
         },
+        activeAutions(uuid) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .delete(`/auctions/activate/${uuid}`)
+                    .then((response) => {
+                        console.log('activate', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        inactivateAutions(uuid) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .delete(`/auctions/inactivate/${uuid}`)
+                    .then((response) => {
+                        console.log('inactivate', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
     },
 });
 

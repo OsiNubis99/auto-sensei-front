@@ -1,23 +1,545 @@
 <template>
     <div>
-        <div class="flex w-full justify-center gap-6 items-center h-screen">
-            <div class="flex gap-8 flex-col">
+        <div class="flex w-full justify-center gap-6 items-center custom-header-all">
+            <div class="flex gap-2 justify-center items-center flex-col">
                 <div>
                     <img class="object-cover " src="../../../assets/svg/upcoming.svg" alt="">
                 </div>
-                <h3 class="text-center"><strong>No upcoming vehicles</strong></h3>
+                <h3 class="text-center text-lg"><strong>No upcoming vehicles</strong></h3>
                 <p class="text-center">Check back later for new vehicles that will be coming up for auction soon</p>
+            </div>
+        </div>
+        <div class="relative max-w-[100rem] mx-auto z-50 top-[60px] ">
+            <div class="flex justify-between mt-5 gap-4">
+                <div class="w-[29%]">
+                    <div class="bg-white p-5 shadow-steps">
+                        <p class=" text-2xl font-semibold  ">Filter Auction</p>
+                        <div class="mt-4 flex flex-col gap-4">
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Reminder Status</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>All</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Make</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select make</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Model</label>
+                                <select
+                                    class=" border-none text-[#858585] p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select model</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Trim</label>
+                                <select
+                                    class=" border-none text-[#858585] p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select trim</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Year</label>
+                                <div class="flex justify-center gap-6 items-center ">
+                                    <VueDatePicker year-picker class="custom-picker">
+                                        <template #calendar-header="{ index, day }">
+                                            <div :class="index === 5 || index === 6 ? 'red-color' : ''">
+                                                {{ day }}
+                                            </div>
+                                        </template>
+                                    </VueDatePicker>
+                                    <p> - </p>
+                                    <VueDatePicker year-picker class="custom-picker">
+                                        <template #calendar-header="{ index, day }">
+                                            <div :class="index === 5 || index === 6 ? 'red-color' : ''">
+                                                {{ day }}
+                                            </div>
+                                        </template>
+                                    </VueDatePicker>
+                                </div>
+
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Body Type</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select body type</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Cylinder</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select cylinder</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Transmission</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select transmission</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Doors</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select doors</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Drivetrain</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select doors</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Vehicle Condition</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select condition</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Exterior Color</label>
+                                <div class="grid grid-cols-3  place-items-start gap-4">
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-black" value="black" name="color-redio">
+                                        Black
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-white" value="white" name="color-redio">
+                                        White
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-silver" value="silver"
+                                            name="color-redio">
+                                        Silver
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-grey" value="grey" name="color-redio">
+                                        Grey
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-greendark" value="greenDark"
+                                            name="color-redio"> Green
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-brown" value="brown" name="color-redio">
+                                        Brown
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-red" value="red" name="color-redio"> Red
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-yellow" value="yellow"
+                                            name="color-redio">
+                                        Yellow
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-green" value="green" name="color-redio">
+                                        Green
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-blue" value="blue" name="color-redio">
+                                        Blue
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+
+                                        Other
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="w-full">
+                                <label class="font-medium text-base " for="">Kilometers</label>
+                                <div class="flex justify-between items-center gap-6 ">
+                                    <input
+                                        class="p-2 w-full mt-3 uppercase  border border-[#E0E0E0] text-[#858585] rounded-lg"
+                                        placeholder="0                                 Kms" type="number">
+                                    <p>-</p>
+                                    <input type="number"
+                                        class="p-2 w-full mt-3 uppercase  border border-[#E0E0E0] text-[#858585] rounded-lg"
+                                        placeholder="0                                 Kms">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-[70%]">
+                    <div class="flex items-center justify-between mb-4">
+                        <p class=" font-semibold ">6 Vehicles</p>
+                        <div class="flex items-center gap-2 ">
+                            <p class="mt-2">Sort by:</p>
+                            <div class="flex items-center gap-5">
+                                <div class="navbar-right relative">
+                                    <button @click="isOpen = !isOpen"
+                                        class="flex gap-2 rounded-md  shadow-md px-2 bg-white items-center">
+                                        <p class="p-2 pb-1">Auction Status & Date</p>
+                                        <div class=" p-2 border-l-2 pr-0 border-[#efefef] ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                viewBox="0 0 18 18" fill="none">
+                                                <path
+                                                    d="M15 3V12H17.25L14.25 15.75L11.25 12H13.5V3H15ZM9 13.5V15H2.25V13.5H9ZM10.5 8.25V9.75H2.25V8.25H10.5ZM10.5 3V4.5H2.25V3H10.5Z"
+                                                    fill="#858585" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div v-if="isOpen"
+                                        class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
+                                        <a href=""
+                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Account
+                                            Settings</a>
+                                        <a href=""
+                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Support</a>
+                                        <a
+                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Sign
+                                            Out</a>
+                                    </div>
+                                </div>
+                                <div class="shadow-md  rounded-md flex bg-white">
+                                    <div @click="changeGridTemplate" :class="changeLayouts ? 'bg-white' : 'bg-[#EFF8E0]'"
+                                        class="p-2 cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            fill="none">
+                                            <path
+                                                d="M19 11V5H5V11H19ZM19 13H5V19H19V13ZM4 3H20C20.2652 3 20.5196 3.10536 20.7071 3.29289C20.8946 3.48043 21 3.73478 21 4V20C21 20.2652 20.8946 20.5196 20.7071 20.7071C20.5196 20.8946 20.2652 21 20 21H4C3.73478 21 3.48043 20.8946 3.29289 20.7071C3.10536 20.5196 3 20.2652 3 20V4C3 3.73478 3.10536 3.48043 3.29289 3.29289C3.48043 3.10536 3.73478 3 4 3Z"
+                                                :fill="changeLayouts ? '#09121F' : '#7EC600'" />
+                                        </svg>
+                                    </div>
+                                    <div @click="changeGridTemplate" :class="changeLayouts ? 'bg-[#EFF8E0]' : 'bg-white'"
+                                        class=" p-2 flex item-center justify-center cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            fill="none">
+                                            <path
+                                                d="M21 3C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V20C22 20.2652 21.8946 20.5196 21.7071 20.7071C21.5196 20.8946 21.2652 21 21 21H3C2.73478 21 2.48043 20.8946 2.29289 20.7071C2.10536 20.5196 2 20.2652 2 20V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21ZM11 13H4V19H11V13ZM20 13H13V19H20V13ZM11 5H4V11H11V5ZM20 5H13V11H20V5Z"
+                                                :fill="changeLayouts ? '#7EC600' : '#09121F'" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 justify-center mt-48 items-center flex-col">
+                        <div>
+                            <img class="object-cover " src="../../../assets/svg/noresultsdealer.svg" alt="">
+                        </div>
+                        <h3 class="text-center text-lg"><strong>No Results Found</strong></h3>
+                        <p class="text-center">You can check your preference car in live bidding <br> or adjust your search
+                            criteria</p>
+                        <div class="flex gap-2 items-center">
+                            <button class="btn border border-[#E0E0E0] ">Reset Filter</button>
+                            <button class="btn bg-primary text-base-black ">Search Live Bidding</button>
+                        </div>
+                    </div>
+                    <div
+                        :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
+                        <RouterLink :to="{ name: 'action-details', params: { id: 123 }}" class="bg-white flex hover:shadow-lg cursor-pointer duration-200 transition-all ease-in  mb-7 gap-5 items-start shadow-steps  w-full "
+                            :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
+                            <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+                                <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
+                                    :class="changeLayouts ? 'w-full' : 'w-[40%]'">
+                                    <swiper-slide>
+                                        <p class="font-semibold fixed left-0 bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">
+                                            Bids
+                                            Complete</p>
+                                        <img class="w-full "
+                                            src="https://http2.mlstatic.com/D_NQ_NP_978610-MLV73175181347_112023-O.webp"
+                                            alt="">
+                                    </swiper-slide>
+                                   
+                                </swiper>
+                                <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+                                    <div class="flex p-5  flex-col gap-3">
+                                        <div class="">
+                                            <div class="font-bold text-xl">2008 Porsche Cayenne S</div>
+                                            <p class=" text-base">
+                                                Ottawa, Ontario
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                            <div class="flex gap-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M1.33398 2.66227C1.33398 2.29651 1.63752 2 1.99518 2H14.0061C14.3713 2 14.6673 2.29663 14.6673 2.66227V13.3377C14.6673 13.7035 14.3638 14 14.0061 14H1.99518C1.63002 14 1.33398 13.7034 1.33398 13.3377V2.66227ZM4.00065 10V11.3333H12.0007V10H4.00065ZM4.00065 4.66667V8.66667H8.00065V4.66667H4.00065ZM9.33398 4.66667V6H12.0007V4.66667H9.33398ZM9.33398 7.33333V8.66667H12.0007V7.33333H9.33398ZM5.33398 6H6.66732V7.33333H5.33398V6Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                                <p>WP1AB29P98LA40998</p>
+                                            </div>
+                                            <div class="flex gap-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M13.334 8.66667C13.334 10.1394 12.7371 11.4727 11.7719 12.4379L12.7147 13.3807C13.9211 12.1743 14.6673 10.5076 14.6673 8.66667C14.6673 4.98477 11.6825 2 8.00065 2C4.31875 2 1.33398 4.98477 1.33398 8.66667C1.33398 10.5076 2.08018 12.1743 3.2866 13.3807L4.22942 12.4379C3.26427 11.4727 2.66732 10.1394 2.66732 8.66667C2.66732 5.72115 5.05513 3.33333 8.00065 3.33333C10.9462 3.33333 13.334 5.72115 13.334 8.66667ZM10.196 5.52865L7.00065 8.33333L8.33398 9.66667L11.1388 6.47145L10.196 5.52865Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                                <p>100,100 Kilometers</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                            <div class="flex gap-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M12.8185 12.489L13.997 11.3106L15.1755 12.489C15.8263 13.1399 15.8263 14.1952 15.1755 14.8461C14.5246 15.497 13.4693 15.497 12.8185 14.8461C12.1676 14.1952 12.1676 13.1399 12.8185 12.489ZM5.91907 0.720703L13.4615 8.26318C13.7219 8.52351 13.7219 8.94564 13.4615 9.20598L7.80467 14.8628C7.54433 15.1232 7.1222 15.1232 6.86187 14.8628L1.20503 9.20598C0.944679 8.94564 0.944679 8.52351 1.20503 8.26318L6.39048 3.07772L4.97627 1.66351L5.91907 0.720703ZM7.33327 4.02054L2.61924 8.73458H12.0473L7.33327 4.02054Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                                <p>Black</p>
+                                            </div>
+                                            <div class="flex gap-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M12.6673 13.3327H3.33398V13.9993C3.33398 14.3675 3.0355 14.666 2.66732 14.666H2.00065C1.63246 14.666 1.33398 14.3675 1.33398 13.9993V7.99935L3.00954 3.53118C3.2047 3.01078 3.70219 2.66602 4.25798 2.66602H11.7433C12.2991 2.66602 12.7966 3.01078 12.9918 3.53118L14.6673 7.99935V13.9993C14.6673 14.3675 14.3689 14.666 14.0007 14.666H13.334C12.9658 14.666 12.6673 14.3675 12.6673 13.9993V13.3327ZM2.75798 7.99935H13.2433L11.7433 3.99935H4.25798L2.75798 7.99935ZM4.33398 11.3327C4.88627 11.3327 5.33398 10.8849 5.33398 10.3327C5.33398 9.78042 4.88627 9.33268 4.33398 9.33268C3.7817 9.33268 3.33398 9.78042 3.33398 10.3327C3.33398 10.8849 3.7817 11.3327 4.33398 11.3327ZM11.6673 11.3327C12.2196 11.3327 12.6673 10.8849 12.6673 10.3327C12.6673 9.78042 12.2196 9.33268 11.6673 9.33268C11.1151 9.33268 10.6673 9.78042 10.6673 10.3327C10.6673 10.8849 11.1151 11.3327 11.6673 11.3327Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                                <p>All-Wheel Drive</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-4 "
+                                            :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
+                                            <div class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
+                                                        fill="#0B1107" />
+                                                </svg>
+                                                <p>Tires is Good</p>
+                                            </div>
+                                            <div class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
+                                                        fill="#0B1107" />
+                                                </svg>
+                                                <p>Rotors & Pads are Good</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                            <div class="bg-[#F0F0F0] flex gap-3 rounded-lg items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M5.37852 15.8333L1.66602 18.75V3.33333C1.66602 3.11232 1.75381 2.90036 1.91009 2.74408C2.06637 2.5878 2.27834 2.5 2.49935 2.5H17.4993C17.7204 2.5 17.9323 2.5878 18.0886 2.74408C18.2449 2.90036 18.3327 3.11232 18.3327 3.33333V15C18.3327 15.221 18.2449 15.433 18.0886 15.5893C17.9323 15.7455 17.7204 15.8333 17.4993 15.8333H5.37852ZM5.83268 8.33333V10H7.49935V8.33333H5.83268ZM9.16602 8.33333V10H10.8327V8.33333H9.16602ZM12.4993 8.33333V10H14.166V8.33333H12.4993Z"
+                                                        fill="#0A0A0A" />
+                                                </svg>
+                                                <p>Contact Buyer</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div :class="changeLayouts ? 'w-full' : 'w-[40%] grid place-content-between'" class="border-l-2  border-[#E0E0E0]">
+                                        <div class="flex p-5  pl-4 ga justify-between "
+                                            :class="changeLayouts ? 'flex-row' : 'flex-col '">
+                                            <div class="space-y-1"
+                                                :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
+                                                <p>Final Bids</p>
+                                                <p class=" font-medium text-base-black  ">$8000 <span
+                                                        class="text-[#666666] mt-2">/24 Bids</span></p>
+                                            </div>
+                                            <div
+                                                :class="changeLayouts ? 'flex justify-between items-start flex-col' : 'space-y-2 flex items-center gap-2'">
+                                                <p>Approval period ends in</p>
+                                                <p class="text-[#FF9A02] font-medium !m-0">08 Hours
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                        <div class="flex gap-4 p-5 justify-between w-full">
+                                            <button class="btn w-full bg-primary text-base-black">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16" fill="none">
+<path d="M11.3333 11.9447L11.5999 12.3C11.6371 12.3496 11.6597 12.4085 11.6652 12.4701C11.6708 12.5318 11.6591 12.5937 11.6314 12.6491C11.6037 12.7045 11.5612 12.751 11.5085 12.7836C11.4558 12.8161 11.3952 12.8334 11.3333 12.8334H0.666585C0.604681 12.8334 0.544 12.8161 0.491342 12.7836C0.438683 12.751 0.396127 12.7045 0.368443 12.6491C0.340759 12.5937 0.32904 12.5318 0.334599 12.4701C0.340158 12.4085 0.362776 12.3496 0.399919 12.3L0.666585 11.9447V6.16671C0.666585 4.75222 1.22849 3.39567 2.22868 2.39547C3.22888 1.39528 4.58543 0.833374 5.99992 0.833374C7.41441 0.833374 8.77096 1.39528 9.77115 2.39547C10.7713 3.39567 11.3333 4.75222 11.3333 6.16671V11.9447ZM4.33325 13.5H7.66658C7.66658 13.9421 7.49099 14.366 7.17843 14.6786C6.86587 14.9911 6.44195 15.1667 5.99992 15.1667C5.55789 15.1667 5.13397 14.9911 4.82141 14.6786C4.50885 14.366 4.33325 13.9421 4.33325 13.5Z" fill="#0B1107"/>
+</svg>
+                                                Remind Me
+                                                
+                                            </button>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </RouterLink>
+                        <div class="bg-white flex hover:shadow-lg cursor-pointer duration-200 transition-all ease-in  mb-7 gap-5 items-start shadow-steps  w-full "
+                            :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
+                            <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+                                <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
+                                    :class="changeLayouts ? 'w-full' : 'w-[40%] gr place-content-between'">
+                                    <swiper-slide>
+                                        <p class="font-semibold fixed left-0 bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">Bids Complete</p>
+                                        <img class="w-full "
+                                            src="https://http2.mlstatic.com/D_NQ_NP_978610-MLV73175181347_112023-O.webp"
+                                            alt="">
+                                    </swiper-slide>
+                                    <swiper-slide>
+                                        <p class="font-semibold fixed left-0 bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">
+                                            Bids
+                                            Complete</p>
+                                        <img class="w-full "
+                                            src="https://http2.mlstatic.com/D_NQ_NP_693606-MLV73175191335_112023-O.webp"
+                                            alt="">
+                                    </swiper-slide>
+                                    <swiper-slide>
+                                        <p class="font-semibold fixed left-0 bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">
+                                            Bids
+                                            Complete</p>
+                                        <img class="w-full "
+                                            src="https://http2.mlstatic.com/D_NQ_NP_899275-MLV73092445294_112023-O.webp"
+                                            alt="">
+                                    </swiper-slide>
+                                </swiper>
+                                <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+                                    <div class="flex p-5  flex-col gap-3">
+                                        <div class="">
+                                            <div class="font-bold text-xl">2008 Porsche Cayenne S</div>
+                                            <p class=" text-base">
+                                                Ottawa, Ontario
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                            <div class="flex gap-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M1.33398 2.66227C1.33398 2.29651 1.63752 2 1.99518 2H14.0061C14.3713 2 14.6673 2.29663 14.6673 2.66227V13.3377C14.6673 13.7035 14.3638 14 14.0061 14H1.99518C1.63002 14 1.33398 13.7034 1.33398 13.3377V2.66227ZM4.00065 10V11.3333H12.0007V10H4.00065ZM4.00065 4.66667V8.66667H8.00065V4.66667H4.00065ZM9.33398 4.66667V6H12.0007V4.66667H9.33398ZM9.33398 7.33333V8.66667H12.0007V7.33333H9.33398ZM5.33398 6H6.66732V7.33333H5.33398V6Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                                <p>WP1AB29P98LA40998</p>
+                                            </div>
+                                            <div class="flex gap-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M13.334 8.66667C13.334 10.1394 12.7371 11.4727 11.7719 12.4379L12.7147 13.3807C13.9211 12.1743 14.6673 10.5076 14.6673 8.66667C14.6673 4.98477 11.6825 2 8.00065 2C4.31875 2 1.33398 4.98477 1.33398 8.66667C1.33398 10.5076 2.08018 12.1743 3.2866 13.3807L4.22942 12.4379C3.26427 11.4727 2.66732 10.1394 2.66732 8.66667C2.66732 5.72115 5.05513 3.33333 8.00065 3.33333C10.9462 3.33333 13.334 5.72115 13.334 8.66667ZM10.196 5.52865L7.00065 8.33333L8.33398 9.66667L11.1388 6.47145L10.196 5.52865Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                                <p>100,100 Kilometers</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                            <div class="flex gap-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M12.8185 12.489L13.997 11.3106L15.1755 12.489C15.8263 13.1399 15.8263 14.1952 15.1755 14.8461C14.5246 15.497 13.4693 15.497 12.8185 14.8461C12.1676 14.1952 12.1676 13.1399 12.8185 12.489ZM5.91907 0.720703L13.4615 8.26318C13.7219 8.52351 13.7219 8.94564 13.4615 9.20598L7.80467 14.8628C7.54433 15.1232 7.1222 15.1232 6.86187 14.8628L1.20503 9.20598C0.944679 8.94564 0.944679 8.52351 1.20503 8.26318L6.39048 3.07772L4.97627 1.66351L5.91907 0.720703ZM7.33327 4.02054L2.61924 8.73458H12.0473L7.33327 4.02054Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                                <p>Black</p>
+                                            </div>
+                                            <div class="flex gap-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M12.6673 13.3327H3.33398V13.9993C3.33398 14.3675 3.0355 14.666 2.66732 14.666H2.00065C1.63246 14.666 1.33398 14.3675 1.33398 13.9993V7.99935L3.00954 3.53118C3.2047 3.01078 3.70219 2.66602 4.25798 2.66602H11.7433C12.2991 2.66602 12.7966 3.01078 12.9918 3.53118L14.6673 7.99935V13.9993C14.6673 14.3675 14.3689 14.666 14.0007 14.666H13.334C12.9658 14.666 12.6673 14.3675 12.6673 13.9993V13.3327ZM2.75798 7.99935H13.2433L11.7433 3.99935H4.25798L2.75798 7.99935ZM4.33398 11.3327C4.88627 11.3327 5.33398 10.8849 5.33398 10.3327C5.33398 9.78042 4.88627 9.33268 4.33398 9.33268C3.7817 9.33268 3.33398 9.78042 3.33398 10.3327C3.33398 10.8849 3.7817 11.3327 4.33398 11.3327ZM11.6673 11.3327C12.2196 11.3327 12.6673 10.8849 12.6673 10.3327C12.6673 9.78042 12.2196 9.33268 11.6673 9.33268C11.1151 9.33268 10.6673 9.78042 10.6673 10.3327C10.6673 10.8849 11.1151 11.3327 11.6673 11.3327Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                                <p>All-Wheel Drive</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-4 "
+                                            :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
+                                            <div class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
+                                                        fill="#0B1107" />
+                                                </svg>
+                                                <p>Tires is Good</p>
+                                            </div>
+                                            <div class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14" fill="none">
+                                                    <path
+                                                        d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
+                                                        fill="#0B1107" />
+                                                </svg>
+                                                <p>Rotors & Pads are Good</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                            <div class="bg-[#F0F0F0] flex gap-3 rounded-lg items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M5.37852 15.8333L1.66602 18.75V3.33333C1.66602 3.11232 1.75381 2.90036 1.91009 2.74408C2.06637 2.5878 2.27834 2.5 2.49935 2.5H17.4993C17.7204 2.5 17.9323 2.5878 18.0886 2.74408C18.2449 2.90036 18.3327 3.11232 18.3327 3.33333V15C18.3327 15.221 18.2449 15.433 18.0886 15.5893C17.9323 15.7455 17.7204 15.8333 17.4993 15.8333H5.37852ZM5.83268 8.33333V10H7.49935V8.33333H5.83268ZM9.16602 8.33333V10H10.8327V8.33333H9.16602ZM12.4993 8.33333V10H14.166V8.33333H12.4993Z"
+                                                        fill="#0A0A0A" />
+                                                </svg>
+                                                <p>Contact Buyer</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div :class="changeLayouts ? 'w-full' : 'w-[40%] grid place-content-between'" class="border-l-2  border-[#E0E0E0]">
+                                        <div class="flex p-5  pl-4 ga justify-between "
+                                            :class="changeLayouts ? 'flex-row' : 'flex-col '">
+                                            <div class="space-y-1"
+                                                :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
+                                                <p>Final Bids</p>
+                                                <p class=" font-medium text-base-black  ">$8000 <span
+                                                        class="text-[#666666] mt-2">/24
+                                                        Bids</span></p>
+                                            </div>
+                                            <div
+                                                :class="changeLayouts ? 'flex justify-between items-start flex-col' : 'space-y-2 flex items-center gap-2'">
+                                                <p>Approval period ends in</p>
+                                                <p class="text-[#FF9A02] font-medium !m-0">08 Hours
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                        <div class="flex gap-4 p-5 justify-between w-full">
+                                            <button class="btn w-full bg-primary text-base-black">Accept</button>
+                                            <button
+                                                class="btn w-full bg-white border border-[#E0E0E0] text-error">Decline</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import { ref, onMounted } from "vue";
+import { toast } from "vue3-toastify";
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 export default {
+
     components: {
+        Swiper,
+        SwiperSlide,
     },
     setup() {
+        const isOpen = ref(false)
+        const loading = ref(false)
+        const changeLayouts = ref(false)
+        const changeGridTemplate = () => {
+            changeLayouts.value = !changeLayouts.value
+        }
 
         return {
+            loading,
+            isOpen,
+            changeLayouts,
+            changeGridTemplate,
+            modules: [Navigation, Pagination, Scrollbar, A11y],
         };
     },
 };

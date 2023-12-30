@@ -132,6 +132,7 @@
 import { onUpdated, ref, onMounted } from 'vue'
 import { stepsSignUp } from "@/stores/stepsSignUp";
 import { useUserStore } from "@/stores/user";
+import { useStoreFile } from "@/stores/uploader";
 import { infoAccount } from '../../../../validations/validationSignUp'
 import { toast } from "vue3-toastify";
 import { useRouter, useRoute } from 'vue-router'
@@ -155,6 +156,7 @@ export default {
         const router = useRouter()
         const isLoading = ref(false)
         const storeUser = useUserStore()
+        const storeFile = useStoreFile()
         const previewImage = (event) => {
             console.log('form', form.value)
             var input = event.target;
@@ -187,49 +189,59 @@ export default {
         }
         const nextStep = async () => {
             invalid.value = infoAccount(form, rol.value);
-            console.log('invalid.value', invalid.value)
 
             if (Object.entries(invalid.value).length === 0) {
                 console.log('form', form)
                 isLoading.value = true
-                try {
-                    let typeSeller = {
-                        seller: {
-                            picture: form.img,
-                            firstName: form.firtName,
-                            lastName: form.lastName,
-                            driverLicense: form.driverLicense,
-                            phone: form.phoneNumber,
-                        }
-                    }
-                    let typeDealer = {
-                        dealer: {
-                            picture: form.img,
-                            name: form.dealerName,
-                            omvic: form.registrationNumber,
-                            address: form.address,
-                            phone: form.phoneNumber
-                        },
-                    }
-                    typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
-                    console.log('typeUser.value', typeUser.value)
-                    let data = {
-                        token: token.value,
-                        payloadData: typeUser.value
-                    }
 
-                    let res = await storeUser.userData(data)
-                    if (res) {
-                        props.next()
+                let resFile = await storeFile.uploaderFile({ file: form.img, location: 'test' })
+                if (resFile.data) {
+                    try {
+                        let typeSeller = {
+                            seller: {
+                                picture: resFile.data,
+                                firstName: form.firtName,
+                                lastName: form.lastName,
+                                driverLicense: form.driverLicense,
+                                phone: form.phoneNumber,
+                            }
+                        }
+                        let typeDealer = {
+                            dealer: {
+                                picture: resFile.data,
+                                name: form.dealerName,
+                                omvic: form.registrationNumber,
+                                address: form.address,
+                                phone: form.phoneNumber
+                            },
+                        }
+                        typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
+
+                        let data = {
+                            token: token.value,
+                            payloadData: typeUser.value
+                        }
+
+                        let res = await storeUser.userData(data)
+                        console.log('res user', res)
+                        if (res) {
+                            props.next()
+                            isLoading.value = false
+                        }
+
+                    } catch (error) {
+                        toast(error?.response?.data?.message || 'error al cargar', {
+                            type: "error",
+                        });
                         isLoading.value = false
                     }
-
-                } catch (error) {
-                    toast(error?.response?.data?.message || 'error al cargar', {
+                } else {
+                    toast('Intente de nuevo', {
                         type: "error",
                     });
-                    isLoading.value = false
                 }
+                console.log('res', res)
+
 
             }
         }
@@ -239,6 +251,9 @@ export default {
         onMounted(() => {
             rol.value = route.params.rol
             token.value = localStorage.getItem('updateUser')
+            if (token.value) {
+                localStorage.clear()
+            }
 
         })
         return {

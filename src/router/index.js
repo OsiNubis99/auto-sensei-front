@@ -73,6 +73,15 @@ const routes = [
         component: () => import('../views/Dashboard/faqs/Main.vue')
 
       },
+      {
+        path: "/action-details",
+        name: "action-details-admin",
+        component: () => import('../views/Dashboard/action-details/Main.vue'),
+        props: true,
+        meta: {
+          hideNavbar: true,
+        }
+      },
     ],
   },
   {
@@ -96,6 +105,21 @@ const routes = [
         }
       },
       {
+        path: "/upcoming-auctions",
+        name: "upcoming-auctions",
+        component: () => import('../views/Dashboard/upcoming-auctions/Main.vue'),
+      },
+      {
+        path: "/live",
+        name: "live",
+        component: () => import('../views/Dashboard/live/Main.vue'),
+      },
+      {
+        path: "/completed",
+        name: "completed",
+        component: () => import('../views/Dashboard/completed/Main.vue'),
+      },
+      {
         path: "/all/create",
         name: "create",
         component: () => import('../views/Dashboard/All/createAuction/Main.vue'),
@@ -107,7 +131,6 @@ const routes = [
   },
   {
     path: "/dealers",
-
     component: MenuDasboard,
     meta: { requiresAuth: true, adminAuth: false, sellerAuth: false, dealersAuth: true },
     children: [
@@ -117,6 +140,14 @@ const routes = [
         name: "upcoming",
         component: () => import('../views/Dashboard/upcoming/Main.vue')
 
+      },
+      {
+        path: "/action-details/:id",
+        name: "action-details",
+        component: () => import('../views/Dashboard/action-details/Main.vue'),
+        meta: {
+          hideNavbar: true,
+        }
       },
     ],
   },

@@ -7,7 +7,7 @@
                     auctions, or online
                     auctions
                     bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
-                    application.</p>
+                    application.</p> 
             </div>
             <div v-else class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
                 <h1 class=" text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>

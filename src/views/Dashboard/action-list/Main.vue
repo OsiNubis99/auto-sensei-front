@@ -118,25 +118,32 @@
                                             </div>
 
                                         </th>
-                                        <div class="flex justify-center">
+                                        <th scope="col" class="flex h-full py-4 px-6 justify-center gap-4">
+                                            <div
+                                                class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap  ">
+                                                <div
+                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
+                                                    Actions
+                                                </div>
+                                                <div
+                                                    class="py-3  px-6 text-xs opacity-0 font-medium tracking-wider text-left text-[#000] capitalize ">
+                                                    Actions
+                                                </div>
+                                            </div>
 
-                                            <th scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
-                                                Actions
-                                            </th>
-                                            <th scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
+                                            <div
+                                                class="w-[50%]  justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
+                                                <p
+                                                    class="py-3 px-6 pl-0 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
+                                                    Confirmation</p>
 
-                                            </th>
-                                            <th scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
-
-                                            </th>
-                                        </div>
+                                            </div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-[#E0E0E0] ">
-                                    <tr v-for="aution in store?.data" :key="aution?.id"
+                                    <tr v-for="(aution, index) in store?.data" :key="aution?.id"
+                                        :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''"
                                         class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -158,11 +165,13 @@
                                             </div>
                                             <div class="flex justify-center flex-col">
                                                 <p class="p-0 !m-0"> {{ aution?.vehicleDetails?.model }}</p>
-                                                <p class="p-0 !m-0">{{ aution?.vin }}</p>
+                                                <p class="p-0 uppercase font-normal  text-[#4D4D4D] !m-0">{{
+                                                    aution?.vehicleDetails?.vin }}</p>
                                             </div>
                                         </td>
                                         <td class="py-4 px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
-                                            <p class="!m-0 font-extrabold">Emma Smith</p>
+                                            <p class="!m-0 font-extrabold">{{ aution.owner.seller.firstName }} {{
+                                                aution.owner.seller.lastName }}</p>
                                             <p class="!m-0">Banff, Alberta</p>
                                         </td>
                                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
@@ -174,24 +183,26 @@
                                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
                                             <div v-if="aution?.vehicleStatus == 'PaidOff'"
                                                 class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#05A54B14] gap-2">
-                                                <div class="text-[#05A54B] capitalize">PaidOff</div>
+                                                <p class="text-[#05A54B] capitalize">PaidOff</p>
                                             </div>
                                             <div v-else-if="aution?.vehicleStatus == 'Financed'"
                                                 class="relative w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#6D53B014] gap-2">
-                                                <div class="text-[#6D53B0] capitalize">Financed</div>
+                                                <p class="text-[#6D53B0] capitalize">Financed</p>
                                             </div>
                                             <div v-else-if="aution?.vehicleStatus == 'Leased'"
                                                 class="relative  w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#1F94F014] gap-2">
-                                                <div class="text-[#1F94F0] capitalize">Inactive</div>
+                                                <p class="text-[#1F94F0] capitalize">Leased</p>
                                             </div>
                                             <div v-else
                                                 class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#7b7b7b14] gap-2">
-                                                <div class="text-[#FF333E] capitalize">there is no state</div>
+                                                <p class="text-[#FF333E] capitalize">there is no state</p>
                                             </div>
                                         </td>
                                         <div class="flex h-full py-4 px-6 justify-center gap-4 ">
-                                            <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
-                                                <button
+                                            <td
+                                                class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
+                                                <RouterLink
+                                                    :to="{ name: 'action-details-admin', query: { data: JSON.stringify(aution) } }"
                                                     class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         viewBox="0 0 16 16" fill="none">
@@ -200,9 +211,7 @@
                                                             fill="#0B1107" />
                                                     </svg>
                                                     Detail
-                                                </button>
-                                            </td>
-                                            <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                </RouterLink>
                                                 <button @click="deleteUserAuction(aution)"
                                                     class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -212,6 +221,17 @@
                                                             fill="#FF333E" />
                                                     </svg>
                                                     <p class="text-error">Remove</p>
+                                                </button>
+                                            </td>
+                                            <td
+                                                class="w-[50%] justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
+                                                <button @click="confirmAutions(aution)"
+                                                    class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                    Accept
+                                                </button>
+                                                <button @click="rejetAutions(aution)"
+                                                    class="flex gap-1 items-center border p-2 bg-error text-white rounded-md border-[#E0E0E0]">
+                                                    Reject
                                                 </button>
                                             </td>
                                         </div>
@@ -321,10 +341,40 @@ export default {
                 loading.value = false
             }
         }
+        const confirmAutions = async (aution) => {
+            console.log('user confirm', aution)
+            console.log('item', item._id)
+            loading.value = true
+            try {
+                await store.activeAutions(aution._id)
+                loading.value = false
+
+            } catch (error) {
+                toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
+                loading.value = false
+            }
+
+
+        }
+        const rejetAutions = async (aution) => {
+            console.log('user confirm', aution)
+            console.log('item', item._id)
+            loading.value = true
+            try {
+                await store.inactivateAutions(aution._id)
+                loading.value = false
+
+            } catch (error) {
+                toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
+                loading.value = false
+            }
+        }
         return {
             store,
             deleteUserAuction,
-            loading
+            loading,
+            confirmAutions,
+            rejetAutions
         };
     },
 };

@@ -79,7 +79,8 @@
                                             class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
                                             <div class="flex items-center gap-1">
                                                 <p class="!m-0">Dealer</p>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                <svg @click="order" class="cursor-pointer "
+                                                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
                                                         d="M6.99996 4.66667H4.66721L4.66663 11.6667H3.49996V4.66667H1.16663L4.08329 1.75L6.99996 4.66667ZM12.8333 9.33333L9.91663 12.25L6.99996 9.33333H9.33329V2.33333H10.5V9.33333H12.8333Z"
@@ -127,20 +128,32 @@
                                             </div>
 
                                         </th>
-                                        <div class="flex justify-center">
-                                            <th scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
-                                                History
-                                            </th>
-                                            <th scope="col"
-                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
-                                                Actions
-                                            </th>
-                                        </div>
+                                        <th scope="col" class="flex h-full py-4 px-6 justify-center gap-4">
+                                            <div
+                                                class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap  ">
+                                                <div
+                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
+                                                    History
+                                                </div>
+                                                <div
+                                                    class="py-3 pl-0 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
+                                                    Actions
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                class="w-[50%]  justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
+                                                <p
+                                                    class="py-3 px-6 pl-0 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
+                                                    Confirmation</p>
+
+                                            </div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-[#E0E0E0] ">
-                                    <tr v-for="user in store?.userDealers.data" :key="user?.id"
+                                    <tr v-for="(user, index) in now" :key="user?.id"
+                                        :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''"
                                         class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -161,7 +174,7 @@
                                                     alt="">
                                             </div>
                                             <div class="flex justify-center flex-col">
-                                                <p class="p-0 !m-0 capitalize"> {{ user?.dealer?.omvic }}</p>
+                                                <p class="p-0 !m-0 capitalize"> {{ user?.dealer?.name }}</p>
                                                 <div class=" flex items-center gap-1">
                                                     <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="15"
                                                         height="15" viewBox="0 0 14 13" fill="none">
@@ -196,7 +209,8 @@
                                             <p class="!m-0">From 94 seller</p>
                                         </td>
                                         <div class="flex h-full py-4 px-6 justify-center gap-4 ">
-                                            <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                            <td
+                                                class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                                 <button
                                                     class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -207,8 +221,6 @@
                                                     </svg>
                                                     View
                                                 </button>
-                                            </td>
-                                            <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
                                                 <button
                                                     class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -220,8 +232,18 @@
                                                     Menu
                                                 </button>
                                             </td>
+                                            <td
+                                                class="w-[50%] justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
+                                                <button @click="confirmDealer(user)"
+                                                    class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                    Accept
+                                                </button>
+                                                <button @click="rejetDealer(user)"
+                                                    class="flex gap-1 items-center border p-2 bg-error text-white rounded-md border-[#E0E0E0]">
+                                                    Reject
+                                                </button>
+                                            </td>
                                         </div>
-
                                     </tr>
                                 </tbody>
                             </table>
@@ -292,19 +314,47 @@
                 </div>
             </div>
         </template>
+        <div class="container mx-auto">
+            <div v-show="isOpen" class="fixed inset-0 flex items-center justify-center bg-base-black bg-opacity-50">
+                <div class="max-w-2xl p-6 bg-white rounded-md shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl">Model Title</h3>
+                        <svg @click="isOpen = false" xmlns="http://www.w3.org/2000/svg"
+                            class="w-8 h-8 text-red-900 cursor-pointer" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="mt-4">
+                        <p class="mb-4 text-sm">
+                            Are you sure you want to Accept/Reject this auction?
+                        </p>
+                        <div class="flex w-full justify-end">
+                            <button @click="isOpen = false" class="px-6 py-2 text-blue-800 border border-blue-600 rounded">
+                                Cancel
+                            </button>
+                            <button class="px-6 py-2 ml-2 text-blue-100 bg-primary rounded">
+                                Accept
+                            </button>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/stores/user";
 export default {
-    components: {
-    },
     setup() {
         const store = useUserStore();
         const isLoading = ref(false)
-
+        const orderName = ref(false)
+        const isOpen = ref(false)
+        const now = ref(computed(() => store.userDealers.data))
         const getUserDealer = async () => {
             isLoading.value = true
             try {
@@ -318,12 +368,33 @@ export default {
             }
 
         }
+        const order = (string) => {
+            orderName.value = !orderName.value
+            if (orderName.value) {
+                return now.value.sort((a, b) => (a.dealer.name > b.dealer.name ? 1 : -1));
+            } else {
+                return now.value.sort((a, b) => (a.dealer.name > b.dealer.name ? -1 : 1));
+            }
+
+
+        }
+        const confirmDealer = (user) => {
+            console.log('user confirm', user)
+        }
+        const rejetDealer = (user) => {
+            console.log('user delete', user)
+        }
         onMounted(() => {
             getUserDealer()
         })
         return {
             isLoading,
-            store
+            store,
+            order,
+            now,
+            isOpen,
+            confirmDealer,
+            rejetDealer
         };
     },
 };
