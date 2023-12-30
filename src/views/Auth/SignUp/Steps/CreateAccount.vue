@@ -20,9 +20,9 @@
             class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full ">
                 <div class="animate-fade-up  animate-ease-in-out animate-delay-100">
-                    <h2 class="mt-6 md:text-4xl font-bold text-base-black text-center mb-5 ">Create Your Dealer Account
+                    <h2 class="mt-6 md:text-4xl font-bold text-base-black text-center mb-5 ">Create Your <span v-if="rol == 'dealers'"> Dealer</span>  <span v-if="rol !== 'dealers'"> Sellers</span>   Account
                     </h2>
-                    <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to dealers right from
+                    <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to <span v-if="rol == 'dealers'"> dealers</span>  <span v-if="rol !== 'dealers'"> sellers</span> right from
                         your home.</p>
                 </div>
 
