@@ -65,7 +65,8 @@
                             <span class="off">ES</span>
                         </div> -->
 
-                        <RouterLink v-if="store?.userData?._id" :to="store?.userData?.type == 0 && '/inicio' ||
+                        <RouterLink v-if="store?.userData?._id" 
+                        :to="store?.userData?.type == 0 && '/inicio' ||
                             store?.userData?.type == 1 && '/all' ||
                             store?.userData?.type == 2 && '/upcoming'" class="btn bg-primary text-base-black">
                             Dashboard
@@ -86,12 +87,12 @@
                                 <span v-else>Login</span>
                             </RouterLink>
                             <RouterLink v-if="path !== 'signup'" :to="path == 'home' ||
-                                    path == 'about' ||
-                                    path == 'sold-auctions' ||
-                                    path == 'how-it-works' ||
-                                    path == 'contact-us'
+                                path == 'about' ||
+                                path == 'sold-auctions' ||
+                                path == 'how-it-works' ||
+                                path == 'contact-us'
 
-                                    ? `/signup/sellers` : `/signup/${route.params.rol}`"
+                                ? `/signup/sellers` : `/signup/${route.params.rol}`"
                                 class="btn bg-primary text-base-black">
                                 Sign Up
                             </RouterLink>
@@ -162,7 +163,7 @@ export default {
             storeData.formAccount.phoneNumber = ''
             storeData.formAccount.preview = ''
             await router.push('/')
-            router.go()
+             router.go()
         }
         const toggle = () => {
             open.value = !open.value

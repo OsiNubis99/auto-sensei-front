@@ -122,12 +122,12 @@
                             <UploadPhotos v-show="op.step3" :key="componentKey" :nextUploadPhotos="nextUploadPhotos"
                                 :form="formData" :op="op" :checkStep="checkStep" :launch="launch" :saveData="saveData"
                                 :invalid="invalid" />
+
                         </template>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 <script>
@@ -141,6 +141,7 @@ import { toast } from "vue3-toastify";
 import { useAuctionStore } from "@/stores/auctions";
 import { useStoreFile } from "@/stores/uploader";
 import { useRouter, useRoute } from 'vue-router'
+import { ModalLaunch } from '@/stores/modalLaunch';
 import moment from 'moment';
 export default {
 
@@ -160,65 +161,95 @@ export default {
         const id_create = ref(null)
         const storeFile = useStoreFile()
         const route = useRoute();
+        const statusLauch = ModalLaunch()
+        const isOpen = ref(true)
         const router = useRouter()
         const formData = ref({
-            numberVinGenerals: '',
-            date: '',
-            province: '',
-            city: '',
-            keys: '',
-            currently: '',
-            buyoutVehicle: '',
-            newVehicle: '',
-            numberVin: '',
-            year: '',
-            make: '',
-            model: '',
-            series: '',
-            bodyType: '',
-            cylinder: '',
-            transmission: '',
-            odometer: '',
-            doors: '',
-            color: '',
-            driveTrain: '',
-            additionalPackages: '',
-            tireCondition: '',
-            lastReplacement: '',
-            brakePads: '',
-            lastReplacement2: '',
-            rotorCondition: '',
-            lastReplacement3: '',
-            document: '',
-            previewDocument: '',
-            driverDocument: '',
-            previewDriver: '',
-            frontPhoto: '',
-            previewFrontPhoto: '',
-            front: '',
-            previewFront: '',
-            driverSide: '',
-            previewDriverSide: '',
-            back: '',
-            previewBack: '',
-            passengerSide: '',
-            previewPassengerSide: '',
-            tireAndRim: '',
-            previewTireAndRim: '',
-            driversDisplay: '',
-            previewDriversDisplay: '',
-            driversSide: '',
-            previewDriversSide: '',
-            centerConsole: '',
-            previewCenterConsole: '',
-            rearSeats: '',
-            previewRearSeats: '',
-            vehicleDamage: '',
-            previewVehicleDamage: '',
-            additionalDocuments: '',
-            previewAdditionalDocuments: '',
-            vehicleVideo: '',
-            previewVehicleVideo: ''
+            numberVinGenerals: undefined,
+            date: undefined,
+            startDate: undefined,
+            province: 'Select province',
+            city: 'Select city',
+            keys: 'Select number of keys',
+            currently: undefined,
+            buyoutVehicle: undefined,
+            newVehicle: undefined,
+            numberVin: undefined,
+            year: undefined,
+            make: undefined,
+            model: undefined,
+            series: undefined,
+            bodyType: undefined,
+            cylinder: undefined,
+            transmission: undefined,
+            odometer: undefined,
+            doors: undefined,
+            color: undefined,
+            driveTrain: undefined,
+            additionalPackages: undefined,
+            tireCondition: undefined,
+            lastReplacement: undefined,
+            brakePads: undefined,
+            lastReplacement2: undefined,
+            rotorCondition: undefined,
+            lastReplacement3: undefined,
+            document: undefined,
+            previewDocument: undefined,
+            driverDocument: undefined,
+            previewDriver: undefined,
+            frontPhoto: undefined,
+            previewFrontPhoto: undefined,
+            front: undefined,
+            previewFront: undefined,
+            driverSide: undefined,
+            previewDriverSide: undefined,
+            back: undefined,
+            previewBack: undefined,
+            passengerSide: undefined,
+            previewPassengerSide: undefined,
+            tireAndRim: undefined,
+            previewTireAndRim: undefined,
+            driversDisplay: undefined,
+            previewDriversDisplay: undefined,
+            driversSide: undefined,
+            previewDriversSide: undefined,
+            centerConsole: undefined,
+            previewCenterConsole: undefined,
+            rearSeats: undefined,
+            previewRearSeats: undefined,
+            vehicleDamage: undefined,
+            previewVehicleDamage: undefined,
+            additionalDocuments: undefined,
+            previewAdditionalDocuments: undefined,
+            vehicleVideo: undefined,
+            previewVehicleVideo: undefined,
+            leasingFinancing: undefined,
+
+            financingCompany: undefined,
+            manyPayments: undefined,
+            remainingPayments: undefined,
+            yourVehicleAmount: undefined,
+            anyVehicle: undefined,
+            makePreferences: undefined,
+            modelPreferences: undefined,
+            modelFromPreferences: undefined,
+            modelToPreferences: undefined,
+            yearFromPreferences: undefined,
+            yearToPreferences: undefined,
+            //Campos de la modal
+            modalLaunchAuction: false,
+            launchOptions: undefined,
+            //AfterVerifield
+            //Date & Time
+            auctionDate: new Date(),
+            auctionTime: undefined,
+            auctionDuration: undefined,
+            //(Weekend)
+            daySaturday: '19.00 PM',
+            dayMonday: 'Select time',
+
+
+
         })
         const op = ref({
             step1: true,
@@ -232,6 +263,7 @@ export default {
         })
         const nextGeneralInformation = async () => {
             componentKey.value += 1
+            console.log('formData.value', formData.value)
             invalid.value = validateData(formData.value, 'generalInformation');
             if (Object.entries(invalid.value).length > 0) {
                 toast(
@@ -251,9 +283,21 @@ export default {
                     city: formData.value.city,
                     province: formData.value.province,
                     keysNumber: formData.value.keys,
-                    vehicleStatus: formData.value.currently,
-                    buyout: formData.value.buyoutVehicle,
-                    buyNew: formData.value.newVehicle
+                    vehicleStatus: {
+                        status: formData.value.currently,
+                        financingCompany: formData.value.financingCompany,
+                        remainingPayments: formData.value.remainingPayments,
+                    },
+                    buyout: formData.value.yourVehicleAmount,
+                    buyNew: {
+                        anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
+                        make: formData.value.makePreferences,
+                        model: formData.value.modelPreferences,
+                        mileageStart: formData.value.modelFromPreferences,
+                        mileageEnd: formData.value.modelToPreferences,
+                        yearStart: formData.value.yearFromPreferences,
+                        yearEnd: formData.value.yearToPreferences
+                    }
                 }
                 console.log('dataPost', dataPost)
                 loading.value = true
@@ -281,7 +325,7 @@ export default {
 
                     }
                 } catch (error) {
-                    id_create.value = null
+                    id_create.value = undefined
                     loading.value = false
                 }
             }
@@ -318,15 +362,30 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
+
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
                     city: formData.value.city,
                     province: formData.value.province,
                     keysNumber: formData.value.keys,
-                    vehicleStatus: formData.value.currently,
-                    buyout: formData.value.buyoutVehicle,
-                    buyNew: formData.value.newVehicle,
+                    vehicleStatus: {
+                        status: formData.value.currently,
+                        financingCompany: formData.value.financingCompany,
+                        remainingPayments: formData.value.remainingPayments,
+                    },
+                    buyout: formData.value.yourVehicleAmount,
+                    buyNew: {
+                        anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
+                        make: formData.value.makePreferences,
+                        model: formData.value.modelPreferences,
+                        mileageStart: formData.value.modelFromPreferences,
+                        mileageEnd: formData.value.modelToPreferences,
+                        yearStart: formData.value.yearFromPreferences,
+                        yearEnd: formData.value.yearToPreferences
+                    },
+                    startDate: null,
+                    duration: formData.value.auctionDuration,
                     vehicleDetails: {
                         odometer: formData.value.odometer,
                         doors: formData.value.doors,
@@ -337,8 +396,6 @@ export default {
                         tireReplacement: formData.value.lastReplacement,
                         brakeCondition: formData.value.brakePads,
                         brakeReplacement: formData.value.lastReplacement2,
-                        rotorCondition: formData.value.rotorCondition,
-                        rotorReplacement: formData.value.lastReplacement3,
                     }
                 }
                 console.log('VEHICULE DETAILS', dataPost)
@@ -360,7 +417,8 @@ export default {
                         loading.value = false
                     }
                 } catch (error) {
-                    id_create.value = null
+                    console.log('hola')
+                    id_create.value = undefined
                     loading.value = false
                     toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
 
@@ -394,6 +452,7 @@ export default {
             let additionalDocuments = [
                 formData.value.additionalDocuments,
             ]
+
             if (exterior.length > 0 && interior.length > 0 && vehicleDamage.length > 0 && additionalDocuments.length > 0) {
                 await Promise.all(
                     exterior.map(async (file, i) => {
@@ -419,17 +478,31 @@ export default {
                         newAdditionalDocuments.push(res.data);
                     })
                 );
-
+                let hour = moment(`${formData.value.auctionTime}:${formData.value.auctionDuration}`, "H:mm").format('HH:mm:ss')
+                let date = moment(formData.value.auctionDate).format('YYYY-MM-DD');
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
                     city: formData.value.city,
                     province: formData.value.province,
                     keysNumber: formData.value.keys,
-                    vehicleStatus: formData.value.currently,
-                    buyout: formData.value.buyoutVehicle,
-                    buyNew: formData.value.newVehicle,
-                    finished: string == 'launch' ? true : false,
+                    vehicleStatus: {
+                        status: formData.value.currently,
+                        financingCompany: formData.value.financingCompany,
+                        remainingPayments: formData.value.remainingPayments,
+                    },
+                    buyout: formData.value.yourVehicleAmount,
+                    buyNew: {
+                        anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
+                        make: formData.value.makePreferences,
+                        model: formData.value.modelPreferences,
+                        mileageStart: formData.value.modelFromPreferences,
+                        mileageEnd: formData.value.modelToPreferences,
+                        yearStart: formData.value.yearFromPreferences,
+                        yearEnd: formData.value.yearToPreferences
+                    },
+                    startDate: date + " " + hour,
+                    duration: formData.value.auctionDuration,
                     vehicleDetails: {
                         odometer: formData.value.odometer,
                         doors: formData.value.doors,
@@ -455,7 +528,6 @@ export default {
             }
         }
         const nextUploadPhotos = async () => {
-
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'UploadPhotos');
             if (Object.entries(invalid.value).length > 0) {
@@ -491,8 +563,6 @@ export default {
                     launch.value = true
                     loading.value = false
                 }, 2000);
-
-
             }
         }
         const saveData = async (string) => {
@@ -551,13 +621,13 @@ export default {
                 loading.value = true
                 let resFiles = await postFile(string)
                 console.log('resFiles', resFiles)
+                statusLauch.closeModal(false)
                 if (resFiles) {
                     try {
                         let res = await store.update({ uuid: id_create.value, payload: resFiles })
                         if (res) {
                             await router.push({ path: '/all' })
                             router.go()
-
                         }
                     } catch (error) {
                         id_create.value = null
@@ -582,6 +652,7 @@ export default {
             componentKey,
             loading,
             auctionList,
+            isOpen
         };
     },
 };

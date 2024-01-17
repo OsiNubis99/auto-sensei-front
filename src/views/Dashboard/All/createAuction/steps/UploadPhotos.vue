@@ -11,30 +11,47 @@
             <p class="font-medium text-base">Original Documents</p>
             <p class="text-sm text-[#666666]">Such as ownership certificate, financing documents, etc.</p>
         </div>
-        <div class="flex max-w-[320px]  flex-col gap-5">
-            <div :class="invalid?.document ? 'border-[#ff000075]' : 'border-[#E0E0E0]'"
-                class="border flex flex-col gap-4 items-center  p-5">
+        <div class="flex max-w-[320px] relative  flex-col gap-5 group  ">
+            <div v-if="form?.previewDocument"
+                class="w-full group-hover:bg-[#0000009f] group-hover:flex transition-all duration-500 ease-linear hidden justify-center items-center gap-4  absolute h-full top-0">
+                <div @click="viewPhoto(form.previewDocument)"
+                    class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                        <path
+                            d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
+                            fill="#09121F" />
+                    </svg>
+                </div>
+                <label class="flex flex-col bg-white items-center rounded-md p-[15px] cursor-pointer">
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                d="M10.4853 6.45739L9.54267 5.51472L3.33333 11.7241V12.6667H4.276L10.4853 6.45739ZM11.428 5.51472L12.3707 4.57206L11.428 3.62939L10.4853 4.57206L11.428 5.51472ZM4.828 14.0001H2V11.1714L10.9567 2.21472C11.0817 2.08974 11.2512 2.01953 11.428 2.01953C11.6048 2.01953 11.7743 2.08974 11.8993 2.21472L13.7853 4.10072C13.9103 4.22574 13.9805 4.39528 13.9805 4.57206C13.9805 4.74883 13.9103 4.91837 13.7853 5.04339L4.82867 14.0001H4.828Z"
+                                fill="#0B1107" />
+                        </svg>
+                    </div>
+                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'document')" class="hidden">
+                </label>
+            </div>
+            <div :class="[invalid?.document ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewDocument ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
+                class="border w-[320px] flex flex-col gap-4 items-center p-5">
                 <div class="w-full flex justify-center ">
                     <img v-if="form?.previewDocument" class="w-full h-[190px] object-contain " :src="form?.previewDocument"
                         alt="">
                     <img v-else class="w-full h-[190px] object-contain "
                         src="../../../../../assets/img/png/exampleDocuemnt.png" alt="">
-                    <!-- <svg v-else class="w-[100px] h-[100px]" :fill="invalid?.document ? '#ff000075' : '#6d6d6d42'"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path
-                            d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                    </svg> -->
                 </div>
-                <div v-if="form?.document?.name" class="flex w-full items-start flex-col justify-start gap-1">
+                <!-- div v-if="form?.document?.name" class="flex w-full items-start flex-col justify-start gap-1">
                     <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
                         form?.document?.mb }}Mb - </p>
                     <p class="text-xs font-medium w-[200px] text-[#666] truncate"><strong>Name:</strong>
                         {{ form?.document?.name }}</p>
-                </div>
-                <p v-else class="text-[14px] font-medium text-[#666]">Example of original documents photo <br> use JPG, PNG,
+                </div> -->
+                <p v-if="!form?.previewDocument" class="text-[14px] font-medium text-[#666]">Example of original documents
+                    photo <br> use JPG, PNG,
                     or BMP file</p>
             </div>
-            <label
+            <label v-if="!form?.previewDocument"
                 class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                 <div class="flex gap-2 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 17 16" fill="none">
@@ -50,7 +67,28 @@
         <div>
             <p class="font-medium text-base">Driver License</p>
         </div>
-        <div class="max-w-[320px]   flex  flex-col gap-5">
+        <div class="max-w-[320px] relative  flex  flex-col gap-5 group">
+            <div v-if="form?.previewDriver"
+                class="w-full group-hover:bg-[#0000009f] group-hover:flex transition-all duration-500 ease-linear hidden justify-center items-center gap-4  absolute h-full top-0">
+                <div @click="viewPhoto(form.previewDriver)"
+                    class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                        <path
+                            d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
+                            fill="#09121F" />
+                    </svg>
+                </div>
+                <label class="flex flex-col bg-white items-center rounded-md p-[15px] cursor-pointer">
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                d="M10.4853 6.45739L9.54267 5.51472L3.33333 11.7241V12.6667H4.276L10.4853 6.45739ZM11.428 5.51472L12.3707 4.57206L11.428 3.62939L10.4853 4.57206L11.428 5.51472ZM4.828 14.0001H2V11.1714L10.9567 2.21472C11.0817 2.08974 11.2512 2.01953 11.428 2.01953C11.6048 2.01953 11.7743 2.08974 11.8993 2.21472L13.7853 4.10072C13.9103 4.22574 13.9805 4.39528 13.9805 4.57206C13.9805 4.74883 13.9103 4.91837 13.7853 5.04339L4.82867 14.0001H4.828Z"
+                                fill="#0B1107" />
+                        </svg>
+                    </div>
+                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'document')" class="hidden">
+                </label>
+            </div>
             <div :class="invalid?.driverDocument ? 'border-[#ff000075]' : 'border-[#E0E0E0]'"
                 class="border flex flex-col gap-4 items-center  p-5">
                 <div class="w-full flex justify-center">
@@ -58,19 +96,8 @@
                         alt="">
                     <img v-else class="w-full h-[190px] object-contain "
                         src="../../../../../assets/img/png/exampleLicencie.png" alt="">
-                    <!-- <svg v-else class="w-[100px] h-[100px]" :fill="invalid?.driverDocument ? '#ff000075' : '#6d6d6d42'"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path
-                            d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                    </svg> -->
                 </div>
-                <div v-if="form?.driverDocument?.name" class="flex w-full items-start flex-col justify-start gap-1">
-                    <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
-                        form?.driverDocument?.mb }}Mb - </p>
-                    <p class="text-xs font-medium w-[200px] text-[#666] truncate"><strong>Name:</strong>
-                        {{ form?.driverDocument?.name }}</p>
-                </div>
-                <p v-else class="text-[14px] font-medium text-[#666]">Example of drive license photo <br> use JPG, PNG, or
+                <p class="text-[14px] font-medium text-[#666]">Example of drive license photo <br> use JPG, PNG, or
                     BMP file</p>
             </div>
             <label
@@ -569,7 +596,6 @@
                         @change="(event) => previewImage(event, 'vehicleVideo')" class="hidden">
                 </label>
             </div>
-
         </div>
         <div v-if="!save" class="flex justify-center items-center gap-5 ">
             <!--  <button
@@ -586,17 +612,25 @@
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save as Draft
             </button>
-            <button @click="createAutions('launch')"
+            <button @click="modalLaunch('launch')"
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Launch Auction POST
+                Launch Auction
             </button>
         </div>
-
+        <ModalLaunchVue :form="form" :modalLaunch="createAutions" />
+        <ModalImageCustomVue v-if="statusModalImage?.isActive" :form="form" />
+        <ModalViewImageVue v-if="statusModalViewImage?.isActive" :form="form" />
     </div>
 </template>
 <script>
 import { ref, onMounted } from "vue";
 import { toast } from "vue3-toastify";
+import ModalLaunchVue from "../../../../../components/Modals/ModalLaunch/ModalLaunchVue.vue";
+import ModalImageCustomVue from "../../../../../components/Modals/ModalImageCustom/ModalImageCustom.vue";
+import ModalViewImageVue from "../../../../../components/Modals/ModalViewImage/ModalViewImage.vue";
+import { ModalLaunch } from '@/stores/modalLaunch';
+import { ModalImageCustom } from '@/stores/modalImageCustom';
+import { ModalViewImage } from '@/stores/modalViewImage';
 export default {
     props: {
         op: {
@@ -623,10 +657,11 @@ export default {
         invalid: {
             type: Object
         },
-
-
     },
     components: {
+        ModalLaunchVue,
+        ModalImageCustomVue,
+        ModalViewImageVue
     },
     setup(props) {
 
@@ -636,6 +671,10 @@ export default {
         const invalid = ref(props.invalid)
         let videoPlayer = ref()
         let isPlaying = ref(false)
+        const statusModal = ModalLaunch()
+        const statusModalImage = ModalImageCustom()
+        const statusModalViewImage = ModalViewImage()
+
         const play = () => {
             videoPlayer.value.play();
             isPlaying.value = true
@@ -649,93 +688,107 @@ export default {
         const previewImage = (event, string) => {
             var input = event.target;
             let typeFile = input.files[0].type.split("/")
-
             let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
             if (input.files) {
-
                 if (convertion > 100 && typeFile[0] == 'video') {
                     toast("The video exceeds 100mb", {
                         type: "error",
                     });
                 } else {
                     var reader = new FileReader();
+                   
                     reader.onload = (e) => {
                         switch (string) {
                             case 'document':
                                 form.value.previewDocument = e.target.result;
                                 form.value.document = input.files[0];
                                 form.value.document.mb = convertion
+                                statusModalImage.openModal({ active: true, img: input.files[0], type: string })
                                 break;
                             case 'driver':
                                 form.value.previewDriver = e.target.result;
                                 form.value.driverDocument = input.files[0];
                                 form.value.driverDocument.mb = convertion
+
                                 break;
                             case 'frontPhoto':
                                 form.value.previewFrontPhoto = e.target.result;
                                 form.value.frontPhoto = input.files[0];
                                 form.value.frontPhoto.mb = convertion
+
                                 break;
                             case 'front':
                                 form.value.previewFront = e.target.result;
                                 form.value.front = input.files[0];
                                 form.value.front.mb = convertion
+
                                 break;
                             case 'driverSide':
                                 form.value.previewDriverSide = e.target.result;
                                 form.value.driverSide = input.files[0];
                                 form.value.driverSide.mb = convertion
+
                                 break;
                             case 'back':
                                 form.value.previewBack = e.target.result;
                                 form.value.back = input.files[0];
                                 form.value.back.mb = convertion
+
                                 break;
                             case 'passengerSide':
                                 form.value.previewPassengerSide = e.target.result;
                                 form.value.passengerSide = input.files[0];
                                 form.value.passengerSide.mb = convertion
+
                                 break;
                             case 'tireAndRim':
                                 form.value.previewTireAndRim = e.target.result;
                                 form.value.tireAndRim = input.files[0];
                                 form.value.tireAndRim.mb = convertion
+
                                 break;
                             case 'driversDisplay':
                                 form.value.previewDriversDisplay = e.target.result;
                                 form.value.driversDisplay = input.files[0];
                                 form.value.driversDisplay.mb = convertion
+
                                 break;
                             case 'driversSide':
                                 form.value.previewDriversSide = e.target.result;
                                 form.value.driversSide = input.files[0];
                                 form.value.driversSide.mb = convertion
+
                                 break;
                             case 'centerConsole':
                                 form.value.previewCenterConsole = e.target.result;
                                 form.value.centerConsole = input.files[0];
                                 form.value.centerConsole.mb = convertion
+
                                 break;
                             case 'rearSeats':
                                 form.value.previewRearSeats = e.target.result;
                                 form.value.rearSeats = input.files[0];
                                 form.value.rearSeats.mb = convertion
+
                                 break;
                             case 'vehicleDamage':
                                 form.value.previewVehicleDamage = e.target.result;
                                 form.value.vehicleDamage = input.files[0];
                                 form.value.vehicleDamage.mb = convertion
+
                                 break;
                             case 'additionalDocuments':
                                 form.value.previewAdditionalDocuments = e.target.result;
                                 form.value.additionalDocuments = input.files[0];
                                 form.value.additionalDocuments.mb = convertion
+
                                 break;
                             case 'vehicleVideo':
                                 console.log('video', e)
                                 form.value.previewVehicleVideo = e.target.result;
                                 form.value.vehicleVideo = input.files[0];
                                 form.value.vehicleVideo.mb = convertion
+
                                 break;
                             default:
                                 break;
@@ -750,8 +803,16 @@ export default {
         const next = () => {
             props.nextUploadPhotos()
         }
+        const modalLaunch = () => {
+            console.log('hols')
+            statusModal.openModal(true)
+        }
         const createAutions = (string) => {
             props.saveData(string)
+        }
+        const viewPhoto = (photo) => {
+            console.log('viewPhoto', photo)
+            statusModalViewImage.openModal({ active: true, img: photo })
         }
         return {
             date,
@@ -764,7 +825,12 @@ export default {
             play,
             paused,
             isPlaying,
-            videoPlayer
+            videoPlayer,
+            modalLaunch,
+            statusModalImage,
+            viewPhoto,
+            statusModalViewImage
+
         };
     },
 };

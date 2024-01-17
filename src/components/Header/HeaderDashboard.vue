@@ -31,7 +31,7 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dashboard</p>
                             </RouterLink>
-                            <RouterLink to="/action-list"
+                            <RouterLink :to="{ name: 'action-list', query: { state: 'drafts' } }"
                                 :class="path == 'action-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Auctions List</p>
@@ -187,7 +187,7 @@
                             <div @click="toggleAccount" class="w-8 h-8 cursor-pointer">
                                 <img v-if="store?.userData?.dealer?.picture"
                                     class="w-full shadow-md   rounded-full h-full object-cover"
-                                    :src=" bucket +  store?.userData?.dealer?.picture" alt="">
+                                    :src="bucket + store?.userData?.dealer?.picture" alt="">
                                 <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                     alt="">
@@ -211,7 +211,7 @@
                         class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
 
-                            <RouterLink to="#" :class="path == 'upcoming' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/upcoming" :class="path == 'upcoming' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dealer Bidding</p>
                             </RouterLink>
@@ -219,10 +219,15 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink>
-                            <RouterLink to="#" :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/faqs-dealers" :class="path == 'faqs-dealers' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
                             </RouterLink>
+                            <RouterLink to="/how-it-works-dealer" :class="path == 'how-it-works-dealer' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
+                                <p>How It Works?</p>
+                            </RouterLink>
+                            
                         </ul>
                     </div>
                 </div>
@@ -299,7 +304,7 @@ export default {
         const logout = async () => {
             localStorage.clear()
             await router.push({ name: 'home' })
-            router.go()
+             router.go()
 
         }
         onMounted(() => {

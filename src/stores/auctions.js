@@ -2,7 +2,7 @@ import axios from "@/axios";
 import { defineStore } from "pinia";
 import moment from 'moment';
 import { enumState } from "../utils/auction-status.enum";
-export const useAuctionStore = defineStore("useAuctionStore", {
+export const useAuctionStore = defineStore("useAuctiontore", {
     state: () => ({
         data: {},
         draft: [],
@@ -11,14 +11,15 @@ export const useAuctionStore = defineStore("useAuctionStore", {
         live: [],
         completed: [],
         canceled: [],
+        autionById:[],
     }),
     actions: {
         index(payload) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get("/auctions")
+                    .post("/auction/find-all")
                     .then((response) => {
-                        console.log('auctions', response)
+                        console.log('auction', response)
                         response.data.map((date, index) => {
                             date.createHour = moment(date.createdAt).format("HH:mm A")
                             date.createDay = moment(date.createdAt).format('LL');
@@ -30,7 +31,6 @@ export const useAuctionStore = defineStore("useAuctionStore", {
                         this.live = response.data.filter((item) => item.status == enumState.live)
                         this.completed = response.data.filter((item) => item.status == enumState.completed)
                         this.canceled = response.data.filter((item) => item.status == enumState.canceled)
-
                         this.data = response.data
                         resolve(response);
                     })
@@ -42,7 +42,7 @@ export const useAuctionStore = defineStore("useAuctionStore", {
         },
         create(data) {
             return new Promise((resolve, reject) => {
-                axios.post("/auctions", data)
+                axios.post("/auction", data)
                     .then((response) => {
                         console.log('create', response)
                         resolve(response);
@@ -57,7 +57,7 @@ export const useAuctionStore = defineStore("useAuctionStore", {
             console.log('payload', payload)
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/auctions/${uuid}`, payload)
+                    .put(`/auction/${uuid}`, payload)
                     .then((response) => {
                         console.log('response', response)
                         resolve(response);
@@ -70,7 +70,7 @@ export const useAuctionStore = defineStore("useAuctionStore", {
         delete(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .delete(`/auctions/${uuid}`)
+                    .delete(`/auction/${uuid}`)
                     .then((response) => {
                         console.log('response', response)
                         resolve(response);
@@ -83,7 +83,7 @@ export const useAuctionStore = defineStore("useAuctionStore", {
         activeAutions(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get(`/auctions/activate/${uuid}`)
+                    .put(`/auction/activate/${uuid}`)
                     .then((response) => {
                         console.log('activate', response)
                         resolve(response);
@@ -96,7 +96,7 @@ export const useAuctionStore = defineStore("useAuctionStore", {
         inactivateAutions(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get(`/auctions/inactivate/${uuid}`)
+                    .put(`/auction/inactivate/${uuid}`)
                     .then((response) => {
                         console.log('inactivate', response)
                         resolve(response);
@@ -106,6 +106,36 @@ export const useAuctionStore = defineStore("useAuctionStore", {
                     });
             });
         },
+        autionsBit({ uuid, payload }) {
+            console.log('uuid', uuid)
+            console.log('payload', payload)
+            return new Promise((resolve, reject) => {
+                axios
+                    .post(`/auction/bid/${uuid}`, payload)
+                    .then((response) => {
+                        console.log('autionsBit', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        getAutionById(uuid) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/auction/${uuid}`)
+                    .then((response) => {
+                        console.log('autionById', response)
+                        this.autionById = response.data.value
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        
     },
 });
 

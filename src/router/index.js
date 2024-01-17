@@ -73,6 +73,7 @@ const routes = [
         component: () => import('../views/Dashboard/faqs/Main.vue')
 
       },
+
       {
         path: "/action-details",
         name: "action-details-admin",
@@ -127,6 +128,16 @@ const routes = [
           hideNavbar: true,
         }
       },
+      {
+        path: "/action-details",
+        name: "action-details-sellers",
+        component: () => import('../views/Dashboard/action-details/Main.vue'),
+        props: true,
+        meta: {
+          hideNavbar: true,
+        }
+      },
+
     ],
   },
   {
@@ -145,6 +156,41 @@ const routes = [
         path: "/action-details/:id",
         name: "action-details",
         component: () => import('../views/Dashboard/action-details/Main.vue'),
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
+        path: "/action-details",
+        name: "action-details-dealers",
+        component: () => import('../views/Dashboard/action-details/Main.vue'),
+        props: true,
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
+        path: "/inbox/:id",
+        name: "inbox",
+        component: () => import('../views/Dashboard/chat/Main.vue'),
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
+        path: "/faqs-dealers",
+        name: "faqs-dealers",
+        component: () => import('../views/Dashboard/faqsDealers/Main.vue'),
+        props: true,
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
+        path: "/how-it-works-dealer",
+        name: "how-it-works-dealer",
+        component: () => import('../views/Dashboard/howItWorksDealer/Main.vue'),
+        props: true,
         meta: {
           hideNavbar: true,
         }
@@ -222,6 +268,7 @@ const routes = [
         path: "/:pathMatch(.*)*",
         component: () => import("../views/Error/Main.vue"),
       },
+
     ],
   },
 
@@ -264,9 +311,7 @@ router.beforeEach((to, from, next) => {
       } else {
         next({ name: 'home' })
       }
-    } else {
-      next()
-    }
+    } 
   } else {
     next()
   }

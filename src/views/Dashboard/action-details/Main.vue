@@ -50,26 +50,29 @@
                         '--swiper-pagination-color': '#fff',
                     }" :spaceBetween="10" :navigation="true" :slidesPerView="1" :thumbs="{ swiper: thumbsSwiper }"
                         :modules="modules" class="myCrousel2">
-                        <swiper-slide v-for="(photo, index) in dataDetails?.photos" :key="index">
+                        <swiper-slide v-if="dataDetails?.photos?.length > 0" v-for="(photo, index) in dataDetails?.photos"
+                            :key="index">
                             <img :src="bucket + photo" alt="">
 
                         </swiper-slide>
-
+                        <swiper-slide v-else v-for="(img, indexx) in 6" :key="indexx">
+                            <img class="w-full h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                        </swiper-slide>
                     </swiper>
                     <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="6" :freeMode="true"
                         :watchSlidesProgress="true" :modules="modules" class="myCrousel">
-                        <swiper-slide v-for="(photo, index) in dataDetails?.photos.slice(0, 6)" :key="index">
-
+                        <swiper-slide v-if="dataDetails?.photos?.length > 0"
+                            v-for="(photo, index) in dataDetails?.photos.slice(1, 7)" :key="index">
                             <div v-if="index == 5" class="relative flex justify-center items-center cursor-pointer">
                                 <img :src="bucket + photo" alt="">
                                 <div class="bg-[#000000a3] absolute w-full h-full top-0 z-50 "></div>
                                 <p class="text-white absolute  z-50 "> All Photos ({{ dataDetails?.photos?.length }})</p>
                             </div>
                             <img v-else :src="bucket + photo" alt="">
-
-
                         </swiper-slide>
-
+                        <swiper-slide v-else v-for="(img, indexx) in 6" :key="indexx">
+                            <img class="w-full h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                        </swiper-slide>
                     </swiper>
                 </div>
                 <div>
@@ -91,75 +94,88 @@
 
                             <div class="border-t-[1px] py-2  flex justify-between items-start  border-[#E0E0E0]">
                                 <div class="flex gap-4 flex-col p-4 w-full border-r-[1px] border-[#E0E0E0] ">
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.vin" class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">VIN</p>
                                         <p>{{ dataDetails?.vehicleDetails?.vin }}</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.make"
+                                        class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">Make</p>
                                         <p>{{ dataDetails?.vehicleDetails?.make }}</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.model"
+                                        class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">Model</p>
                                         <p>{{ dataDetails?.vehicleDetails?.model }}</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.vin" class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">Trim</p>
                                         <p>{{ dataDetails?.vehicleDetails?.vin }}</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.bodyType"
+                                        class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">Body Type</p>
                                         <p>{{ dataDetails?.vehicleDetails?.bodyType }}</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.cylinder"
+                                        class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">Cylinder</p>
                                         <p>{{ dataDetails?.vehicleDetails?.cylinder }}</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.transmission"
+                                        class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">Transmission</p>
                                         <p>{{ dataDetails?.vehicleDetails?.transmission }}</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.driveTrain"
+                                        class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">Drive Train</p>
                                         <p>{{ dataDetails?.vehicleDetails?.driveTrain }}</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-6 capitalize ">
+                                    <div v-if="dataDetails?.vehicleDetails?.doors"
+                                        class="grid grid-cols-4 gap-6 capitalize ">
                                         <p class=" font-semibold col-span-2">Doors</p>
                                         <p>{{ dataDetails?.vehicleDetails?.doors }}</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-4 flex-col p-4 w-full">
-                                    <div class="grid grid-cols-6 gap-6">
+                                    <div v-if="dataDetails?.vehicleDetails?.color" class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Exterior Color</p>
                                         <p class="col-span-4">{{ dataDetails?.vehicleDetails?.color }}</p>
                                     </div>
-                                    <div class="grid grid-cols-6 gap-6">
+                                    <div v-if="dataDetails?.vehicleDetails?.odometer" class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Odometer</p>
                                         <p class="col-span-4">{{ dataDetails?.vehicleDetails?.odometer }}</p>
                                     </div>
-                                    <div class="grid grid-cols-6 gap-6">
+                                    <div v-if="dataDetails?.vehicleDetails?.tireCondition" class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Tire Condition</p>
                                         <p class="col-span-4">{{ dataDetails?.vehicleDetails?.tireCondition }}</p>
                                     </div>
-                                    <div class="grid grid-cols-6 gap-6">
+                                    <div v-if="dataDetails?.vehicleDetails?.brakeCondition" class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Brake Condition</p>
                                         <p class="col-span-4">{{ dataDetails?.vehicleDetails?.brakeCondition }}</p>
                                     </div>
-                                    <div class="grid grid-cols-6 gap-6">
+                                    <div v-if="dataDetails?.vehicleDetails?.status" class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Vehicle is Currently</p>
-                                        <p class="col-span-4">{{ dataDetails?.vehicleStatus }}</p>
+                                        <p class="col-span-4">{{ dataDetails?.vehicleStatus?.status }}</p>
                                     </div>
                                     <div class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Bank/Institute</p>
-                                        <p class="col-span-4">TD Bank</p>
+                                        <p v-if="dataDetails?.vehicleStatus?.financingCompany" class="col-span-4">{{
+                                            dataDetails?.vehicleStatus?.financingCompany }}</p>
+                                        <p v-else class="col-span-4">The seller didn't provide information</p>
                                     </div>
                                     <div class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Remaining Payments</p>
-                                        <p class="col-span-4">The seller didn't provide information</p>
+                                        <p v-if="dataDetails?.vehicleStatus?.remainingPayments">
+                                            {{ dataDetails?.vehicleStatus?.remainingPayments }}</p>
+                                        <p v-else class="col-span-4">The seller didn't provide information</p>
                                     </div>
                                     <div class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Buyout Amount</p>
-                                        <p class="col-span-4">The seller didn't provide information</p>
+                                        <p v-if="dataDetails?.buyout">
+                                            {{ dataDetails?.buyout }}</p>
+                                        <p v-else class="col-span-4">The seller didn't provide information</p>
                                     </div>
                                     <div class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2 ">Vehicle Reports</p>
@@ -210,7 +226,7 @@
                                                     d="M17.5 8.38583V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5H15.8333C14.1845 4.14887 11.0856 5.07273 9.16667 5.51068V14.4893C11.0856 14.9272 14.1845 15.8512 15.8333 17.5H16.6667C17.1269 17.5 17.5 17.1269 17.5 16.6667V11.6142C18.2188 11.4292 18.75 10.7766 18.75 10C18.75 9.22342 18.2188 8.57083 17.5 8.38583ZM4.16667 5.83333C3.24619 5.83333 2.5 6.57952 2.5 7.5V12.5C2.5 13.4205 3.24619 14.1667 4.16667 14.1667H5L5.83333 18.3333H7.5V5.83333H4.16667Z"
                                                     fill="black" />
                                             </svg>
-                                            <p>Upcoming</p>
+                                            <p class=" capitalize ">{{ dataDetails?.status }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -218,7 +234,8 @@
                                     <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
                                         <p class="text-sm">Starts Date & Time</p>
                                         <div class="flex gap-2">
-                                            <p>Oct 20, 09.00 AM</p>
+                                            <p v-if="dataDetails?.startDate">{{ dataDetails?.startDate }}</p>
+                                            <p v-else>There is no start date</p>
                                         </div>
                                     </div>
                                 </div>
@@ -246,14 +263,13 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useRoute, useRouter } from 'vue-router'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
 // Import Swiper styles
 import 'swiper/css';
-
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import moment from 'moment';
 export default {
 
     components: {
@@ -275,14 +291,26 @@ export default {
             console.log('params', route)
             console.log('query', JSON.parse(route.query.data))
             dataDetails.value = JSON.parse(route.query.data)
+            if (dataDetails.value.startDate) {
+                dataDetails.value.startDate = moment(dataDetails.value.startDate).format('LLL')
+            }
+
             let photos = []
-            var d = photos.concat(
-                dataDetails.value?.vehicleDetails?.additionalDocuments,
+            if (dataDetails.value?.vehicleDetails?.additionalDocuments,
                 dataDetails.value?.vehicleDetails?.exteriorPhotos,
                 dataDetails.value?.vehicleDetails?.interiorPhotos,
-                dataDetails.value?.vehicleDetails?.vehicleDamage
-            );
-            dataDetails.value.photos = d
+                dataDetails.value?.vehicleDetails?.vehicleDamage) {
+                var d = photos.concat(
+                    dataDetails.value?.vehicleDetails?.additionalDocuments,
+                    dataDetails.value?.vehicleDetails?.exteriorPhotos,
+                    dataDetails.value?.vehicleDetails?.interiorPhotos,
+                    dataDetails.value?.vehicleDetails?.vehicleDamage
+                );
+                dataDetails.value.photos = d
+            } else {
+                dataDetails.value.photos = null
+            }
+
             console.log('dataDetails.value', dataDetails.value)
 
 

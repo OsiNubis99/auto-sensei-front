@@ -86,7 +86,7 @@ export default {
             }
             loading.value = true
             setTimeout(async () => {
-                await router.push({ path: `/login/${route.params.rol}` })
+                await  router.push({ path: `/login/${route.params.rol}` })
                 router.go()
                 loading.value = false
             }, 2000);

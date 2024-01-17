@@ -62,16 +62,19 @@
             </div>
             <div class="w-full">
                 <label class="font-medium text-base " for="">Odometer</label>
-                <input :class="invalid?.odometer ? 'border-error' : ''" v-model="form.odometer"
-                    class="p-2 w-full mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="4" type="number">
+                <input step="0.01" :class="invalid?.odometer ? 'border-error' : ''" v-model="form.odometer"
+                    class="p-2 w-full mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="Enter odometer" type="number">
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col gap-2">
                     <label class="font-medium text-base " for="">Doors</label>
                     <select :class="invalid?.doors ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.doors"
+                        placeholder="Number of Doors"
                         class=" border  text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>2 Doors</option>
-                        <option value="US">4 Doors</option>
+                        <option value="2 Doors">2 Doors</option>
+                        <option value="3 Doors">3 Doors</option>
+                        <option value="4 Doors">4 Doors</option>
+                        <option value="5 Doors">5 Doors</option>
                     </select>
                 </div>
             </div>
@@ -120,19 +123,19 @@
             <div class="grid grid-cols-2 place-items-baseline  place-content-center gap-4">
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                        class="input-radio on" value="Front-Wheel Drive" name="drive-train"> FWD (Front-Wheel Drive)
+                        class="input-radio on" value="FWD" name="drive-train"> FWD (Front-Wheel Drive)
                 </label>
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                        class="input-radio on" value="All-Wheel Drive" name="drive-train"> AWD (All-Wheel Drive)
+                        class="input-radio on" value="AWD" name="drive-train"> AWD (All-Wheel Drive)
                 </label>
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                        class="input-radio on" value="Rear-Wheel Drive" name="drive-train"> RWD (Rear-Wheel Drive)
+                        class="input-radio on" value="RWD" name="drive-train"> RWD (Rear-Wheel Drive)
                 </label>
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                        class="input-radio on" value="Four-Wheel Drive" name="drive-train"> 4WD (Four-Wheel Drive)
+                        class="input-radio on" value="4WD" name="drive-train"> 4WD (Four-Wheel Drive)
                 </label>
             </div>
 
@@ -153,7 +156,9 @@
                         :class="invalid?.tireCondition ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected>Choose Condition</option>
-                        <option value="US">United States</option>
+                        <option value="Need Replacement">Need Replacement</option>
+                        <option value="Good">Good</option>
+                        <option value="Brand New">Brand New</option>
 
                     </select>
                 </div>
@@ -165,7 +170,11 @@
                         :class="invalid?.lastReplacement ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected>Choose Year</option>
-                        <option value="US">United States</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
                     </select>
                 </div>
             </div>
@@ -175,7 +184,8 @@
                     <select v-model="form.brakePads" :class="invalid?.brakePads ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected>Choose Condition</option>
-                        <option value="US">United States</option>
+                        <option value="Rotors & Pads are good">Rotors & Pads are good</option>
+                        <option value="Rotors & Pads need Replacement">Rotors & Pads need Replacement</option>
 
                     </select>
                 </div>
@@ -187,12 +197,16 @@
                         :class="invalid?.lastReplacement2 ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected>Choose Year</option>
-                        <option value="US">United States</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
 
                     </select>
                 </div>
             </div>
-            <div class="w-full">
+            <!-- <div class="w-full">
                 <div class="w-full flex flex-col gap-2">
                     <label class="font-medium text-base " for="">Rotor Condition</label>
                     <select v-model="form.rotorCondition"
@@ -215,7 +229,7 @@
 
                     </select>
                 </div>
-            </div>
+            </div> -->
         </div>
         <button v-if="!save" @click="next"
             class=" btn flex justify-center bg-[#303E18] py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

@@ -1,0 +1,135 @@
+<template>
+    <div v-if="steps.step1" class="w-full flex flex-col p-4 mt-4 gap-2">
+        <div class="flex justify-center gap-6 items-center ">
+            <div class="w-full flex  flex-col gap-2">
+                <label class=" text-base " for="">Saturday</label>
+                <select v-model="formData.daySaturday" disabled
+                    class=" border-none text-[#858585] p-3  bg-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                    <option value="19.00 PM" selected>19.00 PM</option>
+                </select>
+            </div>
+            <p class="mt-7"> - </p>
+            <div class="w-full flex  flex-col gap-2">
+                <label class=" text-base " for="">Monday</label>
+                <select v-model="formData.dayMonday" :class="invalid?.auctionTime ? 'border-error' : 'border-[#E0E0E0]'"
+                    class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                    <option value="Select time" selected>Select time</option>
+                    <option value="08.00 AM">08.00 AM</option>
+                    <option value="09.00 AM">09.00 AM</option>
+                    <option value="10.00 AM">10.00 AM</option>
+                    <option value="11.00 AM">11.00 AM</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <template v-if="steps.step2">
+        <div class="m-4 p-4 rounded-lg border-[#E0E0E0] border-[1px]">
+            <p class="font-semibold">Launch Information</p>
+            <div class="flex justify-between gap-2">
+                <p>Launch Options</p>
+                <p class="font-semibold">After Hours (Weekend)</p>
+            </div>
+            <div class="flex justify-between gap-2">
+                <p>Auction Date</p>
+                <p class="font-semibold"></p>
+            </div>
+            <div class="flex justify-between gap-2">
+                <p>From</p>
+                <p class="font-semibold">Saturday, 19.00 PM</p>
+            </div>
+            <div class="flex justify-between gap-2">
+                <p>To</p>
+                <p class="font-semibold">Monday, {{ formData.dayMonday }}</p>
+            </div>
+        </div>
+        <p class="px-4 pt-4 border-[#E0E0E0] border-t-[1px]"> Are you sure you want to
+            launch auction with this option?</p>
+    </template>
+    <div v-if="steps.step1" class="pt-4" @click="next(1)">
+        <button :disabled="sizeObjet == 0 ? false : true" :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
+            class="w-full h-[41px] text-blue-100  rounded">
+            Next
+        </button>
+    </div>
+    <div v-if="steps.step2" class="pt-4 flex gap-4">
+        <button @click="back" class="w-full h-[41px] text-blue-100 border-[#E0E0E0] border-[1px]  rounded">
+            No
+        </button>
+        <button @click="next(2)" class="w-full h-[41px] text-blue-100 bg-primary rounded">
+            Yes
+        </button>
+    </div>
+</template>
+
+<script>
+import { ref, watch } from "vue";
+import { toast } from "vue3-toastify";
+import { validateData } from "../../../../validations/validationCreateAutions";
+import moment from 'moment';
+export default {
+    props: {
+        form: {
+            type: Object,
+        },
+        steps: {
+            type: Object,
+        },
+        active: {
+            type: Boolean,
+        },
+        save: {
+            type: Function,
+        },
+
+    },
+    components: {
+    },
+    setup(props) {
+        const formData = ref(props.form)
+        const steps = ref(props.steps)
+        const invalid = ref();
+        const sizeObjet = ref(null)
+        const newDate = ref()
+        const back = (back) => {
+            console.log('back')
+            steps.value.step1 = true
+            steps.value.step2 = false
+        }
+        const next = (paso) => {
+            switch (paso) {
+                case 1:
+                    if (Object.entries(invalid.value).length === 0) {
+                        steps.value.step1 = false
+                        steps.value.step2 = true
+                    }
+                    break;
+                case 2:
+                    props.save()
+                    console.log('invalid.value', invalid.value)
+                    console.log('formData.value', formData.value)
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        watch(formData.value, async (newQuestion, oldQuestion) => {
+            if (newQuestion) {
+                invalid.value = validateData(formData.value, 'Launch Auction', 'hours weekeng');
+                console.log('invalid.value', invalid.value)
+                sizeObjet.value = Object.entries(invalid.value).length
+                newDate.value = null
+                newDate.value = moment(formData.value.auctionDate).format('LL')
+            }
+        })
+        return {
+            formData,
+            next,
+            back,
+            steps,
+            sizeObjet,
+            invalid
+        };
+    },
+};
+</script>

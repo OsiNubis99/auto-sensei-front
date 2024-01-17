@@ -17,7 +17,6 @@
         </div>
     </template>
     <template v-else>
-
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 top-[60px] ">
             <div class="flex justify-between mt-5 gap-4">
                 <div class="w-[29%]">
@@ -28,7 +27,6 @@
                                     src="https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
                                     alt="">
                             </RouterLink>
-
                             <div>
                                 <p class=" font-semibold ">Marshall Autocar</p>
                                 <p class="text-[#666] text-sm uppercase ">Ottawa, Ontario</p>
@@ -122,16 +120,19 @@
                             <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
-                                    <swiper-slide v-for="(img, index) in auction.vehicleDetails.exteriorPhotos"
-                                        :key="index">
+                                    <swiper-slide v-for="(img, index) in auction?.photos" :key="index">
                                         <p class="font-semibold fixed left-0 bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">
                                             Bids
                                             Complete</p>
-                                        <img class="w-full " :src="bucket + img" alt="">
+                                        <img class="w-full h-full object-cover" :src="bucket + img" alt="">
                                     </swiper-slide>
+                                    <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
+                                        <img class="w-full h-full object-cover" src="../../../assets/img/jpg/image.jpg"
+                                            alt="">
+                                    </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
-                                    <div class="flex p-5  flex-col gap-3">
+                                    <RouterLink to="#" class="flex p-5  flex-col gap-3">
                                         <div class="">
                                             <div class="font-bold text-xl">{{ auction?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">
@@ -200,8 +201,7 @@
                                             </div>
                                         </div>
 
-                                        <RouterLink to="#" class="flex gap-4"
-                                            :class="changeLayouts ? 'flex-col' : ''">
+                                        <RouterLink to="#" class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
                                             <div class="bg-[#F0F0F0] flex gap-3 py-1 px-2  rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     viewBox="0 0 20 20" fill="none">
@@ -212,8 +212,9 @@
                                                 <p>Contact Buyer</p>
                                             </div>
                                         </RouterLink>
-                                    </div>
-                                    <div :class="changeLayouts ? 'w-full' : 'w-[40%] grid place-content-between'" class="border-l-2  border-[#E0E0E0]">
+                                    </RouterLink>
+                                    <div :class="changeLayouts ? 'w-full' : 'w-[40%] grid place-content-between'"
+                                        class="border-l-2  border-[#E0E0E0]">
                                         <div class="flex p-5  pl-4 ga justify-between "
                                             :class="changeLayouts ? 'flex-row' : 'flex-col '">
                                             <div class="space-y-1"
@@ -229,7 +230,6 @@
                                                 <p class="text-[#FF9A02] font-medium !m-0">08 Hours
                                                 </p>
                                             </div>
-
                                         </div>
                                         <div class="flex gap-4 p-5 justify-between w-full">
                                             <button class="btn w-full bg-primary text-base-black">Accept</button>
@@ -237,7 +237,6 @@
                                                 class="btn w-full bg-white border border-[#E0E0E0] text-error">Decline</button>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -350,6 +349,24 @@ export default {
             try {
                 let res = await storeAutions.index()
                 data.value = res.data
+                data.value.map((autions, index) => {
+                    let photos = []
+                    if (autions?.vehicleDetails?.additionalDocuments,
+                        autions?.vehicleDetails?.exteriorPhotos,
+                        autions?.vehicleDetails?.interiorPhotos,
+                        autions?.vehicleDetails?.vehicleDamage) {
+                        var d = photos.concat(
+                            autions?.vehicleDetails?.additionalDocuments,
+                            autions?.vehicleDetails?.exteriorPhotos,
+                            autions?.vehicleDetails?.interiorPhotos,
+                            autions?.vehicleDetails?.vehicleDamage
+                        );
+                        return autions.photos = d
+                    } else {
+                        return autions.photos = null
+                    }
+
+                })
                 console.log('Data Seller', data.value)
 
             } catch (error) {

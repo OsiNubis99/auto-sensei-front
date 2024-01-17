@@ -142,19 +142,19 @@ export default {
                         setInterval(async () => {
                             switch (resProfile.data.type) {
                                 case 0:
-                                    await router.push({ path: '/inicio' })
+                                     await router.push({ path: '/inicio' })
                                     router.go()
                                     break;
                                 case 1:
-                                    await router.push({ path: '/all' })
+                                    await  router.push({ path: '/all' })
                                     router.go()
                                     break;
                                 case 2:
-                                    await router.push({ path: '/upcoming' })
+                                    await  router.push({ path: '/upcoming' })
                                     router.go()
                                     break;
                                 default:
-                                    await router.push({ name: 'home' })
+                                    await  router.push({ name: 'home' })
                                     router.go()
                                     break;
                             }

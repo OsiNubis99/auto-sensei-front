@@ -1,0 +1,167 @@
+<template>
+    <div v-show="statusModal.isActive" class="fixed inset-0 flex items-center justify-center bg-base-black  bg-opacity-50">
+        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
+            <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
+                <p class="text-xl text-white">Launch Auction</p>
+                <svg @click="statusModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
+                    class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="p-4 flex gap-3 flex-col  ">
+                <div class="flex justify-start items-center gap-2">
+                    <p>Options</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path
+                            d="M8.78145 8.00048L5.48145 4.70048L6.42411 3.75781L10.6668 8.00048L6.42411 12.2431L5.48145 11.3005L8.78145 8.00048Z"
+                            fill="#858585" />
+                    </svg>
+                    <p class="text-[#858585]">Summary</p>
+                </div>
+                <div class="flex gap-3 items-start ">
+                    <div class="w-[120px] h-[90px]">
+                        <img class="w-full h-full rounded-lg object-cover"
+                            :src="formData?.previewFront"
+                            alt="">
+                    </div>
+                    <div>
+                        <p class=" font-semibold ">212 Chevrolet Captiva SP</p>
+                        <p>St. John, Newfoundland & Labrador</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2 border-[#E0E0E0] border-t-[1px] ">
+                <div class="p-4">
+                    <template v-if="(stepsVerifiqued.step1 && formData.launchOptions == 'Launch now after verified') ||
+                        (stepsDateTime.step1 && formData.launchOptions == 'Choose the date & time') ||
+                        (stepsDateWeekeng.step1 && formData.launchOptions == 'Choose after hours (weekend)' ||
+                            formData.launchOptions == null)">
+                        <p class="font-semibold">Launch Options</p>
+                        <p class=" text-[#858585]">After you launch the auction there is a 90 minute
+                            buffer for our team to
+                            review your posting
+                        </p>
+                        <div class="w-full flex-col items-start mt-4 flex gap-2">
+                            <label class="label-radio !justify-start">
+                                <input v-model="formData.launchOptions" type="radio" value="Launch now after verified"
+                                    class="input-radio on" name="launch-option">
+                                Launch now after verified
+                            </label>
+                            <label class="label-radio !justify-start">
+                                <input v-model="formData.launchOptions" type="radio" value="Choose the date & time"
+                                    class="input-radio on" name="launch-option">
+                                Choose the date & time
+                            </label>
+                            <label class="label-radio !justify-start">
+                                <input v-model="formData.launchOptions" type="radio" value="Choose after hours (weekend)"
+                                    class="input-radio on" name="launch-option">
+                                Choose after hours (weekend)
+                            </label>
+                        </div>
+                    </template>
+                    <AfterVerified v-if="formData.launchOptions == 'Launch now after verified'" :steps="stepsVerifiqued"
+                        :form="formData" :save="save" />
+                    <DateAndTime v-if="formData.launchOptions == 'Choose the date & time'" :steps="stepsDateTime"
+                        :form="formData" :save="save" />
+                    <HoursWeekeng v-if="formData.launchOptions == 'Choose after hours (weekend)'" :steps="stepsDateWeekeng"
+                        :form="formData" :save="save" />
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { ref, onMounted, watch } from "vue";
+import DateAndTime from "./steps/DateAndTime.vue";
+import HoursWeekeng from "./steps/HoursWeekeng.vue";
+import AfterVerified from "./steps/AfterVerified.vue";
+
+import { ModalLaunch } from '@/stores/modalLaunch';
+export default {
+    props: {
+        form: {
+            type: Object,
+        },
+        launch: {
+            type: Boolean,
+        },
+        invalid: {
+            type: Object
+        },
+        modalLaunch: {
+            type: Function,
+        },
+        isActive: {
+            type: Boolean,
+        },
+
+    },
+    components: {
+        DateAndTime,
+        HoursWeekeng,
+        AfterVerified
+    },
+    setup(props) {
+        const isOpen = ref(props.isActive)
+        const formData = ref(props.form)
+        const statusModal = ModalLaunch()
+        const stepsVerifiqued = ref({
+            step1: true,
+            step2: false,
+        })
+        const stepsDateTime = ref({
+            step1: true,
+            step2: false,
+        })
+        const stepsDateWeekeng = ref({
+            step1: true,
+            step2: false,
+        })
+        watch(formData.value, async (newQuestion, oldQuestion) => {
+            if (newQuestion) {
+                switch (newQuestion.launchOptions) {
+                    case 'Launch now after verified':
+                        console.log('1',)
+                        formData.value.auctionDate = ''
+                        formData.value.auctionTime = ''
+                        /*   formData.value.auctionDuration = '' */
+                        formData.value.dayMonday = 'Select time'
+                        break;
+                    case 'Choose the date & time':
+                        /*   formData.value.auctionDuration = '' */
+                        formData.value.dayMonday = 'Select time'
+                        break;
+                    case 'Choose after hours (weekend)':
+                        formData.value.auctionDate = ''
+                        formData.value.auctionTime = ''
+                        /* formData.value.auctionDuration = ''
+                        formData.value.auctionDuration = '' */
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        })
+        onMounted(() => {
+            console.log('formData.value', formData.value)
+        })
+        const save = () => {
+            props.modalLaunch()
+            console.log('formData.value', formData.value)
+        }
+
+        return {
+            isOpen,
+            formData,
+            save,
+            stepsVerifiqued,
+            stepsDateTime,
+            stepsDateWeekeng,
+            statusModal
+        };
+    },
+};
+</script>

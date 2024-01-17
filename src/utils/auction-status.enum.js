@@ -6,5 +6,4 @@ export const enumState = {
     upcoming: 'upcoming',
     live: 'live',
     completed: 'completed',
-
 }

@@ -1,7 +1,8 @@
 import { regexEmail, regexPassword } from "../utils/Regex";
 
 
-export const validateData = (form, step) => {
+export const validateData = (form, step, typeLaunch) => {
+    console.log('typeLaunch', typeLaunch)
     console.log('form', form)
     let error = {};
     if (step == 'generalInformation') {
@@ -11,17 +12,70 @@ export const validateData = (form, step) => {
         if (!form.date) {
             error.date = 'Required field'
         }
+        /* if (!form.startDate) {
+            error.startDate = 'Required field'
+        } */
         if (!form.province) {
+            error.province = 'Required field'
+        } else if (form.province === 'Select province') {
             error.province = 'Required field'
         }
         if (!form.city) {
             error.city = 'Required field'
+        } else if (form.city == 'Select city') {
+            error.city = 'Required field'
         }
+
+
         if (!form.keys) {
+            error.keys = 'Required field'
+        } else if (form.keys == 'Select number of keys') {
             error.keys = 'Required field'
         }
         if (!form.currently) {
             error.currently = 'Required field'
+        } else if (form.currently == 'Financed' || form.currently == 'Leased') {
+            if (!form.financingCompany) {
+                error.financingCompany = 'Required field'
+            }
+            if (!form.manyPayments) {
+                error.manyPayments = 'Required field'
+            } else if (form.manyPayments == 'Yes') {
+                if (!form.remainingPayments) {
+                    error.remainingPayments = 'Required field'
+                }
+            }
+        }
+
+        if (form.buyoutVehicle == 'Yes') {
+            if (!form.yourVehicleAmount) {
+                error.yourVehicleAmount = 'Required field'
+            }
+
+        }
+        if (form.newVehicle == 'Yes') {
+            if (!form.anyVehicle) {
+                error.anyVehicle = 'Required field'
+            }
+            if (!form.makePreferences) {
+                error.makePreferences = 'Required field'
+            }
+            if (!form.modelPreferences) {
+                error.modelPreferences = 'Required field'
+            }
+            if (!form.modelFromPreferences) {
+                error.modelFromPreferences = 'Required field'
+            }
+            if (!form.modelToPreferences) {
+                error.modelToPreferences = 'Required field'
+            }
+            if (!form.yearFromPreferences) {
+                error.yearFromPreferences = 'Required field'
+            }
+            if (!form.yearToPreferences) {
+                error.yearToPreferences = 'Required field'
+            }
+
         }
     }
 
@@ -62,9 +116,9 @@ export const validateData = (form, step) => {
         if (!form.driveTrain) {
             error.driveTrain = 'Required field'
         }
-        if (!form.additionalPackages) {
-            error.additionalPackages = 'Required field'
-        }
+        /*  if (!form.additionalPackages) {
+             error.additionalPackages = 'Required field'
+         } */
         if (!form.tireCondition) {
             error.tireCondition = 'Required field'
         }
@@ -77,12 +131,12 @@ export const validateData = (form, step) => {
         if (!form.lastReplacement2) {
             error.lastReplacement2 = 'Required field'
         }
-        if (!form.rotorCondition) {
+        /* if (!form.rotorCondition) {
             error.rotorCondition = 'Required field'
         }
         if (!form.lastReplacement3) {
             error.lastReplacement3 = 'Required field'
-        }
+        } */
     }
     if (step == 'UploadPhotos') {
         if (!form.document) {
@@ -140,18 +194,77 @@ export const validateData = (form, step) => {
         if (!form.date) {
             error.date = 'Required field'
         }
+        /* if (!form.startDate) {
+            error.startDate = 'Required field'
+        } */
         if (!form.province) {
+            error.province = 'Required field'
+        } else if (form.province === 'Select province') {
             error.province = 'Required field'
         }
         if (!form.city) {
             error.city = 'Required field'
+        } else if (form.city == 'Select city') {
+            error.city = 'Required field'
         }
+
+
         if (!form.keys) {
+            error.keys = 'Required field'
+        } else if (form.keys == 'Select number of keys') {
             error.keys = 'Required field'
         }
         if (!form.currently) {
             error.currently = 'Required field'
+        } else if (form.currently == 'Financed' || form.currently == 'Leased') {
+            if (!form.financingCompany) {
+                error.financingCompany = 'Required field'
+            }
+            if (!form.manyPayments) {
+                error.manyPayments = 'Required field'
+            } else if (form.manyPayments == 'Yes') {
+                if (!form.remainingPayments) {
+                    error.remainingPayments = 'Required field'
+                }
+            }
         }
+
+        if (form.buyoutVehicle == 'Yes') {
+            if (!form.yourVehicleAmount) {
+                error.yourVehicleAmount = 'Required field'
+            }
+
+        }
+        if (form.newVehicle == 'Yes') {
+            if (!form.anyVehicle) {
+                error.anyVehicle = 'Required field'
+            }
+            if (!form.makePreferences) {
+                error.makePreferences = 'Required field'
+            }
+            if (!form.modelPreferences) {
+                error.modelPreferences = 'Required field'
+            }
+            if (!form.modelFromPreferences) {
+                error.modelFromPreferences = 'Required field'
+            }
+            if (!form.modelToPreferences) {
+                error.modelToPreferences = 'Required field'
+            }
+            if (!form.yearFromPreferences) {
+                error.yearFromPreferences = 'Required field'
+            }
+            if (!form.yearToPreferences) {
+                error.yearToPreferences = 'Required field'
+            }
+
+        }
+
+
+
+
+
+
         if (!form.numberVin) {
             error.numberVin = 'Required field'
         }
@@ -188,9 +301,9 @@ export const validateData = (form, step) => {
         if (!form.driveTrain) {
             error.driveTrain = 'Required field'
         }
-        if (!form.additionalPackages) {
-            error.additionalPackages = 'Required field'
-        }
+        /*  if (!form.additionalPackages) {
+             error.additionalPackages = 'Required field'
+         } */
         if (!form.tireCondition) {
             error.tireCondition = 'Required field'
         }
@@ -203,12 +316,12 @@ export const validateData = (form, step) => {
         if (!form.lastReplacement2) {
             error.lastReplacement2 = 'Required field'
         }
-        if (!form.rotorCondition) {
-            error.rotorCondition = 'Required field'
-        }
-        if (!form.lastReplacement3) {
-            error.lastReplacement3 = 'Required field'
-        }
+        /*  if (!form.rotorCondition) {
+             error.rotorCondition = 'Required field'
+         }
+         if (!form.lastReplacement3) {
+             error.lastReplacement3 = 'Required field'
+         } */
         if (!form.document) {
             error.document = 'Required field'
         }
@@ -255,6 +368,31 @@ export const validateData = (form, step) => {
         if (!form.vehicleVideo) {
             error.vehicleVideo = 'Required field'
         }
+    }
+
+    if (step == 'Launch Auction') {
+        if (typeLaunch == 'after verified') {
+            if (!form.auctionDuration) {
+                error.auctionDuration = 'Required field'
+            }
+        }
+        if (typeLaunch == 'date and time') {
+            if (!form.auctionDate) {
+                error.auctionDate = 'Required field'
+            }
+            if (!form.auctionTime) {
+                error.auctionTime = 'Required field'
+            }
+            if (!form.auctionDuration) {
+                error.auctionDuration = 'Required field'
+            }
+        }
+        if (typeLaunch == 'hours weekeng') {
+            if (form.dayMonday == 'Select time') {
+                error.dayMonday = 'Required field'
+            }
+        }
+
     }
 
     return error;
