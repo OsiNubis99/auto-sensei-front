@@ -561,7 +561,9 @@ input.check-toggle-round-flat:checked+label:after {
 .error-picker .dp__input {
     border: 1px solid red;
 }
-
+.swiper-autions{
+    max-height: 250px !important;
+}
 .swiper-autions .swiper-pagination-bullets.swiper-pagination-horizontal {
     top: 87% !important;
 }

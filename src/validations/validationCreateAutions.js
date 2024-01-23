@@ -92,8 +92,8 @@ export const validateData = (form, step, typeLaunch) => {
         if (!form.model) {
             error.model = 'Required field'
         }
-        if (!form.series) {
-            error.series = 'Required field'
+        if (!form.trim) {
+            error.trim = 'Required field'
         }
         if (!form.bodyType) {
             error.bodyType = 'Required field'
@@ -175,7 +175,7 @@ export const validateData = (form, step, typeLaunch) => {
         if (!form.rearSeats) {
             error.rearSeats = 'Required field'
         }
-        if (!form.vehicleDamage) {
+       /*  if (!form.vehicleDamage) {
             error.vehicleDamage = 'Required field'
         }
         if (!form.additionalDocuments) {
@@ -184,7 +184,7 @@ export const validateData = (form, step, typeLaunch) => {
 
         if (!form.vehicleVideo) {
             error.vehicleVideo = 'Required field'
-        }
+        } */
     }
 
     if (step == 'confirmation') {
@@ -277,8 +277,8 @@ export const validateData = (form, step, typeLaunch) => {
         if (!form.model) {
             error.model = 'Required field'
         }
-        if (!form.series) {
-            error.series = 'Required field'
+        if (!form.trim) {
+            error.trim = 'Required field'
         }
         if (!form.bodyType) {
             error.bodyType = 'Required field'
@@ -358,7 +358,7 @@ export const validateData = (form, step, typeLaunch) => {
         if (!form.rearSeats) {
             error.rearSeats = 'Required field'
         }
-        if (!form.vehicleDamage) {
+       /*  if (!form.vehicleDamage) {
             error.vehicleDamage = 'Required field'
         }
         if (!form.additionalDocuments) {
@@ -367,7 +367,7 @@ export const validateData = (form, step, typeLaunch) => {
 
         if (!form.vehicleVideo) {
             error.vehicleVideo = 'Required field'
-        }
+        } */
     }
 
     if (step == 'Launch Auction') {

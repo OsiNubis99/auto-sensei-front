@@ -207,15 +207,16 @@
 
                                             </td>
                                             <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
-                                                <div v-if="aution?.vehicleStatus == 'PaidOff'"
+                                                <div v-if="aution?.vehicleStatus?.status == 'Paid OFF'"
                                                     class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#05A54B14] gap-2">
                                                     <p class="text-[#05A54B] capitalize">PaidOff</p>
                                                 </div>
-                                                <div v-else-if="aution?.vehicleStatus == 'Financed'"
+                                                
+                                                <div v-else-if="aution?.vehicleStatus?.status == 'Financed'"
                                                     class="relative w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#6D53B014] gap-2">
                                                     <p class="text-[#6D53B0] capitalize">Financed</p>
                                                 </div>
-                                                <div v-else-if="aution?.vehicleStatus == 'Leased'"
+                                                <div v-else-if="aution?.vehicleStatus?.status == 'Leased'"
                                                     class="relative  w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#1F94F014] gap-2">
                                                     <p class="text-[#1F94F0] capitalize">Leased</p>
                                                 </div>
@@ -255,7 +256,7 @@
                                                         v-if="aution.status !== 'upcoming' && aution.status !== 'live' && aution.status !== 'completed'"
                                                         @click="confirmAutions(aution)"
                                                         class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
-                                                        Accept
+                                                        Aprove
                                                     </button>
                                                     <button v-if="aution.status !== 'canceled'"
                                                         @click="rejetAutions(aution)"

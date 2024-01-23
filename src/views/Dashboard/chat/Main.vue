@@ -317,14 +317,14 @@
 </template>
 
 <script>
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted, watch, computed, onUpdated } from "vue";
 import axios from "@/axios";
 import { useRouter, useRoute } from 'vue-router'
 import moment from 'moment';
 import { toast } from "vue3-toastify";
 import { useAuthStore } from "@/stores/auth";
 import { useAuctionStore } from "@/stores/auctions";
-import { useSockethStore } from "@/stores/socket";
+import { socket } from '@/socket'
 export default {
 
     components: {
@@ -345,7 +345,6 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const dataAution = ref(null)
         const activateLayout = ref(false)
-        const storeSocket = useSockethStore()
         const auth = useAuthStore()
 
         const accept = () => {
@@ -370,7 +369,7 @@ export default {
             // console.log(this.emojis = /\\p{Emoji}/gu.test(this.message));
             console.log("hlameojo", dataSend);
 
-            storeSocket.socket.emit("createMessage", dataSend, (data) => {
+            socket.emit("createMessage", dataSend, (data) => {
                 textForm.value = ""
                 console.log("smile", data);
             });
@@ -379,8 +378,11 @@ export default {
             let dataGet = {
                 userId: auth.userData._id
             }
-            storeSocket.socket.emit("getMessages", dataGet, (response) => {
-                console.log('getMessages', response)
+            console.log('dataGet', dataGet)
+
+
+            socket.emit("getChats", dataGet, (response) => {
+                console.log('HOLAAAAAAAAAAAAAAAAAAA', response)
             });
 
         }
@@ -394,7 +396,7 @@ export default {
                 userId: 15447,
                 friendId: userF.id,
             };
-            storeSocket.socket.emit("findAllMessages", dataGet, (response) => {
+            socket.emit("findAllMessages", dataGet, (response) => {
                 console.log('response', response)
                 listChat.value = response
                 listChat.value.map((chat, index) => {
@@ -436,7 +438,7 @@ export default {
                 userId: 15447,
                 friendId: route.query.state,
             };
-            storeSocket.socket.emit("findAllMessages", dataGet, (response) => {
+            socket.emit("findAllMessages", dataGet, (response) => {
                 listChat.value = response
                 listChat.value.map((chat, index) => {
                     let today = moment(new Date()).format('dddd')
@@ -463,7 +465,7 @@ export default {
                 userId: 15447,
                 friendId: route.query.state,
             };
-            storeSocket.socket.emit("setMessagesRead", dataGet, (response) => {
+            socket.emit("setMessagesRead", dataGet, (response) => {
                 console.log('readMessages', response)
                 setTimeout(() => {
                     let countMessages =
@@ -481,8 +483,8 @@ export default {
         })
         watch(textForm, async (newQuestion, oldQuestion) => {
             if (newQuestion) {
-                let error = storeSocket.socket.emit('isChatting', 'user is chatting');
-                storeSocket.socket.on('typing', function (data) {
+                let error = socket.emit('isChatting', 'user is chatting');
+                socket.on('typing', function (data) {
                     console.log('data', data)
 
                 });
@@ -520,24 +522,28 @@ export default {
             }
 
         }
-        onMounted(() => {
-            getDataAution(route.params.id)
-            storeSocket.connectIo(auth.userData._id)
-            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', auth?.userData)
-            /*    getChats() */
-            /*  storeSocket.socket.on("newMessageSended", () => {
-                 console.log('New Message')
-                 getMessages();
-             });
-             storeSocket.socket.on("newMessageResived", () => {
-                 console.log('newMessageResived')
-                 if (route.path == '/inbox' && route.query.state) {
-                     console.log('entro aqui')
-                     readMessages(true);
-                 }
-             }); */
-            })
+        onUpdated(() => {
+           /*  connectIo(auth.userData._id) */
+           
+           /*  socket.on("newMessageSended", () => {
+                console.log('New Message')
+                getMessages();
+            });
+            socket.on("newMessageResived", () => {
+                console.log('newMessageResived')
+                if (route.path == '/inbox' && route.query.state) {
+                    console.log('entro aqui')
+                    readMessages(true);
+                }
+            }); */
+        }),
+            onMounted(() => {
+                getChats()
+                getDataAution(route.params.id)
 
+
+
+            })
         return {
             listUser,
             listChat,

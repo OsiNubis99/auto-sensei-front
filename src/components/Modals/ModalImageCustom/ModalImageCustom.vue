@@ -14,7 +14,6 @@
             </div>
             <div v-if="loading">
                 <p>Espere....</p>
-
             </div>
             <div v-else>
                 <cropper ref="croppers" class="twitter-cropper" background-class="twitter-cropper__background"
@@ -27,18 +26,13 @@
                         aspectRatio: 1,
                         previewClass: 'twitter-cropper__stencil',
                     }" :transitions="false" :debounce="false" :default-size="defaultSize" :min-width="150"
-                    :min-height="150" :src="img" @change="onChange" />
+                    :min-height="150" :src="imgPreview" @change="onChange" />
                 <div class="flex justify-between gap-12 p-4">
                     <div class="w-full">
                         <p>Zoom</p>
                         <Navigation :zoom="zoom" @change="onZoom" />
                     </div>
-                    <div class="w-full">
-                        <p>Straight</p>
-                        <Navigation />
-                    </div>
                 </div>
-
             </div>
             <div class="flex w-full justify-end p-4 gap-3">
                 <label class="label-upload btn bg-white border border-[#E0E0E0]">
@@ -74,7 +68,7 @@ export default {
         const formData = ref(props.form)
         const zoom = ref(0)
         const croppers = ref(null)
-        const img = ref(statusModalImage.img)
+        const imgPreview = ref(statusModalImage.img)
         const defaultSize = ({ imageSize }) => {
             return {
                 width: Math.min(imageSize.height, imageSize.width),
@@ -143,75 +137,79 @@ export default {
             }
         }
         const saveEditPhoto = () => {
-            statusModalImage.closeModal(false)
-          /*   console.log('statusModalImage.typeImg', statusModalImage.typeImg)
+
+            console.log('statusModalImage.typeImg', statusModalImage.typeImg)
             console.log('croppers.value', croppers.value.getResult())
             const { canvas } = croppers.value.getResult();
             if (canvas) {
                 canvas.toBlob(async blob => {
                     console.log('blob', blob)
+                    console.log('img NAME', statusModalImage.img)
+                    let nameImg = statusModalImage.img.name
+                    var file = new File([blob], nameImg, { lastModified: new Date().getTime(), type: blob.type });
+                    console.log('file', file)
                     let image = canvas.toDataURL("image/jpeg");
                     switch (statusModalImage.typeImg) {
                         case 'document':
                             formData.value.previewDocument = image;
-                            formData.value.document = blob;
+                            formData.value.document = file;
                             break;
                         case 'driver':
                             formData.value.previewDriver = image;
-                            formData.value.driverDocument = blob;
+                            formData.value.driverDocument = file;
                             break;
                         case 'frontPhoto':
                             formData.value.previewFrontPhoto = image;
-                            formData.value.frontPhoto = blob;
+                            formData.value.frontPhoto = file;
                             break;
                         case 'front':
                             formData.value.previewFront = image;
-                            formData.value.front = blob;
+                            formData.value.front = file;
                             break;
                         case 'driverSide':
                             formData.value.previewDriverSide = image;
-                            formData.value.driverSide = blob;
+                            formData.value.driverSide = file;
                             break;
                         case 'back':
                             formData.value.previewBack = image;
-                            formData.value.back = blob;
+                            formData.value.back = file;
                             break;
                         case 'passengerSide':
                             formData.value.previewPassengerSide = image;
-                            formData.value.passengerSide = blob;
+                            formData.value.passengerSide = file;
                             break;
                         case 'tireAndRim':
                             formData.value.previewTireAndRim = image;
-                            formData.value.tireAndRim = blob;
+                            formData.value.tireAndRim = file;
                             break;
                         case 'driversDisplay':
                             formData.value.previewDriversDisplay = image;
-                            formData.value.driversDisplay = blob;
+                            formData.value.driversDisplay = file;
                             break;
                         case 'driversSide':
                             formData.value.previewDriversSide = image;
-                            formData.value.driversSide = blob;
+                            formData.value.driversSide = file;
                             break;
                         case 'centerConsole':
                             formData.value.previewCenterConsole = image;
-                            formData.value.centerConsole = blob;
+                            formData.value.centerConsole = file;
                             break;
                         case 'rearSeats':
                             formData.value.previewRearSeats = image;
-                            formData.value.rearSeats = blob;
+                            formData.value.rearSeats = file;
                             break;
                         case 'vehicleDamage':
                             formData.value.previewVehicleDamage = image;
-                            formData.value.vehicleDamage = blob;
+                            formData.value.vehicleDamage = file;
                             break;
                         case 'additionalDocuments':
                             formData.value.previewAdditionalDocuments = image;
-                            formData.value.additionalDocuments = blob;
+                            formData.value.additionalDocuments = file;
                             break;
                         case 'vehicleVideo':
                             console.log('video', e)
                             formData.value.previewVehicleVideo = image;
-                            formData.value.vehicleVideo = blob;
+                            formData.value.vehicleVideo = file;
                             break;
                         default:
                             break;
@@ -219,15 +217,13 @@ export default {
                     }
                     statusModalImage.closeModal(false)
                 }, "image/png");
-            } */
+            }
         }
         onMounted(() => {
             console.log('props.form', props.form)
             if (statusModalImage.img) {
-                img.value = URL.createObjectURL(statusModalImage.img)
-
+                imgPreview.value = URL.createObjectURL(statusModalImage.img)
             }
-            console.log('PERAAAAAAAAAAAAAAAA', statusModalImage.img)
         })
         return {
             onZoom,
@@ -239,7 +235,7 @@ export default {
             statusModalImage,
             croppers,
             zoom,
-            img,
+            imgPreview,
             saveEditPhoto
         };
     },

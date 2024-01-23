@@ -2,6 +2,7 @@ import axios from "@/axios";
 import { defineStore } from "pinia";
 import moment from 'moment';
 import { enumState } from "../utils/auction-status.enum";
+import { useAuthStore } from "@/stores/auth";
 export const useAuctionStore = defineStore("useAuctiontore", {
     state: () => ({
         data: {},
@@ -11,7 +12,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         live: [],
         completed: [],
         canceled: [],
-        autionById:[],
+        autionById: [],
     }),
     actions: {
         index(payload) {
@@ -19,17 +20,25 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                 axios
                     .post("/auction/find-all")
                     .then((response) => {
+                        let auth = useAuthStore()
+                        console.log('auth', auth.userData)
                         console.log('auction', response)
                         response.data.map((date, index) => {
                             date.createHour = moment(date.createdAt).format("HH:mm A")
-                            date.createDay = moment(date.createdAt).format('LL');
+                            date.createDay = moment(date.createdAt).format('LL')
+                            date.dropOffDateForma = moment(date.dropOffDate).format('LL')
                             return date
                         })
                         this.draft = response.data.filter((item) => item.status == enumState.draft)
                         this.unapproved = response.data.filter((item) => item.status == enumState.unapproved)
-                        this.upcoming = response.data.filter((item) => item.status == enumState.upcoming)
+                        this.upcoming = response.data.filter((item) => item.status == enumState.upcoming || item.status == enumState.unapproved)
                         this.live = response.data.filter((item) => item.status == enumState.live)
-                        this.completed = response.data.filter((item) => item.status == enumState.completed)
+                        this.completed = response.data.filter((item) =>
+                            item.status == enumState.completed ||
+                            item.status == enumState.reviewed ||
+                            item.status == enumState.bidsCompleted ||
+                            item.status == enumState.dropOff
+                        )
                         this.canceled = response.data.filter((item) => item.status == enumState.canceled)
                         this.data = response.data
                         resolve(response);
@@ -83,7 +92,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         activeAutions(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/auction/activate/${uuid}`)
+                    .put(`/auction/aprove/${uuid}`)
                     .then((response) => {
                         console.log('activate', response)
                         resolve(response);
@@ -96,7 +105,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         inactivateAutions(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/auction/inactivate/${uuid}`)
+                    .put(`/auction/reject/${uuid}`)
                     .then((response) => {
                         console.log('inactivate', response)
                         resolve(response);
@@ -121,13 +130,12 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     });
             });
         },
-        getAutionById(uuid) {
+        autionsCancel(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get(`/auction/${uuid}`)
+                    .put(`/auction/cancel/${uuid}`)
                     .then((response) => {
-                        console.log('autionById', response)
-                        this.autionById = response.data.value
+                        console.log('aution cancel', response)
                         resolve(response);
                     })
                     .catch((error) => {
@@ -135,7 +143,33 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     });
             });
         },
-        
+        autionsDecline(uuid) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .put(`/auction/decline/${uuid}`)
+                    .then((response) => {
+                        console.log('aution cancel', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        acceptAutions(uuid) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .put(`/auction/accept/${uuid}`)
+                    .then((response) => {
+                        console.log('aution cancel', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+
     },
 });
 

@@ -5,7 +5,7 @@ export const ModalImageCustom = defineStore("modalImageCustom", {
     state: () => ({
         isActive: false,
         img: null,
-        typeImg: ''
+        typeImg: null
     }),
     actions: {
         openModal({ active, img, type }) {
@@ -18,6 +18,8 @@ export const ModalImageCustom = defineStore("modalImageCustom", {
         closeModal(params) {
             console.log('closeModal', params)
             this.isActive = params
+           /*  this.img = null
+            this.typeImg = null */
         },
     },
 });

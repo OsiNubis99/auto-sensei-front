@@ -109,5 +109,19 @@ export const useUserStore = defineStore("useUserStore", {
                     });
             });
         },
+        updateUser(data) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .put("/user", data)
+                    .then((response) => {
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+
+
     },
 });

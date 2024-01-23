@@ -178,7 +178,7 @@ export default {
             year: undefined,
             make: undefined,
             model: undefined,
-            series: undefined,
+            trim: undefined,
             bodyType: undefined,
             cylinder: undefined,
             transmission: undefined,
@@ -310,7 +310,7 @@ export default {
                         formData.value.year = res.data.vehicleDetails.year
                         formData.value.make = res.data.vehicleDetails.make
                         formData.value.model = res.data.vehicleDetails.model
-                        formData.value.series = res.data.vehicleDetails.series
+                        formData.value.trim = res.data.vehicleDetails.trim
                         formData.value.bodyType = res.data.vehicleDetails.bodyType
                         formData.value.cylinder = res.data.vehicleDetails.cylinder
                         formData.value.transmission = res.data.vehicleDetails.transmission
@@ -325,6 +325,8 @@ export default {
 
                     }
                 } catch (error) {
+                    toast(error.response.data.message, { type: "error", position: "top-center", theme: "colored", });
+
                     id_create.value = undefined
                     loading.value = false
                 }
@@ -340,7 +342,7 @@ export default {
                     invalid?.value?.year ||
                     invalid?.value?.make ||
                     invalid?.value?.model ||
-                    invalid?.value?.series ||
+                    invalid?.value?.trim ||
                     invalid?.value?.bodyType ||
                     invalid?.value?.cylinder ||
                     invalid?.value?.transmission ||
@@ -358,6 +360,7 @@ export default {
                     invalid?.value?.lastReplacement3
                     , {
                         type: "error",
+
                     });
                 return
             }
@@ -426,107 +429,6 @@ export default {
 
             }
         }
-
-        const postFile = async (string) => {
-            let newArrayExterior = []
-            let newArrayInterior = []
-            let newArrayVehicleDamage = []
-            let newAdditionalDocuments = []
-            let exterior = [
-                formData.value.frontPhoto,
-                formData.value.front,
-                formData.value.driverSide,
-                formData.value.back,
-                formData.value.passengerSide,
-                formData.value.tireAndRim,
-            ]
-            let interior = [
-                formData.value.driversDisplay,
-                formData.value.driverSide,
-                formData.value.centerConsole,
-                formData.value.rearSeats,
-            ]
-            let vehicleDamage = [
-                formData.value.vehicleDamage,
-            ]
-            let additionalDocuments = [
-                formData.value.additionalDocuments,
-            ]
-
-            if (exterior.length > 0 && interior.length > 0 && vehicleDamage.length > 0 && additionalDocuments.length > 0) {
-                await Promise.all(
-                    exterior.map(async (file, i) => {
-                        let res = await storeFile.uploaderFile({ file: file, location: 'test' })
-                        newArrayExterior.push(res.data);
-                    })
-                )
-                await Promise.all(
-                    interior.map(async (file, i) => {
-                        let res = await storeFile.uploaderFile({ file: file, location: 'test' })
-                        newArrayInterior.push(res.data);
-                    })
-                );
-                await Promise.all(
-                    vehicleDamage.map(async (file, i) => {
-                        let res = await storeFile.uploaderFile({ file: file, location: 'test' })
-                        newArrayVehicleDamage.push(res.data);
-                    })
-                );
-                await Promise.all(
-                    additionalDocuments.map(async (file, i) => {
-                        let res = await storeFile.uploaderFile({ file: file, location: 'test' })
-                        newAdditionalDocuments.push(res.data);
-                    })
-                );
-                let hour = moment(`${formData.value.auctionTime}:${formData.value.auctionDuration}`, "H:mm").format('HH:mm:ss')
-                let date = moment(formData.value.auctionDate).format('YYYY-MM-DD');
-                let dataPost = {
-                    vin: formData.value.numberVinGenerals,
-                    dropOffDate: formData.value.date,
-                    city: formData.value.city,
-                    province: formData.value.province,
-                    keysNumber: formData.value.keys,
-                    vehicleStatus: {
-                        status: formData.value.currently,
-                        financingCompany: formData.value.financingCompany,
-                        remainingPayments: formData.value.remainingPayments,
-                    },
-                    buyout: formData.value.yourVehicleAmount,
-                    buyNew: {
-                        anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
-                        make: formData.value.makePreferences,
-                        model: formData.value.modelPreferences,
-                        mileageStart: formData.value.modelFromPreferences,
-                        mileageEnd: formData.value.modelToPreferences,
-                        yearStart: formData.value.yearFromPreferences,
-                        yearEnd: formData.value.yearToPreferences
-                    },
-                    startDate: date + " " + hour,
-                    duration: formData.value.auctionDuration,
-                    vehicleDetails: {
-                        odometer: formData.value.odometer,
-                        doors: formData.value.doors,
-                        color: formData.value.color,
-                        driveTrain: formData.value.driveTrain,
-                        aditionals: formData.value.additionalPackages,
-                        tireCondition: formData.value.tireCondition,
-                        tireReplacement: formData.value.lastReplacement,
-                        brakeCondition: formData.value.brakePads,
-                        brakeReplacement: formData.value.lastReplacement2,
-                        rotorCondition: formData.value.rotorCondition,
-                        rotorReplacement: formData.value.lastReplacement3,
-                        originalDocument: formData.value.document,
-                        driverLicense: formData.value.driverDocument,
-                        exteriorPhotos: newArrayExterior,
-                        interiorPhotos: newArrayInterior,
-                        vehicleDamage: newArrayVehicleDamage,
-                        additionalDocuments: newAdditionalDocuments,
-                        vehicleVideo: formData.value.vehicleVideo,
-                    },
-                }
-                return dataPost
-            }
-        }
         const nextUploadPhotos = async () => {
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'UploadPhotos');
@@ -543,10 +445,7 @@ export default {
                     invalid?.value?.driversDisplay ||
                     invalid?.value?.driversSide ||
                     invalid?.value?.centerConsole ||
-                    invalid?.value?.rearSeats ||
-                    invalid?.value?.vehicleDamage ||
-                    invalid?.value?.additionalDocuments ||
-                    invalid?.value?.vehicleVideo, {
+                    invalid?.value?.rearSeats, {
                     type: "error",
                 });
                 return
@@ -565,6 +464,177 @@ export default {
                 }, 2000);
             }
         }
+        function getDateAndMinutes(hours) {
+            var days = {
+                monday: 1,
+                tuesday: 2,
+                wednesday: 3,
+                thursday: 4,
+                friday: 5,
+                saturday: 6,
+                sunday: 0
+            };
+            if (typeof hours !== 'number' || hours < 0 || hours > 24) {
+                return new Error(hours + " is not a valid hour");
+            }
+            var currDate = new Date(new Date().setHours(19, 0, 0));
+            var dayMillDiff = 0;
+            var dayInMill = 1000 * 60 * 60 * 24;
+            while (currDate.getDay() != 6 || dayMillDiff == 0) {
+                dayMillDiff += dayInMill;
+                currDate = new Date(currDate.getTime() + dayInMill);
+            }
+            var monday = new Date(currDate.getTime() + dayInMill * 2).setHours(hours);
+            var diff = monday - currDate;
+
+            return {
+                startDate: currDate,
+                monday: new Date(monday),
+                duration: Math.floor(((monday - currDate) / 1000) / 60)
+            };
+        }
+        function getMinutesToStart(startDate) {
+            return Math.floor(((startDate - new Date()) / 1000) / 60)
+        }
+        function getMinutesToEnd(startDate, duration) {
+            return Math.floor(((new Date(startDate.getTime() + duration * 1000 * 60) - new Date()) / 1000) / 60)
+        }
+
+        const postFile = async (string) => {
+            console.log('string', string)
+            let newArrayExterior = []
+            let newArrayInterior = []
+            let newArrayVehicleDamage = []
+            let newAdditionalDocuments = []
+            let vehicleDamage = null
+            let additionalDocuments = null
+            let exterior = [
+                formData.value.document,
+                formData.value.frontPhoto,
+                formData.value.front,
+                formData.value.driverSide,
+                formData.value.back,
+                formData.value.passengerSide,
+                formData.value.tireAndRim,
+            ]
+            let interior = [
+                formData.value.driversDisplay,
+                formData.value.driverSide,
+                formData.value.centerConsole,
+                formData.value.rearSeats,
+            ]
+            if (vehicleDamage) {
+                vehicleDamage = [
+                    formData.value.vehicleDamage,
+                ]
+            }
+
+            if (formData.value.additionalDocuments) {
+                additionalDocuments = [
+                    formData.value.additionalDocuments,
+                ]
+            }
+            await Promise.all(
+                exterior.map(async (file, i) => {
+                    let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                    newArrayExterior.push(res.data);
+                })
+            ).catch((error) => {
+                console.log('exterior', error)
+            })
+            await Promise.all(
+                interior.map(async (file, i) => {
+                    let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                    newArrayInterior.push(res.data);
+                })
+            ).catch((error) => {
+                console.log('interior', error)
+            })
+            vehicleDamage && await Promise.all(
+                vehicleDamage.map(async (file, i) => {
+                    let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                    newArrayVehicleDamage.push(res.data);
+                })
+            ).catch((error) => {
+                console.log('vehicleDamage', error)
+            })
+            additionalDocuments && await Promise.all(
+                additionalDocuments.map(async (file, i) => {
+                    let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                    newAdditionalDocuments.push(res.data);
+                }).catch((error) => {
+                    console.log('additionalDocuments', error)
+                })
+            );
+            let resWeekend = getDateAndMinutes(+formData.value.dayMonday)
+            let hour = moment(`${formData.value.auctionTime}:${formData.value.auctionDuration}`, "H:mm").format('HH:mm:ss')
+            let date = moment(formData.value.auctionDate).format('YYYY-MM-DD');
+            let duration = null
+            let startDate = null
+
+            switch (formData.value?.launchOptions) {
+                case 'Launch now after verified':
+                    duration = formData.value.auctionDuration
+                    startDate = null
+                    break;
+                case 'Choose the date & time':
+                    duration = formData.value.auctionDuration
+                    startDate = date + "T" + hour
+                    break;
+                case 'Choose after hours (weekend)':
+                    duration = resWeekend.duration
+                    startDate = resWeekend.startDate
+                    break;
+                default:
+                    break;
+            }
+            let dataPost = {
+                vin: formData.value.numberVinGenerals,
+                dropOffDate: formData.value.date,
+                city: formData.value.city,
+                province: formData.value.province,
+                keysNumber: formData.value.keys,
+                vehicleStatus: {
+                    status: formData.value.currently,
+                    financingCompany: formData.value.financingCompany,
+                    remainingPayments: formData.value.remainingPayments,
+                },
+                buyout: formData.value.yourVehicleAmount,
+                buyNew: {
+                    anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
+                    make: formData.value.makePreferences,
+                    model: formData.value.modelPreferences,
+                    mileageStart: formData.value.modelFromPreferences,
+                    mileageEnd: formData.value.modelToPreferences,
+                    yearStart: formData.value.yearFromPreferences,
+                    yearEnd: formData.value.yearToPreferences
+                },
+                startDate: string == 'draft' ? null : startDate,
+                duration: string == 'draft' ? null : duration,
+                vehicleDetails: {
+                    odometer: formData.value.odometer,
+                    doors: formData.value.doors,
+                    color: formData.value.color,
+                    driveTrain: formData.value.driveTrain,
+                    aditionals: formData.value.additionalPackages,
+                    tireCondition: formData.value.tireCondition,
+                    tireReplacement: formData.value.lastReplacement,
+                    brakeCondition: formData.value.brakePads,
+                    brakeReplacement: formData.value.lastReplacement2,
+                    rotorCondition: formData.value.rotorCondition,
+                    rotorReplacement: formData.value.lastReplacement3,
+                    originalDocument: formData.value.document,
+                    driverLicense: formData.value.driverDocument,
+                    exteriorPhotos: newArrayExterior,
+                    interiorPhotos: newArrayInterior,
+                    vehicleDamage: newArrayVehicleDamage,
+                    additionalDocuments: newAdditionalDocuments,
+                    vehicleVideo: formData.value.vehicleVideo,
+                },
+            }
+            console.log('dataPost', dataPost)
+            return dataPost
+        }
         const saveData = async (string) => {
             console.log('string', string)
             componentKey.value += 1
@@ -582,7 +652,7 @@ export default {
                     invalid?.value?.year ||
                     invalid?.value?.make ||
                     invalid?.value?.model ||
-                    invalid?.value?.series ||
+                    invalid?.value?.trim ||
                     invalid?.value?.bodyType ||
                     invalid?.value?.cylinder ||
                     invalid?.value?.transmission ||
@@ -609,10 +679,7 @@ export default {
                     invalid?.value?.driversDisplay ||
                     invalid?.value?.driversSide ||
                     invalid?.value?.centerConsole ||
-                    invalid?.value?.rearSeats ||
-                    invalid?.value?.vehicleDamage ||
-                    invalid?.value?.additionalDocuments ||
-                    invalid?.value?.vehicleVideo, {
+                    invalid?.value?.rearSeats, {
                     type: "error",
                 });
                 return
@@ -638,6 +705,8 @@ export default {
                 }
             }
         }
+
+
 
         return {
             op,

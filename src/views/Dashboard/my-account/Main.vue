@@ -1,5 +1,21 @@
 <template>
     <div class="bg=[#F9F9F9] h-screen">
+        <div v-show="loading"
+            class="bg-[#000000a1;] left-0 top-0 fixed w-full h-full z-[100] flex justify-center items-center">
+            <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
+                <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+                    <div class="animate-bounce">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
+                            stroke-width="0" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                </div>
+            </div>
+        </div>
         <div>
             <div class="absolute w-full h-[200px] overflow-hidden bg-[#0B1107]">
                 <svg class="w-full " xmlns="http://www.w3.org/2000/svg" width="1768" height="260" viewBox="0 0 1768 260"
@@ -15,18 +31,37 @@
                     <div class="w-2/4  ">
                         <div class="bg-white p-5 shadow-steps">
                             <div class="flex items-center flex-col gap-6 mb-4 relative">
-                                <div class="flex justify-center items-end gap-4">
-                                    <img class="w-36 h-36 rounded-lg"
-                                        src="https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
-                                        alt="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
-                                        fill="none">
-                                        <path
-                                            d="M8.6 5.07206L11.428 7.90072L4.828 14.5001H2V11.6714L8.6 5.07139V5.07206ZM9.54267 4.12939L10.9567 2.71472C11.0817 2.58974 11.2512 2.51953 11.428 2.51953C11.6048 2.51953 11.7743 2.58974 11.8993 2.71472L13.7853 4.60072C13.9103 4.72574 13.9805 4.89528 13.9805 5.07206C13.9805 5.24883 13.9103 5.41837 13.7853 5.54339L12.3707 6.95739L9.54267 4.12939Z"
-                                            fill="#0B1107" />
-                                    </svg>
+                                <div
+                                    class="flex justify-center items-end gap-4 relative group transition-all duration-500 ease-linear">
+                                    <div
+                                        class=" flex justify-center items-center rounded-lg group-hover:visible group-hover:bg-[#0000009f] transition-all duration-500 ease-linear invisible absolute w-full h-full top-0 ">
+                                        <label class="  cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                viewBox="0 0 32 32" fill="none">
+                                                <path
+                                                    d="M17.2 9.14411L22.856 14.8014L9.656 28.0001H4V22.3428L17.2 9.14278V9.14411ZM19.0853 7.25878L21.9133 4.42944C22.1634 4.17948 22.5024 4.03906 22.856 4.03906C23.2096 4.03906 23.5486 4.17948 23.7987 4.42944L27.5707 8.20144C27.8206 8.45148 27.9611 8.79056 27.9611 9.14411C27.9611 9.49766 27.8206 9.83674 27.5707 10.0868L24.7413 12.9148L19.0853 7.25878Z"
+                                                    fill="white" />
+                                            </svg>
+                                            <input type="file" accept="image/*" @change="previewImage" class="hidden">
+                                        </label>
+
+                                    </div>
+                                    <img v-if="form.preview" :src="form.preview" alt=""
+                                        class="w-36 h-36 object-cover rounded-lg">
+                                    <img v-else class="w-36 h-36 rounded-lg object-cover"
+                                        :src="bucket + storeUser.userData?.seller?.picture" alt="">
+
                                 </div>
-                                <p class=" text-2xl font-semibold ">Marshall Autocar</p>
+                                <button v-if="form.preview && form.img" @click="updateiMG()"
+                                    class="btn  animate-fade-up  animate-ease-in-out animate-delay-600  bg-blue-dark text-primary ">Update
+                                    Photo</button>
+                                <div class="flex gap-1 items-center  ">
+                                    <p class="text-2xl font-semibold capitalize ">{{ storeUser.userData?.seller?.firstName
+                                    }}
+                                    </p>
+                                    <p class="text-2xl font-semibold capitalize ">{{ storeUser.userData?.seller?.lastName }}
+                                    </p>
+                                </div>
                             </div>
                             <div class="flex pt-5 cursor-pointer justify-between py-2">
                                 <div class="flex w-full justify-between items-center">
@@ -59,7 +94,7 @@
 
                     </div>
                     <div class="w-full">
-                        <Info />
+                        <Info :key="counter" :dataUser="dataUser" :getProfile="getProfile" />
                     </div>
                 </div>
             </div>
@@ -68,9 +103,13 @@
     </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import Heanding from "../../../components/Headings/Heanding.vue";
 import Info from "./info/Info.vue";
+import { useAuthStore } from "@/stores/auth";
+import { useStoreFile } from "@/stores/uploader";
+import { useUserStore } from "@/stores/user";
+import { toast } from "vue3-toastify";
 export default {
 
     components: {
@@ -78,8 +117,121 @@ export default {
         Heanding
     },
     setup() {
+        const storeUser = useAuthStore()
+        const storeFile = useStoreFile()
+        const storeProfile = useUserStore()
+        const dataUser = ref({})
+        const loading = ref(false)
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+        const counter = ref(0)
+        const form = ref({
+            preview: null,
+            img: null
+
+        })
+        const getProfile = async () => {
+            loading.value = true
+            const token = localStorage.getItem('token')
+            storeUser.authProfile({ token: token }).then((res) => {
+                if (res.data) {
+                    dataUser.value = res.data
+                    loading.value = false
+                    counter.value += 1
+                }
+            }).catch((error) => {
+                console.log("validateToken error", error);
+                loading.value = false
+            });
+        }
+        const previewImage = (event) => {
+            console.log('event', event)
+            var input = event.target;
+            var maxfilesize = 1024 * 1024  // 1 Mb
+            var filesize = input.files[0].size
+            let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
+            if (input.files) {
+                if (filesize > maxfilesize) {
+                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 1 Mb", {
+                        type: "error",
+                    });
+                    form.value.preview = null
+                    form.value.img = null
+                } else {
+                    loading.value = true
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        console.log('e', e)
+
+                        form.value.preview = e.target.result;
+                        loading.value = false
+                    }
+
+                    form.value.img = input.files[0];
+                    form.value.img.mb = convertion
+                    reader.readAsDataURL(input.files[0]);
+                    counter.value += 1
+                    console.log(' form.img', form.preview)
+                }
+            }
+        }
+        const updateiMG = async () => {
+            if (form.value.img) {
+                let data = {
+                    file: form.value.img,
+                    location: 'test'
+                }
+                console.log('data', data)
+                loading.value = true
+                try {
+                    let resFile = await storeFile.uploaderFile(data)
+                    if (resFile.data) {
+                        try {
+                            let update = {
+                                seller: {
+                                    picture: resFile.data,
+                                },
+                            }
+                            let resUpdate = await storeProfile.updateUser(update)
+                            if (resUpdate) {
+                                console.log('resUpdate', resUpdate)
+                                getProfile()
+                                form.value.preview = null
+                                form.value.img = null
+                            }
+                        } catch (error) {
+                            toast(error?.response?.data?.message || 'error al cargar', {
+                                type: "error",
+                            });
+                            loading.value = false
+                        }
+                    }
+                } catch (error) {
+                    toast(error?.response?.data?.message || 'error al cargar', {
+                        type: "error",
+                    });
+                    loading.value = false
+
+                }
+            }
+
+
+        }
+        onMounted(() => {
+            getProfile()
+            console.log('Account', storeUser)
+
+        })
         return {
-            Heanding
+            Heanding,
+            storeUser,
+            loading,
+            dataUser,
+            counter,
+            bucket,
+            previewImage,
+            updateiMG,
+            form,
+            getProfile
         };
     },
 };

@@ -17,7 +17,7 @@
             <div class="w-full">
                 <label class="font-medium text-base " for="">Year</label>
                 <input v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-none'"
-                    class="p-2 w-full mt-3 border bg-[#F0F0F0] rounded-lg" placeholder="2013" disabled type="text">
+                    class="p-2 w-full mt-3 border bg-[#F0F0F0] rounded-lg" placeholder="2013"  type="text">
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col gap-2">
@@ -37,8 +37,8 @@
                     class="p-2 w-full border mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Forester" type="text">
             </div>
             <div class="w-full">
-                <label class="font-medium text-base " for="">Series</label>
-                <input disabled :class="invalid?.series ? 'border-error' : 'border-none'" v-model="form.series"
+                <label class="font-medium text-base " for="">Trim</label>
+                <input  :class="invalid?.trim ? 'border-error' : 'border-none'" v-model="form.trim"
                     class="p-2 w-full border mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Premium Plus" type="text">
             </div>
         </div>
