@@ -115,7 +115,7 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink>
-                            <RouterLink to="#" :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/faqs-seller" :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
                             </RouterLink>

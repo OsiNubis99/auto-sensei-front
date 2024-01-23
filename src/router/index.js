@@ -137,6 +137,15 @@ const routes = [
           hideNavbar: true,
         }
       },
+      {
+        path: "/faqs-seller",
+        name: "faqs-seller",
+        component: () => import('../views/Dashboard/faqsSeller/Main.vue'),
+        props: true,
+        meta: {
+          hideNavbar: true,
+        }
+      },
 
     ],
   },
