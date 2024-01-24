@@ -198,7 +198,8 @@
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
-                                    <div @click="statusModalView.openModal({ isActive: true, data: auction })"
+                                    <div @click="(auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed') && statusModalView.openModal({ isActive: true, data: auction })"
+                                        :class="auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
                                         class="flex p-5  flex-col gap-3">
                                         <div class="">
                                             <div class="font-bold text-xl">{{ auction?.vehicleDetails?.model }}</div>
@@ -387,6 +388,11 @@
                                                     </vue-countdown>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div v-if="auction.status == 'cancelled'"
+                                            class="flex gap-4 p-5  justify-between w-full">
+                                            <P 
+                                                class="btn w-full bg-white mb-20 text-[#A3A3A3] ">Cancelled</P>
                                         </div>
                                     </div>
                                 </div>

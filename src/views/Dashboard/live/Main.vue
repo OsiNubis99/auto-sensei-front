@@ -74,7 +74,7 @@
                                         v-if="storeUser.userData.seller?.lastName"> {{ storeUser.userData.seller?.lastName
                                         }}</span>
                                 </p>
-                               <!--  <p class="text-[#666] text-sm uppercase ">Ottawa, Ontario</p> -->
+                                <!--  <p class="text-[#666] text-sm uppercase ">Ottawa, Ontario</p> -->
                             </div>
                             <svg class=" absolute right-0 top-1 " xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                 viewBox="0 0 20 21" fill="none">
@@ -180,7 +180,7 @@
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
                                     <div @click="statusModal.openModal({ isActive: true, data: auction })"
-                                        class="flex p-5  flex-col gap-3">
+                                        class="flex p-5 cursor-pointer flex-col gap-3">
                                         <div class="">
                                             <div class="font-bold text-xl">{{ auction?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">

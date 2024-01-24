@@ -193,7 +193,7 @@
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
-                                    <RouterLink to="#" class="flex p-5  flex-col gap-3">
+                                    <div :class="auction.status == 'bids completed' || auction.status == 'completed' ? 'cursor-pointer' : ''" @click="(auction.status == 'bids completed' || auction.status == 'completed') && statusModalView.openModal({ isActive: true, data: auction })" class="flex p-5  flex-col gap-3">
                                         <div class="">
                                             <div class="font-bold text-xl">{{ auction?.vehicleDetails?.model }}</div>
                                             <p class="text-base capitalize">
@@ -277,7 +277,7 @@
                                                 <p>Contact Buyer</p>
                                             </div>
                                         </RouterLink>
-                                    </RouterLink>
+                                    </div>
                                     <div :class="changeLayouts ? 'w-full' : 'w-[40%] h-full flex justify-between flex-col'"
                                         class="border-l-2  border-[#E0E0E0]">
                                         <div class="flex p-5  pl-4 ga justify-between "
@@ -453,6 +453,7 @@
         </div>
         <ModalAcceptAutionVue v-if="statusModal?.isActive" :form="form" />
         <ModalReviewVue v-if="statusModalR.isActive" />
+        <ModalViewDetailsVue v-if="statusModalView.isActive" />
     </template>
 </template>
 <script>
@@ -466,18 +467,21 @@ import { useAuthStore } from "@/stores/auth";
 import ModalAcceptAutionVue from "../../../components/Modals/ModalAcceptAution/ModalAcceptAution.vue";
 import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalReview } from "@/stores/modalReview";
+import { ModalViewDetails } from "@/stores/modalViewDetails";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import ModalReviewVue from '@/components/Modals/ModalReview/ModalReview.vue'
+import ModalViewDetailsVue from '@/components/Modals/ModalViewDetails/ModalViewDetails.vue'
 export default {
 
     components: {
         Swiper,
         SwiperSlide,
         ModalAcceptAutionVue,
-        ModalReviewVue
+        ModalReviewVue,
+        ModalViewDetailsVue
     },
     setup() {
         const route = useRoute();
@@ -493,6 +497,7 @@ export default {
         const statusModalR = ModalReview()
         const openDecline = ref(false)
         const autionModal = ref(null)
+        const statusModalView = ModalViewDetails()
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
         }
@@ -583,7 +588,8 @@ export default {
             declineAution,
             autionModal,
             timeToStart,
-            acceptAution
+            acceptAution,
+            statusModalView
 
         };
     },

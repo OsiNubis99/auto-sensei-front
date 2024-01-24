@@ -20,7 +20,6 @@
                             <p>Drop off aggrement: <strong> {{ statusModal.dataAutiont.dropOffDate }}</strong> </p>
                         </div>
                     </div>
-                    {{ statusModal.dataAutiont.status }}
                     <div v-if="statusModal.dataAutiont.status == 'bids completed'" class="flex gap-2 items-center">
                         <button class="btn w-full bg-primary rounded-lg">Accept</button>
                         <button class="btn w-full bg-white border border-error text-error rounded-lg">Decline</button>
@@ -179,7 +178,7 @@
                     <div v-else class=" w-full p-4 border-l border-[#F0F0F0]">
                         <p class="font-semibold text-xl ">Dealer Bids</p>
                         <div class=" h-[50vh] p-4 overflow-x-hidden overflow-y-auto ">
-                            <template v-for="(dealerBit, index) in statusModal.dataAutiont.bids" :key="index">
+                            <template v-if=" statusModal.dataAutiont.bids.length > 0" v-for="(dealerBit, index) in statusModal.dataAutiont.bids" :key="index">
                                 <div
                                     :class="index == 0 && statusModal.dataAutiont.status == 'bids completed' ? 'border-[2px] p-2 border-[#05A54B] rounded-lg' : 'border-[#F0F0F0]  border-b'">
                                     <div class="flex pr-4  py-3 pb-0 justify-between ">
@@ -210,7 +209,7 @@
                                                 <template v-else>
                                                     <p class="font-semibold">{{ dealerBit.participant.dealer.name }}</p>
                                                     <p>
-                                                        {{ moment(dealerBit.participant.updatedAt).format('MMMM DD YYYY, h:mm:ss a') }}</p>
+                                                        {{ moment(dealerBit.participant.updatedAt).format('MMMM DD YYYY, h: mm: ss a') }}</p>
                                                 </template>
 
                                             </div>
@@ -223,7 +222,11 @@
                                 </div>
 
                             </template>
-
+                            <template v-else>
+                                <div class="flex w-full h-full justify-center items-center">
+                                    <p>There are no bids in this auction</p>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
