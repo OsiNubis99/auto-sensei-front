@@ -1,6 +1,6 @@
 
 <template>
-    <div class="w-full pt-10 relative z-10 h-[70vh] bg-blue-dark ">
+    <div class="w-full pt-10 relative -z-10 h-[70vh] bg-blue-dark ">
         <div class="w-full h-full flex flex-col justify-center items-center">
             <h1 class="text-4xl md:text-6xl  font-bold mb-7 text-center text-white">There is always an easy way <br> to sell
                 your car

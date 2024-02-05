@@ -5,7 +5,8 @@ export const useUserStore = defineStore("useUserStore", {
     state: () => ({
         userData: {},
         userDealers: [],
-        userSellers: []
+        userSellers: [],
+        valorationes: null
     }),
     actions: {
         userData(payload) {
@@ -33,7 +34,7 @@ export const useUserStore = defineStore("useUserStore", {
             console.log('createUser', createUser)
             return new Promise((resolve, reject) => {
                 axios
-                    .post("/user/register", data)
+                    .post("/user", data)
                     .then((response) => {
                         resolve(response);
                     })
@@ -86,7 +87,7 @@ export const useUserStore = defineStore("useUserStore", {
         activeUser(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get(`/user/activate/${uuid}`)
+                    .patch(`/user/activate/${uuid}`)
                     .then((response) => {
                         console.log('activate', response)
                         resolve(response);
@@ -99,7 +100,7 @@ export const useUserStore = defineStore("useUserStore", {
         inactivateUser(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get(`/user/inactivate/${uuid}`)
+                    .patch(`/user/inactivate/${uuid}`)
                     .then((response) => {
                         console.log('inactivate', response)
                         resolve(response);
@@ -121,7 +122,29 @@ export const useUserStore = defineStore("useUserStore", {
                     });
             });
         },
+        getValorations(payload) {
+            const config = {
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${payload.token}`
 
+                }
+            };
+            console.log('PERAA', config)
+            return new Promise((resolve, reject) => {
+                axios
+                    .get("/user/valorations", config)
+                    .then((response) => {
+                        this.valorationes = response.data
+                        console.log('valorations', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        console.log('error', error)
+                        reject(error);
+                    });
+            });
+        },
 
     },
 });

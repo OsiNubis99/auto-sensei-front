@@ -36,9 +36,12 @@
                 <div class="flex w-full items-center justify-between gap-3 border-b-2 border-[#dbdbdb93]">
                     <p class=" font-medium ">Full Name</p>
                     <div class="flex items-center">
-                        <div class="flex gap-1 capitalize text-[#9ca3af] items-center">
+                        <div v-if="storeUser.type == 1" class="flex gap-1 capitalize text-[#9ca3af] items-center">
                             <p>{{ storeUser.seller?.firstName }}</p>
                             <p>{{ storeUser.seller?.lastName }}</p>
+                        </div>
+                        <div v-if="storeUser?.type == 2" class="flex gap-1 capitalize text-[#9ca3af] items-center">
+                            <p>{{ storeUser.dealer?.name }}</p>
                         </div>
                     </div>
                 </div>
@@ -116,11 +119,11 @@
                     </div>
                 </div>
 
-                <div class="flex w-full items-center justify-between gap-3 border-b-2 border-[#dbdbdb93]">
+                <div v-if="storeUser.type == 1" class="flex w-full items-center justify-between gap-3 ">
                     <p class=" font-medium  ">Mobile Number</p>
                     <div class="flex items-center">
                         <div class="flex gap-1 capitalize text-[#9ca3af] items-center">
-                            <p>+14043833639</p>
+                            <p>{{ storeUser?.seller?.phone }}</p>
                         </div>
                         <button @click="onOption('number')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -149,13 +152,18 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="flex justify-between w-full  ">
-            <div class="flex flex-col w-[60%] ">
+            <div v-if="storeUser.type == 1" class="flex flex-col w-[60%] ">
                 <p class=" font-semibold text-lg">Driver License</p>
+                <p>This will be displayed on the seller's page</p>
+            </div>
+            <div v-if="storeUser.type == 2" class="flex flex-col w-[60%] ">
+                <p class=" font-semibold text-lg">Dealer Profile</p>
                 <p>This is preview your drive license</p>
             </div>
-            <div
+            <div v-if="storeUser.type == 1"
                 class="flex space-y-2  w-full p-4 justify-between items-end  relative group rounded-lg border-2 border-[#dbdbdb93]">
                 <template v-if="form.driverPreview">
                     <img class="w-4/5 h-[220px] object-cover " :src="form.driverPreview" alt="">
@@ -176,6 +184,44 @@
                     </svg>
                 </button>
             </div>
+            <div v-if="storeUser.type == 2"
+                class="flex flex-col  w-full p-4 justify-between gap-5 items-center rounded-lg border-2 border-[#dbdbdb93]">
+                <div class="flex w-full items-center justify-between gap-3 border-b-2 border-[#dbdbdb93]">
+                    <p class=" font-medium ">Dealer Name</p>
+                    <div class="flex items-center">
+                        <div class="flex gap-1 capitalize text-[#9ca3af] items-center">
+                            <p>{{ storeUser.dealer?.name }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-full items-center justify-between gap-3 border-b-2 border-[#dbdbdb93]">
+                    <p class=" font-medium  ">OMVIC Registration Number</p>
+                    <div class="flex items-center">
+                        <div class="flex gap-1 capitalize text-[#9ca3af] items-center">
+                            <p>{{ storeUser.dealer?.omvic }}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex w-full items-center justify-between gap-3 border-b-2 border-[#dbdbdb93]">
+                    <p class=" font-medium  ">Address</p>
+                    <div class="flex items-center">
+                        <div class="flex gap-1 capitalize text-[#9ca3af] items-center">
+                            <p>{{ storeUser.dealer?.address }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex w-full items-center justify-between gap-3 ">
+                    <p class=" font-medium  ">Mobile Number</p>
+                    <div class="flex items-center">
+                        <div class="flex gap-1 capitalize text-[#9ca3af] items-center">
+                            <p>{{ storeUser?.dealer?.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div v-show="activeInputDriver"
@@ -195,55 +241,32 @@
         </div>
 
     </div>
-    <div class="bg-white flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
-        <div class="flex gap-6">
-            <img src="@/assets/svg/review.svg" alt="">
-            <div class="flex flex-col ">
-                <p class=" font-semibold text-xl">Profile</p>
-                <p>All the reviews you give to the dealer will be displayed here</p>
+    <div v-show="activeModal" class="fixed p-10 inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
+        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
+            <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
+                <p class="text-xl text-white">Change Email Confirmation</p>
+                <svg @click="activeModal = false" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer"
+                    fill="none" viewBox="0 0 24 24" stroke="#fff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
             </div>
-        </div>
-        <hr class="border-[#cfcfcf] border-1 w-full ">
-        <div class="flex justify-between w-full  ">
-            <div class="flex gap-4 items-center">
-                <button class="text-white rounded-lg py-2 px-4 bg-[#1F94F0]">Reviewed (0)</button>
-                <button class=" border borer-[#C2C2C2] py-2 px-4 rounded-lg">Need Review (0)</button>
-            </div>
-        </div>
-        <div class="flex w-full p-8 justify-center items-center flex-col gap-4">
-            <img src="@/assets/svg/noreewed.svg" alt="">
-            <p class="text-xl font-semibold capitalize">No Reviews Yet</p>
-            <p class="text-center">You don't have a record of vehicles that have <br>
-                been sold and reviewed</p>
-        </div>
-        <div v-show="activeModal"
-            class="fixed p-10 inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
-            <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
-                <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
-                    <p class="text-xl text-white">Change Email Confirmation</p>
-                    <svg @click="activeModal = false" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer"
-                        fill="none" viewBox="0 0 24 24" stroke="#fff">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <div class="p-4">
-                    <p class="text-2xl text-center font-semibold">Check Your Email</p>
-                    <p class="text-center">
-                        We sent an email to <strong>{{ form?.email }} </strong> <br>
-                        Open the email to verify your email address.
-                    </p>
-                    <div class="mt-8 flex justify-center items-center flex-col">
-                        <img src="@/assets/svg/login/verifiqueCard.svg" alt="">
-                        <p class=" text-sm mt-6 font-medium mb-5">Didn’t receive the email? Resend Email</p>
-                    </div>
+            <div class="p-4">
+                <p class="text-2xl text-center font-semibold">Check Your Email</p>
+                <p class="text-center">
+                    We sent an email to <strong>{{ form?.email }} </strong> <br>
+                    Open the email to verify your email address.
+                </p>
+                <div class="mt-8 flex justify-center items-center flex-col">
+                    <img src="@/assets/svg/login/verifiqueCard.svg" alt="">
+                    <p class=" text-sm mt-6 font-medium mb-5">Didn’t receive the email? Resend Email</p>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted, watch, computed, onUpdated } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { toast } from "vue3-toastify";
 import { regexEmail } from "../../../../utils/Regex";
@@ -276,7 +299,6 @@ export default {
             driveImg: null
 
         })
-
         const loading = ref(false)
         const activeModal = ref(false)
         const onOption = (optionInput) => {
@@ -376,21 +398,58 @@ export default {
                         toast("Password required", {
                             type: "error",
                         });
+                        return
                     } else if (form.value.password !== form.value.confirmPassword) {
                         toast('Passwords do not match', {
                             type: "error",
                         });
                         return;
                     }
-                    console.log('paso password',)
+                    console.log('paso password', form.value.password)
+                    loading.value = true
+                    try {
+                        let update = {
+                            password: form.value.password.toS,
+                        }
+                        let resUpdate = await storeProfile.updateUser(update)
+                        if (resUpdate) {
+                            console.log('resUpdate password', resUpdate)
+                            props.getProfile()
+                        }
+                    } catch (error) {
+                        toast(error?.response?.data?.message || 'error', {
+                            type: "error",
+                        });
+                        loading.value = false
+                    }
                     break;
                 case 'phone':
                     if (!form.value.phone) {
                         toast("Phone required", {
                             type: "error",
                         });
+                        return
                     }
-                    console.log('paso password',)
+                    loading.value = true
+                    try {
+                        let numero = form.value.phone.toString()
+                        let update = {
+
+                            seller: {
+                                phone: `+${numero}`,
+                            },
+                        }
+                        let resUpdate = await storeProfile.updateUser(update)
+                        if (resUpdate) {
+                            console.log('resUpdate phone', resUpdate)
+                            props.getProfile()
+                        }
+                    } catch (error) {
+                        toast(error?.response?.data?.message || 'error', {
+                            type: "error",
+                        });
+                        loading.value = false
+                    }
                     break;
                 case 'driver':
                     if (form.value.driveImg) {
@@ -411,7 +470,7 @@ export default {
                                     }
                                     let resUpdate = await storeProfile.updateUser(update)
                                     if (resUpdate) {
-                                        console.log('resUpdate', resUpdate)
+                                        console.log('resUpdate driver', resUpdate)
                                         props.getProfile()
                                         form.value.driverPreview = null
                                         form.value.driveImg = null
@@ -437,7 +496,6 @@ export default {
                     break;
             }
         }
-
         return {
             storeUser,
             onOption,

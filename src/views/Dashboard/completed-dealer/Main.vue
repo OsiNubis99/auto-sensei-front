@@ -6,7 +6,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                     <path
                         d="M5.5 12.1667C5.5 12.1667 11.3333 13 13.8333 15.5H14.6667C15.1269 15.5 15.5 15.1269 15.5 14.6667V9.61417C16.2188 9.42917 16.75 8.77658 16.75 8C16.75 7.22342 16.2188 6.57083 15.5 6.38583V1.33333C15.5 0.8731 15.1269 0.5 14.6667 0.5H13.8333C11.3333 3 5.5 3.83333 5.5 3.83333H2.16667C1.24619 3.83333 0.5 4.57952 0.5 5.5V10.5C0.5 11.4205 1.24619 12.1667 2.16667 12.1667H3L3.83333 16.3333H5.5V12.1667ZM7.16667 5.21767C7.73608 5.0955 8.43958 4.92661 9.19942 4.70311C10.5979 4.29178 12.375 3.64385 13.8333 2.64548V13.3545C12.375 12.3562 10.5979 11.7083 9.19942 11.2969C8.43958 11.0734 7.73608 10.9045 7.16667 10.7823V5.21767ZM2.16667 5.5H5.5V10.5H2.16667V5.5Z"
-                        fill="#0B1107" />
+                        :fill="path == 'upcoming' ? '#09121F' : '#C2C2C2'" />
                 </svg>
                 <p>Upcoming ({{ storeAutions?.upcoming?.length }})</p>
             </RouterLink>
@@ -15,7 +15,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                         d="M15.304 15.3037C18.2329 12.3747 18.2329 7.626 15.304 4.69706L16.4825 3.51855C20.0622 7.09836 20.0622 12.9024 16.4825 16.4822L15.304 15.3037ZM4.69735 4.69706C1.76842 7.626 1.76842 12.3747 4.69735 15.3037L3.51884 16.4822C-0.060968 12.9024 -0.060968 7.09836 3.51884 3.51855L4.69735 4.69706ZM12.9469 12.9466C14.5741 11.3194 14.5741 8.68115 12.9469 7.05399L14.1254 5.87548C16.4035 8.15354 16.4035 11.847 14.1254 14.1251L12.9469 12.9466ZM7.05438 7.05399C5.42718 8.68115 5.42718 11.3194 7.05438 12.9466L5.87586 14.1251C3.5978 11.847 3.5978 8.15354 5.87586 5.87548L7.05438 7.05399ZM10.0007 11.667C10.9211 11.667 11.6673 10.9208 11.6673 10.0003C11.6673 9.07982 10.9211 8.33366 10.0007 8.33366C9.08015 8.33366 8.33398 9.07982 8.33398 10.0003C8.33398 10.9208 9.08015 11.667 10.0007 11.667Z"
-                        :fill="path == 'live' ? '#09121F' : '#C2C2C2'" />
+                        :fill="path == 'liveDealer' ? '#09121F' : '#C2C2C2'" />
                 </svg>
                 <p>Live ({{ storeAutions?.live?.length }})</p>
             </RouterLink>
@@ -61,7 +61,7 @@
                     <div>
                         <img class="object-cover " src="../../../assets/svg/upcoming.svg" alt="">
                     </div>
-                    <h3 class="text-center text-lg"><strong>No upcoming vehicles</strong></h3>
+                    <h3 class="text-center text-lg"><strong>No current bits vehicles</strong></h3>
                     <p class="text-center">Check back later for new vehicles that will be coming up for auction soon</p>
                 </div>
             </div>
@@ -289,6 +289,9 @@
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
                                     <swiper-slide v-for="(img, indexPhoto) in aution.photos" :key="indexPhoto">
+                                        <!--  <p class="font-semibold fixed left-0 bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">
+                                        Bids
+                                        Complete</p> -->
                                         <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
                                     </swiper-slide>
                                     <div v-if="!aution.photos" class=" absolute w-full h-full top-0 ">
@@ -300,7 +303,8 @@
                                     <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
                                         class="flex p-5  flex-col gap-3">
                                         <div class="">
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{ auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                                            <div class="font-bold text-xl">{{ aution?.vehicleDetails?.year }} {{
+                                                aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">
                                                 {{ aution.city }}, {{ aution.province }}
                                             </p>
@@ -368,42 +372,51 @@
                                                 <p class=" capitalize ">{{ aution?.vehicleDetails?.rotorCondition }}</p>
                                             </div>
                                         </div>
+                                        <div class="flex gap-4 mt-5 " :class="changeLayouts ? 'flex-col' : ''">
+                                            <RouterLink :to="{ name: 'inbox', params: { id: aution._id } }"
+                                                class=" w-fit flex gap-3 cursor-pointer rounded-lg items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M5.37852 15.8333L1.66602 18.75V3.33333C1.66602 3.11232 1.75381 2.90036 1.91009 2.74408C2.06637 2.5878 2.27834 2.5 2.49935 2.5H17.4993C17.7204 2.5 17.9323 2.5878 18.0886 2.74408C18.2449 2.90036 18.3327 3.11232 18.3327 3.33333V15C18.3327 15.221 18.2449 15.433 18.0886 15.5893C17.9323 15.7455 17.7204 15.8333 17.4993 15.8333H5.37852ZM5.83268 8.33333V10H7.49935V8.33333H5.83268ZM9.16602 8.33333V10H10.8327V8.33333H9.16602ZM12.4993 8.33333V10H14.166V8.33333H12.4993Z"
+                                                        fill="#0A0A0A" />
+                                                </svg>
+                                                <p class="capitalize  ">{{ aution.owner.seller.firstName }} {{
+                                                    aution.owner.seller.lastName }}</p>
+                                            </RouterLink>
+                                        </div>
                                     </RouterLink>
                                     <div :class="changeLayouts ? 'w-full' : 'w-[40%] flex flex-col'"
                                         class="border-l-2  border-[#E0E0E0]">
                                         <div class="flex  p-4 pt-1  justify-between "
                                             :class="changeLayouts ? 'flex-row' : 'flex-col h-full '">
-                                            <div class="space-y-1 flex w-full  flex-col justify-between items-start">
-                                                <p>Starts in:</p>
-                                                <p class=" font-medium text-2xl "> {{ moment(aution.startDate).format('MMMM DD, h: mm: A') }}</p>
+                                            <div class=" flex w-full  justify-between items-center">
+                                                <div class="flex gap-3 items-center justify-center flex-col">
+                                                    <p>Expected drop off date</p>
+                                                    <p class="text-xl font-medium">{{
+                                                        moment(aution.dropOffDate).format('MMMM DD, YYYY') }}</p>
+                                                </div>
                                             </div>
 
+
+                                        </div>
+                                        <div class="flex justify-between items-center w-full p-5">
+                                            <div>
+                                                <p>Final bid</p>
+                                                <p class="text-2xl font-semibold">${{ aution.bids[0].amount }}</p>
+                                            </div>
+                                            <div>
+                                                <p>Status</p>
+                                                <p
+                                                    class="py-1 px-4 border rounded-full text-sm text-white bg-[#05A54B] flex justify-center items-center text-left">
+                                                    Received
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <div v-if="aution.remind" class="flex gap-4 p-5 flex-col justify-between w-full">
-                                            <p class="text-[#858585] text-sm ">We will notify you when the auction is going
-                                                to start via text & email as well</p>
-                                            <button @click="remindCancel(aution)"
-                                                class="btn w-full bg-transparent border border-[#E0E0E0] flex gap-2 items-center text-base-black">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
-                                                    viewBox="0 0 17 17" fill="none">
-                                                    <path
-                                                        d="M12.8907 13.8324H3.16671C3.10481 13.8324 3.04413 13.8152 2.99147 13.7826C2.93881 13.7501 2.89625 13.7035 2.86857 13.6481C2.84088 13.5928 2.82916 13.5308 2.83472 13.4691C2.84028 13.4075 2.8629 13.3486 2.90004 13.2991L3.16671 12.9437V7.16573C3.16671 6.27907 3.38271 5.44307 3.76604 4.70773L1.42871 2.37107L2.37204 1.42773L15.5714 14.6277L14.628 15.5704L12.8907 13.8324ZM13.8334 11.0231L5.53938 2.72907C6.34254 2.19303 7.27616 1.8851 8.24063 1.83814C9.2051 1.79117 10.1642 2.00693 11.0157 2.46239C11.8671 2.91785 12.5789 3.59592 13.0752 4.42426C13.5714 5.2526 13.8335 6.20012 13.8334 7.16573V11.0231ZM6.83338 14.4991H10.1667C10.1667 14.9411 9.99112 15.365 9.67856 15.6776C9.36599 15.9901 8.94207 16.1657 8.50004 16.1657C8.05802 16.1657 7.63409 15.9901 7.32153 15.6776C7.00897 15.365 6.83338 14.9411 6.83338 14.4991Z"
-                                                        fill="#0B1107" />
-                                                </svg>
-                                                Cancel Reminder
-                                            </button>
-                                        </div>
-                                        <div v-else class="flex gap-4 p-5 justify-between w-full">
-                                            <button @click="remind(aution)"
-                                                class="btn w-full bg-primary flex gap-2 items-center text-base-black">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16"
-                                                    viewBox="0 0 12 16" fill="none">
-                                                    <path
-                                                        d="M11.3333 11.9447L11.5999 12.3C11.6371 12.3496 11.6597 12.4085 11.6652 12.4701C11.6708 12.5318 11.6591 12.5937 11.6314 12.6491C11.6037 12.7045 11.5612 12.751 11.5085 12.7836C11.4558 12.8161 11.3952 12.8334 11.3333 12.8334H0.666585C0.604681 12.8334 0.544 12.8161 0.491342 12.7836C0.438683 12.751 0.396127 12.7045 0.368443 12.6491C0.340759 12.5937 0.32904 12.5318 0.334599 12.4701C0.340158 12.4085 0.362776 12.3496 0.399919 12.3L0.666585 11.9447V6.16671C0.666585 4.75222 1.22849 3.39567 2.22868 2.39547C3.22888 1.39528 4.58543 0.833374 5.99992 0.833374C7.41441 0.833374 8.77096 1.39528 9.77115 2.39547C10.7713 3.39567 11.3333 4.75222 11.3333 6.16671V11.9447ZM4.33325 13.5H7.66658C7.66658 13.9421 7.49099 14.366 7.17843 14.6786C6.86587 14.9911 6.44195 15.1667 5.99992 15.1667C5.55789 15.1667 5.13397 14.9911 4.82141 14.6786C4.50885 14.366 4.33325 13.9421 4.33325 13.5Z"
-                                                        fill="#0B1107" />
-                                                </svg>
-                                                Remind Me
+                                        <div class="flex gap-4 p-2 justify-between w-full">
+                                            <button class="btn w-full bg-primary flex gap-2 items-center text-base-black">
+                                                Vehicle Received
                                             </button>
                                         </div>
                                     </div>
@@ -414,7 +427,7 @@
                 </div>
             </div>
         </div>
-        <ModalBidNow v-if="statusModal.isActive" :form="formData" />
+
     </div>
 </template>
 <script>
@@ -424,26 +437,22 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { useAuctionStore } from "@/stores/auctions";
 import { useAuthStore } from "@/stores/auth";
-import { ModalBids } from '@/stores/modalBids';
 import { useRoute, useRouter } from 'vue-router'
-import moment from "moment";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import ModalBidNow from "../../../components/Modals/ModalBidNow/ModalBidNow.vue";
+import moment from "moment";
 export default {
 
     components: {
         Swiper,
         SwiperSlide,
-        ModalBidNow
     },
     setup() {
         const isOpen = ref(false)
         const loading = ref(false)
         const changeLayouts = ref(false)
-        const authStore = useAuthStore()
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
         }
@@ -455,84 +464,51 @@ export default {
             cvv: undefined,
             saveCard: undefined,
             termsConditions: undefined,
+            notify: undefined,
+            creditCard: undefined
         })
-        const statusModal = ModalBids()
+        const authStore = useAuthStore()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const data = ref([])
         const storeAutions = useAuctionStore()
         const path = ref(computed(() => route.name))
         const route = useRoute();
-        const remind = async (aution) => {
-            console.log('aution', aution)
-            loading.value = true
-            try {
-                let res = await storeAutions.autionsAddRemindMe({ uuid: aution._id })
-                console.log('autionsAddRemindMe', res)
-            } catch (error) {
-                console.log('error', error)
-                loading.value = false
-            } finally {
-                index()
-                loading.value = false
-            }
-        }
-        const remindCancel = async (aution) => {
-            console.log('aution', aution)
-            loading.value = true
-            try {
-                let res = await storeAutions.autionsCancelRemindMe({ uuid: aution._id })
-                console.log('autionsCancelRemindMe', res)
-            } catch (error) {
-                console.log('error', error)
-                loading.value = false
-            } finally {
-                index()
-                loading.value = false
-            }
-        }
         const index = async () => {
             loading.value = true
             try {
-                await storeAutions.indexCurrentBids()
-                let res = await storeAutions.index()
-                data.value = storeAutions?.upcoming
+                await storeAutions.index()
+                let res = await storeAutions.indexCurrentBids()
+                console.log('res', res)
+                data.value = storeAutions?.completed
                 data.value.map((autions, index) => {
-                    autions.remindList.map((remind, index) => {
-                        if (authStore.userData._id == remind._id) {
-                            autions.remind = true
-                        }
-                    })
-                  
-                })
-                data.value.map((autions, index) => {
-                        const formatter = new Intl.NumberFormat();
-                        autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
-                        let photos = []
-                        if (autions?.vehicleDetails?.additionalDocuments,
+                    const formatter = new Intl.NumberFormat();
+                    autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
+                    let photos = []
+                    if (autions?.vehicleDetails?.additionalDocuments,
+                        autions?.vehicleDetails?.exteriorPhotos,
+                        autions?.vehicleDetails?.interiorPhotos,
+                        autions?.vehicleDetails?.driverLicense) {
+                        var d = photos.concat(
+                            autions?.vehicleDetails?.additionalDocuments,
                             autions?.vehicleDetails?.exteriorPhotos,
                             autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.driverLicense) {
-                            var d = photos.concat(
-                                autions?.vehicleDetails?.additionalDocuments,
-                                autions?.vehicleDetails?.exteriorPhotos,
-                                autions?.vehicleDetails?.interiorPhotos,
-                                autions?.vehicleDetails?.vehicleDamage,
-                                autions?.vehicleDetails?.driverLicense,
-                                autions?.vehicleDetails?.originalDocument,
-                            );
-                            let resD = d.map((item, i) => {
-                                let name = item.split("/")
-                                let newObjet = {
-                                    name: name[2],
-                                    url: item
-                                }
-                                return newObjet
-                            })
-                            return autions.photos = resD
-                        } else {
-                            return autions.photos = null
-                        }
-                    })
+                            autions?.vehicleDetails?.vehicleDamage,
+                            autions?.vehicleDetails?.driverLicense,
+                            autions?.vehicleDetails?.originalDocument,
+                        );
+                        let resD = d.map((item, i) => {
+                            let name = item.split("/")
+                            let newObjet = {
+                                name: name[2],
+                                url: item
+                            }
+                            return newObjet
+                        })
+                        return autions.photos = resD
+                    } else {
+                        return autions.photos = null
+                    }
+                })
                 console.log('Data Seller', data.value)
             } catch (error) {
                 console.log('error', error)
@@ -541,23 +517,8 @@ export default {
                 loading.value = false
             }
         }
-        watch(statusModal, async (newQuestion, oldQuestion) => {
-            if (newQuestion.finally == 'finally') {
-                index()
-                formData.value.placeyourbid = 0
-                formData.value.cardNumber = undefined
-                formData.value.nameOnCard = undefined
-                formData.value.expiryDate = undefined
-                formData.value.cvv = undefined
-                formData.value.saveCard = undefined
-                formData.value.termsConditions = undefined
-                statusModal.finally = null
-            }
-        })
         onMounted(() => {
             index()
-            console.log('storeAution upcomings', storeAutions?.upcoming)
-            console.log('storeAution Liveeeeeeeeeeeeeeeeeee ', storeAutions?.live)
         })
         return {
             loading,
@@ -568,13 +529,12 @@ export default {
             data,
             bucket,
             formData,
-            statusModal,
             path,
             storeAutions,
-            moment,
-            remind,
             authStore,
-            remindCancel
+            index,
+            moment
+
         };
     },
 };

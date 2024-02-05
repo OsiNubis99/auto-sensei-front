@@ -3,10 +3,10 @@
         class="fixed z-[100] inset-0 flex items-center justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
             <div class="p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
-                <p v-if="steps.step3" class="text-xl text-white">Auto Bid</p>
-                <p v-else class="text-xl text-white">Bid Now</p>
-                <svg @click="statusModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
-                    class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                <p v-if="statusModal.from == 'autoBid'" class="text-xl text-white">Auto Bid</p>
+                <p v-if="statusModal.from == 'bidNow'" class="text-xl text-white">Bid Now</p>
+                <svg @click="closet" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer" fill="none"
+                    viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -24,71 +24,80 @@
 
             </div>
             <template v-if="steps.step1">
-                <div class="flex gap-3 items-start p-5">
+                <div class="flex gap-3 items-start border-b border-[#E0E0E0] p-5">
                     <div class="w-[200px] h-[130px]">
-                        <img class="w-full h-full rounded-lg object-cover"
-                            src="https://s3-alpha-sig.figma.com/img/9597/a863/c0521f8a98cbc1ed727bf1c861fc9820?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=jnzlsc0HAVTtzdIeBX9uiWL3JVvhdOrYyIGKTSMR3HUETm71r1u-KzRBSicOIX3rbzlHkFHey4m~vZ-BDPBQVRijgtZNa9En2nJ9bWRPwzphH1kOSxASLNRkWW-nBSaLbLzhL~UMLiyroJPX0Q7Yw9KbN5OGC0vC~csHz32TXs7KBWMe9nSI6ibqxabak74V5-0m34~lzQZjNxOu0lf6ZPTG4DOZlz1KbjMi0HUGPqkzud3PHP9pl~cxX7utjAVnhAlkka823thzRa9aHbUv8Se28rU8MCWFF2IDPLKMVg6EVcJWRbOT5xByH40QM3VJdYiLS8nCYKG0Vq2fa7L1XQ__"
-                            alt="">
+                        <img v-if="statusModal.data?.photos" class="w-full h-full shadow-lg rounded-lg object-cover"
+                            :src="bucket + statusModal.data?.photos[0].url" alt="">
+                        <img class=" shadow-xl w-full h-full rounded-lg object-cover " v-else
+                            src="@/assets/img/jpg/image.jpg" alt="">
                     </div>
                     <div class="h-[130px] flex justify-between flex-col">
-                        <p class=" font-semibold ">212 Chevrolet Captiva SP</p>
+                        <p class=" font-semibold ">{{ statusModal.data?.vehicleDetails?.year }} {{
+                            statusModal.data?.vehicleDetails?.make }} {{
+        statusModal.data?.vehicleDetails?.model }}</p>
                         <div>
                             <p>Current Bid</p>
-                            <p class="font-semibold">${{ statusModal?.data?.amountBid }}</p>
+                            <p class="font-semibold">{{ statusModal.data?.vehicleDetails?.basePrice }}</p>
                         </div>
-
                     </div>
                 </div>
-                <div class="mt-2 p-5 flex items-center gap-4 border-[#E0E0E0] border-t-[1px] ">
-                    <CurrencyInput :key="counterKey" :error='invalid' v-model="formData.placeyourbid"
-                        :options="{ currency: 'USD' }" :label="'Place your bid'" :placeHolder="'$ Min 100,100'" />
-                    <button @click="addAmount"
-                        class="btn mt-8 bg-blue-dark font-medium rounded-md  text-primary">+$100</button>
-                </div>
-                <div class="p-5 " @click="next(1)">
-                    <button :disabled="sizeObjet == 0 ? false : true"
+                <template v-if="statusModal.from == 'autoBid'">
+                    <div class="p-5">
+                        <div class="flex gap-1 flex-col justify-start">
+                            <p class="font-semibold">Maximum Bid Amount</p>
+                            <p>Please enter a price higher than the current bid</p>
+                        </div>
+                        <CurrencyInput :key="counterKey" v-model="formData.placeyourbid"
+                            :error='invalid?.placeyourbid ? true : false' :options="{ currency: 'USD' }"
+                            :placeHolder="`$ Min ${statusModal?.data?.vehicleDetails?.basePrice}`" />
+                        <p class="text-[#858585] mt-2"> {{ invalid?.placeyourbid }} </p>
+                        <div class="form-group mt-4">
+                            <input type="checkbox" v-model="formData.notify" id="html">
+                            <label for="html">Notify me when the current bid approaches my maximum bid amount</label>
+                        </div>
+                    </div>
+                </template>
+                <template v-if="statusModal.from == 'bidNow'">
+                    <div class="mt-2 p-5 flex items-center gap-4 border-[#E0E0E0] border-t-[1px] ">
+                        <CurrencyInput :key="counterKey" :error='invalid' v-model="formData.placeyourbid"
+                            :options="{ currency: 'USD' }" :label="'Place your bid'" :placeHolder="'$ Min 100,100'" />
+                        <button @click="addAmount"
+                            class="btn mt-8 bg-blue-dark font-medium rounded-md  text-primary">+$100</button>
+                    </div>
+                </template>
+
+
+                <div class="p-5 ">
+                    <button @click="next(1)" :disabled="sizeObjet == 0 ? false : true"
                         :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'" class="w-full h-[41px] rounded">
                         Next
                     </button>
                 </div>
+
             </template>
             <template v-if="steps.step2">
                 <div class="p-5 pt-0">
                     <p>
-                        You'll be charged a $250 + Harmonized Sales Tax (HST) transaction fee if your bid is successful won.
+                        <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $250 transaction fee if your bid is
+                            successfully won.</span>
+                        <span v-if="statusModal.from == 'bidNow'">You'll be charged a $250 + Harmonized Sales Tax (HST)
+                            transaction fee if your bid is
+                            successful won.</span>
                     </p>
-                    <div class="flex pt-4 flex-col gap-3">
-                        <div class="flex flex-col gap-3">
-                            <div class="flex flex-col gap-2">
-                                <label class=" text-base " for="">Card Number</label>
-                                <input class="p-2 w-full rounded-lg border capitalize " placeholder="Input card number"
-                                    v-model="formData.cardNumber" @keyup="formatCardNumber($event)" type="tel"
-                                    inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19">
-                            </div>
-                            <div class="flex flex-col gap-2">
-                                <label class=" text-base " for="">Name on Card</label>
-                                <input v-model="formData.nameOnCard" class="p-2 w-full rounded-lg border capitalize"
-                                    placeholder="Input name" type="text">
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center gap-3">
-                            <div class=" flex flex-col gap-2">
-                                <label class=" text-base " for="">Expiry Date</label>
-                                <input v-model="formData.expiryDate" class="p-2 w-full rounded-lg border capitalize"
-                                    placeholder="Input expired date" type="number">
-                            </div>
+                    <template v-if="authStore.userData.payments.length > 0">
 
-                            <div class=" flex flex-col gap-2">
-                                <label class=" text-base " for="">CVV/CVC</label>
-                                <input v-model="formData.cvv" class="p-2 w-full rounded-lg border capitalize"
-                                    placeholder="Input cvv" pattern="[0-9\s]{13,19}" maxlength="4" type="password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <div class="form-group">
-                            <input type="checkbox" v-model="formData.saveCard" id="html">
-                            <label for="html">Save Credit Card Info</label>
+                        <div class="custom-payment">
+                            <label class=" font-semibold text-[#0B1107]" for="">Credit Card</label>
+                            <select name="" v-model="formData.creditCard" id="">
+                                <option value="" disabled>Select a car</option>
+                                <option v-for="payments in authStore.userData.payments">
+                                    <div class="flex justify-between w-full ">
+                                        <p class="text-base-black w-full">{{ payments.nameCard }}</p>
+                                        <p class="text-base-black w-full">{{ payments.maskedNumber }}</p>
+                                    </div>
+
+                                </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <input type="checkbox" v-model="formData.termsConditions" id="css">
@@ -96,7 +105,51 @@
                                     Conditions</a> to
                                 proceed.</label>
                         </div>
-                    </div>
+                    </template>
+                    <template v-else>
+                        <div class="flex pt-4 flex-col gap-3">
+                            <div class="flex flex-col gap-3">
+                                <div class="flex flex-col gap-2">
+                                    <label class=" text-base " for="">Card Number</label>
+                                    <input class="p-2 w-full rounded-lg border capitalize " placeholder="Input card number"
+                                        v-model="formData.cardNumber" @keydown="formatCardNumber" @input="filterinput"
+                                        type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="16">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class=" text-base " for="">Name on Card</label>
+                                    <input v-model="formData.nameOnCard" @keypress="isLetter($event)"
+                                        class="p-2 w-full rounded-lg border capitalize" placeholder="Input name"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center gap-3">
+                                <div class=" flex flex-col gap-2">
+                                    <label class=" text-base " for="">Expiry Date</label>
+                                    <input v-model="formData.expiryDate" class="p-2 w-full rounded-lg border capitalize"
+                                        placeholder="Input expired date" @keydown="formatExpiryDate" type="number">
+                                </div>
+
+                                <div class=" flex flex-col gap-2">
+                                    <label class=" text-base " for="">CVV/CVC</label>
+                                    <input v-model="formData.cvv" class="p-2 w-full rounded-lg border capitalize"
+                                        placeholder="Input cvv" pattern="[0-9\s]{13,19}" maxlength="4" type="password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="form-group">
+                                <input type="checkbox" v-model="formData.saveCard" id="html">
+                                <label for="html">Save Credit Card Info</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" v-model="formData.termsConditions" id="css">
+                                <label for="css">Please agree to our <a href="#" class="font-semibold underline">Terms &
+                                        Conditions</a> to
+                                    proceed.</label>
+                            </div>
+                        </div>
+                    </template>
+
                 </div>
                 <div class="p-5 flex gap-4 ">
                     <button @click="back(1)"
@@ -110,7 +163,10 @@
                     </button>
                     <button @click="next(2)" :disabled="sizeObjet == 0 ? false : true"
                         :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'" class="w-full h-[41px]  rounded">
-                        Bid Now
+
+
+                        <span v-if="statusModal.from == 'bidNow'">Bid Now</span>
+                        <span v-if="statusModal.from == 'autoBid'">Complete Auto Bid</span>
                     </button>
                 </div>
             </template>
@@ -166,7 +222,7 @@
                 </div>
             </template>
         </div>
-        <div v-if="loading" class="bg-[#000000a1;] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        <!-- <div v-if="loading" class="bg-[#000000a1;] left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
                 <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
                     <div class="animate-bounce">
@@ -180,16 +236,17 @@
                     <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import CurrencyInput from "../../Inputs/CurrencyInput.vue";
 import { validationsDealerBidding } from "../../../validations/validationsDealerBidding";
 import { ModalBids } from '@/stores/modalBids';
 import { useAuctionStore } from "@/stores/auctions";
+import { useAuthStore } from "@/stores/auth";
 import { toast } from "vue3-toastify";
 export default {
     props: {
@@ -207,10 +264,12 @@ export default {
         const sizeObjet = ref(null)
         const loading = ref(false)
         const autionsStore = useAuctionStore()
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+        const authStore = useAuthStore()
         const addAmount = () => {
             counterKey.value += 1
-            statusModal.data.amountBid += 100
-            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal?.data?.amountBid);
+            statusModal.data.vehicleDetails.basePrice += 100
+            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from);
             sizeObjet.value = Object.entries(invalid.value).length
         }
         const steps = ref({
@@ -251,11 +310,19 @@ export default {
                     steps.value.step3 = true
                     break;
                 case 3:
-                    console.log('formData.value', formData.value)
-                    console.log('statusModal.data', statusModal.data._id)
-                    let payload = {
-                        amount: formData.value.placeyourbid,
+                    let payload = null
+                    if (statusModal.from == 'autoBid') {
+                        payload = {
+                            amount: formData.value.placeyourbid,
+                            biddingLimit: formData.value.placeyourbid,
+                        }
+                    } else {
+                        payload = {
+                            amount: formData.value.placeyourbid,
+                        }
                     }
+                    console.log('statusModal.from', statusModal.from)
+                    console.log('payload', payload)
                     loading.value = true
                     try {
                         await autionsStore.autionsBit({ uuid: statusModal.data._id, payload })
@@ -268,6 +335,7 @@ export default {
                         loading.value = false
                         statusModal.isActive = false
                         statusModal.finally = 'finally'
+                        toast('Successfully placed bid', { type: "success", position: "top-center", theme: "colored", });
                     }
                     break;
                 default:
@@ -282,6 +350,7 @@ export default {
             formData.value.cardNumber = value.replaceAll(" ", "")
                 .split("")
                 .map((v, index) => {
+                    event.target.value = event.target.value.replace(/[^0-9]+/g, '');
                     if (index > 0 && index % 4 == 0) {
                         return " " + v
                     } else {
@@ -289,19 +358,75 @@ export default {
                     }
                 }).join("")
         }
+        const filterinput = (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]+/g, '');
+            let value = e.target.value;
+            formData.value.cardNumber = value.replaceAll(" ", "")
+                .split("")
+                .map((v, index) => {
+                    console.log('v', v)
+                    console.log('index', index)
+                    if (index > 0 && index % 4 == 0) {
+                        return " " + v
+                    } else {
+                        return v
+                    }
+                }).join("")
+
+        }
+        const formatExpiryDate = (event) => {
+            console.log(' event.keyCode', event.target.keyCode)
+            console.log('formData.value.expiryDate', formData.value.expiryDate)
+            const key = event.keyCode || event.charCode;
+            if (formData.value.expiryDate.length == 2) {
+                formData.value.expiryDate = (formData.value.expiryDate + '/');
+            }
+            if (key !== 8 && key !== 46) {
+
+            }
+
+            if ((key == 8 || key == 46) && formData.value.expiryDate.length === 4) {
+                formData.value.expiryDate = formData.value.expiryDate.slice(0, 3)
+            }
+        }
+        const isLetter = (e) => {
+            let char = String.fromCharCode(e.keyCode); // Get the character
+            if (/^[a-zA-Z\s]*$/.test(char)) return true; // Match with regex 
+            else e.preventDefault(); // If not match, don't add to input text
+        }
+        const closet = () => {
+            statusModal.closeModal(false)
+            formData.value.placeyourbid = 0
+            formData.value.cardNumber = undefined
+            formData.value.nameOnCard = undefined
+            formData.value.expiryDate = undefined
+            formData.value.cvv = undefined
+            formData.value.saveCard = undefined
+            formData.value.termsConditions = undefined
+            formData.value.notify = undefined
+            formData.value.creditCard = undefined
+        }
         watch(formData.value, async (newQuestion, oldQuestion) => {
-            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal?.data?.amountBid);
+            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, authStore.userData);
+            console.log('invalid.value', invalid.value)
             sizeObjet.value = Object.entries(invalid.value).length
-            if (newQuestion.placeyourbid > statusModal?.data?.amountBid) {
+            if (newQuestion.placeyourbid > statusModal?.data?.vehicleDetails?.basePrice) {
                 counterKey.value += 1
             }
         })
         onMounted(() => {
             if (statusModal.data.bids[0]) {
-                statusModal.data.amountBid = statusModal.data.bids[0].amount
+                statusModal.data.vehicleDetails.basePrice = statusModal.data.bids[0].amount
+                const formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                });
+                statusModal.data.amountBid = formatter.format(statusModal.data.amountBid)
             }
-            console.log('se monto', statusModal.data)
+            console.log('se monto', statusModal.from)
+            console.log('authStore', authStore.userData)
         })
+
         return {
             isOpen,
             formData,
@@ -314,7 +439,13 @@ export default {
             invalid,
             steps,
             formatCardNumber,
-            statusModal
+            statusModal,
+            authStore,
+            closet,
+            bucket,
+            filterinput,
+            isLetter,
+            formatExpiryDate
         };
     },
     components: { CurrencyInput }

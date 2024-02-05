@@ -561,9 +561,11 @@ input.check-toggle-round-flat:checked+label:after {
 .error-picker .dp__input {
     border: 1px solid red;
 }
-.swiper-autions{
+
+.swiper-autions {
     max-height: 250px !important;
 }
+
 .swiper-autions .swiper-pagination-bullets.swiper-pagination-horizontal {
     top: 87% !important;
 }
@@ -581,9 +583,9 @@ input.check-toggle-round-flat:checked+label:after {
     height: 250px !important;
     object-fit: contain;
 } */
-.swiper-autions .swiper-slide {
+/* .swiper-autions .swiper-slide {
     background-color: red;
-}
+} */
 
 .myCrousel .swiper-slide {
     width: 100%;
@@ -773,7 +775,110 @@ input.check-toggle-round-flat:checked+label:after {
     background: #434343;
 }
 
-.shado-yes-img{
+.shado-yes-img {
     box-shadow: 1px 1px 9px -6px black;
 }
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom-payment {
+    margin: 20px 0px;
+
+}
+
+.custom-payment select {
+    /*  appearance: none; */
+    outline: 0;
+    /*   box-shadow: none;
+    border: 0 !important; */
+    background: #ffffff;
+    background-image: none;
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+}
+
+/* Remove IE arrow */
+.custom-payment select::-ms-expand {
+    display: none;
+}
+
+/* Custom Select */
+.custom-payment .select {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    display: flex;
+    width: 10em;
+    height: 3em;
+    line-height: 3;
+    background: #ffffff;
+    overflow: hidden;
+    border-radius: .25em;
+}
+
+.custom-payment select {
+    flex: 1;
+    padding: 0 .5em;
+    color: #858585;
+    cursor: pointer;
+    margin: 10px 0px;
+}
+
+.custom-payment select:focus {
+    border: 1px solid #0B1107;
+}
+
+/* Arrow */
+.custom-payment select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #0077ff;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}
+
+.custom-payment select:focus::after {
+    background: blue;
+}
+
+/* Transition */
+.custom-payment .select:hover::after {
+    color: #f39c12;
+}
+
+.mySwiperHome-full {}
+
+.mySwiperHome-full .swiper-button-next {
+    color: white !important;
+}
+
+.mySwiperHome-full .swiper-button-prev {
+    color: white !important;
+}
+
+.mySwiperHome-full .swiper-button-prev::after,
+.mySwiperHome-full .swiper-button-next::after {
+    font-size: 25px !important;
+}
+.h-screen-custom-full-image{
+    height: calc(100vh - 138px);
+}

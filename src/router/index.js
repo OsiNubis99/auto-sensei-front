@@ -98,8 +98,8 @@ const routes = [
         component: () => import('../views/Dashboard/All/Main.vue')
       },
       {
-        path: "/account",
-        name: "account",
+        path: "/account-seller",
+        name: "account-seller",
         component: () => import('../views/Dashboard/my-account/Main.vue'),
         meta: {
           hideNavbar: true,
@@ -129,13 +129,19 @@ const routes = [
         }
       },
       {
-        path: "/action-details",
-        name: "action-details-sellers",
+        path: "/action-details/:id",
+        name: "action-details-seller",
         component: () => import('../views/Dashboard/action-details/Main.vue'),
         props: true,
         meta: {
           hideNavbar: true,
         }
+      },
+      {
+        path: '/photos-details/:id',
+        name: 'photos-details-seller',
+        props: true,
+        component: () => import('../views/Dashboard/photos-details/Main.vue')
       },
       {
         path: "/faqs-seller",
@@ -149,6 +155,7 @@ const routes = [
 
     ],
   },
+
   {
     path: "/dealers",
     component: MenuDasboard,
@@ -162,22 +169,42 @@ const routes = [
 
       },
       {
-        path: "/action-details/:id",
-        name: "action-details",
-        component: () => import('../views/Dashboard/action-details/Main.vue'),
-        meta: {
-          hideNavbar: true,
-        }
+        path: "/current-bits",
+        name: "current-bits",
+        component: () => import('../views/Dashboard/current-bits/Main.vue')
+
       },
       {
-        path: "/action-details",
-        name: "action-details-dealers",
+        path: "/liveDealer",
+        name: "liveDealer",
+        component: () => import('../views/Dashboard/liveDealer/Main.vue')
+
+      },
+      {
+        path: "/completed-buyer",
+        name: "completed-buyer",
+        component: () => import('../views/Dashboard/completed-dealer/Main.vue')
+
+      },
+      {
+        path: "/action-details/:id",
+        name: "action-details-dealer",
         component: () => import('../views/Dashboard/action-details/Main.vue'),
         props: true,
         meta: {
           hideNavbar: true,
         }
       },
+      {
+        path: '/photos-details/:id',
+        name: 'photos-details-dealer',
+        props: true,
+        component: () => import('../views/Dashboard/photos-details/Main.vue'),
+        meta: {
+          hideNavbar: false,
+        }
+      },
+
       {
         path: "/inbox/:id",
         name: "inbox",
@@ -191,6 +218,14 @@ const routes = [
         name: "faqs-dealers",
         component: () => import('../views/Dashboard/faqsDealers/Main.vue'),
         props: true,
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
+        path: "/account-dealer",
+        name: "account-dealer",
+        component: () => import('../views/Dashboard/my-account/Main.vue'),
         meta: {
           hideNavbar: true,
         }
@@ -255,6 +290,7 @@ const routes = [
         props: true,
         component: () => import('../views/Auth/EmailChangePassword/Main.vue')
       },
+
       {
         path: '/resend-email',
         name: 'resend-email',
@@ -268,6 +304,7 @@ const routes = [
         beforeEnter: beforeEnterTokenEmail,
         component: () => import('../views/Auth/Recover-Password/Main.vue')
       },
+
       {
         path: '/test',
         name: 'test',
@@ -320,7 +357,9 @@ router.beforeEach((to, from, next) => {
       } else {
         next({ name: 'home' })
       }
-    } 
+    } else {
+      next()
+    }
   } else {
     next()
   }

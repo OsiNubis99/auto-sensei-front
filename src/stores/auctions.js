@@ -12,7 +12,9 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         live: [],
         completed: [],
         canceled: [],
+        currentBids: [],
         autionById: [],
+        stats: null
     }),
     actions: {
         index(payload) {
@@ -41,6 +43,28 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                         )
                         this.canceled = response.data.filter((item) => item.status == enumState.canceled)
                         this.data = response.data
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        console.log('error', error)
+                        reject(error);
+                    });
+            });
+        },
+        indexCurrentBids(payload) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .post("/auction/find/current-bids")
+                    .then((response) => {
+                        console.log('current-bids', response)
+                        this.currentBids = response.data.filter((item) => item.status == enumState.live)
+                        this.completed = response.data.filter((item) =>
+                            item.status == enumState.completed ||
+                            item.status == enumState.reviewed ||
+                            item.status == enumState.bidsCompleted ||
+                            item.status == enumState.dropOff
+                        )
+                        console.log('this.completed', this.completed)
                         resolve(response);
                     })
                     .catch((error) => {
@@ -89,10 +113,24 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     });
             });
         },
+        getAutionById({ uuid }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/auction/${uuid}`)
+                    .then((response) => {
+                        this.autionById = response.data
+                        console.log('autionById', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
         activeAutions(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/auction/aprove/${uuid}`)
+                    .patch(`/auction/aprove/${uuid}`)
                     .then((response) => {
                         console.log('activate', response)
                         resolve(response);
@@ -105,7 +143,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         inactivateAutions(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/auction/reject/${uuid}`)
+                    .patch(`/auction/reject/${uuid}`)
                     .then((response) => {
                         console.log('inactivate', response)
                         resolve(response);
@@ -133,7 +171,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         autionsCancel(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/auction/cancel/${uuid}`)
+                    .patch(`/auction/cancel/${uuid}`)
                     .then((response) => {
                         console.log('aution cancel', response)
                         resolve(response);
@@ -146,7 +184,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         autionsDecline(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/auction/decline/${uuid}`)
+                    .patch(`/auction/decline/${uuid}`)
                     .then((response) => {
                         console.log('aution cancel', response)
                         resolve(response);
@@ -159,7 +197,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         acceptAutions(uuid) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/auction/accept/${uuid}`)
+                    .patch(`/auction/accept/${uuid}`)
                     .then((response) => {
                         console.log('aution cancel', response)
                         resolve(response);
@@ -169,7 +207,61 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     });
             });
         },
-
+        autionsReview({ uuid, payload }) {
+            console.log('uuid', uuid)
+            console.log('payload', payload)
+            return new Promise((resolve, reject) => {
+                axios
+                    .post(`/auction/valorate/${uuid}`, payload)
+                    .then((response) => {
+                        console.log('valorate', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        getStats() {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/user/stats`)
+                    .then((response) => {
+                        console.log('stats', response)
+                        this.stats = response.data
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        autionsAddRemindMe({ uuid }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .patch(`/auction/${uuid}/add-remind`)
+                    .then((response) => {
+                        console.log('add-remind', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        autionsCancelRemindMe({ uuid }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .patch(`/auction/${uuid}/remove-remind`)
+                    .then((response) => {
+                        console.log('add-cancel', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
     },
 });
 

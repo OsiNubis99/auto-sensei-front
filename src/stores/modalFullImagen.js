@@ -1,26 +1,24 @@
 import { defineStore } from "pinia";
 
 
-export const ModalBids = defineStore("modalBids", {
+export const ModalImageDetails = defineStore("modalImageDetails", {
     state: () => ({
         isActive: false,
         data: null,
-        finally: null,
-        from: null
+        index: null
 
     }),
     actions: {
         openModal(params) {
             console.log('params', params)
-            this.isActive = params.active
+            this.isActive = params.isActive
             this.data = params.data
-            this.from = params.from
+            this.index = params.index
         },
         closeModal(params) {
             this.isActive = params
             this.data = null
-            this.finally = null
-            this.from = null
+            this.index = null
 
         },
     },

@@ -1,7 +1,7 @@
 <template>
     <div v-if="steps.step1" class="w-full flex flex-col gap-2">
         <label class=" text-base " for="">Auction Date</label>
-        <VueDatePicker :enable-time-picker="false" v-model="formData.auctionDate" class="custom-picker"
+        <VueDatePicker :enable-time-picker="false" v-model="formData.auctionDate" :min-date="new Date()" class="custom-picker"
             :class="invalid?.auctionDate && 'error-picker'">
             <template #calendar-header="{ index, day }">
                 <div :class="index === 5 || index === 6 ? 'red-color' : ''">

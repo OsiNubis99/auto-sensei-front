@@ -79,23 +79,34 @@
                                 fill="white" />
                         </svg>
                         <IconNotifications />
-                        <div class="relative ">
-                            <div @click="toggleAccount" class="w-8 h-8 cursor-pointer">
-                                <img v-if="store?.userData?.seller?.picture"
-                                    class="w-full shadow-md border border-[#e5e5e5]  rounded-full h-full object-contain"
-                                    :src="bucket + store?.userData?.seller?.picture" alt="">
-                                <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
-                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
-                                    alt="">
-                            </div>
-                            <ul :class="openAccount ? 'block' : 'hidden'"
-                                class="absolute z-[1000] top-[30px] -left-[60px] m-0 w-full  min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block">
-                                <li>
-                                    <button @click="logout"
-                                        class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600">Logout</button>
-                                </li>
+                        <div class="navbar-right  relative">
+                            <button class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
+                                @click="isOpen = !isOpen">
+                                <div class="w-8 h-8 ">
+                                    <img v-if="store?.userData?.dealer?.picture"
+                                        class="w-full shadow-md   rounded-full h-full object-cover"
+                                        :src="bucket + store?.userData?.dealer?.picture" alt="">
+                                    <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
+                                        src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                        alt="">
+                                </div>
 
-                            </ul>
+                            </button>
+                            <button v-if="isOpen" @click="isOpen = false" tabindex="-1"
+                                class="fixed top-0 inset-0 h-full w-full bg-black opacity-0 cursor-default"></button>
+                            <div v-if="isOpen"
+                                class="absolute top-auto right-[-100%] w-48 py-2 mt-2 mr-10 rounded-lg border-gray-900 bg-white shadow-xl">
+                                <div @click="goAccount"
+                                    class="text-sm text-gray-900 hover:bg-base-black hover:text-primary block px-4 py-2 cursor-pointer">
+                                    Account
+                                    Settings
+                                </div>
+                                <div @click="logout"
+                                    class="text-sm text-gray-900 hover:bg-base-black hover:text-primary block px-4 py-2 cursor-pointer">
+                                    Sign
+                                    Out
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div name="menu" @click="toggle()" class="text-[30px] cursor-pointer md:hidden">menu</div>
@@ -107,7 +118,7 @@
                     <div :class="open ? ' left-[0%]' : 'left-[-100%]'"
                         class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
-                            <RouterLink to="/all" :class="path == 'all' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/all" :class="path == 'all' || path == 'upcoming-auctions' || path == 'live' || path == 'completed' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sell a Car</p>
                             </RouterLink>
@@ -115,7 +126,8 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink>
-                            <RouterLink to="/faqs-seller" :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/faqs-seller"
+                                :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
                             </RouterLink>
@@ -143,22 +155,34 @@
                                 fill="white" />
                         </svg>
                         <IconNotifications />
-                        <div class="relative ">
-                            <div @click="toggleAccount" class="w-8 h-8 cursor-pointer">
-                                <img v-if="store?.userData?.dealer?.picture"
-                                    class="w-full shadow-md   rounded-full h-full object-cover"
-                                    :src="bucket + store?.userData?.dealer?.picture" alt="">
-                                <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
-                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
-                                    alt="">
+                        <div class="navbar-right  relative">
+                            <button class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
+                                @click="isOpen = !isOpen">
+                                <div class="w-8 h-8 ">
+                                    <img v-if="store?.userData?.dealer?.picture"
+                                        class="w-full shadow-md   rounded-full h-full object-cover"
+                                        :src="bucket + store?.userData?.dealer?.picture" alt="">
+                                    <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
+                                        src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                        alt="">
+                                </div>
+
+                            </button>
+                            <button v-if="isOpen" @click="isOpen = false" tabindex="-1"
+                                class="fixed top-0 inset-0 h-full w-full bg-black opacity-0 cursor-default"></button>
+                            <div v-if="isOpen"
+                                class="absolute top-auto right-[-100%] w-48 py-2 mt-2 mr-10 rounded-lg border-gray-900 bg-white shadow-xl">
+                                <div @click="goAccount"
+                                    class="text-sm text-gray-900 hover:bg-base-black hover:text-primary block px-4 py-2 cursor-pointer">
+                                    Account
+                                    Settings
+                                </div>
+                                <div @click="logout"
+                                    class="text-sm text-gray-900 hover:bg-base-black hover:text-primary block px-4 py-2 cursor-pointer">
+                                    Sign
+                                    Out
+                                </div>
                             </div>
-                            <ul :class="openAccount ? 'block' : 'hidden'"
-                                class="absolute z-[1000] top-[30px] -left-[60px] m-0 w-full  min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block">
-                                <li>
-                                    <button @click="logout"
-                                        class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600">Logout</button>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                     <div name="menu" @click="toggle()" class="text-[30px] cursor-pointer md:hidden">menu</div>
@@ -170,9 +194,8 @@
                     <div :class="open ? ' left-[0%]' : 'left-[-100%]'"
                         class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
-
                             <RouterLink to="/upcoming"
-                                :class="path == 'upcoming' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                :class="path == 'upcoming' || path == 'liveDealer' || path == 'current-bits' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dealer Bidding</p>
                             </RouterLink>
@@ -195,42 +218,7 @@
                     </div>
                 </div>
             </nav>
-            <nav v-if="!route?.meta?.hideNavbar" class="bg-[#22282F] flex items-center gap-6 p-5 ">
-                <div class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto bg-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path
-                            d="M7.5 14.1667C7.5 14.1667 13.3333 15 15.8333 17.5H16.6667C17.1269 17.5 17.5 17.1269 17.5 16.6667V11.6142C18.2188 11.4292 18.75 10.7766 18.75 10C18.75 9.22342 18.2188 8.57083 17.5 8.38583V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5H15.8333C13.3333 5 7.5 5.83333 7.5 5.83333H4.16667C3.24619 5.83333 2.5 6.57952 2.5 7.5V12.5C2.5 13.4205 3.24619 14.1667 4.16667 14.1667H5L5.83333 18.3333H7.5V14.1667ZM9.16667 7.21767C9.73608 7.0955 10.4396 6.92661 11.1994 6.70311C12.5979 6.29178 14.375 5.64385 15.8333 4.64548V15.3545C14.375 14.3562 12.5979 13.7083 11.1994 13.2969C10.4396 13.0734 9.73608 12.9045 9.16667 12.7823V7.21767ZM4.16667 7.5H7.5V12.5H4.16667V7.5Z"
-                            fill="#0B1107" />
-                    </svg>
-                    <p>Upcoming (0)</p>
 
-                </div>
-                <div class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto bg-[#464B50] text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path
-                            d="M15.304 15.3027C18.2329 12.3738 18.2329 7.62502 15.304 4.69609L16.4825 3.51758C20.0622 7.09739 20.0622 12.9014 16.4825 16.4812L15.304 15.3027ZM4.69735 4.69609C1.76842 7.62502 1.76842 12.3738 4.69735 15.3027L3.51884 16.4812C-0.060968 12.9014 -0.060968 7.09739 3.51884 3.51758L4.69735 4.69609ZM12.9469 12.9456C14.5741 11.3184 14.5741 8.68018 12.9469 7.05301L14.1254 5.8745C16.4035 8.15256 16.4035 11.846 14.1254 14.1241L12.9469 12.9456ZM7.05438 7.05301C5.42718 8.68018 5.42718 11.3184 7.05438 12.9456L5.87586 14.1241C3.5978 11.846 3.5978 8.15256 5.87586 5.8745L7.05438 7.05301ZM10.0007 11.666C10.9212 11.666 11.6673 10.9198 11.6673 9.99934C11.6673 9.07884 10.9212 8.33269 10.0007 8.33269C9.08015 8.33269 8.33398 9.07884 8.33398 9.99934C8.33398 10.9198 9.08015 11.666 10.0007 11.666Z"
-                            fill="#C2C2C2" />
-                    </svg>
-                    <p>Live (102)</p>
-
-                </div>
-                <div class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto bg-[#464B50] text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path
-                            d="M4.55149 3.6932C6.01232 2.43008 7.9166 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39697 18.3327 9.99935C18.3327 11.7794 17.7745 13.4292 16.8237 14.7832L14.166 9.99935H16.666C16.666 6.31745 13.6813 3.33268 9.99935 3.33268C8.20753 3.33268 6.58082 4.03957 5.38287 5.1897L4.55149 3.6932ZM15.4472 16.3055C13.9863 17.5686 12.0821 18.3327 9.99935 18.3327C5.39697 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 8.21923 2.22417 6.56948 3.17502 5.21555L5.83268 9.99935H3.33268C3.33268 13.6813 6.31745 16.666 9.99935 16.666C11.7912 16.666 13.4179 15.9591 14.6159 14.809L15.4472 16.3055Z"
-                            fill="#C2C2C2" />
-                    </svg>
-                    <p>Current Bids (102)</p>
-                </div>
-                <div class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto bg-[#464B50] text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path
-                            d="M4.55149 3.6932C6.01232 2.43008 7.9166 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39697 18.3327 9.99935C18.3327 11.7794 17.7745 13.4292 16.8237 14.7832L14.166 9.99935H16.666C16.666 6.31745 13.6813 3.33268 9.99935 3.33268C8.20753 3.33268 6.58082 4.03957 5.38287 5.1897L4.55149 3.6932ZM15.4472 16.3055C13.9863 17.5686 12.0821 18.3327 9.99935 18.3327C5.39697 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 8.21923 2.22417 6.56948 3.17502 5.21555L5.83268 9.99935H3.33268C3.33268 13.6813 6.31745 16.666 9.99935 16.666C11.7912 16.666 13.4179 15.9591 14.6159 14.809L15.4472 16.3055Z"
-                            fill="#C2C2C2" />
-                    </svg>
-                    <p>Completed (102)</p>
-                </div>
-            </nav>
         </div>
 
     </header>
@@ -256,8 +244,10 @@ export default {
         const store = useAuthStore()
         const route = useRoute();
         const router = useRouter();
+        const isOpen = ref(false)
         const path = ref(computed(() => route.name))
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+
         const toggle = () => {
             open.value = !open.value
         }
@@ -270,9 +260,19 @@ export default {
             router.go()
 
         }
-        onMounted(() => {
-            console.log('store', store.userData)
-        })
+        const goAccount = async () => {
+            if (store.userData.dealer) {
+                await router.push('/account-dealer')
+                router.go()
+            } else {
+                await router.push('/account-seller')
+                router.go()
+            }
+
+        }
+        /*  onMounted(() => {
+             console.log('store', store.userData)
+         }) */
         return {
             toggle,
             open,
@@ -287,7 +287,9 @@ export default {
             store,
             router,
             route,
-            bucket
+            bucket,
+            isOpen,
+            goAccount
 
         };
     },

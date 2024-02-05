@@ -1,13 +1,7 @@
 
 <template>
-  <div class="w-full h-screen mt-20 gap-4">
-    <button class="p-4 bg-base-black text-white" @click="testDate('9')">9</button>
-    <button class="p-4 bg-base-black text-white" @click="testDate(10)">10</button>
-    <button class="p-4 bg-base-black text-white" @click="testDate(11)">11</button>
-    <button class="p-4 bg-base-black text-white" @click="testDate(12)">12</button>
-    <button class="p-4 bg-base-black text-white" @click="testDate(13)">13</button>
-    <button class="p-4 bg-base-black text-white" @click="testDate(14)">14</button>
-    <button class="p-4 bg-base-black text-white" @click="testDate(15)">15</button>
+  <div class="w-full bg-error h-screen  flex justify-center items-center mt-20 gap-4">
+    <TheMask mask="FFFFFF" class="bg-white mt-48"  />
   </div>
 </template>
 
@@ -17,10 +11,12 @@ import iconArrow from '../components/icons/iconArrow.vue'
 import Heanding from '../components/Headings/Heanding.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useFaqStore } from "@/stores/faq";
+import {TheMask} from '@/vue-the-mask'
 export default {
   components: {
     iconArrow,
     Heanding,
+    TheMask
   },
   setup() {
     function getDateAndMinutes(hours) {

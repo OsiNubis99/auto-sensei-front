@@ -5,8 +5,8 @@
             <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
                 <p v-if="steps.step1" class="text-xl text-white">Accept Auction</p>
                 <p v-if="steps.step2" class="text-xl text-white">Acceptance</p>
-                <svg @click="statusModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
-                    class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                <svg @click="close" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer" fill="none"
+                    viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -15,11 +15,16 @@
                 <div class="flex justify-start items-center gap-2">
                     <div class="flex gap-3 items-start ">
                         <div class="w-[120px] h-[90px]">
-                            <img v-if="statusModal.dataAutiont?.photos" class="w-full h-full rounded-lg object-cover"
-                                :src="bucket + statusModal.dataAutiont?.photos[0]" alt="">
+                            <img v-if="statusModal.dataAutiont?.photos"
+                                class="w-full h-full shadow-xl rounded-lg object-cover"
+                                :src="bucket + statusModal.dataAutiont?.photos[0].url" alt="">
+                            <img class=" shadow-xl w-full rounded-lg object-cover " v-else src="@/assets/img/jpg/image.jpg"
+                                alt="">
                         </div>
                         <div>
-                            <p class=" font-semibold capitalize ">{{ statusModal.dataAutiont?.vehicleDetails?.model }}</p>
+                            <p class=" font-semibold capitalize ">{{ statusModal.dataAutiont?.vehicleDetails?.year }} {{
+                                statusModal.dataAutiont?.vehicleDetails?.make }} {{
+        statusModal.dataAutiont?.vehicleDetails?.model }}</p>
                             <p class="capitalize ">Final Bid</p>
                             <p class="capitalize">$100,000 / {{ statusModal.dataAutiont?.bids?.length }} </p>
                         </div>
@@ -65,6 +70,9 @@ export default {
         },
         acceptAution: {
             type: Function
+        },
+        index: {
+            type: Function
         }
 
     },
@@ -88,7 +96,10 @@ export default {
                 steps.value.step1 = false
                 steps.value.step2 = true
             }
-
+        }
+        const close = () => {
+            statusModal.closeModal(false)
+            props.index()
         }
 
         return {
@@ -96,7 +107,8 @@ export default {
             statusModal,
             bucket,
             steps,
-            next
+            next,
+            close
         };
     },
 };

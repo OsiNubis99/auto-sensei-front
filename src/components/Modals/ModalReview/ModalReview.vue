@@ -28,23 +28,16 @@
             <div class="py-10 px-4 pb-2">
                 <div class="flex gap-3 justify-center flex-col items-center">
                     <img class="w-[60px] h-[60px] object-cover rounded-full  border border-[#4D4D4D] "
-                        src="https://s3-alpha-sig.figma.com/img/c22b/31d7/d8ccc0e8074d79512ca764e61a530b58?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dinTyujwEF8v4eniC8Ord8p3s4U1a0QsZBfhzKFQ7XtjSWEsBl3Qsqh~37VMY1QyRFqmokbNkFeSYASxCTI2LLlbH7IBOqLFFBe6YE8DghoQvSzsO-4TjHAH5XfEDJgAAVI0eE5T~jeknz1dJPp~rHWDLZgNrX5H0apLQW4vxqXnari0pKQZHN9qJ8a7cwoiUGkQ7i2jcTDEbNX2WSAaPp9yH~AJVaxxNObjYck8LJ80DRY7cFSo4oKk9fCbxaE~j0Qr4M0-3xw6ADPUSYkyyfnhxH7XBhTCPA24IHsDhooC9XHi8BMl0vYCMQ~rSG48NGgrYnbYnFktifUt5jCNOQ__"
-                        alt="">
-                    <p>Maple Leaf Motors</p>
-                    <div class="flex gap-2 items-center">
-                        <svg v-for="(item, index) in 5" :key="index" xmlns="http://www.w3.org/2000/svg" width="60"
-                            height="60" viewBox="0 0 40 40" fill="none">
-                            <path @click="start(index)" class="
-                            hover:fill-error transition-all ease-in duration-200"
-                                d="M20.261 28.4928C20.101 28.3951 19.8998 28.3951 19.7398 28.4928L11.2296 33.6905C10.85 33.9223 10.3794 33.5803 10.4826 33.1477L12.7962 23.4474C12.8397 23.265 12.7775 23.0736 12.6351 22.9517L5.06345 16.4658C4.72567 16.1764 4.90545 15.6232 5.34879 15.5876L15.2876 14.7914C15.4745 14.7764 15.6373 14.6581 15.7093 14.485L19.5387 5.27709C19.7095 4.86642 20.2913 4.86642 20.4621 5.27709L24.2914 14.485C24.3634 14.6581 24.5263 14.7764 24.7132 14.7914L34.6535 15.5876C35.0968 15.6232 35.2766 16.1765 34.9388 16.4658L27.3657 22.9517C27.2233 23.0736 27.1611 23.265 27.2046 23.4474L29.5182 33.1477C29.6214 33.5803 29.1508 33.9223 28.7712 33.6905L20.261 28.4928Z"
-                                fill="#C2C2C2" />
-                        </svg>
-                    </div>
+                        :src="bucket + statusModal?.dataAutiont?.owner?.seller?.picture" alt="">
+                    <p class=" capitalize ">{{ statusModal?.dataAutiont?.owner?.seller?.firstName }} {{
+                        statusModal?.dataAutiont?.owner?.seller?.lastName }}</p>
+                    <star-rating :show-rating="false" :active-color="['#FF333E', '#FF9A02', '#FBDB17']"
+                        :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']" :padding="3" :active-on-click="true"
+                        v-model:rating="form.raiting"></star-rating>
                 </div>
-
                 <div class="flex flex-col mt-4 mb-4 gap-2">
                     <p class="font-semibold ">Tell us your experience</p>
-                    <textarea v-model="form"
+                    <textarea :class="error ? 'border-error' : ''" v-model="form.comment"
                         class="border p-4 capitalize focus:outline-none rounded-lg border-[#E0E0E0] h-[131px]" name=""
                         placeholder="Tell us your experience" id="" cols="30" rows="10"></textarea>
 
@@ -64,10 +57,15 @@
 <script>
 import { ref, onMounted, watch, computed } from "vue";
 import { ModalReview } from '@/stores/modalReview';
+import { useAuctionStore } from "@/stores/auctions";
+import { toast } from "vue3-toastify";
 export default {
     props: {
         form: {
             type: Object,
+        },
+        index: {
+            type: Function,
         },
 
     },
@@ -76,6 +74,7 @@ export default {
         const statusModal = ModalReview()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const loading = ref(false)
+        const storeAutions = useAuctionStore()
         onMounted(() => {
             console.log('formData.value', formData.value)
         })
@@ -89,7 +88,11 @@ export default {
             'Excellent Client'
 
         ])
-        const form = ref('')
+        const form = ref({
+            raiting: null,
+            comment: null,
+        })
+        const error = ref(false)
         const next = () => {
             console.log('hola')
         }
@@ -99,18 +102,40 @@ export default {
         }
         const selecComment = (comments) => {
             console.log('comments', comments)
-            form.value = comments
+            form.value.comment = comments
 
         }
-        const sendComment = () => {
+        const sendComment = async () => {
+            if (!form.value.comment && !form.value.raiting) {
+                error.value = true
+                return
+            } else {
+                error.value = false
+            }
             loading.value = true
+            let payload = {
+                valoration: form.value.raiting.toString(),
+                comment: form.value.comment
+            }
             try {
-                setTimeout(() => {
-                    loading.value = false
-
-                }, 1500);
+                let res = await storeAutions.autionsReview(({ uuid: statusModal.dataAutiont._id, payload }))
+                console.log('res', res)
 
             } catch (error) {
+                toast(error?.response?.data?.message || 'error', {
+                    type: "error",
+                });
+                form.value.comment = null
+                form.value.raiting = null
+                statusModal.closeModal(false)
+                loading.value = false
+                props.index()
+            } finally {
+                loading.value = false
+                form.value.comment = null
+                form.value.raiting = null
+                statusModal.closeModal(false)
+                props.index()
 
             }
 
@@ -126,7 +151,8 @@ export default {
             form,
             selecComment,
             sendComment,
-            loading
+            loading,
+            error
         };
     },
 };

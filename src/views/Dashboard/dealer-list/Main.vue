@@ -233,7 +233,7 @@
                                                 </td>
                                                 <td
                                                     class="w-[50%] justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
-                                                    <button v-if="user.status == 'inactive'" @click="confirmDealer(user)"
+                                                    <button v-if="user.status == 'inactive' || user.status == 'unaproved'" @click="confirmDealer(user)"
                                                         class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         Accept
                                                     </button>

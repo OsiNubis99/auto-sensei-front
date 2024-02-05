@@ -16,16 +16,19 @@
         <div class="flex w-full justify-between items-center gap-5">
             <div class="w-full">
                 <label class="font-medium text-base " for="">Year</label>
-                <input v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-none'"
-                    class="p-2 w-full mt-3 border bg-[#F0F0F0] rounded-lg" placeholder="2013"  type="text">
+                <input disabled v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-none'"
+                    class="p-2 w-full mt-3 border bg-[#F0F0F0] rounded-lg" placeholder="2013" type="text">
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col gap-2">
-                    <label class="font-medium text-base " for="">Make</label>
+                   <!--  <label class="font-medium text-base " for="">Make</label>
                     <select disabled v-model="form.make" :class="invalid?.make ? 'border-error' : 'border-none'"
                         class=" border bg-[#F0F0F0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg  w-full ">
                         <option value="make">make</option>
-                    </select>
+                    </select> -->
+                    <label class="font-medium text-base " for="">Make</label>
+                    <input disabled :class="invalid?.make ? 'border-error' : 'border-none'" v-make="form.model"
+                    class="p-2 w-full border mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Forester" type="text">
                 </div>
             </div>
 
@@ -38,7 +41,7 @@
             </div>
             <div class="w-full">
                 <label class="font-medium text-base " for="">Trim</label>
-                <input  :class="invalid?.trim ? 'border-error' : 'border-none'" v-model="form.trim"
+                <input :class="invalid?.trim ? 'border-error' : 'border-none'" v-model="form.trim"
                     class="p-2 w-full border mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Premium Plus" type="text">
             </div>
         </div>
@@ -57,7 +60,7 @@
         <div class="flex w-full justify-between items-center gap-5">
             <div class="w-full">
                 <label class="font-medium text-base " for="">Transmission</label>
-                <input disabled :class="invalid?.transmission ? 'border-error' : 'border-none'" v-model="form.transmission"
+                <input v-model="form.transmission" :disabled="form.transmission ? true : false" :class="invalid?.transmission ? 'border-error' : 'border-none'" 
                     class="p-2 w-full mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="SUV" type="text">
             </div>
             <div class="w-full">
@@ -82,7 +85,7 @@
         <p class="font-medium text-base">Exterior Color</p>
         <div class="flex flex-wrap gap-4">
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" class="input-radio on-black" value="black" name="color-redio"> Black
+                <input type="radio" v-model="form.color" class="input-radio on-black" value="black" name="color-redio"> Black
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
                 <input type="radio" v-model="form.color" class="input-radio on-white" value="white" name="color-redio">

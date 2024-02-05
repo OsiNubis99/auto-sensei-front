@@ -382,7 +382,7 @@ export default {
 
 
             socket.emit("getChats", dataGet, (response) => {
-                console.log('HOLAAAAAAAAAAAAAAAAAAA', response)
+                console.log('Res Chat getChats', response)
             });
 
         }

@@ -62,19 +62,19 @@
                 <div class="w-[29%]">
                     <div class="bg-white p-5 shadow-steps">
                         <div class="flex items-center gap-6 mb-4  relative cursor-pointer">
-                            <RouterLink to="/account">
+                            <RouterLink to="/account-seller">
                                 <img v-if="storeUser.userData?.seller?.picture" class="w-14 h-14 object-cover rounded-full"
                                     :src="bucket + storeUser.userData.seller.picture" alt="">
                                 <img v-else class="w-14 h-14 rounded-full" src="@/assets/img/jpg/image.jpg" alt="">
                             </RouterLink>
                             <div>
-                                <p class=" font-semibold capitalize ">
+                                <p class="font-semibold capitalize">
                                     <span v-if="storeUser.userData.seller?.firstName"> {{
                                         storeUser.userData.seller?.firstName }}</span> <span
                                         v-if="storeUser.userData.seller?.lastName"> {{ storeUser.userData.seller?.lastName
                                         }}</span>
                                 </p>
-                               <!--  <p class="text-[#666] text-sm uppercase ">Ottawa, Ontario</p> -->
+                                <!--  <p class="text-[#666] text-sm uppercase ">Ottawa, Ontario</p> -->
                             </div>
                             <svg class=" absolute right-0 top-1 " xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                 viewBox="0 0 20 21" fill="none">
@@ -171,21 +171,23 @@
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
                                     <swiper-slide v-for="(img, index) in auction?.photos" :key="index">
 
-                                        <img class="w-full h-full object-cover" :src="bucket + img" alt="">
+                                        <img class="w-full  rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
-                                        <img class="w-full h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
+                                        <img class=" w-full rounded-s-lg  h-full object-cover"
+                                            src="@/assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
-                                <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
-                                    <RouterLink to="#" class="flex p-5  flex-col gap-3">
+                                <div @click="statusModal.openModal({ isActive: true, data: auction })"
+                                    class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+                                    <div class="flex p-5  flex-col gap-3">
                                         <div class="">
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.model }}</div>
+                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{ auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">
                                                 {{ auction?.city }}, {{ auction?.province }}
                                             </p>
                                         </div>
-                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                        <div class="grid grid-cols-2 gap-1 " :class="changeLayouts ? 'flex-col' : ''">
                                             <div v-if="auction.vehicleDetails.vin" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
@@ -206,7 +208,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                        <div class="grid grid-cols-2 gap-1 " :class="changeLayouts ? 'flex-col' : ''">
                                             <div v-if="auction?.vehicleDetails?.color" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
@@ -226,7 +228,7 @@
                                                 <p class=" capitalize ">{{ auction?.vehicleDetails?.driveTrain }}</p>
                                             </div>
                                         </div>
-                                        <div class="flex gap-4 "
+                                        <div class="grid grid-cols-2 gap-1  "
                                             :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
                                             <div v-if="auction?.vehicleDetails?.tireCondition"
                                                 class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
@@ -253,7 +255,7 @@
                                             <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
                                             <p>Waiting for verification, can take up to <Strong> 90 mins</Strong></p>
                                         </div>
-                                    </RouterLink>
+                                    </div>
                                     <div :class="changeLayouts ? 'w-full' : 'w-[40%] flex flex-col justify-between h-full '"
                                         class="border-l-2  border-[#E0E0E0]">
                                         <div class="flex p-5  pl-4 ga justify-between "
@@ -261,7 +263,7 @@
                                             <div class="space-y-1"
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                                                 <p>Starts in: </p>
-                                                <div class="flex gap-2 items-center ">
+                                                <div v-if="auction.startDate" class="flex gap-2 items-center ">
                                                     <vue-countdown :time="timeToStart(auction.startDate)"
                                                         class="flex text-base-black  text-2xl gap-3 items-center"
                                                         v-slot="{ days, hours, minutes, seconds }">
@@ -357,6 +359,7 @@
                 </div>
             </div>
         </div>
+        <ModalDetailsLiveVue v-if="statusModal.isActive" :cancelAution="cancelAution" />
         <div v-show="openDecline" class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
             <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
                 <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
@@ -391,7 +394,8 @@
                     <div class="w-full flex gap-2 mt-4 items-center">
                         <button @click="openDecline = false"
                             class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
-                        <button @click="cancelAution" class="btn w-full bg-primary rounded-lg ">Yes</button>
+                        <button @click="cancelAution(autionModal._id)"
+                            class="btn w-full bg-primary rounded-lg ">Yes</button>
                     </div>
                 </div>
             </div>
@@ -406,8 +410,9 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { useAuctionStore } from "@/stores/auctions";
 import { useAuthStore } from "@/stores/auth";
-
+import { ModalDetailsLive } from '@/stores/modalDetailsLive';
 import { enumState } from "@/utils/auction-status.enum";
+import ModalDetailsLiveVue from "../../../components/Modals/ModalDetailsLive/ModalDetailsLive.vue";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -418,6 +423,7 @@ export default {
     components: {
         Swiper,
         SwiperSlide,
+        ModalDetailsLiveVue
     },
     setup() {
         const route = useRoute();
@@ -430,6 +436,7 @@ export default {
         const openDecline = ref(false)
         const autionModal = ref(null)
         const path = ref(computed(() => route.name))
+        const statusModal = ModalDetailsLive()
 
         const declineAution = (auction) => {
             console.log('auction', auction)
@@ -447,24 +454,40 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const index = async () => {
             loading.value = true
+
+            let example = 'hola/nuevo/barra'
+
+
             try {
                 let res = await storeAutions.index()
                 console.log('res', res)
                 if (res) {
                     data.value = storeAutions.upcoming
                     data.value.map((autions, index) => {
+                        const formatter = new Intl.NumberFormat();
+                        autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
                         let photos = []
                         if (autions?.vehicleDetails?.additionalDocuments,
                             autions?.vehicleDetails?.exteriorPhotos,
                             autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.vehicleDamage) {
+                            autions?.vehicleDetails?.driverLicense) {
                             var d = photos.concat(
                                 autions?.vehicleDetails?.additionalDocuments,
                                 autions?.vehicleDetails?.exteriorPhotos,
                                 autions?.vehicleDetails?.interiorPhotos,
-                                autions?.vehicleDetails?.vehicleDamage
+                                autions?.vehicleDetails?.vehicleDamage,
+                                autions?.vehicleDetails?.driverLicense,
+                                autions?.vehicleDetails?.originalDocument,
                             );
-                            return autions.photos = d
+                            let resD = d.map((item, i) => {
+                                let name = item.split("/")
+                                let newObjet = {
+                                    name: name[2],
+                                    url: item
+                                }
+                                return newObjet
+                            })
+                            return autions.photos = resD
                         } else {
                             return autions.photos = null
                         }
@@ -479,11 +502,11 @@ export default {
                 loading.value = false
             }
         }
-        const cancelAution = async () => {
+        const cancelAution = async (id) => {
             console.log('a', autionModal.value._id)
             loading.value = true
             try {
-                let res = await storeAutions.autionsCancel(autionModal.value._id)
+                let res = await storeAutions.autionsCancel(id)
                 if (res) {
                     autionModal.value = null
                     openDecline.value = false
@@ -522,7 +545,8 @@ export default {
             declineAution,
             autionModal,
             timeToStart,
-            cancelAution
+            cancelAution,
+            statusModal
 
         };
     },

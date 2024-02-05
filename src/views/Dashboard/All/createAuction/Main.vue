@@ -305,12 +305,13 @@ export default {
 
                     let res = await store.create(dataPost)
                     if (res) {
+                        console.log('res.data', res.data)
                         id_create.value = res.data._id
                         formData.value.numberVin = res.data.vehicleDetails.vin
-                        formData.value.year = res.data.vehicleDetails.year
                         formData.value.make = res.data.vehicleDetails.make
                         formData.value.model = res.data.vehicleDetails.model
                         formData.value.trim = res.data.vehicleDetails.trim
+                        formData.value.year = res.data.vehicleDetails.year
                         formData.value.bodyType = res.data.vehicleDetails.bodyType
                         formData.value.cylinder = res.data.vehicleDetails.cylinder
                         formData.value.transmission = res.data.vehicleDetails.transmission
@@ -506,64 +507,95 @@ export default {
             let newArrayInterior = []
             let newArrayVehicleDamage = []
             let newAdditionalDocuments = []
-            let vehicleDamage = null
-            let additionalDocuments = null
+            let vehicleDamage = []
+            let additionalDocuments = []
             let exterior = [
-                formData.value.document,
-                formData.value.frontPhoto,
-                formData.value.front,
-                formData.value.driverSide,
-                formData.value.back,
-                formData.value.passengerSide,
-                formData.value.tireAndRim,
+                {
+                    file: formData.value.frontPhoto,
+                    name: 'Front Photo'
+                },
+                {
+                    file: formData.value.front,
+                    name: 'Front'
+                },
+                {
+                    file: formData.value.driverSide,
+                    name: 'Driver Side (Exterior)'
+                },
+                {
+                    file: formData.value.back,
+                    name: 'Back'
+                },
+                {
+                    file: formData.value.passengerSide,
+                    name: 'Passenger Side'
+                },
+                {
+                    file: formData.value.tireAndRim,
+                    name: 'Tire and Rim'
+                },
             ]
             let interior = [
-                formData.value.driversDisplay,
-                formData.value.driverSide,
-                formData.value.centerConsole,
-                formData.value.rearSeats,
+                {
+                    file: formData.value.driversDisplay,
+                    name: 'Drivers Display (Odometer)'
+                },
+                {
+                    file: formData.value.driverSide,
+                    name: 'Drivers Side (Interior)'
+                },
+                {
+                    file: formData.value.centerConsole,
+                    name: 'Center Console'
+                },
+                {
+                    file: formData.value.rearSeats,
+                    name: 'Rear Seats'
+                }
             ]
-            if (vehicleDamage) {
+            if (formData.value.vehicleDamage) {
                 vehicleDamage = [
-                    formData.value.vehicleDamage,
+                    {
+                        file: formData.value.vehicleDamage,
+                        name: 'Vehicle Damage'
+                    }
+
                 ]
             }
 
             if (formData.value.additionalDocuments) {
                 additionalDocuments = [
-                    formData.value.additionalDocuments,
+                    {
+                        file: formData.value.additionalDocuments,
+                        name: 'Additional Documents'
+                    }
+
                 ]
             }
+            let resOriginalDocument = await storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/Original Documents`})
+            let resLicence = await storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/Driver License`})
             await Promise.all(
-                exterior.map(async (file, i) => {
-                    let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                exterior.map(async (photo, i) => {
+                    let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}`})
                     newArrayExterior.push(res.data);
                 })
-            ).catch((error) => {
-                console.log('exterior', error)
-            })
+            )
             await Promise.all(
-                interior.map(async (file, i) => {
-                    let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+                interior.map(async (photo, i) => {
+                    let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}`})
                     newArrayInterior.push(res.data);
                 })
-            ).catch((error) => {
-                console.log('interior', error)
-            })
-            vehicleDamage && await Promise.all(
-                vehicleDamage.map(async (file, i) => {
-                    let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+            )
+            vehicleDamage.length > 0 && await Promise.all(
+                vehicleDamage.map(async (photo, i) => {
+                    let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}`})
                     newArrayVehicleDamage.push(res.data);
                 })
-            ).catch((error) => {
-                console.log('vehicleDamage', error)
-            })
-            additionalDocuments && await Promise.all(
-                additionalDocuments.map(async (file, i) => {
-                    let res = await storeFile.uploaderFile({ file: file, location: 'test' })
+            )
+            additionalDocuments.length > 0 && await Promise.all(
+                additionalDocuments.map(async (photo, i) => {
+                    let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}`})
                     newAdditionalDocuments.push(res.data);
-                }).catch((error) => {
-                    console.log('additionalDocuments', error)
                 })
             );
             let resWeekend = getDateAndMinutes(+formData.value.dayMonday)
@@ -576,14 +608,20 @@ export default {
                 case 'Launch now after verified':
                     duration = formData.value.auctionDuration
                     startDate = null
+                    console.log('duration', duration)
+                    console.log('startDate', startDate)
                     break;
                 case 'Choose the date & time':
                     duration = formData.value.auctionDuration
                     startDate = date + "T" + hour
+                    console.log('duration', duration)
+                    console.log('startDate', startDate)
                     break;
                 case 'Choose after hours (weekend)':
                     duration = resWeekend.duration
                     startDate = resWeekend.startDate
+                    console.log('duration', duration)
+                    console.log('startDate', startDate)
                     break;
                 default:
                     break;
@@ -610,7 +648,7 @@ export default {
                     yearEnd: formData.value.yearToPreferences
                 },
                 startDate: string == 'draft' ? null : startDate,
-                duration: string == 'draft' ? null : duration,
+                duration: string == 'draft' ? null : Number(duration),
                 vehicleDetails: {
                     odometer: formData.value.odometer,
                     doors: formData.value.doors,
@@ -623,13 +661,16 @@ export default {
                     brakeReplacement: formData.value.lastReplacement2,
                     rotorCondition: formData.value.rotorCondition,
                     rotorReplacement: formData.value.lastReplacement3,
-                    originalDocument: formData.value.document,
-                    driverLicense: formData.value.driverDocument,
+                    originalDocument: resOriginalDocument?.data,
+                    driverLicense: resLicence?.data,
                     exteriorPhotos: newArrayExterior,
                     interiorPhotos: newArrayInterior,
                     vehicleDamage: newArrayVehicleDamage,
                     additionalDocuments: newAdditionalDocuments,
                     vehicleVideo: formData.value.vehicleVideo,
+                  /*   year: formData.value.year,
+                    trim: formData.value.trim, */
+                  
                 },
             }
             console.log('dataPost', dataPost)

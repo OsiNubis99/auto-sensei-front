@@ -62,7 +62,7 @@
                 <div class="w-[29%]">
                     <div class="bg-white p-5 shadow-steps">
                         <div class="flex items-center gap-6 mb-4  relative cursor-pointer">
-                            <RouterLink to="/account">
+                            <RouterLink to="/account-seller">
                                 <img v-if="storeUser.userData?.seller?.picture" class="w-14 h-14 object-cover rounded-full"
                                     :src="bucket + storeUser.userData.seller.picture" alt="">
                                 <img v-else class="w-14 h-14 rounded-full" src="@/assets/img/jpg/image.jpg" alt="">
@@ -125,10 +125,11 @@
                                     </button>
                                     <div v-if="isOpen"
                                         class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
-                                        <a href=""
-                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Auction
+                                        <div
+                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                            Auction
                                             Title
-                                        </a>
+                                        </div>
                                         <a href=""
                                             class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Auction
                                             Start</a>
@@ -160,7 +161,7 @@
                     </div>
                     <div
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
-                        <div v-for="(auction, index) in data" :key="index"
+                        <div v-for="(auction, index) in dataAutionSorft" :key="index"
                             class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
                             <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
@@ -190,11 +191,11 @@
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
                                     <swiper-slide v-for="(img, index) in auction?.photos" :key="index">
-                                        <img class="w-full h-full object-cover" :src="bucket + img" alt="">
+                                        <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
-                                        <img class="w-full h-full object-cover" src="../../../assets/img/jpg/image.jpg"
-                                            alt="">
+                                        <img class="w-full rounded-s-lg h-full object-cover"
+                                            src="../../../assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
@@ -202,20 +203,20 @@
                                         :class="auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
                                         class="flex p-5  flex-col gap-3">
                                         <div class="">
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.model }}</div>
+                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{ auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">
                                                 {{ auction?.city }}, {{ auction?.province }}
                                             </p>
                                         </div>
-                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
-                                            <div v-if="auction.vehicleDetails.vin" class="flex gap-4">
+                                        <div class="grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                                            <div v-if="auction?.vehicleDetails?.vin" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
                                                     <path
                                                         d="M1.33398 2.66227C1.33398 2.29651 1.63752 2 1.99518 2H14.0061C14.3713 2 14.6673 2.29663 14.6673 2.66227V13.3377C14.6673 13.7035 14.3638 14 14.0061 14H1.99518C1.63002 14 1.33398 13.7034 1.33398 13.3377V2.66227ZM4.00065 10V11.3333H12.0007V10H4.00065ZM4.00065 4.66667V8.66667H8.00065V4.66667H4.00065ZM9.33398 4.66667V6H12.0007V4.66667H9.33398ZM9.33398 7.33333V8.66667H12.0007V7.33333H9.33398ZM5.33398 6H6.66732V7.33333H5.33398V6Z"
                                                         fill="#858585" />
                                                 </svg>
-                                                <p class="uppercase">{{ auction.vehicleDetails.vin }}</p>
+                                                <p class="uppercase">{{ auction?.vehicleDetails?.vin }}</p>
                                             </div>
                                             <div v-if="auction?.vehicleDetails?.odometer" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -228,7 +229,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
+                                        <div class="grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
                                             <div v-if="auction?.vehicleDetails?.color" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
@@ -248,7 +249,7 @@
                                                 <p class="capitalize">{{ auction?.vehicleDetails?.driveTrain }}</p>
                                             </div>
                                         </div>
-                                        <div class="flex gap-4 "
+                                        <div class="grid grid-cols-2 gap-1 "
                                             :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
                                             <div v-if="auction?.vehicleDetails?.tireCondition"
                                                 class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
@@ -305,7 +306,8 @@
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                                                 <p>Final Bids</p>
                                                 <div class="flex gap-1">
-                                                    <p class="font-medium text-base-black text-2xl ">$8000 </p>
+                                                    <p class="font-medium text-base-black text-2xl ">${{
+                                                        auction?.vehicleDetails?.basePrice }} </p>
                                                     <p class="text-[#666666] mt-1 "> /{{ auction.bids.length }} Bids</p>
                                                 </div>
                                             </div>
@@ -324,12 +326,12 @@
                                             class="flex gap-4 p-5  justify-between w-full">
                                             <button @click="statusModal.openModal({ isActive: true, data: auction })"
                                                 class="btn w-full bg-primary text-base-black">Accept</button>
-                                            <button @click="declineAution(auction)"
+                                            <button @click="declineAution(auction, 'decline')"
                                                 class="btn w-full bg-white border border-[#E0E0E0] text-error">Decline</button>
                                         </div>
                                         <div v-if="auction.status == 'drop off'"
                                             class="flex gap-4 p-5  justify-between w-full">
-                                            <button @click="statusModalR.openModal({ isActive: true })"
+                                            <button @click="statusModalR.openModal({ isActive: true, data: auction })"
                                                 class="btn w-full bg-white border border-[#E0E0E0]  ">Input Review</button>
                                         </div>
                                         <div v-if="auction.status == 'reviewed'"
@@ -342,7 +344,8 @@
                                             <div class="space-y-1"
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                                                 <p>Current bid</p>
-                                                <p class=" font-medium text-base-black  ">$8000 <span
+                                                <p class=" font-medium text-base-black  ">${{
+                                                    auction?.vehicleDetails?.basePrice }} <span
                                                         class="text-[#666666] mt-2">/{{ auction.bids.length }}
                                                         Bids
                                                     </span>
@@ -370,8 +373,8 @@
 
                                             </div>
                                         </div>
-                                        <div v-if="auction.status == 'upcoming' || auction.status == 'unapproved'"
-                                            class="flex p-5  pl-4 ga justify-between "
+                                        <div v-if="auction.status == 'upcoming'"
+                                            class="flex p-5  pl-4 ga h-full justify-between "
                                             :class="changeLayouts ? 'flex-row' : 'flex-col '">
                                             <div class="space-y-1"
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
@@ -388,11 +391,20 @@
                                                     </vue-countdown>
                                                 </div>
                                             </div>
+
                                         </div>
-                                        <div v-if="auction.status == 'cancelled'"
+                                        <div v-if="auction.status == 'upcoming' || auction.status == 'unapproved'"
+                                            class=" p-5 w-full">
+                                            <button @click="declineAution(auction, 'cancelled')"
+                                                class="btn w-full bg-white border border-[#E0E0E0] text-error">Cancel</button>
+                                        </div>
+                                        <div v-if="auction.status == 'cancelled' || auction.status == 'declined'"
                                             class="flex gap-4 p-5  justify-between w-full">
-                                            <P 
-                                                class="btn w-full bg-white mb-20 text-[#A3A3A3] ">Cancelled</P>
+                                            <P class="btn w-full bg-white mb-20 text-[#A3A3A3] ">
+                                                <span v-if="auction.status == 'cancelled'">Cancelled</span>
+                                                <span v-if="auction.status == 'declined'">Declined</span>
+
+                                            </P>
                                         </div>
                                     </div>
                                 </div>
@@ -476,10 +488,10 @@
         </div>
 
     </template>
-    <div v-show="openDecline" class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
+    <div v-if="openDecline" class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
             <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
-                <p class="text-xl text-white">Decline Auction</p>
+                <p class="text-xl text-white">Cancel Auction</p>
                 <svg @click="openDecline = false" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer"
                     fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -497,25 +509,26 @@
                         <p class=" font-semibold ">{{ autionModal?.vehicleDetails?.model }}</p>
                         <p>Final Bid</p>
                         <div class="flex gap-1">
-                            <p class="font-medium text-base-black text-2xl ">$8000 </p>
+                            <p class="font-medium text-base-black text-2xl ">${{ auction?.vehicleDetails?.basePrice }} </p>
                             <p class="text-[#666666] mt-1 "> /{{ autionModal?.Bids?.length }} Bids</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="py-10 px-4 pb-2">
-                <p>Are you sure you want to cancel the auction for the <strong>{{ autionModal?.vehicleDetails?.model
-                }}</strong> ?</p>
+                <p>Are you sure you want to cancel the auction for the <span class="font-medium">{{
+                    autionModal?.vehicleDetails?.model }}</span>?</p>
                 <div class="w-full flex gap-2 mt-4 items-center">
-                    <button class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
-                    <button class="btn w-full bg-primary rounded-lg ">Yes</button>
+                    <button @click="openDecline = false" class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
+                    <button @click="cancelAution" class="btn w-full bg-primary rounded-lg ">Yes</button>
                 </div>
             </div>
         </div>
     </div>
+
     <ModalAcceptAutionVue v-if="statusModal?.isActive" :form="form" :acceptAution="acceptAution" />
-    <ModalReviewVue v-if="statusModalR.isActive" />
-    <ModalViewDetailsVue v-if="statusModalView.isActive" />
+    <ModalReviewVue v-if="statusModalR?.isActive" />
+    <ModalViewDetailsVue v-if="statusModalView?.isActive" />
 </template>
 <script>
 import { ref, onMounted, computed } from "vue";
@@ -565,6 +578,59 @@ export default {
             changeLayouts.value = !changeLayouts.value
         }
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+        const cancelAution = async () => {
+            console.log('a', autionModal.value)
+            switch (autionModal.value.option) {
+                case "cancelled":
+                    loading.value = true
+                    try {
+                        let res = await storeAutions.autionsCancel(autionModal.value._id)
+                        if (res) {
+                            autionModal.value = null
+                            openDecline.value = false
+                            toast('Successfully cancel the auction', {
+                                theme: "colored",
+                                type: "success",
+                                position: "top-center",
+                            });
+                            index()
+                        }
+                    } catch (error) {
+                        toast(error?.response?.data?.message || 'error al cargar', {
+                            type: "error",
+                            position: "top-center",
+                        });
+                        loading.value = false
+                    }
+                    break;
+                case "decline":
+                    loading.value = true
+                    try {
+                        let res = await storeAutions.autionsDecline(autionModal.value._id)
+                        if (res) {
+                            autionModal.value = null
+                            openDecline.value = false
+                            toast('Successfully declined the final bids. The vehicle has been moved to the "Parked"', {
+                                theme: "colored",
+                                type: "success",
+                                position: "top-center",
+                            });
+                            index()
+                        }
+                    } catch (error) {
+                        toast(error?.response?.data?.message || 'error al cargar', {
+                            type: "error",
+                            position: "top-center",
+                        });
+                        loading.value = false
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
         const index = async () => {
             loading.value = true
             try {
@@ -572,23 +638,34 @@ export default {
                 console.log('res', res)
                 data.value = res.data.filter((item) => item.status !== "draft")
                 data.value.map((autions, index) => {
-                    let photos = []
-                    if (autions?.vehicleDetails?.additionalDocuments,
-                        autions?.vehicleDetails?.exteriorPhotos,
-                        autions?.vehicleDetails?.interiorPhotos,
-                        autions?.vehicleDetails?.vehicleDamage) {
-                        var d = photos.concat(
-                            autions?.vehicleDetails?.additionalDocuments,
+                        const formatter = new Intl.NumberFormat();
+                        autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
+                        let photos = []
+                        if (autions?.vehicleDetails?.additionalDocuments,
                             autions?.vehicleDetails?.exteriorPhotos,
                             autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.vehicleDamage
-                        );
-                        return autions.photos = d
-                    } else {
-                        return autions.photos = null
-                    }
-
-                })
+                            autions?.vehicleDetails?.driverLicense) {
+                            var d = photos.concat(
+                                autions?.vehicleDetails?.additionalDocuments,
+                                autions?.vehicleDetails?.exteriorPhotos,
+                                autions?.vehicleDetails?.interiorPhotos,
+                                autions?.vehicleDetails?.vehicleDamage,
+                                autions?.vehicleDetails?.driverLicense,
+                                autions?.vehicleDetails?.originalDocument,
+                            );
+                            let resD = d.map((item, i) => {
+                                let name = item.split("/")
+                                let newObjet = {
+                                    name: name[2],
+                                    url: item
+                                }
+                                return newObjet
+                            })
+                            return autions.photos = resD
+                        } else {
+                            return autions.photos = null
+                        }
+                    })
                 console.log('Data Seller', data.value)
                 console.log('storeAutions.draft', storeAutions.draft)
             } catch (error) {
@@ -598,10 +675,11 @@ export default {
                 loading.value = false
             }
         }
-        const declineAution = (auction) => {
+        const declineAution = (auction, option) => {
             console.log('auction', auction)
             openDecline.value = true
             autionModal.value = auction
+            autionModal.value.option = option
         }
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
@@ -631,6 +709,9 @@ export default {
             }
 
         }
+        const dataAutionSorft = computed(() => {
+            return data.value.sort((a, b, c) => (a.status < b.status ? 1 : -1));
+        })
         onMounted(() => {
             index()
             console.log('bucket.value', bucket.value)
@@ -656,7 +737,9 @@ export default {
             statusModalView,
             timeToEnd,
             timeToStart,
-            acceptAution
+            acceptAution,
+            cancelAution,
+            dataAutionSorft
 
         };
     },

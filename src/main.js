@@ -13,6 +13,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import VueTheMask from 'vue-the-mask'
 import '@vuepic/vue-datepicker/dist/main.css'
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import StarRating from 'vue-star-rating'
 import { socket } from '@/socket'
 const app = createApp(App)
 app.use(Vue3Toastify, {
@@ -23,6 +24,7 @@ app.use(Vue3Toastify, {
 });
 app.component('VueDatePicker', VueDatePicker);
 app.component(VueCountdown.name, VueCountdown);
+app.component('star-rating', StarRating)
 app.use(createPinia())
 app.use(router)
 app.use(i18n);

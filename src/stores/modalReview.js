@@ -15,6 +15,7 @@ export const ModalReview = defineStore("ModalReview", {
         closeModal(params) {
             console.log('params', params)
             this.isActive = params
+            this.dataAutiont = null
         },
     },
 });
