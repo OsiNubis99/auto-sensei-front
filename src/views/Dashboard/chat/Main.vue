@@ -324,7 +324,7 @@ import moment from 'moment';
 import { toast } from "vue3-toastify";
 import { useAuthStore } from "@/stores/auth";
 import { useAuctionStore } from "@/stores/auctions";
-import { socket } from '@/socket'
+import { useSockethStore } from "@/stores/socket";
 export default {
 
     components: {
@@ -337,7 +337,7 @@ export default {
         const userFriend = ref(null)
         const search = ref('')
         const searchat = ref('')
-        const textForm = ref(null)
+        const textForm = ref('Hola RAMONN')
         const loading = ref(false)
         const loadingUser = ref(false)
         const termins = ref(null)
@@ -346,46 +346,45 @@ export default {
         const dataAution = ref(null)
         const activateLayout = ref(false)
         const auth = useAuthStore()
+        const socketStore = useSockethStore()
+        
 
         const accept = () => {
             console.log('termis')
             termins.value = false
         }
-        const sendMessage = () => {
-
-            if (!textForm.value) {
-                toast("Campos Requerido", {
-                    type: "error",
-                });
-                return
-            }
-            const emoji = textForm.value
-            const encodeemoji = encodeURIComponent(emoji)
-            const dataSend = {
-                idFrom: 15447,
-                idTo: route.query.state,
-                message: encodeemoji
-            };
-            // console.log(this.emojis = /\\p{Emoji}/gu.test(this.message));
-            console.log("hlameojo", dataSend);
-
-            socket.emit("createMessage", dataSend, (data) => {
-                textForm.value = ""
-                console.log("smile", data);
-            });
-        }
-        const getChats = async () => {
+        const getChats = async (id) => {
             let dataGet = {
-                userId: auth.userData._id
+                chatId: "65c030d14021c575e8036597-65b8029b2f66ffd8f461b813"
             }
             console.log('dataGet', dataGet)
-
-
             socket.emit("getChats", dataGet, (response) => {
                 console.log('Res Chat getChats', response)
             });
 
         }
+        const sendMessage = (params) => {
+
+            /*   if (!textForm.value) {
+                  toast("Campos Requerido", {
+                      type: "error",
+                  });
+                  return
+              } */
+            const emoji = textForm.value
+            const encodeemoji = encodeURIComponent(emoji)
+            const dataSend = {
+                chatid: `${route.params.id}-65b8029b2f66ffd8f461b813`,
+                message: 'Holaaaaaaaaaaaaaaaaa'
+            };
+            console.log("dataSendMessage", dataSend);
+
+            socket.emit("createMessage", dataSend, (data) => {
+                console.log("SMILEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", data);
+               
+            });
+        }
+       
         const sendChat = (userF) => {
             console.log('userF', userF)
             termins.value = null
@@ -494,8 +493,9 @@ export default {
         const getDataAution = async (id) => {
             loading.value = true
             try {
-                let res = await storeAution.getAutionById(id)
+                let res = await storeAution.getAutionById({ uuid: id })
                 if (res) {
+                    console.log('res', res)
                     let photos = []
                     if (storeAution.autionById.vehicleDetails?.additionalDocuments,
                         storeAution.autionById.vehicleDetails?.exteriorPhotos,
@@ -523,23 +523,28 @@ export default {
 
         }
         onUpdated(() => {
-           /*  connectIo(auth.userData._id) */
-           
-           /*  socket.on("newMessageSended", () => {
-                console.log('New Message')
-                getMessages();
-            });
-            socket.on("newMessageResived", () => {
-                console.log('newMessageResived')
-                if (route.path == '/inbox' && route.query.state) {
-                    console.log('entro aqui')
-                    readMessages(true);
-                }
-            }); */
+           /* console.log('socket', socket)
+             socket.on("newMessageSended", () => {
+                 console.log('New Message')
+                 getMessages();
+             });
+             socket.on("newMessageResived", () => {
+                 console.log('newMessageResived')
+                 if (route.path == '/inbox' && route.query.state) {
+                     console.log('entro aqui')
+                     readMessages(true);
+                 }
+             }); */
         }),
             onMounted(() => {
-                getChats()
-                getDataAution(route.params.id)
+                console.log('route.params', route.params.id)
+                console.log('socketStore.', socketStore.socket)
+               /*  getDataAution(route.params.id)
+                sendMessage()
+                getChats() */
+              /*   socket.value = socketConnects()
+                console.log('auth.authProfile.data', auth.userData)
+                console.log('socketConnects', socket.value) */
 
 
 

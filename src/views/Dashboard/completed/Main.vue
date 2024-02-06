@@ -267,7 +267,7 @@
                                             </div>
                                         </div>
 
-                                        <RouterLink v-if="auction.status == 'bids completed'" to="#" class="flex gap-4"
+                                        <RouterLink v-if="auction.status == 'bids completed'" :to="{ name: 'inbox-seller', params: { id: auction._id } }"  class="flex gap-4"
                                             :class="changeLayouts ? 'flex-col' : ''">
                                             <div class="bg-[#F0F0F0] flex gap-3 py-1 px-2  rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -318,7 +318,7 @@
                                         </div>
                                         <div v-if="auction.status == 'completed'"
                                             class="flex gap-4 p-5 justify-between w-full">
-                                            <button class="btn w-full bg-primary text-base-black">Contact Buyer</button>
+                                            <RouterLink :to="{ name: 'inbox-seller', params: { id: auction._id } }" class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>
                                         </div>
                                         <div v-if="auction.status == 'bids completed'"
                                             class="flex gap-4 p-5  justify-between w-full">

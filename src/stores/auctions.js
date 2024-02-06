@@ -11,6 +11,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         upcoming: [],
         live: [],
         completed: [],
+        completedDelaer: [],
         canceled: [],
         currentBids: [],
         autionById: [],
@@ -58,13 +59,13 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     .then((response) => {
                         console.log('current-bids', response)
                         this.currentBids = response.data.filter((item) => item.status == enumState.live)
-                        this.completed = response.data.filter((item) =>
+                        this.completedDelaer = response.data.filter((item) =>
                             item.status == enumState.completed ||
                             item.status == enumState.reviewed ||
                             item.status == enumState.bidsCompleted ||
                             item.status == enumState.dropOff
                         )
-                        console.log('this.completed', this.completed)
+                        console.log('this.completed', this.completedDelaer)
                         resolve(response);
                     })
                     .catch((error) => {
