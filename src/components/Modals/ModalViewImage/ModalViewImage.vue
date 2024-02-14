@@ -59,11 +59,6 @@ export default {
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        onMounted(() => {
-            console.log('props.form', props.form)
-            console.log('statusModalView', statusModalView)
-
-        })
         return {
             uploadImage,
 

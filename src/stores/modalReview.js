@@ -8,12 +8,12 @@ export const ModalReview = defineStore("ModalReview", {
     }),
     actions: {
         openModal({ isActive, data }) {
-            console.log('data', data)
+             
             this.isActive = isActive
             this.dataAutiont = data
         },
         closeModal(params) {
-            console.log('params', params)
+             
             this.isActive = params
             this.dataAutiont = null
         },

@@ -463,13 +463,12 @@ export default {
         const path = ref(computed(() => route.name))
         const route = useRoute();
         const remind = async (aution) => {
-            console.log('aution', aution)
+             
             loading.value = true
             try {
                 let res = await storeAutions.autionsAddRemindMe({ uuid: aution._id })
-                console.log('autionsAddRemindMe', res)
             } catch (error) {
-                console.log('error', error)
+                 
                 loading.value = false
             } finally {
                 index()
@@ -477,13 +476,12 @@ export default {
             }
         }
         const remindCancel = async (aution) => {
-            console.log('aution', aution)
+             
             loading.value = true
             try {
                 let res = await storeAutions.autionsCancelRemindMe({ uuid: aution._id })
-                console.log('autionsCancelRemindMe', res)
             } catch (error) {
-                console.log('error', error)
+                 
                 loading.value = false
             } finally {
                 index()
@@ -533,9 +531,9 @@ export default {
                             return autions.photos = null
                         }
                     })
-                console.log('Data Seller', data.value)
+                 
             } catch (error) {
-                console.log('error', error)
+                 
 
             } finally {
                 loading.value = false
@@ -556,8 +554,6 @@ export default {
         })
         onMounted(() => {
             index()
-            console.log('storeAution upcomings', storeAutions?.upcoming)
-            console.log('storeAution Liveeeeeeeeeeeeeeeeeee ', storeAutions?.live)
         })
         return {
             loading,

@@ -90,7 +90,6 @@ export default {
         let rol = ref()
         let stepsCurrent = ref(0)
         function getRef(swiperInstance) {
-            console.log('swiperInstance', swiperInstance)
             swiper.value = swiperInstance
         }
 
@@ -121,9 +120,7 @@ export default {
                     }, 3000);
 
                 }
-                console.log('res', res)
             } catch (error) {
-                console.log('error', error)
                 if (error.response.data.statusCode == 401) {
                     toast(error.response.data.message, {
                         type: "error",
@@ -138,7 +135,6 @@ export default {
 
         onMounted(() => {
             rol.value = route.params.rol
-            console.log('route.params', route.query)
             if (route.query.token) {
                 getAuth(route.query)
             } else {

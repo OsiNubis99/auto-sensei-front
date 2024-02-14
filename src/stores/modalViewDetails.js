@@ -8,7 +8,7 @@ export const ModalViewDetails = defineStore("modalViewDetails", {
     }),
     actions: {
         openModal({ isActive, data }) {
-            console.log('data', data)
+             
             this.isActive = isActive
             this.dataAutiont = data
         },

@@ -10,7 +10,7 @@ export const ModalImageDetails = defineStore("modalImageDetails", {
     }),
     actions: {
         openModal(params) {
-            console.log('params', params)
+             
             this.isActive = params.isActive
             this.data = params.data
             this.index = params.index

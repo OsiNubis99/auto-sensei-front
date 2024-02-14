@@ -119,13 +119,10 @@ export default {
             try {
                 await store.index();
             } catch (error) {
-                console.log(error);
 
             }
         };
         const sendQuestion = async () => {
-            console.log('question', payloadData.value.question)
-            console.log('answer', payloadData.value.answer)
 
             if (!payloadData.value.answer || !payloadData.value.question) {
                 toast("Required field", {
@@ -146,16 +143,15 @@ export default {
                     payloadData.value.question = ''
                     isLoading.value = false
                 }
-                console.log('res', res)
+                 
             } catch (error) {
                 isLoading.value = false
-                console.log('error', error)
+                 
 
             }
 
         }
         const deleteQuestion = async (faqItem) => {
-            console.log('faqItem', faqItem._id)
             isLoading.value = true
             try {
                 let res = await store.delete(faqItem._id)
@@ -168,10 +164,10 @@ export default {
                         type: "success",
                     });
                 }
-                console.log('res', res)
+                 
             } catch (error) {
                 isLoading.value = false
-                console.log('error', error)
+                 
 
             }
 
@@ -183,9 +179,6 @@ export default {
             payloadData.value.answer = faqItem.answer
         }
         const updateQuestion = async (faqItem) => {
-            console.log('payloadData.value.question', payloadData.value.question)
-            console.log('payloadData.value.answer', payloadData.value.answer)
-            console.log('dataEdit.value._id',)
             let dataUpdate = {
                 question: payloadData.value.question,
                 answer: payloadData.value.answer
@@ -204,11 +197,11 @@ export default {
                         type: "success",
                     });
                 }
-                console.log('res', res)
+                 
             } catch (error) {
                 isLoading.value = false
                 faqUpdate.value = false
-                console.log('error', error)
+                 
 
             }
 

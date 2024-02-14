@@ -410,7 +410,7 @@
                                             </div>
                                         </div>
                                         <div class="flex gap-4 " :class="changeLayouts ? 'flex-col' : ''">
-                                            <RouterLink :to="{ name: 'inbox', params: { id: aution._id } }"
+                                            <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution._id + '-' + auth.userData._id } }"
                                                 class=" w-fit flex gap-3 cursor-pointer rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     viewBox="0 0 20 20" fill="none">
@@ -428,14 +428,15 @@
                                             :class="changeLayouts ? 'flex-row' : 'flex-col h-full '">
                                             <div class=" flex w-full  justify-between items-center">
 
-                                                <div class="flex gap-3 items-center justify-center flex-col">
+                                                <div class="flex gap-3 items-start justify-center flex-col">
                                                     <p>Current bid</p>
                                                     <p v-if="aution?.bids[0]?.amount"
                                                         class=" font-medium text-2xl text-base-black  ">
                                                         ${{ aution.bids[0].amount }}
                                                     </p>
-                                                    <p v-else class=" font-medium text-2xl text-base-black  ">
+                                                    <p v-else-if="aution?.vehicleDetails?.basePrice " class=" font-medium text-2xl text-base-black  ">
                                                         ${{ aution?.vehicleDetails?.basePrice }}</p>
+                                                    <p v-else class="font-medium text-2xl text-base-black ">0$</p>
                                                 </div>
                                             </div>
 
@@ -505,6 +506,7 @@ import { toast } from "vue3-toastify";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { useAuctionStore } from "@/stores/auctions";
+import { useAuthStore } from "@/stores/auth";
 import { ModalBids } from '@/stores/modalBids';
 import { useRoute, useRouter } from 'vue-router'
 import 'swiper/css';
@@ -543,12 +545,13 @@ export default {
         const storeAutions = useAuctionStore()
         const path = ref(computed(() => route.name))
         const route = useRoute();
+        const auth = useAuthStore()
         const index = async () => {
             loading.value = true
             try {
                 await storeAutions.indexCurrentBids()
                 let res = await storeAutions.index()
-                console.log('res', res)
+                 
                 data.value = storeAutions?.live
                 data.value.map((autions, index) => {
                         const formatter = new Intl.NumberFormat();
@@ -579,9 +582,9 @@ export default {
                             return autions.photos = null
                         }
                     })
-                console.log('Data Seller', data.value)
+                 
             } catch (error) {
-                console.log('error', error)
+                 
 
             } finally {
                 loading.value = false
@@ -608,8 +611,6 @@ export default {
         })
         onMounted(() => {
             index()
-            console.log('storeAution upcomings', storeAutions?.upcoming)
-            console.log('storeAution Liveeeeeeeeeeeeeeeeeee ', storeAutions?.live)
         })
         return {
             loading,
@@ -623,7 +624,8 @@ export default {
             statusModal,
             path,
             storeAutions,
-            timeToEnd
+            timeToEnd,
+            auth
 
         };
     },

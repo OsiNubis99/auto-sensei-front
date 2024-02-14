@@ -360,7 +360,7 @@ export default {
             try {
                 await store.getUserDealers()
             } catch (error) {
-                console.log('error', error)
+                 
                 isLoading.value = false
 
             } finally {
@@ -438,7 +438,6 @@ export default {
         }
         onMounted(() => {
             getUserDealer()
-            console.log('now', now.value)
         })
         return {
             isLoading,

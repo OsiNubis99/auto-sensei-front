@@ -37,7 +37,7 @@
                         d="M8.33876 1.75273C7.17079 1.37464 5.9011 1.90056 5.34256 2.99381L4.67107 4.30812C4.59129 4.46428 4.46428 4.59129 4.30812 4.67107L2.99381 5.34256C1.90056 5.9011 1.37464 7.17079 1.75273 8.33876L2.20728 9.74292C2.26128 9.90976 2.26128 10.0894 2.20728 10.2563L1.75273 11.6604C1.37464 12.8284 1.90056 14.0981 2.99381 14.6567L4.30812 15.3281C4.46428 15.4079 4.59129 15.5349 4.67107 15.6911L5.34256 17.0054C5.9011 18.0987 7.17079 18.6246 8.33876 18.2465L9.74292 17.7919C9.90976 17.7379 10.0894 17.7379 10.2563 17.7919L11.6604 18.2465C12.8284 18.6246 14.0981 18.0987 14.6567 17.0054L15.3281 15.6911C15.4079 15.5349 15.5349 15.4079 15.6911 15.3281L17.0054 14.6567C18.0987 14.0981 18.6246 12.8284 18.2465 11.6604L17.7919 10.2563C17.7379 10.0894 17.7379 9.90976 17.7919 9.74292L18.2465 8.33876C18.6246 7.17079 18.0987 5.9011 17.0054 5.34256L15.6911 4.67107C15.5349 4.59129 15.4079 4.46428 15.3281 4.30812L14.6567 2.99381C14.0981 1.90056 12.8284 1.37464 11.6604 1.75273L10.2563 2.20728C10.0894 2.26128 9.90976 2.26129 9.74292 2.20728L8.33876 1.75273ZM6.82674 3.75208C7.01292 3.38767 7.43616 3.21236 7.82548 3.33839L9.22967 3.79293C9.73018 3.95496 10.269 3.95496 10.7695 3.79293L12.1738 3.33839C12.563 3.21236 12.9863 3.38767 13.1724 3.75207L13.8439 5.06639C14.0833 5.53487 14.4643 5.91591 14.9328 6.15526L16.2471 6.82674C16.6115 7.01292 16.7868 7.43616 16.6608 7.82548L16.2063 9.22967C16.0443 9.73018 16.0443 10.269 16.2063 10.7695L16.6608 12.1738C16.7868 12.563 16.6115 12.9863 16.2471 13.1724L14.9328 13.8439C14.4643 14.0833 14.0833 14.4643 13.8439 14.9328L13.1724 16.2471C12.9863 16.6115 12.563 16.7868 12.1738 16.6608L10.7695 16.2063C10.269 16.0443 9.73018 16.0443 9.22967 16.2063L7.82548 16.6608C7.43616 16.7868 7.01292 16.6115 6.82674 16.2471L6.15526 14.9328C5.91591 14.4643 5.53487 14.0833 5.06639 13.8439L3.75208 13.1724C3.38767 12.9863 3.21236 12.563 3.33839 12.1738L3.79293 10.7695C3.95496 10.269 3.95496 9.73018 3.79293 9.22967L3.33839 7.82548C3.21236 7.43616 3.38767 7.01292 3.75208 6.82674L5.06639 6.15526C5.53487 5.91591 5.91591 5.53487 6.15526 5.06639L6.82674 3.75208ZM5.63259 9.79742L9.16809 13.3329L15.0607 7.4404L13.8822 6.26189L9.16809 10.9759L6.81111 8.61884L5.63259 9.79742Z"
                         :fill="path == 'completed-buyer' ? '#09121F' : '#C2C2C2'" />
                 </svg>
-                <p>Completed ({{ storeAutions?.completedDelaer?.length }})</p>
+                <p>Completed ({{ data?.length }})</p>
             </RouterLink>
         </nav>
         <div v-if="loading" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
@@ -373,7 +373,8 @@
                                             </div>
                                         </div>
                                         <div class="flex gap-4 mt-5 " :class="changeLayouts ? 'flex-col' : ''">
-                                            <RouterLink :to="{ name: 'inbox', params: { id: aution._id } }"
+                                            <RouterLink
+                                                :to="{ name: 'inbox-dealer', query: { id: aution._id + '-' + authStore.userData._id } }"
                                                 class=" w-fit flex gap-3 cursor-pointer rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     viewBox="0 0 20 20" fill="none">
@@ -400,7 +401,8 @@
 
 
                                         </div>
-                                        <div class="flex justify-between items-center w-full p-5">
+                                        <div v-if="aution.status == 'drop off'"
+                                            class="flex justify-between items-center w-full p-5">
                                             <div>
                                                 <p>Final bid</p>
                                                 <p class="text-2xl font-semibold">${{ aution.bids[0].amount }}</p>
@@ -414,9 +416,20 @@
                                             </div>
                                         </div>
 
-                                        <div class="flex gap-4 p-2 justify-between w-full">
-                                            <button class="btn w-full bg-primary flex gap-2 items-center text-base-black">
-                                                Vehicle Received
+                                        <div v-if="aution.status == 'completed' || aution.status == 'bids completed'"
+                                            class="p-2">
+                                            <button :disabled="loadingButton ? true : false"
+                                                @click="confirmVehicle(aution._id)"
+                                                class="btn w-full bg-primary flex gap-2 items-center text-base-black">
+                                                <div v-if="loadingButton && indexShowLoading == aution._id" class="w-8 h-8">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin"
+                                                        fill="#0B1107" stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <span v-else> Vehicle Received</span>
                                             </button>
                                         </div>
                                     </div>
@@ -473,13 +486,21 @@ export default {
         const storeAutions = useAuctionStore()
         const path = ref(computed(() => route.name))
         const route = useRoute();
+        const indexShowLoading = ref(false)
+        const loadingButton = ref(false)
         const index = async () => {
             loading.value = true
             try {
+                let newArray = []
                 await storeAutions.index()
                 let res = await storeAutions.indexCurrentBids()
-                console.log('res', res)
-                data.value = storeAutions?.completedDelaer
+                console.log('storeAutions?.completed', storeAutions?.completed)
+                console.log('storeAutions?.completedDelaer', storeAutions?.completedDelaer)
+                let resnewArray = newArray.concat(storeAutions.completedDelaer, storeAutions.completed)
+
+
+                console.log('newArray', resnewArray)
+                data.value = resnewArray
                 data.value.map((autions, index) => {
                     const formatter = new Intl.NumberFormat();
                     autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
@@ -509,12 +530,27 @@ export default {
                         return autions.photos = null
                     }
                 })
-                console.log('Data Seller', data.value)
             } catch (error) {
-                console.log('error', error)
-
+                toast(error.response.data.message, {
+                    type: "error",
+                });
             } finally {
                 loading.value = false
+            }
+        }
+        const confirmVehicle = async (id) => {
+            indexShowLoading.value = id
+            console.log('id', id)
+            loadingButton.value = true
+            try {
+                await storeAutions.vehicleReceived({ uuid: id })
+            } catch (error) {
+                toast(error.response.data.message, {
+                    type: "error",
+                });
+            } finally {
+                loadingButton.value = false
+                index()
             }
         }
         onMounted(() => {
@@ -533,7 +569,10 @@ export default {
             storeAutions,
             authStore,
             index,
-            moment
+            moment,
+            confirmVehicle,
+            loadingButton,
+            indexShowLoading
 
         };
     },

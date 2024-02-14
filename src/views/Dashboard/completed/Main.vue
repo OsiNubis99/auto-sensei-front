@@ -188,8 +188,8 @@
                                         <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
-                                        <img class="w-full rounded-s-lg h-full object-cover" src="../../../assets/img/jpg/image.jpg"
-                                            alt="">
+                                        <img class="w-full rounded-s-lg h-full object-cover"
+                                            src="../../../assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
@@ -197,7 +197,8 @@
                                         @click="(auction.status == 'bids completed' || auction.status == 'completed') && statusModalView.openModal({ isActive: true, data: auction })"
                                         class="flex p-5  flex-col gap-3">
                                         <div class="">
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{ auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{
+                                                auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                                             <p class="text-base capitalize">
                                                 {{ auction?.city }}, {{ auction?.province }}
                                             </p>
@@ -212,7 +213,7 @@
                                                 </svg>
                                                 <p class=" uppercase ">{{ auction.vehicleDetails.vin }}</p>
                                             </div>
-                                            <div  v-if="auction.vehicleDetails.odometer" class="flex gap-4">
+                                            <div v-if="auction.vehicleDetails.odometer" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
                                                     <path
@@ -224,7 +225,7 @@
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
-                                            <div  v-if="auction.vehicleDetails.color" class="flex gap-4">
+                                            <div v-if="auction.vehicleDetails.color" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
                                                     <path
@@ -233,7 +234,7 @@
                                                 </svg>
                                                 <p class=" capitalize ">{{ auction?.vehicleDetails?.color }}</p>
                                             </div>
-                                            <div  v-if="auction.vehicleDetails.driveTrain" class="flex gap-4">
+                                            <div v-if="auction.vehicleDetails.driveTrain" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
                                                     <path
@@ -267,8 +268,9 @@
                                             </div>
                                         </div>
 
-                                        <RouterLink v-if="auction.status == 'bids completed'" :to="{ name: 'inbox-seller', params: { id: auction._id } }"  class="flex gap-4"
-                                            :class="changeLayouts ? 'flex-col' : ''">
+                                        <RouterLink v-if="auction.status == 'bids completed'"
+                                            :to="{ name: 'inbox-seller', query: { id: auction._id + '-' + auction?.bids[0]?.participant?._id } }"
+                                            class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
                                             <div class="bg-[#F0F0F0] flex gap-3 py-1 px-2  rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     viewBox="0 0 20 20" fill="none">
@@ -295,30 +297,29 @@
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                                                 <p>Final Bids</p>
                                                 <div class="flex gap-1">
-                                                    <p class="font-medium text-base-black text-2xl ">${{
-                                                        auction?.vehicleDetails?.basePrice }} </p>
+                                                    <p class="font-medium text-base-black text-2xl ">
+                                                        <span v-if="auction.bids[0]?.amount">
+                                                        ${{ auction.bids[0]?.amount}}
+                                                        </span>
+                                                        <span v-else> 
+                                                            ${{ auction?.vehicleDetails?.basePrice }} 
+                                                        </span>
+                                                    </p>
                                                     <p class="text-[#666666] mt-1 "> /{{ auction.bids.length }} Bids</p>
                                                 </div>
                                             </div>
                                             <div v-if="auction.status == 'bids completed'"
                                                 :class="changeLayouts ? 'flex justify-between items-start flex-col' : 'space-y-2 flex items-center gap-2'">
-                                               <!--  <p>Approval period ends in</p>
-                                                <p class="text-[#FF9A02] font-medium !m-0">08 Hours
+                                                <p>Approval period ends in</p>
+                                                <p class="text-[#FF9A02] font-medium !m-0">48 Hours
                                                 </p>
-                                                <vue-countdown :time="timeToStart(auction.startDate)"
-                                                    class="flex text-base-black  text-2xl gap-3 items-center"
-                                                    v-slot="{ days, hours, minutes, seconds }">
-                                                    <p class="font-medium" v-if="days > 0">{{ days }}D</p>
-                                                    <p class="font-medium" v-if="hours > 0">{{ hours }}H</p>
-                                                    <p class="font-medium" v-if="minutes > 0">{{ minutes }}M</p>
-                                                    <p class="font-medium" v-if="seconds > 0">{{ seconds }}S</p>
-                                                    <p class="font-medium" v-else>0S</p>
-                                                </vue-countdown> -->
                                             </div>
                                         </div>
                                         <div v-if="auction.status == 'completed'"
                                             class="flex gap-4 p-5 justify-between w-full">
-                                            <RouterLink :to="{ name: 'inbox-seller', params: { id: auction._id } }" class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>
+                                            <RouterLink
+                                                :to="{ name: 'inbox-seller', query: { id: auction._id + '-' + auction?.bids[0]?.participant._id } }"
+                                                class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>
                                         </div>
                                         <div v-if="auction.status == 'bids completed'"
                                             class="flex gap-4 p-5  justify-between w-full">
@@ -358,7 +359,7 @@
                         </h1>
                         <p>Let the bids begin, post your auction, sell your car quick as 48 hours.</p>
                     </div>
-                    <RouterLink to="/all/create" @click="onSteps"
+                    <RouterLink to="/all/create"
                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Create My Auction
                     </RouterLink>
@@ -435,10 +436,12 @@
                                 src="../../../assets/img/jpg/image.jpg" alt="">
                         </div>
                         <div>
-                            <p class=" font-semibold ">{{ autionModal?.vehicleDetails?.year }} {{ autionModal?.vehicleDetails?.make }} {{ autionModal?.vehicleDetails?.model }}</p>
+                            <p class=" font-semibold ">{{ autionModal?.vehicleDetails?.year }} {{
+                                autionModal?.vehicleDetails?.make }} {{ autionModal?.vehicleDetails?.model }}</p>
                             <p>Final Bid</p>
                             <div class="flex gap-1">
-                                <p class="font-medium text-base-black text-2xl ">${{ auction?.vehicleDetails?.basePrice }}
+                                <p class="font-medium text-base-black text-2xl ">${{ autionModal?.vehicleDetails?.basePrice
+                                }}
                                 </p>
                                 <p class="text-[#666666] mt-1 "> /{{ autionModal?.Bids?.length }} Bids</p>
                             </div>
@@ -457,7 +460,7 @@
             </div>
         </div>
         <ModalAcceptAutionVue v-if="statusModal?.isActive" :form="form" :acceptAution="acceptAution" :index="index" />
-        <ModalReviewVue v-if="statusModalR.isActive" :index="index"  />
+        <ModalReviewVue v-if="statusModalR.isActive" :index="index" />
         <ModalViewDetailsVue v-if="statusModalView.isActive" />
     </template>
 </template>
@@ -536,7 +539,6 @@ export default {
             loading.value = true
             try {
                 let res = await storeAutions.index()
-                console.log('res', res)
                 if (res) {
                     data.value = storeAutions.completed
                     data.value.map((autions, index) => {
@@ -568,19 +570,15 @@ export default {
                             return autions.photos = null
                         }
                     })
-                    console.log('Data Seller', data.value)
-                    console.log('storeAutions.draft', storeAutions.live)
                 }
 
             } catch (error) {
-                console.log('error', error)
 
             } finally {
                 loading.value = false
             }
         }
         const declineAution = (auction) => {
-            console.log('auction', auction)
             openDecline.value = true
             autionModal.value = auction
         }
@@ -589,28 +587,23 @@ export default {
             return new Date(startDate) - Date.now();
         }
         const acceptAution = () => {
-            console.log('statusModal.dataAutiont', statusModal.dataAutiont._id)
             loading.value = true
             try {
                 let res = storeAutions.acceptAutions(statusModal.dataAutiont._id)
                 if (res) {
-                    console.log('res', res)
                     return '200'
                 }
-                console.log('res', res)
             } catch (error) {
-                console.log('error', error)
                 loading.value = true
 
             } finally {
-               /*  index() */
+                /*  index() */
                 loading.value = false
             }
 
         }
         onMounted(() => {
             index()
-            console.log('bucket.value', bucket.value)
 
         })
 

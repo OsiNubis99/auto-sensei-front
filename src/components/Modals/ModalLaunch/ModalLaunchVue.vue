@@ -123,21 +123,16 @@ export default {
             if (newQuestion) {
                 switch (newQuestion.launchOptions) {
                     case 'Launch now after verified':
-                        console.log('1',)
                         formData.value.auctionDate = ''
                         formData.value.auctionTime = ''
-                        /*   formData.value.auctionDuration = '' */
                         formData.value.dayMonday = 'Select time'
                         break;
                     case 'Choose the date & time':
-                        /*   formData.value.auctionDuration = '' */
                         formData.value.dayMonday = 'Select time'
                         break;
                     case 'Choose after hours (weekend)':
                         formData.value.auctionDate = ''
                         formData.value.auctionTime = ''
-                        /* formData.value.auctionDuration = ''
-                        formData.value.auctionDuration = '' */
                         break;
                     default:
                         break;
@@ -145,12 +140,8 @@ export default {
 
             }
         })
-        onMounted(() => {
-            console.log('formData.value', formData.value)
-        })
         const save = () => {
             props.modalLaunch()
-            console.log('formData.value', formData.value)
         }
 
         return {

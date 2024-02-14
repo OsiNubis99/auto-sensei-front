@@ -164,7 +164,6 @@ export default {
                 }
             } catch (error) {
                 messageError.value = error?.response?.data?.message
-                console.log(error);
                 isLoadingLogin.value = false;
             }
         };

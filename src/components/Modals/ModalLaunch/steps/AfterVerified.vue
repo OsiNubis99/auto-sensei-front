@@ -66,17 +66,14 @@ export default {
         const steps = ref(props.steps)
         const invalid = ref();
         const back = (back) => {
-            console.log('back')
             steps.value.step1 = true
             steps.value.step2 = false
         }
         const next = (paso) => {
             invalid.value = validateData(formData.value, 'Launch Auction', 'after verified');
-            console.log('Object.entries(invalid.value).length', Object.entries(invalid.value).length)
             switch (paso) {
                 case 1:
                     if (Object.entries(invalid.value).length === 0) {
-                        console.log('NEXT 1')
                         steps.value.step1 = false
                         steps.value.step2 = true
                     }
@@ -88,8 +85,6 @@ export default {
                 default:
                     break;
             }
-            console.log('invalid.value', invalid.value)
-            console.log('formData.value', formData.value)
         }
         return {
             formData,

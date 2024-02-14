@@ -311,7 +311,7 @@ export default {
                 await store.getUserSellers()
                 numberPage.value = Math.ceil(store.userSellers?.data.length / 10)
             } catch (error) {
-                console.log('error', error)
+                 
                 isLoading.value = false
 
             } finally {
@@ -336,7 +336,8 @@ export default {
             }
         }
         const dataTableSearch = computed(() => {
-            return store.userSellers?.data?.filter(s => s.seller.firstName.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
+           
+            return store.userSellers?.data?.filter(s => s.seller?.firstName?.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
         })
         const indexStart = computed(() => {
             return (current.value - 1) * pageSize.value;
@@ -360,7 +361,7 @@ export default {
         }
         onMounted(() => {
             getUserSeller()
-            console.log('now.value', now.value)
+            console.log('userSellers', store.userSellers)
         })
         return {
             isLoading,

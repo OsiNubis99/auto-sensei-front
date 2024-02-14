@@ -130,7 +130,7 @@ export default {
                     options.value.interior = false
                     options.value.document = false
                     data.value.photos = data.value.exteriorPhotos
-                    console.log('data.value.photos', data.value.photos)
+                     
                     break;
                 case 'interior':
                     options.value.allPhoto = false
@@ -138,7 +138,7 @@ export default {
                     options.value.interior = true
                     options.value.document = false
                     data.value.photos = data.value.interiorPhotos
-                    console.log('data.value.photos', data.value.photos)
+                     
                     break;
                 case 'document':
                     options.value.allPhoto = false
@@ -152,20 +152,16 @@ export default {
             }
         }
         function getRef(swiperInstance) {
-            console.log('swiperInstance', swiperInstance)
             swiper.value = swiperInstance
         }
         const onSlideChange = (e) => {
             activeIndex.value = e.activeIndex + 1
-            console.log('e.activeIndex', e.activeIndex)
-            /*   currentSlider.value = e.activeIndex;
-              prevSlider.value = e.previousIndex; */
         }
         const index = async (id) => {
             loading.value = true
             try {
                 let res = await storeAutions?.getAutionById({ uuid: id })
-                console.log('res', res)
+                 
                 if (res) {
                     data.value = storeAutions?.autionById
                     if (data.value.startDate) {
@@ -238,14 +234,13 @@ export default {
                     }
                 }
             } catch (error) {
-                console.log('error', error)
+                 
 
             } finally {
                 loading.value = false
             }
         }
         onMounted(() => {
-            console.log('route.query', route.params.id)
             if (route.params.id) {
                 index(route.params.id)
             }

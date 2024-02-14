@@ -123,7 +123,6 @@ export default {
         const invalid = ref();
         const newDate = ref()
         const back = (back) => {
-            console.log('back')
             steps.value.step1 = true
             steps.value.step2 = false
         }
@@ -136,8 +135,6 @@ export default {
                     }
                     break;
                 case 2:
-                    console.log('invalid.value', invalid.value)
-                    console.log('formData.value', formData.value)
                     props.save()
                     break;
 

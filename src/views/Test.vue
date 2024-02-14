@@ -61,9 +61,7 @@ export default {
     }
 
     const testDate = (horas) => {
-      console.log('horas', horas)
       var data = getDateAndMinutes(+horas);
-      console.log({ data, startAt: timeToStart(data.startDate), endAt: timeToEnd(data.startDate, data.duration) })
     }
     onMounted(() => {
 

@@ -174,21 +174,22 @@
                                         <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
-                                        <img class="w-full rounded-s-lg h-full object-cover" src="../../../assets/img/jpg/image.jpg"
-                                            alt="">
+                                        <img class="w-full rounded-s-lg h-full object-cover"
+                                            src="../../../assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
                                     <div @click="statusModal.openModal({ isActive: true, data: auction })"
                                         class="flex p-5 cursor-pointer flex-col gap-3">
                                         <div class="">
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{ auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{
+                                                auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">
                                                 {{ auction?.city }}, {{ auction?.province }}
                                             </p>
                                         </div>
                                         <div class="grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
-                                            <div  v-if="auction?.vehicleDetails?.vin"  class="flex gap-4">
+                                            <div v-if="auction?.vehicleDetails?.vin" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
                                                     <path
@@ -197,7 +198,7 @@
                                                 </svg>
                                                 <p class="capitalize">{{ auction.vehicleDetails.vin }}</p>
                                             </div>
-                                            <div  v-if="auction?.vehicleDetails?.odometer"  class="flex gap-4">
+                                            <div v-if="auction?.vehicleDetails?.odometer" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
                                                     <path
@@ -229,7 +230,8 @@
                                         </div>
                                         <div class="grid grid-cols-2 gap-1 "
                                             :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
-                                            <div v-if="auction?.vehicleDetails?.tireCondition" class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
+                                            <div v-if="auction?.vehicleDetails?.tireCondition"
+                                                class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
@@ -238,7 +240,8 @@
                                                 </svg>
                                                 <p class="capitalize">{{ auction?.vehicleDetails?.tireCondition }}</p>
                                             </div>
-                                            <div v-if="auction?.vehicleDetails?.rotorCondition" class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
+                                            <div v-if="auction?.vehicleDetails?.rotorCondition"
+                                                class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
@@ -248,18 +251,6 @@
                                                 <p class="capitalize">{{ auction?.vehicleDetails?.rotorCondition }}</p>
                                             </div>
                                         </div>
-
-                                        <RouterLink to="#" class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
-                                            <div class="bg-[#F0F0F0] flex gap-3 py-1 px-2  rounded-lg items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    viewBox="0 0 20 20" fill="none">
-                                                    <path
-                                                        d="M5.37852 15.8333L1.66602 18.75V3.33333C1.66602 3.11232 1.75381 2.90036 1.91009 2.74408C2.06637 2.5878 2.27834 2.5 2.49935 2.5H17.4993C17.7204 2.5 17.9323 2.5878 18.0886 2.74408C18.2449 2.90036 18.3327 3.11232 18.3327 3.33333V15C18.3327 15.221 18.2449 15.433 18.0886 15.5893C17.9323 15.7455 17.7204 15.8333 17.4993 15.8333H5.37852ZM5.83268 8.33333V10H7.49935V8.33333H5.83268ZM9.16602 8.33333V10H10.8327V8.33333H9.16602ZM12.4993 8.33333V10H14.166V8.33333H12.4993Z"
-                                                        fill="#0A0A0A" />
-                                                </svg>
-                                                <p>Contact Buyer</p>
-                                            </div>
-                                        </RouterLink>
                                     </div>
                                     <div :class="changeLayouts ? 'w-full' : 'w-[40%] grid place-content-between'"
                                         class="border-l-2  border-[#E0E0E0]">
@@ -268,9 +259,13 @@
                                             <div class="space-y-1"
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                                                 <p>Current bid</p>
-                                                <p class=" font-medium text-base-black  ">${{
-                                                    auction?.vehicleDetails?.basePrice }} <span
-                                                        class="text-[#666666] mt-2">/{{ auction.bids.length }}
+                                                <p class=" font-medium text-2xl text-base-black">
+                                                    <span v-if="auction?.bids[0]?.amount">${{ auction?.bids[0]?.amount
+                                                    }}</span>
+                                                    <span v-else-if="auction?.vehicleDetails?.basePrice"> ${{
+                                                        auction?.vehicleDetails?.basePrice }} </span>
+                                                    <span v-else>$0</span>
+                                                    <span class="text-[#666666] !text-lg mt-2">/{{ auction.bids.length }}
                                                         Bids
                                                     </span>
                                                 </p>
@@ -319,7 +314,7 @@
                         </h1>
                         <p>Let the bids begin, post your auction, sell your car quick as 48 hours.</p>
                     </div>
-                    <RouterLink to="/all/create" @click="onSteps"
+                    <RouterLink to="/all/create"
                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Create My Auction
                     </RouterLink>
@@ -423,7 +418,7 @@ export default {
             loading.value = true
             try {
                 let res = await storeAutions.index()
-                console.log('res', res)
+
                 if (res) {
                     data.value = storeAutions.live
                     data.value.map((autions, index) => {
@@ -455,12 +450,12 @@ export default {
                             return autions.photos = null
                         }
                     })
-                    console.log('Data Seller', data.value)
-                    console.log('storeAutions.draft', storeAutions.live)
+
+
                 }
 
             } catch (error) {
-                console.log('error', error)
+
 
             } finally {
                 loading.value = false
@@ -482,9 +477,7 @@ export default {
         }
         onMounted(() => {
             let resTime = timeConvert(45000000)
-            console.log('resTime', resTime)
             index()
-            console.log('bucket.value', bucket.value)
 
         })
 

@@ -13,7 +13,9 @@
             <div class="p-5">
                 <div class="border-b pb-2 flex justify-between items-center border-b-[#F0F0F0]">
                     <div clas capitalize s="">
-                        <p class="text-2xl font-semibold capitalize">{{ statusModal.dataAutiont?.vehicleDetails?.year }} {{ statusModal.dataAutiont?.vehicleDetails?.make }} {{ statusModal.dataAutiont?.vehicleDetails?.model }}</p>
+                        <p class="text-2xl font-semibold capitalize">{{ statusModal.dataAutiont?.vehicleDetails?.year }} {{
+                            statusModal.dataAutiont?.vehicleDetails?.make }} {{
+        statusModal.dataAutiont?.vehicleDetails?.model }}</p>
                         <div class="flex gap-1 items-center">
                             <p>{{ statusModal.dataAutiont?.city }}, {{ statusModal.dataAutiont?.province }}</p>
                             <p>|</p>
@@ -30,10 +32,11 @@
                 <div class="border-r flex pt-0 border-r-[#F0F0F0]">
                     <div class="w-[70%] p-4">
                         <div>
-                            <img v-if="statusModal.dataAutiont?.photos" class=" h-[400px] shadow-xl w-full rounded-lg object-cover  "
-                                :src="bucket + statusModal.dataAutiont?.photos[0]?.url"
-                                alt="">
-                                <img class="h-[400px] shadow-xl w-full rounded-lg object-cover " v-else src="@/assets/img/jpg/image.jpg" alt="">
+                            <img v-if="statusModal.dataAutiont?.photos"
+                                class=" h-[400px] shadow-xl w-full rounded-lg object-cover  "
+                                :src="bucket + statusModal.dataAutiont?.photos[0]?.url" alt="">
+                            <img class="h-[400px] shadow-xl w-full rounded-lg object-cover " v-else
+                                src="@/assets/img/jpg/image.jpg" alt="">
                             <div class="flex flex-col gap-1">
                                 <div class="grid grid-cols-2 gap-2 pt-4">
                                     <div v-if="statusModal.dataAutiont?.vin" class="flex gap-2 items-center">
@@ -111,15 +114,21 @@
 
                                     <p v-if="statusModal.dataAutiont?.status == 'bids completed'"
                                         class=" text-lg font-medium capitalize ">Completed</p>
-                                    <p v-else class=" text-lg font-medium capitalize ">{{ statusModal.dataAutiont?.status }}
+                                    <p v-else class=" text-lg font-medium capitalize ">Accepted
                                     </p>
                                 </div>
                             </div>
-                            <div class=" w-full flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
+                            <div v-if="statusModal.dataAutiont?.status == 'bids completed'"  class=" w-full flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
                                 <p class="text-sm">Total Bid</p>
                                 <div class="flex gap-2 items-center ">
                                     <p class=" text-lg font-medium capitalize ">{{ statusModal.dataAutiont?.bids.length }}
                                         Bids</p>
+                                </div>
+                            </div>
+                            <div v-if="statusModal.dataAutiont?.status == 'completed'"  class=" w-full flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
+                                <p class="text-sm">Final Bids</p>
+                                <div class="flex gap-2 items-center ">
+                                    <p class=" text-lg font-medium capitalize ">${{ statusModal.dataAutiont?.bids[0]?.amount}}</p>
                                 </div>
                             </div>
                         </div>
@@ -143,11 +152,11 @@
                             <div class="w-full flex flex-col">
                                 <div class="flex py-4 border-b border-[#F0F0F0] justify-between items-center">
                                     <p class=" font-semibold ">Full Name</p>
-                                    <p class="text-[#858585]">Alex Tuner</p>
+                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.name }}</p>
                                 </div>
                                 <div class="flex py-4 justify-between items-center">
                                     <p class=" font-semibold ">Email Address</p>
-                                    <p class="text-[#858585]">alexturner@gmail.com</p>
+                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.email }}</p>
                                 </div>
                             </div>
                         </div>
@@ -163,15 +172,15 @@
                                 </div>
                                 <div class="flex py-4 justify-between items-center">
                                     <p class=" font-semibold ">OMVIC Registration Number</p>
-                                    <p class="text-[#858585]">alexturner@gmail.com</p>
+                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.omvic  }}</p>
                                 </div>
                                 <div class="flex py-4 justify-between items-center">
                                     <p class=" font-semibold ">Address</p>
-                                    <p class="text-[#858585]">alexturner@gmail.com</p>
+                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.address  }}</p>
                                 </div>
                                 <div class="flex py-4 justify-between items-center">
                                     <p class=" font-semibold ">Phone Number</p>
-                                    <p class="text-[#858585]">alexturner@gmail.com</p>
+                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.phone  }}</p>
                                 </div>
                             </div>
                         </div>
@@ -179,17 +188,18 @@
                     <div v-else class=" w-full p-4 border-l border-[#F0F0F0]">
                         <p class="font-semibold text-xl ">Dealer Bids</p>
                         <div class=" h-[50vh] p-4 overflow-x-hidden overflow-y-auto ">
-                            <template v-if=" statusModal.dataAutiont?.bids.length > 0" v-for="(dealerBit, index) in statusModal.dataAutiont?.bids" :key="index">
+                            <template v-if="statusModal.dataAutiont?.bids.length > 0"
+                                v-for="(dealerBit, index) in statusModal.dataAutiont?.bids" :key="index">
                                 <div
                                     :class="index == 0 && statusModal.dataAutiont?.status == 'bids completed' ? 'border-[2px] p-2 border-[#05A54B] rounded-lg' : 'border-[#F0F0F0]  border-b'">
                                     <div class="flex pr-4  py-3 pb-0 justify-between ">
                                         <div class="flex ">
                                             <div class="h-[60px] w-[60px]">
-                                                <img v-if="dealerBit.participant.dealer.picture" class="w-full shadow-lg rounded-lg h-full object-cover"
-                                                   :src="bucket + dealerBit.participant.dealer.picture"
-                                                    alt="">
-                                                    <img class=" shadow-xl w-full rounded-lg object-cover " v-else src="@/assets/img/jpg/image.jpg"
-                                alt="">
+                                                <img v-if="dealerBit.participant.dealer.picture"
+                                                    class="w-full shadow-lg rounded-lg h-full object-cover"
+                                                    :src="bucket + dealerBit.participant.dealer.picture" alt="">
+                                                <img class=" shadow-xl w-full rounded-lg object-cover " v-else
+                                                    src="@/assets/img/jpg/image.jpg" alt="">
                                             </div>
                                             <div class="flex gap-1 p-2 flex-col items-start">
                                                 <template
@@ -211,17 +221,17 @@
                                                 </template>
                                                 <template v-else>
                                                     <p class="font-semibold">{{ dealerBit.participant.dealer.name }}</p>
-                                                    <p>
-                                                        {{ moment(dealerBit?.participant?.updatedAt).format('MMMM DD YYYY, h: mm: ss a') }}</p>
+                                                    <p>{{ moment(dealerBit?.participant?.updatedAt).format('MMMM DD YYYY, h: mm: ss a') }}</p>
                                                 </template>
 
                                             </div>
                                         </div>
                                         <p class="font-semibold text-[1.5rem]">${{ dealerBit.amount }}</p>
                                     </div>
-                                    <button v-if="index == 0 && statusModal.dataAutiont?.status == 'bids completed'"
-                                        class="w-full border hover:bg-primary transition-all ease-in duration-300  hover:text-white py-2 rounded-lg mt-4 border-[#F0F0F0] ">Contact
-                                        Buyer</button>
+                                    <RouterLink v-if="index == 0 && statusModal.dataAutiont?.status == 'bids completed'"
+                                    :to="{ name: 'inbox-seller', query: { id: statusModal.dataAutiont?._id + '-' + statusModal.dataAutiont?.bids[0].participant._id }}"
+                                        class="w-full btn border hover:bg-primary transition-all ease-in duration-300  hover:text-white py-2 rounded-lg mt-4 border-[#F0F0F0] ">Contact
+                                        Buyer</RouterLink>
                                 </div>
 
                             </template>
@@ -239,7 +249,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch ,computed} from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import { ModalBids } from '@/stores/modalBids';
 import { toast } from "vue3-toastify";
 import { ModalViewDetails } from '@/stores/modalViewDetails';
@@ -250,11 +260,9 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         onMounted(() => {
             if (statusModal.dataAutiont) {
+                console.log('statusModal.dataAutiont', statusModal.dataAutiont)
                 statusModal.dataAutiont.dropOffDate = moment(statusModal.dataAutiont.dropOffDate).format("DD MMMM YYYY");
-
-
             }
-            console.log('statusModal.data', statusModal.dataAutiont)
         })
         return {
             statusModal,

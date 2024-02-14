@@ -346,7 +346,6 @@ export default {
         }
 
         const previewImage = (event) => {
-            console.log('event', event)
             var input = event.target;
             var maxfilesize = 1024 * 1024  // 1 Mb
             var filesize = input.files[0].size
@@ -362,17 +361,13 @@ export default {
                     loading.value = true
                     var reader = new FileReader();
                     reader.onload = (e) => {
-                        console.log('e', e)
-
                         form.value.driverPreview = e.target.result;
                         loading.value = false
                     }
-
                     form.value.driveImg = input.files[0];
                     form.value.driveImg.mb = convertion
                     reader.readAsDataURL(input.files[0]);
                     counter.value += 1
-                    console.log(' form.img', form.driverPreview)
                 }
             }
         }
@@ -391,7 +386,6 @@ export default {
                         return;
                     }
                     activeModal.value = true
-                    console.log('paso email',)
                     break;
                 case 'password':
                     if (!form.value.password || !form.value.confirmPassword) {
@@ -405,7 +399,6 @@ export default {
                         });
                         return;
                     }
-                    console.log('paso password', form.value.password)
                     loading.value = true
                     try {
                         let update = {
@@ -413,7 +406,6 @@ export default {
                         }
                         let resUpdate = await storeProfile.updateUser(update)
                         if (resUpdate) {
-                            console.log('resUpdate password', resUpdate)
                             props.getProfile()
                         }
                     } catch (error) {
@@ -441,7 +433,6 @@ export default {
                         }
                         let resUpdate = await storeProfile.updateUser(update)
                         if (resUpdate) {
-                            console.log('resUpdate phone', resUpdate)
                             props.getProfile()
                         }
                     } catch (error) {
@@ -457,7 +448,7 @@ export default {
                             file: form.value.driveImg,
                             location: 'test'
                         }
-                        console.log('data', data)
+
                         loading.value = true
                         try {
                             let resFile = await storeFile.uploaderFile(data)
@@ -470,7 +461,6 @@ export default {
                                     }
                                     let resUpdate = await storeProfile.updateUser(update)
                                     if (resUpdate) {
-                                        console.log('resUpdate driver', resUpdate)
                                         props.getProfile()
                                         form.value.driverPreview = null
                                         form.value.driveImg = null

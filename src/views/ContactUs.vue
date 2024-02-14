@@ -121,15 +121,12 @@ export default {
         const route = useRouter();
         const store = useFaqStore();
         const redirectLogin = (redirect) => {
-            console.log('redirect', route)
             route.push({ name: 'signup', params: { rol: redirect } })
         }
         const index = async () => {
             try {
                 let res = await store.index();
-                console.log('FAQ', res)
             } catch (error) {
-                console.log(error);
 
             }
         };

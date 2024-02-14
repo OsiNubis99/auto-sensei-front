@@ -18,11 +18,10 @@ export const useStoreFile = defineStore("useStoreFile", {
                         },
                     })
                     .then((response) => {
-                        console.log('response', response)
+                        console.log('uploader/create', response)
                         resolve(response);
                     })
                     .catch((error) => {
-                        console.log("ERROR >> ", error);
                         reject(error);
                     });
             });

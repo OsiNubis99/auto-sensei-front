@@ -25,9 +25,15 @@
             class="row-span-1 col-span-5 border-b-2 border-r-2 border-[#E0E0E0]   p-5">
             <div class="flex items-center justify-between gap-4">
                 <div class="flex justify-between w-full items-center">
-                    <div>
-                        <p class=" capitalize text-2xl font-medium">{{ userFriend?.firstName }}</p>
-                        <p>St. John, Newfoundland & Labrador</p>
+                    <div v-if="auth?.userData.type == 2">
+                        <p class=" capitalize text-2xl font-medium">{{ storeAution?.vehicleDetails?.year }} {{
+                            storeAution?.vehicleDetails?.make }} {{ storeAution?.vehicleDetails?.model }}</p>
+
+                    </div>
+                    <div v-else>
+                        <p class="capitalize text-2xl font-medium">{{ storeAution?.vehicleDetails?.year }} {{
+                            storeAution?.vehicleDetails?.make }} {{ storeAution?.vehicleDetails?.model }}</p>
+                        <p>{{ storeAution?.owner?.dealer?.address }}</p>
                     </div>
                     <div>
                         <div class="container-seaxrh">
@@ -71,18 +77,44 @@
                 </div>
             </div>
             <template v-else>
-                <template v-if="dataTableSearch.length > 0" v-for="(user, index) in dataTableSearch" :key="index">
-                    <RouterLink :to="{ name: 'inbox', query: { state: user.id } }" @click="sendChat(user)"
-                        class="flex flex-row py-3 gap-4 pl-2  justify-center cursor-pointer  hover:bg-[#1F94F0] hover:text-white ease-in-out duration-500 transition-all  items-center border-b-2 border-[#E0E0E0]"
-                        :class="userFriend?.id === user.id ? 'bg-[#1F94F0] text-white' : ''">
-                        <div class="w-[30%] ">
-                            <img src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
-                                class="object-cover h-12 w-full rounded-md" alt="" />
-                        </div>
-                        <div class="w-full">
-                            <div class="text-lg font-semibold">{{ user.firstName }}</div>
-                            <span class="text-gray-500">{{ user.createdAt }} </span>
-                        </div>
+                <template v-if="dataTableSearch.length > 0" v-for="(user, indexx) in dataTableSearch" :key="indexx">
+                    <RouterLink
+                        :to="{ name: auth?.userData.type == 1 ? 'inbox-seller' : 'inbox-dealer', query: { id: user.auction._id + '-' + user.participant._id } }"
+                        @click="getMessages(user, indexx, user.auction._id + '-' + user.participant._id)"
+                        class="flex flex-row py-3 gap-4 pl-2  justify-center cursor-pointer   hover:bg-[#1F94F0] hover:text-white ease-in-out duration-500 transition-all  items-center border-b-2 border-[#E0E0E0]"
+                        :class="(user.activeChat == route.query.id) && route.query.id ? 'bg-[#1F94F0] text-white' : 'bg-white'">
+                        <template v-if="auth?.userData.type == 1">
+                            <div class="w-[30%] ">
+                                <img v-if="user.participant.dealer.picture" :src="bucket + user.participant.dealer.picture"
+                                    class="object-cover h-12 w-full rounded-md" alt="" />
+                                <img v-else class="w-full rounded-s-lg h-full object-cover" src="@/assets/img/jpg/image.jpg"
+                                    alt="">
+                            </div>
+                            <div class="w-full">
+                                <div class="text-lg font-semibold">{{ user.participant.dealer.name }}</div>
+                                <span class="text-gray-500">{{ user.createdAt }} </span>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="w-[30%] ">
+                                <img v-if="user.auction?.vehicleDetails.exteriorPhotos[0]"
+                                    :src="bucket + user.auction?.vehicleDetails?.exteriorPhotos[0]"
+                                    class="object-cover h-12 w-full rounded-md" alt="" />
+                                <img v-else class="w-full rounded-s-lg h-full object-cover" src="@/assets/img/jpg/image.jpg"
+                                    alt="">
+                            </div>
+                            <div class="w-full flex  justify-between items-end  relative">
+                                <div>
+                                    <p class="text-lg font-semibold">
+                                        {{ user.auction?.vehicleDetails?.year }} {{
+                                            user.auction?.vehicleDetails?.make }} {{ user.auction?.vehicleDetails?.model }}</p>
+                                    <p class="capitalize">{{ user.auction?.owner?.seller?.firstName }} {{
+                                        user.auction?.owner?.seller?.lastName }}
+                                    </p>
+                                </div>
+                                <p class="text-gray-500 absolute -bottom-2 right-2  ">11.31</p>
+                            </div>
+                        </template>
                     </RouterLink>
                 </template>
                 <div class="w-full h-full flex justify-center items-center" v-else>
@@ -126,17 +158,17 @@
             <div v-else class="w-full  flex flex-col h-full justify-between">
                 <div class="flex overflow-auto section-message-chat relative h-custom-chat-panel mb-3 flex-col ">
                     <template v-if="dataChat?.length > 0" v-for="(msg, index) in dataChat" :key="index">
-                        <div class="flex justify-center gap-4 items-center mt-4">
+                       <!--  <div class="flex justify-center gap-4 items-center mt-4">
                             <hr class="w-full border border-[#E0E0E0]">
                             <p v-if="msg.today" class="text-[#666]">Today</p>
                             <p v-else class="text-[#666]">{{ msg.day }}</p>
                             <hr class="w-full border border-[#E0E0E0]">
-                        </div>
+                        </div> -->
                         <div v-if="msg.me" class="flex justify-end pt-4 mb-4" :class="index == 0 ? 'pt-5' : ''">
                             <div>
-                                <div class=" py-3 px-4 bg-[#1F94F0] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                <p class=" py-3 px-4 bg-[#1F94F0] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                                     {{ msg.message }}
-                                </div>
+                                </p>
                                 <div class="flex items-center w-full justify-end gap-1">
                                     <p class=" capitalize text-[12px]  py-2"> {{ msg.createdAt }}</p>
                                     <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -151,10 +183,10 @@
                         </div>
                         <div v-else class="flex justify-start mb-4" :class="index == 0 ? 'pt-5' : ''">
                             <div>
-                                <div
+                                <p
                                     class=" py-3 px-4 bg-[#F0F0F0] rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-base-black">
                                     {{ msg.message }}
-                                </div>
+                                </p>
                                 <div class="flex items-center w-full justify-start gap-1">
                                     <p class=" capitalize text-[12px]  py-2"> {{ msg.createdAt }}</p>
                                     <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -164,14 +196,12 @@
                                             fill="#05A54B" />
                                     </svg>
                                 </div>
-
-
                             </div>
                         </div>
                     </template>
-                    <div v-else class="w-full h-full flex justify-center items-center">
+                    <!--  <div v-else class="w-full h-full flex justify-center items-center">
                         <p class=" capitalize   font-semibold text-[#3e3e3e]  ">no results</p>
-                    </div>
+                    </div> -->
                 </div>
                 <div :class="termins && listChat.length === 0 ? 'bg-[#A3A3A3] pointer-events-none ' : ''"
                     class="p-5 pt-0 mb-2 border flex gap-3 flex-col shadow-xl   rounded-lg border-[#E0E0E0]">
@@ -211,12 +241,13 @@
         <div :class="activateLayout ? 'visible pointer-events-auto' : 'invisible pointer-events-none '"
             class="row-span-5 flex flex-col gap-4 col-span-2  border-t-[1px] border-[#E0E0E0] p-5">
             <div class="flex flex-col">
-                <img v-if="storeAution.autionById?.photos" :src="bucket + storeAution.autionById?.photos[0]"
+                <img v-if="storeAution?.vehicleDetails?.exteriorPhotos[0]"
+                    :src="bucket + storeAution?.vehicleDetails?.exteriorPhotos[0]"
                     class="object-cover rounded-xl h-[240px] " alt="" />
                 <div class="mt-4">
-                    <p class=" capitalize font-semibold text-xl">{{ storeAution.autionById?.vehicleDetails?.make }}</p>
+                    <p class=" capitalize font-semibold text-xl">{{ storeAution?.vehicleDetails?.make }}</p>
                     <p class=" capitalize font-light">
-                        {{ storeAution.autionById?.city }}, {{ storeAution.autionById?.province }}
+                        {{ storeAution?.city }}, {{ storeAution?.province }}
                     </p>
                 </div>
             </div>
@@ -229,7 +260,7 @@
                                 d="M0.333496 0.662267C0.333496 0.296507 0.637036 0 0.994696 0H13.0056C13.3708 0 13.6668 0.296633 13.6668 0.662267V11.3377C13.6668 11.7035 13.3633 12 13.0056 12H0.994696C0.629529 12 0.333496 11.7034 0.333496 11.3377V0.662267ZM3.00016 8V9.33333H11.0002V8H3.00016ZM3.00016 2.66667V6.66667H7.00016V2.66667H3.00016ZM8.3335 2.66667V4H11.0002V2.66667H8.3335ZM8.3335 5.33333V6.66667H11.0002V5.33333H8.3335ZM4.3335 4H5.66683V5.33333H4.3335V4Z"
                                 fill="#858585" />
                         </svg>
-                        <p class="  w-fit uppercase">{{ storeAution.autionById?.vin }}</p>
+                        <p class="  w-fit uppercase">{{ storeAution?.vin }}</p>
                     </div>
                     <div class="flex justify-between items-center gap-2">
                         <svg class="w-fit capitalize" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -238,7 +269,7 @@
                                 d="M13.3335 8.66667C13.3335 10.1394 12.7366 11.4727 11.7714 12.4379L12.7142 13.3807C13.9206 12.1743 14.6668 10.5076 14.6668 8.66667C14.6668 4.98477 11.682 2 8.00016 2C4.31826 2 1.3335 4.98477 1.3335 8.66667C1.3335 10.5076 2.07969 12.1743 3.28612 13.3807L4.22893 12.4379C3.26378 11.4727 2.66683 10.1394 2.66683 8.66667C2.66683 5.72115 5.05464 3.33333 8.00016 3.33333C10.9457 3.33333 13.3335 5.72115 13.3335 8.66667ZM10.1955 5.52865L7.00016 8.33333L8.3335 9.66667L11.1383 6.47145L10.1955 5.52865Z"
                                 fill="#858585" />
                         </svg>
-                        <p class=" capitalize w-fit ">{{ storeAution.autionById?.vehicleDetails?.odometer }} Kilometers</p>
+                        <p class=" capitalize w-fit ">{{ storeAution?.vehicleDetails?.odometer }} Kilometers</p>
                     </div>
                 </div>
 
@@ -250,7 +281,7 @@
                                 d="M12.8185 12.489L13.997 11.3106L15.1755 12.489C15.8263 13.1399 15.8263 14.1952 15.1755 14.8461C14.5246 15.497 13.4693 15.497 12.8185 14.8461C12.1676 14.1952 12.1676 13.1399 12.8185 12.489ZM5.91907 0.720703L13.4615 8.26318C13.7219 8.52351 13.7219 8.94564 13.4615 9.20598L7.80467 14.8628C7.54433 15.1232 7.1222 15.1232 6.86187 14.8628L1.20503 9.20598C0.944679 8.94564 0.944679 8.52351 1.20503 8.26318L6.39048 3.07772L4.97627 1.66351L5.91907 0.720703ZM7.33327 4.02054L2.61924 8.73458H12.0473L7.33327 4.02054Z"
                                 fill="#858585" />
                         </svg>
-                        <p class=" capitalize w-fit "> {{ storeAution.autionById?.vehicleDetails?.color }} </p>
+                        <p class=" capitalize w-fit "> {{ storeAution?.vehicleDetails?.color }} </p>
                     </div>
                     <div class="flex justify-between items-center gap-2">
                         <svg class="w-fit capitalize" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -259,7 +290,7 @@
                                 d="M12.6668 13.3327H3.3335V13.9993C3.3335 14.3675 3.03502 14.666 2.66683 14.666H2.00016C1.63198 14.666 1.3335 14.3675 1.3335 13.9993V7.99935L3.00906 3.53118C3.20421 3.01078 3.7017 2.66602 4.2575 2.66602H11.7428C12.2986 2.66602 12.7961 3.01078 12.9913 3.53118L14.6668 7.99935V13.9993C14.6668 14.3675 14.3684 14.666 14.0002 14.666H13.3335C12.9653 14.666 12.6668 14.3675 12.6668 13.9993V13.3327ZM2.7575 7.99935H13.2428L11.7428 3.99935H4.2575L2.7575 7.99935ZM4.3335 11.3327C4.88578 11.3327 5.3335 10.8849 5.3335 10.3327C5.3335 9.78042 4.88578 9.33268 4.3335 9.33268C3.78121 9.33268 3.3335 9.78042 3.3335 10.3327C3.3335 10.8849 3.78121 11.3327 4.3335 11.3327ZM11.6668 11.3327C12.2191 11.3327 12.6668 10.8849 12.6668 10.3327C12.6668 9.78042 12.2191 9.33268 11.6668 9.33268C11.1146 9.33268 10.6668 9.78042 10.6668 10.3327C10.6668 10.8849 11.1146 11.3327 11.6668 11.3327Z"
                                 fill="#858585" />
                         </svg>
-                        <p class=" capitalize w-fit ">{{ storeAution.autionById?.vehicleDetails?.driveTrain }}</p>
+                        <p class=" capitalize w-fit ">{{ storeAution?.vehicleDetails?.driveTrain }}</p>
                     </div>
                 </div>
                 <div class="flex gap-4 py-2">
@@ -282,35 +313,221 @@
                 </div>
 
             </div>
-            <div class="grid grid-cols-2  place-items-start gap-2 ">
-                <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
-                    <p class=" capitalize ">Auction Status</p>
-                    <div class="flex gap-2 items-center">
-                        <div class="w-[10px] h-[10px] rounded-full bg-[#FF333E] "></div>
-                        <p class=" capitalize font-semibold text-xl">{{ storeAution.autionById?.status }} </p>
+            <template v-if="auth?.userData?.type == 1">
+                <div class="grid grid-cols-2  place-items-start gap-2 ">
+                    <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p class=" capitalize ">Auction Status</p>
+                        <div v-if="storeAution?.status == 'completed'" class="flex gap-2 items-center">
+                            <div class="w-[10px] h-[10px] rounded-full bg-[#FF333E] "></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path
+                                    d="M7.33925 0.752733C6.17128 0.374641 4.90159 0.900558 4.34305 1.99381L3.67156 3.30812C3.59178 3.46428 3.46477 3.59129 3.3086 3.67107L1.9943 4.34256C0.901046 4.9011 0.37513 6.17079 0.753221 7.33876L1.20777 8.74292C1.26178 8.90976 1.26178 9.08942 1.20777 9.25626L0.753221 10.6604C0.37513 11.8284 0.901046 13.0981 1.9943 13.6567L3.3086 14.3281C3.46477 14.4079 3.59178 14.5349 3.67156 14.6911L4.34305 16.0054C4.90159 17.0987 6.17128 17.6246 7.33925 17.2465L8.74341 16.7919C8.91025 16.7379 9.08991 16.7379 9.25675 16.7919L10.6609 17.2465C11.8289 17.6246 13.0986 17.0987 13.6572 16.0054L14.3286 14.6911C14.4084 14.5349 14.5354 14.4079 14.6916 14.3281L16.0059 13.6567C17.0992 13.0981 17.6251 11.8284 17.247 10.6604L16.7924 9.25626C16.7384 9.08942 16.7384 8.90976 16.7924 8.74292L17.247 7.33876C17.6251 6.17079 17.0992 4.9011 16.0059 4.34256L14.6916 3.67107C14.5354 3.59129 14.4084 3.46428 14.3286 3.30812L13.6572 1.99381C13.0986 0.900558 11.8289 0.374641 10.6609 0.752733L9.25675 1.20728C9.08991 1.26128 8.91025 1.26129 8.74341 1.20728L7.33925 0.752733ZM4.63322 8.79734L5.81174 7.61876L8.16875 9.97584L12.8828 5.2618L14.0613 6.44031L8.16875 12.3328L4.63322 8.79734Z"
+                                    fill="#05A54B" />
+                            </svg>
+                            <p class=" capitalize font-semibold text-xl">{{ storeAution?.status }} </p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p>Bid Status</p>
+                        <div class="flex gap-2 items-center">
+                            <p class=" capitalize  border border-[#E0E0E0] font-medium  rounded-full p-2">You Haven’t Bid
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p>Current bid</p>
+                        <p class=" capitalize font-semibold text-xl">${{ storeAution?.bids[0]?.amount }}</p>
+                    </div>
+                    <div v-if="storeAution?.status == 'completed'"
+                        class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p>Final bid</p>
+                        <p class=" capitalize font-semibold text-xl">${{ storeAution?.bids[0]?.amount }}</p>
+                    </div>
+                    <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p>Total Bid</p>
+                        <p v-if="storeAution?.bids?.length > 0" class="font-semibold text-xl">
+                            {{ storeAution?.bids?.length }} Bids
+                        </p>
+                        <p v-else class="font-semibold text-xl">0 Bids</p>
                     </div>
                 </div>
-                <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
-                    <p>Bid Status</p>
+                <div>
+                    <div class="flex items-center gap-3 mb-3 justify-between  ">
+                        <button class="btn w-full bg-primary ">Accept</button>
+                        <button class="btn w-full border-error border text-error">Decline</button>
+                    </div>
                     <div class="flex gap-2 items-center">
-                        <p class=" capitalize  border border-[#E0E0E0] font-medium  rounded-full p-2">You Haven’t Bid</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                            <path
+                                d="M9.99984 18.8327C5.39734 18.8327 1.6665 15.1018 1.6665 10.4993C1.6665 5.89685 5.39734 2.16602 9.99984 2.16602C14.6023 2.16602 18.3332 5.89685 18.3332 10.4993C18.3332 15.1018 14.6023 18.8327 9.99984 18.8327ZM9.99984 17.166C11.7679 17.166 13.4636 16.4636 14.7139 15.2134C15.9641 13.9632 16.6665 12.2675 16.6665 10.4993C16.6665 8.73124 15.9641 7.03555 14.7139 5.7853C13.4636 4.53506 11.7679 3.83268 9.99984 3.83268C8.23173 3.83268 6.53604 4.53506 5.28579 5.7853C4.03555 7.03555 3.33317 8.73124 3.33317 10.4993C3.33317 12.2675 4.03555 13.9632 5.28579 15.2134C6.53604 16.4636 8.23173 17.166 9.99984 17.166ZM9.1665 12.9993H10.8332V14.666H9.1665V12.9993ZM9.1665 6.33268H10.8332V11.3327H9.1665V6.33268Z"
+                                fill="#0B1107" />
+                        </svg>
+                        <p>Approval ends in <span class="text-[#FF9A02]">48 Hours</span></p>
                     </div>
                 </div>
-                <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
-                    <p>Current bid</p>
-                    <p class=" capitalize font-semibold text-xl">${{ storeAution.autionById?.amountBid }}</p>
+                <div class="p-2 flex  gap-4 flex-col ">
+                    <p>Update your Final Bid <span class="text-error">(
+                            <p class="text-[#FF9A02] font-medium !m-0">
+                                <vue-countdown :time="timeToEnd(storeAution?.startDate, storeAution?.duration)"
+                                    v-slot="{ days, hours, minutes, seconds }">
+                                    <div class="flex items-center gap-1">
+                                        <!--   <p v-if="days > 0" class="flex gap-1 items-center">{{ days }} </p> -->
+                                        <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours
+                                        }}
+                                            Hours</p>
+                                        <p v-if="minutes > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
+                                            class="flex gap-1 items-center">{{ minutes }}m</p>
+                                        <p v-if="seconds > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
+                                            class="flex gap-1 items-center">{{ seconds }}s</p>
+                                    </div>
+                                </vue-countdown>
+                            </p>)
+                        </span></p>
+                    <CurrencyInput :options="{ currency: 'USD' }" v-model="currencyBit" :label="'Place your bid'"
+                        :placeHolder="'$ Min 100,100'" />
+                    <p class="text-[#858585] ">Please enter your revised final bid amount that has been agreed upon with the
+                        seller</p>
+                    <button class="btn bg-primary w-full text-blue-dark ">Submit</button>
                 </div>
-                <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
-                    <p>Total Bid</p>
-                    <p v-if="storeAution.autionById?.bids?.length > 0" class="font-semibold text-xl">{{
-                        storeAution.autionById?.bids?.length }} Bids
-                    </p>
-                    <p v-else class="font-semibold text-xl">0 Bids</p>
+                <div>
+                    <button class="btn bg-primary w-full text-blue-dark ">See Detail</button>
                 </div>
+            </template>
+            <template v-if="auth?.userData.type == 2">
+                <div class="grid grid-cols-2  place-items-start gap-2 ">
+                    <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p class=" capitalize ">Auction Status</p>
+                        <div class="flex gap-2 items-center">
+                            <!--  <div class="w-[10px] h-[10px] rounded-full bg-[#FF333E]"></div> -->
+                            <div v-if="storeAution?.status == 'live'" class="w-[15px] h-[15px] rounded-full bg-[#1f94f0]">
+                            </div>
+                            <svg v-if="storeAution?.status == 'bids completed' || storeAution?.status == 'completed'"
+                                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path
+                                    d="M7.33925 0.752733C6.17128 0.374641 4.90159 0.900558 4.34305 1.99381L3.67156 3.30812C3.59178 3.46428 3.46477 3.59129 3.3086 3.67107L1.9943 4.34256C0.901046 4.9011 0.37513 6.17079 0.753221 7.33876L1.20777 8.74292C1.26178 8.90976 1.26178 9.08942 1.20777 9.25626L0.753221 10.6604C0.37513 11.8284 0.901046 13.0981 1.9943 13.6567L3.3086 14.3281C3.46477 14.4079 3.59178 14.5349 3.67156 14.6911L4.34305 16.0054C4.90159 17.0987 6.17128 17.6246 7.33925 17.2465L8.74341 16.7919C8.91025 16.7379 9.08991 16.7379 9.25675 16.7919L10.6609 17.2465C11.8289 17.6246 13.0986 17.0987 13.6572 16.0054L14.3286 14.6911C14.4084 14.5349 14.5354 14.4079 14.6916 14.3281L16.0059 13.6567C17.0992 13.0981 17.6251 11.8284 17.247 10.6604L16.7924 9.25626C16.7384 9.08942 16.7384 8.90976 16.7924 8.74292L17.247 7.33876C17.6251 6.17079 17.0992 4.9011 16.0059 4.34256L14.6916 3.67107C14.5354 3.59129 14.4084 3.46428 14.3286 3.30812L13.6572 1.99381C13.0986 0.900558 11.8289 0.374641 10.6609 0.752733L9.25675 1.20728C9.08991 1.26128 8.91025 1.26129 8.74341 1.20728L7.33925 0.752733ZM4.63322 8.79734L5.81174 7.61876L8.16875 9.97584L12.8828 5.2618L14.0613 6.44031L8.16875 12.3328L4.63322 8.79734Z"
+                                    fill="#05A54B" />
+                            </svg>
+                            <p v-if="storeAution?.status == 'live'" class=" capitalize font-semibold text-xl">{{
+                                storeAution?.status }} </p>
+                            <p v-if="storeAution?.status == 'bids completed'" class=" capitalize font-semibold text-xl">
+                                Completed </p>
+                            <p v-if="storeAution?.status == 'completed'" class=" capitalize font-semibold text-xl">Accepted
+                            </p>
+                            <p v-if="storeAution?.status == 'drop off'" class=" capitalize font-semibold text-xl">Dropped
+                                Off</p>
 
-            </div>
-            <div>
-                <button class="btn bg-primary w-full text-blue-dark ">See Detail</button>
+
+                        </div>
+                    </div>
+                    <!-- <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p>Final Bid</p>
+                        <div class="flex gap-2 items-center">
+                            <p class=" capitalize  border border-[#E0E0E0] font-medium  rounded-full p-2">You Haven’t Bid
+                            </p>
+                        </div>
+                    </div> -->
+                    <div v-if="storeAution?.status == 'live'"
+                        class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p>Current bid</p>
+                        <p class=" capitalize font-semibold text-xl">${{ storeAution?.bids[0]?.amount }}</p>
+                    </div>
+                    <div v-if="storeAution?.status == 'bids completed' || storeAution?.status == 'completed' || storeAution?.status == 'drop off'"
+                        class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p>Final bid</p>
+                        <p class=" capitalize font-semibold text-xl">${{ storeAution?.bids[0]?.amount }}</p>
+                    </div>
+                    <!--  <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                        <p>Total Bid</p>
+                        <p v-if="storeAution?.bids?.length > 0" class="font-semibold text-xl">
+                            {{ storeAution?.bids?.length }} Bids
+                        </p>
+                        <p v-else class="font-semibold text-xl">0 Bids</p>
+                    </div> -->
+                </div>
+                <div class="p-2 flex  gap-4 flex-col ">
+                    <div v-if="storeAution?.status == 'live'" class="w-full flex whitespace-pre">
+                        <div class="flex">Update your Final Bid </div>
+                        (<vue-countdown :time="timeToEnd(storeAution?.startDate, storeAution?.duration)"
+                            v-slot="{ days, hours, minutes, seconds }">
+                            <div class="flex whitespace-pre text-error  items-center gap-1">
+                                <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours }}
+                                    Hours</p>
+                                <p v-if="minutes > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
+                                    class="flex gap-1 items-center">{{ minutes }}m</p>
+                                <p v-if="seconds > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
+                                    class="flex gap-1 items-center">{{ seconds }}s</p>
+                            </div>
+                        </vue-countdown>)
+                    </div>
+                    <p v-if="storeAution?.status == 'bids completed'">Update your Final Bid <span
+                            class="text-error">(Expires in 48 hours)</span></p>
+                    <template v-if="storeAution?.status == 'bids completed'">
+                        <CurrencyInput :options="{ currency: 'USD' }" v-model="currencyBit" :label="'Place your bid'"
+                            :placeHolder="'$ Min 100,100'" />
+                        <p v-if="errorCurrencyBit"
+                            class="text-error animate-fade-up  animate-ease-in-out animate-delay-100">{{ errorCurrencyBit }}
+                        </p>
+                        <p class="text-[#858585] ">Please enter your revised final bid amount that has been agreed upon with
+                            the
+                            seller</p>
+                        <button @click="openFinalBid" class="btn bg-primary w-full text-blue-dark ">Submit</button>
+                    </template>
+
+                </div>
+                <div v-if="storeAution?.status == 'completed'">
+                    <RouterLink :to="{ name: 'action-details-dealer', params: { id: storeAution?._id } }"
+                        class="btn bg-primary w-full text-blue-dark ">See Detail</RouterLink>
+                </div>
+            </template>
+        </div>
+        <div v-show="modalFinalBit"
+            class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
+            <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
+                <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
+                    <p class="text-xl text-white">Final Bid Adjustment</p>
+                    <svg @click="closeFinalBid" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer"
+                        fill="none" viewBox="0 0 24 24" stroke="#fff">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div class="p-5 flex flex-col gap-2 bg-white">
+                    <div class="flex justify-between gap-2 items-center">
+                        <div
+                            class="w-full relative bg-[#F7F7F7] p-5 h-24 flex flex-col items-center shadow-lg  justify-between  ">
+                            <p>Final Bid</p>
+                            <p class="text-2xl font-medium">${{ storeAution?.bids[0]?.amount }}</p>
+                            <div
+                                class="w-8 h-8 -right-4 top-[40%] z-[1000] absolute bg-blue-dark flex justify-center items-center rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                    fill="none">
+                                    <path
+                                        d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z"
+                                        fill="white" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div
+                            class="w-full relative bg-[#F7F7F7] p-5 h-24 flex flex-col items-center  shadow-lg justify-between  ">
+                            <p>Final Bid</p>
+                            <p class="text-2xl font-medium">${{ currencyBit }}</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-[#E0E0E0] pt-2 mt-6">
+                        <p>Are you sure you want to update the final bid for the
+                            <span class="font-bold">
+                                {{ storeAution?.vehicleDetails?.year }}
+                                {{ storeAution?.vehicleDetails?.make }}
+                                {{ storeAution?.vehicleDetails?.model }}
+                            </span> ?
+                        </p>
+                    </div>
+                    <div class="flex w-full gap-2 items-center">
+                        <button class="btn w-full bg-primary">Yes</button>
+                        <button @click="closeFinalBid"
+                            class="btn w-full bg-transparent border border-[#E0E0E0] ">No</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -324,10 +541,12 @@ import moment from 'moment';
 import { toast } from "vue3-toastify";
 import { useAuthStore } from "@/stores/auth";
 import { useAuctionStore } from "@/stores/auctions";
-import { useSockethStore } from "@/stores/socket";
+import { socket } from "@/socket";
+import CurrencyInput from "../../../components/Inputs/CurrencyInput.vue";
 export default {
 
     components: {
+        CurrencyInput
     },
     setup() {
         const router = useRouter()
@@ -337,67 +556,77 @@ export default {
         const userFriend = ref(null)
         const search = ref('')
         const searchat = ref('')
-        const textForm = ref('Hola RAMONN')
+        const textForm = ref('')
         const loading = ref(false)
         const loadingUser = ref(false)
-        const termins = ref(null)
-        const storeAution = useAuctionStore()
+        const termins = ref(false)
+        const storeIdAution = useAuctionStore()
+        const storeAution = ref(null)
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const dataAution = ref(null)
         const activateLayout = ref(false)
+        const modalFinalBit = ref(false)
+        const currencyBit = ref(null)
+        const errorCurrencyBit = ref(null)
         const auth = useAuthStore()
-        const socketStore = useSockethStore()
-        
+        function timeToEnd(startDate, duration) {
+            if (!startDate || !duration) return 0;
+            return (
+                new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
+            );
+        }
 
         const accept = () => {
-            console.log('termis')
             termins.value = false
         }
         const getChats = async (id) => {
-            let dataGet = {
-                chatId: "65c030d14021c575e8036597-65b8029b2f66ffd8f461b813"
-            }
-            console.log('dataGet', dataGet)
-            socket.emit("getChats", dataGet, (response) => {
-                console.log('Res Chat getChats', response)
+            socket?.emit("getChats", (response) => {
+                response.map((chats, index) => {
+                    if ((chats.auction._id + "-" + chats.participant._id) == route.query.id) {
+                        chats.activeChat = chats.auction._id + "-" + chats.participant._id
+                    }
+                    return chats
+
+                })
+                listUser.value = response
+                console.log('listUser', listUser)
+                /*  sendChat() */
             });
 
         }
         const sendMessage = (params) => {
-
-            /*   if (!textForm.value) {
-                  toast("Campos Requerido", {
-                      type: "error",
-                  });
-                  return
-              } */
+            if (!textForm.value) {
+                toast("Campos Requerido", {
+                    type: "error",
+                });
+                return
+            }
             const emoji = textForm.value
             const encodeemoji = encodeURIComponent(emoji)
             const dataSend = {
-                chatid: `${route.params.id}-65b8029b2f66ffd8f461b813`,
-                message: 'Holaaaaaaaaaaaaaaaaa'
+                chatId: route.query.id,
+                message: encodeemoji
             };
-            console.log("dataSendMessage", dataSend);
-
-            socket.emit("createMessage", dataSend, (data) => {
-                console.log("SMILEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", data);
-               
+            socket?.emit("createMessage", dataSend, (data) => {
+                textForm.value = ''
             });
         }
-       
-        const sendChat = (userF) => {
-            console.log('userF', userF)
-            termins.value = null
-            loading.value = true
-            userFriend.value = userF
+
+        const getMessages = (userF, index, id) => {
+
+            if (userF && index) {
+                dataTableSearch.value[index].activeChat = userF.auction._id + "-" + userF.participant._id
+            }
+
             activateLayout.value = true
             const dataGet = {
-                userId: 15447,
-                friendId: userF.id,
+                chatId: id ? id : route.query.id,
             };
-            socket.emit("findAllMessages", dataGet, (response) => {
+            socket?.emit("getMessages", dataGet, (response) => {
                 console.log('response', response)
-                listChat.value = response
+                storeAution.value = response.auction
+                userFriend.value = response.participant
+                listChat.value = response.messages
                 listChat.value.map((chat, index) => {
                     let today = moment(new Date()).format('dddd')
                     let res = moment(chat.createdAt).format('dddd')
@@ -405,23 +634,27 @@ export default {
                     chat.day = res
 
                 })
-                response.map((msg) => {
+                response.messages.map((msg) => {
                     const encoded = msg.message
                     const decodedUriComponent = decodeURIComponent(encoded)
-                    msg.me = msg.userFrom.id == 15447 ? true : false;
+                    msg.me = msg.user == auth.userData._id ? true : false;
                     msg.message = decodedUriComponent
                     msg.createdAt = moment(msg.createdAt).format('LT');
                 });
-                listChat.value = response.reverse();
+                listChat.value = response.messages.reverse();
                 console.log('listChat.value', listChat.value)
-                setTimeout(() => {
-                    loading.value = false
-                    if (listChat.value.length === 0) {
-                        termins.value = true
-                    }
-                    refreshScroll()
-                }, 1000);
+                /*  setTimeout(() => {
+                     if (listChat.value.length === 0) {
+                         termins.value = true
+                     }
+                     refreshScroll()
+                 }, 1000); */
+                refreshScroll()
             });
+            if (listChat.value.length == 0) {
+                termins.value = true
+            }
+            console.log('listChat.value', listChat.value)
         }
         const refreshScroll = () => {
             if (listChat.value.length > 3) {
@@ -432,40 +665,13 @@ export default {
                 }, 5);
             }
         }
-        const getMessages = () => {
-            const dataGet = {
-                userId: 15447,
-                friendId: route.query.state,
-            };
-            socket.emit("findAllMessages", dataGet, (response) => {
-                listChat.value = response
-                listChat.value.map((chat, index) => {
-                    let today = moment(new Date()).format('dddd')
-                    let res = moment(chat.createdAt).format('dddd')
-                    chat.today = res === today
-                    chat.day = res
 
-                })
-                response.map((msg) => {
-                    const encoded = msg.message
-                    const decodedUriComponent = decodeURIComponent(encoded)
-                    console.log("recibid", decodedUriComponent);
-                    msg.me = msg.userFrom.id == 15447 ? true : false;
-                    msg.message = decodedUriComponent
-                    msg.createdAt = moment(msg.createdAt).format('LT');
-                });
-                listChat.value = response.reverse();
-                refreshScroll();
-            });
-
-        }
         const readMessages = (Messages = false) => {
             const dataGet = {
                 userId: 15447,
                 friendId: route.query.state,
             };
-            socket.emit("setMessagesRead", dataGet, (response) => {
-                console.log('readMessages', response)
+            socket?.emit("setMessagesRead", dataGet, (response) => {
                 setTimeout(() => {
                     let countMessages =
                         localStorage.getItem("messages") - response.length;
@@ -475,86 +681,79 @@ export default {
             });
         }
         const dataTableSearch = computed(() => {
-            return listUser.value.filter(s => s?.firstName?.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
+            return listUser.value.filter(s => s.auction?.vehicleDetails?.make?.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
         })
         const dataChat = computed(() => {
             return listChat.value.filter(s => s?.message?.toLocaleLowerCase().includes(searchat.value.toLocaleLowerCase()))
         })
-        watch(textForm, async (newQuestion, oldQuestion) => {
-            if (newQuestion) {
-                let error = socket.emit('isChatting', 'user is chatting');
-                socket.on('typing', function (data) {
-                    console.log('data', data)
-
-                });
-                console.log('error', error)
-            }
-        })
         const getDataAution = async (id) => {
             loading.value = true
             try {
-                let res = await storeAution.getAutionById({ uuid: id })
+                let res = await storeIdAution.getAutionById({ uuid: id })
                 if (res) {
-                    console.log('res', res)
-                    let photos = []
-                    if (storeAution.autionById.vehicleDetails?.additionalDocuments,
-                        storeAution.autionById.vehicleDetails?.exteriorPhotos,
-                        storeAution.autionById.vehicleDetails?.interiorPhotos,
-                        storeAution.autionById.vehicleDetails?.vehicleDamage) {
-                        var d = photos.concat(
-                            storeAution.autionById.vehicleDetails?.additionalDocuments,
-                            storeAution.autionById.vehicleDetails?.exteriorPhotos,
-                            storeAution.autionById.vehicleDetails?.interiorPhotos,
-                            storeAution.autionById.vehicleDetails?.vehicleDamage
-                        );
-                        storeAution.autionById.photos = d
-                    } else {
-                        storeAution.autionById.photos = null
-                    }
-
-                    console.log('   storeAution.autionById', storeAution.autionById)
+                    storeAution.value = res.data
+                    const formatter = new Intl.NumberFormat();
+                    storeAution.value.vehicleDetails.odometer = formatter.format(storeAution.value.vehicleDetails.odometer)
+                    console.log('storeAution', storeAution.value)
                 }
             } catch (error) {
-                console.log('error', error)
-                loading.value = true
+                loading.value = false
             } finally {
-                loading.value = true
+                loading.value = false
             }
 
         }
-        onUpdated(() => {
-           /* console.log('socket', socket)
-             socket.on("newMessageSended", () => {
-                 console.log('New Message')
-                 getMessages();
-             });
-             socket.on("newMessageResived", () => {
-                 console.log('newMessageResived')
-                 if (route.path == '/inbox' && route.query.state) {
-                     console.log('entro aqui')
-                     readMessages(true);
-                 }
-             }); */
-        }),
-            onMounted(() => {
-                console.log('route.params', route.params.id)
-                console.log('socketStore.', socketStore.socket)
-               /*  getDataAution(route.params.id)
-                sendMessage()
-                getChats() */
-              /*   socket.value = socketConnects()
-                console.log('auth.authProfile.data', auth.userData)
-                console.log('socketConnects', socket.value) */
 
+        const openFinalBid = () => {
+            console.log('currencyBit.value', currencyBit.value)
+            if (!currencyBit.value) {
+                errorCurrencyBit.value = 'Required Field'
+            } else if (currencyBit.value <= storeAution.value?.bids[0]?.amount) {
+                errorCurrencyBit.value = 'Your bid is less than the minimum bid'
+            } else {
+                errorCurrencyBit.value = null
+                modalFinalBit.value = true
+            }
 
+        }
 
-            })
+        const closeFinalBid = () => {
+            modalFinalBit.value = false
+            currencyBit.value = null
+            errorCurrencyBit.value = null
+        }
+        onMounted(async () => {
+            if (socket?.connected) {
+                getChats()
+                if (route.query.id) {
+                    let idAution = route.query.id.split('-')
+                    getDataAution(idAution[0])
+                    getMessages()
+                } else {
+                    activateLayout.value = false
+                }
+                socket?.on("newMessageSended", () => {
+                    getMessages()
+                });
+
+                socket?.on("newMessageReceived", () => {
+                    getMessages()
+                    // Verificar que este dentro del chat para marcar como leido
+                    // Sigue escuchando una vez que entra en esta vista
+
+                });
+
+            }
+        })
         return {
             listUser,
             listChat,
-            sendChat,
+            getMessages,
             sendMessage,
             accept,
+            timeToEnd,
+            closeFinalBid,
+            openFinalBid,
             route,
             userFriend,
             textForm,
@@ -568,7 +767,11 @@ export default {
             dataAution,
             bucket,
             activateLayout,
-            storeAution
+            storeAution,
+            auth,
+            modalFinalBit,
+            currencyBit,
+            errorCurrencyBit
         };
     },
 };

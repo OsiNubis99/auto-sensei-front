@@ -888,7 +888,6 @@ export default {
             isPlaying.value = true
         }
         const paused = () => {
-            console.log('paused')
             videoPlayer.value.pause();
             isPlaying.value = false
         }
@@ -904,7 +903,6 @@ export default {
                     });
                 } else {
                     var reader = new FileReader();
-                    console.log('string', string)
                     reader.onload = (e) => {
                         if(typeFile[0] !== 'video'){
                             statusModalImage.openModal({ active: true, img: input.files[0], type: string })
@@ -996,7 +994,6 @@ export default {
 
                                 break;
                             case 'vehicleVideo':
-                                console.log('video', e)
                                 form.value.previewVehicleVideo = e.target.result;
                                 form.value.vehicleVideo = input.files[0];
                                 form.value.vehicleVideo.mb = convertion
@@ -1009,21 +1006,18 @@ export default {
                     }
                 }
                 reader.readAsDataURL(input.files[0]);
-                console.log('reader', reader)
             }
         }
         const next = () => {
             props.nextUploadPhotos()
         }
         const modalLaunch = () => {
-            console.log('hols')
             statusModal.openModal(true)
         }
         const createAutions = (string) => {
             props.saveData(string)
         }
         const viewPhoto = (photo) => {
-            console.log('viewPhoto', photo)
             statusModalViewImage.openModal({ active: true, img: photo })
         }
         return {

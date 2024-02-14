@@ -2,8 +2,6 @@ import { regexEmail, regexPassword } from "../utils/Regex";
 
 
 export const validateData = (form, step, typeLaunch) => {
-    console.log('typeLaunch', typeLaunch)
-    console.log('form', form)
     let error = {};
     if (step == 'generalInformation') {
         if (!form.numberVinGenerals) {

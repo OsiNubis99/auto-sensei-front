@@ -2,10 +2,6 @@ import { regexEmail, regexPassword } from "../utils/Regex";
 
 
 export const validationsDealerBidding = (form, step, amount, from, user) => {
-    console.log('form', form)
-    console.log('amount', amount)
-    console.log('from', from)
-    console.log('user', user)
     let error = {};
     if (step.step1) {
         if (from == 'autoBid') {
@@ -64,10 +60,6 @@ export const validationsDealerBidding = (form, step, amount, from, user) => {
 };
 
 export const validationsAutoBids = (form, step, amount, from, user) => {
-    console.log('form', form)
-    console.log('amount', amount)
-    console.log('from', from)
-    console.log('user', user)
     let error = {};
 
     if (!form.placeyourbid) {

@@ -112,7 +112,6 @@ export default {
         const sizeObjet = ref(null)
         const newDate = ref()
         const back = (back) => {
-            console.log('back')
             steps.value.step1 = true
             steps.value.step2 = false
         }
@@ -126,8 +125,6 @@ export default {
                     break;
                 case 2:
                     props.save()
-                    console.log('invalid.value', invalid.value)
-                    console.log('formData.value', formData.value)
                     break;
 
                 default:
@@ -137,7 +134,6 @@ export default {
         watch(formData.value, async (newQuestion, oldQuestion) => {
             if (newQuestion) {
                 invalid.value = validateData(formData.value, 'Launch Auction', 'hours weekeng');
-                console.log('invalid.value', invalid.value)
                 sizeObjet.value = Object.entries(invalid.value).length
                 newDate.value = null
                 newDate.value = moment(formData.value.auctionDate).format('LL')

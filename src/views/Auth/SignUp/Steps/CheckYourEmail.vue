@@ -58,9 +58,6 @@ export default {
         const backStep = () => {
             props.back()
         }
-        onMounted(() => {
-            console.log('form', form)
-        })
         const sendResendEmail = async () => {
             await router.push({ name: 'resend-email' })
             router.go()

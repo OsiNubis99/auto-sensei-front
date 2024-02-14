@@ -99,7 +99,8 @@
                                 </div>
                             </template>
                             <template v-if="storeUser.userData?.type == 2">
-                                <div v-if="statusAction.stats?.total_auciton" class="flex pt-5 cursor-pointer justify-between py-2">
+                                <div v-if="statusAction.stats?.total_auciton"
+                                    class="flex pt-5 cursor-pointer justify-between py-2">
                                     <div class="flex w-full justify-between items-center">
                                         <div class="flex gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -114,7 +115,8 @@
                                     </div>
                                 </div>
                                 <hr class="border-[#cfcfcf] border-1 ">
-                                <div v-if="statusAction.stats?.total_won" class="flex w-full justify-between items-center py-2">
+                                <div v-if="statusAction.stats?.total_won"
+                                    class="flex w-full justify-between items-center py-2">
                                     <div class="flex gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
                                             fill="none">
@@ -127,7 +129,8 @@
                                     <p class="text-[#858585] ">{{ statusAction.stats?.total_won }} Vehicles</p>
                                 </div>
                                 <hr class="border-[#cfcfcf] border-1 ">
-                                <div v-if="statusAction.stats?.success_rate" class="flex w-full justify-between items-center py-2">
+                                <div v-if="statusAction.stats?.success_rate"
+                                    class="flex w-full justify-between items-center py-2">
                                     <div class="flex gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
                                             fill="none">
@@ -140,7 +143,8 @@
                                     <p class="text-[#858585] ">{{ Math.round(statusAction.stats?.success_rate) }} %</p>
                                 </div>
                                 <hr class="border-[#cfcfcf] border-1 ">
-                                <div v-if="statusAction.stats?.total_purchase" class="flex w-full justify-between items-center py-2">
+                                <div v-if="statusAction.stats?.total_purchase"
+                                    class="flex w-full justify-between items-center py-2">
                                     <div class="flex gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
                                             fill="none">
@@ -242,7 +246,6 @@ export default {
             const token = localStorage.getItem('token')
             storeUser.authProfile({ token: token }).then(async (res) => {
                 if (res.data) {
-                    console.log('res USERRRRRRRRRRRRRRRRRRRRRRR', res.data)
                     if (res.data.type == 2) await statusAction.getStats()
 
                     dataUser.value = res.data
@@ -259,17 +262,14 @@ export default {
                     })
                 }
             }).catch((error) => {
-                console.log("validateToken error", error);
                 loading.value = false
             });
             storeProfile.getValorations({ token: token }).then((res) => {
             }).catch((error) => {
-                console.log("validateToken error", error);
                 loading.value = false
             });
         }
         const previewImage = (event) => {
-            console.log('event', event)
             var input = event.target;
             var maxfilesize = 1024 * 1024  // 1 Mb
             var filesize = input.files[0].size
@@ -285,8 +285,6 @@ export default {
                     loading.value = true
                     var reader = new FileReader();
                     reader.onload = (e) => {
-                        console.log('e', e)
-
                         form.value.preview = e.target.result;
                         loading.value = false
                     }
@@ -295,7 +293,6 @@ export default {
                     form.value.img.mb = convertion
                     reader.readAsDataURL(input.files[0]);
                     counter.value += 1
-                    console.log(' form.img', form.preview)
                 }
             }
         }
@@ -303,20 +300,24 @@ export default {
             if (form.value.img) {
                 let data = {
                     file: form.value.img,
-                    location: 'test'
+                    location: 'profile'
                 }
-                console.log('data', data)
                 loading.value = true
                 try {
                     let resFile = await storeFile.uploaderFile(data)
                     if (resFile.data) {
                         try {
-                            let update = {
+                            let updateSeller = {
                                 seller: {
                                     picture: resFile.data,
                                 },
                             }
-                            let resUpdate = await storeProfile.updateUser(update)
+                            let updateDelaer = {
+                                dealer: {
+                                    picture: resFile.data,
+                                },
+                            }
+                            let resUpdate = await storeProfile.updateUser(storeUser.userData?.type == 1 ? updateSeller : updateDelaer)
                             if (resUpdate) {
                                 console.log('resUpdate', resUpdate)
                                 getProfile()
@@ -338,13 +339,10 @@ export default {
 
                 }
             }
-
-
         }
 
         onMounted(() => {
             getProfile()
-            console.log('Account', storeUser)
         })
         return {
             Heanding,

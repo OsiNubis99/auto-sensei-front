@@ -26,10 +26,6 @@ export default {
     },
     setup(props) {
         const storeModalFull = ModalImageDetails();
-        onMounted(() => {
-            console.log('storeModalFull', storeModalFull.index)
-        })
-
         return {
             storeModalFull
         };

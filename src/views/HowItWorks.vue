@@ -142,7 +142,6 @@ export default {
     setup() {
         const route = useRouter();
         const redirectLogin = (redirect) => {
-            console.log('redirect', route)
             route.push({ name: 'signup', params: { rol: redirect } })
         }
         return {

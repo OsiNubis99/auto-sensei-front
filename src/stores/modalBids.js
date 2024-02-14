@@ -11,7 +11,6 @@ export const ModalBids = defineStore("modalBids", {
     }),
     actions: {
         openModal(params) {
-            console.log('params', params)
             this.isActive = params.active
             this.data = params.data
             this.from = params.from

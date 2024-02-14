@@ -96,10 +96,6 @@ export default {
         const backStep = () => {
             props.back()
         }
-        onMounted(() => {
-            console.log('path', route.params.rol)
-
-        })
         return {
             nextStep,
             backStep,

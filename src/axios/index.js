@@ -28,7 +28,7 @@ axiosIns.interceptors.response.use(
     return response
   },
   error => {
-    console.log('error', error)
+     
     if (error.response.status === 401 && error.response.data.message === 'Unauthenticated.' || error.message == 'Network Error') {
       console.log('error 401')
       localStorage.removeItem('authStore')

@@ -26,7 +26,7 @@
                                 statusModal.dataAutiont?.vehicleDetails?.make }} {{
         statusModal.dataAutiont?.vehicleDetails?.model }}</p>
                             <p class="capitalize ">Final Bid</p>
-                            <p class="capitalize">${{ statusModal.dataAutiont?.bids[0].amount }} / {{ statusModal.dataAutiont?.bids?.length }} </p>
+                            <p class="capitalize">${{ statusModal.dataAutiont?.bids[0]?.amount }} / {{ statusModal.dataAutiont?.bids?.length }} </p>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <p>Are you sure you want to accept the final bid for the <strong>
                                 {{ statusModal.dataAutiont?.vehicleDetails?.model }} </strong>?</p>
                         <div class="flex pt-4 gap-2 items-center justify-between">
-                            <button class="btn w-full border border-[#E0E0E0] ">No</button>
+                            <button @click="close" class="btn w-full border border-[#E0E0E0] ">No</button>
                             <button @click="next" class="btn w-full bg-primary rounded-md ">Yes</button>
                         </div>
                     </div>
@@ -80,26 +80,23 @@ export default {
         const formData = ref(props.form)
         const statusModal = ModalAcceptAution()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-        onMounted(() => {
-            console.log('formData.value', formData.value)
-        })
-
         const steps = ref({
             step1: true,
             step2: false
         })
-
         const next = async () => {
             let res = await props.acceptAution()
             if (res == '200') {
-                console.log('res', res)
                 steps.value.step1 = false
                 steps.value.step2 = true
             }
         }
         const close = () => {
             statusModal.closeModal(false)
-            props.index()
+            if(steps.value.step2){
+                props.index()
+            }
+           
         }
 
         return {

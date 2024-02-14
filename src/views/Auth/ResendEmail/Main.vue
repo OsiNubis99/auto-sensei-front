@@ -113,13 +113,10 @@ export default {
                 if (res.status == 200) {
                     loading.value = false
                 }
-                console.log('res', res)
 
             } catch (error) {
                 loading.value = false
                 message.value = ''
-                console.log('error', error)
-
             }
         }
         const resendEmail = () => {

@@ -263,7 +263,6 @@ export default {
         })
         const nextGeneralInformation = async () => {
             componentKey.value += 1
-            console.log('formData.value', formData.value)
             invalid.value = validateData(formData.value, 'generalInformation');
             if (Object.entries(invalid.value).length > 0) {
                 toast(
@@ -299,13 +298,11 @@ export default {
                         yearEnd: formData.value.yearToPreferences
                     }
                 }
-                console.log('dataPost', dataPost)
                 loading.value = true
                 try {
 
                     let res = await store.create(dataPost)
                     if (res) {
-                        console.log('res.data', res.data)
                         id_create.value = res.data._id
                         formData.value.numberVin = res.data.vehicleDetails.vin
                         formData.value.make = res.data.vehicleDetails.make
@@ -322,13 +319,10 @@ export default {
                         checkStep.value.step2 = false
                         checkStep.value.step3 = false
                         loading.value = false
-                        console.log(' id_create.value', id_create.value)
 
                     }
                 } catch (error) {
                     toast(error.response.data.message, { type: "error", position: "top-center", theme: "colored", });
-
-                    id_create.value = undefined
                     loading.value = false
                 }
             }
@@ -402,7 +396,6 @@ export default {
                         brakeReplacement: formData.value.lastReplacement2,
                     }
                 }
-                console.log('VEHICULE DETAILS', dataPost)
                 loading.value = true
                 try {
                     let res = await store.update({ uuid: id_create.value, payload: dataPost })
@@ -421,8 +414,6 @@ export default {
                         loading.value = false
                     }
                 } catch (error) {
-                    console.log('hola')
-                    id_create.value = undefined
                     loading.value = false
                     toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
 
@@ -502,7 +493,6 @@ export default {
         }
 
         const postFile = async (string) => {
-            console.log('string', string)
             let newArrayExterior = []
             let newArrayInterior = []
             let newArrayVehicleDamage = []
@@ -512,52 +502,52 @@ export default {
             let exterior = [
                 {
                     file: formData.value.frontPhoto,
-                    name: 'Front Photo'
+                    name: 'front-photo'
                 },
                 {
                     file: formData.value.front,
-                    name: 'Front'
+                    name: 'front'
                 },
                 {
                     file: formData.value.driverSide,
-                    name: 'Driver Side (Exterior)'
+                    name: 'driver-side-(exterior)'
                 },
                 {
                     file: formData.value.back,
-                    name: 'Back'
+                    name: 'back'
                 },
                 {
                     file: formData.value.passengerSide,
-                    name: 'Passenger Side'
+                    name: 'passenger-side'
                 },
                 {
                     file: formData.value.tireAndRim,
-                    name: 'Tire and Rim'
+                    name: 'tire-and-rim'
                 },
             ]
             let interior = [
                 {
                     file: formData.value.driversDisplay,
-                    name: 'Drivers Display (Odometer)'
+                    name: 'drivers-display-(odometer)'
                 },
                 {
                     file: formData.value.driverSide,
-                    name: 'Drivers Side (Interior)'
+                    name: 'drivers-side-(interior)'
                 },
                 {
                     file: formData.value.centerConsole,
-                    name: 'Center Console'
+                    name: 'center-console'
                 },
                 {
                     file: formData.value.rearSeats,
-                    name: 'Rear Seats'
+                    name: 'rear-seats'
                 }
             ]
             if (formData.value.vehicleDamage) {
                 vehicleDamage = [
                     {
                         file: formData.value.vehicleDamage,
-                        name: 'Vehicle Damage'
+                        name: 'vehicle-damage'
                     }
 
                 ]
@@ -567,13 +557,13 @@ export default {
                 additionalDocuments = [
                     {
                         file: formData.value.additionalDocuments,
-                        name: 'Additional Documents'
+                        name: 'additional-documents'
                     }
 
                 ]
             }
-            let resOriginalDocument = await storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/Original Documents`})
-            let resLicence = await storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/Driver License`})
+            let resOriginalDocument = await storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents`})
+            let resLicence = await storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license`})
             await Promise.all(
                 exterior.map(async (photo, i) => {
                     let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}`})
@@ -608,20 +598,14 @@ export default {
                 case 'Launch now after verified':
                     duration = formData.value.auctionDuration
                     startDate = null
-                    console.log('duration', duration)
-                    console.log('startDate', startDate)
                     break;
                 case 'Choose the date & time':
                     duration = formData.value.auctionDuration
                     startDate = date + "T" + hour
-                    console.log('duration', duration)
-                    console.log('startDate', startDate)
                     break;
                 case 'Choose after hours (weekend)':
                     duration = resWeekend.duration
                     startDate = resWeekend.startDate
-                    console.log('duration', duration)
-                    console.log('startDate', startDate)
                     break;
                 default:
                     break;
@@ -673,14 +657,11 @@ export default {
                   
                 },
             }
-            console.log('dataPost', dataPost)
             return dataPost
         }
         const saveData = async (string) => {
-            console.log('string', string)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'confirmation');
-            console.log('invalid.value', invalid.value)
             if (Object.entries(invalid.value).length > 0) {
                 toast(
                     invalid?.value?.numberVinGenerals ||
@@ -728,7 +709,6 @@ export default {
             if (Object.entries(invalid.value).length === 0) {
                 loading.value = true
                 let resFiles = await postFile(string)
-                console.log('resFiles', resFiles)
                 statusLauch.closeModal(false)
                 if (resFiles) {
                     try {
@@ -738,7 +718,6 @@ export default {
                             router.go()
                         }
                     } catch (error) {
-                        id_create.value = null
                         loading.value = false
                         toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
 

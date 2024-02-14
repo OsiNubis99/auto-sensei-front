@@ -372,7 +372,7 @@
                                             </div>
                                         </div>
                                         <div class="flex gap-4 " :class="changeLayouts ? 'flex-col' : ''">
-                                            <RouterLink :to="{ name: 'inbox', params: { id: aution._id } }"
+                                            <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution._id + '-' + authStore.userData._id } }"
                                                 class=" w-fit flex gap-3 cursor-pointer rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     viewBox="0 0 20 20" fill="none">
@@ -536,7 +536,6 @@ export default {
             try {
                 await storeAutions.index()
                 let res = await storeAutions.indexCurrentBids()
-                console.log('res', res)
                 data.value = storeAutions?.currentBids
                 data.value.map((autions, index) => {
                         const formatter = new Intl.NumberFormat();
@@ -567,9 +566,7 @@ export default {
                             return autions.photos = null
                         }
                     })
-                console.log('Data Seller', data.value)
             } catch (error) {
-                console.log('error', error)
 
             } finally {
                 loading.value = false
@@ -596,8 +593,6 @@ export default {
         }
         onMounted(() => {
             index()
-            console.log('storeAution upcomings', storeAutions?.upcoming)
-            console.log('storeAution Liveeeeeeeeeeeeeeeeeee ', storeAutions?.live)
         })
         return {
             loading,

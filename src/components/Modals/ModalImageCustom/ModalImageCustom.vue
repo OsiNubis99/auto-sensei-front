@@ -12,37 +12,53 @@
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <div v-if="loading">
-                <p>Espere....</p>
-            </div>
-            <div v-else>
-                <cropper ref="croppers" class="twitter-cropper" background-class="twitter-cropper__background"
-                    foreground-class="twitter-cropper__foreground" image-restriction="stencil" :stencil-size="stencilSize"
-                    :stencil-props="{
-                        lines: {},
-                        handlers: {},
-                        movable: false,
-                        scalable: false,
-                        aspectRatio: 1,
-                        previewClass: 'twitter-cropper__stencil',
-                    }" :transitions="false" :debounce="false" :default-size="defaultSize" :min-width="150"
-                    :min-height="150" :src="imgPreview" @change="onChange" />
-                <div class="flex justify-between gap-12 p-4">
-                    <div class="w-full">
-                        <p>Zoom</p>
-                        <Navigation :zoom="zoom" @change="onZoom" />
+
+            <div class="relative">
+                <div v-if="loading" class="min-h-[400px] h-full flex justify-center items-center">
+                    <div class="w-full h-full flex justify-center items-center">
+                        <div class=" text-indigo-700">
+                            <div class="   h-[80px] w-[80px] ">
+                                <div class="animate-bounce">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
+                                        stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="flex w-full justify-end p-4 gap-3">
-                <label class="label-upload btn bg-white border border-[#E0E0E0]">
-                    <input type="file" hidden ref="file" @change="uploadImage($event)" accept="image/*" />
-                    <div class="btn-up">Replace</div>
-                </label>
-                <button @click="saveEditPhoto" class="btn bg-primary ">Upload</button>
+                <template v-else>
+                    <cropper ref="croppers" class="twitter-cropper" background-class="twitter-cropper__background"
+                        foreground-class="twitter-cropper__foreground" image-restriction="stencil"
+                        :stencil-size="stencilSize" :stencil-props="{
+                            lines: {},
+                            handlers: {},
+                            movable: false,
+                            scalable: false,
+                            aspectRatio: 1,
+                            previewClass: 'twitter-cropper__stencil',
+                        }" :transitions="false" :debounce="false" :default-size="defaultSize" :min-width="150"
+                        :min-height="150" :src="imgPreview" @change="onChange" />
+                    <div class="flex justify-between gap-12 p-4">
+                        <div class="w-full">
+                            <p>Zoom</p>
+                            <Navigation :zoom="zoom" @change="onZoom" />
+                        </div>
+                    </div>
+                    <div class="flex w-full justify-end p-4 gap-3">
+                        <label class="label-upload btn bg-white border border-[#E0E0E0]">
+                            <input type="file" hidden ref="file" @change="uploadImage($event)" accept="image/*" />
+                            <div class="btn-up">Replace</div>
+                        </label>
+                        <button @click="saveEditPhoto" class="btn bg-primary ">Upload</button>
+                    </div>
+                </template>
             </div>
         </div>
-
     </div>
 </template>
     
@@ -83,7 +99,6 @@ export default {
         }
         const uploadImage = (event) => {
             var input = event.target;
-            console.log('input.files[0]', input.files[0])
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 loading.value = true
@@ -137,17 +152,11 @@ export default {
             }
         }
         const saveEditPhoto = () => {
-
-            console.log('statusModalImage.typeImg', statusModalImage.typeImg)
-            console.log('croppers.value', croppers.value.getResult())
             const { canvas } = croppers.value.getResult();
             if (canvas) {
                 canvas.toBlob(async blob => {
-                    console.log('blob', blob)
-                    console.log('img NAME', statusModalImage.img)
                     let nameImg = statusModalImage.img.name
                     var file = new File([blob], nameImg, { lastModified: new Date().getTime(), type: blob.type });
-                    console.log('file', file)
                     let image = canvas.toDataURL("image/jpeg");
                     switch (statusModalImage.typeImg) {
                         case 'document':
@@ -207,7 +216,6 @@ export default {
                             formData.value.additionalDocuments = file;
                             break;
                         case 'vehicleVideo':
-                            console.log('video', e)
                             formData.value.previewVehicleVideo = image;
                             formData.value.vehicleVideo = file;
                             break;
@@ -219,10 +227,31 @@ export default {
                 }, "image/png");
             }
         }
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+        });
+        async function MainFile(file) {
+            loading.value = true
+            try {
+                const result = await toBase64(file);
+                if (result) {
+                    imgPreview.value = result
+                    loading.value = false
+                }
+                return result
+            } catch (error) {
+                loading.value = false
+                console.error(error);
+                return;
+            }
+            //...
+        }
         onMounted(() => {
-            console.log('props.form', props.form)
             if (statusModalImage.img) {
-                imgPreview.value = URL.createObjectURL(statusModalImage.img)
+                MainFile(statusModalImage.img)
             }
         })
         return {

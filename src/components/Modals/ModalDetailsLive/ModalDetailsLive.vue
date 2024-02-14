@@ -239,9 +239,6 @@ export default {
             vin: false,
             photos: false
         })
-        onMounted(() => {
-            console.log('statusModal.', statusModal.data)
-        })
         const openColapse = (op) => {
             switch (op) {
                 case 1:

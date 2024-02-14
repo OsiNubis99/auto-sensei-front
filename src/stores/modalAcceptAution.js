@@ -8,7 +8,6 @@ export const ModalAcceptAution = defineStore("modalAcceptAution", {
     }),
     actions: {
         openModal({ isActive, data }) {
-            console.log('data', data)
             this.isActive = isActive
             this.dataAutiont = data
         },

@@ -9,7 +9,7 @@ export const ModalCrediCard = defineStore("modalCrediCard", {
     }),
     actions: {
         openModal(params) {
-            console.log('params', params)
+             
             this.isActive = params.isActive
             this.data = params.data
         },

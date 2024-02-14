@@ -20,12 +20,14 @@
             class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full ">
                 <div class="animate-fade-up  animate-ease-in-out animate-delay-100">
-                    <h2 class="mt-6 md:text-4xl font-bold text-base-black text-center mb-5 ">Create Your <span v-if="rol == 'dealers'"> Dealer</span>  <span v-if="rol !== 'dealers'"> Sellers</span>   Account
+                    <h2 class="mt-6 md:text-4xl font-bold text-base-black text-center mb-5 ">Create Your <span
+                            v-if="rol == 'dealers'"> Dealer</span> <span v-if="rol !== 'dealers'"> Sellers</span> Account
                     </h2>
-                    <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to <span v-if="rol == 'dealers'"> dealers</span>  <span v-if="rol !== 'dealers'"> sellers</span> right from
+                    <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to <span
+                            v-if="rol == 'dealers'"> dealers</span> <span v-if="rol !== 'dealers'"> sellers</span> right
+                        from
                         your home.</p>
                 </div>
-
                 <div class="mt-8">
                     <div class="mt-6 space-y-7 ">
                         <div v-if="rol == 'dealers'" class="flex flex-col md:flex-row gap-6 justify-between items-center">
@@ -141,13 +143,9 @@ export default {
                 });
                 return
             }
-
-            console.log('invalid.value', invalid.value)
             if (Object.entries(invalid.value).length === 0) {
                 loading.value = true
                 try {
-                    console.log('form', form)
-
                     let typeSeller = {
                         email: form.email,
                         password: form.password,
@@ -165,7 +163,6 @@ export default {
                     }
 
                     let resRol = rol.value == 'dealers' ? typeDealer : typeSeller
-                    console.log('resRol', resRol)
                     let res = await storeAuth.register(resRol)
                     if (res.data.status == 400) {
                         toast(res?.data?.message || 'error al cargar', {

@@ -278,7 +278,6 @@ export default {
             step3: false,
         });
         const back = (paso) => {
-            console.log('paso ', paso);
             steps.value.step1 = true
             steps.value.step2 = false
             switch (paso) {
@@ -321,8 +320,6 @@ export default {
                             amount: formData.value.placeyourbid,
                         }
                     }
-                    console.log('statusModal.from', statusModal.from)
-                    console.log('payload', payload)
                     loading.value = true
                     try {
                         await autionsStore.autionsBit({ uuid: statusModal.data._id, payload })
@@ -341,7 +338,6 @@ export default {
                 default:
                     break;
             }
-            console.log('formData.value ', formData.value);
 
         };
         const formatCardNumber = (event) => {
@@ -364,8 +360,6 @@ export default {
             formData.value.cardNumber = value.replaceAll(" ", "")
                 .split("")
                 .map((v, index) => {
-                    console.log('v', v)
-                    console.log('index', index)
                     if (index > 0 && index % 4 == 0) {
                         return " " + v
                     } else {
@@ -375,8 +369,6 @@ export default {
 
         }
         const formatExpiryDate = (event) => {
-            console.log(' event.keyCode', event.target.keyCode)
-            console.log('formData.value.expiryDate', formData.value.expiryDate)
             const key = event.keyCode || event.charCode;
             if (formData.value.expiryDate.length == 2) {
                 formData.value.expiryDate = (formData.value.expiryDate + '/');
@@ -408,7 +400,6 @@ export default {
         }
         watch(formData.value, async (newQuestion, oldQuestion) => {
             invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, authStore.userData);
-            console.log('invalid.value', invalid.value)
             sizeObjet.value = Object.entries(invalid.value).length
             if (newQuestion.placeyourbid > statusModal?.data?.vehicleDetails?.basePrice) {
                 counterKey.value += 1
@@ -423,8 +414,6 @@ export default {
                 });
                 statusModal.data.amountBid = formatter.format(statusModal.data.amountBid)
             }
-            console.log('se monto', statusModal.from)
-            console.log('authStore', authStore.userData)
         })
 
         return {

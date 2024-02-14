@@ -75,9 +75,6 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const loading = ref(false)
         const storeAutions = useAuctionStore()
-        onMounted(() => {
-            console.log('formData.value', formData.value)
-        })
         const comments = ref([
             'Superb Shopper',
             'Outstanding Customer',
@@ -94,19 +91,18 @@ export default {
         })
         const error = ref(false)
         const next = () => {
-            console.log('hola')
+          
         }
         const start = (index) => {
-            console.log('index', index += 1)
-
+           
         }
         const selecComment = (comments) => {
-            console.log('comments', comments)
+          
             form.value.comment = comments
 
         }
         const sendComment = async () => {
-            if (!form.value.comment && !form.value.raiting) {
+            if (!form.value.comment || !form.value.raiting) {
                 error.value = true
                 return
             } else {
@@ -114,12 +110,13 @@ export default {
             }
             loading.value = true
             let payload = {
-                valoration: form.value.raiting.toString(),
+                valoration: form.value?.raiting?.toString(),
                 comment: form.value.comment
             }
+            console.log('payload', payload)
             try {
                 let res = await storeAutions.autionsReview(({ uuid: statusModal.dataAutiont._id, payload }))
-                console.log('res', res)
+               
 
             } catch (error) {
                 toast(error?.response?.data?.message || 'error', {

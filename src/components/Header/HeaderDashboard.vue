@@ -73,11 +73,14 @@
                             <input type="search" placeholder="Search for vehicles by make, model, VIN, etc."
                                 class="border-[1px] rounded-[8px] text-white w-full bg-transparent border-[#d3d3d361] py-3 pl-10 pr-3  ">
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M6.455 19L2 22.5V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V18C22 18.2652 21.8946 18.5196 21.7071 18.7071C21.5196 18.8946 21.2652 19 21 19H6.455ZM5.763 17H20V5H4V18.385L5.763 17ZM11 10H13V12H11V10ZM7 10H9V12H7V10ZM15 10H17V12H15V10Z"
-                                fill="white" />
-                        </svg>
+                        <RouterLink :to="{ name: 'inbox-seller' }" class="flex items-center gap-2">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M6.455 19L2 22.5V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V18C22 18.2652 21.8946 18.5196 21.7071 18.7071C21.5196 18.8946 21.2652 19 21 19H6.455ZM5.763 17H20V5H4V18.385L5.763 17ZM11 10H13V12H11V10ZM7 10H9V12H7V10ZM15 10H17V12H15V10Z"
+                                    fill="white" />
+                            </svg>
+                        </RouterLink>
                         <IconNotifications />
                         <div class="navbar-right  relative">
                             <button class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
@@ -118,7 +121,8 @@
                     <div :class="open ? ' left-[0%]' : 'left-[-100%]'"
                         class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
-                            <RouterLink to="/all" :class="path == 'all' || path == 'upcoming-auctions' || path == 'live' || path == 'completed' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/all"
+                                :class="path == 'all' || path == 'upcoming-auctions' || path == 'live' || path == 'completed' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sell a Car</p>
                             </RouterLink>
@@ -144,16 +148,22 @@
                             <svg class="w-6 h-6 text-gray-700 absolute top-3 left-2" fill="none" stroke="white"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                </path>
                             </svg>
                             <input type="search" placeholder="Search for vehicles by make, model, VIN, etc."
                                 class="border-[1px] rounded-[8px] w-full bg-transparent border-[#d3d3d361] py-3 px-10">
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M6.455 19L2 22.5V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V18C22 18.2652 21.8946 18.5196 21.7071 18.7071C21.5196 18.8946 21.2652 19 21 19H6.455ZM5.763 17H20V5H4V18.385L5.763 17ZM11 10H13V12H11V10ZM7 10H9V12H7V10ZM15 10H17V12H15V10Z"
-                                fill="white" />
-                        </svg>
+
+                        <RouterLink :to="{ name: 'inbox-dealer' }" class="flex items-center gap-2">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M6.455 19L2 22.5V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V18C22 18.2652 21.8946 18.5196 21.7071 18.7071C21.5196 18.8946 21.2652 19 21 19H6.455ZM5.763 17H20V5H4V18.385L5.763 17ZM11 10H13V12H11V10ZM7 10H9V12H7V10ZM15 10H17V12H15V10Z"
+                                    fill="white" />
+                            </svg>
+                        </RouterLink>
+
                         <IconNotifications />
                         <div class="navbar-right  relative">
                             <button class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
@@ -270,9 +280,6 @@ export default {
             }
 
         }
-        /*  onMounted(() => {
-             console.log('store', store.userData)
-         }) */
         return {
             toggle,
             open,

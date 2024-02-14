@@ -208,7 +208,6 @@ export default {
             }
         }
         const candelAutobid = async (paso, estado) => {
-            console.log('hola cancel')
             state.value = estado
             switch (paso) {
                 case 1:
@@ -265,7 +264,6 @@ export default {
         }
         watch(formData.value, async (newQuestion, oldQuestion) => {
             invalid.value = validationsAutoBids(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, authStore.userData);
-            console.log('invalid.value', invalid.value)
             sizeObjet.value = Object.entries(invalid.value).length
             if (newQuestion.placeyourbid > statusModal?.data?.vehicleDetails?.basePrice) {
                 counterKey.value += 1
@@ -280,8 +278,6 @@ export default {
                 });
                 statusModal.data.amountBid = formatter.format(statusModal.data.amountBid)
             }
-            console.log('se monto', statusModal.from)
-            console.log('authStore', authStore.userData)
         })
 
         return {

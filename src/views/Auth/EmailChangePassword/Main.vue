@@ -10,8 +10,8 @@
                             <p class="mb-2 text-lg text-zinc-500">
                                 We have sent you a link to change your password to the email address
                                 <br>
-                                <span
-                                    class="font-medium text-indigo-500">{{ formEmail }}</span>.</p>
+                                <span class="font-medium text-indigo-500">{{ formEmail }}</span>.
+                            </p>
                             <button @click="resendEmail"
                                 class="mt-3 bg-primary inline-block w-96 rounded bg-indigo-600 px-5 py-3 font-medium text-black shadow-md shadow-indigo-500/20 hover:bg-indigo-700">Resend</button>
                         </div>
@@ -118,12 +118,10 @@ export default {
                     loading.value = false
                     message.value = 'Se ha enviado un correo de cambiar password'
                 }
-                console.log('res', res)
 
             } catch (error) {
                 loading.value = false
                 message.value = ''
-                console.log('error', error)
 
             }
         }

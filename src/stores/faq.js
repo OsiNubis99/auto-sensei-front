@@ -16,7 +16,6 @@ export const useFaqStore = defineStore("faqStore", {
             return new Promise((resolve, reject) => {
                 axios.get("/faq", { params })
                     .then((response) => {
-                        console.log('FAQ', response.data)
                         response.data.map((date, index) => {
                             date.createdAt = moment(date.createdAt).format('YYYY-MM-DD');
                             date.updatedAt = moment(date.updatedAt).format('YYYY-MM-DD');
@@ -34,7 +33,6 @@ export const useFaqStore = defineStore("faqStore", {
             return new Promise((resolve, reject) => {
                 axios.post("/faq", data)
                     .then((response) => {
-                        console.log('create', response)
                         resolve(response);
                     })
                     .catch((error) => {
@@ -43,13 +41,10 @@ export const useFaqStore = defineStore("faqStore", {
             });
         },
         update({ uuid, payload }) {
-            console.log('uuid', uuid)
-            console.log('payload', payload)
             return new Promise((resolve, reject) => {
                 axios
                     .put(`/faq/${uuid}`, payload)
                     .then((response) => {
-                        console.log('response', response)
                         resolve(response);
                     })
                     .catch((error) => {
@@ -62,7 +57,6 @@ export const useFaqStore = defineStore("faqStore", {
                 axios
                     .delete(`/faq/${uuid}`)
                     .then((response) => {
-                        console.log('response', response)
                         resolve(response);
                     })
                     .catch((error) => {

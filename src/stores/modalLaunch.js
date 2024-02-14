@@ -7,7 +7,6 @@ export const ModalLaunch = defineStore("modalLaunch", {
     }),
     actions: {
         openModal(params) {
-            console.log('hola', params)
             this.isActive = params
         },
         closeModal(params) {

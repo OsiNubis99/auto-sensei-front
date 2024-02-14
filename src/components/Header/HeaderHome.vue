@@ -137,13 +137,8 @@ export default {
                 document.documentElement.style.overflow = "initial";
             }
         })
-        watch(scrollPosition, async (newQuestion, oldQuestion) => {
-
-            console.log('newQuestion', newQuestion)
-        })
 
         const handleChangeLang = (e) => {
-            console.log(' this.$i18n', i18n)
             if (!e) {
                 i18n.global.locale = "en";
             } else {
@@ -170,7 +165,6 @@ export default {
         }
         const updateScroll = () => {
             scrollPosition.value = window.scrollY
-            console.log('store', store.userData)
         }
         onMounted(() => {
             window.addEventListener('scroll', updateScroll);

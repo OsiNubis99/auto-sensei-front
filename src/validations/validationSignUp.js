@@ -1,8 +1,6 @@
 import { regexEmail, regexPassword } from "../utils/Regex";
 
 export const createAccount = (form, rol) => {
-    console.log("DATA VALIDACION ==>", form);
-    console.log("DATA ROL ==>", rol);
     let error = {};
 
     if (rol == 'dealers') {
@@ -46,8 +44,6 @@ export const createAccount = (form, rol) => {
     return error;
 };
 export const infoAccount = (form, rol) => {
-    console.log("DATA VALIDACION ==>", form);
-    console.log("DATA ROL ==>", rol);
 
     let error = {};
 

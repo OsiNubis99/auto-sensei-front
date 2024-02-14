@@ -8,13 +8,12 @@ import utils from "./utils";
 import Vue3Toastify from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { useAuthStore } from "@/stores/auth";
-import { useSockethStore } from "@/stores/socket";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import VueTheMask from 'vue-the-mask'
 import '@vuepic/vue-datepicker/dist/main.css'
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import StarRating from 'vue-star-rating'
-import { socketConnects } from './socket';
+import { socket } from "@/socket";
 const app = createApp(App)
 app.use(Vue3Toastify, {
     autoClose: 2000,
@@ -22,6 +21,7 @@ app.use(Vue3Toastify, {
     hideProgressBar: true,
     closeOnClick: true,
 });
+
 app.component('VueDatePicker', VueDatePicker);
 app.component(VueCountdown.name, VueCountdown);
 app.component('star-rating', StarRating)
@@ -30,33 +30,27 @@ app.use(router)
 app.use(i18n);
 app.use(VueTheMask)
 utils(app);
-app.mount('#app')
+
 
 let token = null;
 token = localStorage.getItem('token')
 let store = useAuthStore()
-let soketStore = useSockethStore()
 if (token) {
-    store.authProfile({ token: token }).then((res) => {
-        let resIo = socketConnects(res.data)
-        if (resIo) {
-            soketStore.connectIo(resIo)
-            soketStore.socket.on("connect", (io) => {
-                console.log('Conectado')
+    store.authProfile().then((res) => {
+        socket.on("connect", () => {
+            app.mount('#app')
+        });
 
-            });
-            soketStore.socket.on("disconnect", () => {
-                console.log('disconnect')
-
-            });
-        }
     }).catch((error) => {
-        console.log("Holaaaaaaaaaaa", error);
         if (error.response.data.message == "Unauthorized" || error.response.data.statusCode == 401) {
             localStorage.clear()
         }
     });
+} else {
+    app.mount('#app')
 }
+
+
 
 
 

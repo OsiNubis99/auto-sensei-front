@@ -365,7 +365,6 @@ export default {
             try {
                 let res = await store.index()
                 if (res.status === 200) {
-                    console.log('Entro', res)
                     switch (route.query.state) {
                         case 'drafts':
                             stateTable.value = 'drafts'
@@ -441,23 +440,20 @@ export default {
 
         }
         const deleteUserAuction = async (item) => {
-            loading.value = true
+            console.log('deleteUserAuction', item)
             try {
                 await store.delete(item._id)
                 index()
-                loading.value = false
 
             } catch (error) {
                 toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
-                loading.value = false
             }
         }
         const confirmAutions = async (aution) => {
-            loading.value = true
+            console.log('confirmAutions', aution)
             try {
                 await store.activeAutions(aution._id)
                 index()
-                loading.value = false
 
             } catch (error) {
                 toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
@@ -465,16 +461,13 @@ export default {
             }
         }
         const rejetAutions = async (aution) => {
-            console.log('user confirm', aution)
-            loading.value = true
+            console.log('rejetAutions', aution)
             try {
                 await store.inactivateAutions(aution._id)
                 index()
-                loading.value = false
 
             } catch (error) {
                 toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
-                loading.value = false
             }
         }
         const changeSeccion = (change) => {

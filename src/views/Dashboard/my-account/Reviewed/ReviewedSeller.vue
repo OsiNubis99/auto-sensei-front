@@ -151,13 +151,11 @@ export default {
                 case 'review':
                     optione.value.opReview = true
                     optione.value.opNewReview = false
-                    console.log('props.reviewed', props.reviewed)
 
                     break;
                 case 'newreview':
                     optione.value.opReview = false
                     optione.value.opNewReview = true
-                    console.log('props.needReview', props.needReview)
                     break;
                 default:
                     break;

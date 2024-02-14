@@ -171,14 +171,14 @@
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
                                     <swiper-slide v-for="(img, index) in auction?.photos" :key="index">
 
-                                        <img class="w-full  rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
+                                        <img @click="statusModal.openModal({ isActive: true, data: auction })" class="w-full  rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
                                         <img class=" w-full rounded-s-lg  h-full object-cover"
                                             src="@/assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
-                                <div @click="statusModal.openModal({ isActive: true, data: auction })"
+                                <div 
                                     class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
                                     <div class="flex p-5  flex-col gap-3">
                                         <div class="">
@@ -253,7 +253,7 @@
                                         </div>
                                         <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
                                             <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
-                                            <p>Waiting for verification, can take up to <Strong> 90 mins</Strong></p>
+                                            <p>Waiting for verification, can take up to <span class="font-bold"> 90 mins</span></p>
                                         </div>
                                     </div>
                                     <div :class="changeLayouts ? 'w-full' : 'w-[40%] flex flex-col justify-between h-full '"
@@ -301,7 +301,7 @@
                         </h1>
                         <p>Let the bids begin, post your auction, sell your car quick as 48 hours.</p>
                     </div>
-                    <RouterLink to="/all/create" @click="onSteps"
+                    <RouterLink to="/all/create" 
                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Create My Auction
                     </RouterLink>
@@ -374,7 +374,7 @@
                     <div class="flex gap-3 items-start ">
                         <div class="w-[120px] h-[90px]">
                             <img v-if="autionModal?.photos" class="w-full h-full rounded-lg object-cover"
-                                :src="bucket + autionModal?.photos[0]" alt="">
+                                :src="bucket + autionModal?.photos[0].url" alt="">
                             <img v-else class="w-full h-full rounded-lg object-cover"
                                 src="../../../assets/img/jpg/image.jpg" alt="">
                         </div>
@@ -389,8 +389,7 @@
                     </div>
                 </div>
                 <div class="py-10 px-4 pb-2">
-                    <p>Are you sure you want to decline the final bid for the <strong>{{ autionModal?.vehicleDetails?.model
-                    }}</strong> ?</p>
+                    <p>Are you sure you want to decline the final bid for the <span>{{ autionModal?.vehicleDetails?.model}}</span>?</p>
                     <div class="w-full flex gap-2 mt-4 items-center">
                         <button @click="openDecline = false"
                             class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
@@ -439,7 +438,6 @@ export default {
         const statusModal = ModalDetailsLive()
 
         const declineAution = (auction) => {
-            console.log('auction', auction)
             openDecline.value = true
             autionModal.value = auction
         }
@@ -460,7 +458,7 @@ export default {
 
             try {
                 let res = await storeAutions.index()
-                console.log('res', res)
+                 
                 if (res) {
                     data.value = storeAutions.upcoming
                     data.value.map((autions, index) => {
@@ -492,18 +490,15 @@ export default {
                             return autions.photos = null
                         }
                     })
-                    console.log('Data Seller', data.value)
-                    console.log('storeAutions.unapproved', storeAutions)
                 }
             } catch (error) {
-                console.log('error', error)
+                 
 
             } finally {
                 loading.value = false
             }
         }
         const cancelAution = async (id) => {
-            console.log('a', autionModal.value._id)
             loading.value = true
             try {
                 let res = await storeAutions.autionsCancel(id)
@@ -526,7 +521,6 @@ export default {
         }
         onMounted(() => {
             index()
-            console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', storeAutions.unapproved)
 
         })
 

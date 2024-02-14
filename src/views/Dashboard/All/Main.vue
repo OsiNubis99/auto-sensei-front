@@ -161,7 +161,7 @@
                     </div>
                     <div
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
-                        <div v-for="(auction, index) in dataAutionSorft" :key="index"
+                        <div v-for="(auction, index) in data" :key="index"
                             class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
                             <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
@@ -202,8 +202,9 @@
                                     <div @click="(auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed') && statusModalView.openModal({ isActive: true, data: auction })"
                                         :class="auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
                                         class="flex p-5  flex-col gap-3">
-                                        <div class="">
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{ auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                                        <div>
+                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{
+                                                auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">
                                                 {{ auction?.city }}, {{ auction?.province }}
                                             </p>
@@ -273,7 +274,7 @@
                                             </div>
                                         </div>
 
-                                        <RouterLink v-if="auction.status == 'bids completed'" to="#" class="flex gap-4"
+                                        <RouterLink v-if="auction?.status == 'bids completed'" to="#" class="flex gap-4"
                                             :class="changeLayouts ? 'flex-col' : ''">
                                             <div class="bg-[#F0F0F0] flex gap-3 py-1 px-2  rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -287,59 +288,58 @@
                                         </RouterLink>
                                         <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
                                             <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
-                                            <p>Waiting for verification, can take up to <Strong> 90 mins</Strong></p>
+                                            <p>Waiting for verification, can take up to <span> 90 mins</span></p>
                                         </div>
                                     </div>
                                     <div :class="changeLayouts ? 'w-full' : 'w-[40%] flex flex-col h-full justify-between'"
                                         class="border-l-2  border-[#E0E0E0]">
-                                        <div v-if="auction.status !== 'live' && (auction.status !== 'upcoming' && auction.status !== 'unapproved')"
+                                        <div v-if="auction?.status !== 'live' && (auction?.status !== 'upcoming' && auction?.status !== 'unapproved')"
                                             class="flex p-5  pl-4 gag justify-between "
                                             :class="changeLayouts ? 'flex-row' : 'flex-col '">
-                                            <div v-if="auction.status == 'reviewed' || auction.status == 'drop off'"
+                                            <div v-if="auction?.status == 'reviewed' || auction?.status == 'drop off'"
                                                 class="space-y-1"
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                                                 <p>Dropped off date</p>
                                                 <p class=" font-medium text-base-black  ">{{ auction.dropOffDateForma }}</p>
                                             </div>
-                                            <div v-if="auction.status == 'reviewed' || auction.status == 'completed' || auction.status == 'bids completed' || auction.status == 'drop off'"
+                                            <div v-if="auction?.status == 'reviewed' || auction?.status == 'completed' || auction?.status == 'bids completed' || auction?.status == 'drop off'"
                                                 class="space-y-1"
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                                                 <p>Final Bids</p>
                                                 <div class="flex gap-1">
-                                                    <p class="font-medium text-base-black text-2xl ">${{
-                                                        auction?.vehicleDetails?.basePrice }} </p>
+                                                    <p class="font-medium text-base-black text-2xl ">${{auction?.bids[0]?.amount }} </p>
                                                     <p class="text-[#666666] mt-1 "> /{{ auction.bids.length }} Bids</p>
                                                 </div>
                                             </div>
-                                            <div v-if="auction.status == 'bids completed'"
+                                            <div v-if="auction?.status == 'bids completed'"
                                                 :class="changeLayouts ? 'flex justify-between items-start flex-col' : 'space-y-2 flex items-center gap-2'">
                                                 <p>Approval period ends in</p>
-                                                <p class="text-[#FF9A02] font-medium !m-0">08 Hours
+                                                <p class="text-[#FF9A02] font-medium !m-0"> 48 Hours
                                                 </p>
                                             </div>
                                         </div>
-                                        <div v-if="auction.status == 'completed'"
+                                        <div v-if="auction?.status == 'completed'"
                                             class="flex gap-4 p-5 justify-between w-full">
-                                            <button class="btn w-full bg-primary text-base-black">Contact Buyer</button>
+                                            <RouterLink :to="{ name: 'inbox-seller', query: { id: auction._id + '-' + auction?.bids[0]?.participant._id } }" class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>
                                         </div>
-                                        <div v-if="auction.status == 'bids completed'"
+                                        <div v-if="auction?.status == 'bids completed'"
                                             class="flex gap-4 p-5  justify-between w-full">
                                             <button @click="statusModal.openModal({ isActive: true, data: auction })"
                                                 class="btn w-full bg-primary text-base-black">Accept</button>
                                             <button @click="declineAution(auction, 'decline')"
                                                 class="btn w-full bg-white border border-[#E0E0E0] text-error">Decline</button>
                                         </div>
-                                        <div v-if="auction.status == 'drop off'"
+                                        <div v-if="auction?.status == 'drop off'"
                                             class="flex gap-4 p-5  justify-between w-full">
                                             <button @click="statusModalR.openModal({ isActive: true, data: auction })"
                                                 class="btn w-full bg-white border border-[#E0E0E0]  ">Input Review</button>
                                         </div>
-                                        <div v-if="auction.status == 'reviewed'"
+                                        <div v-if="auction?.status == 'reviewed'"
                                             class="flex gap-4 p-5  justify-between w-full">
                                             <button disabled
                                                 class="btn w-full bg-white border border-[#E0E0E0] text-[#A3A3A3] ">Reviewed</button>
                                         </div>
-                                        <div v-if="auction.status == 'live'" class="flex p-5  pl-4 gap justify-between "
+                                        <div v-if="auction?.status == 'live'" class="flex p-5  pl-4 gap justify-between "
                                             :class="changeLayouts ? 'flex-row' : 'flex-col '">
                                             <div class="space-y-1"
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
@@ -358,7 +358,6 @@
                                                     <vue-countdown :time="timeToEnd(auction.startDate, auction.duration)"
                                                         v-slot="{ days, hours, minutes, seconds }">
                                                         <div class="flex items-center gap-1">
-                                                            <!--   <p v-if="days > 0" class="flex gap-1 items-center">{{ days }} </p> -->
                                                             <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours }}
                                                                 Hours</p>
                                                             <p v-if="minutes > 0"
@@ -373,7 +372,7 @@
 
                                             </div>
                                         </div>
-                                        <div v-if="auction.status == 'upcoming'"
+                                        <div v-if="auction?.status == 'upcoming'"
                                             class="flex p-5  pl-4 ga h-full justify-between "
                                             :class="changeLayouts ? 'flex-row' : 'flex-col '">
                                             <div class="space-y-1"
@@ -393,18 +392,19 @@
                                             </div>
 
                                         </div>
-                                        <div v-if="auction.status == 'upcoming' || auction.status == 'unapproved'"
+                                        <div v-if="auction?.status == 'upcoming' || auction?.status == 'unapproved'"
                                             class=" p-5 w-full">
                                             <button @click="declineAution(auction, 'cancelled')"
                                                 class="btn w-full bg-white border border-[#E0E0E0] text-error">Cancel</button>
                                         </div>
-                                        <div v-if="auction.status == 'cancelled' || auction.status == 'declined'"
-                                            class="flex gap-4 p-5  justify-between w-full">
-                                            <P class="btn w-full bg-white mb-20 text-[#A3A3A3] ">
-                                                <span v-if="auction.status == 'cancelled'">Cancelled</span>
-                                                <span v-if="auction.status == 'declined'">Declined</span>
-
-                                            </P>
+                                        <div v-if="auction?.status == 'cancelled' || auction?.status == 'declined'" class="flex gap-4 p-5 justify-between w-full">
+                                            <button class="btn w-full bg-white mb-20 text-[#A3A3A3] ">
+                                                <p v-if="auction?.status == 'cancelled'">Cancelled</p>
+                                                
+                                            </button>
+                                            <button class="btn w-full bg-white mb-20 text-[#A3A3A3] ">
+                                                <p v-if="auction?.status == 'declined'">Declined</p>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -427,7 +427,7 @@
                         </h1>
                         <p>Let the bids begin, post your auction, sell your car quick as 48 hours.</p>
                     </div>
-                    <RouterLink to="/all/create" @click="onSteps"
+                    <RouterLink to="/all/create"
                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Create My Auction
                     </RouterLink>
@@ -490,7 +490,7 @@
     </template>
     <div v-if="openDecline" class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
-            <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
+            <div class="p-4 rounded-t-lg  bg-blue-dark flex items-center justify-between">
                 <p class="text-xl text-white">Cancel Auction</p>
                 <svg @click="openDecline = false" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer"
                     fill="none" viewBox="0 0 24 24" stroke="#fff">
@@ -502,7 +502,7 @@
                 <div class="flex gap-3 items-start ">
                     <div class="w-[120px] h-[90px]">
                         <img v-if="autionModal?.photos" class="w-full h-full rounded-lg object-cover"
-                            :src="bucket + autionModal?.photos[0]" alt="">
+                            :src="bucket + autionModal?.photos[0].url" alt="">
                         <img v-else class="w-full h-full rounded-lg object-cover" src="@/assets/img/jpg/image.jpg" alt="">
                     </div>
                     <div>
@@ -526,8 +526,8 @@
         </div>
     </div>
 
-    <ModalAcceptAutionVue v-if="statusModal?.isActive" :form="form" :acceptAution="acceptAution" />
-    <ModalReviewVue v-if="statusModalR?.isActive" />
+    <ModalAcceptAutionVue v-if="statusModal?.isActive" :acceptAution="acceptAution" />
+    <ModalReviewVue v-if="statusModalR?.isActive" :index="index" />
     <ModalViewDetailsVue v-if="statusModalView?.isActive" />
 </template>
 <script>
@@ -579,7 +579,6 @@ export default {
         }
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const cancelAution = async () => {
-            console.log('a', autionModal.value)
             switch (autionModal.value.option) {
                 case "cancelled":
                     loading.value = true
@@ -635,48 +634,43 @@ export default {
             loading.value = true
             try {
                 let res = await storeAutions.index()
-                console.log('res', res)
                 data.value = res.data.filter((item) => item.status !== "draft")
                 data.value.map((autions, index) => {
-                        const formatter = new Intl.NumberFormat();
-                        autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
-                        let photos = []
-                        if (autions?.vehicleDetails?.additionalDocuments,
+                    const formatter = new Intl.NumberFormat();
+                    autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
+                    let photos = []
+                    if (autions?.vehicleDetails?.additionalDocuments,
+                        autions?.vehicleDetails?.exteriorPhotos,
+                        autions?.vehicleDetails?.interiorPhotos,
+                        autions?.vehicleDetails?.driverLicense) {
+                        var d = photos.concat(
+                            autions?.vehicleDetails?.additionalDocuments,
                             autions?.vehicleDetails?.exteriorPhotos,
                             autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.driverLicense) {
-                            var d = photos.concat(
-                                autions?.vehicleDetails?.additionalDocuments,
-                                autions?.vehicleDetails?.exteriorPhotos,
-                                autions?.vehicleDetails?.interiorPhotos,
-                                autions?.vehicleDetails?.vehicleDamage,
-                                autions?.vehicleDetails?.driverLicense,
-                                autions?.vehicleDetails?.originalDocument,
-                            );
-                            let resD = d.map((item, i) => {
-                                let name = item.split("/")
-                                let newObjet = {
-                                    name: name[2],
-                                    url: item
-                                }
-                                return newObjet
-                            })
-                            return autions.photos = resD
-                        } else {
-                            return autions.photos = null
-                        }
-                    })
-                console.log('Data Seller', data.value)
-                console.log('storeAutions.draft', storeAutions.draft)
-            } catch (error) {
-                console.log('error', error)
-
-            } finally {
+                            autions?.vehicleDetails?.vehicleDamage,
+                            autions?.vehicleDetails?.driverLicense,
+                            autions?.vehicleDetails?.originalDocument,
+                        );
+                        let resD = d.map((item, i) => {
+                            let name = item.split("/")
+                            let newObjet = {
+                                name: name[2],
+                                url: item
+                            }
+                            return newObjet
+                        })
+                        return autions.photos = resD
+                    } else {
+                        return autions.photos = null
+                    }
+                })
                 loading.value = false
-            }
+            } catch (error) {
+                loading.value = false
+
+            } 
         }
         const declineAution = (auction, option) => {
-            console.log('auction', auction)
             openDecline.value = true
             autionModal.value = auction
             autionModal.value.option = option
@@ -692,31 +686,22 @@ export default {
             return new Date(startDate) - Date.now();
         }
         const acceptAution = () => {
-            console.log('statusModal.dataAutiont', statusModal.dataAutiont._id)
             loading.value = true
             try {
                 let res = storeAutions.acceptAutions(statusModal.dataAutiont._id)
                 if (res) {
-                    console.log('res', res)
                     return '200'
                 }
-                console.log('res', res)
             } catch (error) {
-                console.log('error', error)
 
             } finally {
                 index()
             }
 
         }
-        const dataAutionSorft = computed(() => {
-            return data.value.sort((a, b, c) => (a.status < b.status ? 1 : -1));
-        })
         onMounted(() => {
             index()
-            console.log('bucket.value', bucket.value)
-
-        })
+         })
 
         return {
             loading,
@@ -739,7 +724,7 @@ export default {
             timeToStart,
             acceptAution,
             cancelAution,
-            dataAutionSorft
+            index
 
         };
     },

@@ -158,7 +158,6 @@ export default {
         const storeUser = useUserStore()
         const storeFile = useStoreFile()
         const previewImage = (event) => {
-            console.log('form', form.value)
             var input = event.target;
             var maxfilesize = 1024 * 1024  // 1 Mb
             var filesize = input.files[0].size
@@ -173,14 +172,12 @@ export default {
                 } else {
                     var reader = new FileReader();
                     reader.onload = (e) => {
-                        console.log('e', e)
                         form.preview = e.target.result;
                     }
 
                     form.img = input.files[0];
                     form.img.mb = convertion
                     reader.readAsDataURL(input.files[0]);
-                    console.log(' form.img', form.img)
                 }
             }
         }
@@ -191,7 +188,6 @@ export default {
             invalid.value = infoAccount(form, rol.value);
 
             if (Object.entries(invalid.value).length === 0) {
-                console.log('form', form)
                 isLoading.value = true
 
                 let resFile = await storeFile.uploaderFile({ file: form.img, location: 'test' })
@@ -223,7 +219,6 @@ export default {
                         }
 
                         let res = await storeUser.userData(data)
-                        console.log('res user', res)
                         if (res) {
                             props.next()
                             isLoading.value = false
@@ -240,7 +235,6 @@ export default {
                         type: "error",
                     });
                 }
-                console.log('res', res)
             }
         }
         onUpdated(() => {

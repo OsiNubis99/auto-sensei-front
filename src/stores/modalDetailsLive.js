@@ -9,7 +9,7 @@ export const ModalDetailsLive = defineStore("modalDetailsLive", {
     }),
     actions: {
         openModal(params) {
-            console.log('params', params)
+             
             this.isActive = params.isActive
             this.data = params.data
         },

@@ -14,14 +14,11 @@ const beforeEnterTokenEmail = async (to, from, next) => {
   const router = useRouter()
   try {
     let res = await store.authProfile(to.query)
-    console.log('res', res)
     if (res?.status == 200) {
       localStorage.setItem('password', to.query.token)
       next();
     }
-    console.log('res', res)
   } catch (error) {
-    console.log('error', error)
     if (error?.response?.data?.statusCode == 401) {
       next({ name: 'recover-password' })
     } else {
@@ -75,7 +72,7 @@ const routes = [
       },
 
       {
-        path: "/action-details",
+        path: "/action-details-admin",
         name: "action-details-admin",
         component: () => import('../views/Dashboard/action-details/Main.vue'),
         props: true,
@@ -88,7 +85,6 @@ const routes = [
   {
     path: "/sellers",
     component: MenuDasboard,
-
     meta: { requiresAuth: true, adminAuth: false, sellerAuth: true, dealersAuth: false },
     children: [
       //RUTAS DEL Sellers
@@ -96,6 +92,7 @@ const routes = [
         path: "/all",
         name: "all",
         component: () => import('../views/Dashboard/All/Main.vue')
+        
       },
       {
         path: "/account-seller",
@@ -121,7 +118,7 @@ const routes = [
         component: () => import('../views/Dashboard/completed/Main.vue'),
       },
       {
-        path: "/inbox/:id",
+        path: "/inbox-seller",
         name: "inbox-seller",
         component: () => import('../views/Dashboard/chat/Main.vue'),
         meta: {
@@ -137,7 +134,7 @@ const routes = [
         }
       },
       {
-        path: "/action-details/:id",
+        path: "/action-details-seller/:id",
         name: "action-details-seller",
         component: () => import('../views/Dashboard/action-details/Main.vue'),
         props: true,
@@ -195,7 +192,7 @@ const routes = [
 
       },
       {
-        path: "/action-details/:id",
+        path: "/action-details-dealer/:id",
         name: "action-details-dealer",
         component: () => import('../views/Dashboard/action-details/Main.vue'),
         props: true,
@@ -214,8 +211,8 @@ const routes = [
       },
 
       {
-        path: "/inbox/:id",
-        name: "inbox",
+        path: "/inbox-dealer",
+        name: "inbox-dealer",
         component: () => import('../views/Dashboard/chat/Main.vue'),
         meta: {
           hideNavbar: true,

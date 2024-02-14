@@ -109,7 +109,6 @@ export default {
             if (token.value) {
                 try {
                     await store.authProfile({ token: token.value })
-                    console.log('store?.userData', store?.userData)
                 } catch (error) {
                     toast(error?.response?.data?.message || "An error has occurred", {
                         type: "error",

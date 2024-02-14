@@ -50,7 +50,6 @@ export default {
     setup(props) {
         const storeModal = ModalCrediCard()
         const opeModal = () => {
-            console.log('storeModal', storeModal)
             storeModal.openModal({ isActive: true })
 
         }
