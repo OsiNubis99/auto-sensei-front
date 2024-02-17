@@ -92,7 +92,7 @@ const routes = [
         path: "/all",
         name: "all",
         component: () => import('../views/Dashboard/All/Main.vue')
-        
+
       },
       {
         path: "/account-seller",
@@ -333,11 +333,22 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-
+  let store = useAuthStore()
+  store.authProfile().then((res) => {
+    if (res.data.type == 1 || res.data.type == 2) {
+      store.socketChat.on("connect", () => {
+        console.log('socketChat Connect')
+      });
+      store.socketNotification.on("connect", () => {
+        console.log('socketNotifications Connect')
+      });
+    }
+  }).catch((error) => { console.log('error', error) });
   const authStore = localStorage.getItem("token");
   let token = null;
   let rol = null
   if (authStore) {
+
     token = authStore;
     rol = localStorage.getItem('rol')
   }

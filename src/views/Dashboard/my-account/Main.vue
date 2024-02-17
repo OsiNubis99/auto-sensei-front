@@ -252,6 +252,7 @@ export default {
                     loading.value = false
                     counter.value += 1
                     let resValorationes = await statusAction.index()
+                    console.log('resValorationes.data', resValorationes.data)
                     resValorationes.data.map((res, index) => {
                         if (res.status == 'reviewed') {
                             reviewed.value.push(res)

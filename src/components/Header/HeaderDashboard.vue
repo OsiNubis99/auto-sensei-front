@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="relative">
         <div v-show="store?.userData?.type == 0">
             <nav class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
                 <div class=" flex items-center">
@@ -228,8 +228,34 @@
                     </div>
                 </div>
             </nav>
-
         </div>
+       <!--  <div class="fixed z-[1000] right-0 top-0  shadow-xl   w-1/4 flex flex-col rounded-lg bg-white">
+            <div v-for="(item, index) in 8" :key="index"
+                :class="` border-b px-2 py-3 border-[#cfcfcf] pb-3 hover:bg-[#d6d6d6] transition-all cursor-pointer ease-linear duration-200 animate-fade-down animate-once animate-duration-2000 animate-delay-600 animate-ease-in-out`">
+                <div class="flex gap-2">
+                    <div class="w-[40%]">
+                        <img class=" rounded-lg shadow-lg w-full h-full object-cover"
+                            src="https://s3-alpha-sig.figma.com/img/2f96/a19f/432d1f5ab1b4ab8858a78eff9d520d88?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EyPWohxpVTLFfBWvtuaMoQyx4lFXTbPn1eVb1M7BmBaFaLCW-Wu9p8QJGtmSndUZsO~3XmP7Jy2ZEFp5ow0cUGDgkslQQH-Q23AtfUln~J1VRnMOen8JEtjLrW3sH4Aazvj50hBW9~VFYgsTEA-gzlaXoxLw0jg2T7KyPKTDJ35PDqlRJcWLghqp0uvZJzg9O0O1IIJIOgVHdyQT5iop6FQB-AWksI3eOdb1InLpUgwHbmGH43gi-W8ddW8nOr8AZmOnV8JLSOcd-Cde0JaxbV6YIZ~CJ3lqdN9WalGCewaFFaBNRVvrtyGVkgShlD3brWij7Jv-PQVVHQyWQcrAjA__"
+                            alt="">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 17" fill="none">
+                                <path
+                                    d="M8.00016 15.1668C4.31816 15.1668 1.3335 12.1822 1.3335 8.50016C1.3335 4.81816 4.31816 1.8335 8.00016 1.8335C11.6822 1.8335 14.6668 4.81816 14.6668 8.50016C14.6668 12.1822 11.6822 15.1668 8.00016 15.1668ZM7.3335 10.5002V11.8335H8.66683V10.5002H7.3335ZM7.3335 5.16683V9.16683H8.66683V5.16683H7.3335Z"
+                                    fill="#FF333E" />
+                            </svg>
+                            <p class="text-error text-lg">Outbid Alert!</p>
+                        </div>
+                        <p class="text-sm">Your bid for the <span class="font-bold"> 2006 Mercedes-Benz C280 4Matic</span>
+                            has
+                            been outbid, keep
+                            bidding to win!</p>
+                    </div>
+                </div>
+            </div>
+            <p class="p-4 animate-fade-down animate-once animate-duration-2000 font-medium text-center">See All Outbid</p>
+        </div> -->
 
     </header>
 </template>
@@ -257,7 +283,7 @@ export default {
         const isOpen = ref(false)
         const path = ref(computed(() => route.name))
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-
+        const socket = store.socketNotification
         const toggle = () => {
             open.value = !open.value
         }
@@ -280,6 +306,31 @@ export default {
             }
 
         }
+        onMounted(() => {
+            store.authProfile().then(async (res) => {
+                if (res.data) {
+                    console.log('socket', socket)
+                    socket.on("auctionUpdate", (response) => {
+                        console.log('auctionUpdate', response)
+
+                    });
+                    socket.on("subscribedAuctionStarted", (response) => {
+                        console.log('subscribedAuctionStarted', response)
+
+                    });
+                    socket.on("bidExeeded", (response) => {
+                        console.log('bidExeeded', response)
+
+                    });
+                    socket.on("bidsFiniched", (response) => {
+                        console.log('bidsFiniched', response)
+
+                    });
+                }
+            }).catch((error) => {
+            });
+
+        })
         return {
             toggle,
             open,

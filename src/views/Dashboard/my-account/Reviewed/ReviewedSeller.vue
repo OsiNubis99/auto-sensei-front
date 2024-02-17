@@ -37,12 +37,12 @@
                         <p class="text-[#858585] ">sold for</p>
                         <img class="w-[30px] rounded-full shadow-lg h-[30px]" :src="bucket + item.owner.seller.picture"
                             alt="">
-                        <p>{{ item.owner.seller.firstName }} {{ item.owner.seller.lastName }}</p>
+                        <p class=" capitalize ">{{ item.owner.seller.firstName }} {{ item.owner.seller.lastName }}</p>
                     </div>
                     <div class="flex flex-col justify-start items-start">
                         <p>Final Bids</p>
                         <div class="flex">
-                            <p class="text-xl font-semibold">$18,000</p>
+                            <p class="text-xl font-semibold">${{ item.bids[0]?.amount }}</p>
                             <p class="mt-1 text-[#666666] ">/{{ item.bids.length }} Bids</p>
                         </div>
                     </div>
@@ -53,10 +53,7 @@
                 </star-rating>
                 {{ rating }}
                 <div>
-                    <p>Working with AutoSensei was a breeze. We connected with a serious buyer quickly, and the negotiation
-                        process was straightforward. Our deal was closed smoothly, and the platform's security features gave
-                        us
-                        confidence. AutoSensei is our top choice for connecting with reliable buyers
+                    <p class="py-4">{{ item?.valuation?.comment }}
                     </p>
                     <div class="flex gap-2 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

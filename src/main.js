@@ -13,7 +13,6 @@ import VueTheMask from 'vue-the-mask'
 import '@vuepic/vue-datepicker/dist/main.css'
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import StarRating from 'vue-star-rating'
-import { socket } from "@/socket";
 const app = createApp(App)
 app.use(Vue3Toastify, {
     autoClose: 2000,
@@ -26,29 +25,23 @@ app.component('VueDatePicker', VueDatePicker);
 app.component(VueCountdown.name, VueCountdown);
 app.component('star-rating', StarRating)
 app.use(createPinia())
-app.use(router)
 app.use(i18n);
 app.use(VueTheMask)
 utils(app);
-
-
+app.use(router)
 let token = null;
 token = localStorage.getItem('token')
 let store = useAuthStore()
 if (token) {
     store.authProfile().then((res) => {
-        socket.on("connect", () => {
-            app.mount('#app')
-        });
-
+      
     }).catch((error) => {
         if (error.response.data.message == "Unauthorized" || error.response.data.statusCode == 401) {
             localStorage.clear()
         }
     });
-} else {
-    app.mount('#app')
 }
+app.mount('#app')
 
 
 

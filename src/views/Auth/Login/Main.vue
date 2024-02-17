@@ -7,7 +7,7 @@
                     auctions, or online
                     auctions
                     bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
-                    application.</p> 
+                    application.</p>
             </div>
             <div v-else class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
                 <h1 class=" text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>
@@ -64,7 +64,7 @@
                                     </label>
                                     <div class="mt-1">
                                         <input id="password" v-model="payloadData.password" name="password" type="password"
-                                            placeholder="*********" autoComplete="current-password"
+                                            placeholder="*********" autoComplete="password"
                                             class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                     </div>
                                 </div>
@@ -121,6 +121,7 @@ export default {
             password: ""
         });
         const getLogin = async () => {
+            console.log('hola')
             if (payloadData.value.email == "" || payloadData.value.password == "") {
                 toast("Campos Requerido", {
                     type: "error",
@@ -136,25 +137,25 @@ export default {
             try {
                 let res = await store.login(payloadData.value);
                 if (res.data.access_token) {
-                    let resProfile = await store.authProfile({ token: res.data.access_token })
+                    let resProfile = await store.authProfile()
                     localStorage.setItem('rol', resProfile.data.type)
                     if (resProfile.statusText = "OK") {
                         setInterval(async () => {
                             switch (resProfile.data.type) {
                                 case 0:
-                                     await router.push({ path: '/inicio' })
+                                    await router.push({ path: '/inicio' })
                                     router.go()
                                     break;
                                 case 1:
-                                    await  router.push({ path: '/all' })
+                                    await router.push({ path: '/all' })
                                     router.go()
                                     break;
                                 case 2:
-                                    await  router.push({ path: '/upcoming' })
+                                    await router.push({ path: '/upcoming' })
                                     router.go()
                                     break;
                                 default:
-                                    await  router.push({ name: 'home' })
+                                    await router.push({ name: 'home' })
                                     router.go()
                                     break;
                             }
@@ -163,6 +164,7 @@ export default {
                     }
                 }
             } catch (error) {
+                console.log('hola error', error)
                 messageError.value = error?.response?.data?.message
                 isLoadingLogin.value = false;
             }

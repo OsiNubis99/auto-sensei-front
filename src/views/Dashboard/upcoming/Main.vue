@@ -300,7 +300,7 @@
                                     <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
                                         class="flex p-5  flex-col gap-3">
                                         <div class="">
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{ auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                                            <div class="font-bold text-xl">{{ aution?.vehicleDetails?.year }} {{ aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">
                                                 {{ aution.city }}, {{ aution.province }}
                                             </p>

@@ -1,7 +1,7 @@
 import axios from "@/axios";
 import { defineStore } from "pinia";
 import { io } from "socket.io-client";
-import { socket } from "../socket";
+const URL = import.meta.env.VITE_BASE_URL_API;
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     userData: {},
@@ -52,7 +52,9 @@ export const useAuthStore = defineStore("authStore", {
          nameCard: 'Jessica Christie'
        } */
     ],
-    useSoket: null,
+    rol: null,
+    socketChat: null,
+    socketNotification: null
   }),
   persist: true,
 
@@ -112,19 +114,38 @@ export const useAuthStore = defineStore("authStore", {
       });
     },
     authProfile(payload) {
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${payload?.token}`
+
+        }
+      };
       return new Promise((resolve, reject) => {
         axios
-          .get("/auth/profile")
+          .get("/auth/profile", payload && config)
           .then((response) => {
             response.data.payments = this.cards
             this.userData = response.data
-            socket.on('connect', function () {
-              this.useSoket = socket
-              console.log('check 2', socket.connected);
-            });
+            this.rol = response.data.type
+            if (response.data.type !== 0) {
+              this.socketChat = io(`${URL}message`, {
+                auth: {
+                  userId: response.data._id
+                }
+              })
+              this.socketNotification = io(`${URL}notification`, {
+                auth: {
+                  userId: response.data._id
+                }
+              })
+            }
+
+            console.log(' this.userData', this.userData)
             resolve(response);
           })
           .catch((error) => {
+            console.log('error', error)
             reject(error);
           });
       });

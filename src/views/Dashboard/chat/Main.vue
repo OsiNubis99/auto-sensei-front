@@ -124,7 +124,7 @@
         </div>
         <div :class="activateLayout ? 'visible pointer-events-auto' : 'invisible pointer-events-none '"
             class="row-span-5 col-span-5 border-r-2 border-t-[1px] relative border-[#E0E0E0] py-5 px-2 pt-0 pb-0">
-            <div v-if="termins && listChat.length === 0" class="flex justify-center items-center absolute w-full top-0">
+            <div v-if="termins && listChat?.length === 0" class="flex justify-center items-center absolute w-full top-0">
                 <div class="bg-[#464B50] w-fit flex justify-around mt-4 z-50  gap-4 items-center rounded-md p-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path
@@ -158,7 +158,7 @@
             <div v-else class="w-full  flex flex-col h-full justify-between">
                 <div class="flex overflow-auto section-message-chat relative h-custom-chat-panel mb-3 flex-col ">
                     <template v-if="dataChat?.length > 0" v-for="(msg, index) in dataChat" :key="index">
-                       <!--  <div class="flex justify-center gap-4 items-center mt-4">
+                        <!--  <div class="flex justify-center gap-4 items-center mt-4">
                             <hr class="w-full border border-[#E0E0E0]">
                             <p v-if="msg.today" class="text-[#666]">Today</p>
                             <p v-else class="text-[#666]">{{ msg.day }}</p>
@@ -317,23 +317,27 @@
                 <div class="grid grid-cols-2  place-items-start gap-2 ">
                     <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
                         <p class=" capitalize ">Auction Status</p>
-                        <div v-if="storeAution?.status == 'completed'" class="flex gap-2 items-center">
-                            <div class="w-[10px] h-[10px] rounded-full bg-[#FF333E] "></div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <div class="flex gap-2 items-center">
+                            <div v-if="storeAution?.status == 'live'" class="w-[10px] h-[10px] rounded-full bg-[#1f94f0]">
+                            </div>
+                            <!--   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                                 <path
                                     d="M7.33925 0.752733C6.17128 0.374641 4.90159 0.900558 4.34305 1.99381L3.67156 3.30812C3.59178 3.46428 3.46477 3.59129 3.3086 3.67107L1.9943 4.34256C0.901046 4.9011 0.37513 6.17079 0.753221 7.33876L1.20777 8.74292C1.26178 8.90976 1.26178 9.08942 1.20777 9.25626L0.753221 10.6604C0.37513 11.8284 0.901046 13.0981 1.9943 13.6567L3.3086 14.3281C3.46477 14.4079 3.59178 14.5349 3.67156 14.6911L4.34305 16.0054C4.90159 17.0987 6.17128 17.6246 7.33925 17.2465L8.74341 16.7919C8.91025 16.7379 9.08991 16.7379 9.25675 16.7919L10.6609 17.2465C11.8289 17.6246 13.0986 17.0987 13.6572 16.0054L14.3286 14.6911C14.4084 14.5349 14.5354 14.4079 14.6916 14.3281L16.0059 13.6567C17.0992 13.0981 17.6251 11.8284 17.247 10.6604L16.7924 9.25626C16.7384 9.08942 16.7384 8.90976 16.7924 8.74292L17.247 7.33876C17.6251 6.17079 17.0992 4.9011 16.0059 4.34256L14.6916 3.67107C14.5354 3.59129 14.4084 3.46428 14.3286 3.30812L13.6572 1.99381C13.0986 0.900558 11.8289 0.374641 10.6609 0.752733L9.25675 1.20728C9.08991 1.26128 8.91025 1.26129 8.74341 1.20728L7.33925 0.752733ZM4.63322 8.79734L5.81174 7.61876L8.16875 9.97584L12.8828 5.2618L14.0613 6.44031L8.16875 12.3328L4.63322 8.79734Z"
                                     fill="#05A54B" />
-                            </svg>
-                            <p class=" capitalize font-semibold text-xl">{{ storeAution?.status }} </p>
+                            </svg> -->
+                            <p v-if="storeAution?.status == 'completed'" class="capitalize font-semibold text-xl">Accepted
+                            </p>
+                            <p v-else class="capitalize font-semibold text-xl">{{
+                                storeAution?.status }} </p>
                         </div>
                     </div>
-                    <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                    <!--  <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
                         <p>Bid Status</p>
                         <div class="flex gap-2 items-center">
                             <p class=" capitalize  border border-[#E0E0E0] font-medium  rounded-full p-2">You Haven’t Bid
                             </p>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
                         <p>Current bid</p>
                         <p class=" capitalize font-semibold text-xl">${{ storeAution?.bids[0]?.amount }}</p>
@@ -351,7 +355,7 @@
                         <p v-else class="font-semibold text-xl">0 Bids</p>
                     </div>
                 </div>
-                <div>
+                <div v-if="storeAution?.status == 'bids completed'">
                     <div class="flex items-center gap-3 mb-3 justify-between  ">
                         <button class="btn w-full bg-primary ">Accept</button>
                         <button class="btn w-full border-error border text-error">Decline</button>
@@ -365,12 +369,15 @@
                         <p>Approval ends in <span class="text-[#FF9A02]">48 Hours</span></p>
                     </div>
                 </div>
-                <div class="p-2 flex  gap-4 flex-col ">
-                    <p>Update your Final Bid <span class="text-error">(
-                            <p class="text-[#FF9A02] font-medium !m-0">
+                <div v-if="storeAution?.status == 'live'" class="p-2 flex  gap-4 flex-col ">
+                    <div class="flex gap-2">
+                        <p>Update your Final Bid </p>
+                        <div class="text-error">
+                            <div class="text-[#FF9A02] font-medium !m-0">
                                 <vue-countdown :time="timeToEnd(storeAution?.startDate, storeAution?.duration)"
                                     v-slot="{ days, hours, minutes, seconds }">
                                     <div class="flex items-center gap-1">
+                                        (
                                         <!--   <p v-if="days > 0" class="flex gap-1 items-center">{{ days }} </p> -->
                                         <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours
                                         }}
@@ -379,18 +386,15 @@
                                             class="flex gap-1 items-center">{{ minutes }}m</p>
                                         <p v-if="seconds > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
                                             class="flex gap-1 items-center">{{ seconds }}s</p>
+                                        )
                                     </div>
                                 </vue-countdown>
-                            </p>)
-                        </span></p>
-                    <CurrencyInput :options="{ currency: 'USD' }" v-model="currencyBit" :label="'Place your bid'"
-                        :placeHolder="'$ Min 100,100'" />
-                    <p class="text-[#858585] ">Please enter your revised final bid amount that has been agreed upon with the
-                        seller</p>
-                    <button class="btn bg-primary w-full text-blue-dark ">Submit</button>
-                </div>
-                <div>
-                    <button class="btn bg-primary w-full text-blue-dark ">See Detail</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button v-if="storeAution?.status == 'completed'"
+                        class="btn bg-transparent border border-[#E0E0E0]   w-full text-blue-dark ">Have a trouble?
+                        Report now</button>
                 </div>
             </template>
             <template v-if="auth?.userData.type == 2">
@@ -415,17 +419,8 @@
                             </p>
                             <p v-if="storeAution?.status == 'drop off'" class=" capitalize font-semibold text-xl">Dropped
                                 Off</p>
-
-
                         </div>
                     </div>
-                    <!-- <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
-                        <p>Final Bid</p>
-                        <div class="flex gap-2 items-center">
-                            <p class=" capitalize  border border-[#E0E0E0] font-medium  rounded-full p-2">You Haven’t Bid
-                            </p>
-                        </div>
-                    </div> -->
                     <div v-if="storeAution?.status == 'live'"
                         class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
                         <p>Current bid</p>
@@ -436,13 +431,14 @@
                         <p>Final bid</p>
                         <p class=" capitalize font-semibold text-xl">${{ storeAution?.bids[0]?.amount }}</p>
                     </div>
-                    <!--  <div class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
+                    <div v-if="storeAution?.status == 'live'"
+                        class="flex flex-col w-full h-full gap-2 border border-[#E0E0E0] p-4 rounded-lg pb-2 ">
                         <p>Total Bid</p>
                         <p v-if="storeAution?.bids?.length > 0" class="font-semibold text-xl">
                             {{ storeAution?.bids?.length }} Bids
                         </p>
                         <p v-else class="font-semibold text-xl">0 Bids</p>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="p-2 flex  gap-4 flex-col ">
                     <div v-if="storeAution?.status == 'live'" class="w-full flex whitespace-pre">
@@ -534,14 +530,13 @@
 </template>
 
 <script>
-import { ref, onMounted, watch, computed, onUpdated } from "vue";
+import { ref, onMounted, watch, computed, onUpdated, watchEffect } from "vue";
 import axios from "@/axios";
 import { useRouter, useRoute } from 'vue-router'
 import moment from 'moment';
 import { toast } from "vue3-toastify";
 import { useAuthStore } from "@/stores/auth";
 import { useAuctionStore } from "@/stores/auctions";
-import { socket } from "@/socket";
 import CurrencyInput from "../../../components/Inputs/CurrencyInput.vue";
 export default {
 
@@ -569,6 +564,7 @@ export default {
         const currencyBit = ref(null)
         const errorCurrencyBit = ref(null)
         const auth = useAuthStore()
+        const socketChat = auth.socketChat
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
             return (
@@ -580,7 +576,7 @@ export default {
             termins.value = false
         }
         const getChats = async (id) => {
-            socket?.emit("getChats", (response) => {
+            socketChat?.emit("getChats", (response) => {
                 response.map((chats, index) => {
                     if ((chats.auction._id + "-" + chats.participant._id) == route.query.id) {
                         chats.activeChat = chats.auction._id + "-" + chats.participant._id
@@ -607,7 +603,7 @@ export default {
                 chatId: route.query.id,
                 message: encodeemoji
             };
-            socket?.emit("createMessage", dataSend, (data) => {
+            socketChat?.emit("createMessage", dataSend, (data) => {
                 textForm.value = ''
             });
         }
@@ -622,7 +618,7 @@ export default {
             const dataGet = {
                 chatId: id ? id : route.query.id,
             };
-            socket?.emit("getMessages", dataGet, (response) => {
+            socketChat?.emit("getMessages", dataGet, (response) => {
                 console.log('response', response)
                 storeAution.value = response.auction
                 userFriend.value = response.participant
@@ -671,7 +667,7 @@ export default {
                 userId: 15447,
                 friendId: route.query.state,
             };
-            socket?.emit("setMessagesRead", dataGet, (response) => {
+            socketChat?.emit("setMessagesRead", dataGet, (response) => {
                 setTimeout(() => {
                     let countMessages =
                         localStorage.getItem("messages") - response.length;
@@ -723,27 +719,29 @@ export default {
             errorCurrencyBit.value = null
         }
         onMounted(async () => {
-            if (socket?.connected) {
-                getChats()
-                if (route.query.id) {
-                    let idAution = route.query.id.split('-')
-                    getDataAution(idAution[0])
-                    getMessages()
-                } else {
-                    activateLayout.value = false
+            auth.authProfile().then(async (res) => {
+                if (res.data) {
+                    getChats()
+                    if (route.query.id) {
+                        let idAution = route.query.id.split('-')
+                        getDataAution(idAution[0])
+                        getMessages()
+                    } else {
+                        activateLayout.value = false
+                    }
+                    socketChat.on("newMessageSended", () => {
+                        getMessages()
+                    });
+
+                    socketChat.on("newMessageReceived", () => {
+                        getMessages()
+                        // Verificar que este dentro del chat para marcar como leido
+                        // Sigue escuchando una vez que entra en esta vista
+
+                    });
                 }
-                socket?.on("newMessageSended", () => {
-                    getMessages()
-                });
-
-                socket?.on("newMessageReceived", () => {
-                    getMessages()
-                    // Verificar que este dentro del chat para marcar como leido
-                    // Sigue escuchando una vez que entra en esta vista
-
-                });
-
-            }
+            }).catch((error) => {
+            });
         })
         return {
             listUser,

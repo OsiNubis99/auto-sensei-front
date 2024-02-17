@@ -437,6 +437,7 @@ export default {
             }
         }
         onMounted(() => {
+            console.log('store.userDealers', store.userDealers)
             getUserDealer()
         })
         return {
