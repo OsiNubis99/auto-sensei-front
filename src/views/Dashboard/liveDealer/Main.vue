@@ -544,8 +544,14 @@ export default {
         const data = ref([])
         const storeAutions = useAuctionStore()
         const path = ref(computed(() => route.name))
+       
         const route = useRoute();
         const auth = useAuthStore()
+        const autionUpdate = ref(computed(() => auth.aution))
+        watch(autionUpdate, async (newQuestion, oldQuestion) => {
+            const i = data.value.findIndex(x => x._id === newQuestion._id)
+            data.value[i] = newQuestion
+        })
         const index = async () => {
             loading.value = true
             try {

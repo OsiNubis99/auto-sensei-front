@@ -311,7 +311,7 @@ export default {
         function progressBar() {
             show.value = true
             resetProgressBar();
-            idInterval.value = setInterval(frame, 40);
+            idInterval.value = setInterval(frame, 100);
             function frame() {
                 if (widthTime.value <= 0) {
                     clearInterval(idInterval.value);

@@ -614,9 +614,10 @@ export default {
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
             } else {
-                data.value.splice(data.value.findIndex(function (i) {
-                    return i._id === newQuestion._id;
-                }), 1);
+                let result = null;
+                result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                data.value = result
+               
             }
         })
         function timeToEnd(startDate, duration) {
