@@ -377,7 +377,7 @@
     </template>
 </template>
 <script>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed ,watch} from "vue";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from 'vue-router'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -408,11 +408,15 @@ export default {
         const storeUser = useAuthStore()
         const path = ref(computed(() => route.name))
         const statusModal = ModalViewDetails()
-
+        const autionUpdate = ref(computed(() => storeUser.aution))
         const data = ref([])
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
         }
+        watch(autionUpdate, async (newQuestion, oldQuestion) => {
+            const i = data.value.findIndex(x => x._id === newQuestion._id)
+            data.value[i] = newQuestion
+        })
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const index = async () => {
             loading.value = true

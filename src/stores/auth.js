@@ -54,7 +54,9 @@ export const useAuthStore = defineStore("authStore", {
     ],
     rol: null,
     socketChat: null,
-    socketNotification: null
+    socketNotification: null,
+    notifications: [],
+    aution: null
   }),
   persist: true,
 
@@ -140,7 +142,36 @@ export const useAuthStore = defineStore("authStore", {
                 }
               })
             }
+            this.socketNotification.on("connect", () => {
+              this.socketNotification.on("auctionUpdate", (response) => {
+                this.aution = response
+                console.log('auth auctionUpdate', response)
 
+              });
+              this.socketNotification.on("subscribedAuctionStarted", (response) => {
+                console.log('auth subscribedAuctionStarted', response)
+
+              });
+              this.socketNotification.on("bidExceeded", (response) => {
+                this.notifications = [...this.notifications, response]
+                const result = this.notifications.reduce((accumulator, current) => {
+                  let exists = accumulator.find(item => {
+                    return item.id === current.id;
+                  });
+                  if (!exists) {
+                    accumulator = accumulator.concat(current);
+                  }
+                  return accumulator;
+                }, []);
+                this.notifications = result
+                console.log('auth bidExeeded', response)
+
+              });
+              this.socketNotification.on("bidsFinished", (response) => {
+                this.notifications = [...this.notifications, response]
+
+              });
+            });
             console.log(' this.userData', this.userData)
             resolve(response);
           })
@@ -150,7 +181,6 @@ export const useAuthStore = defineStore("authStore", {
           });
       });
     },
-
   },
 });
 

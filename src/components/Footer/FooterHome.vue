@@ -5,10 +5,17 @@
                 src="../../assets/svg/lines/lineFooter.svg" alt="">
             <div class="grid relative p-5 lg:p-14 lg:pb-52  lg:grid-cols-2">
                 <div class="flex flex-col gap-7">
-                    <RouterLink to="/">
+                      <RouterLink to="/">
                         <LogoIcon v-if="path !== 'about'" />
                         <LogoBlack v-else />
                     </RouterLink>
+                    <p class="text-sm font-normal text-white"> Join AutoSensei and Make a Difference in Children's Lives!</p>
+                    <p class="text-sm font-normal text-white">
+                        At AutoSensei, we believe in making a positive impact in the world, especially in the lives of those <br>
+                        who need it most. That's why we are proud to announce that a portion of our income is dedicated to <br>
+                        supporting the SickKids nonprofit organization. By using our platform, you are indirectly <br>
+                        contributing towards providing better healthcare and support for sick children in our community. <br>
+                    </p>
                     <p :class="path == 'about' ? 'text-black' : 'text-white'" class="text-sm font-normal">
                         AutoSensei revolutionizes car selling, providing a fast, <br>
                         stress-free process and top value via local dealership bids.

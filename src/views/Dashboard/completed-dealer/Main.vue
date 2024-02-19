@@ -289,9 +289,6 @@
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
                                     <swiper-slide v-for="(img, indexPhoto) in aution.photos" :key="indexPhoto">
-                                        <!--  <p class="font-semibold fixed left-0 bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">
-                                        Bids
-                                        Complete</p> -->
                                         <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
                                     </swiper-slide>
                                     <div v-if="!aution.photos" class=" absolute w-full h-full top-0 ">
@@ -372,7 +369,7 @@
                                                 <p class=" capitalize ">{{ aution?.vehicleDetails?.rotorCondition }}</p>
                                             </div>
                                         </div>
-                                        <div class="flex gap-4 mt-5 " :class="changeLayouts ? 'flex-col' : ''">
+                                        <div v-if="aution?.bids[0].participant._id == authStore.userData._id" class="flex gap-4 mt-5 " :class="changeLayouts ? 'flex-col' : ''">
                                             <RouterLink
                                                 :to="{ name: 'inbox-dealer', query: { id: aution._id + '-' + authStore.userData._id } }"
                                                 class=" w-fit flex gap-3 cursor-pointer rounded-lg items-center">
@@ -415,23 +412,27 @@
                                                 </p>
                                             </div>
                                         </div>
+                                        <template v-if="aution?.bids[0].participant._id == authStore.userData._id">
+                                            <div v-if="aution.status == 'completed' || aution.status == 'bids completed'"
+                                                class="p-2">
+                                                <button :disabled="loadingButton ? true : false"
+                                                    @click="confirmVehicle(aution._id)"
+                                                    class="btn w-full bg-primary flex gap-2 items-center text-base-black">
+                                                    <div v-if="loadingButton && indexShowLoading == aution._id"
+                                                        class="w-8 h-8">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin"
+                                                            fill="#0B1107" stroke="#fff" stroke-width="0"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                    <span v-else> Vehicle Received</span>
+                                                </button>
+                                            </div>
+                                        </template>
 
-                                        <div v-if="aution.status == 'completed' || aution.status == 'bids completed'"
-                                            class="p-2">
-                                            <button :disabled="loadingButton ? true : false"
-                                                @click="confirmVehicle(aution._id)"
-                                                class="btn w-full bg-primary flex gap-2 items-center text-base-black">
-                                                <div v-if="loadingButton && indexShowLoading == aution._id" class="w-8 h-8">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin"
-                                                        fill="#0B1107" stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <span v-else> Vehicle Received</span>
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -495,12 +496,12 @@ export default {
                 await storeAutions.index()
                 let res = await storeAutions.indexCurrentBids()
                 console.log('storeAutions?.completed', storeAutions?.completed)
-                console.log('storeAutions?.completedDelaer', storeAutions?.completedDelaer)
-                let resnewArray = newArray.concat(storeAutions.completedDelaer, storeAutions.completed)
-
-
-                console.log('newArray', resnewArray)
-                data.value = resnewArray
+                /*   console.log('storeAutions?.completedDelaer', storeAutions?.completedDelaer)
+                  let resnewArray = newArray.concat(storeAutions.completedDelaer, storeAutions.completed)
+  
+  
+                  console.log('newArray', resnewArray) */
+                data.value = storeAutions?.completed
                 data.value.map((autions, index) => {
                     const formatter = new Intl.NumberFormat();
                     autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)

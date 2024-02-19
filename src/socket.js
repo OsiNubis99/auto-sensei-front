@@ -24,19 +24,19 @@ if (token) {
 }
 
 socketNotifications.on("auctionUpdate", (response) => {
-    console.log('auctionUpdate', response)
+    console.log('main auctionUpdate', response)
 
 });
 socketNotifications.on("subscribedAuctionStarted", (response) => {
-    console.log('subscribedAuctionStarted', response)
+    console.log('main subscribedAuctionStarted', response)
 
 });
-socketNotifications.on("bidExeeded", (response) => {
-    console.log('bidExeeded', response)
+socketNotifications.on("bidExceeded", (response) => {
+    console.log('main bidExeeded', response)
 
 });
-socketNotifications.on("bidsFiniched", (response) => {
-    console.log('bidsFiniched', response)
+socketNotifications.on("bidsFinished", (response) => {
+    console.log('main bidsFiniched', response)
 
 });
 export { socketNotifications };

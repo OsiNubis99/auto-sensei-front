@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch,computed } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import CurrencyInput from "../../Inputs/CurrencyInput.vue";
 import { validationsAutoBids } from "../../../validations/validationsDealerBidding";
 import { ModalAutoBid } from '@/stores/modalAutoBid';
@@ -197,10 +197,8 @@ export default {
                         steps.value.step2 = true
                     } else {
                         statusModal.closeModal(false)
-                        props.index()
+                      /*   props.index() */
                     }
-
-
                     break;
 
                 default:
@@ -228,12 +226,12 @@ export default {
                         });
                         loading.value = false
                     } finally {
-                       
+
                         loading.value = false
                         statusModal.closeModal(false)
-                        toast( 'Successfully cancelled your auto bid', { type: "success", position: "top-center", theme: "colored", });
-                        props.index()
-                        
+                        toast('Successfully cancelled your auto bid', { type: "success", position: "top-center", theme: "colored", });
+                        /*  props.index() */
+
                     }
                     break;
 
@@ -256,10 +254,10 @@ export default {
                 });
                 loading.value = false
             } finally {
-                toast( 'Successfully cancelled your auto bid', { type: "success", position: "top-center", theme: "colored", });
+                toast('Successfully cancelled your auto bid', { type: "success", position: "top-center", theme: "colored", });
                 loading.value = false
                 statusModal.closeModal(false)
-                props.index()
+                /*  props.index() */
             }
         }
         watch(formData.value, async (newQuestion, oldQuestion) => {

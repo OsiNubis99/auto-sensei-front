@@ -56,7 +56,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     .post("/auction/find/current-bids")
                     .then((response) => {
                         console.log('find/current-bids', response)
-                        this.currentBids = response.data.filter((item) => item.status == enumState.live)
+                        this.currentBids = response.data.filter((item) => item.status == enumState.live || item.status == enumState.bidsCompleted)
                         this.completedDelaer = response.data.filter((item) =>
                             item.status == enumState.completed ||
                             item.status == enumState.reviewed ||
