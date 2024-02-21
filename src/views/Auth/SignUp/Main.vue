@@ -11,15 +11,14 @@
             </div>
             <div v-else class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
                 <h1 class=" text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>
-                <p class="w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and 
-                    efficient process. Maximize the value of your car by inviting competitive bids from  local
+                <p class="w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and
+                    efficient process. Maximize the value of your car by inviting competitive bids from local
                     dealerships.
                 </p>
             </div>
             <img class="h-auto absolute bottom-0 w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg" alt="" />
         </div>
         <template v-if="loading">
-
             <div class="w-1/2 absolute top-0 right-0  h-full flex justify-center items-center">
                 <div class="text-indigo-700 mt-32">
                     <div class="h-[80px] w-[80px] ">
@@ -35,22 +34,20 @@
                     </div>
                 </div>
             </div>
-
         </template>
-
         <swiper @swiper="getRef" :pagination="{ type: 'bullets' }" :simulateTouch="false" :modules="modules"
             class="stepsSwiper lg:w-2/4 ">
             <swiper-slide v-if="!loading">
                 <CreateAccount v-if="stepsCurrent == 0" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
             <swiper-slide v-if="!loading">
-                <CheckYourEmail v-if="stepsCurrent == 1" :back="back" :next="next" :rol="rol" />
+                <CheckYourEmail v-if="stepsCurrent == 1" :back="back" :next="next" :gobackError="gobackError" :rol="rol" />
             </swiper-slide>
             <swiper-slide v-if="!loading">
-                <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next" :rol="rol" />
+                <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next" :backEmailToken="backEmailToken" :rol="rol" />
             </swiper-slide>
             <swiper-slide v-if="!loading">
-                <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next" :rol="rol" />
+                <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next" :backEmailToken="backEmailToken" :rol="rol" />
             </swiper-slide>
         </swiper>
     </div>
@@ -92,7 +89,6 @@ export default {
         function getRef(swiperInstance) {
             swiper.value = swiperInstance
         }
-
         function next() {
             swiper.value.slideNext() // should work
             stepsCurrent.value = swiper.value.activeIndex
@@ -104,12 +100,15 @@ export default {
         const getAuth = async (token) => {
             loading.value = true
             try {
+
                 let res = await store.authProfile(token)
                 if (res.status == 200) {
+                    console.log('entro bien ')
                     stepsCurrent.value = 1
                     swiper.value?.slideTo(1)
                     toast("Your email has been verified successfully", {
                         type: "success",
+                        autoClose: 3000,
                     });
                     localStorage.setItem('updateUser', route.query.token)
                     router.replace({ query: '' })
@@ -121,18 +120,30 @@ export default {
 
                 }
             } catch (error) {
-                if (error.response.data.statusCode == 401) {
-                    toast(error.response.data.message, {
+                console.log('entro ene l error')
+                if (error.response.data.message == "Unauthorized") {
+                    toast('Your email verification token has expired', {
                         type: "error",
+                        autoClose: 2000,
                     });
                     loading.value = false
-                    stepsCurrent.value = 0
-                    swiper.value.slideTo(0)
-                    router.replace({ query: '' })
+                    stepsCurrent.value = 1
+                    swiper.value.slideTo(1)
+                    router.replace({ query: { error: 'expired' } })
+
                 }
             }
         }
-
+        const gobackError = () => {
+            stepsCurrent.value = 0
+            swiper.value?.slideTo(0)
+            router.replace({ query: '' })
+        }
+        const backEmailToken = () => {
+            stepsCurrent.value = 1
+                    swiper.value.slideTo(1)
+                    router.replace({ query: { error: 'expired' } })
+        }
         onMounted(() => {
             rol.value = route.params.rol
             if (route.query.token) {
@@ -157,7 +168,9 @@ export default {
             modules: [Navigation, Pagination, Scrollbar, A11y],
             rol,
             stepsCurrent,
-            loading
+            loading,
+            gobackError,
+            backEmailToken
         };
     },
 };

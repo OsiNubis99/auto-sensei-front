@@ -110,8 +110,10 @@ export default {
                     email: formEmail.value
                 }
                 let res = await storeAuth.resendEmail(data)
+                console.log('res', res)
                 if (res.status == 200) {
                     loading.value = false
+                    message.value = 'Se ha enviado un correo de cambiar password'
                 }
 
             } catch (error) {

@@ -61,6 +61,8 @@ import { onMounted, ref, computed } from 'vue'
 import { stepsSignUp } from "@/stores/stepsSignUp";
 import { toast } from "vue3-toastify";
 import { useRouter, useRoute } from 'vue-router'
+import { useAuthStore } from "@/stores/auth";
+import axios from "@/axios";
 export default {
     props: {
         next: {
@@ -72,12 +74,16 @@ export default {
     },
     setup(props) {
         const storeData = stepsSignUp()
+        const formdata = storeData.formData
+        const store = useAuthStore()
         const form = ref({ code: '' })
         const route = useRoute();
         const path = ref(computed(() => route.name))
         const router = useRouter()
         const loading = ref(false)
-        const nextStep = () => {
+        const token = ref(null)
+        const nextStep = async () => {
+
             if (!form.value.code) {
                 toast('Campo Obligarotio', {
                     type: "error",
@@ -85,17 +91,51 @@ export default {
                 return
             }
             loading.value = true
+            axios.defaults.headers['Authorization'] = `Bearer ${token.value}`;
+            localStorage.setItem('token', token.value)
+            let resToken = await store.authProfile()
+           
+            if (resToken.statusText = "OK") {
+                localStorage.removeItem('updateUser')
+                localStorage.setItem('rol', resToken.data.type)
+                setInterval(async () => {
+                    switch (resToken.data.type) {
+                        case 0:
+                            await router.push({ path: '/inicio' })
+                            router.go()
+                            break;
+                        case 1:
+                            await router.push({ path: '/all' })
+                            router.go()
+                            break;
+                        case 2:
+                            await router.push({ path: '/upcoming' })
+                            router.go()
+                            break;
+                        default:
+                            await router.push({ name: 'home' })
+                            router.go()
+                            break;
+                    }
+                    loading.value = false;
+                }, 800);
+            }
+           /*  console.log('res', resToken)
             setTimeout(async () => {
-                await  router.push({ path: `/login/${route.params.rol}` })
+                await router.push({ path: `/login/${route.params.rol}` })
                 router.go()
                 loading.value = false
-            }, 2000);
+            }, 2000); */
 
             /*  props.next() */
         }
         const backStep = () => {
             props.back()
         }
+        onMounted(() => {
+            token.value = localStorage.getItem('updateUser')
+        })
+
         return {
             nextStep,
             backStep,

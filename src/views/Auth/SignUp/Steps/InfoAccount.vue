@@ -144,6 +144,9 @@ export default {
         back: {
             type: Function,
         },
+        backEmailToken: {
+            type: Function,
+        },
     },
     setup(props) {
         let rol = ref()
@@ -186,16 +189,70 @@ export default {
         }
         const nextStep = async () => {
             invalid.value = infoAccount(form, rol.value);
-
             if (Object.entries(invalid.value).length === 0) {
+                if (!form.phoneNumber.includes('+')) {
+                    form.phoneNumber = `+1${form.phoneNumber}`
+                }
                 isLoading.value = true
+                if (form.img) {
+                    let resFile = await storeFile.uploaderFile({ file: form.img, location: 'profile' })
+                    if (resFile.data) {
+                        try {
+                            let typeSeller = {
+                                seller: {
+                                    picture: resFile.data,
+                                    firstName: form.firtName,
+                                    lastName: form.lastName,
+                                    driverLicense: form.driverLicense,
+                                    phone: form.phoneNumber,
+                                }
+                            }
+                            let typeDealer = {
+                                dealer: {
+                                    picture: resFile.data,
+                                    name: form.dealerName,
+                                    omvic: form.registrationNumber,
+                                    address: form.address,
+                                    phone: form.phoneNumber
+                                },
+                            }
+                            typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
 
-                let resFile = await storeFile.uploaderFile({ file: form.img, location: 'test' })
-                if (resFile.data) {
+                            let data = {
+                                token: token.value,
+                                payloadData: typeUser.value
+                            }
+
+                            try {
+                                let res = await storeUser.userData(data)
+                                if (res) {
+                                    props.next()
+                                    isLoading.value = false
+                                }
+                            } catch (error) {
+                                isLoading.value = false
+                                toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                    type: "error",
+                                });
+                            }
+
+
+
+                        } catch (error) {
+                            toast(error?.response?.data?.message || 'error al cargar', {
+                                type: "error",
+                            });
+                            isLoading.value = false
+                        }
+                    } else {
+                        toast('Intente de nuevo', {
+                            type: "error",
+                        });
+                    }
+                } else {
                     try {
                         let typeSeller = {
                             seller: {
-                                picture: resFile.data,
                                 firstName: form.firtName,
                                 lastName: form.lastName,
                                 driverLicense: form.driverLicense,
@@ -204,7 +261,6 @@ export default {
                         }
                         let typeDealer = {
                             dealer: {
-                                picture: resFile.data,
                                 name: form.dealerName,
                                 omvic: form.registrationNumber,
                                 address: form.address,
@@ -212,28 +268,40 @@ export default {
                             },
                         }
                         typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
-
                         let data = {
                             token: token.value,
                             payloadData: typeUser.value
                         }
-
-                        let res = await storeUser.userData(data)
-                        if (res) {
-                            props.next()
+                        try {
+                            let res = await storeUser.userData(data)
+                            if (res) {
+                                props.next()
+                                isLoading.value = false
+                            }
+                        } catch (error) {
                             isLoading.value = false
+                            toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                type: "error",
+                            });
                         }
 
                     } catch (error) {
-                        toast(error?.response?.data?.message || 'error al cargar', {
-                            type: "error",
-                        });
+                        if (error?.response?.data?.message == "Unauthorized") {
+                            toast(error?.response?.data?.message || 'error al cargar', {
+                                type: "error",
+                                autoClose: 2000,
+                            });
+                            props.backEmailToken()
+                            /*   setTimeout(async () => {
+                                  await router.push({ name: 'resend-email' })
+                                  router.go()
+                              }, 2000); */
+
+
+                        }
+
                         isLoading.value = false
                     }
-                } else {
-                    toast('Intente de nuevo', {
-                        type: "error",
-                    });
                 }
             }
         }
@@ -243,9 +311,9 @@ export default {
         onMounted(() => {
             rol.value = route.params.rol
             token.value = localStorage.getItem('updateUser')
-            if (token.value) {
+            /* if (token.value) {
                 localStorage.clear()
-            }
+            } */
 
         })
         return {

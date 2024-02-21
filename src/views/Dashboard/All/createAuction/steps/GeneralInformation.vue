@@ -34,7 +34,8 @@
                 </div> -->
                 <div class="w-full mt-5 flex flex-col gap-2">
                     <label class=" text-base " for="">Vehicle Drop Off Agreement</label>
-                    <VueDatePicker  :enable-time-picker="false" :min-date="new Date()" class="custom-picker" :class="invalid?.date && 'error-picker'" v-model="form.date">
+                    <VueDatePicker :enable-time-picker="false" :min-date="new Date()" class="custom-picker"
+                        :class="invalid?.date && 'error-picker'" v-model="form.date">
                         <template #calendar-header="{ index, day }">
                             <div :class="index === 5 || index === 6 ? 'red-color' : ''">
                                 {{ day }}
@@ -55,12 +56,19 @@
                 <select v-model="form.province" :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
                     class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option selected>Select province</option>
-                    <option value="Alberta">Alberta</option>
-                    <option value="Brunswick Baru">Brunswick Baru</option>
-                    <option value="Manitoba">Manitoba</option>
-                    <option value="Ontario">Ontario</option>
-                    <option value="Ontario">Saskatchewan</option>
-                    <option value="Ontario">Ottawa</option>
+                    <option value="Alberta">AB | Alberta</option>
+                    <option value="British Columbia">BC | British Columbia</option>
+                    <option value="Manitoba">MB | Manitoba</option>
+                    <option value="New Brunswick">NB | New Brunswick</option>
+                    <option value="Newfoundland and Labrador">NL | Newfoundland and Labrador</option>
+                    <option value="Nova Scotia">NS | Nova Scotia</option>
+                    <option value="Ontario">ON | Ontario</option>
+                    <option value="Prince Edward Island">PE | Prince Edward Island</option>
+                    <option value="Quebec">QC | Quebec</option>
+                    <option value="Saskatchewan">SK | Saskatchewan</option>
+                    <option value="Northwest Territories">NT | Northwest Territories</option>
+                    <option value="Nunavut">NU | Nunavut</option>
+                    <option value="Yukon">YT | Yukon</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
@@ -136,9 +144,12 @@
                         </div>
                         <div v-if="form.manyPayments == 'Yes'" class="w-full flex flex-col gap-2">
                             <label class=" text-base " for="">Remaining payments</label>
-                            <input :class="invalid?.remainingPayments ? 'border-error' : 'border-[#E0E0E0]'"
+                            <!-- <input :class="invalid?.remainingPayments ? 'border-error' : 'border-[#E0E0E0]'"
                                 v-model="form.remainingPayments" class="p-2 rounded-lg border "
-                                placeholder="Enter the number of payments left" type="number">
+                                placeholder="Enter the number of payments left" type="number"> -->
+                            <CurrencyInput :key="counterKey" v-model="form.remainingPayments"
+                                :error='invalid?.remainingPayments' :options="{ currency: 'USD' }"
+                                :placeHolder="`Enter Number of payments left $`" />
                         </div>
                     </div>
                 </div>
@@ -160,9 +171,11 @@
                 </div>
                 <div v-if="form.buyoutVehicle == 'Yes'" class="w-full flex flex-col gap-2">
                     <label class=" text-base " for="">Amount</label>
-                    <input v-model="form.yourVehicleAmount"
+                    <!--   <input v-model="form.yourVehicleAmount"
                         :class="invalid?.yourVehicleAmount ? 'border-error' : 'border-[#E0E0E0]'"
-                        class="p-2 rounded-lg border =" placeholder="Enter Number of payments left" type="number">
+                        class="p-2 rounded-lg border =" placeholder="Enter Number of payments left" type="number"> -->
+                    <CurrencyInput :key="counterKey" v-model="form.yourVehicleAmount" :error='invalid?.yourVehicleAmount'
+                        :options="{ currency: 'USD' }" :placeHolder="`Enter Number of payments left $`" />
                 </div>
             </div>
         </div>
@@ -198,24 +211,24 @@
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <div class="w-full flex flex-col gap-2">
+                       <!--  <div class="w-full flex flex-col gap-2">
                             <label class=" text-base " for="">Make</label>
                             <select v-model="form.makePreferences"
                                 :class="invalid?.makePreferences ? 'border-error' : 'border-[#E0E0E0]'"
                                 class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                               
+
                                 <option value="option 1">option 1</option>
                                 <option value="option 2">option 2</option>
                                 <option value="option 3">option 3</option>
                                 <option value="option 4">option 4</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="w-full flex flex-col gap-2">
                             <label class=" text-base " for="">Model</label>
                             <select v-model="form.modelPreferences"
                                 :class="invalid?.modelPreferences ? 'border-error' : 'border-[#E0E0E0]'"
                                 class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                              
+
                                 <option value="option 1">option 1</option>
                                 <option value="option 2">option 2</option>
                                 <option value="option 3">option 3</option>
@@ -274,7 +287,9 @@
 </template>
 <script>
 import { ref, onMounted, watch } from "vue";
+import CurrencyInput from "../../../../../components/Inputs/CurrencyInput.vue";
 export default {
+
     props: {
         op: {
             type: Object,
@@ -314,6 +329,7 @@ export default {
             save
         };
     },
+    components: { CurrencyInput }
 };
 </script>
 

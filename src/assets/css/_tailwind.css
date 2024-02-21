@@ -25,7 +25,9 @@ select:active option {
     padding: 20px !important;
     height: 40px !important;
 }
-
+input::placeholder{
+    text-transform: capitalize;
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;

@@ -233,7 +233,7 @@
             class="fixed z-[1000] right-[60px]   shadow-xl  transition-all ease-linear duration-200  w-1/4 flex flex-col rounded-lg bg-white modal-notificationes">
             <div v-for="(item, index) in notiAutions" :key="index"
                 :class="` border-b px-2 py-3 border-[#cfcfcf] pb-3 hover:bg-[#d6d6d6] transition-all cursor-pointer ease-linear duration-200 animate-fade-down animate-once animate-duration-2000 animate-delay-600 animate-ease-in-out`">
-                <div class="flex gap-2">
+                <RouterLink :to="{ name: 'action-details-dealer', params: { id: item?._id } }" class="flex gap-2">
                     <div class="w-[40%]">
                         <img class=" rounded-lg shadow-lg w-full h-full object-cover"
                             :src="bucket + item.vehicleDetails.exteriorPhotos[0]" alt="">
@@ -258,7 +258,7 @@
                         </p>
 
                     </div>
-                </div>
+                </RouterLink>
             </div>
             <p class="p-4 animate-fade-down animate-once animate-duration-2000 font-medium text-center">
                 See All Outbid
@@ -301,11 +301,15 @@ export default {
         const show = ref(false)
         const timeNotification = ref(0)
         const scrollPosition = ref(0)
+        const data = ref({ soundurl: 'https://soundbible.com/mp3/Air%20Plane%20Ding-SoundBible.com-496729130.mp3' })
         const idInterval = ref(null)
         watch(notiAutions, async (newQuestion, oldQuestion) => {
+            var audio = new Audio(data.value.soundurl);
             if (newQuestion) {
-                progressBar()
-
+                if (audio.play()) {
+                    audio.play()
+                    progressBar()
+                }
             }
         })
         function progressBar() {

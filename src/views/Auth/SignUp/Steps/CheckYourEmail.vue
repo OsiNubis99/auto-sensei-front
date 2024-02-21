@@ -2,9 +2,12 @@
     <div class="flex-1 flex flex-col  justify-between h-full py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full ">
-                <div>
+                <div v-if="route.query?.error == 'expired'">
+                    <h2 class="mt-6 text-4xl font-bold text-base-black text-center mb-5 ">Your email verification token has
+                        expired</h2>
+                </div>
+                <div v-else>
                     <h2 class="mt-6 text-4xl font-bold text-base-black text-center mb-5 ">Check Your Email</h2>
-
                     <p class=" text-sm font-normal text-[#666] text-center  ">We sent an email to
                         <strong>{{ form?.email }}</strong>. <br>
                         Open the email to verify your email address.
@@ -12,18 +15,20 @@
                 </div>
                 <div class="mt-8 flex justify-center items-center flex-col">
                     <img src="../../../../assets/svg/login/verifiqueCard.svg" alt="">
-                    <p class=" text-sm mt-6 font-medium mb-5">Click the link in your email to continue</p>
+                    <template v-if="route.query?.error == 'expired'">
+                        <div class="flex gap-2 items-center">
+                            <button @click="backError" class="btn bg-primary mt-5">Go back</button>
+                            <button @click="sendResendEmail" class="btn bg-primary mt-5">Resend Email</button>
+                        </div>
+                    </template>
+                     <p v-else class=" text-sm mt-6 font-medium mb-5">Click the link in your email to continue</p>
                 </div>
             </div>
-            <!--  <button @click="nextStep"
-                class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Create Account
-            </button> -->
         </div>
-        <div class="text-center">
+        <div v-if="route.query?.error !== 'expired'" class="text-center">
             <p class=" text-xs font-normal text-[#666]  ">
                 Didn’t receive the email?
-            <p @click="sendResendEmail" class="font-medium underline text-base-black hover:text-indigo-500">
+            <p @click="sendResendEmail" class="font-medium cursor-pointer  underline text-base-black hover:text-indigo-500">
                 Resend Email
             </p>
             </p>
@@ -45,13 +50,18 @@ export default {
         rol: {
             type: String,
         },
+        gobackError: {
+            type: Function,
+        },
+        
 
     },
     setup(props) {
-        let rol = props.rolf
+        let rol = props.rol
         const storeData = stepsSignUp()
         const form = storeData.formData
         const router = useRouter();
+        const route = useRoute();
         const nextStep = () => {
             props.next()
         }
@@ -62,12 +72,22 @@ export default {
             await router.push({ name: 'resend-email' })
             router.go()
         }
+        const backError = () => {
+            props.gobackError()
+
+        }
+        onMounted(() => {
+            console.log('se moneto el paso 3', route.query?.error)
+
+        })
         return {
             nextStep,
             rol,
             form,
             backStep,
-            sendResendEmail
+            sendResendEmail,
+            route,
+            backError
         };
     },
 };

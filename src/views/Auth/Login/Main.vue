@@ -138,8 +138,9 @@ export default {
                 let res = await store.login(payloadData.value);
                 if (res.data.access_token) {
                     let resProfile = await store.authProfile()
-                    localStorage.setItem('rol', resProfile.data.type)
+                   
                     if (resProfile.statusText = "OK") {
+                        localStorage.setItem('rol', resProfile.data.type)
                         setInterval(async () => {
                             switch (resProfile.data.type) {
                                 case 0:

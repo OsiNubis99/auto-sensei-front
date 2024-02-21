@@ -15,7 +15,7 @@
         </div>
     </div>
     <div v-else
-        class="flex-1 flex flex-col overflow-auto justify-between py-12 px-4 h-full sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        class="flex-1 flex flex-col overflow-auto md:overflow-hidden justify-between py-12 px-4 h-full sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div
             class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full ">
@@ -164,6 +164,7 @@ export default {
 
                     let resRol = rol.value == 'dealers' ? typeDealer : typeSeller
                     let res = await storeAuth.register(resRol)
+                    console.log('res', res)
                     if (res.data.status == 400) {
                         toast(res?.data?.message || 'error al cargar', {
                             type: "error",

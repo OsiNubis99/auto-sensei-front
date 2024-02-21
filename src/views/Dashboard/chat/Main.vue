@@ -239,11 +239,11 @@
             </div>
         </div>
         <div :class="activateLayout ? 'visible pointer-events-auto' : 'invisible pointer-events-none '"
-            class="row-span-5 flex flex-col gap-4 col-span-2  border-t-[1px] border-[#E0E0E0] p-5">
+            class="row-span-5 flex flex-col  col-span-2  border-t-[1px] border-[#E0E0E0] p-5">
             <div class="flex flex-col">
                 <img v-if="storeAution?.vehicleDetails?.exteriorPhotos[0]"
                     :src="bucket + storeAution?.vehicleDetails?.exteriorPhotos[0]"
-                    class="object-cover rounded-xl h-[240px] " alt="" />
+                    class="object-cover rounded-xl h-[200px] " alt="" />
                 <div class="mt-4">
                     <p class=" capitalize font-semibold text-xl">{{ storeAution?.vehicleDetails?.make }}</p>
                     <p class=" capitalize font-light">
@@ -369,7 +369,7 @@
                         <p>Approval ends in <span class="text-[#FF9A02]">48 Hours</span></p>
                     </div>
                 </div>
-                <div v-if="storeAution?.status == 'live'" class="p-2 flex  gap-4 flex-col ">
+                <div v-if="storeAution?.status == 'live'" class="p-2 flex  gap-2 flex-col ">
                     <div class="flex gap-2">
                         <p>Update your Final Bid </p>
                         <div class="text-error">
@@ -440,7 +440,7 @@
                         <p v-else class="font-semibold text-xl">0 Bids</p>
                     </div>
                 </div>
-                <div class="p-2 flex  gap-4 flex-col ">
+                <div class="p-2 flex  gap-2 flex-col ">
                     <div v-if="storeAution?.status == 'live'" class="w-full flex whitespace-pre">
                         <div class="flex">Update your Final Bid </div>
                         (<vue-countdown :time="timeToEnd(storeAution?.startDate, storeAution?.duration)"
@@ -714,9 +714,10 @@ export default {
         }
 
         const closeFinalBid = () => {
-            modalFinalBit.value = false
             currencyBit.value = null
             errorCurrencyBit.value = null
+            modalFinalBit.value = false
+          
         }
         onMounted(async () => {
             auth.authProfile().then(async (res) => {

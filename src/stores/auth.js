@@ -129,7 +129,10 @@ export const useAuthStore = defineStore("authStore", {
           .then((response) => {
             response.data.payments = this.cards
             this.userData = response.data
-            this.rol = response.data.type
+            if (localStorage.getItem('rol')) {
+              this.rol = response.data.type
+            }
+
             if (response.data.type !== 0) {
               this.socketChat = io(`${URL}message`, {
                 auth: {

@@ -48,9 +48,9 @@ export const infoAccount = (form, rol) => {
     let error = {};
 
     if (rol == "dealers") {
-        if (!form.img) {
+       /*  if (!form.img) {
             error.img = 'Required field'
-        }
+        } */
         if (!form.dealerName) {
             error.dealerName = 'Required field'
         }
@@ -64,9 +64,9 @@ export const infoAccount = (form, rol) => {
             error.phoneNumber = 'Required field'
         }
     } else {
-        if (!form.img) {
+       /*  if (!form.img) {
             error.img = 'Required field'
-        }
+        } */
         if (!form.firtName) {
             error.firtName = 'Required field'
         }

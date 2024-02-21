@@ -65,8 +65,7 @@
                             <span class="off">ES</span>
                         </div> -->
 
-                        <RouterLink v-if="store?.userData?._id" 
-                        :to="store?.userData?.type == 0 && '/inicio' ||
+                        <RouterLink v-if="store?.rol" :to="store?.userData?.type == 0 && '/inicio' ||
                             store?.userData?.type == 1 && '/all' ||
                             store?.userData?.type == 2 && '/upcoming'" class="btn bg-primary text-base-black">
                             Dashboard
@@ -158,7 +157,7 @@ export default {
             storeData.formAccount.phoneNumber = ''
             storeData.formAccount.preview = ''
             await router.push('/')
-             router.go()
+            router.go()
         }
         const toggle = () => {
             open.value = !open.value
@@ -181,7 +180,7 @@ export default {
             IconArrow,
             scrollPosition,
             store,
-            LogoBlack
+            LogoBlack,
         };
     },
 };
