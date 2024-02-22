@@ -198,7 +198,7 @@
                                                 <p class="!m-0 font-extrabold capitalize">
                                                     {{ aution.owner.seller.firstName }} {{ aution.owner.seller.lastName }}
                                                 </p>
-                                                <p class="!m-0">Banff, Alberta</p>
+                                                <p class="!m-0"> {{ aution.city }}, {{ aution.province }}</p>
                                             </td>
                                             <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
 
