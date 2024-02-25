@@ -7,12 +7,14 @@ export const useStoreFile = defineStore("useStoreFile", {
     }),
     actions: {
         uploaderFile(params) {
+            console.log('params', params)
             let data = new FormData();
             data.append("file", params.file);
             data.append("location", params.location);
+           
             return new Promise((resolve, reject) => {
                 axios
-                    .post("/uploader/create", data, {
+                    .post(params.route, data, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },
@@ -22,6 +24,9 @@ export const useStoreFile = defineStore("useStoreFile", {
                         resolve(response);
                     })
                     .catch((error) => {
+                        console.log('error', error)
+                       
+                        
                         reject(error);
                     });
             });

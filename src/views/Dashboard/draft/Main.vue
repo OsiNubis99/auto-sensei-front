@@ -25,7 +25,7 @@
                         d="M2.5 9.16667H17.5V10.8333H2.5V9.16667ZM15 15V17.5H13.3333V15H10.8333L14.1667 11.6667L17.5 15H15ZM6.66667 15V17.5H5V15H2.5L5.83333 11.6667L9.16667 15H6.66667ZM15 5H17.5L14.1667 8.33333L10.8333 5H13.3333V2.5H15V5ZM6.66667 5H9.16667L5.83333 8.33333L2.5 5H5V2.5H6.66667V5Z"
                         :fill="path == 'all' ? '#09121F' : '#C2C2C2'" />
                 </svg>
-                <p>All ({{ storeAutions.data.length - storeAutions.draft.length }})</p>
+                <p>All ({{ data.length }})</p>
             </RouterLink>
             <RouterLink to="/upcoming-auctions"
                 :class="path == 'upcoming-auctions' ? 'bg-primary' : 'bg-[#464B50] text-white'"
@@ -35,7 +35,7 @@
                         d="M7.5 14.1667C7.5 14.1667 13.3333 15 15.8333 17.5H16.6667C17.1269 17.5 17.5 17.1269 17.5 16.6667V11.6142C18.2188 11.4292 18.75 10.7766 18.75 10C18.75 9.22342 18.2188 8.57083 17.5 8.38583V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5H15.8333C13.3333 5 7.5 5.83333 7.5 5.83333H4.16667C3.24619 5.83333 2.5 6.57952 2.5 7.5V12.5C2.5 13.4205 3.24619 14.1667 4.16667 14.1667H5L5.83333 18.3333H7.5V14.1667ZM9.16667 7.21767C9.73608 7.0955 10.4396 6.92661 11.1994 6.70311C12.5979 6.29178 14.375 5.64385 15.8333 4.64548V15.3545C14.375 14.3562 12.5979 13.7083 11.1994 13.2969C10.4396 13.0734 9.73608 12.9045 9.16667 12.7823V7.21767ZM4.16667 7.5H7.5V12.5H4.16667V7.5Z"
                         :fill="path == 'upcoming-auctions' ? '#09121F' : '#C2C2C2'" />
                 </svg>
-                <p>Upcoming Auctions ({{ data.length }})</p>
+                <p>Upcoming Auctions ({{ storeAutions.upcoming.length }})</p>
 
             </RouterLink>
             <RouterLink to="/live" :class="path == 'live' ? 'bg-primary' : 'bg-[#464B50] text-white'"
@@ -43,7 +43,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                         d="M15.304 15.3037C18.2329 12.3747 18.2329 7.626 15.304 4.69706L16.4825 3.51855C20.0622 7.09836 20.0622 12.9024 16.4825 16.4822L15.304 15.3037ZM4.69735 4.69706C1.76842 7.626 1.76842 12.3747 4.69735 15.3037L3.51884 16.4822C-0.060968 12.9024 -0.060968 7.09836 3.51884 3.51855L4.69735 4.69706ZM12.9469 12.9466C14.5741 11.3194 14.5741 8.68115 12.9469 7.05399L14.1254 5.87548C16.4035 8.15354 16.4035 11.847 14.1254 14.1251L12.9469 12.9466ZM7.05438 7.05399C5.42718 8.68115 5.42718 11.3194 7.05438 12.9466L5.87586 14.1251C3.5978 11.847 3.5978 8.15354 5.87586 5.87548L7.05438 7.05399ZM10.0007 11.667C10.9211 11.667 11.6673 10.9208 11.6673 10.0003C11.6673 9.07982 10.9211 8.33366 10.0007 8.33366C9.08015 8.33366 8.33398 9.07982 8.33398 10.0003C8.33398 10.9208 9.08015 11.667 10.0007 11.667Z"
-                        :fill="path == 'all' ? '#09121F' : '#C2C2C2'" />
+                        :fill="path == 'live' ? '#09121F' : '#C2C2C2'" />
                 </svg>
                 <p>Live ({{ storeAutions.live.length }})</p>
             </RouterLink>
@@ -52,7 +52,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                         d="M4.55149 3.6932C6.01232 2.43008 7.9166 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39697 18.3327 9.99935C18.3327 11.7794 17.7745 13.4292 16.8237 14.7832L14.166 9.99935H16.666C16.666 6.31745 13.6813 3.33268 9.99935 3.33268C8.20753 3.33268 6.58082 4.03957 5.38287 5.1897L4.55149 3.6932ZM15.4472 16.3055C13.9863 17.5686 12.0821 18.3327 9.99935 18.3327C5.39697 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 8.21923 2.22417 6.56948 3.17502 5.21555L5.83268 9.99935H3.33268C3.33268 13.6813 6.31745 16.666 9.99935 16.666C11.7912 16.666 13.4179 15.9591 14.6159 14.809L15.4472 16.3055Z"
-                        :fill="path == 'all' ? '#09121F' : '#C2C2C2'" />
+                        :fill="path == 'completed' ? '#09121F' : '#C2C2C2'" />
                 </svg>
                 <p>Completed ({{ storeAutions.completed.length }})</p>
             </RouterLink>
@@ -68,7 +68,7 @@
                                 <img v-else class="w-14 h-14 rounded-full" src="@/assets/img/jpg/image.jpg" alt="">
                             </RouterLink>
                             <div>
-                                <p class="font-semibold capitalize">
+                                <p class=" font-semibold capitalize ">
                                     <span v-if="storeUser.userData.seller?.firstName"> {{
                                         storeUser.userData.seller?.firstName }}</span> <span
                                         v-if="storeUser.userData.seller?.lastName"> {{ storeUser.userData.seller?.lastName
@@ -85,13 +85,11 @@
                         </div>
                         <hr class="border-[#cfcfcf] border-1 ">
                         <div class="flex pt-5 cursor-pointer justify-between">
-                            <RouterLink to="/draft" class="font-medium">Draft <span class="text-[#858585]">{{ storeAutions?.draft?.length
-                            }}</span></RouterLink>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 20 21" fill="none">
-                                <path
-                                    d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
-                                    fill="#858585" />
-                            </svg>
+                            <RouterLink to="/draft" class="font-medium w-full p-2 rounded-lg bg-[#F0F0F0]">Draft <span
+                                    class="text-[#858585]">{{
+                                        storeAutions?.draft?.length
+                                    }}</span>
+                            </RouterLink>
                         </div>
                         <RouterLink to="/all/create"
                             class="btn w-full bg-base-black mt-7 flex gap-2 justify-center items-center text-primary ">
@@ -125,10 +123,11 @@
                                     </button>
                                     <div v-if="isOpen"
                                         class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
-                                        <a href=""
-                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Auction
+                                        <div
+                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                            Auction
                                             Title
-                                        </a>
+                                        </div>
                                         <a href=""
                                             class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Auction
                                             Start</a>
@@ -164,38 +163,43 @@
                             class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
                             <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
-                                <p
-                                    class="font-semibold absolute top-0 left-0 z-50 bg-[#fff] rounded-lg ml-2 mt-2 px-4 py-1">
-                                    Launching Soon</p>
+                                <p v-if="auction.status == 'completed'"
+                                    class="font-semibold fixed left-0 z-50 text-white bg-[#05A54B] rounded-lg ml-2 mt-2 px-4 py-1">
+                                    Complete
+                                </p>
+                                <p class="font-semibold fixed left-0 z-50  bg-[#FFFFFF] rounded-lg ml-2 mt-2 px-4 py-1">
+                                    Draft
+                                </p>
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
                                     <swiper-slide v-for="(img, index) in auction?.photos" :key="index">
-
-                                        <img @click="statusModal.openModal({ isActive: true, data: auction })" class="w-full  rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
+                                        <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
-                                        <img class=" w-full rounded-s-lg  h-full object-cover"
-                                            src="@/assets/img/jpg/image.jpg" alt="">
+                                        <img class="w-full rounded-s-lg h-full object-cover"
+                                            src="../../../assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
-                                <div 
-                                    class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
-                                    <div class="flex p-5  flex-col gap-3">
-                                        <div class="">
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{ auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                                <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+                                    <div @click="(auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed') && statusModalView.openModal({ isActive: true, data: auction })"
+                                        :class="auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
+                                        class="flex p-5  flex-col gap-3">
+                                        <div>
+                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{
+                                                auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                                             <p class=" text-base">
                                                 {{ auction?.city }}, {{ auction?.province }}
                                             </p>
                                         </div>
-                                        <div class="grid grid-cols-2 gap-1 " :class="changeLayouts ? 'flex-col' : ''">
-                                            <div v-if="auction.vehicleDetails.vin" class="flex gap-4">
+                                        <div class="grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                                            <div v-if="auction?.vehicleDetails?.vin" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
                                                     <path
                                                         d="M1.33398 2.66227C1.33398 2.29651 1.63752 2 1.99518 2H14.0061C14.3713 2 14.6673 2.29663 14.6673 2.66227V13.3377C14.6673 13.7035 14.3638 14 14.0061 14H1.99518C1.63002 14 1.33398 13.7034 1.33398 13.3377V2.66227ZM4.00065 10V11.3333H12.0007V10H4.00065ZM4.00065 4.66667V8.66667H8.00065V4.66667H4.00065ZM9.33398 4.66667V6H12.0007V4.66667H9.33398ZM9.33398 7.33333V8.66667H12.0007V7.33333H9.33398ZM5.33398 6H6.66732V7.33333H5.33398V6Z"
                                                         fill="#858585" />
                                                 </svg>
-                                                <p class=" uppercase ">{{ auction.vehicleDetails.vin }}</p>
+                                                <p class="uppercase">{{ auction?.vehicleDetails?.vin }}</p>
                                             </div>
                                             <div v-if="auction?.vehicleDetails?.odometer" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -204,11 +208,11 @@
                                                         d="M13.334 8.66667C13.334 10.1394 12.7371 11.4727 11.7719 12.4379L12.7147 13.3807C13.9211 12.1743 14.6673 10.5076 14.6673 8.66667C14.6673 4.98477 11.6825 2 8.00065 2C4.31875 2 1.33398 4.98477 1.33398 8.66667C1.33398 10.5076 2.08018 12.1743 3.2866 13.3807L4.22942 12.4379C3.26427 11.4727 2.66732 10.1394 2.66732 8.66667C2.66732 5.72115 5.05513 3.33333 8.00065 3.33333C10.9462 3.33333 13.334 5.72115 13.334 8.66667ZM10.196 5.52865L7.00065 8.33333L8.33398 9.66667L11.1388 6.47145L10.196 5.52865Z"
                                                         fill="#858585" />
                                                 </svg>
-                                                <p class=" capitalize ">{{ auction?.vehicleDetails?.odometer }} Kilometers
+                                                <p class="capitalize">{{ auction?.vehicleDetails?.odometer }} Kilometers
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="grid grid-cols-2 gap-1 " :class="changeLayouts ? 'flex-col' : ''">
+                                        <div class="grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
                                             <div v-if="auction?.vehicleDetails?.color" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
@@ -216,7 +220,7 @@
                                                         d="M12.8185 12.489L13.997 11.3106L15.1755 12.489C15.8263 13.1399 15.8263 14.1952 15.1755 14.8461C14.5246 15.497 13.4693 15.497 12.8185 14.8461C12.1676 14.1952 12.1676 13.1399 12.8185 12.489ZM5.91907 0.720703L13.4615 8.26318C13.7219 8.52351 13.7219 8.94564 13.4615 9.20598L7.80467 14.8628C7.54433 15.1232 7.1222 15.1232 6.86187 14.8628L1.20503 9.20598C0.944679 8.94564 0.944679 8.52351 1.20503 8.26318L6.39048 3.07772L4.97627 1.66351L5.91907 0.720703ZM7.33327 4.02054L2.61924 8.73458H12.0473L7.33327 4.02054Z"
                                                         fill="#858585" />
                                                 </svg>
-                                                <p class=" capitalize ">{{ auction?.vehicleDetails?.color }}</p>
+                                                <p class="capitalize">{{ auction?.vehicleDetails?.color }}</p>
                                             </div>
                                             <div v-if="auction?.vehicleDetails?.driveTrain" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -225,10 +229,10 @@
                                                         d="M12.6673 13.3327H3.33398V13.9993C3.33398 14.3675 3.0355 14.666 2.66732 14.666H2.00065C1.63246 14.666 1.33398 14.3675 1.33398 13.9993V7.99935L3.00954 3.53118C3.2047 3.01078 3.70219 2.66602 4.25798 2.66602H11.7433C12.2991 2.66602 12.7966 3.01078 12.9918 3.53118L14.6673 7.99935V13.9993C14.6673 14.3675 14.3689 14.666 14.0007 14.666H13.334C12.9658 14.666 12.6673 14.3675 12.6673 13.9993V13.3327ZM2.75798 7.99935H13.2433L11.7433 3.99935H4.25798L2.75798 7.99935ZM4.33398 11.3327C4.88627 11.3327 5.33398 10.8849 5.33398 10.3327C5.33398 9.78042 4.88627 9.33268 4.33398 9.33268C3.7817 9.33268 3.33398 9.78042 3.33398 10.3327C3.33398 10.8849 3.7817 11.3327 4.33398 11.3327ZM11.6673 11.3327C12.2196 11.3327 12.6673 10.8849 12.6673 10.3327C12.6673 9.78042 12.2196 9.33268 11.6673 9.33268C11.1151 9.33268 10.6673 9.78042 10.6673 10.3327C10.6673 10.8849 11.1151 11.3327 11.6673 11.3327Z"
                                                         fill="#858585" />
                                                 </svg>
-                                                <p class=" capitalize ">{{ auction?.vehicleDetails?.driveTrain }}</p>
+                                                <p class="capitalize">{{ auction?.vehicleDetails?.driveTrain }}</p>
                                             </div>
                                         </div>
-                                        <div class="grid grid-cols-2 gap-1  "
+                                        <div class="grid grid-cols-2 gap-1 "
                                             :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
                                             <div v-if="auction?.vehicleDetails?.tireCondition"
                                                 class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
@@ -238,7 +242,7 @@
                                                         d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                                         fill="#0B1107" />
                                                 </svg>
-                                                <p class=" capitalize ">{{ auction?.vehicleDetails?.tireCondition }}</p>
+                                                <p class="capitalize">{{ auction?.vehicleDetails?.tireCondition }}</p>
                                             </div>
                                             <div v-if="auction?.vehicleDetails?.rotorCondition"
                                                 class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
@@ -248,37 +252,47 @@
                                                         d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                                         fill="#0B1107" />
                                                 </svg>
-                                                <p class=" capitalize ">{{ auction?.vehicleDetails?.rotorCondition }}</p>
+                                                <p class="capitalize">{{ auction?.vehicleDetails?.rotorCondition }}</p>
                                             </div>
                                         </div>
                                         <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
                                             <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
-                                            <p>Waiting for verification, can take up to <span class="font-bold"> 90 mins</span></p>
+                                            <p>Waiting for verification, can take up to <span> 90 mins</span></p>
                                         </div>
                                     </div>
-                                    <div :class="changeLayouts ? 'w-full' : 'w-[40%] flex flex-col justify-between h-full '"
-                                        class="border-l-2  border-[#E0E0E0]">
-                                        <div class="flex p-5  pl-4 ga justify-between "
-                                            :class="changeLayouts ? 'flex-row' : 'flex-col '">
-                                            <div class="space-y-1"
-                                                :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
-                                                <p>Starts in: </p>
-                                                <div v-if="auction.startDate" class="flex gap-2 items-center ">
-                                                    <vue-countdown :time="timeToStart(auction.startDate)"
-                                                        class="flex text-base-black  text-2xl gap-3 items-center"
-                                                        v-slot="{ days, hours, minutes, seconds }">
-                                                        <p class="font-medium" v-if="days > 0">{{ days }}D</p>
-                                                        <p class="font-medium" v-if="hours > 0">{{ hours }}H</p>
-                                                        <p class="font-medium" v-if="minutes > 0">{{ minutes }}M</p>
-                                                        <p class="font-medium" v-if="seconds > 0">{{ seconds }}S</p>
-                                                        <p class="font-medium" v-else>0S</p>
-                                                    </vue-countdown>
-                                                </div>
+                                    <div :class="changeLayouts ? 'w-full' : 'w-[40%] flex flex-col h-full justify-between'"
+                                        class="border-l-2  p-5 border-[#E0E0E0]">
+                                        <div class="flex flex-col gap-4">
+                                            <div class="bg-[#E0E0E0] w-full h-[8px]  rounded-md">
+                                                <div class="w-[70%] bg-[#05A54B] rounded-md h-full"></div>
+                                            </div>
+                                            <div class="flex gap-2 items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                    viewBox="0 0 16 16" fill="none">
+                                                    <path
+                                                        d="M7.99967 14.6663C4.31767 14.6663 1.33301 11.6817 1.33301 7.99967C1.33301 4.31767 4.31767 1.33301 7.99967 1.33301C11.6817 1.33301 14.6663 4.31767 14.6663 7.99967C14.6663 11.6817 11.6817 14.6663 7.99967 14.6663ZM7.33501 10.6663L12.0483 5.95234L11.1057 5.00967L7.33501 8.78101L5.44901 6.89501L4.50634 7.83767L7.33501 10.6663Z"
+                                                        fill="#05A54B" />
+                                                </svg>
+                                                <p class="text-lg pt-[2px]">75% completed</p>
                                             </div>
                                         </div>
-                                        <div class=" p-5 w-full">
-                                            <button @click="declineAution(auction)"
-                                                class="btn w-full bg-white border border-[#E0E0E0] text-error">Cancel</button>
+                                        <div v-if="index !== 4" class="flex w-full justify-between gap-4 items-center">
+                                            <button class="btn bg-primary w-full ">Continue to edit</button>
+                                            <button class=" bg-transparent border p-3 rounded-xl border-[#E0E0E0] ">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                    viewBox="0 0 15 15" fill="none">
+                                                    <path
+                                                        d="M10.833 2.16634H14.1663V3.49967H12.833V13.4997C12.833 13.6765 12.7628 13.8461 12.6377 13.9711C12.5127 14.0961 12.3432 14.1663 12.1663 14.1663H2.83301C2.6562 14.1663 2.48663 14.0961 2.3616 13.9711C2.23658 13.8461 2.16634 13.6765 2.16634 13.4997V3.49967H0.833008V2.16634H4.16634V0.833008H10.833V2.16634ZM5.49967 5.49967V10.833H6.83301V5.49967H5.49967ZM8.16634 5.49967V10.833H9.49967V5.49967H8.16634Z"
+                                                        fill="#FF333E" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div v-if="index == 4" class="flex w-full justify-between gap-4 items-center">
+                                            <button class="btn bg-primary w-full ">Launch</button>
+                                            <button
+                                                class=" w-full bg-transparent border p-3 font-medium rounded-xl border-[#E0E0E0] ">
+                                                Edit
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +306,7 @@
             <div class="flex gap-20 items-end ">
                 <div class="flex gap-8 flex-col">
                     <div class="flex w-full justify-start">
-                        <img class="object-cover" src="@/assets/svg/vehiculoAll.svg" alt="">
+                        <img class="object-cover" src="../../../assets/svg/vehiculoAll.svg" alt="">
                     </div>
                     <div>
                         <h1 class="text-5xl font-semibold text-blue-dark ">
@@ -301,7 +315,7 @@
                         </h1>
                         <p>Let the bids begin, post your auction, sell your car quick as 48 hours.</p>
                     </div>
-                    <RouterLink to="/all/create" 
+                    <RouterLink to="/all/create"
                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Create My Auction
                     </RouterLink>
@@ -358,47 +372,9 @@
                     </div>
                 </div>
             </div>
+
         </div>
-        <ModalDetailsLiveVue v-if="statusModal.isActive" :cancelAution="cancelAution" />
-        <div v-show="openDecline" class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
-            <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
-                <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
-                    <p class="text-xl text-white">Decline Auction</p>
-                    <!-- <svg @click="openDecline = false" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer"
-                        fill="none" viewBox="0 0 24 24" stroke="#fff">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg> -->
-                </div>
-                <div class="p-4 border border-b-[#E0E0E0] flex gap-3 flex-col  ">
-                    <div class="flex gap-3 items-start ">
-                        <div class="w-[120px] h-[90px]">
-                            <img v-if="autionModal?.photos" class="w-full h-full rounded-lg object-cover"
-                                :src="bucket + autionModal?.photos[0].url" alt="">
-                            <img v-else class="w-full h-full rounded-lg object-cover"
-                                src="../../../assets/img/jpg/image.jpg" alt="">
-                        </div>
-                        <div>
-                            <p class=" font-semibold ">{{ autionModal?.vehicleDetails?.model }}</p>
-                            <p>Final Bid</p>
-                            <div class="flex gap-1">
-                                <p class="font-medium text-base-black text-2xl ">$8000 </p>
-                                <p class="text-[#666666] mt-1 "> /{{ autionModal?.Bids?.length }} Bids</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-10 px-4 pb-2">
-                    <p>Are you sure you want to decline the final bid for the <span>{{ autionModal?.vehicleDetails?.model}}</span>?</p>
-                    <div class="w-full flex gap-2 mt-4 items-center">
-                        <button @click="openDecline = false"
-                            class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
-                        <button @click="cancelAution(autionModal._id)"
-                            class="btn w-full bg-primary rounded-lg ">Yes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </template>
 </template>
 <script>
@@ -409,20 +385,18 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { useAuctionStore } from "@/stores/auctions";
 import { useAuthStore } from "@/stores/auth";
-import { ModalDetailsLive } from '@/stores/modalDetailsLive';
-import { enumState } from "@/utils/auction-status.enum";
-import ModalDetailsLiveVue from "../../../components/Modals/ModalDetailsLive/ModalDetailsLive.vue";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
+import { ModalAcceptAution } from "@/stores/modalAcceptAution";
+import { ModalReview } from "@/stores/modalReview";
+import { ModalViewDetails } from "@/stores/modalViewDetails";
 export default {
 
     components: {
         Swiper,
         SwiperSlide,
-        ModalDetailsLiveVue
     },
     setup() {
         const route = useRoute();
@@ -432,96 +406,89 @@ export default {
         const changeLayouts = ref(false)
         const storeAutions = useAuctionStore()
         const storeUser = useAuthStore()
+        const statusModal = ModalAcceptAution()
+        const path = ref(computed(() => route.name))
+        const statusModalR = ModalReview()
         const openDecline = ref(false)
         const autionModal = ref(null)
-        const path = ref(computed(() => route.name))
-        const statusModal = ModalDetailsLive()
-
-        const declineAution = (auction) => {
-            openDecline.value = true
-            autionModal.value = auction
-        }
         const data = ref([])
+        const statusModalView = ModalViewDetails()
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
+        }
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+        const index = async () => {
+            loading.value = true
+            try {
+                let res = await storeAutions.index()
+                data.value = storeAutions.draft
+                data.value.map((autions, index) => {
+                    const formatter = new Intl.NumberFormat();
+                    autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
+                    let photos = []
+                    if (autions?.vehicleDetails?.additionalDocuments,
+                        autions?.vehicleDetails?.exteriorPhotos,
+                        autions?.vehicleDetails?.interiorPhotos,
+                        autions?.vehicleDetails?.driverLicense) {
+                        var d = photos.concat(
+                            autions?.vehicleDetails?.additionalDocuments,
+                            autions?.vehicleDetails?.exteriorPhotos,
+                            autions?.vehicleDetails?.interiorPhotos,
+                            autions?.vehicleDetails?.vehicleDamage,
+                            autions?.vehicleDetails?.driverLicense,
+                            autions?.vehicleDetails?.originalDocument,
+                        );
+                        let resD = d.map((item, i) => {
+                            let name = item.split("/")
+                            let newObjet = {
+                                name: name[2],
+                                url: item
+                            }
+                            return newObjet
+                        })
+                        return autions.photos = resD
+                    } else {
+                        return autions.photos = null
+                    }
+                })
+                console.log('data.value', data.value)
+                loading.value = false
+            } catch (error) {
+                loading.value = false
+
+            }
+        }
+        const declineAution = (auction, option) => {
+            openDecline.value = true
+            autionModal.value = auction
+            autionModal.value.option = option
+        }
+        function timeToEnd(startDate, duration) {
+            if (!startDate || !duration) return 0;
+            return (
+                new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
+            );
         }
         function timeToStart(startDate) {
             if (!startDate) return 0;
             return new Date(startDate) - Date.now();
         }
-        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-        const index = async () => {
+        const acceptAution = () => {
             loading.value = true
-
-            let example = 'hola/nuevo/barra'
-
-
             try {
-                let res = await storeAutions.index()
-                 
+                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id)
                 if (res) {
-                    data.value = storeAutions.upcoming
-                    data.value.map((autions, index) => {
-                        const formatter = new Intl.NumberFormat();
-                        autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
-                        let photos = []
-                        if (autions?.vehicleDetails?.additionalDocuments,
-                            autions?.vehicleDetails?.exteriorPhotos,
-                            autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.driverLicense) {
-                            var d = photos.concat(
-                                autions?.vehicleDetails?.additionalDocuments,
-                                autions?.vehicleDetails?.exteriorPhotos,
-                                autions?.vehicleDetails?.interiorPhotos,
-                                autions?.vehicleDetails?.vehicleDamage,
-                                autions?.vehicleDetails?.driverLicense,
-                                autions?.vehicleDetails?.originalDocument,
-                            );
-                            let resD = d.map((item, i) => {
-                                let name = item.split("/")
-                                let newObjet = {
-                                    name: name[2],
-                                    url: item
-                                }
-                                return newObjet
-                            })
-                            return autions.photos = resD
-                        } else {
-                            return autions.photos = null
-                        }
-                    })
+                    return '200'
                 }
             } catch (error) {
-                 
 
             } finally {
-                loading.value = false
+                index()
             }
-        }
-        const cancelAution = async (id) => {
-            loading.value = true
-            try {
-                let res = await storeAutions.autionsCancel(id)
-                if (res) {
-                    autionModal.value = null
-                    openDecline.value = false
-                    toast('Successfully cancel the auction', {
-                        theme: "colored",
-                        type: "success",
-                        position: "top-center",
-                    });
-                    index()
-                }
-            } catch (error) {
-                toast(error?.response?.data?.message || 'error al cargar', {
-                    type: "error",
-                    position: "top-center",
-                });
-            }
+
         }
         onMounted(() => {
             index()
-
         })
 
         return {
@@ -535,12 +502,16 @@ export default {
             storeUser,
             storeAutions,
             path,
-            openDecline,
+            statusModal,
             declineAution,
             autionModal,
+            openDecline,
+            statusModalR,
+            statusModalView,
+            timeToEnd,
             timeToStart,
-            cancelAution,
-            statusModal
+            acceptAution,
+            index
 
         };
     },

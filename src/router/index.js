@@ -134,6 +134,14 @@ const routes = [
         }
       },
       {
+        path: "/draft",
+        name: "draft",
+        component: () => import('../views/Dashboard/draft/Main.vue'),
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
         path: "/action-details-seller/:id",
         name: "action-details-seller",
         component: () => import('../views/Dashboard/action-details/Main.vue'),

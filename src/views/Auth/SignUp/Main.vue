@@ -103,7 +103,7 @@ export default {
 
                 let res = await store.authProfile(token)
                 if (res.status == 200) {
-                    console.log('entro bien ')
+                    console.log('entro bien')
                     stepsCurrent.value = 1
                     swiper.value?.slideTo(1)
                     toast("Your email has been verified successfully", {

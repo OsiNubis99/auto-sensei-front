@@ -157,67 +157,84 @@ export default {
                 canvas.toBlob(async blob => {
                     let nameImg = statusModalImage.img.name
                     var file = new File([blob], nameImg, { lastModified: new Date().getTime(), type: blob.type });
+                    console.log('file', file)
                     let image = canvas.toDataURL("image/jpeg");
+                    console.log('image', image)
                     switch (statusModalImage.typeImg) {
                         case 'document':
                             formData.value.previewDocument = image;
                             formData.value.document = file;
+                            console.log('document', formData.value.previewDocument, formData.value.document)
                             break;
                         case 'driver':
                             formData.value.previewDriver = image;
                             formData.value.driverDocument = file;
+                            console.log('driver',formData.value.previewDriver,formData.value.driverDocument)
                             break;
                         case 'frontPhoto':
                             formData.value.previewFrontPhoto = image;
                             formData.value.frontPhoto = file;
+                            
                             break;
                         case 'front':
                             formData.value.previewFront = image;
                             formData.value.front = file;
+                            
                             break;
                         case 'driverSide':
                             formData.value.previewDriverSide = image;
                             formData.value.driverSide = file;
+                            
                             break;
                         case 'back':
                             formData.value.previewBack = image;
                             formData.value.back = file;
+                            
                             break;
                         case 'passengerSide':
                             formData.value.previewPassengerSide = image;
                             formData.value.passengerSide = file;
+                            
                             break;
                         case 'tireAndRim':
                             formData.value.previewTireAndRim = image;
                             formData.value.tireAndRim = file;
+                            
                             break;
                         case 'driversDisplay':
                             formData.value.previewDriversDisplay = image;
                             formData.value.driversDisplay = file;
+                            
                             break;
                         case 'driversSide':
                             formData.value.previewDriversSide = image;
                             formData.value.driversSide = file;
+                            
                             break;
                         case 'centerConsole':
                             formData.value.previewCenterConsole = image;
                             formData.value.centerConsole = file;
+                            
                             break;
                         case 'rearSeats':
                             formData.value.previewRearSeats = image;
                             formData.value.rearSeats = file;
+                            
                             break;
                         case 'vehicleDamage':
                             formData.value.previewVehicleDamage = image;
                             formData.value.vehicleDamage = file;
+                            
                             break;
                         case 'additionalDocuments':
                             formData.value.previewAdditionalDocuments = image;
                             formData.value.additionalDocuments = file;
+                            
                             break;
                         case 'vehicleVideo':
                             formData.value.previewVehicleVideo = image;
                             formData.value.vehicleVideo = file;
+                            
                             break;
                         default:
                             break;

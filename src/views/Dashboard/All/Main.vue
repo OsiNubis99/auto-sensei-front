@@ -85,8 +85,8 @@
                         </div>
                         <hr class="border-[#cfcfcf] border-1 ">
                         <div class="flex pt-5 cursor-pointer justify-between">
-                            <p class="font-medium">Draft <span class="text-[#858585]">{{ storeAutions?.draft?.length
-                            }}</span></p>
+                            <RouterLink to="/draft" class="font-medium">Draft <span class="text-[#858585]">{{ storeAutions?.draft?.length
+                            }}</span></RouterLink>
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 20 21" fill="none">
                                 <path
                                     d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
