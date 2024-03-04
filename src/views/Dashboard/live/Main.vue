@@ -13,7 +13,7 @@
                 <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
                 <div class="w-full md:w-[70%] ">
                     <div class="flex items-center justify-between mb-4">
-                        <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
+                        <p class=" font-semibold ">{{ sortedData?.length }} Vehicles</p>
                         <div class="flex items-center gap-2 ">
                             <p class="mt-2">Sort by:</p>
                             <div class="flex items-center gap-5">
@@ -71,13 +71,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-2"
+                    <div class="p-2" v-if="sortedData.length > 0"
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
                         <div v-for="(auction, index) in sortedData" :key="index"
                             class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
                             <CardLiveSeller :key="counter" :auction="auction" :changeLayouts="changeLayouts" />
                         </div>
+                    </div>
+                    <div v-else>
+                        <ScrrenNoSorbySeller />
                     </div>
                 </div>
             </div>
@@ -91,7 +94,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watch ,watchEffect} from "vue";
+import { ref, onMounted, computed, watch, watchEffect } from "vue";
 import { useRoute, useRouter } from 'vue-router'
 import { useAuctionStore } from "@/stores/auctions";
 import { useAuthStore } from "@/stores/auth";
@@ -103,6 +106,7 @@ import CardAutionMobile from '../../../components/Cards/CardAutionMobile.vue'
 import CardLiveSeller from '../../../components/Cards/CardLiveSeller.vue'
 import Basic from '../../../components/Loading/Basic.vue'
 import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
+import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
 export default {
 
     components: {
@@ -112,7 +116,8 @@ export default {
         CardAutionMobile,
         CardLiveSeller,
         Basic,
-        ScreenCreateAution
+        ScreenCreateAution,
+        ScrrenNoSorbySeller
     },
     setup() {
         const route = useRoute();

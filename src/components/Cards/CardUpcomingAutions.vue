@@ -13,11 +13,11 @@
             </div>
         </swiper>
         <div class="w-full flex flex-col md:flex-row justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
-            <div class="flex p-5  flex-col gap-3">
+            <div class="flex p-4 pb-0 md:p-5  flex-col gap-3">
                 <div>
-                    <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{
+                    <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
                         auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
-                    <p class=" text-base">
+                    <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
                 </div>
@@ -58,10 +58,10 @@
                         <p class="capitalize">{{ auction?.vehicleDetails?.driveTrain }}</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-1 "
+                <div class=" flex  items-center md:grid md:grid-cols-2  gap-1 "
                     :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
                     <div v-if="auction?.vehicleDetails?.tireCondition"
-                        class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
+                        class="bg-[#F0F0F0] flex px-1 md:px-5 py-1 gap-1 md:gap-3  rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                             <path
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
@@ -70,7 +70,7 @@
                         <p class=" text-[10px] capitalize">{{ auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
-                        class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
+                        class="bg-[#F0F0F0] flex px-1  md:px-5 py-1  gap-1 md:gap-3 rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                             <path
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
@@ -81,7 +81,7 @@
                 </div>
                 <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
                     <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
-                    <p class=" text-xs md:text-base">Waiting for verification, can take up to <span class="font-bold"> 90
+                    <p class=" text-[12px] md:text-base">Waiting for verification, can take up to <span class="font-bold"> 90
                             mins</span></p>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                         <p class="text-xs md:text-base">Starts in:  </p>
                         <div v-if="auction?.startDate" class="flex gap-2 items-center ">
                             <vue-countdown :time="timeToStart(auction?.startDate)"
-                                class="flex text-base-black  text-2xl gap-3 items-center"
+                                class="flex text-base-black  md:text-2xl gap-3 items-center"
                                 v-slot="{ days, hours, minutes, seconds }">
                                 <p class="font-medium" v-if="days > 0">{{ days }}D</p>
                                 <p class="font-medium" v-if="hours > 0">{{ hours }}H</p>

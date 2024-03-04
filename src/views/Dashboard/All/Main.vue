@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-2"
+                    <div class="p-2" v-if="sortedData.length > 0"
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
                         <div v-for="(auction, index) in sortedData" :key="index"
                             class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
@@ -83,6 +83,9 @@
                             <CardAutionAll :key="counter" :auction="auction" :changeLayouts="changeLayouts"
                                 :decline="declineAution" />
                         </div>
+                    </div>
+                    <div v-else>
+                        <ScrrenNoSorbySeller />
                     </div>
                 </div>
             </div>
@@ -163,6 +166,7 @@ import CardAutionMobile from '../../../components/Cards/CardAutionMobile.vue'
 import HeaderOptionesSeller from '../../../components/Header/HeaderOptionesSeller.vue'
 import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
 import SorBy from '../../../components/Filters/SorBy.vue'
+import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
 export default {
 
     components: {
@@ -175,7 +179,8 @@ export default {
         CardAutionAll,
         HeaderOptionesSeller,
         ScreenCreateAution,
-        SorBy
+        SorBy,
+        ScrrenNoSorbySeller
     },
     setup() {
         const route = useRoute();

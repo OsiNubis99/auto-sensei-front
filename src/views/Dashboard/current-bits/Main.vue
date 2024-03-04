@@ -5,6 +5,7 @@
             <Basic />
         </template>
         <div v-else class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
@@ -14,17 +15,69 @@
                 </div>
                 <div class="w-full md:w-[70%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }} Vehicles
+                        <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }}
+                            Vehicles
                         </p>
-                        <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" />
+                        <div class="flex items-center gap-5">
+                            <div class="navbar-right relative">
+                                <button @click="isOpen = !isOpen"
+                                    class="flex gap-2 rounded-md  shadow-md px-2 bg-white items-center">
+                                    <p class="p-2 text-xs md:text-[16px] pb-1"> Current Bid</p>
+                                    <div class=" p-2 border-l-2 pr-0 border-[#efefef] ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 18 18" fill="none">
+                                            <path
+                                                d="M15 3V12H17.25L14.25 15.75L11.25 12H13.5V3H15ZM9 13.5V15H2.25V13.5H9ZM10.5 8.25V9.75H2.25V8.25H10.5ZM10.5 3V4.5H2.25V3H10.5Z"
+                                                fill="#858585" />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div v-if="isOpen"
+                                    class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
+                                    <div @click="setSorBy('current-bid')"
+                                        class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                        Current Bid
+                                    </div>
+                                    <div @click="setSorBy('odometer')"
+                                        class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                        Odometer
+                                    </div>
+                                    <div @click="setSorBy('year')"
+                                        class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                        Year</div>
+
+                                </div>
+                            </div>
+                            <div class="shadow-md md:flex rounded-md hidden bg-white">
+                                <div @click="changeGridTemplate" :class="changeLayouts ? 'bg-white' : 'bg-[#EFF8E0]'"
+                                    class="p-2 cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M19 11V5H5V11H19ZM19 13H5V19H19V13ZM4 3H20C20.2652 3 20.5196 3.10536 20.7071 3.29289C20.8946 3.48043 21 3.73478 21 4V20C21 20.2652 20.8946 20.5196 20.7071 20.7071C20.5196 20.8946 20.2652 21 20 21H4C3.73478 21 3.48043 20.8946 3.29289 20.7071C3.10536 20.5196 3 20.2652 3 20V4C3 3.73478 3.10536 3.48043 3.29289 3.29289C3.48043 3.10536 3.73478 3 4 3Z"
+                                            :fill="changeLayouts ? '#09121F' : '#7EC600'" />
+                                    </svg>
+                                </div>
+                                <div @click="changeGridTemplate" :class="changeLayouts ? 'bg-[#EFF8E0]' : 'bg-white'"
+                                    class=" p-2 flex item-center justify-center cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M21 3C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V20C22 20.2652 21.8946 20.5196 21.7071 20.7071C21.5196 20.8946 21.2652 21 21 21H3C2.73478 21 2.48043 20.8946 2.29289 20.7071C2.10536 20.5196 2 20.2652 2 20V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21ZM11 13H4V19H11V13ZM20 13H13V19H20V13ZM11 5H4V11H11V5ZM20 5H13V11H20V5Z"
+                                            :fill="changeLayouts ? '#7EC600' : '#09121F'" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" /> -->
                     </div>
                     <div class="p-2"
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
 
-                        <div v-for="(aution, index) in data" :key="index"
+                        <div v-for="(aution, index) in sortedData" :key="index"
                             class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-                            <CardsCurrentBits :aution="aution" :changeLayouts="changeLayouts" :auth="authStore" />
+                            <CardsCurrentBits :key="counter" :aution="aution" :changeLayouts="changeLayouts" :auth="authStore" />
                             <!--  <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
@@ -223,8 +276,6 @@
                                                 Contact Seller
                                             </RouterLink>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div> -->
@@ -248,8 +299,9 @@
         <ModalAutoBidVue v-if="statusModalAuto.isActive" :form="formData" :index="index" />
     </div>
 </template>
+
 <script>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch, watchEffect } from "vue";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { useAuctionStore } from "@/stores/auctions";
@@ -311,6 +363,7 @@ export default {
         const storeAutions = useAuctionStore()
         const path = ref(computed(() => route.name))
         const route = useRoute();
+        const sortBy = ref('current-bid')
         const autionUpdate = ref(computed(() => authStore.aution))
         const index = async () => {
             loading.value = true
@@ -318,9 +371,10 @@ export default {
                 await storeAutions.index()
                 let res = await storeAutions.indexCurrentBids()
                 data.value = storeAutions?.currentBids
+                console.log('data.value', data.value)
                 data.value.map((autions, index) => {
-                    const formatter = new Intl.NumberFormat();
-                    autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
+                   /*  const formatter = new Intl.NumberFormat();
+                    autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer) */
                     let photos = []
                     if (autions?.vehicleDetails?.additionalDocuments,
                         autions?.vehicleDetails?.exteriorPhotos,
@@ -386,6 +440,49 @@ export default {
                 new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
             );
         }
+        const setSorBy = (sort) => {
+            sortBy.value = sort
+
+        }
+        const statusOrder = [
+            'bids completed',
+            'live',
+        ]
+
+        const sortedData = computed(() => {
+            switch (sortBy.value) {
+                case 'current-bid':
+                    console.log('current-bid')
+                    let sortStatus = {}
+                    data.value.forEach(auction => {
+                        if (!sortStatus[auction.status]) sortStatus[auction.status] = []
+                        sortStatus[auction.status].push(auction)
+                    })
+                    const sortedItems = []
+                    for (let key of statusOrder) {
+                        if (sortStatus[key])
+                            sortedItems.push(sortStatus[key].sort((a, b) => timeToEnd(a.startDate, a.duration) - timeToEnd(b.startDate, b.duration)))
+                    }
+                    return sortedItems.reverse().flat()
+                case 'odometer':
+                console.log('odometer')
+                    return data.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
+                case 'year':
+                console.log('year')
+                    return data.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
+                default:
+               
+                    return data.value
+            }
+        })
+        watchEffect(() => {
+            if (sortBy.value) {
+                counter.value++
+            }
+            else {
+                counter.value++
+            }
+        })
         onMounted(() => {
             index()
         })
@@ -405,10 +502,11 @@ export default {
             statusModalAuto,
             index,
             timeToEnd,
+            setSorBy,
+            sortedData,
             counter
 
         };
     },
 };
 </script>
-

@@ -21,7 +21,7 @@
                 <ScreenNoDataDealer />
             </template>
             <div v-else class="flex justify-between mt-5 gap-4">
-                <div class="w-[29%]">
+                <!--  <div class="hidden md:w-[29%] md:block">
                     <div class="bg-white p-5 shadow-steps">
                         <p class=" text-2xl font-semibold  ">Filter Auction</p>
                         <div class="mt-4 flex flex-col gap-4">
@@ -190,11 +190,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-[70%]">
+                </div> -->
+                <div class="w-full md:w-[70%]">
                     <div class="flex items-center justify-between mb-4">
                         <p class=" font-semibold " v-if="data.length > 0">{{ data.length }} Vehicles</p>
-                        <div class="flex items-center gap-2 ">
+                        <!--  <div class="flex items-center gap-2 ">
                             <p class="mt-2">Sort by:</p>
                             <div class="flex items-center gap-5">
                                 <div class="navbar-right relative">
@@ -248,14 +248,15 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <div
+                    <div class="p-2" v-if="sortedData.length > 0"
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
-                        <div v-for="(aution, index) in sortedData" :key="index"
-                            class="bg-white flex hover:shadow-lg  duration-200 transition-all ease-in  mb-7 gap-5 items-start shadow-steps  w-full "
+                        <div v-for="(auction, index) in sortedData" :key="index"
+                            class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-                            <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+                            <CardUpcoming :key="counter" :remind="remind" :aution="auction" :remindCancel="remindCancel" />
+                            <!--   <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
                                     <swiper-slide v-for="(img, indexPhoto) in aution.photos" :key="indexPhoto">
@@ -386,7 +387,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -413,6 +414,7 @@ import 'swiper/css/scrollbar';
 import ModalBidNow from "../../../components/Modals/ModalBidNow/ModalBidNow.vue";
 import HeaderOptionsDealer from '../../../components/Header/HeaderOptionsDealer.vue'
 import ScreenNoDataDealer from '../../../components/Screen/ScreenNoDataDealer.vue'
+import CardUpcoming from '../../../components/Cards/CardUpcoming.vue'
 export default {
 
     components: {
@@ -420,7 +422,8 @@ export default {
         SwiperSlide,
         ModalBidNow,
         HeaderOptionsDealer,
-        ScreenNoDataDealer
+        ScreenNoDataDealer,
+        CardUpcoming
     },
     setup() {
         const isOpen = ref(false)
@@ -446,6 +449,7 @@ export default {
         const path = ref(computed(() => route.name))
         const route = useRoute();
         const sortBy = ref('year')
+        const counter = ref(0)
         const remind = async (aution) => {
 
             loading.value = true
@@ -455,8 +459,8 @@ export default {
 
                 loading.value = false
             } finally {
+                counter.value++
                 index()
-                loading.value = false
             }
         }
         const remindCancel = async (aution) => {
@@ -468,8 +472,8 @@ export default {
 
                 loading.value = false
             } finally {
+               
                 index()
-                loading.value = false
             }
         }
         function timeToEnd(startDate, duration) {
@@ -488,13 +492,14 @@ export default {
                     autions.remindList.map((remind, index) => {
                         if (authStore.userData._id == remind._id) {
                             autions.remind = true
+                            counter.value++
                         }
                     })
 
                 })
                 data.value.map((autions, index) => {
-                  /*   const formatter = new Intl.NumberFormat();
-                    autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer) */
+                    /*   const formatter = new Intl.NumberFormat();
+                      autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer) */
                     let photos = []
                     if (autions?.vehicleDetails?.additionalDocuments,
                         autions?.vehicleDetails?.exteriorPhotos,
@@ -579,7 +584,8 @@ export default {
             authStore,
             remindCancel,
             setSorBy,
-            sortedData
+            sortedData,
+            counter
         };
     },
 };

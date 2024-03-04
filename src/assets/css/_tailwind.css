@@ -1016,4 +1016,7 @@ input.check-toggle-round-flat:checked+label:after {
         width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 6px)) !important;
         height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 6px)) !important;
     }
+    .btn {
+        font-size: 12px;
+    }
 }

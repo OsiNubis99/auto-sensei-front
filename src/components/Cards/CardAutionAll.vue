@@ -1,27 +1,27 @@
 <template>
     <div class="w-full flex flex-col md:flex-row  sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
         <p v-if="auction?.status == 'completed'"
-            class="font-semibold fixed left-0 z-50 text-white bg-[#05A54B] rounded-lg ml-2 mt-2 px-4 py-1">
+            class="md:font-semibold  text-xs md:text-base fixed left-2 z-50 text-white bg-[#05A54B] rounded-lg ml-2 mt-2 px-4 py-1">
             Complete
         </p>
         <p v-if="auction?.status == 'bids completed'"
-            class="font-semibold fixed left-0 z-50  bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">
+            class="md:font-semibold  text-xs md:text-base fixed left-2 z-50  bg-[#FBDB17] rounded-lg ml-2 mt-2 px-4 py-1">
             Bids
             Complete
         </p>
         <p v-if="auction?.status == 'reviewed'"
-            class="font-semibold fixed left-0 z-50 text-white bg-[#0B1107] rounded-lg ml-2 mt-2 px-4 py-1">
+            class="md:font-semibold  text-xs md:text-base fixed left-2 z-50 text-white bg-[#0B1107] rounded-lg ml-2 mt-2 px-4 py-1">
             Reviewed
         </p>
         <p v-if="auction?.status == 'drop off'"
-            class="font-semibold fixed left-0 z-50 bg-[#0B1107] text-white rounded-lg ml-2 mt-2 px-4 py-1">
+            class="md:font-semibold  text-xs md:text-base fixed left-2 z-50 bg-[#0B1107] text-white rounded-lg ml-2 mt-2 px-4 py-1">
             Dropped Off
         </p>
         <p v-if="auction?.status == 'upcoming' || auction?.status == 'unapproved'"
-            class="font-semibold absolute top-0 left-0 z-50 bg-[#fff] rounded-lg ml-2 mt-2 px-4 py-1">
+            class="md:font-semibold  text-xs md:text-base absolute top-0 left-0 z-50 bg-[#fff] rounded-lg ml-2 mt-2 px-4 py-1">
             Launching Soon</p>
         <p v-if="auction?.status == 'live'"
-            class="font-semibold text-white z-50 fixed left-0 bg-[#1F94F0] rounded-lg ml-2 mt-2 px-4 py-1">
+            class="md:font-semibold  text-xs md:text-base text-white z-50 fixed left-2 bg-[#1F94F0] rounded-lg ml-2 mt-2 px-4 py-1">
             Live</p>
         <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
             :class="changeLayouts ? 'w-full' : 'w-full md:w-[40%]'">
@@ -37,8 +37,8 @@
                 :class="auction?.status == 'live' || auction?.status == 'bids completed' || auction?.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
                 class="flex p-2 md:p-5  flex-col gap-3">
                 <div>
-                    <div class="font-bold text-xl">{{ auction.title }}</div>
-                    <p class=" text-base">
+                    <div class="font-bold md:text-xl">{{ auction.title }}</div>
+                    <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
                 </div>
@@ -79,10 +79,10 @@
                         <p class="capitalize">{{ auction?.vehicleDetails?.driveTrain }}</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-1 "
+                <div class=" flex  items-center md:grid md:grid-cols-2  gap-1 "
                     :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
                     <div v-if="auction?.vehicleDetails?.tireCondition"
-                        class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
+                        class="bg-[#F0F0F0] flex px-1 md:px-5 py-1 gap-1 md:gap-3  rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                             <path
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
@@ -91,7 +91,7 @@
                         <p class=" text-[10px] capitalize">{{ auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
-                        class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
+                        class="bg-[#F0F0F0] flex px-1  md:px-5 py-1  gap-1 md:gap-3 rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                             <path
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
@@ -129,17 +129,17 @@
                     </div>
                     <div v-if="auction?.status == 'reviewed' || auction?.status == 'completed' || auction?.status == 'bids completed' || auction?.status == 'drop off'"
                         class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
-                        <p>Final Bids</p>
+                        <p class="text-sm md:text-base">Final Bids</p>
                         <div class="flex gap-1">
-                            <p class="font-medium text-base-black text-2xl ">
+                            <p class=" font-medium text-lg md:text-2xl text-base-black ">
                                 ${{ auction?.bids[0]?.amount }} </p>
-                            <p class="text-[#666666] mt-1 "> /{{ auction?.bids.length }} Bids</p>
+                            <p class="text-[#666666] mt-1 text-sm md:text-base "> /{{ auction?.bids.length }} Bids</p>
                         </div>
                     </div>
                     <div v-if="auction?.status == 'bids completed'"
                         :class="changeLayouts ? 'flex justify-between items-start flex-col' : 'space-y-2 flex items-center gap-2'">
-                        <p>Approval period ends in</p>
-                        <p class="text-[#FF9A02] font-medium !m-0"> 48 Hours
+                        <p class="text-xs md:text-base">Approval period ends in</p>
+                        <p class="text-[#FF9A02] text-xs md:text-base font-medium !m-0"> 48 Hours
                         </p>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                 <div v-if="auction?.status == 'live'" class="flex p-5  pl-4 gap justify-between "
                     :class="changeLayouts ? 'flex-row' : 'flex-col '">
                     <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
-                        <p>Current bid</p>
+                        <p class="text-sm md:text-bas">Current bid</p>
                         <p class=" font-medium text-base-black  ">${{
         auction?.vehicleDetails?.basePrice }} <span class="text-[#666666] mt-2">/{{
         auction?.bids.length }}
@@ -175,7 +175,7 @@
                     </div>
                     <div
                         :class="changeLayouts ? 'flex justify-between items-start flex-col' : 'space-y-2 flex items-center gap-2'">
-                        <p>Auction ends in </p>
+                        <p class="text-sm md:text-base">Auction ends in </p>
                         <p class="text-[#FF9A02] font-medium !m-0">
                             <vue-countdown :time="timeToEnd(auction?.startDate, auction?.duration)"
                                 v-slot="{ days, hours, minutes, seconds }">
@@ -192,13 +192,13 @@
 
                     </div>
                 </div>
-                <div v-if="auction?.status == 'upcoming'" class="flex p-5  pl-4 ga h-full justify-between "
+                <div v-if="auction?.status == 'upcoming'" class="flex md:p-5  pl-4 ga h-full justify-between "
                     :class="changeLayouts ? 'flex-row' : 'flex-col '">
                     <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
-                        <p>Starts in: </p>
+                        <p class="text-sm md:text-bas">Starts in: </p>
                         <div class="flex gap-2 items-center ">
                             <vue-countdown :time="timeToStart(auction?.startDate)"
-                                class="flex text-base-black  text-2xl gap-3 items-center"
+                                class="flex text-base-black  md:text-2xl gap-3 items-center"
                                 v-slot="{ days, hours, minutes, seconds }">
                                 <p class="font-medium" v-if="days > 0">{{ days }}D</p>
                                 <p class="font-medium" v-if="hours > 0">{{ hours }}H</p>
@@ -210,7 +210,7 @@
                     </div>
 
                 </div>
-                <div v-if="auction?.status == 'upcoming' || auction?.status == 'unapproved'" class=" p-5 w-full">
+                <div v-if="auction?.status == 'upcoming' || auction?.status == 'unapproved'" class=" p-2 md:p-5 w-full">
                     <button @click="declineAution(auction, 'cancelled')"
                         class="btn w-full bg-white border border-[#E0E0E0] text-error">Cancel</button>
                 </div>
