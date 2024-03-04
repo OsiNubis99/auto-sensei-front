@@ -77,7 +77,8 @@
                         <div v-for="(aution, index) in sortedData" :key="index"
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-                            <CardsCurrentBits :key="counter" :aution="aution" :changeLayouts="changeLayouts" :auth="authStore" />
+                            <CardsCurrentBits :key="counter" :aution="aution" :changeLayouts="changeLayouts"
+                                :auth="authStore" />
                             <!--  <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
@@ -373,8 +374,8 @@ export default {
                 data.value = storeAutions?.currentBids
                 console.log('data.value', data.value)
                 data.value.map((autions, index) => {
-                   /*  const formatter = new Intl.NumberFormat();
-                    autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer) */
+                    /*  const formatter = new Intl.NumberFormat();
+                     autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer) */
                     let photos = []
                     if (autions?.vehicleDetails?.additionalDocuments,
                         autions?.vehicleDetails?.exteriorPhotos,
@@ -465,13 +466,13 @@ export default {
                     }
                     return sortedItems.reverse().flat()
                 case 'odometer':
-                console.log('odometer')
+                    console.log('odometer')
                     return data.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
                 case 'year':
-                console.log('year')
+                    console.log('year')
                     return data.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
                 default:
-               
+
                     return data.value
             }
         })
