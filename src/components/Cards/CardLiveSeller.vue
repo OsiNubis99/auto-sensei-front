@@ -12,13 +12,13 @@
                 <img class="w-full rounded-s-lg h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
             </div>
         </swiper>
-        <div class="w-full flex flex-col md:flex-row justify-between gap-3" :class="changeLayouts ? 'flex-col' : ''">
+        <div class="w-full flex flex-col md:flex-row justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : ''">
             <div @click="statusModal.openModal({ isActive: true, data: auction })"
-                class="flex p-5 cursor-pointer flex-col gap-3">
+                class="flex p-4 md:p-5 cursor-pointer flex-col gap-3">
                 <div>
-                    <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{
+                    <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
                         auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
-                    <p class=" text-base">
+                    <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
                 </div>
@@ -59,10 +59,10 @@
                         <p class="capitalize">{{ auction?.vehicleDetails?.driveTrain }}</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-1 "
+                <div class=" flex  items-center md:grid md:grid-cols-2  gap-1 "
                     :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
                     <div v-if="auction?.vehicleDetails?.tireCondition"
-                        class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
+                        class="bg-[#F0F0F0] flex px-1 md:px-5 py-1 gap-1 md:gap-3  rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                             <path
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
@@ -71,7 +71,7 @@
                         <p class=" text-[10px] capitalize">{{ auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
-                        class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
+                        class="bg-[#F0F0F0] flex px-1  md:px-5 py-1  gap-1 md:gap-3 rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                             <path
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
@@ -88,16 +88,16 @@
             </div>
             <div :class="changeLayouts ? 'w-full' : 'md:w-[40%] flex flex-col justify-between h-full '"
                 class="border-l-2  border-[#E0E0E0]">
-                <div class="flex p-5  pl-4 ga justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col '">
+                <div class="flex md:p-5  pl-4 ga justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col '">
                     <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
-                        <p>Current bid</p>
-                        <p class=" font-medium text-2xl text-base-black">
+                        <p class="text-sm md:text-base">Current bid</p>
+                        <p class=" text-lg font-medium md:text-2xl text-base-black">
                             <span v-if="auction?.bids[0]?.amount">${{ auction?.bids[0]?.amount
                             }}</span>
                             <span v-else-if="auction?.vehicleDetails?.basePrice"> ${{
                                 auction?.vehicleDetails?.basePrice }} </span>
                             <span v-else>$0</span>
-                            <span class="text-[#666666] !text-lg mt-2">/{{ auction.bids.length }}
+                            <span class="text-[#666666] text-sm md:!text-lg mt-2">/{{ auction.bids.length }}
                                 Bids
                             </span>
                         </p>

@@ -155,7 +155,7 @@
                         class="btn w-full bg-white border border-[#E0E0E0] text-error">Decline</button>
                 </div>
                 <div v-if="auction?.status == 'drop off'" class="flex gap-4 p-5  justify-between w-full">
-                    <button @click="statusModalR.openModal({ isActive: true, data: auction })"
+                    <button @click="statusReview.openModal({ isActive: true, data: auction })"
                         class="btn w-full bg-white border border-[#E0E0E0]  ">Input Review</button>
                 </div>
                 <div v-if="auction?.status == 'reviewed'" class="flex gap-4 p-5  justify-between w-full">
@@ -165,7 +165,7 @@
                 <div v-if="auction?.status == 'live'" class="flex p-5  pl-4 gap justify-between "
                     :class="changeLayouts ? 'flex-row' : 'flex-col '">
                     <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
-                        <p class="text-sm md:text-bas">Current bid</p>
+                        <p class="text-sm md:text-base">Current bid</p>
                         <p class=" font-medium text-base-black  ">${{
         auction?.vehicleDetails?.basePrice }} <span class="text-[#666666] mt-2">/{{
         auction?.bids.length }}
@@ -239,6 +239,7 @@ import 'swiper/css/scrollbar';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalViewDetails } from "@/stores/modalViewDetails";
+import { ModalReview } from "@/stores/modalReview";
 export default {
     components: {
         Swiper,
@@ -267,6 +268,7 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const statusModalView = ModalViewDetails()
         const statusModal = ModalAcceptAution()
+        const statusReview = ModalReview()
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
             return (
@@ -302,7 +304,8 @@ export default {
             cancelAution,
             acceptAution,
             statusModal,
-            statusModalView
+            statusModalView,
+            statusReview
         };
     },
 };
