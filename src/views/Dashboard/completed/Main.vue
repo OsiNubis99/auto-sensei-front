@@ -85,7 +85,7 @@
                     <div class="p-2" v-if="sortedData.length > 0"
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
                         <div v-for="(auction, index) in sortedData" :key="index"
-                            class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
+                            class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[30px] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
                             <CardCompleteSeller :key="counter" :auction="auction" :changeLayouts="changeLayouts"
                                 :decline="declineAution" />
