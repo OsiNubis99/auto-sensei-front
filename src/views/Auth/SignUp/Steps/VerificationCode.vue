@@ -15,17 +15,18 @@
         </div>
     </div>
     <div v-else class="flex-1 flex flex-col justify-between py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
-        <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
+        <div class="flex-1 flex flex-col justify-center md:py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full ">
                 <div>
-                    <h2 class="mt-6 text-4xl font-bold text-base-black text-center mb-5 ">Enter Verification Code</h2>
+                    <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">Enter Verification
+                        Code</h2>
                     <p class=" text-sm font-normal text-[#666] text-center  ">A text message with a 6-digit code has
-                        been sent to (628) 267-9126
+                        been sent to <strong> (628) 267-9126 </strong>
                     </p>
                 </div>
                 <div class="mt-8">
                     <div class="mt-6">
-                        <div class="space-y-7">
+                        <div class="space-y-7 ">
                             <div>
                                 <label htmlFor="email" class="block text-sm font-medium text-gray-700">
                                     Code
@@ -46,13 +47,14 @@
                 </div>
             </div>
         </div>
-        <div class="text-center">
+        <div class="text-center mt-5 flex justify-center gap-2 md:flex-col">
             <p class=" text-xs font-normal text-[#666]  ">
-                Didn’t receive the code?
-            <p @click="backStep" class="font-medium underline text-base-black hover:text-indigo-500">
+                Didn’t receive the code? </p>
+            <p @click="backStep"
+                class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
                 Resend Code
             </p>
-            </p>
+
         </div>
     </div>
 </template>
@@ -94,7 +96,7 @@ export default {
             axios.defaults.headers['Authorization'] = `Bearer ${token.value}`;
             localStorage.setItem('token', token.value)
             let resToken = await store.authProfile()
-           
+
             if (resToken.statusText = "OK") {
                 localStorage.removeItem('updateUser')
                 localStorage.setItem('rol', resToken.data.type)
@@ -120,12 +122,12 @@ export default {
                     loading.value = false;
                 }, 800);
             }
-           /*  console.log('res', resToken)
-            setTimeout(async () => {
-                await router.push({ path: `/login/${route.params.rol}` })
-                router.go()
-                loading.value = false
-            }, 2000); */
+            /*  console.log('res', resToken)
+             setTimeout(async () => {
+                 await router.push({ path: `/login/${route.params.rol}` })
+                 router.go()
+                 loading.value = false
+             }, 2000); */
 
             /*  props.next() */
         }

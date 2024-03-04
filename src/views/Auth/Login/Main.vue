@@ -1,23 +1,5 @@
 <template>
-    <div class="main-login  flex">
-        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class="hidden  lg:block w-1/2 relative ">
-            <div v-if="rol == 'dealers'" class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
-                <h1 class=" text-5xl text-blue-dark font-bold ">Boost Your Inventory <br> Organically</h1>
-                <p class="w-[70%]">Dealers are able to increase their inventory without having to go to their local
-                    auctions, or online
-                    auctions
-                    bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
-                    application.</p>
-            </div>
-            <div v-else class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
-                <h1 class=" text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>
-                <p class="w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and
-                    efficient process. Maximize the value of your car by inviting competitive bids from local
-                    dealerships.
-                </p>
-            </div>
-            <img class="h-auto absolute bottom-0 w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg" alt="" />
-        </div>
+    <div class="main-login  flex  flex-col md:flex-row-reverse">
         <div
             class="flex-1 flex flex-col lg:w-1/2 relative justify-between py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div v-if="isLoadingLogin" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
@@ -36,10 +18,10 @@
                 </div>
             </div>
             <div v-else
-                class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
+                class="flex-1 flex flex-col justify-center pt-0 md:py-12 md:px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
                 <div class="mx-auto w-full ">
                     <div>
-                        <h2 class="mt-6 text-xl md:text-4xl font-bold text-base-black text-center mb-5 ">Welcome to
+                        <h2 class="md:mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">Welcome to
                             AutoSensei</h2>
 
                         <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to dealers right from
@@ -75,7 +57,7 @@
                                     </button>
                                     <p class="mt-4 uppercase text-error text-md font-semibold">{{ messageError }}</p>
                                 </div>
-                                <div class="text-sm mt-6 text-center">
+                                <div class="text-sm md:mt-6 !mb-5 text-center">
                                     <RouterLink to="/recover-password"
                                         class="font-medium underline text-indigo-600 hover:text-indigo-500">
                                         Forgot your password?
@@ -88,8 +70,8 @@
 
             </div>
             <div v-if="!isLoadingLogin" class="text-center">
-                <p class=" text-xs font-normal text-[#666]">
-                    By clicking “Log In”, you acknowledge that you have <br>
+                <p class=" text-[10px] md:text-xs font-normal text-[#666]">
+                    By clicking “Log In”, you acknowledge that you have
                     read & agreed to AutoSensei User's
                     <RouterLink to="#" class="font-medium underline text-base-black hover:text-indigo-500">
                         Terms & Conditions.
@@ -97,6 +79,27 @@
                 </p>
             </div>
         </div>
+        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class="  lg:block md:w-1/2 relative ">
+            <div v-if="rol == 'dealers'" class="h-full  flex justify-start items-start flex-col gap-5 px-16 py-12">
+                <h1 class="p-5 pb-0 !md:p-0  text-5xl text-blue-dark font-bold ">Boost Your Inventory <br> Organically</h1>
+                <p class="p-5 pt-0 !md:p-0 w-[70%]">Dealers are able to increase their inventory without having to go to their local
+                    auctions, or online
+                    auctions
+                    bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
+                    application.</p>
+                     <img class="h-[60vh] block lg:hidden  w-full object-cover  " src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+            </div>
+            <div v-else class="h-full  flex justify-start lg:p-5 items-start flex-col gap-5 md:px-16 md:py-12">
+                <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>
+                <p class="p-5 pt-0 !md:p-0 md:w-[70%] text-sm ">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and
+                    efficient process. Maximize the value of your car by inviting competitive bids from local
+                    dealerships.
+                </p>
+                 <img class="h-[60vh] block lg:hidden  w-full object-cover  " src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+            </div>
+            <img class="h-auto hidden lg:block absolute bottom-0 w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+        </div>
+       
     </div>
 </template>
 

@@ -25,14 +25,14 @@
                         class=" border bg-[#F0F0F0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg  w-full ">
                         <option value="make">make</option>
                     </select> -->
-                    <label class="font-medium text-base " for="">Make</label>
-                    <input :class="invalid?.make ? 'border-error' : 'border-none'" v-make="form.model"
+                    <label class="font-medium text-base " for="">Make </label>
+                    <input :class="invalid?.make ? 'border-error' : 'border-none'" v-model="form.make"
                         class="p-2 w-full border mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Forester" type="text">
                 </div>
             </div>
 
         </div>
-        <div class="flex w-full justify-between items-center gap-5">
+        <div class="flex w-full justify-between items-center flex-row gap-5">
             <div class="w-full">
                 <label class="font-medium text-base " for="">Model</label>
                 <input :class="invalid?.model ? 'border-error' : 'border-none'" v-model="form.model"
@@ -56,7 +56,7 @@
                     class="p-2 w-full mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="4" type="text">
             </div>
         </div>
-        <div class="flex w-full justify-between items-center gap-5">
+        <div class="flex w-full justify-between items-center flex-col md:flex-row gap-5">
             <div class="w-full">
                 <label class="font-medium text-base " for="">Transmission</label>
                 <input v-model="form.transmission" :class="invalid?.transmission ? 'border-error' : 'border-none'"
@@ -73,16 +73,20 @@
                     <select :class="invalid?.doors ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.doors"
                         placeholder="Number of Doors"
                         class=" border  text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+
+
                         <option value="2 Doors">2 Doors</option>
                         <option value="3 Doors">3 Doors</option>
                         <option value="4 Doors">4 Doors</option>
                         <option value="5 Doors">5 Doors</option>
+
+
                     </select>
                 </div>
             </div>
         </div>
         <p class="font-medium text-base">Exterior Color</p>
-        <div class="flex flex-wrap gap-4">
+        <div class=" grid grid-cols-3 gap-[8px]  md:flex md:flex-wrap md:gap-4">
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
                 <input type="radio" v-model="form.color" class="input-radio on-black" value="black" name="color-redio">
                 Black
@@ -123,7 +127,7 @@
         </div>
         <div class="flex flex-col gap-4">
             <p class="font-medium text-base">Drive Train</p>
-            <div class="grid grid-cols-2 place-items-baseline  place-content-center gap-4">
+            <div class="flex flex-col md:grid md:grid-cols-2 place-items-baseline  place-content-center gap-4">
                 <label class="label-radio">
                     <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
                         class="input-radio on" value="FWD" name="drive-train"> FWD (Front-Wheel Drive)
@@ -151,7 +155,7 @@
                 type="text">
             <p class="text-sm mt-3 text-[#858585] ">Such as Sports Package, Remote Starter, etc.</p>
         </div>
-        <div class="grid w-full gap-4 grid-cols-2">
+        <div class=" flex flex-col md:grid w-full gap-4 md:grid-cols-2">
             <div class="w-full">
                 <div class="w-full flex flex-col gap-2">
                     <label class="font-medium text-base " for="">Tire Condition</label>

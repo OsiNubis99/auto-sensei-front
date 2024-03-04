@@ -3,11 +3,11 @@
         <div class="flex gap-6">
             <img src="../../../../../assets/svg/imgGenerals.svg" alt="">
             <div class="flex flex-col ">
-                <p class=" font-semibold    text-xl  ">General Information</p>
-                <p>Related to your vehicle to help get the right bids !</p>
+                <p class=" font-semibold    md:text-xl  ">General Information</p>
+                <p class=" text-xs md:text-base">Related to your vehicle to help get the right bids !</p>
             </div>
         </div>
-        <div class="flex justify-between items-center gap-4">
+        <div class="flex flex-col md:flex-row justify-between items-center md:gap-4">
             <div class="w-full flex flex-col gap-2">
                 <label class=" text-base " for="">Vehicle Identification Number (VIN)</label>
                 <input v-model="form.numberVinGenerals"
@@ -50,7 +50,7 @@
             </div>
 
         </div>
-        <div class="grid w-full grid-cols-3 gap-5">
+        <div class="flex flex-col md:grid w-full md:grid-cols-3 gap-5">
             <div class="w-full flex flex-col gap-2">
                 <label class=" text-base " for="">Province</label>
                 <select v-model="form.province" :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
@@ -124,7 +124,7 @@
                             class="p-2 rounded-lg border "
                             placeholder="Enter the bank/institution your vehicle is currently being financed or leased with">
                     </div>
-                    <div class="flex w-fill justify-between">
+                    <div class="flex w-fill flex-col md:flex-row justify-between">
                         <div class="flex flex-col w-full gap-4">
                             <p class="text-sm text-[#666666]  ">Do you know how many payments are left? (to be verified by
                                 the
@@ -236,7 +236,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="w-full flex items-center  justify-between gap-4 ">
+                    <div class="w-full flex items-center  flex-col md:flex-row justify-between gap-4 ">
                         <div class="w-full flex flex-col gap-2">
                             <label class=" text-base " for="">Mileage</label>
                             <input v-model="form.modelFromPreferences"

@@ -1,22 +1,48 @@
 <template>
-    <div class="main-login  flex">
-        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class="hidden lg:block w-1/2 relative ">
-            <div v-if="rol == 'dealers'" class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
-                <h1 class=" text-5xl text-blue-dark font-bold ">Boost Your Inventory <br> Organically</h1>
-                <p class="w-[70%]">Dealers are able to increase their inventory without having to go to their local
+    <div class="main-login  md:flex  md:flex-row-reverse">
+        <swiper @swiper="getRef" :pagination="{ type: 'bullets' }" :simulateTouch="false" :modules="modules"
+            class="stepsSwiper w-full  lg:w-2/4 ">
+            <swiper-slide v-if="!loading">
+                <CreateAccount v-if="stepsCurrent == 0" :back="back" :next="next" :rol="rol" />
+            </swiper-slide>
+            <swiper-slide v-if="!loading">
+                <CheckYourEmail v-if="stepsCurrent == 1" :back="back" :next="next" :gobackError="gobackError" :rol="rol" />
+            </swiper-slide>
+            <swiper-slide v-if="!loading">
+                <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next" :backEmailToken="backEmailToken"
+                    :rol="rol" />
+            </swiper-slide>
+            <swiper-slide v-if="!loading">
+                <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next" :backEmailToken="backEmailToken"
+                    :rol="rol" />
+            </swiper-slide>
+        </swiper>
+        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" lg:block md:w-1/2 relative ">
+            <div v-if="rol == 'dealers'" class="h-full flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
+                <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br>
+                    Organically</h1>
+                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">Dealers are able to increase their inventory without having to go to
+                    their local
                     auctions, or online
                     auctions
                     bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
                     application.</p>
+                <img class="h-[50vh] block md:hidden w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg"
+                    alt="" />
             </div>
-            <div v-else class="h-full flex justify-start items-start flex-col gap-5 px-16 py-12">
-                <h1 class=" text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>
-                <p class="w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and
+            <div v-else class="h-full flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
+                <h1 class="p-5 pb-0 !md:p-0  text-4xl  md:text-5xl text-blue-dark font-bold ">Elevate Your Car Selling
+                    Journey with AutoSensei</h1>
+                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a
+                    seamless and
                     efficient process. Maximize the value of your car by inviting competitive bids from local
                     dealerships.
                 </p>
+                <img class="h-[50vh] block md:hidden w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg"
+                    alt="" />
             </div>
-            <img class="h-auto absolute bottom-0 w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+            <img class="h-auto hidden md:block absolute bottom-0 w-full object-cover"
+                src="../../../assets/svg/vehiculosLogin.svg" alt="" />
         </div>
         <template v-if="loading">
             <div class="w-1/2 absolute top-0 right-0  h-full flex justify-center items-center">
@@ -35,21 +61,7 @@
                 </div>
             </div>
         </template>
-        <swiper @swiper="getRef" :pagination="{ type: 'bullets' }" :simulateTouch="false" :modules="modules"
-            class="stepsSwiper lg:w-2/4 ">
-            <swiper-slide v-if="!loading">
-                <CreateAccount v-if="stepsCurrent == 0" :back="back" :next="next" :rol="rol" />
-            </swiper-slide>
-            <swiper-slide v-if="!loading">
-                <CheckYourEmail v-if="stepsCurrent == 1" :back="back" :next="next" :gobackError="gobackError" :rol="rol" />
-            </swiper-slide>
-            <swiper-slide v-if="!loading">
-                <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next" :backEmailToken="backEmailToken" :rol="rol" />
-            </swiper-slide>
-            <swiper-slide v-if="!loading">
-                <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next" :backEmailToken="backEmailToken" :rol="rol" />
-            </swiper-slide>
-        </swiper>
+
     </div>
 </template>
 
@@ -141,10 +153,12 @@ export default {
         }
         const backEmailToken = () => {
             stepsCurrent.value = 1
-                    swiper.value.slideTo(1)
-                    router.replace({ query: { error: 'expired' } })
+            swiper.value.slideTo(1)
+            router.replace({ query: { error: 'expired' } })
         }
         onMounted(() => {
+            swiper.value.allowTouchMove = false
+            console.log(' swiper.value', swiper.value)
             rol.value = route.params.rol
             if (route.query.token) {
                 getAuth(route.query)

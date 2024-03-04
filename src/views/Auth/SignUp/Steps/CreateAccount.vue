@@ -20,7 +20,7 @@
             class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full ">
                 <div class="animate-fade-up  animate-ease-in-out animate-delay-100">
-                    <h2 class="mt-6 md:text-4xl font-bold text-base-black text-center mb-5 ">Create Your <span
+                    <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center md:mb-5 ">Create Your <span
                             v-if="rol == 'dealers'"> Dealer</span> <span v-if="rol !== 'dealers'"> Sellers</span> Account
                     </h2>
                     <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to <span
@@ -84,25 +84,25 @@
                                     class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                         </div>
-                        <div>
+                        <div class="!mb-10 !md:m-0">
                             <button @click="nextStep"
                                 class="animate-fade-up  animate-ease-in-out animate-delay-900 w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Create Account
                             </button>
                         </div>
-                        <div class="text-sm mt-6 text-center animate-fade-up  animate-ease-in-out animate-delay-800">
+                        <!--  <div class="text-sm mt-6 text-center animate-fade-up  animate-ease-in-out animate-delay-800">
                             <RouterLink to="#" class="font-medium underline text-indigo-600 hover:text-indigo-500">
                                 Forgot your password?
                             </RouterLink>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="text-center">
-            <p class=" text-xs font-normal text-[#666]">
-                By clicking “Log In”, you acknowledge that you have <br>
+            <p class="text-[10px] md:text-xs font-normal text-[#666]">
+                By clicking “Log In”, you acknowledge that you have
                 read & agreed to AutoSensei User's
                 <RouterLink to="#" class="font-medium underline text-base-black hover:text-indigo-500">
                     Terms & Conditions.
@@ -140,6 +140,7 @@ export default {
             if (Object.entries(invalid.value).length > 0) {
                 toast(invalid?.value?.email || invalid.value.password || invalid.value.confirmPassword, {
                     type: "error",
+                    autoClose: 2000,
                 });
                 return
             }

@@ -19,7 +19,8 @@ export const stepsSignUp = defineStore('stepsSignUp', () => {
         firtName:'',
         lastName:'',
         driverLicense:'',
-        numberCode:''
+        numberCode:'',
+        previewDriverLicense:''
 
     })
 

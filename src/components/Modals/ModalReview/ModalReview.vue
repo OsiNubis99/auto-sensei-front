@@ -1,7 +1,7 @@
 <template>
     <div v-show="statusModal.isActive"
-        class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
-        <div v-show="loading" class=" bg-[#0000004f] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        class="fixed inset-0 flex md:items-center z-50  items-end  justify-center bg-base-black  bg-opacity-50 ">
+        <div v-show="loading" class=" bg-[#0000004f] left-0 top-0 absolute w-full h-full flex md:justify-center md:items-center">
             <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
                 <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
                     <div class="animate-bounce">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
+        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
             <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
                 <p class="text-xl text-white">Input Review</p>
                 <svg @click="statusModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
@@ -31,22 +31,24 @@
                         :src="bucket + statusModal?.dataAutiont?.owner?.seller?.picture" alt="">
                     <p class=" capitalize ">{{ statusModal?.dataAutiont?.owner?.seller?.firstName }} {{
                         statusModal?.dataAutiont?.owner?.seller?.lastName }}</p>
-                    <star-rating :show-rating="false" :active-color="['#FF333E', '#FF9A02', '#FBDB17']"
+                    <star-rating :show-rating="false"  :active-color="['#FF333E', '#FF9A02', '#FBDB17']"
                         :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']" :padding="3" :active-on-click="true"
+                        :star-size=" 20"
                         v-model:rating="form.raiting"></star-rating>
                 </div>
                 <div class="flex flex-col mt-4 mb-4 gap-2">
-                    <p class="font-semibold ">Tell us your experience</p>
+                    <p class="font-semibold text-xs md:text-base ">Tell us your experience</p>
                     <textarea :class="error ? 'border-error' : ''" v-model="form.comment"
-                        class="border p-4 capitalize focus:outline-none rounded-lg border-[#E0E0E0] h-[131px]" name=""
+                    
+                        class="border p-4 capitalize focus:outline-none rounded-lg border-[#E0E0E0] h-[110px] md:h-[131px]" name=""
                         placeholder="Tell us your experience" id="" cols="30" rows="10"></textarea>
 
                     <div class="flex flex-wrap  gap-2">
                         <p v-for="(name, index) in comments" :key="index" @click="selecComment(name)"
-                            class="p-2 rounded-full border border-[#E0E0E0] transition-all ease-in duration-200 hover:bg-blue-dark hover:text-primary">
+                            class="md:p-2 rounded-full text-xs p-1 md:text-base border border-[#E0E0E0] transition-all ease-in duration-200 hover:bg-blue-dark hover:text-primary">
                             {{ name }}</p>
                     </div>
-                    <button class="btn bg-primary rounded-lg w-full" @click="sendComment">Submit</button>
+                    <button class="btn bg-primary !text-xs !md:text-base rounded-lg w-full" @click="sendComment">Submit</button>
                 </div>
 
             </div>

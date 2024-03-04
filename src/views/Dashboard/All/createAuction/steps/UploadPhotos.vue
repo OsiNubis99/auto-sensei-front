@@ -509,7 +509,7 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driverSide')"
+                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driversSide')"
                                 class="hidden">
                         </label>
                     </div>
@@ -532,7 +532,7 @@
                         </svg>
                         <p class=" text-sm  font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driversSide')"
+                    <input type="file" aOccept="image/*" @change="(event) => previewImage(event, 'driversSide')"
                         class="hidden">
                 </label>
             </div>

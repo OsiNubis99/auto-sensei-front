@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 export const useStoreFile = defineStore("useStoreFile", {
     state: () => ({
         url: [],
+        progressUpload: Number(0)
     }),
     actions: {
         uploaderFile(params) {
@@ -11,22 +12,40 @@ export const useStoreFile = defineStore("useStoreFile", {
             let data = new FormData();
             data.append("file", params.file);
             data.append("location", params.location);
-           
+
             return new Promise((resolve, reject) => {
+                console.log('data', data)
                 axios
-                    .post(params.route, data, {
+                    .post('/uploader/create', data, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },
+                        onUploadProgress: progressEvent => {
+                            this.progressUpload = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                            console.log('this.progressUpload', this.progressUpload)
+
+                        },
+                        transformRequest: [function (data, headers) {
+                            // Haz lo que quieras para transformar data
+                            console.log('transformRequest', data)
+                            return data;
+                        }],
+
+                        // `transformResponse` permite que se realicen cambios en los datos de respuesta antes
+                        //  que pasen a then/catch
+                        transformResponse: [function (data) {
+                            // Haz lo que quieras para transformar data
+                            console.log('transformResponse', data)
+                            return data;
+                        }],
                     })
                     .then((response) => {
-                        console.log('uploader/create', response)
                         resolve(response);
                     })
                     .catch((error) => {
                         console.log('error', error)
-                       
-                        
+
+
                         reject(error);
                     });
             });

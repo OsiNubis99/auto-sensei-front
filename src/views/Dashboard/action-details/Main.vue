@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="relative max-w-[100rem] mx-auto z-50 top-[60px] pb-10 ">
+        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] pb-10 ">
             <div v-if="route.meta.adminAuth" class="flex gap-2 items-center">
                 <div class="flex items-center gap-2">
                     <p v-if="router.options.history.state.back == '/action-list'" class="text-[#858585]">Auctions List</p>

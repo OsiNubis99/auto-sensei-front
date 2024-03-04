@@ -15,32 +15,34 @@
                     <div class="flex flex-col gap-3">
                         <div class="flex flex-col gap-2">
                             <label class=" text-base font-medium " for="">Card Number</label>
-                            <input class="p-2 w-full rounded-lg border border-[#C2C2C2] capitalize "
+                            <input v-model="form.name" class="p-2 w-full rounded-lg border border-[#C2C2C2] capitalize "
                                 placeholder="Input card number" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
                                 maxlength="19">
                         </div>
                         <div class="flex flex-col gap-2">
                             <label class=" text-base font-medium " for="">Name on Card</label>
-                            <input class="p-2 w-full rounded-lg border border-[#C2C2C2] capitalize" placeholder="Input name"
+                            <input v-model="form.cardNumber"
+                                class="p-2 w-full rounded-lg border border-[#C2C2C2] capitalize" placeholder="Input name"
                                 type="text">
                         </div>
                     </div>
                     <div class="flex justify-between items-center gap-3">
                         <div class=" flex flex-col gap-2">
                             <label class=" text-base font-medium " for="">Expiry Date</label>
-                            <input class="p-2 w-full rounded-lg border border-[#C2C2C2] capitalize"
+                            <input v-model="form.expiryDate"
+                                class="p-2 w-full rounded-lg border border-[#C2C2C2] capitalize"
                                 placeholder="Input expired date" type="number">
                         </div>
 
                         <div class=" flex flex-col gap-2">
                             <label class=" text-base font-medium " for="">CVV/CVC</label>
-                            <input class="p-2 w-full rounded-lg border border-[#C2C2C2] capitalize" placeholder="Input cvv"
-                                pattern="[0-9\s]{13,19}" maxlength="4" type="password">
+                            <input v-model="form.cvv" class="p-2 w-full rounded-lg border border-[#C2C2C2] capitalize"
+                                placeholder="Input cvv" pattern="[0-9\s]{13,19}" maxlength="4" type="password">
                         </div>
                     </div>
                 </div>
                 <div class="m-4">
-                    <button
+                    <button @click="addpayment"
                         class="w-full p-2 items-center  bg-base-gray text-white  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
                         <p>Add Credit Card</p>
                     </button>
@@ -70,6 +72,7 @@ import { ref, onMounted, watch } from "vue";
 import CurrencyInput from "../../Inputs/CurrencyInput.vue";
 import { validationsDealerBidding } from "../../../validations/validationsDealerBidding";
 import { ModalCrediCard } from '@/stores/modalCrediCard';
+import { usePayments } from "@/stores/payments";
 export default {
     components: { CurrencyInput },
     props: {
@@ -80,9 +83,46 @@ export default {
     setup(props) {
         const storeModal = ModalCrediCard()
         const loading = ref(false)
+        const controllerPayment = usePayments()
+        const form = ref({
+            cardNumber: null,
+            name: null,
+            expiryDate: null,
+            cvv: null
+        })
+        const addpayment = async () => {
+            console.log('hola', form.value)
+            let data = {
+                billing_details: {
+                    address: {
+                        city: 'Canada',
+                        country: 'CA',
+                        line1: 'linea 1',
+                        line2: 'linea 2',
+                        postal_code: 'CA',
+                        state: 'state'
+                    },
+                    name: 'KENNY BRYAN',
+                },
+                card: {
+                    number: '4000056655665556',
+                    exp_month: 4,
+                    exp_year: 24,
+                    cvc: '123'
+                }
+            }
+            try {
+                let res = await controllerPayment.addPayment(data)
+                console.log('res', res)
+            } catch (error) {
+
+            }
+        }
         return {
             storeModal,
-            loading
+            loading,
+            addpayment,
+            form
         };
     },
 };

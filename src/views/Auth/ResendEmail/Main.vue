@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-4xl mx-auto  mt-24">
         <div class="flex flex-col items-center justify-center  p-4 space-y-4 antialiased text-gray-900 bg-gray-100">
-            <div class="w-full px-8 max-w-lg space-y-6 bg-white rounded-md py-16">
+            <div class="w-full md:px-8 max-w-lg space-y-6 bg-white rounded-md py-16">
                 <template v-if="message">
                     <div class="relative flex  flex-col items-center justify-center overflow-hidden py-6 sm:py-12 bg-white">
                         <div class="max-w-xl px-5 text-center">

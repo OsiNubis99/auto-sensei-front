@@ -57,7 +57,7 @@
                 <p>Completed ({{ storeAutions.completed.length }})</p>
             </RouterLink>
         </nav>
-        <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 top-[60px] ">
+        <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between mt-5 gap-4">
                 <div class="w-[29%]">
                     <div class="bg-white p-5 shadow-steps">

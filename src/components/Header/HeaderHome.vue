@@ -28,7 +28,7 @@
                         </svg>
                     </button>
                 </div>
-                <div :class="[(open ? 'block fixed top-0 left-0 h-screen !w-[80%] md:w-auto bg-base-black  flex-col ' : 'hidden'), (path == 'login' || path == 'signup' ? 'justify-end' : '')]"
+                <div :class="[(open ? 'block fixed top-0 left-0 h-screen !w-[80%] md:w-auto bg-base-black  flex-col ' : ''), (path == 'login' || path == 'signup' ? 'justify-end' : '')]"
                     class="w-full flex-grow lg:flex sm:items-center sm:w-auto">
                     <div :class="[(path === 'login' || path === 'signup' ? 'hidden' : 'flex'), (open && 'flex-col p-5')]"
                         class="text-sm gap-6 sm:flex-grow text-white">
@@ -53,7 +53,7 @@
                             :class="[((path == 'contact-us' && scrollPosition < 1) && 'text-base-black')]"
                             class="font-medium text-sm" to="/login/dealers">Dealer Page</RouterLink>
                     </div>
-                    <div class="flex gap-4 items-center pr-7">
+                    <div class="flex mt-4 justify-center gap-4 items-center md:pr-7">
                         <!-- <div class="switch">
                             <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox"
                                 @change="(event) => {
@@ -81,7 +81,7 @@
                             <RouterLink v-if="path !== 'login'" :to="path == 'home' || path == 'about' || path == 'sold-auctions' ||
                                 path == 'how-it-works' ||
                                 path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`"
-                                :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'" class="btn">
+                                :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'" class="px-5 py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize ">
                                 <span v-if="path == 'signup'">Sign In</span>
                                 <span v-else>Login</span>
                             </RouterLink>
@@ -90,9 +90,8 @@
                                 path == 'sold-auctions' ||
                                 path == 'how-it-works' ||
                                 path == 'contact-us'
-
                                 ? `/signup/sellers` : `/signup/${route.params.rol}`"
-                                class="btn bg-primary text-base-black">
+                                class="px-5 bg-primary py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize">
                                 Sign Up
                             </RouterLink>
                         </template>

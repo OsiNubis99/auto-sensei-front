@@ -160,6 +160,7 @@ export default {
                     console.log('file', file)
                     let image = canvas.toDataURL("image/jpeg");
                     console.log('image', image)
+                    
                     switch (statusModalImage.typeImg) {
                         case 'document':
                             formData.value.previewDocument = image;

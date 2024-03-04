@@ -1,7 +1,7 @@
 <template>
-    <div class="bg=[#F9F9F9] h-screen">
+    <div class="bg-[#BDBDBF66] md:bg=[#F9F9F9] h-screen">
         <div>
-            <div class="absolute w-full h-[200px] overflow-hidden bg-[#0B1107]">
+            <div class="absolute hidden md:block w-full h-[200px] overflow-hidden bg-[#0B1107]">
                 <svg class="w-full " xmlns="http://www.w3.org/2000/svg" width="1768" height="260" viewBox="0 0 1768 260"
                     fill="none">
                     <path opacity="0.2"
@@ -9,11 +9,116 @@
                         stroke="#272D35" stroke-width="132" />
                 </svg>
             </div>
-            <div class="relative max-w-[85rem] mx-auto z-50 top-[60px] ">
-                <Heanding :type="'h3'" :msg="'Create Auctions'" />
-                <div class="flex justify-center mt-5 gap-7">
-                    <div class="w-2/4  ">
-                        <div class="bg-white p-5 shadow-steps">
+            <div class="relative max-w-[85rem] mx-auto z-50 md:top-[60px] ">
+                <Heanding class="hidden md:block" :type="'h3'" :msg="'Create Auctions'" />
+                <div class="flex justify-center flex-col md:flex-row md:mt-5 gap-7 relative">
+                    <div class="md:w-2/4 w-full  ">
+                        <div class="w-full   left-0 z-50 block md:hidden ">
+                            <div class="py-2 bg-white shadow-md">
+                                <div class="flex items-center cursor-pointer  justify-between uppercase w-full text-sm px-4 py-2"
+                                    @click="expanded = !expanded">
+                                    <span class="text-[#666666] text-center">Complete our 3 step process</span>
+                                    <svg class="transition-all ease-linear mb-1 duration-200 "
+                                        :class="expanded ? 'rotate-90' : 'transition-all ease-linear duration-200 '"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M13.1717 12.0007L8.22168 7.05072L9.63568 5.63672L15.9997 12.0007L9.63568 18.3647L8.22168 16.9507L13.1717 12.0007Z"
+                                            fill="#000" />
+                                    </svg>
+                                </div>
+                                <div class="grid text-sm text-slate-600 overflow-hidden transition-all duration-300 ease-in-out"
+                                    :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
+                                    <div class="overflow-hidden">
+                                        <div class="p-5 pt-0">
+                                            <div class=" flex justify-between  gap-[100px] mt-7 items-center">
+                                                <div class="flex hr-custims-1 items-center gap-5 ">
+                                                    <div v-if="op.step1 && !checkStep.step1"
+                                                        class="flex justify-center bg-[#1F94F0] items-center w-8 h-8 text-white  rounded-full">
+                                                        1
+                                                    </div>
+                                                    <div v-if="(checkStep.step1 && !op.step1) || (op.step1 && op.step2 && op.step3)"
+                                                        class="flex justify-center items-center w-8 h-8 text-white bg-[#000] rounded-full">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                                            viewBox="0 0 22 22" fill="none">
+                                                            <path
+                                                                d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
+                                                                fill="white" />
+                                                        </svg>
+                                                    </div>
+                                                    <p>General Information</p>
+                                                </div>
+                                                <svg class=" absolute right-5 " xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M13.1717 12.0007L8.22168 7.05072L9.63568 5.63672L15.9997 12.0007L9.63568 18.3647L8.22168 16.9507L13.1717 12.0007Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                            </div>
+                                            <div class=" flex justify-between gap-[100px] mt-7 items-center">
+                                                <div class="flex items-center hr-custims-2 gap-5 ">
+                                                    <div v-if="!checkStep.step2"
+                                                        :class="op.step2 ? 'bg-[#1F94F0]' : 'bg-[#E0E0E0]'"
+                                                        class="flex justify-center items-center w-8 h-8 text-white  rounded-full">
+                                                        2
+                                                    </div>
+                                                    <div v-if="(checkStep.step2 && !op.step2) || (op.step1 && op.step2 && op.step3)"
+                                                        class="flex justify-center items-center w-8 h-8 text-white bg-[#000] rounded-full">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                                            viewBox="0 0 22 22" fill="none">
+                                                            <path
+                                                                d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
+                                                                fill="white" />
+                                                        </svg>
+                                                    </div>
+                                                    <p
+                                                        :class="op.step2 || checkStep.step2 ? 'text-[#000]' : 'text-[#E0E0E0]'">
+                                                        Vehicles
+                                                        Details</p>
+                                                </div>
+                                                <svg class=" absolute right-5 " xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M13.1717 12.0007L8.22168 7.05072L9.63568 5.63672L15.9997 12.0007L9.63568 18.3647L8.22168 16.9507L13.1717 12.0007Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                            </div>
+                                            <div class=" flex justify-between gap-[100px] mt-7 items-center">
+                                                <div class="flex items-center gap-5 ">
+                                                    <div v-if="!checkStep.step3"
+                                                        :class="op.step3 ? 'bg-[#1F94F0]' : 'bg-[#E0E0E0]'"
+                                                        class="flex justify-center items-center w-8 h-8 text-white  rounded-full">
+                                                        3
+                                                    </div>
+                                                    <div v-if="op.step1 && op.step2 && op.step3"
+                                                        class="flex justify-center items-center w-8 h-8 text-white bg-[#000] rounded-full">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                                            viewBox="0 0 22 22" fill="none">
+                                                            <path
+                                                                d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
+                                                                fill="white" />
+                                                        </svg>
+                                                    </div>
+                                                    <p
+                                                        :class="op.step3 || checkStep.step3 ? 'text-[#000]' : 'text-[#E0E0E0]'">
+                                                        Upload
+                                                        Photos
+                                                    </p>
+                                                </div>
+                                                <svg class=" absolute right-5 " xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M13.1717 12.0007L8.22168 7.05072L9.63568 5.63672L15.9997 12.0007L9.63568 18.3647L8.22168 16.9507L13.1717 12.0007Z"
+                                                        fill="#858585" />
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white hidden md:block p-5 shadow-steps">
                             <p class="text-[#666] font-medium  text-lg uppercase ">COMPLETE OUR 3 STEP PROCESS</p>
                             <div class=" flex justify-between gap-[100px] mt-7 items-center">
                                 <div class="flex hr-custim-1 items-center gap-5 ">
@@ -94,24 +199,77 @@
 
                     </div>
                     <div class="w-full">
-                        <div v-if="loading"
-                            class="bg-white h-[50vh] flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
-                            <div class="  w-full h-full flex justify-center items-center">
-                                <div class="text-indigo-700">
-                                    <div class="h-[80px] w-[80px] ">
-                                        <div class="animate-bounce">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
-                                                stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
-                                                </path>
-                                            </svg>
+                        <template v-if="loading || loadingUploadImages">
+                            <div v-if="loading"
+                                class="bg-white h-[50vh] flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
+                                <div class="w-full h-full flex justify-center items-center">
+                                    <div class="text-indigo-700">
+                                        <div class="h-[80px] w-[80px] ">
+                                            <div class="animate-bounce">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
+                                                    stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                            <p class=" text-base-gray font-medium pl-2">Loading...</p>
+                                            <p class="text-error" v-if="stateProgressUpload">{{ stateProgressUpload }}</p>
                                         </div>
-                                        <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <template v-if="loadingUploadImages">
+                                <div class="bg-white h-fit flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
+                                    <div class="w-full flex flex-col md:grid md:grid-cols-2 gap-4">
+                                        <div v-if="arrayUpload?.length > 0" v-for="(nameUpload, index) in arrayUpload"
+                                            :key="index">
+                                            <div
+                                                class="flex justify-between border-b border-[#e5e5e5] pb-3 items-start gap-4 w-full">
+                                                <div v-if="nameUpload.preview" class="w-16">
+                                                    <img class="w-15 object-cover h-15 rounded-lg shadow-lg"
+                                                        :src="nameUpload.preview" alt="">
+                                                </div>
+                                                <div v-if="!nameUpload.completed" class="w-full flex flex-col gap-2">
+                                                    <p class="capitalize">{{ nameUpload.name }}</p>
+                                                    <div
+                                                        class="bg-[#E5E5E5] whitespace-pre shadow-sm w-full rounded-full  h-4">
+                                                        <div :style="{ width: porcertanje + '%' }"
+                                                            class=" h-4 bg-primary flex justify-center items-center rounded-full shadow-progreess ">
+                                                            <p class="text-[10px] ">{{ porcertanje }} %</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-else-if="index == arrayUpload.length - 1"
+                                                    class="w-full flex flex-col gap-2">
+                                                    <p class="capitalize">{{ nameUpload.name }}</p>
+                                                    <div class="bg-[#E5E5E5] rounded-full  shadow-xl h-4">
+                                                        <div
+                                                            class=" w-full h-4 bg-primary flex justify-center items-center rounded-full">
+                                                            <p class="text-[10px]">Completed</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-else class="w-full flex flex-col gap-2">
+                                                    <p class="capitalize">{{ nameUpload.name }}</p>
+                                                    <div class="bg-[#E5E5E5] rounded-full  shadow-xl h-4">
+                                                        <div
+                                                            class=" w-full h-4 bg-primary flex justify-center items-center rounded-full">
+                                                            <p class="text-[10px]">Completed</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center w-full items-center">
+                                        <img class="h-16 w-16" src="@/assets/svg/Spin.svg" alt="">
+                                        <p class=" text-base-gray mt-1 font-medium">Uploading...</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+
                         <template v-else>
                             <GeneralInformation v-show="op.step1" :key="componentKey"
                                 :nextGeneralInformation="nextGeneralInformation" :form="formData" :op="op"
@@ -131,7 +289,7 @@
     </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref, watch, computed } from "vue";
 import Heanding from "../../../../components/Headings/Heanding.vue";
 import GeneralInformation from "./steps/GeneralInformation.vue"
 import VehiclesDetails from "./steps/VehiclesDetails.vue";
@@ -157,6 +315,7 @@ export default {
         const launch = ref(false)
         const componentKey = ref(0)
         const loading = ref(false)
+        const loadingUploadImages = ref(false)
         const store = useAuctionStore()
         const id_create = ref(null)
         const storeFile = useStoreFile()
@@ -164,6 +323,17 @@ export default {
         const statusLauch = ModalLaunch()
         const isOpen = ref(true)
         const router = useRouter()
+        const expanded = ref(false)
+        const stateProgressUpload = ref('')
+        const porcertanje = ref(0)
+        const powerValue = ref(computed(() => { return storeFile.progressUpload }))
+        const arrayUpload = ref([])
+        watch(powerValue, async (newQuestion, oldQuestion) => {
+            porcertanje.value = newQuestion
+        })
+        const espandex = () => {
+            expanded.value = !expanded.value
+        }
         const formData = ref({
             numberVinGenerals: undefined,
             date: undefined,
@@ -302,6 +472,7 @@ export default {
                 try {
 
                     let res = await store.create(dataPost)
+                    console.log('res', res)
                     if (res) {
                         id_create.value = res.data._id
                         formData.value.numberVin = res.data.vehicleDetails.vin
@@ -485,13 +656,6 @@ export default {
                 duration: Math.floor(((monday - currDate) / 1000) / 60)
             };
         }
-        function getMinutesToStart(startDate) {
-            return Math.floor(((startDate - new Date()) / 1000) / 60)
-        }
-        function getMinutesToEnd(startDate, duration) {
-            return Math.floor(((new Date(startDate.getTime() + duration * 1000 * 60) - new Date()) / 1000) / 60)
-        }
-
         const postFile = async (string) => {
             let newArrayExterior = []
             let newArrayInterior = []
@@ -564,42 +728,106 @@ export default {
             }
 
             try {
-                let resOriginalDocument = await storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })
-                let resLicence = await storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })
-                await Promise.all(
-                    exterior.map(async (photo, i) => {
-                        console.log(' photo.file', photo.file)
-                        let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}` })
-                        newArrayExterior.push(res.data);
-                    })
-                )
-                await Promise.all(
-                    interior.map(async (photo, i) => {
-                        console.log(' photo.file', photo.file)
-                        let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}` })
-                        newArrayInterior.push(res.data);
-                    })
-                )
-                vehicleDamage.length > 0 && await Promise.all(
-                    vehicleDamage.map(async (photo, i) => {
-                        console.log(' photo.file', photo.file)
-                        let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}` })
-                        newArrayVehicleDamage.push(res.data);
-                    })
-                )
-                additionalDocuments.length > 0 && await Promise.all(
-                    additionalDocuments.map(async (photo, i) => {
-                        console.log(' photo.file', photo.file)
-                        let res = await storeFile.uploaderFile({ file: photo.file, location: `${id_create.value}/${photo.name}` })
-                        newAdditionalDocuments.push(res.data);
-                    })
-                )
+                arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
+                let resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
+                if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
+                let resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
+                if (resLicence[0]?.data) arrayUpload.value[0].completed = true
+
+
+                arrayUpload.value = [...arrayUpload.value, { name: 'Main Photo (3/4 Front Photo)', preview: formData.value.previewFrontPhoto, completed: false, }]
+                let resFronPhoto = await Promise.all([storeFile.uploaderFile({ file: formData.value.frontPhoto, location: `${id_create.value}/front-photo` })])
+                if (resFronPhoto[0]?.data) {
+                    arrayUpload.value[1].completed = true
+                    newArrayExterior = [...newArrayExterior, resFronPhoto[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Front Photo', preview: formData.value.previewFront, completed: false, }]
+                let resFron = await Promise.all([storeFile.uploaderFile({ file: formData.value.front, location: `${id_create.value}/front` })])
+                if (resFron[0]?.data) {
+                    arrayUpload.value[2].completed = true
+                    newArrayExterior = [...newArrayExterior, resFron[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Driver Side Exterior', preview: formData.value.previewDriverSide, completed: false, }]
+                let resDriverSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverSide, location: `${id_create.value}/driver-side-(exterior)` })])
+                if (resDriverSide[0]?.data) {
+                    arrayUpload.value[3].completed = true
+                    newArrayExterior = [...newArrayExterior, resDriverSide[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Back', preview: formData.value.previewBack, completed: false, }]
+                let resBack = await Promise.all([storeFile.uploaderFile({ file: formData.value.back, location: `${id_create.value}/'back'` })])
+                if (resBack[0]?.data) {
+                    arrayUpload.value[4].completed = true
+                    newArrayExterior = [...newArrayExterior, resBack[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Passenger Side', preview: formData.value.previewPassengerSide, completed: false, }]
+                let resPassengerSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.passengerSide, location: `${id_create.value}/passenger-side` })])
+                if (resPassengerSide[0]?.data) {
+                    arrayUpload.value[5].completed = true
+                    newArrayExterior = [...newArrayExterior, resPassengerSide[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Tire And Rim', preview: formData.value.previewTireAndRim, completed: false, }]
+                let resTireAndRim = await Promise.all([storeFile.uploaderFile({ file: formData.value.tireAndRim, location: `${id_create.value}/tire-and-rim` })])
+                if (resTireAndRim[0]?.data) {
+                    arrayUpload.value[6].completed = true
+                    newArrayExterior = [...newArrayExterior, resTireAndRim[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Display (Odometer)', preview: formData.value.previewDriversDisplay, completed: false, }]
+                let resDriversDisplay = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversDisplay, location: `${id_create.value}/drivers-display-(odometer)` })])
+                if (resDriversDisplay[0]?.data) {
+                    arrayUpload.value[7].completed = true
+                    newArrayInterior = [...newArrayInterior, resDriversDisplay[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Side (Interior)', preview: formData.value.previewDriversSide, completed: false, }]
+                let resDriverSideInterior = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversSide, location: `${id_create.value}/drivers-side-(interior)` })])
+                if (resDriverSideInterior[0]?.data) {
+                    arrayUpload.value[8].completed = true
+                    newArrayInterior = [...newArrayInterior, resDriverSideInterior[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Center Console', preview: formData.value.previewCenterConsole, completed: false, }]
+                let resCenterConsole = await Promise.all([storeFile.uploaderFile({ file: formData.value.centerConsole, location: `${id_create.value}/center-console` })])
+                if (resCenterConsole[0]?.data) {
+                    arrayUpload.value[9].completed = true
+                    newArrayInterior = [...newArrayInterior, resCenterConsole[0]?.data]
+                }
+                
+                arrayUpload.value = [...arrayUpload.value, { name: 'Rear Seats', preview: formData.value.previewRearSeats, completed: false, }]
+                let resRearSeats = await Promise.all([storeFile.uploaderFile({ file: formData.value.rearSeats, location: `${id_create.value}/rear-seats` })])
+                if (resRearSeats[0]?.data) {
+                    arrayUpload.value[10].completed = true
+                    newArrayInterior = [...newArrayInterior, resRearSeats[0]?.data]
+                }
+                
+                if (formData.value.vehicleDamage) {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Vehicle Damage', preview: formData.value.previewVehicleDamage, completed: false, }]
+                    let resVehicleDamage = await Promise.all([storeFile.uploaderFile({ file: formData.value.vehicleDamage, location: `${id_create.value}/vehicle-damage` })])
+                    if (resVehicleDamage[0]?.data) {
+                        arrayUpload.value[11].completed = true
+                        newArrayVehicleDamage = [...newArrayVehicleDamage, resVehicleDamage[0]?.data]
+                    }
+                }
+                if (formData.value.additionalDocuments) {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Additional Documents', preview: formData.value.previewAdditionalDocuments, completed: false, }]
+                    let resAdditionalDocuments = await Promise.all([storeFile.uploaderFile({ file: formData.value.additionalDocuments, location: `${id_create.value}/additional-documents` })])
+                    if (resAdditionalDocuments[0]?.data) {
+                        arrayUpload.value[12].completed = true
+                        newAdditionalDocuments = [...newAdditionalDocuments, resAdditionalDocuments[0]?.data]
+                    }
+                }
                 let resWeekend = getDateAndMinutes(+formData.value.dayMonday)
                 let hour = moment(`${formData.value.auctionTime}:${formData.value.auctionDuration}`, "H:mm").format('HH:mm:ss')
                 let date = moment(formData.value.auctionDate).format('YYYY-MM-DD');
                 let duration = null
                 let startDate = null
-
                 switch (formData.value?.launchOptions) {
                     case 'Launch now after verified':
                         duration = formData.value.auctionDuration
@@ -651,22 +879,20 @@ export default {
                         brakeReplacement: formData.value.lastReplacement2,
                         rotorCondition: formData.value.rotorCondition,
                         rotorReplacement: formData.value.lastReplacement3,
-                        originalDocument: resOriginalDocument?.data,
-                        driverLicense: resLicence?.data,
+                        originalDocument: resOriginalDocument[0]?.data,
+                        driverLicense: resLicence[0]?.data,
                         exteriorPhotos: newArrayExterior,
                         interiorPhotos: newArrayInterior,
                         vehicleDamage: newArrayVehicleDamage,
                         additionalDocuments: newAdditionalDocuments,
                         vehicleVideo: formData.value.vehicleVideo,
-                        /*   year: formData.value.year,
-                          trim: formData.value.trim, */
 
                     },
                 }
                 return dataPost
             } catch (error) {
                 console.log('error', error)
-                loading.value = false
+                loadingUploadImages.value = false
                 toast(error?.response?.data?.message || 'There was a mistake. I tried it later.', {
                     type: "error",
                 });
@@ -723,7 +949,7 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-                loading.value = true
+                loadingUploadImages.value = true
                 let resFiles = await postFile(string)
                 statusLauch.closeModal(false)
                 if (resFiles) {
@@ -734,7 +960,7 @@ export default {
                             router.go()
                         }
                     } catch (error) {
-                        loading.value = false
+                        loadingUploadImages.value = false
                         toast(error.response.data.message || 'An error has occurred try again', { type: "error" });
 
                     }
@@ -757,7 +983,13 @@ export default {
             componentKey,
             loading,
             auctionList,
-            isOpen
+            isOpen,
+            espandex,
+            expanded,
+            stateProgressUpload,
+            porcertanje,
+            arrayUpload,
+            loadingUploadImages
         };
     },
 };

@@ -1,119 +1,29 @@
 <template>
     <template v-if="loading">
-        <div class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
-            <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
-                <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
-                    <div class="animate-bounce">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
-                            stroke-width="0" viewBox="0 0 16 16">
-                            <path
-                                d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
-                            </path>
-                        </svg>
-                    </div>
-                    <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
-                </div>
-            </div>
-        </div>
+        <Basic />
     </template>
-    <template v-else>
-        <nav class="bg-[#22282F] flex items-center gap-6 p-5 ">
-            <RouterLink to="/all" :class="path == 'all' ? 'bg-primary' : 'bg-[#464B50] text-white'"
-                class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto  ease-linear duration-500 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M2.5 9.16667H17.5V10.8333H2.5V9.16667ZM15 15V17.5H13.3333V15H10.8333L14.1667 11.6667L17.5 15H15ZM6.66667 15V17.5H5V15H2.5L5.83333 11.6667L9.16667 15H6.66667ZM15 5H17.5L14.1667 8.33333L10.8333 5H13.3333V2.5H15V5ZM6.66667 5H9.16667L5.83333 8.33333L2.5 5H5V2.5H6.66667V5Z"
-                        :fill="path == 'all' ? '#09121F' : '#C2C2C2'" />
-                </svg>
-                <p>All ({{ storeAutions.data.length - storeAutions.draft.length }})</p>
-            </RouterLink>
-            <RouterLink to="/upcoming-auctions"
-                :class="path == 'upcoming-auctions' ? 'bg-primary' : 'bg-[#464B50] text-white'"
-                class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto  ease-linear duration-500 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M7.5 14.1667C7.5 14.1667 13.3333 15 15.8333 17.5H16.6667C17.1269 17.5 17.5 17.1269 17.5 16.6667V11.6142C18.2188 11.4292 18.75 10.7766 18.75 10C18.75 9.22342 18.2188 8.57083 17.5 8.38583V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5H15.8333C13.3333 5 7.5 5.83333 7.5 5.83333H4.16667C3.24619 5.83333 2.5 6.57952 2.5 7.5V12.5C2.5 13.4205 3.24619 14.1667 4.16667 14.1667H5L5.83333 18.3333H7.5V14.1667ZM9.16667 7.21767C9.73608 7.0955 10.4396 6.92661 11.1994 6.70311C12.5979 6.29178 14.375 5.64385 15.8333 4.64548V15.3545C14.375 14.3562 12.5979 13.7083 11.1994 13.2969C10.4396 13.0734 9.73608 12.9045 9.16667 12.7823V7.21767ZM4.16667 7.5H7.5V12.5H4.16667V7.5Z"
-                        :fill="path == 'upcoming-auctions' ? '#09121F' : '#C2C2C2'" />
-                </svg>
-                <p>Upcoming Auctions ({{ storeAutions.upcoming.length }})</p>
 
-            </RouterLink>
-            <RouterLink to="/live" :class="path == 'live' ? 'bg-primary' : 'bg-[#464B50] text-white'"
-                class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto  ease-linear duration-500 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M15.304 15.3037C18.2329 12.3747 18.2329 7.626 15.304 4.69706L16.4825 3.51855C20.0622 7.09836 20.0622 12.9024 16.4825 16.4822L15.304 15.3037ZM4.69735 4.69706C1.76842 7.626 1.76842 12.3747 4.69735 15.3037L3.51884 16.4822C-0.060968 12.9024 -0.060968 7.09836 3.51884 3.51855L4.69735 4.69706ZM12.9469 12.9466C14.5741 11.3194 14.5741 8.68115 12.9469 7.05399L14.1254 5.87548C16.4035 8.15354 16.4035 11.847 14.1254 14.1251L12.9469 12.9466ZM7.05438 7.05399C5.42718 8.68115 5.42718 11.3194 7.05438 12.9466L5.87586 14.1251C3.5978 11.847 3.5978 8.15354 5.87586 5.87548L7.05438 7.05399ZM10.0007 11.667C10.9211 11.667 11.6673 10.9208 11.6673 10.0003C11.6673 9.07982 10.9211 8.33366 10.0007 8.33366C9.08015 8.33366 8.33398 9.07982 8.33398 10.0003C8.33398 10.9208 9.08015 11.667 10.0007 11.667Z"
-                        :fill="path == 'live' ? '#09121F' : '#C2C2C2'" />
-                </svg>
-                <p>Live ({{ storeAutions.live.length }})</p>
-            </RouterLink>
-            <RouterLink to="/completed" :class="path == 'completed' ? 'bg-primary' : 'bg-[#464B50] text-white'"
-                class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto  ease-linear duration-500 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M4.55149 3.6932C6.01232 2.43008 7.9166 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39697 18.3327 9.99935C18.3327 11.7794 17.7745 13.4292 16.8237 14.7832L14.166 9.99935H16.666C16.666 6.31745 13.6813 3.33268 9.99935 3.33268C8.20753 3.33268 6.58082 4.03957 5.38287 5.1897L4.55149 3.6932ZM15.4472 16.3055C13.9863 17.5686 12.0821 18.3327 9.99935 18.3327C5.39697 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 8.21923 2.22417 6.56948 3.17502 5.21555L5.83268 9.99935H3.33268C3.33268 13.6813 6.31745 16.666 9.99935 16.666C11.7912 16.666 13.4179 15.9591 14.6159 14.809L15.4472 16.3055Z"
-                        :fill="path == 'completed' ? '#09121F' : '#C2C2C2'" />
-                </svg>
-                <p>Completed ({{ data.length }})</p>
-            </RouterLink>
-        </nav>
-        <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 top-[60px] ">
+    <template v-else>
+        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
+        <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between mt-5 gap-4">
-                <div class="w-[29%]">
-                    <div class="bg-white p-5 shadow-steps">
-                        <div class="flex items-center gap-6 mb-4  relative cursor-pointer">
-                            <RouterLink to="/account-seller">
-                                <img v-if="storeUser.userData?.seller?.picture" class="w-14 h-14 object-cover rounded-full"
-                                    :src="bucket + storeUser.userData.seller.picture" alt="">
-                                <img v-else class="w-14 h-14 rounded-full" src="@/assets/img/jpg/image.jpg" alt="">
-                            </RouterLink>
-                            <div>
-                                <p class=" font-semibold capitalize ">
-                                    <span v-if="storeUser.userData.seller?.firstName"> {{
-                                        storeUser.userData.seller?.firstName }}</span> <span
-                                        v-if="storeUser.userData.seller?.lastName"> {{ storeUser.userData.seller?.lastName
-                                        }}</span>
-                                </p>
-                                <!--  <p class="text-[#666] text-sm uppercase ">Ottawa, Ontario</p> -->
-                            </div>
-                            <svg class=" absolute right-0 top-1 " xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                viewBox="0 0 20 21" fill="none">
-                                <path
-                                    d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
-                                    fill="#858585" />
-                            </svg>
-                        </div>
-                        <hr class="border-[#cfcfcf] border-1 ">
-                        <div class="flex pt-5 cursor-pointer justify-between">
-                            <p class="font-medium">Draft <span class="text-[#858585]">{{ storeAutions?.draft?.length
-                            }}</span></p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 20 21" fill="none">
-                                <path
-                                    d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
-                                    fill="#858585" />
-                            </svg>
-                        </div>
-                        <RouterLink to="/all/create"
-                            class="btn w-full bg-base-black mt-7 flex gap-2 justify-center items-center text-primary ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 17 17" fill="none">
-                                <path
-                                    d="M7.83398 7.83398V3.83398H9.16732V7.83398H13.1673V9.16732H9.16732V13.1673H7.83398V9.16732H3.83398V7.83398H7.83398Z"
-                                    fill="#C1F861" />
-                            </svg>
-                            <p class="text-primary pt-1">Create Auction</p>
-                        </RouterLink>
-                    </div>
+                <div class="hidden md:w-[29%] md:block">
+                    <CreateAution class="hidden md:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
-                <div class="w-[70%]">
-                    <div class="flex items-center justify-between mb-4">
-                        <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
+                <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="w-full md:w-[70%] ">
+                    <div class="flex items-center px-3 justify-between mb-4">
+                        <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }}
+                            Vehicles
+                        </p>
+                        <!-- <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" /> -->
                         <div class="flex items-center gap-2 ">
-                            <p class="mt-2">Sort by:</p>
+                            <p class="mt-2 hidden md:block">Filter by:</p>
                             <div class="flex items-center gap-5">
                                 <div class="navbar-right relative">
                                     <button @click="isOpen = !isOpen"
                                         class="flex gap-2 rounded-md  shadow-md px-2 bg-white items-center">
-                                        <p class="p-2 pb-1">Auction Status & Date</p>
+                                        <p class="p-2 text-xs md:text-[16px] pb-1">Start date</p>
                                         <div class=" p-2 border-l-2 pr-0 border-[#efefef] ">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 viewBox="0 0 18 18" fill="none">
@@ -125,30 +35,44 @@
                                     </button>
                                     <div v-if="isOpen"
                                         class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
-                                        <a href=""
-                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Auction
-                                            Title
-                                        </a>
-                                        <a href=""
-                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Auction
-                                            Start</a>
+                                        <div @click="setSorBy('all-status')"
+                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                            All Status
+                                        </div>
+                                        <div @click="setSorBy('needs-approval')"
+                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                            Needs Approval
+                                        </div>
+                                        <div @click="setSorBy('accepted')"
+                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                            Accepted
+                                        </div>
+                                        <div @click="setSorBy('dropped-off')"
+                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                            Dropped Off
+                                        </div>
+                                        <div @click="setSorBy('reviewed')"
+                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                            Reviewed
+                                        </div>
 
                                     </div>
                                 </div>
-                                <div class="shadow-md  rounded-md flex bg-white">
-                                    <div @click="changeGridTemplate" :class="changeLayouts ? 'bg-white' : 'bg-[#EFF8E0]'"
-                                        class="p-2 cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none">
+                                <div class="shadow-md md:flex rounded-md hidden bg-white">
+                                    <div @click="changeGridTemplate"
+                                        :class="changeLayouts ? 'bg-white' : 'bg-[#EFF8E0]'" class="p-2 cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
                                             <path
                                                 d="M19 11V5H5V11H19ZM19 13H5V19H19V13ZM4 3H20C20.2652 3 20.5196 3.10536 20.7071 3.29289C20.8946 3.48043 21 3.73478 21 4V20C21 20.2652 20.8946 20.5196 20.7071 20.7071C20.5196 20.8946 20.2652 21 20 21H4C3.73478 21 3.48043 20.8946 3.29289 20.7071C3.10536 20.5196 3 20.2652 3 20V4C3 3.73478 3.10536 3.48043 3.29289 3.29289C3.48043 3.10536 3.73478 3 4 3Z"
                                                 :fill="changeLayouts ? '#09121F' : '#7EC600'" />
                                         </svg>
                                     </div>
-                                    <div @click="changeGridTemplate" :class="changeLayouts ? 'bg-[#EFF8E0]' : 'bg-white'"
+                                    <div @click="changeGridTemplate"
+                                        :class="changeLayouts ? 'bg-[#EFF8E0]' : 'bg-white'"
                                         class=" p-2 flex item-center justify-center cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
                                             <path
                                                 d="M21 3C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V20C22 20.2652 21.8946 20.5196 21.7071 20.7071C21.5196 20.8946 21.2652 21 21 21H3C2.73478 21 2.48043 20.8946 2.29289 20.7071C2.10536 20.5196 2 20.2652 2 20V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21ZM11 13H4V19H11V13ZM20 13H13V19H20V13ZM11 5H4V11H11V5ZM20 5H13V11H20V5Z"
                                                 :fill="changeLayouts ? '#7EC600' : '#09121F'" />
@@ -158,12 +82,14 @@
                             </div>
                         </div>
                     </div>
-                    <div
+                    <div class="p-2"
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
-                        <div v-for="(auction, index) in data" :key="index"
+                        <div v-for="(auction, index) in sortedData" :key="index"
                             class="bg-white flex  mb-7 gap-5 items-start shadow-steps  w-full "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-                            <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+                            <CardCompleteSeller :key="counter" :auction="auction" :changeLayouts="changeLayouts"
+                                :decline="declineAution" />
+                            <!--  <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <p v-if="auction.status == 'completed'"
                                     class="font-semibold fixed z-50 left-0 bg-[#05A54B] text-white rounded-lg ml-2 mt-2 px-4 py-1">
                                     Complete
@@ -299,10 +225,10 @@
                                                 <div class="flex gap-1">
                                                     <p class="font-medium text-base-black text-2xl ">
                                                         <span v-if="auction.bids[0]?.amount">
-                                                        ${{ auction.bids[0]?.amount}}
+                                                            ${{ auction.bids[0]?.amount }}
                                                         </span>
-                                                        <span v-else> 
-                                                            ${{ auction?.vehicleDetails?.basePrice }} 
+                                                        <span v-else>
+                                                            ${{ auction?.vehicleDetails?.basePrice }}
                                                         </span>
                                                     </p>
                                                     <p class="text-[#666666] mt-1 "> /{{ auction.bids.length }} Bids</p>
@@ -340,84 +266,20 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
+                            
+                            
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div v-else class="flex w-full flex-col justify-center gap-6 items-center custom-header-all ">
-            <div class="flex gap-20 items-end ">
-                <div class="flex gap-8 flex-col">
-                    <div class="flex w-full justify-start">
-                        <img class="object-cover" src="../../../assets/svg/vehiculoAll.svg" alt="">
-                    </div>
-                    <div>
-                        <h1 class="text-5xl font-semibold text-blue-dark ">
-                            Get the best value <br>
-                            for your car with <br> AutoSensei !
-                        </h1>
-                        <p>Let the bids begin, post your auction, sell your car quick as 48 hours.</p>
-                    </div>
-                    <RouterLink to="/all/create"
-                        class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Create My Auction
-                    </RouterLink>
-                </div>
-                <div>
-                    <h1 class="font-bold ">Benefits of selling your car on AutoSensei:</h1>
-                    <div class="flex flex-col gap-8 pt-6">
-                        <div class="flex items-center gap-3">
-                            <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
-                                    fill="none">
-                                    <path
-                                        d="M10.8898 11.9446H3.11198V12.5001C3.11198 12.6475 3.05345 12.7888 2.94926 12.8929C2.84507 12.9971 2.70377 13.0557 2.55642 13.0557H2.00087C1.85353 13.0557 1.71222 12.9971 1.60803 12.8929C1.50384 12.7888 1.44531 12.6475 1.44531 12.5001V7.50011L2.84142 3.77678C2.92083 3.56494 3.06301 3.38239 3.24895 3.25353C3.4349 3.12467 3.65575 3.05564 3.88198 3.05566H10.1198C10.346 3.05564 10.5668 3.12467 10.7528 3.25353C10.9387 3.38239 11.0809 3.56494 11.1603 3.77678L12.5564 7.50011V12.5001C12.5564 12.6475 12.4979 12.7888 12.3937 12.8929C12.2895 12.9971 12.1482 13.0557 12.0009 13.0557H11.4453C11.298 13.0557 11.1567 12.9971 11.0525 12.8929C10.9483 12.7888 10.8898 12.6475 10.8898 12.5001V11.9446ZM2.63198 7.50011H11.3698L10.1198 4.16678H3.88198L2.63198 7.50011ZM3.94531 10.2779C4.16633 10.2779 4.37829 10.1901 4.53457 10.0338C4.69085 9.87753 4.77865 9.66557 4.77865 9.44455C4.77865 9.22354 4.69085 9.01158 4.53457 8.8553C4.37829 8.69902 4.16633 8.61122 3.94531 8.61122C3.7243 8.61122 3.51234 8.69902 3.35606 8.8553C3.19978 9.01158 3.11198 9.22354 3.11198 9.44455C3.11198 9.66557 3.19978 9.87753 3.35606 10.0338C3.51234 10.1901 3.7243 10.2779 3.94531 10.2779ZM10.0564 10.2779C10.2774 10.2779 10.4894 10.1901 10.6457 10.0338C10.802 9.87753 10.8898 9.66557 10.8898 9.44455C10.8898 9.22354 10.802 9.01158 10.6457 8.8553C10.4894 8.69902 10.2774 8.61122 10.0564 8.61122C9.83541 8.61122 9.62345 8.69902 9.46717 8.8553C9.31089 9.01158 9.22309 9.22354 9.22309 9.44455C9.22309 9.66557 9.31089 9.87753 9.46717 10.0338C9.62345 10.1901 9.83541 10.2779 10.0564 10.2779Z"
-                                        fill="#05A54B" />
-                                </svg>
-                            </div>
-                            <p>Sell your car without any cost or fees</p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
-                                    fill="none">
-                                    <path
-                                        d="M7.28017 13.0564C4.21183 13.0564 1.72461 10.5692 1.72461 7.50087C1.72461 4.43253 4.21183 1.94531 7.28017 1.94531C10.3485 1.94531 12.8357 4.43253 12.8357 7.50087C12.8357 10.5692 10.3485 13.0564 7.28017 13.0564ZM10.8107 9.69642V9.63809C10.8107 9.12587 10.8107 8.89198 10.4485 8.68476C10.3321 8.61875 10.2125 8.5585 10.0902 8.5042C9.88628 8.41142 9.75128 8.35087 9.56905 8.0842C9.5473 8.05254 9.52582 8.02068 9.50461 7.98865C9.31294 7.69698 9.17461 7.48698 8.64794 7.57031C7.61183 7.73476 7.53517 7.91698 7.48961 8.22476L7.48239 8.27531C7.41517 8.72531 7.40294 8.87642 7.59072 9.07365C8.2935 9.81087 8.71461 10.3425 8.84239 10.6536C8.90461 10.8053 9.06461 11.2648 8.95461 11.7192C9.62896 11.4506 10.2292 11.0245 10.7052 10.4764C10.7663 10.2686 10.8107 10.0098 10.8107 9.69642ZM7.28017 2.96365C5.99294 2.96365 4.83017 3.50031 4.00461 4.36142C4.10294 4.42976 4.1885 4.52587 4.24739 4.65809C4.36072 4.91198 4.36072 5.17365 4.36072 5.40531C4.36072 5.58753 4.36072 5.76087 4.41905 5.88587C4.49905 6.05698 4.84461 6.13031 5.14961 6.19365C5.25905 6.21698 5.37128 6.24031 5.4735 6.26865C5.75461 6.34642 5.97239 6.5992 6.14628 6.80198C6.2185 6.88587 6.32572 7.00976 6.37961 7.04087C6.40739 7.02087 6.49683 6.92365 6.54072 6.7642C6.57516 6.64198 6.56517 6.5342 6.51572 6.47531C6.20461 6.10865 6.22183 5.40309 6.31794 5.14253C6.46905 4.73198 6.94128 4.76253 7.28683 4.78476C7.41572 4.79309 7.53683 4.80142 7.62794 4.78976C7.9735 4.74642 8.08016 4.22031 8.15517 4.11753C8.31739 3.89531 8.81405 3.56031 9.12183 3.35365C8.54211 3.09586 7.91462 2.96298 7.28017 2.96365Z"
-                                        fill="#05A54B" />
-                                </svg>
-                            </div>
-                            <p>Skip the hassle of visiting multiple dealers</p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
-                                    fill="none">
-                                    <path
-                                        d="M3.54588 4.14672C4.4313 3.43731 5.53244 3.05158 6.66699 3.05339C7.84755 3.05339 8.93255 3.46227 9.78811 4.14672L10.5953 3.3395L11.3809 4.12505L10.5737 4.93227C11.1613 5.66791 11.5292 6.55451 11.6352 7.49005C11.7412 8.42558 11.5809 9.37202 11.1727 10.2205C10.7645 11.0689 10.1251 11.7849 9.328 12.2859C8.5309 12.787 7.60851 13.0528 6.66699 13.0528C5.72548 13.0528 4.80309 12.787 4.00599 12.2859C3.20888 11.7849 2.56945 11.0689 2.16128 10.2205C1.75311 9.37202 1.59279 8.42558 1.69877 7.49005C1.80475 6.55451 2.17271 5.66791 2.76033 4.93227L1.95311 4.12561L2.73866 3.34005L3.54588 4.14727V4.14672ZM7.22255 7.49783V4.99505L4.44477 8.60894H6.11144V11.1089L8.88922 7.49783H7.22255ZM4.44477 1.38672H8.88922V2.49783H4.44477V1.38672Z"
-                                        fill="#05A54B" />
-                                </svg>
-                            </div>
-                            <p>Sell from your home within just 48 hours</p>
-                        </div>
-
-                        <div class="flex items-center gap-3">
-                            <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
-                                    fill="none">
-                                    <path
-                                        d="M8.111 11.9448V13.056H1.44434V11.9448H8.111ZM8.43656 1.21484L12.7577 5.53595L11.9721 6.32262L11.3832 6.12595L10.0071 7.5004L13.1499 10.6432L12.3643 11.4287L9.22211 8.28595L7.88656 9.62151L8.04378 10.2504L7.25767 11.036L2.93656 6.71484L3.72267 5.92929L4.35045 6.08596L7.84711 2.58984L7.651 2.00095L8.43656 1.21484Z"
-                                        fill="#05A54B" />
-                                </svg>
-                            </div>
-
-                            <p>No more haggling with disinterested buyers</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-show="openDecline" class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
+        <template v-else>
+            <ScreenCreateAution />
+        </template>
+        <div v-show="openDecline"
+            class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
             <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
                 <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
                     <p class="text-xl text-white">Decline Auction</p>
@@ -437,11 +299,12 @@
                         </div>
                         <div>
                             <p class=" font-semibold ">{{ autionModal?.vehicleDetails?.year }} {{
-                                autionModal?.vehicleDetails?.make }} {{ autionModal?.vehicleDetails?.model }}</p>
+        autionModal?.vehicleDetails?.make }} {{ autionModal?.vehicleDetails?.model }}</p>
                             <p>Final Bid</p>
                             <div class="flex gap-1">
-                                <p class="font-medium text-base-black text-2xl ">${{ autionModal?.vehicleDetails?.basePrice
-                                }}
+                                <p class="font-medium text-base-black text-2xl ">${{
+        autionModal?.vehicleDetails?.basePrice
+    }}
                                 </p>
                                 <p class="text-[#666666] mt-1 "> /{{ autionModal?.Bids?.length }} Bids</p>
                             </div>
@@ -450,7 +313,7 @@
                 </div>
                 <div class="py-10 px-4 pb-2">
                     <p>Are you sure you want to cancel the auction for the <strong>{{ autionModal?.vehicleDetails?.model
-                    }}</strong> ?</p>
+                            }}</strong> ?</p>
                     <div class="w-full flex gap-2 mt-4 items-center">
                         <button @click="openDecline = false"
                             class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
@@ -464,8 +327,9 @@
         <ModalViewDetailsVue v-if="statusModalView.isActive" />
     </template>
 </template>
+
 <script>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed ,watchEffect} from "vue";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from 'vue-router'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -482,6 +346,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import ModalReviewVue from '@/components/Modals/ModalReview/ModalReview.vue'
 import ModalViewDetailsVue from '@/components/Modals/ModalViewDetails/ModalViewDetails.vue'
+import Basic from '../../../components/Loading/Basic.vue'
+import HeaderOptionesSeller from '../../../components/Header/HeaderOptionesSeller.vue'
+import CreateAution from '../../../components/Cards/CreateAution.vue'
+import CardCompleteSeller from '../../../components/Cards/CardCompleteSeller.vue'
+import CardAutionMobile from '../../../components/Cards/CardAutionMobile.vue'
+import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
+import SorBy from '../../../components/Filters/SorBy.vue'
 export default {
 
     components: {
@@ -489,7 +360,14 @@ export default {
         SwiperSlide,
         ModalAcceptAutionVue,
         ModalReviewVue,
-        ModalViewDetailsVue
+        ModalViewDetailsVue,
+        HeaderOptionesSeller,
+        CreateAution,
+        CardCompleteSeller,
+        CardAutionMobile,
+        Basic,
+        ScreenCreateAution,
+        SorBy
     },
     setup() {
         const route = useRoute();
@@ -505,9 +383,12 @@ export default {
         const statusModalR = ModalReview()
         const openDecline = ref(false)
         const autionModal = ref(null)
+        const counter = ref(0)
         const statusModalView = ModalViewDetails()
+        const sortBy = ref('reviewed')
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
+            counter.value++
         }
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
 
@@ -582,10 +463,6 @@ export default {
             openDecline.value = true
             autionModal.value = auction
         }
-        function timeToStart(startDate) {
-            if (!startDate) return 0;
-            return new Date(startDate) - Date.now();
-        }
         const acceptAution = () => {
             loading.value = true
             try {
@@ -602,11 +479,38 @@ export default {
             }
 
         }
+        const setSorBy = (sort) => {
+            sortBy.value = sort
+
+        }
+
+        const sortedData = computed(() => {
+            switch (sortBy.value) {
+                case 'all-status':
+                    return data.value
+                case 'needs-approval':
+                    return data.value.filter((aution) => aution.status == 'bids completed')
+                case 'accepted':
+                    return data.value.filter((aution) => aution.status == 'completed')
+                case 'dropped-off':
+                    return data.value.filter((aution) => aution.status == 'drop off')
+                case 'reviewed':
+                    return data.value.filter((aution) => aution.status == 'reviewed')
+                default:
+                    return data.value
+            }
+        })
+        watchEffect(() => {
+            if (sortBy.value) {
+                counter.value++
+            }
+            else {
+                counter.value++
+            }
+        })
         onMounted(() => {
             index()
-
         })
-
         return {
             loading,
             isOpen,
@@ -623,19 +527,15 @@ export default {
             openDecline,
             declineAution,
             autionModal,
-            timeToStart,
             acceptAution,
             statusModalView,
             cancelAution,
-            index
+            index,
+            sortedData,
+            setSorBy,
+            counter
 
         };
     },
 };
 </script>
-
-
-
-
-
-  

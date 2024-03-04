@@ -26,7 +26,7 @@
                                 statusModal.dataAutiont?.vehicleDetails?.make }} {{
         statusModal.dataAutiont?.vehicleDetails?.model }}</p>
                             <p class="capitalize ">Final Bid</p>
-                            <p class="capitalize">${{ statusModal.dataAutiont?.bids[0]?.amount }} / {{ statusModal.dataAutiont?.bids?.length }} </p>
+                            <p class="font-medium text-base-black text-2xl">${{ statusModal.dataAutiont?.bids[0]?.amount }}/<span class="text-[#666666] mt-1 text-base ">{{ statusModal.dataAutiont?.bids?.length }} Bids</span>  </p>
                         </div>
                     </div>
                 </div>

@@ -25,9 +25,11 @@ select:active option {
     padding: 20px !important;
     height: 40px !important;
 }
-input::placeholder{
+
+input::placeholder {
     text-transform: capitalize;
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -538,6 +540,12 @@ input.check-toggle-round-flat:checked+label:after {
     position: relative;
 }
 
+.hr-custims-1,
+.hr-custims-2,
+.hr-custims-3 {
+    position: relative;
+}
+
 .hr-custim-1::after,
 .hr-custim-2::after {
     content: '';
@@ -547,6 +555,19 @@ input.check-toggle-round-flat:checked+label:after {
     border: 1px solid #E0E0E0;
     transform: rotate(90deg);
     left: 10px;
+    bottom: -16px;
+
+}
+
+.hr-custims-1::after,
+.hr-custims-2::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    bottom: 0;
+    border: 1px solid #E0E0E0;
+    transform: rotate(90deg);
+    left: 6px;
     bottom: -16px;
 
 }
@@ -881,6 +902,118 @@ input.check-toggle-round-flat:checked+label:after {
 .mySwiperHome-full .swiper-button-next::after {
     font-size: 25px !important;
 }
-.h-screen-custom-full-image{
+
+.h-screen-custom-full-image {
     height: calc(100vh - 138px);
+}
+
+/* width */
+.scroll-custom-options::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+}
+
+/* Track */
+.scroll-custom-options::-webkit-scrollbar-track {
+    background: #09121F;
+}
+
+/* Handle */
+.scroll-custom-options::-webkit-scrollbar-thumb {
+
+    background: #d8f8a0;
+}
+
+/* Handle on hover */
+.scroll-custom-options::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.custom-phone #telephone {
+    border: 1px solid #E0E0E0;
+    width: 100%;
+}
+
+.custom-phone #telephone:focus {
+    outline: none;
+}
+
+.custom-phone .iti {
+    width: 100%;
+}
+
+.shadow-progreess {
+    box-shadow: 0px 0px 11px 0px #c1f861;
+    animation-name: parpadeo;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+}
+
+@keyframes parpadeo {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+.animation-fade-modal {
+    animation: slidein 1s forwards alternate ease-in-out;
+}
+
+@keyframes slidein {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@media (max-width: 680px) {
+    .Toastify__toast {
+        margin: 20px !important;
+    }
+
+    .btn {
+        padding: 10px;
+        line-height: 13px;
+    }
+
+    .h-modal-review {
+        height: calc(100vh - 56px);
+        overflow: hidden;
+    }
+
+    .custom-header-all {
+        height: auto;
+    }
+
+    .label-radio {
+        font-size: 14px;
+    }
+
+    label.label-colors {
+        padding: 10px;
+        font-size: 10px;
+    }
+
+    .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+    .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+        margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 2px) !important;
+    }
+
+    .swiper-pagination-bullet {
+        width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 6px)) !important;
+        height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 6px)) !important;
+    }
 }

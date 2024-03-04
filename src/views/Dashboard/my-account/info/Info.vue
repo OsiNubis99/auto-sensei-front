@@ -173,6 +173,7 @@
                         :src="bucket + storeUser.seller?.driverLicense" alt="">
                     <img v-else class="w-4/5  h-[220px] object-cover " src="../../../../assets/img/png/exampleLicencie.png"
                         alt="">
+                        
                 </template>
 
 

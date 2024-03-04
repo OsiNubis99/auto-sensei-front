@@ -1,6 +1,6 @@
 <template>
     <div class="w-full flex justify-center items-center h-screen  p-6 ">
-        <div class="bg-white  w-2/6 shadow-lg mt-7 rounded-xl">
+        <div class="bg-white  md:w-2/6 shadow-lg mt-7 rounded-xl">
             <div v-if="loading" class="  w-full h-full flex justify-center items-center">
                 <div class=" h-full flex justify-center item-center my-7 w-full text-indigo-700">
                     <div class="h-[80px] w-[80px] ">
