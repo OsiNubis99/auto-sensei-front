@@ -1,8 +1,8 @@
 
 <template>
     <div class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
-        <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
-            <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+        <div class="absolute top-1/2 left-1/2 md:-mt-4 md:-ml-2 h-8 w-4 text-indigo-700">
+            <div class="absolute -left-[30px] z-10  h-12 w-12 md:h-[80px] md:w-[80px] ">
                 <div class="animate-bounce">
                     <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                         stroke-width="0" viewBox="0 0 16 16">
@@ -11,7 +11,7 @@
                         </path>
                     </svg>
                 </div>
-                <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
             </div>
         </div>
     </div>

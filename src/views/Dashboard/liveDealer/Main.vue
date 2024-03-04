@@ -1,22 +1,11 @@
 <template>
-    <div>
+     <template v-if="loading">
+        <Basic />
+    </template>
+    <template v-else>
         <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
-        <div v-if="loading" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
-            <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
-                <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
-                    <div class="animate-bounce">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
-                            stroke-width="0" viewBox="0 0 16 16">
-                            <path
-                                d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
-                            </path>
-                        </svg>
-                    </div>
-                    <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
-                </div>
-            </div>
-        </div>
-        <div v-else class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+      
+        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
@@ -275,7 +264,7 @@
             </div>
         </div>
         <ModalBidNow v-if="statusModal.isActive" :form="formData" />
-    </div>
+    </template>
 </template>
 
 <script>
@@ -295,6 +284,7 @@ import ModalBidNow from "../../../components/Modals/ModalBidNow/ModalBidNow.vue"
 import HeaderOptionsDealer from '../../../components/Header/HeaderOptionsDealer.vue'
 import ScreenNoDataDealer from '../../../components/Screen/ScreenNoDataDealer.vue'
 import CardLiveDealer from '../../../components/Cards/CardLiveDealer.vue'
+import Basic from '../../../components/Loading/Basic.vue'
 export default {
 
     components: {
@@ -303,7 +293,8 @@ export default {
         ModalBidNow,
         HeaderOptionsDealer,
         ScreenNoDataDealer,
-        CardLiveDealer
+        CardLiveDealer,
+        Basic
     },
     setup() {
         const isOpen = ref(false)
