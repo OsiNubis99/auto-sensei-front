@@ -1,8 +1,8 @@
 <template>
     <div v-show="statusModal.isActive"
         class="fixed inset-0 overflow-auto flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
-        <div class=" w-full md:w-[60%]  bg-white rounded-lg shadow-xl">
-            <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
+        <div class=" w-full md:w-[60%] h-full md:h-fit bg-white rounded-lg shadow-xl animation-fade-modal">
+            <div class=" p-2 md:p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
                 <p class="md:text-xl text-xs text-white">View Details</p>
                 <svg @click="statusModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
                     class=" w-6 h-6 md:w-8 md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
@@ -10,7 +10,7 @@
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <div class="md:p-5 h-modal-review overflow-auto">
+            <div class="md:p-5 h-modal-review  ">
                 <div class="md:border-b pb-2 flex justify-between items-center border-b-[#F0F0F0]">
                     <div class="hidden md:block">
                         <p class="text-2xl font-semibold capitalize">{{ statusModal.dataAutiont?.vehicleDetails?.year }} {{
@@ -120,7 +120,7 @@
                         </div>
                         <div class="flex gap-4 w-full ">
                             <div class=" w-full flex flex-col md:gap-2 bg-[#F7F7F7] h-max p-2 md:p-4 rounded-lg ">
-                                <p class="text-sm">Auction Status</p>
+                                <p class=" text-xs md:text-sm">Auction Status</p>
                                 <div class="flex gap-2 items-center ">
                                     <div v-if="statusModal.dataAutiont?.status == 'completed'"
                                         class=" w-3 h-3 md:w-4 md:h-4 bg-[#05A54B] rounded-full"></div>
@@ -130,86 +130,91 @@
                                         class=" w-3 h-3 md:w-4 md:h-4 bg-[#1F94F0] rounded-full"></div>
 
                                     <p v-if="statusModal.dataAutiont?.status == 'bids completed'"
-                                        class=" md:text-lg font-medium capitalize ">Completed</p>
-                                    <p v-else class=" md:text-lg font-medium capitalize ">Accepted
+                                        class="text-sm md:text-lg font-medium capitalize ">Completed</p>
+                                    <p v-else class="text-sm md:text-lg font-medium capitalize ">Accepted
                                     </p>
                                 </div>
                             </div>
                             <div v-if="statusModal.dataAutiont?.status == 'bids completed'"  class=" w-full flex flex-col md:gap-2 bg-[#F7F7F7]  h-max p-2 md:p-4 rounded-lg ">
-                                <p class="text-sm">Total Bid</p>
+                                <p class=" text-xs md:text-sm">Total Bid</p>
                                 <div class="flex gap-2 items-center ">
-                                    <p class=" md:text-lg font-medium capitalize ">{{ statusModal.dataAutiont?.bids.length }}
+                                    <p class=" text-sm md:text-lg font-medium capitalize ">{{ statusModal.dataAutiont?.bids.length }}
                                         Bids</p>
                                 </div>
                             </div>
-                            <div v-if="statusModal.dataAutiont?.status == 'completed'"  class=" w-full flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
-                                <p class="text-sm">Final Bids</p>
+                            <div v-if="statusModal.dataAutiont?.status == 'completed'"  class=" w-full flex flex-col md:gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
+                                <p class=" text-xs md:text-sm">Final Bids</p>
                                 <div class="flex gap-2 items-center ">
-                                    <p class=" text-lg font-medium capitalize ">${{ statusModal.dataAutiont?.bids[0]?.amount}}</p>
+                                    <p class="  text-sm md:text-lg font-medium capitalize ">${{ statusModal.dataAutiont?.bids[0]?.amount}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div v-if="statusModal.dataAutiont?.status === 'completed'"
-                        class=" w-full md:p-4 border-l border-[#F0F0F0]">
-                        <div class="flex items-center gap-4">
-                            <img class="w-16 h-16 rounded-lg object-cover"
-                                src="https://s3-alpha-sig.figma.com/img/f257/e88b/52d32b07e44843bb10d69f7ac7a91630?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KWO2AqkgEIPD1l94dZMLIiAy-RD0AQTbazhj88F2v8KMJeXr9Jbsr6CzPVorz75qLYEQZoH6wzlGxq2XUKda438g9tO5IQJlkCTbHI~WvxkthKJ8z7x7k~us-MgCFu2Griy7a7AxFxHTcrPAHj7hAq6-j64jwvMKfLJAX6R7oeMAez6Rcka5F5zlr8w8g0sLn4~NNNRvjAlTDVr~Y4to-HjK3WQnpm9Rl6e9TqsW8Gzno8gC0xfobrRUNmKgJSiz7IppEfHhX6t9XvsFOad39rUg76l4rTRdrEdokKOIvtjA78hxwHlYVKjefo4085ORwRnPzcsQVTmf-~PGv3Lx-Q__"
+                        class=" w-full md:p-4 border-l  border-[#F0F0F0] custom-seccion-scrren">
+                        <div class="flex p-2 items-center gap-4">
+                            <img class="w-10 h-10 md:w-16 md:h-16 shadow-lg rounded-lg  object-cover"
+                              :src="bucket + statusModal.dataAutiont?.bids[0]?.participant?.dealer?.picture"
                                 alt="">
                             <div>
-                                <p>Maple Auto Sales</p>
-                                <p>Oct 20, 2023 at 2:41 AM</p>
+                                <p class="text-sm font-semibold md:text-base">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.name }}</p>
+                                <p class="text-[10px]  text-[#858585]  md:text-base">Oct 20, 2023 at 2:41 AM</p>
                             </div>
                         </div>
-                        <div class="flex pb-4">
-                            <div class="flex flex-col gap-3">
-                                <p>User Profile</p>
-                                <p>This will not be displayed on the seller's page</p>
+                        <div class="flex p-2 md:pb-4 ">
+                            <div class="flex w-[60%] md:w-full flex-col md:gap-3">
+                                <p class="text-xs font-medium md:font-semibold  md:text-base">User Profile</p>
+                                <p class="text-[10px] w-4/5 md:w-full md:text-base">This will not be displayed on the seller's page</p>
                             </div>
-                            <div class="w-full flex flex-col">
-                                <div class="flex py-4 border-b border-[#F0F0F0] justify-between items-center">
-                                    <p class=" font-semibold ">Full Name</p>
-                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.name }}</p>
+                            <div class="md:w-full flex flex-col">
+                                <div class="flex flex-col md:flex-row md:py-4 border-b border-[#F0F0F0] justify-between items-start md:items-center">
+                                    <p class=" md:font-semibold text-xs md:text-base ">Full Name</p>
+                                    <p class="text-[#858585] md:font-semibold text-xs md:text-base">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.name }}</p>
                                 </div>
-                                <div class="flex py-4 justify-between items-center">
-                                    <p class=" font-semibold ">Email Address</p>
-                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.email }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex border-t pt-4 border-[#F0F0F0]">
-                            <div class="flex flex-col gap-1">
-                                <p>Dealer Company</p>
-                                <p>This will be displayed on the seller's page</p>
-                            </div>
-                            <div class="w-full flex flex-col">
-                                <div class="flex py-4 border-b border-[#F0F0F0] justify-between items-center">
-                                    <p class=" font-semibold ">Dealer Name</p>
-                                    <p class="text-[#858585]">Alex Tuner</p>
-                                </div>
-                                <div class="flex py-4 justify-between items-center">
-                                    <p class=" font-semibold ">OMVIC Registration Number</p>
-                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.omvic  }}</p>
-                                </div>
-                                <div class="flex py-4 justify-between items-center">
-                                    <p class=" font-semibold ">Address</p>
-                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.address  }}</p>
-                                </div>
-                                <div class="flex py-4 justify-between items-center">
-                                    <p class=" font-semibold ">Phone Number</p>
-                                    <p class="text-[#858585]">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.phone  }}</p>
+                                <div class="flex flex-col md:flex-row py-4 justify-between items-start md:items-center">
+                                    <p class=" md:font-semibold text-xs md:text-base ">Email Address</p>
+                                    <p class="text-[#858585] md:font-semibold text-xs md:text-base ">{{ statusModal.dataAutiont?.bids[0]?.participant?.email }}</p>
                                 </div>
                             </div>
                         </div>
+                        <div class="flex p-2 border-t  border-[#F0F0F0]">
+                            <div class="flex w-[60%] flex-col gap-1">
+                                <p  class="text-xs font-medium md:font-semibold  md:text-base">Dealer Company</p>
+                                <p class="text-[10px] w-4/5 md:w-full md:text-base">This will be displayed on the seller's page</p>
+                            </div>
+                            <div class="md:w-full flex flex-col">
+                                <div class="flex flex-col md:flex-row py-2 md:py-4 border-b border-[#F0F0F0] justify-between items-start md:items-center">
+                                    <p class=" md:font-semibold text-xs md:text-base  ">Dealer Name</p>
+                                    <p class="text-[#858585] md:font-semibold text-xs md:text-base">Alex Tuner</p>
+                                </div>
+                                <div class="flex flex-col md:flex-row py-4 justify-between items-start md:items-center">
+                                    <p class=" md:font-semibold text-xs md:text-base  ">OMVIC Registration Number</p>
+                                    <p class="text-[#858585] md:font-semibold text-xs md:text-base">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.omvic  }}</p>
+                                </div>
+                                <div class="flex flex-col md:flex-row py-4 justify-between items-start md:items-center">
+                                    <p class=" md:font-semibold text-xs md:text-base  ">Address</p>
+                                    <p class="text-[#858585] md:font-semibold text-xs md:text-base">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.address  }}</p>
+                                </div>
+                                <div class="flex flex-col md:flex-row py-4 justify-between items-start md:items-center">
+                                    <p class=" md:font-semibold text-xs md:text-base  ">Phone Number</p>
+                                    <p class="text-[#858585] md:font-semibold text-xs md:text-base">{{ statusModal.dataAutiont?.bids[0]?.participant?.dealer?.phone  }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="statusModal.dataAutiont?.status == 'completed'" class="  fixed bottom-2 p-2  w-full">
+                    <RouterLink
+                        :to="{ name: 'inbox-seller', query: { id: statusModal.dataAutiont?._id + '-' + statusModal.dataAutiont?.bids[0].participant._id } }"
+                        class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>
+                </div>
                     </div>
                     <div v-else class=" w-full p-2 md:p-4 border-l border-[#F0F0F0]">
-                        <p class="font-semibold md:text-xl ">Dealer Bids</p>
+                        <p class=" text-md md:font-semibold md:text-xl ">Dealer Bids</p>
                         <div class=" h-[50vh] md:p-4 overflow-x-hidden overflow-y-auto ">
                             <template v-if="statusModal.dataAutiont?.bids.length > 0"
                                 v-for="(dealerBit, index) in statusModal.dataAutiont?.bids" :key="index">
                                 <div
                                     :class="index == 0 && statusModal.dataAutiont?.status == 'bids completed' ? 'border-[2px] p-2 border-[#05A54B] rounded-lg' : 'border-[#F0F0F0]  border-b'">
-                                    <div class="flex pr-4  py-3 pb-0 justify-between ">
+                                    <div class="flex md:pr-4  md:py-3 pb-0 justify-between ">
                                         <div class="flex ">
                                             <div class=" w-12  h-12 md:h-[60px] md:w-[60px]">
                                                 <img v-if="dealerBit.participant.dealer.picture"
@@ -223,9 +228,9 @@
                                                     v-if="index == 0 && statusModal.dataAutiont?.status == 'bids completed'"
                                                     clas capitalize s="">
                                                     <div class="flex gap-2 items-center">
-                                                        <p class="font-semibold capitalize w-[70px] md:w-auto truncate ">{{
+                                                        <p class=" text-xs md:text-base md:font-semibold capitalize w-[70px] md:w-auto truncate ">{{
                                                             dealerBit.participant.dealer.name }}</p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        <svg class=" w-4 h-4 md:w-6 md:h-6" xmlns="http://www.w3.org/2000/svg"
                                                             viewBox="0 0 16 16" fill="none">
                                                             <path
                                                                 d="M8.66699 11.292V12.6667H12.0003V14H4.00033V12.6667H7.33366V11.292C6.04479 11.1295 4.85954 10.5022 4.00033 9.52783C3.14112 8.55349 2.66701 7.29907 2.66699 6V2H13.3337V6C13.3336 7.29907 12.8595 8.55349 12.0003 9.52783C11.1411 10.5022 9.95586 11.1295 8.66699 11.292ZM0.666992 3.33333H2.00033V6H0.666992V3.33333ZM14.0003 3.33333H15.3337V6H14.0003V3.33333Z"
@@ -243,7 +248,7 @@
 
                                             </div>
                                         </div>
-                                        <p class="font-semibold md:text-[1.5rem]">${{ dealerBit.amount }}</p>
+                                        <p class="font-semibold text-sm mt-7 md:mt-0 md:text-[1.5rem]">${{ dealerBit.amount }}</p>
                                     </div>
                                     <RouterLink v-if="index == 0 && statusModal.dataAutiont?.status == 'bids completed'"
                                     :to="{ name: 'inbox-seller', query: { id: statusModal.dataAutiont?._id + '-' + statusModal.dataAutiont?.bids[0].participant._id }}"
@@ -260,7 +265,9 @@
                         </div>
                     </div>
                 </div>
+              
             </div>
+          
         </div>
     </div>
 </template>

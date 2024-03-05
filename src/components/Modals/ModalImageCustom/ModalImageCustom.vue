@@ -2,10 +2,10 @@
 
 <template>
     <div v-show="statusModalImage.isActive"
-        class="fixed z-[100] inset-0 flex items-center justify-center bg-base-black  bg-opacity-50">
-        <div class="max-w-md w-full overflow-auto  bg-white rounded-lg shadow-xl">
+        class="fixed z-[100] inset-0 flex items-end md:items-center md:justify-center bg-base-black  bg-opacity-50">
+        <div class="max-w-md w-full overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
             <div class="p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
-                <p class="text-xl text-white">Edit & Crop Image</p>
+                <p class="md:text-xl text-white">Edit & Crop Image</p>
                 <svg @click="statusModalImage.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
                     class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -14,10 +14,10 @@
             </div>
 
             <div class="relative">
-                <div v-if="loading" class="min-h-[400px] h-full flex justify-center items-center">
+                <div v-if="loading" class="md:min-h-[400px] h-full flex justify-center items-center">
                     <div class="w-full h-full flex justify-center items-center">
                         <div class=" text-indigo-700">
-                            <div class="   h-[80px] w-[80px] ">
+                            <div class="   md:h-[80px] md:w-[80px] ">
                                 <div class="animate-bounce">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
                                         stroke="#fff" stroke-width="0" viewBox="0 0 16 16">

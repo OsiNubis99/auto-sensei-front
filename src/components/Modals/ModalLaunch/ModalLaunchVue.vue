@@ -1,59 +1,59 @@
 <template>
-    <div v-show="statusModal.isActive" class="fixed inset-0 flex items-center justify-center bg-base-black  bg-opacity-50">
-        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
-            <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
-                <p class="text-xl text-white">Launch Auction</p>
+    <div v-show="statusModal.isActive" class="fixed inset-0 flex items-end md:items-center md:justify-center bg-base-black  bg-opacity-50">
+        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl  animation-fade-modal">
+            <div class="md:p-4 p-2 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
+                <p class="text-sm md:text-xl text-white">Launch Auction</p>
                 <svg @click="statusModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
                     class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <div class="p-4 flex gap-3 flex-col  ">
+            <div class=" p-2 pb-0 md:p-4 flex gap-3 flex-col  ">
                 <div class="flex justify-start items-center gap-2">
-                    <p>Options</p>
+                    <p class=" text-xs md:text-base">Options</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path
                             d="M8.78145 8.00048L5.48145 4.70048L6.42411 3.75781L10.6668 8.00048L6.42411 12.2431L5.48145 11.3005L8.78145 8.00048Z"
                             fill="#858585" />
                     </svg>
-                    <p class="text-[#858585]">Summary</p>
+                    <p class="text-[#858585] text-xs md:text-base">Summary</p>
                 </div>
                 <div class="flex gap-3 items-start ">
-                    <div class="w-[120px] h-[90px]">
+                    <div class=" w-[90px] h-[70px] md:w-[120px] md:h-[90px]">
                         <img class="w-full h-full rounded-lg object-cover"
                             :src="formData?.previewFront"
                             alt="">
                     </div>
                     <div>
-                        <p class=" font-semibold ">212 Chevrolet Captiva SP</p>
-                        <p>St. John, Newfoundland & Labrador</p>
+                        <p class="font-semibold text-xs md:text-base ">212 Chevrolet Captiva SP</p>
+                        <p class="text-[10px] md:text-base">St. John, Newfoundland & Labrador</p>
                     </div>
                 </div>
             </div>
             <div class="mt-2 border-[#E0E0E0] border-t-[1px] ">
-                <div class="p-4">
+                <div class=" p-2  md:p-4">
                     <template v-if="(stepsVerifiqued.step1 && formData.launchOptions == 'Launch now after verified') ||
                         (stepsDateTime.step1 && formData.launchOptions == 'Choose the date & time') ||
                         (stepsDateWeekeng.step1 && formData.launchOptions == 'Choose after hours (weekend)' ||
                             formData.launchOptions == null)">
-                        <p class="font-semibold">Launch Options</p>
-                        <p class=" text-[#858585]">After you launch the auction there is a 90 minute
+                        <p class="md:font-semibold text-xs md:text-base ">Launch Options</p>
+                        <p class=" text-[#858585] text-[10px] md:text-base">After you launch the auction there is a 90 minute
                             buffer for our team to
                             review your posting
                         </p>
                         <div class="w-full flex-col items-start mt-4 flex gap-2">
-                            <label class="label-radio !justify-start">
+                            <label class="label-radio !text-[12px] !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Launch now after verified"
                                     class="input-radio on" name="launch-option">
                                 Launch now after verified
                             </label>
-                            <label class="label-radio !justify-start">
+                            <label class="label-radio !text-[12px] !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Choose the date & time"
                                     class="input-radio on" name="launch-option">
                                 Choose the date & time
                             </label>
-                            <label class="label-radio !justify-start">
+                            <label class="label-radio !text-[12px] !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Choose after hours (weekend)"
                                     class="input-radio on" name="launch-option">
                                 Choose after hours (weekend)

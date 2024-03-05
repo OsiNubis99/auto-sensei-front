@@ -1,18 +1,18 @@
 <template>
     <div v-if="steps.step1" class="w-full flex flex-col p-4 mt-4 gap-2">
         <div class="flex justify-center gap-6 items-center ">
-            <div class="w-full flex  flex-col gap-2">
-                <label class=" text-base " for="">Saturday</label>
+            <div class="w-full flex  flex-col md:gap-2">
+                <label class=" text-xs font-medium mb-2 md:text-base" for="">Saturday</label>
                 <select v-model="formData.daySaturday" disabled
-                    class=" border-none text-[#858585] p-3  bg-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                    class=" custom-select-launch border-none text-[#858585] md:p-3  bg-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option value="19.00 PM" selected>19.00 PM</option>
                 </select>
             </div>
             <p class="mt-7"> - </p>
-            <div class="w-full flex  flex-col gap-2">
-                <label class=" text-base " for="">Monday</label>
+            <div class="w-full flex  flex-col md:gap-2">
+                <label class=" text-xs font-medium mb-2 md:text-base" for="">Monday</label>
                 <select v-model="formData.dayMonday" :class="invalid?.auctionTime ? 'border-error' : 'border-[#E0E0E0]'"
-                    class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                    class=" custom-select-launch border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option value="Select time" selected>Select time</option>
                     <option value="00">00.00 AM</option>
                     <option value="01">01.00 AM</option>
@@ -45,38 +45,38 @@
     </div>
     <template v-if="steps.step2">
         <div class="m-4 p-4 rounded-lg border-[#E0E0E0] border-[1px]">
-            <p class="font-semibold">Launch Information</p>
-            <div class="flex justify-between gap-2">
-                <p>Launch Options</p>
-                <p class="font-semibold">After Hours (Weekend)</p>
+            <p class="font-semibold text-xs md:text-base">Launch Information</p>
+            <div class="flex justify-between py-1  gap-2">
+                <p class=" text-xs md:text-base">Launch Options</p>
+                <p class="text-xs md:text-base">After Hours (Weekend)</p>
             </div>
-            <div class="flex justify-between gap-2">
-                <p>Auction Date</p>
-                <p class="font-semibold"></p>
+            <div class="flex justify-between py-1  gap-2">
+                <p class=" text-xs md:text-base">Auction Date</p>
+                <p class="font-semibold text-xs md:text-base"></p>
             </div>
-            <div class="flex justify-between gap-2">
-                <p>From</p>
-                <p class="font-semibold">Saturday, 19.00 PM</p>
+            <div class="flex justify-between py-1  gap-2">
+                <p class=" text-xs md:text-base">From</p>
+                <p class="font-semibold text-xs md:text-base">Saturday, 19.00 PM</p>
             </div>
-            <div class="flex justify-between gap-2">
-                <p>To</p>
-                <p class="font-semibold">Monday, {{ formData.dayMonday }}</p>
+            <div class="flex justify-between py-1  gap-2">
+                <p class=" text-xs md:text-base">To</p>
+                <p class="font-semibold text-xs md:text-base">Monday, {{ formData.dayMonday }}</p>
             </div>
         </div>
-        <p class="px-4 pt-4 border-[#E0E0E0] border-t-[1px]"> Are you sure you want to
+        <p class="px-4 pt-4 text-xs md:text-base border-[#E0E0E0] border-t-[1px]"> Are you sure you want to
             launch auction with this option?</p>
     </template>
     <div v-if="steps.step1" class="pt-4" @click="next(1)">
         <button :disabled="sizeObjet == 0 ? false : true" :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
-            class="w-full h-[41px] text-blue-100  rounded">
+            class="w-full md:h-[41px] h-[35px] text-blue-100 text-xs font-semibold bg-primary rounded">
             Next
         </button>
     </div>
     <div v-if="steps.step2" class="pt-4 flex gap-4">
-        <button @click="back" class="w-full h-[41px] text-blue-100 border-[#E0E0E0] border-[1px]  rounded">
+        <button @click="back" class="w-full text-xs md:text-base h-[30px] md:h-[41px] text-blue-100 border-[#E0E0E0] border-[1px]  rounded">
             No
         </button>
-        <button @click="next(2)" class="w-full h-[41px] text-blue-100 bg-primary rounded">
+        <button @click="next(2)" class="w-full text-xs md:text-base h-[30px] md:h-[41px] text-blue-100 bg-primary rounded">
             Yes
         </button>
     </div>

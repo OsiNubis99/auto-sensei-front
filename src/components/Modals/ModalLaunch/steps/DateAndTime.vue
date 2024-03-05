@@ -1,6 +1,6 @@
 <template>
-    <div v-if="steps.step1" class="w-full flex flex-col gap-2">
-        <label class=" text-base " for="">Auction Date</label>
+    <div v-if="steps.step1" class="w-full flex flex-col md:gap-2">
+        <label class="text-xs font-medium mb-2 md:text-base " for="">Auction Date</label>
         <VueDatePicker :enable-time-picker="false" v-model="formData.auctionDate" :min-date="new Date()" class="custom-picker"
             :class="invalid?.auctionDate && 'error-picker'">
             <template #calendar-header="{ index, day }">
@@ -9,13 +9,13 @@
                 </div>
             </template>
         </VueDatePicker>
-        <div class="w-full flex flex-col mt-4 gap-2">
+        <div class="w-full flex flex-col mt-4 md:gap-2">
             <div class="flex justify-center gap-6 items-center ">
-                <div class="w-full flex  flex-col gap-2">
-                    <label class=" text-base " for="">Auction Time</label>
+                <div class="w-full flex  flex-col md:gap-2">
+                    <label class=" text-xs font-medium mb-2 md:text-base" for="">Auction Time</label>
                     <select v-model="formData.auctionTime"
                         :class="invalid?.auctionTime ? 'border-error' : 'border-[#E0E0E0]'"
-                        class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                        class=" border custom-select-launch text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option value="00">00.00 AM</option>
                         <option value="01">01.00 AM</option>
                         <option value="02">02.00 AM</option>
@@ -44,11 +44,11 @@
                     </select>
                 </div>
                 <p class="mt-7"> - </p>
-                <div class="w-full flex  flex-col gap-2">
-                    <label class=" text-base " for="">Auction Duration</label>
+                <div class="w-full flex  flex-col md:gap-2">
+                    <label class=" text-xs font-medium mb-2 md:text-base " for="">Auction Duration</label>
                     <select v-model="formData.auctionDuration"
                         :class="invalid?.auctionDuration ? 'border-error' : 'border-[#E0E0E0]'"
-                        class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                        class=" border custom-select-launch text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option value="45">45 Minutes</option>
                         <option value="50">50 Minutes</option>
                         <option value="60">60 Minutes</option>
@@ -61,38 +61,38 @@
     </div>
     <template v-if="steps.step2">
         <div class="m-4 p-4 rounded-lg border-[#E0E0E0] border-[1px]">
-            <p class="font-semibold">Launch Information</p>
-            <div class="flex justify-between gap-2">
-                <p>Launch Option</p>
-                <p class="font-semibold">Choose the date & time</p>
+            <p class="font-semibold text-xs md:text-base">Launch Information</p>
+            <div class="flex justify-between py-1 md:gap-2">
+                <p class=" text-xs md:text-base">Launch Option</p>
+                <p class="text-xs md:text-base">Choose the date & time</p>
             </div>
-            <div class="flex justify-between gap-2">
-                <p>Auction Date</p>
-                <p class="font-semibold">{{ newDate }}</p>
+            <div class="flex justify-between py-1 md:gap-2">
+                <p class=" text-xs md:text-base">Auction Date</p>
+                <p class="font-semibold text-xs md:text-base">{{ newDate }}</p>
             </div>
-            <div class="flex justify-between gap-2">
-                <p>Auction Time</p>
-                <p class="font-semibold">{{ formData.auctionTime }}</p>
+            <div class="flex justify-between py-1 md:gap-2">
+                <p class=" text-xs md:text-base">Auction Time</p>
+                <p class="font-semibold text-xs md:text-base">{{ formData.auctionTime }}</p>
             </div>
-            <div class="flex justify-between gap-2">
-                <p>Auction Duration</p>
-                <p class="font-semibold">{{ formData.auctionDuration }} Minutes</p>
+            <div class="flex justify-between py-1 md:gap-2">
+                <p class=" text-xs md:text-base">Auction Duration</p>
+                <p class="font-semibold text-xs md:text-base">{{ formData.auctionDuration }} Minutes</p>
             </div>
         </div>
-        <p class="px-4 pt-4 border-[#E0E0E0] border-t-[1px]">Are you sure you want to
+        <p class="px-4 pt-4 text-xs md:text-base border-[#E0E0E0] border-t-[1px]">Are you sure you want to
             launch auction with this option?</p>
     </template>
     <div v-if="steps.step1" class="pt-4" @click="next(1)">
         <button :disabled="sizeObjet == 0 ? false : true" :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
-            class="w-full h-[41px] text-blue-100  rounded">
+            class="w-full md:h-[41px] h-[35px] text-blue-100 text-xs font-semibold bg-primary rounded">
             Next
         </button>
     </div>
     <div v-if="steps.step2" class="pt-4 flex gap-4">
-        <button @click="back" class="w-full h-[41px] text-blue-100 border-[#E0E0E0] border-[1px]  rounded">
+        <button @click="back" class="w-full text-xs md:text-base h-[30px] md:h-[41px] text-blue-100 border-[#E0E0E0] border-[1px]  rounded">
             No
         </button>
-        <button @click="next(2)" class="w-full h-[41px] text-blue-100 bg-primary rounded">
+        <button @click="next(2)" class="w-full text-xs md:text-base h-[30px] md:h-[41px] text-blue-100 bg-primary rounded">
             Yes
         </button>
     </div>

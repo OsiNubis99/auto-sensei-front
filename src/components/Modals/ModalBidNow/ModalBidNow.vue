@@ -110,13 +110,13 @@
                         <div class="flex pt-4 flex-col gap-3">
                             <div class="flex flex-col gap-3">
                                 <div class="flex flex-col gap-2">
-                                    <label class=" text-base " for="">Card Number</label>
+                                    <label class=" text-sm md:text-base " for="">Card Number</label>
                                     <input class="p-2 w-full rounded-lg border capitalize " placeholder="Input card number"
                                         v-model="formData.cardNumber" @keydown="formatCardNumber" @input="filterinput"
                                         type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="16">
                                 </div>
                                 <div class="flex flex-col gap-2">
-                                    <label class=" text-base " for="">Name on Card</label>
+                                    <label class=" text-sm md:text-base " for="">Name on Card</label>
                                     <input v-model="formData.nameOnCard" @keypress="isLetter($event)"
                                         class="p-2 w-full rounded-lg border capitalize" placeholder="Input name"
                                         type="text">
@@ -124,13 +124,13 @@
                             </div>
                             <div class="flex justify-between items-center gap-3">
                                 <div class=" flex flex-col gap-2">
-                                    <label class=" text-base " for="">Expiry Date</label>
+                                    <label class=" text-sm md:text-base " for="">Expiry Date</label>
                                     <input v-model="formData.expiryDate" class="p-2 w-full rounded-lg border capitalize"
                                         placeholder="Input expired date" @keydown="formatExpiryDate" type="number">
                                 </div>
 
                                 <div class=" flex flex-col gap-2">
-                                    <label class=" text-base " for="">CVV/CVC</label>
+                                    <label class=" text-sm md:text-base " for="">CVV/CVC</label>
                                     <input v-model="formData.cvv" class="p-2 w-full rounded-lg border capitalize"
                                         placeholder="Input cvv" pattern="[0-9\s]{13,19}" maxlength="4" type="password">
                                 </div>

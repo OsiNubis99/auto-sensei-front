@@ -4,25 +4,25 @@
         <div class="mt-4 flex flex-col gap-4">
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Reminder Status</label>
-                <select class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>All</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Make</label>
-                <select class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select make</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Model</label>
-                <select class=" border-none text-[#858585] p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border-none text-[#858585] md:p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select model</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Trim</label>
-                <select class=" border-none text-[#858585] p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border-none text-[#858585] md:p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select trim</option>
                 </select>
             </div>
@@ -49,37 +49,37 @@
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Body Type</label>
-                <select class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select body type</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Cylinder</label>
-                <select class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select cylinder</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Transmission</label>
-                <select class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select transmission</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Doors</label>
-                <select class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select doors</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Drivetrain</label>
-                <select class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select doors</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class="font-medium text-sm " for="">Vehicle Condition</label>
-                <select class=" border border-[#E0E0E0] text-[#858585] p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                <select class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
                     <option selected>Select condition</option>
                 </select>
             </div>

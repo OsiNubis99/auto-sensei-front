@@ -579,6 +579,7 @@ input.check-toggle-round-flat:checked+label:after {
 .custom-picker .dp__input {
     border-radius: 8px !important;
     height: 42px !important;
+    padding-left: 43px !important;
 }
 
 .error-picker .dp__input {
@@ -979,7 +980,7 @@ input.check-toggle-round-flat:checked+label:after {
     }
 }
 .animation-menu-modal {
-    animation: menu 1s forwards alternate ease-in-out;
+    animation: menu 1s forwards alternate linear;
 }
 @keyframes menu {
     from {
@@ -993,6 +994,13 @@ input.check-toggle-round-flat:checked+label:after {
 @media (max-width: 680px) {
     .Toastify__toast {
         margin: 20px !important;
+        min-height:fit-content !important;
+    }
+    .Toastify__toast-body>div:last-child{ 
+        font-size: 10px !important;
+    }
+    .Toastify__toast-icon {
+        width: 14px !important;
     }
 
     .btn {
@@ -1036,8 +1044,60 @@ input.check-toggle-round-flat:checked+label:after {
     }
     input{
         height: 32px;
+        font-size: 13px;
+        padding: 0 !important;
+    }
+    input[type='text'],input[type='email'],input[type='password'],input[type='number']{
+        padding: 0px 10px !important;
+    }
+    input[type='tel']{
+        padding-left: 40px;
+    }
+    select{
+        height: 32px;
+        font-size: 11px;
+    }
+    select::placeholder{
+        font-size: 11px;
     }
     input::placeholder{
         font-size: 11px;
+    }
+    textarea::placeholder{
+        font-size: 12px;
+    }
+    select.custom-select-launch{
+        padding: 0px 4px;
+        font-size: 12px !important;
+        color: black !important;
+    }
+    textarea{
+        font-size: 12px;
+    }
+    .input-radio{
+        width: 13px;
+        height: 13px;
+    }
+    .custom-seccion-scrren{
+        overflow: auto;
+        height: calc(100vh - 305px);
+        padding-bottom: 50px;
+    }
+    .custom-picker .dp__input{
+        height: 32px !important;
+    }
+    .dp__cell_inner{
+        width: 21px !important;
+        height: 25px !important;
+    }
+    .twitter-cropper{
+        height: max-content !important;
+    }
+    .twitter-navigation__inner-circle{
+        width: 17px !important;
+        height: 17px !important;
+    }
+    .twitter-navigation__line{
+        height: 7px !important;
     }
 }

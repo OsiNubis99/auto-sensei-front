@@ -9,16 +9,16 @@
         </div>
         <div class="flex flex-col md:flex-row justify-between items-center md:gap-4">
             <div class="w-full flex flex-col gap-2">
-                <label class=" text-base " for="">Vehicle Identification Number (VIN)</label>
+                <label class=" text-sm md:text-base " for="">Vehicle Identification Number (VIN)</label>
                 <input v-model="form.numberVinGenerals"
                     :class="invalid?.numberVinGenerals ? 'border-error' : 'border-[#E0E0E0]'"
                     class="p-2 rounded-lg border uppercase" placeholder="Input your VIN number" type="text">
-                <p class="text-sm text-[#858585] ">Provide the exact VIN number in order to decode your vehicle accurately.
+                <p class="text-xs md:text-sm text-[#858585] ">Provide the exact VIN number in order to decode your vehicle accurately.
                 </p>
             </div>
             <div class="flex gap-2 items-center justify-between">
                 <!-- <div class="w-full flex mt-5 flex-col gap-2">
-                    <label class=" text-base " for="">Start Date Vehicle</label>
+                    <label class=" text-sm md:text-base " for="">Start Date Vehicle</label>
                     <VueDatePicker class="custom-picker" :class="invalid?.startDate && 'error-picker'"
                         v-model="form.startDate">
                         <template #calendar-header="{ index, day }">
@@ -27,13 +27,13 @@
                             </div>
                         </template>
                     </VueDatePicker>
-                    <p class="text-sm text-[#858585] ">If you accept a bid, the vehicle must be dropped off within 14 days
+                    <p class="text-xs md:text-sm text-[#858585] ">If you accept a bid, the vehicle must be dropped off within 14 days
                         from
                         the acceptance date.
                     </p>
                 </div> -->
                 <div class="w-full mt-5 flex flex-col gap-2">
-                    <label class=" text-base " for="">Vehicle Drop Off Agreement</label>
+                    <label class=" text-sm md:text-base " for="">Vehicle Drop Off Agreement</label>
                     <VueDatePicker :enable-time-picker="false" :min-date="new Date()" class="custom-picker"
                         :class="invalid?.date && 'error-picker'" v-model="form.date">
                         <template #calendar-header="{ index, day }">
@@ -42,7 +42,7 @@
                             </div>
                         </template>
                     </VueDatePicker>
-                    <p class="text-sm text-[#858585] ">If you accept a bid, the vehicle must be dropped off within 14 days
+                    <p class="text-xs md:text-sm text-[#858585] ">If you accept a bid, the vehicle must be dropped off within 14 days
                         from
                         the acceptance date.
                     </p>
@@ -52,9 +52,9 @@
         </div>
         <div class="flex flex-col md:grid w-full md:grid-cols-3 gap-5">
             <div class="w-full flex flex-col gap-2">
-                <label class=" text-base " for="">Province</label>
+                <label class=" text-sm md:text-base " for="">Province</label>
                 <select v-model="form.province" :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
-                    class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                    class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option selected>Select province</option>
                     <option value="Alberta">AB | Alberta</option>
                     <option value="British Columbia">BC | British Columbia</option>
@@ -72,9 +72,9 @@
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
-                <label class=" text-base " for="">City</label>
+                <label class=" text-sm md:text-base " for="">City</label>
                 <select v-model="form.city" :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
-                    class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                    class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option selected>Select city </option>
                     <option value="London">London</option>
                     <option value="Montreal">Montreal</option>
@@ -84,9 +84,9 @@
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2">
-                <label class=" text-base " for="">How many keys?</label>
+                <label class=" text-sm md:text-base " for="">How many keys?</label>
                 <select v-model="form.keys" :class="invalid?.keys ? 'border-error' : 'border-[#E0E0E0]'"
-                    class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                    class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                     <option selected>Select number of keys</option>
                     <option value="1 keys">1 keys</option>
                     <option value="2 keys">2 keys</option>
@@ -118,7 +118,7 @@
             <div class="mt-4" v-if="form.currently == 'Financed' || form.currently == 'Leased'">
                 <div class="flex flex-col gap-4">
                     <div class="w-full flex flex-col gap-2">
-                        <label class=" text-base " for="">Leasing or Financing Company</label>
+                        <label class=" text-sm md:text-base " for="">Leasing or Financing Company</label>
                         <input v-model="form.financingCompany"
                             :class="invalid?.financingCompany ? 'border-error' : 'border-[#E0E0E0]'"
                             class="p-2 rounded-lg border "
@@ -126,7 +126,7 @@
                     </div>
                     <div class="flex w-fill flex-col md:flex-row justify-between">
                         <div class="flex flex-col w-full gap-4">
-                            <p class="text-sm text-[#666666]  ">Do you know how many payments are left? (to be verified by
+                            <p class="text-xs md:text-sm text-[#666666]  ">Do you know how many payments are left? (to be verified by
                                 the
                                 dealer)</p>
                             <div class="w-full items-center flex gap-4">
@@ -143,7 +143,7 @@
                             </div>
                         </div>
                         <div v-if="form.manyPayments == 'Yes'" class="w-full flex flex-col gap-2">
-                            <label class=" text-base " for="">Remaining payments</label>
+                            <label class=" text-sm md:text-base " for="">Remaining payments</label>
                             <!-- <input :class="invalid?.remainingPayments ? 'border-error' : 'border-[#E0E0E0]'"
                                 v-model="form.remainingPayments" class="p-2 rounded-lg border "
                                 placeholder="Enter the number of payments left" type="number"> -->
@@ -157,7 +157,7 @@
         </div>
         <hr class="border w-full border-[#E0E0E0]">
         <div class="flex w-full flex-col gap-4">
-            <p class="text-sm text-[#666666] ">Do you know the buyout for your vehicle? (Optional)</p>
+            <p class="text-xs md:text-sm text-[#666666] ">Do you know the buyout for your vehicle? (Optional)</p>
             <div class="flex w-full justify-between gap-4 items-center">
                 <div class="w-full items-center flex gap-4">
                     <label class="label-radio">
@@ -170,7 +170,7 @@
                     </label>
                 </div>
                 <div v-if="form.buyoutVehicle == 'Yes'" class="w-full flex flex-col gap-2">
-                    <label class=" text-base " for="">Amount</label>
+                    <label class=" text-sm md:text-base " for="">Amount</label>
                     <!--   <input v-model="form.yourVehicleAmount"
                         :class="invalid?.yourVehicleAmount ? 'border-error' : 'border-[#E0E0E0]'"
                         class="p-2 rounded-lg border =" placeholder="Enter Number of payments left" type="number"> -->
@@ -180,7 +180,7 @@
             </div>
         </div>
         <div class="flex flex-col gap-4">
-            <p class="text-sm text-[#666666] ">Are you currently in the market to buy a new vehicle? (Optional)</p>
+            <p class="text-xs md:text-sm text-[#666666] ">Are you currently in the market to buy a new vehicle? (Optional)</p>
             <div class="flex flex-col gap-4">
                 <div class="flex gap-4 items-center">
                     <label class="label-radio">
@@ -193,12 +193,12 @@
                 <div v-if="form.newVehicle == 'Yes'" class="flex flex-col gap-4">
                     <div class="flex gap-2 flex-col">
                         <p>Vehicle Preferences</p>
-                        <p class="text-sm text-[#666666] ">If you are looking to buy a vehicle in the future, let us know,
+                        <p class="text-xs md:text-sm text-[#666666] ">If you are looking to buy a vehicle in the future, let us know,
                             we will connect dealers that have what you want in stock to bid, and get you tax savings on your
                             trade.</p>
                     </div>
                     <div class="flex gap-4  flex-col">
-                        <p class="text-sm text-[#666666] ">Open to any vehicle?</p>
+                        <p class="text-xs md:text-sm text-[#666666] ">Open to any vehicle?</p>
                         <div class="flex gap-4 items-center">
                             <label class="label-radio">
                                 <input :class="invalid?.anyVehicle ? 'error-currently' : ''" v-model="form.anyVehicle"
@@ -212,10 +212,10 @@
                     </div>
                     <div class="flex gap-4">
                        <!--  <div class="w-full flex flex-col gap-2">
-                            <label class=" text-base " for="">Make</label>
+                            <label class=" text-sm md:text-base " for="">Make</label>
                             <select v-model="form.makePreferences"
                                 :class="invalid?.makePreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
                                 <option value="option 1">option 1</option>
                                 <option value="option 2">option 2</option>
@@ -224,10 +224,10 @@
                             </select>
                         </div> -->
                         <div class="w-full flex flex-col gap-2">
-                            <label class=" text-base " for="">Model</label>
+                            <label class=" text-sm md:text-base " for="">Model</label>
                             <select v-model="form.modelPreferences"
                                 :class="invalid?.modelPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
                                 <option value="option 1">option 1</option>
                                 <option value="option 2">option 2</option>
@@ -238,7 +238,7 @@
                     </div>
                     <div class="w-full flex items-center  flex-col md:flex-row justify-between gap-4 ">
                         <div class="w-full flex flex-col gap-2">
-                            <label class=" text-base " for="">Mileage</label>
+                            <label class=" text-sm md:text-base " for="">Mileage</label>
                             <input v-model="form.modelFromPreferences"
                                 :class="invalid?.modelFromPreferences ? 'border-error' : 'border-[#E0E0E0]'"
                                 class="p-2 rounded-lg border uppercase" placeholder="Mileage From" type="number">
@@ -247,15 +247,15 @@
 
                             <input v-model="form.modelToPreferences"
                                 :class="invalid?.modelToPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class="p-2 mt-8 rounded-lg border uppercase" placeholder="Mileage To" type="number">
+                                class="p-2 md:mt-8 rounded-lg border uppercase" placeholder="Mileage To" type="number">
                         </div>
                     </div>
                     <div class="flex gap-4 items-center ">
                         <div class="w-full flex flex-col gap-2">
-                            <label class=" text-base " for="">Year</label>
+                            <label class=" text-sm md:text-base " for="">Year</label>
                             <select v-model="form.yearFromPreferences"
                                 :class="invalid?.yearFromPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                                 <option selected>From 1996</option>
                                 <option value="option 1">option 1</option>
                                 <option value="option 2">option 2</option>
@@ -267,7 +267,7 @@
 
                             <select v-model="form.yearToPreferences"
                                 :class="invalid?.yearToPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] p-3 mt-8  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+                                class=" border text-[#858585] md:p-3 mt-8  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                                 <option selected>To 2020</option>
                                 <option value="option 1">option 1</option>
                                 <option value="option 2">option 2</option>
