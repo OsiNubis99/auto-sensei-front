@@ -9,7 +9,7 @@
         <div class="font-sans antialiased" id="app">
             <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
         (scrollPosition > 100 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md')]"
-                class="flex py-2 px-1 md:p-4 bg-blue-dark  top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal md:px-20 md:py-6">
+                class="flex py-2 px-1 md:p-4   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal md:px-20 md:py-6">
                 <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
                     <LogoBlack class="md:w-[80%]" v-if="path == 'contact-us' && scrollPosition < 110" />
                     <LogoIcon v-else
@@ -57,7 +57,7 @@
                     </div>
 
                 </div>
-                <div v-else class="flex">
+                <div v-else class="flex md:hidden">
                     <RouterLink to="/login/sellers"
                         class=" text-xs px-4 py-2 rounded-md bg-transparent text-white border border-[#e5e5e5]">
                         Login
@@ -171,7 +171,7 @@
                                 fill="white" />
                         </svg>
                     </div>
-                    <div class="flex flex-col gap-4 mt-4">
+                    <div v-if="store.userData.type == 2" class="flex flex-col gap-4 mt-4">
                         <ul class="flex flex-col gap-3">
                             <RouterLink to="/upcoming"
                                 :class="path == 'upcoming' || path == 'liveDealer' || path == 'current-bits' ? 'bg-[#303E18] text-primary' : ' text-white'"
@@ -208,6 +208,51 @@
                                     :src="bucket + storeUser?.userData?.dealer?.picture" alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                     {{ storeUser.userData.dealer.name }}
+                                </p>
+                            </div>
+                            <div @click="logout" class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M5 22C4.73478 22 4.48043 21.8946 4.29289 21.7071C4.10536 21.5196 4 21.2652 4 21V3C4 2.73478 4.10536 2.48043 4.29289 2.29289C4.48043 2.10536 4.73478 2 5 2H19C19.2652 2 19.5196 2.10536 19.7071 2.29289C19.8946 2.48043 20 2.73478 20 3V6H18V4H6V20H18V18H20V21C20 21.2652 19.8946 21.5196 19.7071 21.7071C19.5196 21.8946 19.2652 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"
+                                        fill="white" />
+                                </svg>
+                                <p class="text-white font-semibold">Logout</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div v-else class="flex flex-col gap-4 mt-4">
+                        <ul class="flex flex-col gap-3">
+                            <RouterLink @click="open = false" to="/all"
+                                :class="path == 'all' || path == 'upcoming-auctions' || path == 'live' || path == 'completed' ? ' text-primary' : ' text-white'"
+                                class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
+                                <p>Sell a Car</p>
+                            </RouterLink>
+                            <RouterLink @click="open = false" to="#"
+                                :class="path == 'auto-list' ? ' text-primary' : ' text-white'"
+                                class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
+                                <p>Sold Auction</p>
+                            </RouterLink>
+                            <RouterLink @click="open = false" to="/faqs-seller"
+                                :class="path == 'dealer-list' ? ' text-primary' : ' text-white'"
+                                class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
+                                <p>FAQs</p>
+                            </RouterLink>
+                        </ul>
+                        <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
+                            <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
+                                <img class="h-10 rounded-full w-10 object-cover"
+                                    :src="bucket + store?.userData?.seller?.picture" alt="">
+                                <p class="text-white text-sm font-semibold truncate  w-[150px]">
+                                    {{ store.userData.seller.firstName }} {{ store.userData.seller.lastName }}
+                                </p>
+                            </div>
+                            <div @click="goAccount" v-else class="flex items-center gap-2">
+                                <img class="h-10 rounded-full w-10 object-cover"
+                                    :src="bucket + store?.userData?.dealer?.picture" alt="">
+                                <p class="text-white text-sm font-semibold truncate  w-[150px]">
+                                    {{ store.userData.dealer.name }}
                                 </p>
                             </div>
                             <div @click="logout" class="flex gap-2">

@@ -93,7 +93,6 @@
         <template v-else>
             <ScreenCreateAution />
         </template>
-
     </template>
     <div v-if="openDecline" class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
