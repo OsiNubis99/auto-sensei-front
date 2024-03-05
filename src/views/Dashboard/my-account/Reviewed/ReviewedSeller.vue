@@ -3,8 +3,8 @@
         <div class="flex gap-6">
             <img src="@/assets/svg/review.svg" alt="">
             <div class="flex flex-col ">
-                <p class=" font-semibold text-xl">My Reviews</p>
-                <p>All the reviews you give to the dealer will be displayed here</p>
+                <p class="font-semibold text-sm md:text-xl">My Reviews</p>
+                <p class=" text-xs md:text-base">All the reviews you give to the dealer will be displayed here</p>
             </div>
         </div>
         <hr class="border-[#cfcfcf] border-1 w-full ">
@@ -12,19 +12,19 @@
             <div class="flex gap-4 items-center">
                 <button @click="changeOptions('review')"
                     :class="optione.opReview ? 'bg-[#1F94F0] text-white' : 'border border-[#C2C2C2] '"
-                    class=" rounded-lg py-2 px-4 ">Reviewed
+                    class=" rounded-lg py-1 px-3 md:py-2 text-xs md:text-base md:px-4 ">Reviewed
                     ({{ reviewed.length }})</button>
                 <button @click="changeOptions('newreview')"
                     :class="optione.opNewReview ? 'bg-[#1F94F0] text-white' : 'border border-[#C2C2C2] '"
-                    class=" py-2 px-4 rounded-lg">Need Review
+                    class=" md:py-2 py-1 px-3 md:px-4 text-xs md:text-base rounded-lg">Need Review
                     ({{ needReview.length }})</button>
             </div>
         </div>
         <template v-if="reviewed.length == 0 && optione.opReview">
             <div class="flex w-full p-8 justify-center items-center flex-col gap-4">
                 <img src="@/assets/svg/noreewed.svg" alt="">
-                <p class="text-xl font-semibold capitalize">No Reviews Yet</p>
-                <p class="text-center">You don't have a record of vehicles that have <br>
+                <p class="md:text-xl font-semibold capitalize">No Reviews Yet</p>
+                <p class="text-center text-xs md:text-base">You don't have a record of vehicles that have <br>
                     been sold and reviewed</p>
             </div>
         </template>

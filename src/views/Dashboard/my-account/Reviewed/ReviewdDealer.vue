@@ -1,18 +1,18 @@
 <template>
     <div class="bg-white flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
-        <div class="flex gap-6">
+        <div class="flex gap-2 md:gap-6">
             <img src="@/assets/svg/review.svg" alt="">
             <div class="flex flex-col ">
-                <p class=" font-semibold text-xl">Reviews</p>
-                <p>Explore user reviews and ratings for valuable insights into their experiences</p>
+                <p class="font-semibold text-sm md:text-xl">Reviews</p>
+                <p class=" text-xs md:text-base">Explore user reviews and ratings for valuable insights into their experiences</p>
             </div>
         </div>
         <hr class="border-[#cfcfcf] border-1 w-full ">
         <template v-if="storeProfile?.valorationes?.length == 0">
             <div class="flex w-full p-8 justify-center items-center flex-col gap-4">
                 <img src="@/assets/svg/noreewed.svg" alt="">
-                <p class="text-xl font-semibold capitalize">No Reviews Yet</p>
-                <p class="text-center">You haven't received any reviews from buyers yet</p>
+                <p class="md:text-xl font-semibold capitalize">No Reviews Yet</p>
+                <p class="text-center text-xs md:text-base">You haven't received any reviews from buyers yet</p>
             </div>
         </template>
         <template v-else>

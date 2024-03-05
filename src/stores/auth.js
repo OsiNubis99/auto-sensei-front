@@ -6,52 +6,6 @@ export const useAuthStore = defineStore("authStore", {
   state: () => ({
     userData: {},
     token: "",
-    cards: [
-      /*  {
-         bin: "424242",
-         expirationMonth: "12",
-         expirationYear: "2020",
-         last4: "4242",
-         cardType: "Visa",
-         cardholderName: "Visa",
-         expirationDate: "12/2020",
-         maskedNumber: "**** **** **** 1423",
-         nameCard: 'John Cenna'
-       },
-       {
-         bin: "424242123123",
-         expirationMonth: "06",
-         expirationYear: "2021",
-         last4: "4242",
-         cardType: "MasterCard",
-         cardholderName: "MasterCard",
-         expirationDate: "06/2021",
-         maskedNumber: "**** **** **** 7521",
-         nameCard: 'Alfa Romeo'
-       },
-       {
-         bin: "424242123123",
-         expirationMonth: "06",
-         expirationYear: "2021",
-         last4: "4242",
-         cardType: "MasterCard",
-         cardholderName: "MasterCard",
-         expirationDate: "06/2021",
-         maskedNumber: "**** **** **** 6514",
-         nameCard: 'Audi Ayunda'
-       },
-       {
-         bin: "424242123123",
-         expirationMonth: "06",
-         expirationYear: "2021",
-         last4: "4242",
-         cardType: "MasterCard",
-         cardholderName: "MasterCard",
-         expirationDate: "06/2021",
-         maskedNumber: "**** **** **** 5577",
-         nameCard: 'Jessica Christie'
-       } */
-    ],
     rol: null,
     socketChat: null,
     socketNotification: null,
@@ -127,7 +81,6 @@ export const useAuthStore = defineStore("authStore", {
         axios
           .get("/auth/profile", payload && config)
           .then((response) => {
-            response.data.payments = this.cards
             this.userData = response.data
             if (localStorage.getItem('rol')) {
               this.rol = response.data.type

@@ -1019,4 +1019,14 @@ input.check-toggle-round-flat:checked+label:after {
     .btn {
         font-size: 12px;
     }
+    .btn.btn-mobil-account {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    input{
+        height: 32px;
+    }
+    input::placeholder{
+        font-size: 11px;
+    }
 }

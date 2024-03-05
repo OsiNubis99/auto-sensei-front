@@ -12,15 +12,15 @@
                 </div>
                 <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
                 <div class="w-full md:w-[70%] ">
-                    <div class="flex items-center justify-between mb-4">
-                        <p class=" font-semibold ">{{ sortedData?.length }} Vehicles</p>
+                    <div class="flex items-center px-3 justify-between mb-4">
+                        <p class=" text-xs font-semibold md:text-base  ">{{ sortedData?.length }} Vehicles</p>
                         <div class="flex items-center gap-2 ">
-                            <p class="mt-2">Sort by:</p>
+                            <p class="mt-2 hidden md:block">Sort by:</p>
                             <div class="flex items-center gap-5">
                                 <div class="navbar-right relative">
                                     <button @click="isOpen = !isOpen"
                                         class="flex gap-2 rounded-md  shadow-md px-2 bg-white items-center">
-                                        <p class="p-2 pb-1"> Current Bid</p>
+                                        <p class="p-2 text-xs md:text-[16px] pb-1"> Current Bid</p>
                                         <div class=" p-2 border-l-2 pr-0 border-[#efefef] ">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 viewBox="0 0 18 18" fill="none">
@@ -47,7 +47,7 @@
 
                                     </div>
                                 </div>
-                                <div class="shadow-md  rounded-md flex bg-white">
+                                <div class="shadow-md md:flex rounded-md hidden bg-white">
                                     <div @click="changeGridTemplate"
                                         :class="changeLayouts ? 'bg-white' : 'bg-[#EFF8E0]'" class="p-2 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -69,6 +69,7 @@
                                     </div>
                                 </div>
                             </div>
+                        
                         </div>
                     </div>
                     <div class="p-2" v-if="sortedData.length > 0"
