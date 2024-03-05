@@ -240,7 +240,7 @@
             class="flex items-center pt-4 justify-end gap-2 w-full animate-fade-up   animate-ease-in-out animate-delay-600">
             <div class="flex items-center gap-3">
                 <button @click="offOption('driver')" class="btn btn-mobil-account bg-white border border-[#E0E0E0]">Cancel</button>
-                <label class="btn bg-blue-dark text-primary    cursor-pointer">
+                <label class="btn btn-mobil-account bg-blue-dark text-primary    cursor-pointer">
                     <span class="  font-medium leading-normal">Upload Driver License</span>
                     <input type="file" accept="image/*" @change="previewImage" class="hidden">
                 </label>
