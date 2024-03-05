@@ -1,4 +1,3 @@
-
 <template>
   <div class="w-screen h-screen flex flex-col justify-center gap-4 items-center">
     <div class="flex flex-col gap-2 w-[40vw] relative">
@@ -18,7 +17,10 @@
           </div>
         </div>
       </div>
-
+      <div class="form-group">
+        <label>Card number</label>
+        <input class="form-control" v-cardformat:formatCardExpiry>
+      </div>
       <div v-if="arrayName.length > 0" v-for="(nameUpload, index) in arrayName" :key="index">
         <div class="flex justify-between border-b border-[#e5e5e5] pb-2 items-start gap-4 w-full">
           <div v-if="nameUpload.preview" class="w-16">
@@ -72,7 +74,7 @@
   </div>
 </template>
 
-<script >
+<script>
 import { ref, onMounted, watch, computed } from "vue";
 import { useStoreFile } from "@/stores/uploader";
 export default {
@@ -290,5 +292,3 @@ export default {
   },
 };
 </script>
-
-  

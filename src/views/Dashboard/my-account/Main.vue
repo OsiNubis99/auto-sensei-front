@@ -92,16 +92,16 @@
                                     Photo</button>
 
                                 <div v-if="storeUser.userData?.type == 1" class="flex gap-1 items-center  ">
-                                    <p class="text-2xl font-semibold capitalize ">{{
+                                    <p class=" text-md md:text-2xl font-semibold capitalize ">{{
             storeUser.userData?.seller?.firstName
         }}
                                     </p>
-                                    <p class="text-2xl font-semibold capitalize ">{{
+                                    <p class=" text-md md:text-2xl font-semibold capitalize ">{{
                 storeUser.userData?.seller?.lastName }}
                                     </p>
                                 </div>
                                 <div v-if="storeUser.userData?.type == 2" class="flex gap-1 items-center  ">
-                                    <p class="text-2xl font-semibold capitalize ">{{ storeUser.userData?.dealer?.name }}
+                                    <p class=" text-md md:text-2xl font-semibold capitalize ">{{ storeUser.userData?.dealer?.name }}
                                     </p>
                                 </div>
                             </div>

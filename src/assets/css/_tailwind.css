@@ -978,7 +978,18 @@ input.check-toggle-round-flat:checked+label:after {
         transform: translateY(0%);
     }
 }
+.animation-menu-modal {
+    animation: menu 1s forwards alternate ease-in-out;
+}
+@keyframes menu {
+    from {
+        transform: translateY(-100%);
+    }
 
+    to {
+        transform: translateY(0%);
+    }
+}
 @media (max-width: 680px) {
     .Toastify__toast {
         margin: 20px !important;
