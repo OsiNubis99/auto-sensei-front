@@ -89,46 +89,53 @@
             <ScreenCreateAution />
         </template>
         <ModalDetailsLiveVue v-if="statusModal.isActive" :cancelAution="cancelAution" />
-        <div v-show="openDecline"
-            class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
-            <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
-                <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
-                    <p class="text-xl text-white">Decline Auction</p>
-                    <!-- <svg @click="openDecline = false" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer"
-                        fill="none" viewBox="0 0 24 24" stroke="#fff">
+        <div v-if="openDecline"
+            class="fixed inset-0 flex items-end md:items-center z-50 justify-center bg-base-black  bg-opacity-50">
+            <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
+                <div class="p-2 md:p-4  rounded-t-lg  bg-blue-dark flex items-center justify-between">
+                    <p class=" text-sm md:text-xl text-white">Cancel Auction</p>
+                    <svg @click="openDecline = false" xmlns="http://www.w3.org/2000/svg"
+                        class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg> -->
+                    </svg>
                 </div>
                 <div class="p-4 border border-b-[#E0E0E0] flex gap-3 flex-col  ">
                     <div class="flex gap-3 items-start ">
-                        <div class="w-[120px] h-[90px]">
+                        <div class="w-[80px] md:w-[120px] md:h-[90px]">
                             <img v-if="autionModal?.photos" class="w-full h-full rounded-lg object-cover"
                                 :src="bucket + autionModal?.photos[0].url" alt="">
-                            <img v-else class="w-full h-full rounded-lg object-cover"
-                                src="../../../assets/img/jpg/image.jpg" alt="">
+                            <img v-else class="w-full h-full rounded-lg object-cover" src="@/assets/img/jpg/image.jpg"
+                                alt="">
                         </div>
                         <div>
-                            <p class=" font-semibold ">{{ autionModal?.vehicleDetails?.year }} {{
-        autionModal?.vehicleDetails?.make }} {{
+                            <p class="font-semibold capitalize md:text-base text-sm ">{{
+        autionModal?.vehicleDetails?.year
+    }} {{
+            autionModal?.vehicleDetails?.make }} {{
         autionModal?.vehicleDetails?.model }}</p>
-                            <p>Final Bid</p>
+                            <p class="capitalize text-sm md:text-base ">Final Bid</p>
                             <div class="flex gap-1">
-                                <p v-if="autionModal?.bids[0]?.amount" class="font-medium text-base-black text-2xl ">${{
+                                <p v-if="autionModal?.bids[0]?.amount"
+                                    class="font-medium text-sm text-base-black md:text-2xl">
+                                    ${{
         autionModal?.bids[0].amount }} </p>
                                 <p v-else-if="autionModal?.vehicleDetails?.basePrice"
                                     class="font-medium text-base-black text-2xl ">${{ auction?.vehicleDetails?.basePrice
                                     }}
                                 </p>
                                 <p v-else class="font-medium text-base-black text-2xl ">$0 </p>
-                                <p class="text-[#666666] mt-1 "> /{{ autionModal?.Bids?.length }} Bids</p>
+                                <p class="text-[#666666] mt-1 text-xs md:text-base "> /{{ autionModal?.bids?.length }}
+                                    Bids
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="py-10 px-4 pb-2">
-                    <p>Are you sure you want to decline the final bid for the <span>{{
-        autionModal?.vehicleDetails?.model }}</span>?</p>
+                <div class="md:py-10 p-2 md:px-4 pb-2">
+                    <p class="text-xs md:text-base">Are you sure you want to cancel the auction for the <span
+                            class="font-medium">{{
+                            autionModal?.vehicleDetails?.model }}</span>?</p>
                     <div class="w-full flex gap-2 mt-4 items-center">
                         <button @click="openDecline = false"
                             class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
@@ -274,6 +281,7 @@ export default {
         }
         const setSorBy = (sort) => {
             sortBy.value = sort
+            isOpen.value = false
 
         }
 

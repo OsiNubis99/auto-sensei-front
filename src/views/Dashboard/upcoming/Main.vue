@@ -15,7 +15,8 @@
                 </div>
                 <div class="w-full md:w-[70%]">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class="text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }} Vehicles</p>
+                        <p class="text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }} Vehicles
+                        </p>
                         <div class="flex items-center gap-5">
                             <div class="navbar-right relative">
                                 <button @click="isOpen = !isOpen"
@@ -33,17 +34,17 @@
                                 <div v-if="isOpen"
                                     class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
                                     <div @click="setSorBy('auction-date')"
-                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
-                                            Auction Date
-                                        </div>
-                                        <div @click="setSorBy('odometer')"
-                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
-                                            Odometer
-                                        </div>
-                                        <div @click="setSorBy('year')"
-                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
-                                            Year
-                                        </div>
+                                        class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                        Auction Date
+                                    </div>
+                                    <div @click="setSorBy('odometer')"
+                                        class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                        Odometer
+                                    </div>
+                                    <div @click="setSorBy('year')"
+                                        class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                        Year
+                                    </div>
 
                                 </div>
                             </div>
@@ -68,7 +69,7 @@
                                 </div>
                             </div>
                         </div>
-                     
+
                     </div>
                     <div class="p-2" v-if="sortedData.length > 0"
                         :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
@@ -230,7 +231,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch ,watchEffect} from "vue";
 import { toast } from "vue3-toastify";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -385,6 +386,7 @@ export default {
         })
         const setSorBy = (sort) => {
             sortBy.value = sort
+            isOpen.value = false
 
         }
 
@@ -398,6 +400,14 @@ export default {
                     return data.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
                 default:
                     return data.value
+            }
+        })
+        watchEffect(() => {
+            if (sortBy.value) {
+                counter.value++
+            }
+            else {
+                counter.value++
             }
         })
         onMounted(() => {

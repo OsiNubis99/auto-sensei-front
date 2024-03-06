@@ -10,7 +10,8 @@
                         </path>
                     </svg>
                 </div>
-                <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                <p v-if="codePhone" class=" text-base-gray font-medium pl-2 ">Sending code to your phone...</p>
+                <p v-else class=" text-base-gray font-medium pl-2 ">Loading...</p>
             </div>
         </div>
     </div>
@@ -21,15 +22,17 @@
                     <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">Create Your Dealer
                         Account
                     </h2>
-                    <p class=" text-xs md:text-sm font-normal text-[#666] text-center  ">Auction your car to dealers right
+                    <p class=" text-xs md:text-sm font-normal text-[#666] text-center  ">Auction your car to dealers
+                        right
                         from
                         your home.</p>
                 </div>
                 <div class="mt-8">
                     <div class="mt-6">
                         <div class="space-y-6">
-                            <p class="text-sm font-medium capitalize"> <span v-if="rol === 'sellers'">Seller</span> <span
-                                    v-else>Dealer</span> Photo</p>
+                            <p class="text-sm font-medium capitalize"> <span v-if="rol === 'sellers'">Seller</span>
+                                <span v-else>Dealer</span> Photo
+                            </p>
                             <div class="flex !mt-2 gap-2 md:gap-6">
                                 <img class="w-[80px] h-[80px] rounded-full object-cover " v-if="form?.preview"
                                     :src="form?.preview" alt="">
@@ -38,10 +41,12 @@
                                     <div class="flex gap-1  items-center" v-if="form?.img?.name">
                                         <p class="text-xs font-medium text-[#666] truncate"> <strong
                                                 class="text-[15]">Size:</strong> {{ form?.img?.mb }}Mb - </p>
-                                        <p class="text-xs w-[90px]  font-medium md:w-[150px] text-[#666] truncate"><strong
-                                                class="text-[15]">Name:</strong> {{ form?.img?.name }}</p>
+                                        <p class="text-xs w-[90px]  font-medium md:w-[150px] text-[#666] truncate">
+                                            <strong class="text-[15]">Name:</strong> {{ form?.img?.name }}
+                                        </p>
                                     </div>
-                                    <p v-else class="text-xs font-medium text-[#666]">JPG, GIF or PNG. Max size of 1Mb</p>
+                                    <p v-else class="text-xs font-medium text-[#666]">JPG, GIF or PNG. Max size of 1Mb
+                                    </p>
                                     <label :class="invalid?.img ? 'bg-error' : 'bg-[#F0F0F0]'"
                                         class="flex flex-col items-center mt-4 px-2 py-2  rounded-lg shadow-lg  tracking-wide  cursor-pointer">
                                         <span :class="invalid?.img ? 'text-white' : 'text-base-black'"
@@ -106,7 +111,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div v-if="rol == 'sellers'">
                                 <label htmlFor="lastName" class="block text-sm font-medium text-gray-700">
                                     Driver License
                                 </label>
@@ -153,6 +158,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import { onUpdated, ref, onMounted } from 'vue'
 import { stepsSignUp } from "@/stores/stepsSignUp";
@@ -175,6 +181,9 @@ export default {
         backEmailToken: {
             type: Function,
         },
+        getDataRegister: {
+            type: Object,
+        }
     },
     setup(props) {
         let rol = ref()
@@ -189,6 +198,8 @@ export default {
         const storeUser = useUserStore()
         const storeFile = useStoreFile()
         const telInput = ref();
+        const codePhone = ref(null)
+        const dataForm = ref(props.getDataRegister)
         const previewImage = (event) => {
             var input = event.target;
             var maxfilesize = 1024 * 1024  // 1 Mb
@@ -241,6 +252,7 @@ export default {
         const backStep = () => {
             props.back()
         }
+
         const filterinput = (e) => {
             e.target.value = e.target.value.replace(/[^0-9]+/g, '');
             let value = e.target.value;
@@ -250,114 +262,162 @@ export default {
             invalid.value = infoAccount(form, rol.value);
             if (Object.entries(invalid.value).length === 0) {
                 const formattedNumber = telInput.value.selectedCountryData.dialCode;
-                let idCode = `+${formattedNumber + form.phoneNumber}`;
-                /*   form.phoneNumber = idCode + form.phoneNumber */
-                console.log('idCode', idCode)
-                isLoading.value = true
-                if (form.img || form.driverLicense) {
-                    let resFile = form.img && await storeFile.uploaderFile({ file: form.img, location: 'profile' })
-                    let resLicence = form.driverLicense && await storeFile.uploaderFile({ file: form.driverLicense, location: 'license' })
-                    console.log('resLicence', resLicence)
-                    if (resFile.data || resLicence.data) {
-                        try {
-                            let typeSeller = {
-                                seller: {
-                                    picture: resFile.data ? resFile.data : null,
-                                    firstName: form.firtName,
-                                    lastName: form.lastName,
-                                    driverLicense: resLicence.data ? resLicence.data : null,
-                                    phone: idCode ? idCode : null,
-                                }
-                            }
-                            let typeDealer = {
-                                dealer: {
-                                    picture: resFile.data ? resFile.data : null,
-                                    name: form.dealerName,
-                                    omvic: form.registrationNumber,
-                                    address: form.address,
-                                    phone: idCode ? idCode : null
-                                },
-                            }
-                            typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
-
-                            let data = {
-                                token: token.value,
-                                payloadData: typeUser.value
-                            }
-
-                            try {
-                                let res = await storeUser.userData(data)
-                                if (res) {
-                                    props.next()
-                                    isLoading.value = false
-                                }
-                            } catch (error) {
-                                isLoading.value = false
-                                toast(error?.response?.data?.message[0] || 'error al cargar', {
-                                    type: "error",
-                                });
-                            }
-
-
-
-                        } catch (error) {
-                            toast(error?.response?.data?.message || 'error al cargar', {
-                                type: "error",
-                            });
-                            isLoading.value = false
-                        }
-                    } else {
-                        isLoading.value = false
-                        toast('Intente de nuevo', {
-                            type: "error",
-                        });
-                    }
-                } else {
-                    try {
-                        let typeSeller = {
-                            seller: {
-                                firstName: form.firtName,
-                                lastName: form.lastName,
-                                phone: idCode ? idCode : null,
-                            }
-                        }
-                        let typeDealer = {
-                            dealer: {
-                                name: form.dealerName,
-                                omvic: form.registrationNumber,
-                                address: form.address,
-                                phone: idCode ? idCode : null,
-                            },
-                        }
-                        typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
-                        let data = {
-                            token: token.value,
-                            payloadData: typeUser.value
-                        }
-                        try {
-                            let res = await storeUser.userData(data)
-                            if (res) {
-                                props.next()
-                                isLoading.value = false
-                            }
-                        } catch (error) {
-                            isLoading.value = false
-                            toast(error?.response?.data?.message[0] || 'error al cargar', {
-                                type: "error",
-                            });
-                        }
-
-                    } catch (error) {
-                        if (error?.response?.data?.message == "Unauthorized") {
-                            toast(error?.response?.data?.message || 'error al cargar', {
-                                type: "error",
-                                autoClose: 2000,
-                            });
-                            props.backEmailToken()
-                        }
-                        isLoading.value = false
-                    }
+                codePhone.value = `+${formattedNumber + form.phoneNumber}`;
+                let data = {
+                    phone: codePhone.value
                 }
+
+                try {
+                    let resCode = await storeUser.getValidation(data)
+                    if (resCode.data.status == 'ok') {
+                        let dataSenCode = {
+                            token: token.value,
+                            rol: rol.value,
+                            phone: codePhone.value ? codePhone.value : null,
+                            picture: form.img ? form.img : null,
+                            name: form.dealerName ? form.dealerName : null,
+                            firstName: form.firtName ? form.firtName : null,
+                            lastName: form.lastName ? form.lastName : null,
+                            omvic: form.registrationNumber ? form.registrationNumber : null,
+                            address: form.address ? form.address : null,
+                            driverLicense: form.driverLicense ? form.driverLicense : null,
+                            validationCode: resCode.data.code
+                        }
+                        storeData.getSendData = dataSenCode
+                        console.log('dataSenCode', dataSenCode)
+                        props.next()
+                    }
+                    console.log('resCode', resCode)
+                } catch (error) {
+                    console.log('errro', errro)
+
+                }
+                /*  let typeSeller = {
+                     seller: {
+                         picture: form.img ? form.img : null,
+                         firstName: form.firtName,
+                         lastName: form.lastName,
+                         driverLicense: form.driverLicense ? form.driverLicense : null,
+                         phone: idCode ? idCode : null,
+                     }
+                 }
+                 let typeDealer = {
+                     dealer: {
+                         picture: form.img ? form.img : null,
+                         name: form.dealerName,
+                         omvic: form.registrationNumber,
+                         address: form.address,
+                         phone: idCode ? idCode : null
+                     },
+                 }
+                 typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer */
+
+
+                /*  isLoading.value = true
+                 if (form.img || form.driverLicense) {
+                     let resFile = form.img && await storeFile.uploaderFile({ file: form.img, location: 'profile' })
+                     let resLicence = form.driverLicense && await storeFile.uploaderFile({ file: form.driverLicense, location: 'license' })
+                     console.log('resLicence', resLicence)
+                     if (resFile.data || resLicence.data) {
+                         try {
+                             let typeSeller = {
+                                 seller: {
+                                     picture: resFile.data ? resFile.data : null,
+                                     firstName: form.firtName,
+                                     lastName: form.lastName,
+                                     driverLicense: resLicence.data ? resLicence.data : null,
+                                     phone: idCode ? idCode : null,
+                                 }
+                             }
+                             let typeDealer = {
+                                 dealer: {
+                                     picture: resFile.data ? resFile.data : null,
+                                     name: form.dealerName,
+                                     omvic: form.registrationNumber,
+                                     address: form.address,
+                                     phone: idCode ? idCode : null
+                                 },
+                             }
+                             typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
+ 
+                             let data = {
+                                 token: token.value,
+                                 payloadData: typeUser.value
+                             }
+ 
+                             try {
+                                 let res = await storeUser.userData(data)
+                                 if (res) {
+                                     props.next()
+                                     isLoading.value = false
+                                 }
+                             } catch (error) {
+                                 isLoading.value = false
+                                 toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                     type: "error",
+                                 });
+                             }
+ 
+ 
+ 
+                         } catch (error) {
+                             toast(error?.response?.data?.message || 'error al cargar', {
+                                 type: "error",
+                             });
+                             isLoading.value = false
+                         }
+                     } else {
+                         isLoading.value = false
+                         toast('Intente de nuevo', {
+                             type: "error",
+                         });
+                     }
+                 } else {
+                     try {
+                         let typeSeller = {
+                             seller: {
+                                 firstName: form.firtName,
+                                 lastName: form.lastName,
+                                 phone: idCode ? idCode : null,
+                             }
+                         }
+                         let typeDealer = {
+                             dealer: {
+                                 name: form.dealerName,
+                                 omvic: form.registrationNumber,
+                                 address: form.address,
+                                 phone: idCode ? idCode : null,
+                             },
+                         }
+                         typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
+                         let data = {
+                             token: token.value,
+                             payloadData: typeUser.value
+                         }
+                         try {
+                             let res = await storeUser.userData(data)
+                             if (res) {
+                                 props.next()
+                                 isLoading.value = false
+                             }
+                         } catch (error) {
+                             isLoading.value = false
+                             toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                 type: "error",
+                             });
+                         }
+ 
+                     } catch (error) {
+                         if (error?.response?.data?.message == "Unauthorized") {
+                             toast(error?.response?.data?.message || 'error al cargar', {
+                                 type: "error",
+                                 autoClose: 2000,
+                             });
+                             props.backEmailToken()
+                         }
+                         isLoading.value = false
+                     }
+                 } */
             }
         }
         onUpdated(() => {
@@ -388,7 +448,8 @@ export default {
             invalid,
             rol,
             isLoading,
-            filterinput
+            filterinput,
+            codePhone
         };
     },
 };

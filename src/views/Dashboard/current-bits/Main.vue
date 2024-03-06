@@ -443,6 +443,7 @@ export default {
         }
         const setSorBy = (sort) => {
             sortBy.value = sort
+            isOpen.value = false
 
         }
         const statusOrder = [

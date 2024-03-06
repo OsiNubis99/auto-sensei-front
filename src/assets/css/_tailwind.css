@@ -967,7 +967,7 @@ input.check-toggle-round-flat:checked+label:after {
 }
 
 .animation-fade-modal {
-    animation: slidein 1s forwards alternate ease-in-out;
+    animation: slidein 0.4s forwards alternate ease-in-out;
 }
 
 @keyframes slidein {
@@ -980,7 +980,7 @@ input.check-toggle-round-flat:checked+label:after {
     }
 }
 .animation-menu-modal {
-    animation: menu 1s forwards alternate linear;
+    animation: menu 0.4s forwards alternate linear;
 }
 @keyframes menu {
     from {

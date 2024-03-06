@@ -18,10 +18,11 @@
         <div class="flex-1 flex flex-col justify-center md:py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full ">
                 <div>
-                    <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">Enter Verification
+                    <h2 @click="openCode" class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">
+                        Enter Verification
                         Code</h2>
                     <p class=" text-sm font-normal text-[#666] text-center  ">A text message with a 6-digit code has
-                        been sent to <strong> (628) 267-9126 </strong>
+                        been sent to <strong> {{ formdata?.phone }} </strong>
                     </p>
                 </div>
                 <div class="mt-8">
@@ -58,12 +59,15 @@
         </div>
     </div>
 </template>
+
 <script>
 import { onMounted, ref, computed } from 'vue'
 import { stepsSignUp } from "@/stores/stepsSignUp";
 import { toast } from "vue3-toastify";
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from "@/stores/auth";
+import { useStoreFile } from "@/stores/uploader";
+import { useUserStore } from "@/stores/user";
 import axios from "@/axios";
 export default {
     props: {
@@ -76,14 +80,17 @@ export default {
     },
     setup(props) {
         const storeData = stepsSignUp()
-        const formdata = storeData.formData
+        const formdata = storeData.getSendData
+        const storeUser = useUserStore()
         const store = useAuthStore()
         const form = ref({ code: '' })
         const route = useRoute();
         const path = ref(computed(() => route.name))
         const router = useRouter()
         const loading = ref(false)
+        const storeFile = useStoreFile()
         const token = ref(null)
+        const dataForm = ref(props.getDataRegister)
         const nextStep = async () => {
 
             if (!form.value.code) {
@@ -92,47 +99,183 @@ export default {
                 });
                 return
             }
+            console.log('formdata', formdata)
             loading.value = true
-            axios.defaults.headers['Authorization'] = `Bearer ${token.value}`;
-            localStorage.setItem('token', token.value)
-            let resToken = await store.authProfile()
+            if (formdata.picture || formdata.driverLicense) {
+                let resFile = formdata.picture && await storeFile.uploaderFile({ file: formdata.picture, location: 'profile' })
+                let resLicence = formdata.driverLicense && await storeFile.uploaderFile({ file: formdata.driverLicense, location: 'license' })
+                console.log('resLicence', resLicence)
+                if (resFile?.data || resLicence?.data) {
+                    console.log('entro aqi')
+                    try {
+                        let typeSeller = {
+                            seller: {
+                                picture: resFile.data ? resFile.data : null,
+                                firstName: formdata.firstName,
+                                lastName: formdata.lastName,
+                                driverLicense: resLicence?.data ? resLicence?.data : null,
+                            },
+                            phone: formdata.phone,
+                            validationCode: form.value.code
+                        }
+                        let typeDealer = {
+                            dealer: {
+                                picture: resFile?.data ? resFile?.data : null,
+                                name: formdata.dealerName,
+                                omvic: formdata.omvic,
+                                address: formdata.address,
+                                phone: formdata.phone ? formdata.phone : null
+                            },
+                            phone: formdata.phone,
+                            validationCode: form.value.code
+                        }
+                        let dataRegister = formdata.rol == 'sellers' ? typeSeller : typeDealer
+                        let data = {
+                            token: formdata.token,
+                            payloadData: dataRegister
+                        }
 
-            if (resToken.statusText = "OK") {
-                localStorage.removeItem('updateUser')
-                localStorage.setItem('rol', resToken.data.type)
-                setInterval(async () => {
-                    switch (resToken.data.type) {
-                        case 0:
-                            await router.push({ path: '/inicio' })
-                            router.go()
-                            break;
-                        case 1:
-                            await router.push({ path: '/all' })
-                            router.go()
-                            break;
-                        case 2:
-                            await router.push({ path: '/upcoming' })
-                            router.go()
-                            break;
-                        default:
-                            await router.push({ name: 'home' })
-                            router.go()
-                            break;
+                        try {
+                            console.log('entro aqi')
+                            let res = await storeUser.userData(data)
+                            if (res) {
+                                axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
+                                localStorage.setItem('token', formdata.token)
+                                let resToken = await store.authProfile()
+                                if (resToken.statusText = "OK") {
+                                    localStorage.removeItem('updateUser')
+                                    localStorage.setItem('rol', resToken.data.type)
+                                    setInterval(async () => {
+                                        switch (resToken.data.type) {
+                                            case 0:
+                                                await router.push({ path: '/inicio' })
+                                                router.go()
+                                                break;
+                                            case 1:
+                                                await router.push({ path: '/all' })
+                                                router.go()
+                                                break;
+                                            case 2:
+                                                await router.push({ path: '/upcoming' })
+                                                router.go()
+                                                break;
+                                            default:
+                                                await router.push({ name: 'home' })
+                                                router.go()
+                                                break;
+                                        }
+                                        loading.value = false;
+                                    }, 800);
+                                }
+                            }
+                        } catch (error) {
+                            console.log('entro aqi', error)
+                            loading.value = false
+                            toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                type: "error",
+                            });
+                        }
+                    } catch (error) {
+                        console.log('entro aqi', error)
+                        toast(error?.response?.data?.message || 'error al cargar', {
+                            type: "error",
+                        });
+                        loading.value = false
                     }
-                    loading.value = false;
-                }, 800);
+                } else {
+                    loading.value = false
+                    toast('Intente de nuevo', {
+                        type: "error",
+                    });
+                }
+            } else {
+                try {
+                    let typeSeller = {
+                        seller: {
+                            firstName: formdata.firtName,
+                            lastName: formdata.lastName,
+                        },
+                        phone: formdata.phone,
+                        validationCode: form.value.code
+                    }
+                    let typeDealer = {
+                        dealer: {
+                            name: formdata.dealerName,
+                            omvic: formdata.registrationNumber,
+                            address: formdata.address,
+                        },
+                        phone: formdata.phone,
+                        validationCode: form.value.code
+                    }
+                    let dataRegister = rol.value == 'sellers' ? typeSeller : typeDealer
+                    let data = {
+                        token: formdata.token,
+                        payloadData: dataRegister
+                    }
+                    try {
+                        let res = await storeUser.userData(data)
+                        if (res) {
+                            axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
+                            localStorage.setItem('token', formdata.token)
+                            let resToken = await store.authProfile()
+                            if (resToken.statusText = "OK") {
+                                localStorage.removeItem('updateUser')
+                                localStorage.setItem('rol', resToken.data.type)
+                                setInterval(async () => {
+                                    switch (resToken.data.type) {
+                                        case 0:
+                                            await router.push({ path: '/inicio' })
+                                            router.go()
+                                            break;
+                                        case 1:
+                                            await router.push({ path: '/all' })
+                                            router.go()
+                                            break;
+                                        case 2:
+                                            await router.push({ path: '/upcoming' })
+                                            router.go()
+                                            break;
+                                        default:
+                                            await router.push({ name: 'home' })
+                                            router.go()
+                                            break;
+                                    }
+                                    loading.value = false;
+                                }, 800);
+                            }
+                        }
+                    } catch (error) {
+                        loading.value = false
+                        toast(error?.response?.data?.message[0] || 'error al cargar', {
+                            type: "error",
+                        });
+                    }
+
+                } catch (error) {
+                    if (error?.response?.data?.message == "Unauthorized") {
+                        toast(error?.response?.data?.message || 'error al cargar', {
+                            type: "error",
+                            autoClose: 2000,
+                        });
+                    }
+                    loading.value = false
+                }
             }
+
             /*  console.log('res', resToken)
              setTimeout(async () => {
                  await router.push({ path: `/login/${route.params.rol}` })
                  router.go()
                  loading.value = false
-             }, 2000); */
+             }, 2000);
 
             /*  props.next() */
         }
         const backStep = () => {
             props.back()
+        }
+        const openCode = () => {
+            alert(formdata.validationCode)
         }
         onMounted(() => {
             token.value = localStorage.getItem('updateUser')
@@ -142,7 +285,8 @@ export default {
             nextStep,
             backStep,
             form,
-            loading
+            loading,
+            openCode, formdata
         };
     },
 };

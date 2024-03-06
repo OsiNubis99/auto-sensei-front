@@ -55,9 +55,9 @@
                                 class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
                                 @click="isOpen = !isOpen">
                                 <div class="w-8 h-8 ">
-                                    <img v-if="store?.userData?.dealer?.picture"
+                                    <img v-if="store?.userData?.seller?.picture"
                                         class="w-full shadow-md   rounded-full h-full object-cover"
-                                        :src="bucket + store?.userData?.dealer?.picture" alt="">
+                                        :src="bucket + store?.userData?.seller?.picture" alt="">
                                     <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
                                         src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                         alt="">

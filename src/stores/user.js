@@ -133,7 +133,19 @@ export const useUserStore = defineStore("useUserStore", {
                     });
             });
         },
-      
+        getValidation(data) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .post("/user/send-validation-code",data)
+                    .then((response) => {
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+
 
     },
 });

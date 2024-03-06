@@ -1,9 +1,9 @@
 <template>
     <div v-show="statusModal.isActive"
-        class="fixed inset-0 flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
-        <div class="max-w-6xl overflow-auto   rounded-lg shadow-xl bg-[#F9F9F9]">
+        class="fixed inset-0 flex items-end md:items-center z-50 justify-center bg-base-black  bg-opacity-50">
+        <div class="max-w-6xl overflow-auto   rounded-lg shadow-xl animation-fade-modal bg-[#F9F9F9]">
             <div class="p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
-                <p class="text-xl text-white">View Details</p>
+                <p class="text-sm md:text-xl text-white">View Details</p>
                 <svg @click="statusModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
                     class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

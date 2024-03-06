@@ -6,22 +6,24 @@
                 <CreateAccount v-if="stepsCurrent == 0" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
             <swiper-slide v-if="!loading">
-                <CheckYourEmail v-if="stepsCurrent == 1" :back="back" :next="next" :gobackError="gobackError" :rol="rol" />
-            </swiper-slide>
-            <swiper-slide v-if="!loading">
-                <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next" :backEmailToken="backEmailToken"
+                <CheckYourEmail v-if="stepsCurrent == 1" :back="back" :next="next" :gobackError="gobackError"
                     :rol="rol" />
             </swiper-slide>
             <swiper-slide v-if="!loading">
-                <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next" :backEmailToken="backEmailToken"
-                    :rol="rol" />
+                <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next"
+                    :backEmailToken="backEmailToken" :rol="rol" />
+            </swiper-slide>
+            <swiper-slide v-if="!loading">
+                <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next"
+                    :backEmailToken="backEmailToken" :rol="rol" />
             </swiper-slide>
         </swiper>
         <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" lg:block md:w-1/2 relative ">
             <div v-if="rol == 'dealers'" class="h-full flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br>
                     Organically</h1>
-                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">Dealers are able to increase their inventory without having to go to
+                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">Dealers are able to increase their inventory without having to go
+                    to
                     their local
                     auctions, or online
                     auctions
@@ -33,7 +35,8 @@
             <div v-else class="h-full flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl  md:text-5xl text-blue-dark font-bold ">Elevate Your Car Selling
                     Journey with AutoSensei</h1>
-                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering a
+                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering
+                    a
                     seamless and
                     efficient process. Maximize the value of your car by inviting competitive bids from local
                     dealerships.
@@ -90,7 +93,7 @@ export default {
         InfoAccount,
         VerificationCode
     },
-    setup() {
+    setup(props) {
         const swiper = ref(null)
         const route = useRoute();
         const router = useRouter()
@@ -184,7 +187,7 @@ export default {
             stepsCurrent,
             loading,
             gobackError,
-            backEmailToken
+            backEmailToken,
         };
     },
 };

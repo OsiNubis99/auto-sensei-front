@@ -125,7 +125,7 @@
                     </div>
                 </div>
 
-                <div v-if="storeUser.type == 1" class="flex w-full flex-col md:items-center justify-between md:gap-3 ">
+                <div v-if="storeUser.type == 1" class="flex w-full flex-col md:flex-row md:items-center justify-between md:gap-3 ">
                     <p class="font-medium text-xs md:text-base  ">Mobile Number</p>
                     <div class="flex items-center justify-between">
                         <div class="flex gap-1 capitalize text-[#9ca3af] text-xs md:text-base items-center">

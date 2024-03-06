@@ -1,6 +1,6 @@
 <template>
     <div v-show="statusModal.isActive"
-        class="fixed inset-0 flex items-end md:items-center z-50 justify-center bg-base-black  bg-opacity-50">
+        class="fixed inset-0 flex items-end md:items-center z-50 md:justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
             <div class=" p-2 md:p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
                 <p v-if="steps.step1" class=" text-sm md:text-xl text-white">Accept Auction</p>
