@@ -121,10 +121,11 @@
                                     ${{
         autionModal?.bids[0].amount }} </p>
                                 <p v-else-if="autionModal?.vehicleDetails?.basePrice"
-                                    class="font-medium text-base-black text-2xl ">${{ auction?.vehicleDetails?.basePrice
+                                    class="font-medium text-base-black 
+ text-xs md:text-2xl ">${{ auction?.vehicleDetails?.basePrice
                                     }}
                                 </p>
-                                <p v-else class="font-medium text-base-black text-2xl ">$0 </p>
+                                <p v-else class="font-medium text-base-black text-xs md:text-2xl ">$0 </p>
                                 <p class="text-[#666666] mt-1 text-xs md:text-base "> /{{ autionModal?.bids?.length }}
                                     Bids
                                 </p>

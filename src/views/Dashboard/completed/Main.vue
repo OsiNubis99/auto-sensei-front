@@ -223,7 +223,8 @@
                                                 :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                                                 <p>Final Bids</p>
                                                 <div class="flex gap-1">
-                                                    <p class="font-medium text-base-black text-2xl ">
+                                                    <p class="font-medium text-base-black 
+ text-xs md:text-2xl ">
                                                         <span v-if="auction.bids[0]?.amount">
                                                             ${{ auction.bids[0]?.amount }}
                                                         </span>
@@ -313,10 +314,11 @@
                                     ${{
         autionModal?.bids[0].amount }} </p>
                                 <p v-else-if="autionModal?.vehicleDetails?.basePrice"
-                                    class="font-medium text-base-black text-2xl ">${{ auction?.vehicleDetails?.basePrice
+                                    class="font-medium text-base-black 
+ text-xs md:text-2xl ">${{ auction?.vehicleDetails?.basePrice
                                     }}
                                 </p>
-                                <p v-else class="font-medium text-base-black text-2xl ">$0 </p>
+                                <p v-else class="font-medium text-base-black text-xs md:text-2xl ">$0 </p>
                                 <p class="text-[#666666] mt-1 text-xs md:text-base "> /{{ autionModal?.bids?.length }}
                                     Bids
                                 </p>

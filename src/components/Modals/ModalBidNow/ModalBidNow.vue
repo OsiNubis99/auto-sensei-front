@@ -1,60 +1,59 @@
 <template>
     <div v-show="statusModal.isActive"
-        class="fixed z-[100] inset-0 flex items-center justify-center bg-base-black  bg-opacity-50">
-        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
-            <div class="p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
+        class="fixed z-[100] inset-0 flex items-end md:items-center justify-center bg-base-black  bg-opacity-50">
+        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl  animation-fade-modal">
+            <div class="md:p-4 p-2 rounded-t-lg  bg-base-black flex items-center justify-between">
                 <p class="text-xl text-white">PEPITO</p>
-                <p v-if="statusModal.from == 'autoBid'" class="text-xl text-white">Auto Bid</p>
-                <p v-if="statusModal.from == 'bidNow'" class="text-xl text-white">Bid Now</p>
-                <svg @click="closet" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer" fill="none"
+                <p v-if="statusModal.from == 'autoBid'" class=" text-sm md:text-xl text-white">Auto Bid</p>
+                <p v-if="statusModal.from == 'bidNow'" class=" text-sm md:text-xl text-white">Bid Now</p>
+                <svg @click="closet" xmlns="http://www.w3.org/2000/svg" class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none"
                     viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <div v-if="steps.step1 || steps.step2" class="p-4 flex gap-3 flex-col  ">
+            <div v-if="steps.step1 || steps.step2" class="md:p-4 p-2 flex gap-3 pb-2 flex-col  ">
                 <div class="flex justify-start items-center gap-2">
-                    <p :class="steps.step1 ? 'text-base-black font-semibold' : 'text-[#858585]'">Select Amount</p>
+                    <p class="text-xs md:text-base " :class="steps.step1 ? 'text-base-black font-semibold' : 'text-[#858585]'">Select Amount</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path
                             d="M8.78145 8.00048L5.48145 4.70048L6.42411 3.75781L10.6668 8.00048L6.42411 12.2431L5.48145 11.3005L8.78145 8.00048Z"
                             fill="#858585" />
                     </svg>
-                    <p :class="steps.step2 ? 'text-base-black font-semibold' : 'text-[#858585]'">Payment</p>
+                    <p class="text-xs md:text-base " :class="steps.step2 ? 'text-base-black font-semibold' : 'text-[#858585]'">Payment</p>
                 </div>
-
             </div>
             <template v-if="steps.step1">
-                <div class="flex gap-3 items-start border-b border-[#E0E0E0] p-5">
-                    <div class="w-[200px] h-[130px]">
+                <div class="flex gap-3 items-start border-b border-[#E0E0E0] p-2 md:p-5">
+                    <div class="w-[80px] md:w-[120px]   md:h-[90px]">
                         <img v-if="statusModal.data?.photos" class="w-full h-full shadow-lg rounded-lg object-cover"
                             :src="bucket + statusModal.data?.photos[0].url" alt="">
                         <img class=" shadow-xl w-full h-full rounded-lg object-cover " v-else
                             src="@/assets/img/jpg/image.jpg" alt="">
                     </div>
-                    <div class="h-[130px] flex justify-between flex-col">
-                        <p class=" font-semibold ">{{ statusModal.data?.vehicleDetails?.year }} {{
+                    <div class="md:h-[130px] flex justify-between flex-col">
+                        <p class=" font-semibold text-sm :text-base ">{{ statusModal.data?.vehicleDetails?.year }} {{
         statusModal.data?.vehicleDetails?.make }} {{
         statusModal.data?.vehicleDetails?.model }}</p>
                         <div>
-                            <p>Current Bid</p>
-                            <p class="font-semibold">{{ statusModal.data?.vehicleDetails?.basePrice }}</p>
+                            <p class="capitalize text-sm md:text-base mt-4">Current Bid</p>
+                            <p class="font-semibold">${{ statusModal.data?.vehicleDetails?.basePrice }}</p>
                         </div>
                     </div>
                 </div>
                 <template v-if="statusModal.from == 'autoBid'">
-                    <div class="p-5">
+                    <div class="md:p-5 p-2">
                         <div class="flex gap-1 flex-col justify-start">
-                            <p class="font-semibold">Maximum Bid Amount</p>
-                            <p>Please enter a price higher than the current bid</p>
+                            <p class="font-semibold text-sm md:text-base">Maximum Bid Amount</p>
+                            <p class="text-xs md:text-base">Please enter a price higher than the current bid</p>
                         </div>
                         <CurrencyInput :key="counterKey" v-model="formData.placeyourbid"
                             :error='invalid?.placeyourbid ? true : false' :options="{ currency: 'USD' }"
                             :placeHolder="`$ Min ${statusModal?.data?.vehicleDetails?.basePrice}`" />
-                        <p class="text-[#858585] mt-2"> {{ invalid?.placeyourbid }} </p>
-                        <div class="form-group mt-4">
+                        <p class="text-[#858585] text-xs md:text-base mt-2"> {{ invalid?.placeyourbid }} </p>
+                        <div class="form-group md:mt-4">
                             <input type="checkbox" v-model="formData.notify" id="html">
-                            <label for="html">Notify me when the current bid approaches my maximum bid amount</label>
+                            <label class="text-xs md:text-base" for="html">Notify me when the current bid approaches my maximum bid amount</label>
                         </div>
                     </div>
                 </template>
@@ -69,10 +68,10 @@
                 </template>
 
 
-                <div class="p-5 ">
+                <div class="md:p-5 p-2 pt-0 ">
                     <button @click="next(1)" :disabled="sizeObjet == 0 ? false : true"
                         :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
-                        class="w-full h-[41px] rounded">
+                        class="w-full  text-sm h-9 md:text-base md:h-[41px] rounded">
                         Next
                     </button>
                 </div>
@@ -80,8 +79,8 @@
             </template>
 
             <template v-if="steps.step2">
-                <div class="p-5 pt-0">
-                    <p>
+                <div class="md:p-5 p-2 pt-0">
+                    <p class="text-xs  md:text-base">
                         <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $250 transaction fee if your bid
                             is
                             successfully won.</span>
@@ -91,30 +90,30 @@
                     </p>
                     <template v-if="authStore.userData?.paymentMethods?.length > 0 && !showPayment">
                         <div class="custom-payment">
-                            <label class=" font-semibold text-[#0B1107]" for="">Credit Card</label>
+                            <label class=" font-semibold text-sm md:text-base text-[#0B1107]" for="">Credit Card</label>
                             <div class="navbar-right w-full relative">
                                 <button @click="openDropdown = !openDropdown"
-                                :class="openDropdown ? 'border border-[#0A0A0A] transition-all ease-linear duration-300 ' : 'transition-all ease-linear duration-300'"
+                                    :class="openDropdown ? 'border border-[#0A0A0A] transition-all ease-linear duration-300 ' : 'transition-all ease-linear duration-300'"
                                     class="flex w-full gap-2 rounded-md md:h-[42px] shadow-md px-2 bg-white items-center">
                                     <p v-if="!itemCard" class="p-2 text-xs md:text-[16px] pb-1">Choose credit card</p>
                                     <p v-else class="p-2 text-xs md:text-[16px] pb-1">{{ itemCard?.billingDetails?.name
                                         }} - **** **** **** {{ itemCard?.card?.last4 }}</p>
                                 </button>
                                 <div v-if="openDropdown"
-                                    class="absolute h-[150px] custom-scroll-payment border border-[#E0E0E0] overflow-auto  z-10 top-auto left-0 w-full py-2 mt-2  rounded-lg border-gray-900 bg-white shadow-xl">
+                                    class="absolute h-[128px] md:h-[150px] flex flex-col gap-[6px] custom-scroll-payment border border-[#E0E0E0] overflow-auto  z-10 top-auto left-0 w-full py-2 mt-2  rounded-lg border-gray-900 bg-white shadow-xl">
                                     <div v-for="(payments, index) in authStore.userData.paymentMethods"
                                         class="flex flex-col   "
                                         :class="index !== authStore.userData.paymentMethods.length - 1 ? 'hover:bg-primary gap-6  cursor-pointer transition-all ease-linear duration-300 ' : ''">
                                         <div :class="index !== authStore.userData.paymentMethods.length - 1 ? ' py-1 ' : ''"
-                                            @click="getCard(payments)" class="flex px-6 justify-between w-full  ">
-                                            <p class="text-base-black text-start  w-full">
+                                            @click="getCard(payments)" class="flex px-2 md:px-6 justify-between w-full  ">
+                                            <p class="text-base-black text-start text-xs md:text-base  w-full">
                                                 {{ payments?.billingDetails?.name }}</p>
-                                            <p class="text-base-black text-end  w-full">**** **** ****
+                                            <p class="text-base-black text-end  text-xs md:text-base w-full">**** **** ****
                                                 {{ payments?.card?.last4 }}</p>
                                         </div>
                                         <p @click="showOptionNewPaymtent('add-card')"
                                             v-if="index === authStore.userData.paymentMethods.length - 1"
-                                            class="text-[#1F94F0] px-6  pt-2 mt-0 cursor-pointer text-start font-semibold ">
+                                            class="text-[#1F94F0] px-2 md:px-6 text-xs md:text-base pt-2 mt-0 cursor-pointer text-start font-semibold ">
                                             Add another Credit Card</p>
                                     </div>
 
@@ -123,14 +122,14 @@
                         </div>
                         <div class="form-group">
                             <input type="checkbox" v-model="formData.termsConditions" id="css">
-                            <label for="css">Please agree to our <a href="#" class="font-semibold underline">Terms &
+                            <label for="css" class=" text-xs md:text-base">Please agree to our <a href="#" class="font-semibold underline">Terms &
                                     Conditions</a> to
                                 proceed.</label>
                         </div>
                     </template>
 
                     <template v-if="showPayment || authStore.userData?.paymentMethods?.length === 0">
-                        <div class="flex pt-4 flex-col gap-3">
+                        <div class="flex md:pt-4 flex-col gap-3">
                             <div class="flex flex-col gap-3">
                                 <div class="flex flex-col gap-2">
                                     <label class=" text-sm md:text-base " for="">Card Number</label>
@@ -161,13 +160,13 @@
                             </div>
                         </div>
                         <div class="mt-4">
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <input type="checkbox" v-model="formData.saveCard" id="html">
-                                <label for="html">Save Credit Card Info</label>
+                                <label for="html" class="text-xs md:text-base ">Save Credit Card Info</label>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <input type="checkbox" v-model="formData.termsConditions" id="css">
-                                <label for="css">Please agree to our <a href="#" class="font-semibold underline">Terms &
+                                <label class="text-xs md:text-base " for="css">Please agree to our <a href="#" class="font-semibold underline">Terms &
                                         Conditions</a> to
                                     proceed.</label>
                             </div>
@@ -177,7 +176,7 @@
                 </div>
                 <div class="p-5 flex gap-4 ">
                     <button v-if="!showPayment" @click="back(1)"
-                        class="w-2/5 h-[41px] items-center  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
+                        class="w-2/5 md:h-[41px] text-xs h-9 md:text-base items-center  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                             <path
                                 d="M5.7185 7.83312H13.8332V9.16645H5.7185L9.2945 12.7425L8.35184 13.6851L3.1665 8.49979L8.35184 3.31445L9.2945 4.25712L5.7185 7.83312Z"
@@ -185,8 +184,9 @@
                         </svg>
                         <p>Back</p>
                     </button>
-                    <button v-else @click="showOptionNewPaymtent('select-card')"
-                        class="w-full h-[41px] items-center  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
+                    <button v-if="showPayment && authStore.userData.paymentMethods.length > 0"
+                        @click="showOptionNewPaymtent('select-card')"
+                        class="w-full text-xs h-9 md:text-base md:h-[41px] items-center  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                             <path
                                 d="M5.7185 7.83312H13.8332V9.16645H5.7185L9.2945 12.7425L8.35184 13.6851L3.1665 8.49979L8.35184 3.31445L9.2945 4.25712L5.7185 7.83312Z"
@@ -196,7 +196,7 @@
                     </button>
                     <button @click="next(2)" :disabled="sizeObjet == 0 ? false : true"
                         :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
-                        class="w-full h-[41px]  rounded">
+                        class="w-full text-xs h-9 md:text-base md:h-[41px]  rounded">
 
 
                         <span v-if="statusModal.from == 'bidNow'">Bid Now</span>
@@ -240,19 +240,19 @@
                             </clipPath>
                         </defs>
                     </svg>
-                    <p class="  text-center font-semibold">You're all set! Let's keep your bids winning</p>
-                    <p class=" text-center">Give your maximum bid amount and save the time of watching the bid
+                    <p class="  text-sm md:text-base text-center font-semibold">You're all set! Let's keep your bids winning</p>
+                    <p class=" text-sm md:text-base text-center">Give your maximum bid amount and save the time of watching the bid
                         constantly
                         with auto bid. Are you
                         sure you want to set Auto Bid on this auction ? You can change your Auto Bid later as well.</p>
                 </div>
                 <div class="flex p-4 gap-3">
                     <button @click="next(3)" :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
-                        class="w-full p-2  rounded">
+                        class="w-full p-2 text-xs h-9 md:text-base  rounded">
                         Yes
                     </button>
                     <button @click="back(2)"
-                        class="w-full p-2 items-center  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
+                        class="w-full p-2 text-xs h-9 md:text-base items-center  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
                         <p>No</p>
                     </button>
                 </div>
@@ -474,12 +474,12 @@ export default {
             itemCard.value = null
         }
         watch(formData.value, async (newQuestion, oldQuestion) => {
-            if(authStore.userData.paymentMethods.length > 0){ 
-                    showPayment.value = false
-                }else{
-                    showPayment.value = true
-                }
-            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, showPayment.value, itemCard.value,authStore.userData);
+          /*   if (authStore.userData.paymentMethods.length > 0) {
+                showPayment.value = false
+            } else {
+                showPayment.value = true
+            } */
+            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, showPayment.value, itemCard.value, authStore.userData);
             sizeObjet.value = Object.entries(invalid.value).length
             if (newQuestion.placeyourbid > statusModal?.data?.vehicleDetails?.basePrice) {
                 counterKey.value += 1
@@ -493,7 +493,7 @@ export default {
                     currency: 'USD',
                 });
                 statusModal.data.amountBid = formatter.format(statusModal.data.amountBid)
-               
+
 
             }
         })

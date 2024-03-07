@@ -4,10 +4,10 @@
     <div v-show="statusModalImage.isActive"
         class="fixed z-[100] inset-0 flex items-end md:items-center md:justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md w-full overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
-            <div class="p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
+            <div class="md:p-4 p-2 rounded-t-lg  bg-base-black flex items-center justify-between">
                 <p class="md:text-xl text-white">Edit & Crop Image</p>
                 <svg @click="statusModalImage.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
-                    class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -43,13 +43,13 @@
                             previewClass: 'twitter-cropper__stencil',
                         }" :transitions="false" :debounce="false" :default-size="defaultSize" :min-width="150"
                         :min-height="150" :src="imgPreview" @change="onChange" />
-                    <div class="flex justify-between gap-12 p-4">
-                        <div class="w-full">
-                            <p>Zoom</p>
+                    <div class="flex justify-between gap-12 p-2 md:p-4">
+                        <div class="w-full px-2" >
+                            <p class=" text-sm md:text-base">Zoom</p>
                             <Navigation :zoom="zoom" @change="onZoom" />
                         </div>
                     </div>
-                    <div class="flex w-full justify-end p-4 gap-3">
+                    <div class="flex w-full justify-end p-2 md:p-4 gap-3">
                         <label class="label-upload btn bg-white border border-[#E0E0E0]">
                             <input type="file" hidden ref="file" @change="uploadImage($event)" accept="image/*" />
                             <div class="btn-up">Replace</div>
