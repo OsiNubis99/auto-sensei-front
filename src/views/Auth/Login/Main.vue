@@ -2,9 +2,10 @@
     <div class="main-login  flex  flex-col md:flex-row-reverse">
         <div
             class="flex-1 flex flex-col lg:w-1/2 relative justify-between py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-            <div v-if="isLoadingLogin" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
-                <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
-                    <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+            <div v-if="isLoadingLogin"
+                class="h-screen-login-loading  left-0 top-0  w-full h-full flex justify-center items-center">
+                <div>
+                    <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
                         <div class="animate-bounce">
                             <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                                 stroke-width="0" viewBox="0 0 16 16">
@@ -13,7 +14,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                        <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
                     </div>
                 </div>
             </div>
@@ -45,8 +46,8 @@
                                         Password
                                     </label>
                                     <div class="mt-1">
-                                        <input id="password" v-model="payloadData.password" name="password" type="password"
-                                            placeholder="*********" autoComplete="password"
+                                        <input id="password" v-model="payloadData.password" name="password"
+                                            type="password" placeholder="*********" autoComplete="password"
                                             class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                     </div>
                                 </div>
@@ -81,25 +82,33 @@
         </div>
         <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class="  lg:block md:w-1/2 relative ">
             <div v-if="rol == 'dealers'" class="h-full  flex justify-start items-start flex-col gap-5 px-16 py-12">
-                <h1 class="p-5 pb-0 !md:p-0  text-5xl text-blue-dark font-bold ">Boost Your Inventory <br> Organically</h1>
-                <p class="p-5 pt-0 !md:p-0 w-[70%]">Dealers are able to increase their inventory without having to go to their local
+                <h1 class="p-5 pb-0 !md:p-0  text-5xl text-blue-dark font-bold ">Boost Your Inventory <br> Organically
+                </h1>
+                <p class="p-5 pt-0 !md:p-0 w-[70%]">Dealers are able to increase their inventory without having to go to
+                    their local
                     auctions, or online
                     auctions
                     bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
                     application.</p>
-                     <img class="h-[60vh] block lg:hidden  w-full object-cover  " src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+                <img class="h-[60vh] block lg:hidden  w-full object-cover  "
+                    src="../../../assets/svg/vehiculosLogin.svg" alt="" />
             </div>
             <div v-else class="h-full  flex justify-start lg:p-5 items-start flex-col gap-5 md:px-16 md:py-12">
-                <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Elevate Your Car Selling <br> Journey with AutoSensei</h1>
-                <p class="p-5 pt-0 !md:p-0 md:w-[70%] text-sm ">AutoSensei revolutionizes the way you sell your vehicle, offering a seamless and
+                <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Elevate Your Car Selling
+                    <br> Journey with AutoSensei
+                </h1>
+                <p class="p-5 pt-0 !md:p-0 md:w-[70%] text-sm ">AutoSensei revolutionizes the way you sell your vehicle,
+                    offering a seamless and
                     efficient process. Maximize the value of your car by inviting competitive bids from local
                     dealerships.
                 </p>
-                 <img class="h-[60vh] block lg:hidden  w-full object-cover  " src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+                <img class="h-[60vh] block lg:hidden  w-full object-cover  "
+                    src="../../../assets/svg/vehiculosLogin.svg" alt="" />
             </div>
-            <img class="h-auto hidden lg:block absolute bottom-0 w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+            <img class="h-auto hidden lg:block absolute bottom-0 w-full object-cover"
+                src="../../../assets/svg/vehiculosLogin.svg" alt="" />
         </div>
-       
+
     </div>
 </template>
 
@@ -109,8 +118,10 @@ import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from "@/stores/auth";
 import { toast } from "vue3-toastify";
 import { regexEmail } from "../../../utils/Regex";
+import Basic from '../../../components/Loading/Basic.vue'
 export default {
     components: {
+        Basic
     },
     setup() {
         const route = useRoute();
@@ -141,7 +152,7 @@ export default {
                 let res = await store.login(payloadData.value);
                 if (res.data.access_token) {
                     let resProfile = await store.authProfile()
-                   
+
                     if (resProfile.statusText = "OK") {
                         localStorage.setItem('rol', resProfile.data.type)
                         setInterval(async () => {

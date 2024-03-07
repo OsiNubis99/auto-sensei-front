@@ -9,7 +9,7 @@
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
-            <div v-else class="flex justify-between mt-5 gap-4">
+            <div v-else class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class=" hidden md:w-[29%] md:block">
                     <FilterBig />
                 </div>
@@ -22,7 +22,7 @@
                             <div class="navbar-right relative">
                                 <button @click="isOpen = !isOpen"
                                     class="flex gap-2 rounded-md  shadow-md px-2 bg-white items-center">
-                                    <p class="p-2 text-xs md:text-[16px] pb-1"> Current Bid</p>
+                                    <p class="p-2 text-xs md:text-[16px] pb-1">{{ sortBy }}</p>
                                     <div class=" p-2 border-l-2 pr-0 border-[#efefef] ">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                             viewBox="0 0 18 18" fill="none">
@@ -34,15 +34,15 @@
                                 </button>
                                 <div v-if="isOpen"
                                     class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
-                                    <div @click="setSorBy('current-bid')"
+                                    <div @click="setSorBy('Current Bid')"
                                         class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                         Current Bid
                                     </div>
-                                    <div @click="setSorBy('odometer')"
+                                    <div @click="setSorBy('Odometer')"
                                         class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                         Odometer
                                     </div>
-                                    <div @click="setSorBy('year')"
+                                    <div @click="setSorBy('Year')"
                                         class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                         Year</div>
 
@@ -364,7 +364,7 @@ export default {
         const storeAutions = useAuctionStore()
         const path = ref(computed(() => route.name))
         const route = useRoute();
-        const sortBy = ref('current-bid')
+        const sortBy = ref('Current Bid')
         const autionUpdate = ref(computed(() => authStore.aution))
         const index = async () => {
             loading.value = true
@@ -453,7 +453,7 @@ export default {
 
         const sortedData = computed(() => {
             switch (sortBy.value) {
-                case 'current-bid':
+                case 'Current Bid':
                     console.log('current-bid')
                     let sortStatus = {}
                     data.value.forEach(auction => {
@@ -466,11 +466,11 @@ export default {
                             sortedItems.push(sortStatus[key].sort((a, b) => timeToEnd(a.startDate, a.duration) - timeToEnd(b.startDate, b.duration)))
                     }
                     return sortedItems.reverse().flat()
-                case 'odometer':
+                case 'Odometer':
                     console.log('odometer')
                     return data.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
                 case 'year':
-                    console.log('year')
+                    console.log('Year')
                     return data.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
                 default:
 
@@ -506,8 +506,8 @@ export default {
             timeToEnd,
             setSorBy,
             sortedData,
-            counter
-
+            counter,
+            sortBy
         };
     },
 };

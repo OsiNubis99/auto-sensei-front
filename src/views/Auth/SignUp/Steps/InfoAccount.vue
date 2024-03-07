@@ -1,7 +1,7 @@
 <template>
-    <div v-if="isLoading" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
-        <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
-            <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+    <div v-if="loading" class="h-screen-login-loading w-full h-full flex justify-center items-center">
+        <div>
+            <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
                 <div class="animate-bounce">
                     <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                         stroke-width="0" viewBox="0 0 16 16">
@@ -10,8 +10,8 @@
                         </path>
                     </svg>
                 </div>
-                <p v-if="codePhone" class=" text-base-gray font-medium pl-2 ">Sending code to your phone...</p>
-                <p v-else class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                <p v-if="codePhone" class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2">Sending code to your phone...</p>
+                <p v-else class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2">Loading...</p>
             </div>
         </div>
     </div>
@@ -121,14 +121,15 @@
                                         class=" pl-2 text-blue-dark font-medium truncate w-[50%] text-sm">
                                         {{ form?.driverLicense?.name }}
                                     </p>
-                                    <p v-else class="text-[#858585] pl-2  text-sm">
+                                    <p v-else class="text-[#858585] pl-2  text-xs md:text-sm">
                                         JPG or PNG. Up to 5mb
                                     </p>
                                     <div>
                                         <label :class="invalid?.driverLicense ? 'bg-error' : 'bg-[#F0F0F0]'"
-                                            class="flex flex-col items-center  px-2 py-2  rounded-lg shadow-lg  tracking-wide  cursor-pointer">
+                                            class="flex flex-col items-center py-1 px-2 md:py-2  rounded-lg shadow-lg  tracking-wide  cursor-pointer">
                                             <span :class="invalid?.driverLicense ? 'text-white' : 'text-base-black'"
-                                                class="text-sm  font-medium leading-normal">Upload Profile</span>
+                                                class=" text-xs md:text-sm  font-medium leading-normal">Upload
+                                                Profile</span>
                                             <input type="file" accept="image/*" @change="previewLicense" class="hidden">
                                         </label>
                                     </div>

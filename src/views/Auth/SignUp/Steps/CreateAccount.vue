@@ -1,7 +1,7 @@
 <template>
-    <div v-if="loading" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
-        <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
-            <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+    <div v-if="loading" class="h-screen-login-loading w-full h-full flex justify-center items-center">
+        <div>
+            <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
                 <div class="animate-bounce">
                     <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                         stroke-width="0" viewBox="0 0 16 16">
@@ -10,7 +10,7 @@
                         </path>
                     </svg>
                 </div>
-                <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
             </div>
         </div>
     </div>
@@ -20,8 +20,9 @@
             class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full ">
                 <div class="animate-fade-up  animate-ease-in-out animate-delay-100">
-                    <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center md:mb-5 ">Create Your <span
-                            v-if="rol == 'dealers'"> Dealer</span> <span v-if="rol !== 'dealers'"> Sellers</span> Account
+                    <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center md:mb-5 ">Create Your
+                        <span v-if="rol == 'dealers'"> Dealer</span> <span v-if="rol !== 'dealers'"> Sellers</span>
+                        Account
                     </h2>
                     <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to <span
                             v-if="rol == 'dealers'"> dealers</span> <span v-if="rol !== 'dealers'"> sellers</span> right
@@ -30,7 +31,8 @@
                 </div>
                 <div class="mt-8">
                     <div class="mt-6 space-y-7 ">
-                        <div v-if="rol == 'dealers'" class="flex flex-col md:flex-row gap-6 justify-between items-center">
+                        <div v-if="rol == 'dealers'"
+                            class="flex flex-col md:flex-row gap-6 justify-between items-center">
                             <div class="w-full animate-fade-up  animate-ease-in-out animate-delay-200">
                                 <label htmlFor="name" class="block text-sm font-medium text-gray-700">
                                     Legal First Name*
@@ -111,6 +113,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import { useRouter, useRoute } from 'vue-router'
 import { onMounted, onUpdated, ref } from 'vue'

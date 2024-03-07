@@ -58,7 +58,7 @@
             </RouterLink>
         </nav>
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
-            <div class="flex justify-between mt-5 gap-4">
+            <div class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class="w-[29%]">
                     <div class="bg-white p-5 shadow-steps">
                         <div class="flex items-center gap-6 mb-4  relative cursor-pointer">

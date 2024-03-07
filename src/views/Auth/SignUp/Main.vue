@@ -10,12 +10,12 @@
                     :rol="rol" />
             </swiper-slide>
             <swiper-slide v-if="!loading">
-                <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next"
-                    :backEmailToken="backEmailToken" :rol="rol" />
+                <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next" :backEmailToken="backEmailToken"
+                    :rol="rol" />
             </swiper-slide>
             <swiper-slide v-if="!loading">
-                <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next"
-                    :backEmailToken="backEmailToken" :rol="rol" />
+                <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next" :backEmailToken="backEmailToken"
+                    :rol="rol" />
             </swiper-slide>
         </swiper>
         <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" lg:block md:w-1/2 relative ">
@@ -48,9 +48,9 @@
                 src="../../../assets/svg/vehiculosLogin.svg" alt="" />
         </div>
         <template v-if="loading">
-            <div class="w-1/2 absolute top-0 right-0  h-full flex justify-center items-center">
-                <div class="text-indigo-700 mt-32">
-                    <div class="h-[80px] w-[80px] ">
+            <div class="h-screen-login-loading  left-0 top-0  w-full h-full flex justify-center items-center">
+                <div>
+                    <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
                         <div class="animate-bounce">
                             <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                                 stroke-width="0" viewBox="0 0 16 16">
@@ -59,7 +59,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                        <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
                     </div>
                 </div>
             </div>

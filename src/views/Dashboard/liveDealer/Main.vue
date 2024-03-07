@@ -10,7 +10,7 @@
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
-            <div v-else class="flex justify-between mt-5 gap-4">
+            <div v-else class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class=" hidden md:w-[29%] md:block">
                     <FilterBig />
                 </div>
@@ -75,7 +75,7 @@
                             <div class="navbar-right relative">
                                 <button @click="isOpen = !isOpen"
                                     class="flex gap-2 rounded-md  shadow-md px-2 bg-white items-center">
-                                    <p class="p-2 text-xs md:text-[16px] pb-1">Auction Posted</p>
+                                    <p class="p-2 text-xs md:text-[16px] pb-1">{{ sortBy }}</p>
                                     <div class=" p-2 border-l-2 pr-0 border-[#efefef] ">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                             viewBox="0 0 18 18" fill="none">
@@ -87,15 +87,15 @@
                                 </button>
                                 <div v-if="isOpen"
                                     class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
-                                    <div @click="setSorBy('auction-posted')"
+                                    <div @click="setSorBy('Auction Posted')"
                                             class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                             Auction Posted
                                         </div>
-                                        <div @click="setSorBy('odometer')"
+                                        <div @click="setSorBy('Odometer')"
                                             class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                             Odometer
                                         </div>
-                                        <div @click="setSorBy('year')"
+                                        <div @click="setSorBy('Year')"
                                             class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                             Year
                                         </div>
@@ -222,7 +222,7 @@ export default {
         const route = useRoute();
         const auth = useAuthStore()
         const autionUpdate = ref(computed(() => auth.aution))
-        const sortBy = ref('auction-posted')
+        const sortBy = ref('Auction Posted')
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             const i = data.value.findIndex(x => x._id === newQuestion._id)
             data.value[i] = newQuestion
@@ -298,11 +298,11 @@ export default {
 
         const sortedData = computed(() => {
             switch (sortBy.value) {
-                case 'auction-posted':
+                case 'Auction Posted':
                     return data.value.filter(p => true).sort((a, b) => timeToEnd(b.startDate, b.duration) - timeToEnd(a.startDate, a.duration))
-                case 'odometer':
+                case 'Odometer':
                     return data.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
-                case 'year':
+                case 'Year':
                     return data.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
                 default:
                     return data.value
@@ -335,7 +335,8 @@ export default {
             auth,
             setSorBy,
             sortedData,
-            counter
+            counter,
+            sortBy
 
         };
     },

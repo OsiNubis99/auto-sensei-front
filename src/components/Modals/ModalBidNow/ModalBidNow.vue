@@ -3,6 +3,7 @@
         class="fixed z-[100] inset-0 flex items-center justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
             <div class="p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
+                <p class="text-xl text-white">PEPITO</p>
                 <p v-if="statusModal.from == 'autoBid'" class="text-xl text-white">Auto Bid</p>
                 <p v-if="statusModal.from == 'bidNow'" class="text-xl text-white">Bid Now</p>
                 <svg @click="closet" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8  cursor-pointer" fill="none"
@@ -33,7 +34,7 @@
                     </div>
                     <div class="h-[130px] flex justify-between flex-col">
                         <p class=" font-semibold ">{{ statusModal.data?.vehicleDetails?.year }} {{
-                            statusModal.data?.vehicleDetails?.make }} {{
+        statusModal.data?.vehicleDetails?.make }} {{
         statusModal.data?.vehicleDetails?.model }}</p>
                         <div>
                             <p>Current Bid</p>
@@ -57,6 +58,7 @@
                         </div>
                     </div>
                 </template>
+
                 <template v-if="statusModal.from == 'bidNow'">
                     <div class="mt-2 p-5 flex items-center gap-4 border-[#E0E0E0] border-t-[1px] ">
                         <CurrencyInput :key="counterKey" :error='invalid' v-model="formData.placeyourbid"
@@ -69,35 +71,55 @@
 
                 <div class="p-5 ">
                     <button @click="next(1)" :disabled="sizeObjet == 0 ? false : true"
-                        :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'" class="w-full h-[41px] rounded">
+                        :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
+                        class="w-full h-[41px] rounded">
                         Next
                     </button>
                 </div>
 
             </template>
+
             <template v-if="steps.step2">
                 <div class="p-5 pt-0">
                     <p>
-                        <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $250 transaction fee if your bid is
+                        <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $250 transaction fee if your bid
+                            is
                             successfully won.</span>
                         <span v-if="statusModal.from == 'bidNow'">You'll be charged a $250 + Harmonized Sales Tax (HST)
                             transaction fee if your bid is
                             successful won.</span>
                     </p>
-                    <template v-if="authStore.userData.payments.length > 0">
-
+                    <template v-if="authStore.userData?.paymentMethods?.length > 0 && !showPayment">
                         <div class="custom-payment">
                             <label class=" font-semibold text-[#0B1107]" for="">Credit Card</label>
-                            <select name="" v-model="formData.creditCard" id="">
-                                <option value="" disabled>Select a car</option>
-                                <option v-for="payments in authStore.userData.payments">
-                                    <div class="flex justify-between w-full ">
-                                        <p class="text-base-black w-full">{{ payments.nameCard }}</p>
-                                        <p class="text-base-black w-full">{{ payments.maskedNumber }}</p>
+                            <div class="navbar-right w-full relative">
+                                <button @click="openDropdown = !openDropdown"
+                                :class="openDropdown ? 'border border-[#0A0A0A] transition-all ease-linear duration-300 ' : 'transition-all ease-linear duration-300'"
+                                    class="flex w-full gap-2 rounded-md md:h-[42px] shadow-md px-2 bg-white items-center">
+                                    <p v-if="!itemCard" class="p-2 text-xs md:text-[16px] pb-1">Choose credit card</p>
+                                    <p v-else class="p-2 text-xs md:text-[16px] pb-1">{{ itemCard?.billingDetails?.name
+                                        }} - **** **** **** {{ itemCard?.card?.last4 }}</p>
+                                </button>
+                                <div v-if="openDropdown"
+                                    class="absolute h-[150px] custom-scroll-payment border border-[#E0E0E0] overflow-auto  z-10 top-auto left-0 w-full py-2 mt-2  rounded-lg border-gray-900 bg-white shadow-xl">
+                                    <div v-for="(payments, index) in authStore.userData.paymentMethods"
+                                        class="flex flex-col   "
+                                        :class="index !== authStore.userData.paymentMethods.length - 1 ? 'hover:bg-primary gap-6  cursor-pointer transition-all ease-linear duration-300 ' : ''">
+                                        <div :class="index !== authStore.userData.paymentMethods.length - 1 ? ' py-1 ' : ''"
+                                            @click="getCard(payments)" class="flex px-6 justify-between w-full  ">
+                                            <p class="text-base-black text-start  w-full">
+                                                {{ payments?.billingDetails?.name }}</p>
+                                            <p class="text-base-black text-end  w-full">**** **** ****
+                                                {{ payments?.card?.last4 }}</p>
+                                        </div>
+                                        <p @click="showOptionNewPaymtent('add-card')"
+                                            v-if="index === authStore.userData.paymentMethods.length - 1"
+                                            class="text-[#1F94F0] px-6  pt-2 mt-0 cursor-pointer text-start font-semibold ">
+                                            Add another Credit Card</p>
                                     </div>
 
-                                </option>
-                            </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <input type="checkbox" v-model="formData.termsConditions" id="css">
@@ -106,14 +128,16 @@
                                 proceed.</label>
                         </div>
                     </template>
-                    <template v-else>
+
+                    <template v-if="showPayment || authStore.userData?.paymentMethods?.length === 0">
                         <div class="flex pt-4 flex-col gap-3">
                             <div class="flex flex-col gap-3">
                                 <div class="flex flex-col gap-2">
                                     <label class=" text-sm md:text-base " for="">Card Number</label>
-                                    <input class="p-2 w-full rounded-lg border capitalize " placeholder="Input card number"
-                                        v-model="formData.cardNumber" @keydown="formatCardNumber" @input="filterinput"
-                                        type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="16">
+                                    <input class="p-2 w-full rounded-lg border capitalize "
+                                        placeholder="Input card number" v-model="formData.cardNumber"
+                                        @keydown="formatCardNumber" @input="filterinput" type="text" inputmode="numeric"
+                                        pattern="[0-9\s]{13,19}" maxlength="16">
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <label class=" text-sm md:text-base " for="">Name on Card</label>
@@ -152,7 +176,7 @@
 
                 </div>
                 <div class="p-5 flex gap-4 ">
-                    <button @click="back(1)"
+                    <button v-if="!showPayment" @click="back(1)"
                         class="w-2/5 h-[41px] items-center  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                             <path
@@ -161,8 +185,18 @@
                         </svg>
                         <p>Back</p>
                     </button>
+                    <button v-else @click="showOptionNewPaymtent('select-card')"
+                        class="w-full h-[41px] items-center  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                            <path
+                                d="M5.7185 7.83312H13.8332V9.16645H5.7185L9.2945 12.7425L8.35184 13.6851L3.1665 8.49979L8.35184 3.31445L9.2945 4.25712L5.7185 7.83312Z"
+                                fill="#0B1107" />
+                        </svg>
+                        <p>Select card</p>
+                    </button>
                     <button @click="next(2)" :disabled="sizeObjet == 0 ? false : true"
-                        :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'" class="w-full h-[41px]  rounded">
+                        :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
+                        class="w-full h-[41px]  rounded">
 
 
                         <span v-if="statusModal.from == 'bidNow'">Bid Now</span>
@@ -170,6 +204,7 @@
                     </button>
                 </div>
             </template>
+
             <template v-if="steps.step3">
                 <div class="flex gap-3 items-center justify-center flex-col p-5">
                     <svg xmlns="http://www.w3.org/2000/svg" width="89" height="108" viewBox="0 0 89 108" fill="none">
@@ -206,7 +241,8 @@
                         </defs>
                     </svg>
                     <p class="  text-center font-semibold">You're all set! Let's keep your bids winning</p>
-                    <p class=" text-center">Give your maximum bid amount and save the time of watching the bid constantly
+                    <p class=" text-center">Give your maximum bid amount and save the time of watching the bid
+                        constantly
                         with auto bid. Are you
                         sure you want to set Auto Bid on this auction ? You can change your Auto Bid later as well.</p>
                 </div>
@@ -256,16 +292,19 @@ export default {
     },
     setup(props) {
         const isOpen = ref(true);
+        const openDropdown = ref(false)
         const value = ref('')
         const formData = ref(props.form);
         const statusModal = ModalBids()
         const counterKey = ref(0)
         const invalid = ref(null)
         const sizeObjet = ref(null)
+        const showPayment = ref(false)
         const loading = ref(false)
         const autionsStore = useAuctionStore()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const authStore = useAuthStore()
+        const itemCard = ref(null)
         const addAmount = () => {
             counterKey.value += 1
             statusModal.data.vehicleDetails.basePrice += 100
@@ -285,6 +324,16 @@ export default {
                     steps.value.step1 = true
                     steps.value.step2 = false
                     steps.value.step3 = false
+                    openDropdown.value = false
+                    formData.value.cardNumber = undefined;
+                    formData.value.creditCard = undefined;
+                    formData.value.cvv = undefined;
+                    formData.value.expiryDate = undefined;
+                    formData.value.nameOnCard = undefined;
+                    formData.value.notify = undefined;
+                    formData.value.saveCard = undefined;
+                    formData.value.termsConditions = false;
+                    itemCard.value = null
                     break;
                 case 2:
                     steps.value.step1 = false
@@ -309,15 +358,18 @@ export default {
                     steps.value.step3 = true
                     break;
                 case 3:
+
                     let payload = null
                     if (statusModal.from == 'autoBid') {
                         payload = {
                             amount: formData.value.placeyourbid,
                             biddingLimit: formData.value.placeyourbid,
+                            idPaymentMethod: itemCard.value._id
                         }
                     } else {
                         payload = {
                             amount: formData.value.placeyourbid,
+                            idPaymentMethod: itemCard.value._id
                         }
                     }
                     loading.value = true
@@ -370,7 +422,7 @@ export default {
         }
         const formatExpiryDate = (event) => {
             const key = event.keyCode || event.charCode;
-            if (formData.value.expiryDate.length == 2) {
+            if (formData.value.expiryDate?.length == 2) {
                 formData.value.expiryDate = (formData.value.expiryDate + '/');
             }
             if (key !== 8 && key !== 46) {
@@ -398,8 +450,36 @@ export default {
             formData.value.notify = undefined
             formData.value.creditCard = undefined
         }
+        const getCard = (card) => {
+            console.log('card', card)
+            itemCard.value = card
+            openDropdown.value = false
+        }
+        const showOptionNewPaymtent = (op) => {
+            if (op == 'add-card') {
+                showPayment.value = true
+            } else {
+                showPayment.value = false
+            }
+
+            openDropdown.value = false
+            formData.value.cardNumber = undefined;
+            formData.value.creditCard = undefined;
+            formData.value.cvv = undefined;
+            formData.value.expiryDate = undefined;
+            formData.value.nameOnCard = undefined;
+            formData.value.notify = undefined;
+            formData.value.saveCard = undefined;
+            formData.value.termsConditions = false;
+            itemCard.value = null
+        }
         watch(formData.value, async (newQuestion, oldQuestion) => {
-            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, authStore.userData);
+            if(authStore.userData.paymentMethods.length > 0){ 
+                    showPayment.value = false
+                }else{
+                    showPayment.value = true
+                }
+            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, showPayment.value, itemCard.value,authStore.userData);
             sizeObjet.value = Object.entries(invalid.value).length
             if (newQuestion.placeyourbid > statusModal?.data?.vehicleDetails?.basePrice) {
                 counterKey.value += 1
@@ -413,11 +493,14 @@ export default {
                     currency: 'USD',
                 });
                 statusModal.data.amountBid = formatter.format(statusModal.data.amountBid)
+               
+
             }
         })
 
         return {
             isOpen,
+            openDropdown,
             formData,
             next,
             back,
@@ -434,7 +517,11 @@ export default {
             bucket,
             filterinput,
             isLetter,
-            formatExpiryDate
+            formatExpiryDate,
+            itemCard,
+            getCard,
+            showPayment,
+            showOptionNewPaymtent
         };
     },
     components: { CurrencyInput }

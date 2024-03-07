@@ -6,7 +6,7 @@
     <template v-else>
         <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
-            <div class="flex justify-between mt-5 gap-4">
+            <div class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class="hidden md:w-[29%] md:block">
                     <CreateAution class="hidden md:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
@@ -23,7 +23,7 @@
                                 <div class="navbar-right relative">
                                     <button @click="isOpen = !isOpen"
                                         class="flex gap-2 rounded-md  shadow-md px-2 bg-white items-center">
-                                        <p class="p-2 text-xs md:text-[16px] pb-1">Start date</p>
+                                        <p class="p-2 text-xs md:text-[16px] pb-1">{{ sortBy }}</p>
                                         <div class=" p-2 border-l-2 pr-0 border-[#efefef] ">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 viewBox="0 0 18 18" fill="none">
@@ -35,23 +35,23 @@
                                     </button>
                                     <div v-if="isOpen"
                                         class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
-                                        <div @click="setSorBy('all-status')"
+                                        <div @click="setSorBy('All Status')"
                                             class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                             All Status
                                         </div>
-                                        <div @click="setSorBy('needs-approval')"
+                                        <div @click="setSorBy('Needs Approval')"
                                             class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                             Needs Approval
                                         </div>
-                                        <div @click="setSorBy('accepted')"
+                                        <div @click="setSorBy('Accepted')"
                                             class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                             Accepted
                                         </div>
-                                        <div @click="setSorBy('dropped-off')"
+                                        <div @click="setSorBy('Dropped Off')"
                                             class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                             Dropped Off
                                         </div>
-                                        <div @click="setSorBy('reviewed')"
+                                        <div @click="setSorBy('Reviewed')"
                                             class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
                                             Reviewed
                                         </div>
@@ -402,7 +402,7 @@ export default {
         const autionModal = ref(null)
         const counter = ref(0)
         const statusModalView = ModalViewDetails()
-        const sortBy = ref('all-status')
+        const sortBy = ref('All Status')
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
             counter.value++
@@ -504,15 +504,15 @@ export default {
 
         const sortedData = computed(() => {
             switch (sortBy.value) {
-                case 'all-status':
+                case 'All Status':
                     return data.value
-                case 'needs-approval':
+                case 'Needs Approval':
                     return data.value.filter((aution) => aution.status == 'bids completed')
-                case 'accepted':
+                case 'Accepted':
                     return data.value.filter((aution) => aution.status == 'completed')
-                case 'dropped-off':
+                case 'Dropped Off':
                     return data.value.filter((aution) => aution.status == 'drop off')
-                case 'reviewed':
+                case 'Reviewed':
                     return data.value.filter((aution) => aution.status == 'reviewed')
                 default:
                     return data.value
@@ -551,7 +551,8 @@ export default {
             index,
             sortedData,
             setSorBy,
-            counter
+            counter,
+            sortBy
 
         };
     },

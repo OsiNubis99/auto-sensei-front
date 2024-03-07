@@ -1,11 +1,11 @@
 <template>
     <div v-show="storeModal.isActive"
-        class="fixed z-[100] inset-0 flex items-center justify-center bg-base-black  bg-opacity-50">
-        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl">
-            <div class="p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
-                <p class="text-xl text-white">Add Credit Card</p>
+        class="fixed z-[100] inset-0 flex items-end md:items-center justify-center bg-base-black  bg-opacity-50">
+        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
+            <div class="p-2 md:p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
+                <p class="text-sm md:text-xl text-white">Add Credit Card</p>
                 <svg @click="storeModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
-                    class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -43,8 +43,8 @@
                 </div>
                 <div class="m-4">
                     <button @click="addpayment"
-                        class="w-full p-2 items-center  bg-base-gray text-white  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
-                        <p>Add Credit Card</p>
+                        class="w-full py-2 md:p-2 items-center  bg-base-gray text-white  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
+                        <p class=" text-xs md:text-base" >Add Credit Card</p>
                     </button>
                 </div>
             </div>

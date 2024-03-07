@@ -28,7 +28,7 @@
         </p>
     </template>
     <div v-if="steps.step1" class="pt-4" @click="next(1)">
-        <button class="w-full md:h-[41px] h-[35px] text-blue-100 text-xs font-semibold bg-primary rounded">
+        <button class="w-full md:h-[41px] h-[35px] text-blue-100 text-xs md:text-base font-semibold bg-primary rounded">
             Next
         </button>
     </div>

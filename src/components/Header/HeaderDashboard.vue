@@ -1,7 +1,7 @@
 <template>
     <header class="relative">
         <div v-show="store?.userData?.type == 0">
-            <nav class=" hidden md:flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
+            <nav class="md:flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
                 <div class=" flex items-center">
                     <div class="flex gap-5 ">
                         <IconSearch />
@@ -21,9 +21,42 @@
                 </div>
                 <div class="flex items-center gap-3">
                     <RouterLink :to="{ name: 'home' }" class="flex items-center gap-2">
-                        <LogoIcon class=" w-[90%] md:w-full" />
+                        <LogoIcon class="w-[90%] md:w-full" />
                     </RouterLink>
+                    <div
+                        class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
+                        <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
 
+                            <RouterLink to="/inicio" :class="path == 'inicio' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
+                                <p>Dashboard</p>
+                            </RouterLink>
+                            <RouterLink :to="{ name: 'action-list', query: { state: 'drafts' } }"
+                                :class="path == 'action-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
+                                <p>Auctions List</p>
+                            </RouterLink>
+                            <RouterLink to="/dealer-list"
+                                :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
+                                <p>Dealer List</p>
+                            </RouterLink>
+                            <RouterLink to="/seller-list"
+                                :class="path == 'seller-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
+                                <p>Seller List</p>
+                            </RouterLink>
+                            <RouterLink to="/settings"
+                                :class="path == 'config-setting' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
+                                <p>Settings</p>
+                            </RouterLink>
+                            <RouterLink to="/faqs" :class="path == 'faqs' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
+                                <p>Faq</p>
+                            </RouterLink>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -272,9 +305,9 @@
 
                         </ul>
                     </div>
-                    </div>
+                </div>
             </nav>
-            </div>
+        </div>
         <template v-if="store?.userData?._id">
             <div v-show="open" class="fixed bg-[#0b1107b5] left-0 animation-menu-modal top-0 h-screen w-full z-[580]">
             </div>
@@ -331,7 +364,7 @@
                             <img class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.dealer?.picture" alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                {{ store.userData.dealer.name }}
+                                {{ store.userData?.dealer?.name }}
                             </p>
                         </div>
                         <div @click="logout" class="flex gap-2">
@@ -374,14 +407,14 @@
                             <img class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.seller?.picture" alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                {{ store.userData.seller.name }}
+                                {{ store.userData?.seller?.name }}
                             </p>
                         </div>
                         <div @click="goAccount" v-else class="flex items-center gap-2">
                             <img class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.dealer?.picture" alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                {{ store.userData.dealer.name }}
+                                {{ store.userData?.dealer?.name }}
                             </p>
                         </div>
                         <div @click="logout" class="flex gap-2">

@@ -43,17 +43,17 @@
                             review your posting
                         </p>
                         <div class="w-full flex-col items-start mt-4 flex gap-2">
-                            <label class="label-radio !text-[12px] !justify-start">
+                            <label class="label-radio text-[12px] md:text-base !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Launch now after verified"
                                     class="input-radio on" name="launch-option">
                                 Launch now after verified
                             </label>
-                            <label class="label-radio !text-[12px] !justify-start">
+                            <label class="label-radio text-[12px] md:text-base !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Choose the date & time"
                                     class="input-radio on" name="launch-option">
                                 Choose the date & time
                             </label>
-                            <label class="label-radio !text-[12px] !justify-start">
+                            <label class="label-radio text-[12px] md:text-base !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Choose after hours (weekend)"
                                     class="input-radio on" name="launch-option">
                                 Choose after hours (weekend)

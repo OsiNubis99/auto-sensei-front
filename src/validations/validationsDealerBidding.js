@@ -1,7 +1,7 @@
 import { regexEmail, regexPassword } from "../utils/Regex";
 
 
-export const validationsDealerBidding = (form, step, amount, from, user) => {
+export const validationsDealerBidding = (form, step, amount, from, showPayment, payment,user) => {
     let error = {};
     if (step.step1) {
         if (from == 'autoBid') {
@@ -28,11 +28,12 @@ export const validationsDealerBidding = (form, step, amount, from, user) => {
 
     }
     if (step.step2) {
-        if (user.payments.length > 0) {
+        console.log('showPayment', showPayment)
+        if (!showPayment) {
             if (!form.termsConditions) {
                 error.termsConditions = 'Required field'
             }
-            if (!form.creditCard) {
+            if (!payment?.card?.last4) {
                 error.creditCard = 'Required field'
             }
         } else {
@@ -64,7 +65,7 @@ export const validationsAutoBids = (form, step, amount, from, user) => {
 
     if (!form.placeyourbid) {
         error.placeyourbid = 'Required field'
-    }else if (form.placeyourbid <= amount) {
+    } else if (form.placeyourbid <= amount) {
         error.placeyourbid = 'Your bid is less than the minimum bid'
     }
     if (!form.notify) {
