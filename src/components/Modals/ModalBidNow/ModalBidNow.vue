@@ -1,9 +1,8 @@
 <template>
     <div v-show="statusModal.isActive"
         class="fixed z-[100] inset-0 flex items-end md:items-center justify-center bg-base-black  bg-opacity-50">
-        <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl  animation-fade-modal">
+        <div class=" w-full md:w-auto md:max-w-xl overflow-auto  bg-white rounded-lg shadow-xl  animation-fade-modal">
             <div class="md:p-4 p-2 rounded-t-lg  bg-base-black flex items-center justify-between">
-                <p class="text-xl text-white">PEPITO</p>
                 <p v-if="statusModal.from == 'autoBid'" class=" text-sm md:text-xl text-white">Auto Bid</p>
                 <p v-if="statusModal.from == 'bidNow'" class=" text-sm md:text-xl text-white">Bid Now</p>
                 <svg @click="closet" xmlns="http://www.w3.org/2000/svg" class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none"
@@ -31,7 +30,7 @@
                         <img class=" shadow-xl w-full h-full rounded-lg object-cover " v-else
                             src="@/assets/img/jpg/image.jpg" alt="">
                     </div>
-                    <div class="md:h-[130px] flex justify-between flex-col">
+                    <div class="md:h-full flex justify-between flex-col">
                         <p class=" font-semibold text-sm :text-base ">{{ statusModal.data?.vehicleDetails?.year }} {{
         statusModal.data?.vehicleDetails?.make }} {{
         statusModal.data?.vehicleDetails?.model }}</p>

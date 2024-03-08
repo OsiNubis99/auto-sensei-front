@@ -11,7 +11,7 @@
         </swiper>
         <div class="w-full flex flex-col md:flex-row justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : ''">
             <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
-                class="flex p-5  flex-col gap-3">
+                class="flex md:p-5  p-2 flex-col gap-3">
                 <div class="">
                     <div class="font-bold md:text-xl">{{ aution?.vehicleDetails?.year }} {{
                         aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
@@ -79,7 +79,7 @@
                 </div>
                 <div v-if="aution?.status === 'live'" class="flex gap-4 " :class="changeLayouts ? 'flex-col' : ''">
                     <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
-                        class=" w-fit flex gap-3 cursor-pointer rounded-lg items-center">
+                        class=" w-fit md:flex gap-3 hidden cursor-pointer rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path
                                 d="M5.37852 15.8333L1.66602 18.75V3.33333C1.66602 3.11232 1.75381 2.90036 1.91009 2.74408C2.06637 2.5878 2.27834 2.5 2.49935 2.5H17.4993C17.7204 2.5 17.9323 2.5878 18.0886 2.74408C18.2449 2.90036 18.3327 3.11232 18.3327 3.33333V15C18.3327 15.221 18.2449 15.433 18.0886 15.5893C17.9323 15.7455 17.7204 15.8333 17.4993 15.8333H5.37852ZM5.83268 8.33333V10H7.49935V8.33333H5.83268ZM9.16602 8.33333V10H10.8327V8.33333H9.16602ZM12.4993 8.33333V10H14.166V8.33333H12.4993Z"
@@ -180,7 +180,7 @@
                 </div>
             </div>
             <div class="md:hidden">
-                <div class="flex  p-4 pt-1 pb-0 justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col h-full '">
+                <div class="flex p-2  md:p-4 pt-1 pb-0 justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col h-full '">
                     <div class=" flex w-full  justify-between items-center">
 
                         <div class="flex items-start justify-center flex-col">

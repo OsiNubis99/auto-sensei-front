@@ -431,10 +431,10 @@
                 </div>
             </nav>
         </template>
-        <div :class="[scrollPosition > 6 ? 'top-0' : 'top-[56px]', show ? 'visible opacity-100 transition-all ease-out duration-500 ' : ' invisible opacity-0  transition-all ease-out duration-300 ']"
-            class="fixed z-[1000] right-[60px]   shadow-xl  transition-all ease-linear duration-200  w-1/4 flex flex-col rounded-lg bg-white modal-notificationes">
+        <div :class="[scrollPosition > 6 ? 'top-0' : ' top-[2%] md:top-[56px]', show ? 'visible opacity-100 transition-all ease-out duration-500 ' : ' invisible opacity-0  transition-all ease-out duration-300 ']"
+            class="fixed z-[1000] md:right-[60px] right-[5%] left-[5%] w-[90%]  shadow-xl  transition-all ease-linear duration-200   md:w-1/4 flex flex-col rounded-lg bg-white modal-notificationes">
             <div v-for="(item, index) in notiAutions" :key="index"
-                :class="` border-b px-2 py-3 border-[#cfcfcf] pb-3 hover:bg-[#d6d6d6] transition-all cursor-pointer ease-linear duration-200 animate-fade-down animate-once animate-duration-2000 animate-delay-600 animate-ease-in-out`">
+                :class="` border-b p-2 md:px-2 md:py-3 border-[#cfcfcf] md:pb-3 hover:bg-[#d6d6d6] transition-all cursor-pointer ease-linear duration-200 animate-fade-down animate-once animate-duration-2000 animate-delay-600 animate-ease-in-out`">
                 <RouterLink :to="{ name: 'action-details-dealer', params: { id: item?._id } }" class="flex gap-2">
                     <div class="w-[40%]">
                         <img class=" rounded-lg shadow-lg w-full h-full object-cover"
@@ -442,15 +442,15 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 17"
+                            <svg class="h-[17px] w-[17px] md:h-[25px] md:w-[25px]" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 17"
                                 fill="none">
                                 <path
                                     d="M8.00016 15.1668C4.31816 15.1668 1.3335 12.1822 1.3335 8.50016C1.3335 4.81816 4.31816 1.8335 8.00016 1.8335C11.6822 1.8335 14.6668 4.81816 14.6668 8.50016C14.6668 12.1822 11.6822 15.1668 8.00016 15.1668ZM7.3335 10.5002V11.8335H8.66683V10.5002H7.3335ZM7.3335 5.16683V9.16683H8.66683V5.16683H7.3335Z"
                                     fill="#FF333E" />
                             </svg>
-                            <p class="text-error text-lg">Outbid Alert!</p>
+                            <p class="text-error text-sm md:text-lg">Outbid Alert!</p>
                         </div>
-                        <p class="text-sm">Your bid for the
+                        <p class=" text-xs md:text-sm">Your bid for the
                             <span class="font-bold">
                                 {{ item?.vehicleDetails?.year }} {{ item?.vehicleDetails?.make }}{{
             item?.vehicleDetails?.model }}
@@ -463,7 +463,7 @@
                     </div>
                 </RouterLink>
             </div>
-            <p class="p-4 animate-fade-down animate-once animate-duration-2000 font-medium text-center">
+            <p class="md:p-4 p-2 animate-fade-down animate-once text-xs md:text-base animate-duration-2000 font-medium text-center">
                 See All Outbid
                 {{ notiAutions?.length }}
             </p>

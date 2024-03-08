@@ -60,15 +60,15 @@
                     <p class="font-semibold">2016 Mazda MX-5 Miata Club</p>
                 </div>
             </div>
-            <div class="flex flex-col md:mt-7 md:gap-5">
-                 <div class="flex gap-1 w-[600px] md:w-full md:gap-5">
+            <div class="flex flex-col md:mt-7 overflow-hidden md:gap-5">
+                <div class="flex gap-1 w-[600px] overflow-auto md:w-full md:gap-5">
                     <swiper v-if="dataDetails?.photos?.length > 0" :style="{
-                        '--swiper-navigation-color': '#fff',
-                        '--swiper-pagination-color': '#fff',
-                    }" :spaceBetween="10" :navigation="true" :slidesPerView="1" :thumbs="{ swiper: thumbsSwiper }"
+            '--swiper-navigation-color': '#fff',
+            '--swiper-pagination-color': '#fff',
+        }" :spaceBetween="10" :navigation="true" :slidesPerView="1" :thumbs="{ swiper: thumbsSwiper }"
                         :modules="modules" class="myCrousel2">
-                        <swiper-slide v-if="dataDetails?.photos?.length > 0" v-for="(photo, index) in dataDetails?.photos"
-                            :key="index">
+                        <swiper-slide v-if="dataDetails?.photos?.length > 0"
+                            v-for="(photo, index) in dataDetails?.photos" :key="index">
                             <img :src="bucket + photo.url" alt="">
 
                         </swiper-slide>
@@ -83,7 +83,8 @@
                             <div v-if="index == 5" class="relative flex justify-center items-center cursor-pointer">
                                 <img :src="bucket + photo.url" alt="">
                                 <div class="bg-[#000000a3] absolute w-full h-full top-0 z-50 "></div>
-                                <p class="text-white absolute md:text-base text-[8px]  whitespace-pre z-50 "> All Photos ({{ dataDetails?.photos?.length }})</p>
+                                <p class="text-white absolute md:text-base text-[8px]  whitespace-pre z-50 "> All Photos
+                                    ({{ dataDetails?.photos?.length }})</p>
                             </div>
                             <img v-else :src="bucket + photo.url" alt="">
                         </swiper-slide>
@@ -342,7 +343,7 @@
                             class="border-t-[1px] md:p-4 flex-col items-center border-[#E0E0E0]">
                             <div class="flex gap-3  justify-between items-start pb-2 ">
                                 <div class="flex flex-col  w-full ">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
                                         <p class="text-sm">Auction Status</p>
                                         <div class="flex items-center gap-2 ">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -351,12 +352,12 @@
                                                     d="M17.5 8.38583V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5H15.8333C14.1845 4.14887 11.0856 5.07273 9.16667 5.51068V14.4893C11.0856 14.9272 14.1845 15.8512 15.8333 17.5H16.6667C17.1269 17.5 17.5 17.1269 17.5 16.6667V11.6142C18.2188 11.4292 18.75 10.7766 18.75 10C18.75 9.22342 18.2188 8.57083 17.5 8.38583ZM4.16667 5.83333C3.24619 5.83333 2.5 6.57952 2.5 7.5V12.5C2.5 13.4205 3.24619 14.1667 4.16667 14.1667H5L5.83333 18.3333H7.5V5.83333H4.16667Z"
                                                     fill="black" />
                                             </svg>
-                                            <p class=" capitalize text-xl font-medium ">Live Now</p>
+                                            <p class=" capitalize text-xs md:text-xl font-medium ">Live Now</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col  w-full">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
                                         <p class="text-sm">Starts Date & Time</p>
                                         <div class="flex gap-2">
                                             <p class="capitalize text-lg font-medium ">{{
@@ -414,26 +415,26 @@
                             class="border-t-[1px] p-4 flex-col items-center border-[#E0E0E0]">
                             <div class="flex gap-3 justify-between items-start pb-2 ">
                                 <div class="flex flex-col  w-full ">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
                                         <p class="text-sm">Auction Status</p>
                                         <div class="flex items-center gap-2 ">
-                                            <div class="w-4 h-4 rounded-full bg-error "></div>
-                                            <p class=" capitalize text-xl font-medium ">Live Now</p>
+                                            <div class="md:w-4 md:h-4 w-3 h-3 rounded-full bg-error "></div>
+                                            <p class=" capitalize text-sm md:text-xl font-medium ">Live Now</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col  w-full">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
-                                        <p class="text-sm">Bid Status</p>
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
+                                        <p class=" text-xs md:text-sm">Bid Status</p>
                                         <div class="flex gap-2">
 
                                             <template v-if="dataDetails.participate">
                                                 <p v-if="dataDetails?.bids[0].participant._id == auth.userData._id"
-                                                    class="py-2 px-4 border rounded-full text-[#05A54B] border-[#05A54B] flex justify-center items-center text-left">
+                                                    class="md:py-2 py-1 px-2 md:px-4 md:text-base text-sm border rounded-full text-[#05A54B] border-[#05A54B] flex justify-center items-center text-left">
                                                     Leading
                                                 </p>
                                                 <p v-else
-                                                    class="py-2 px-4 border rounded-full text-[#FF333E] border-[#FF333E] flex justify-center items-center text-left">
+                                                    class="md:py-2 py-1 px-2 md:px-4 md:text-base text-sm border rounded-full text-[#FF333E] border-[#FF333E] flex justify-center items-center text-left">
                                                     Outbid
                                                 </p>
                                             </template>
@@ -449,21 +450,21 @@
                             </div>
                             <div class="flex gap-3 justify-between items-start  ">
                                 <div class="flex flex-col  w-full ">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
-                                        <p class="text-sm">Current bid</p>
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
+                                        <p class=" text-xs md:text-sm">Current bid</p>
                                         <div class="flex items-center gap-2 ">
                                             <p v-if="dataDetails?.bids[0]?.amount"
                                                 class="capitalize text-xl font-medium">
                                                 ${{ dataDetails?.bids[0]?.amount }}</p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
-                                                dataDetails?.vehicleDetails?.basePrice }}</p>
+            dataDetails?.vehicleDetails?.basePrice }}</p>
                                             <p v-else>$0</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col  w-full">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
-                                        <p class="text-sm">Total Bids</p>
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
+                                        <p class=" text-xs md:text-sm">Total Bids</p>
                                         <div class="flex gap-2">
                                             <p class="text-xl font-medium">{{ dataDetails?.bids?.length }} Bids</p>
                                         </div>
@@ -490,7 +491,7 @@
                                             d="M9.99984 18.8332C5.39734 18.8332 1.6665 15.1023 1.6665 10.4998C1.6665 5.89734 5.39734 2.1665 9.99984 2.1665C14.6023 2.1665 18.3332 5.89734 18.3332 10.4998C18.3332 15.1023 14.6023 18.8332 9.99984 18.8332ZM9.99984 17.1665C11.7679 17.1665 13.4636 16.4641 14.7139 15.2139C15.9641 13.9636 16.6665 12.2679 16.6665 10.4998C16.6665 8.73173 15.9641 7.03604 14.7139 5.78579C13.4636 4.53555 11.7679 3.83317 9.99984 3.83317C8.23173 3.83317 6.53604 4.53555 5.28579 5.78579C4.03555 7.03604 3.33317 8.73173 3.33317 10.4998C3.33317 12.2679 4.03555 13.9636 5.28579 15.2139C6.53604 16.4641 8.23173 17.1665 9.99984 17.1665ZM9.1665 12.9998H10.8332V14.6665H9.1665V12.9998ZM9.1665 6.33317H10.8332V11.3332H9.1665V6.33317Z"
                                             fill="#0B1107" />
                                     </svg>
-                                    <p>All bids are binding and all sales are final</p>
+                                    <p class=" text-xs md:text-base">All bids are binding and all sales are final</p>
                                 </div>
 
                             </div>
@@ -502,26 +503,28 @@
                             class="border-t-[1px] p-4 flex-col items-center border-[#E0E0E0]">
                             <div class="flex gap-3 justify-between items-start pb-2 ">
                                 <div class="flex flex-col  w-full ">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
-                                        <p class="text-sm">Auction Status</p>
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
+                                        <p class="text-xs md:text-sm">Auction Status</p>
                                         <div class="flex items-center gap-2 ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            <svg class=" w-[15px] h-[15px] md:h-[20px] md:w-[20px]" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                 viewBox="0 0 20 20" fill="none">
                                                 <path
                                                     d="M8.33925 1.75273C7.17128 1.37464 5.90159 1.90056 5.34305 2.99381L4.67156 4.30812C4.59178 4.46428 4.46477 4.59129 4.3086 4.67107L2.9943 5.34256C1.90105 5.9011 1.37513 7.17079 1.75322 8.33876L2.20777 9.74292C2.26178 9.90976 2.26178 10.0894 2.20777 10.2563L1.75322 11.6604C1.37513 12.8284 1.90105 14.0981 2.9943 14.6567L4.3086 15.3281C4.46477 15.4079 4.59178 15.5349 4.67156 15.6911L5.34305 17.0054C5.90159 18.0987 7.17128 18.6246 8.33925 18.2465L9.74341 17.7919C9.91025 17.7379 10.0899 17.7379 10.2567 17.7919L11.6609 18.2465C12.8289 18.6246 14.0986 18.0987 14.6572 17.0054L15.3286 15.6911C15.4084 15.5349 15.5354 15.4079 15.6916 15.3281L17.0059 14.6567C18.0992 14.0981 18.6251 12.8284 18.247 11.6604L17.7924 10.2563C17.7384 10.0894 17.7384 9.90976 17.7924 9.74292L18.247 8.33876C18.6251 7.17079 18.0992 5.9011 17.0059 5.34256L15.6916 4.67107C15.5354 4.59129 15.4084 4.46428 15.3286 4.30812L14.6572 2.99381C14.0986 1.90056 12.8289 1.37464 11.6609 1.75273L10.2567 2.20728C10.0899 2.26128 9.91025 2.26129 9.74341 2.20728L8.33925 1.75273ZM5.63322 9.79734L6.81174 8.61876L9.16875 10.9758L13.8828 6.2618L15.0613 7.44031L9.16875 13.3328L5.63322 9.79734Z"
                                                     fill="#05A54B" />
                                             </svg>
-                                            <p class=" capitalize text-xl font-medium ">Completed</p>
+                                            <p class=" capitalize text-sm md:text-xl font-medium ">Completed</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col  w-full ">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
                                         <p class="text-sm">Final Bid</p>
                                         <div class="flex items-center gap-2 ">
-                                            <p v-if="dataDetails?.bids[0]?.amount"
-                                                class="capitalize text-xl font-medium">
-                                                ${{ dataDetails?.bids[0]?.amount }}</p>
+                                            <p  v-if="dataDetails?.bids[0]?.amount"
+                                                class="capitalize text-sm md:text-xl font-medium">
+                                                ${{dataDetails?.bids[0]?.amount}}
+                                             <!--    ${{makeFriendly(dataDetails?.bids[0]?.amount)}} -->
+                                            </p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
                                                 dataDetails?.vehicleDetails?.basePrice }}</p>
                                             <p v-else>$0</p>
@@ -532,10 +535,10 @@
                             <div class="flex gap-3 justify-between items-start  ">
 
                                 <div class="flex flex-col  w-full">
-                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-4 rounded-lg ">
+                                    <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
                                         <p class="text-sm">Expected drop off date</p>
                                         <div class="flex gap-2">
-                                            <p class="text-xl font-medium">{{
+                                            <p class=" text-md md:text-xl font-medium">{{
                                                 moment(dataDetails.vehicleDetails.dropOffDate).format('MMMM DD, YYYY')
                                                 }}
                                             </p>
@@ -695,6 +698,16 @@ export default {
                 getDataAution(route.params.id)
             }
         }
+        function intlFormat(num) {
+            return new Intl.NumberFormat().format(Math.round(num * 10) / 10);
+        }
+        function makeFriendly(num) {
+            if (num >= 1000000)
+                return intlFormat(num / 1000000) + 'M';
+            if (num >= 1000)
+                return intlFormat(num / 1000) + 'k';
+            return intlFormat(num);
+        }
         onMounted(() => {
             getDataAution(route.params.id)
 
@@ -713,7 +726,8 @@ export default {
             remind,
             remindCancel,
             loadingButton,
-            confirmVehicle
+            confirmVehicle,
+            makeFriendly
         };
     },
 };
