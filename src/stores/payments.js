@@ -9,9 +9,9 @@ export const usePayments = defineStore("payments", {
         getCountry(params) {
             var config = {
                 method: 'get',
-                url: 'https://api.countrystatecity.in/v1/countries',
+                url: 'https://api.countrystatecity.in/v1/countries/CA/states/AB',
                 headers: {
-                    'X-CSCAPI-KEY': 'API_KEY'
+                    'X-CSCAPI-KEY': 'N1dCMW1kc3U1cG1wdkZTNVBGcHZaY0w5ekhQSnkyNkRVMXZkRGFSSA=='
                 }
             };
             return new Promise((resolve, reject) => {

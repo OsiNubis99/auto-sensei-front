@@ -19,13 +19,10 @@
                             alt="">
                     </div>
                     <div class="h-[100px] mb-2 flex md:justify-between flex-col">
-                        <p class=" font-semibold capitalize md:text-base text-sm  ">{{
-        statusModal.data?.vehicleDetails?.year }} {{
-        statusModal.data?.vehicleDetails?.make }} {{
-        statusModal.data?.vehicleDetails?.model }}</p>
+                        <p class=" font-semibold capitalize md:text-base text-sm">{{statusModal.data?.vehicleDetails?.year }} {{statusModal.data?.vehicleDetails?.make }} {{statusModal.data?.vehicleDetails?.model }}</p>
                         <div>
-                            <p  class="capitalize text-sm md:text-base mt-8">Current Bid</p>
-                            <p class="font-medium text-sm text-base-black md:text-2xl">${{ statusModal.data?.bids[0]?.biddingLimit }}</p>
+                            <p class="capitalize text-sm md:text-base mt-8">Current Bid</p>
+                            <p class="font-medium text-sm text-base-black md:text-2xl">${{statusModal.data?.bids[0]?.amount }}</p>
                         </div>
                     </div>
                 </div>
@@ -44,7 +41,7 @@
                                     </svg>
                                     <p class=" text-xs font-medium md:text-base">Maximum Bid Amount</p>
                                 </div>
-                                <p class="font-medium text-xs md:text-base">$200,000</p>
+                                <p class="font-medium text-xs md:text-base">${{ statusModal.data?.bids[0]?.biddingLimit }}</p>
                             </div>
                             <div class="flex gap-2 items-center justify-between">
                                 <div class="flex gap-2 items-center">
@@ -57,7 +54,7 @@
                                     </svg>
                                     <p class=" text-xs font-medium md:text-base">Credit Card Name</p>
                                 </div>
-                                <p class="font-medium text-xs md:text-base">John Cenna</p>
+                                <p class="font-medium text-xs md:text-base">{{ statusModal.data?.bids[0]?.paymentMethod?.billingDetails?.name }}</p>
                             </div>
                             <div class="flex gap-2 items-center justify-between">
                                 <div class="flex gap-2 items-center">
@@ -69,14 +66,15 @@
                                     </svg> -->
                                     <p class=" text-xs whitespace-pre font-medium md:text-base">Credit Card Number</p>
                                 </div>
-                                <p class="font-medium text-xs whitespace-pre md:text-base">**** **** **** 1231</p>
+                                <p class="font-medium text-xs whitespace-pre md:text-base">**** **** **** {{ statusModal.data?.bids[0]?.paymentMethod?.card?.last4 }}</p>
                             </div>
                         </div>
 
                     </div>
                     <div class="flex w-full gap-4 p-2 md:p-5 pt-0 items-center">
                         <button @click="candelAutobid(1, 'cancel')"
-                            class="btn w-full border rounded-lg border-[#E0E0E0] whitespace-pre text-error ">Cancel Auto Bid</button>
+                            class="btn w-full border rounded-lg border-[#E0E0E0] whitespace-pre text-error ">Cancel Auto
+                            Bid</button>
                         <button @click="editAutobid(1, 'edit')" class="btn w-full bg-primary text-blue-dark ">Edit Auto
                             Bid</button>
                     </div>
@@ -97,7 +95,8 @@
                         <p class="text-[#858585] mt-2"> {{ invalid?.placeyourbid }} </p>
                         <div class="form-group mt-4">
                             <input type="checkbox" v-model="formData.notify" id="html">
-                            <label for="html" class="text-xs md:text-base">Notify me when the current bid approaches my maximum bid amount</label>
+                            <label for="html" class="text-xs md:text-base">Notify me when the current bid approaches my
+                                maximum bid amount</label>
                         </div>
                         <button @click="updateAmounBit"
                             :class="sizeObjet == 0 ? 'bg-primary' : 'bg-base-gray text-white'"
@@ -253,12 +252,12 @@ export default {
         }
         const updateAmounBit = async () => {
             let payload = {
-                amount: formData.value.placeyourbid,
                 biddingLimit: formData.value.placeyourbid,
             }
+
             loading.value = true
             try {
-                await autionsStore.autionsBit({ uuid: statusModal.data._id, payload })
+                await autionsStore.autionsBitUpdate({ uuid: statusModal.data._id, payload })
             } catch (error) {
                 toast(error?.response?.data?.message || "An error has occurred", {
                     type: "error",

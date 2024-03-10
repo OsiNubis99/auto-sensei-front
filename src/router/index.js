@@ -268,11 +268,11 @@ const routes = [
         name: 'about',
         component: () => import('../views/AboutView.vue')
       },
-      {
+   /*    {
         path: '/sold-auctions',
         name: 'sold-auctions',
         component: () => import('../views/SoldAuctions.vue')
-      },
+      }, */
       {
         path: '/how-it-works',
         name: 'how-it-works',

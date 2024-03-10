@@ -475,12 +475,12 @@ export default {
             }
         }
         const getCountry = async () => {
-            /*   try {
+              try {
                   const res = await payment.getCountry()
                   console.log('resresresresresres', res)
               } catch (error) {
   
-              } */
+              }
         }
 
         onMounted(() => {

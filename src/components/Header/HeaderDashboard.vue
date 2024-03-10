@@ -165,11 +165,11 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sell a Car</p>
                             </RouterLink>
-                            <RouterLink to="#"
+                          <!--   <RouterLink to="#"
                                 :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
-                            </RouterLink>
+                            </RouterLink> -->
                             <RouterLink to="/faqs-seller"
                                 :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
@@ -287,11 +287,11 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dealer Bidding</p>
                             </RouterLink>
-                            <RouterLink to="#"
+                        <!--     <RouterLink to="#"
                                 :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
-                            </RouterLink>
+                            </RouterLink> -->
                             <RouterLink to="/faqs-dealers"
                                 :class="path == 'faqs-dealers' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
@@ -341,11 +341,11 @@
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>Sell a Car</p>
                         </RouterLink>
-                        <RouterLink @click="open = false" to="#"
+                      <!--   <RouterLink @click="open = false" to="#"
                             :class="path == 'auto-list' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>Sold Auction</p>
-                        </RouterLink>
+                        </RouterLink> -->
                         <RouterLink @click="open = false" to="/faqs-seller"
                             :class="path == 'dealer-list' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
@@ -386,11 +386,11 @@
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">Dealer Bidding</p>
                         </RouterLink>
-                        <RouterLink @click="open = false" to="#"
+                     <!--    <RouterLink @click="open = false" to="#"
                             :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">Sold Auction</p>
-                        </RouterLink>
+                        </RouterLink> -->
                         <RouterLink @click="open = false" to="/faqs-dealers"
                             :class="path == 'faqs-dealers' ? 'bg-[#303E18] text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">

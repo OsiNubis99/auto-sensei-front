@@ -3,23 +3,25 @@
         class="fixed z-[100] inset-0 flex items-end md:items-center justify-center bg-base-black  bg-opacity-50">
         <div class=" w-full md:w-auto md:max-w-xl overflow-auto  bg-white rounded-lg shadow-xl  animation-fade-modal">
             <div class="md:p-4 p-2 rounded-t-lg  bg-base-black flex items-center justify-between">
-                <p v-if="statusModal.from == 'autoBid'" class=" text-sm md:text-xl text-white">Auto Bid</p>
+                <p v-if="statusModal.from == 'autoBid'" class=" text-sm md:text-xl text-white">PEPITOOOOOOOAuto Bid</p>
                 <p v-if="statusModal.from == 'bidNow'" class=" text-sm md:text-xl text-white">Bid Now</p>
-                <svg @click="closet" xmlns="http://www.w3.org/2000/svg" class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none"
-                    viewBox="0 0 24 24" stroke="#fff">
+                <svg @click="closet" xmlns="http://www.w3.org/2000/svg" class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer"
+                    fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
             <div v-if="steps.step1 || steps.step2" class="md:p-4 p-2 flex gap-3 pb-2 flex-col  ">
                 <div class="flex justify-start items-center gap-2">
-                    <p class="text-xs md:text-base " :class="steps.step1 ? 'text-base-black font-semibold' : 'text-[#858585]'">Select Amount</p>
+                    <p class="text-xs md:text-base "
+                        :class="steps.step1 ? 'text-base-black font-semibold' : 'text-[#858585]'">Select Amount</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path
                             d="M8.78145 8.00048L5.48145 4.70048L6.42411 3.75781L10.6668 8.00048L6.42411 12.2431L5.48145 11.3005L8.78145 8.00048Z"
                             fill="#858585" />
                     </svg>
-                    <p class="text-xs md:text-base " :class="steps.step2 ? 'text-base-black font-semibold' : 'text-[#858585]'">Payment</p>
+                    <p class="text-xs md:text-base "
+                        :class="steps.step2 ? 'text-base-black font-semibold' : 'text-[#858585]'">Payment</p>
                 </div>
             </div>
             <template v-if="steps.step1">
@@ -36,7 +38,14 @@
         statusModal.data?.vehicleDetails?.model }}</p>
                         <div>
                             <p class="capitalize text-sm md:text-base mt-4">Current Bid</p>
-                            <p class="font-semibold">${{ statusModal.data?.vehicleDetails?.basePrice }}</p>
+                              <p v-if="statusModal.data?.bids[0]?.amount"
+                                class=" font-medium text-lg md:text-2xl text-base-black  ">
+                                ${{ statusModal.data.bids[0].amount }}
+                            </p>
+                            <p v-else-if="statusModal.data?.vehicleDetails?.basePrice"
+                                class=" font-medium text-2xl text-base-black  ">
+                                ${{ statusModal.data?.vehicleDetails?.basePrice }}</p>
+                            <p v-else class="font-medium text-2xl text-base-black ">0$</p>
                         </div>
                     </div>
                 </div>
@@ -52,7 +61,8 @@
                         <p class="text-[#858585] text-xs md:text-base mt-2"> {{ invalid?.placeyourbid }} </p>
                         <div class="form-group md:mt-4">
                             <input type="checkbox" v-model="formData.notify" id="html">
-                            <label class="text-xs md:text-base" for="html">Notify me when the current bid approaches my maximum bid amount</label>
+                            <label class="text-xs md:text-base" for="html">Notify me when the current bid approaches my
+                                maximum bid amount</label>
                         </div>
                     </div>
                 </template>
@@ -61,6 +71,7 @@
                     <div class="mt-2 p-5 flex items-center gap-4 border-[#E0E0E0] border-t-[1px] ">
                         <CurrencyInput :key="counterKey" :error='invalid' v-model="formData.placeyourbid"
                             :options="{ currency: 'USD' }" :label="'Place your bid'" :placeHolder="'$ Min 100,100'" />
+                        {{ formData.placeyourbid }}
                         <button @click="addAmount"
                             class="btn mt-8 bg-blue-dark font-medium rounded-md  text-primary">+$100</button>
                     </div>
@@ -104,10 +115,12 @@
                                         class="flex flex-col   "
                                         :class="index !== authStore.userData.paymentMethods.length - 1 ? 'hover:bg-primary gap-6  cursor-pointer transition-all ease-linear duration-300 ' : ''">
                                         <div :class="index !== authStore.userData.paymentMethods.length - 1 ? ' py-1 ' : ''"
-                                            @click="getCard(payments)" class="flex px-2 md:px-6 justify-between w-full  ">
+                                            @click="getCard(payments)"
+                                            class="flex px-2 md:px-6 justify-between w-full  ">
                                             <p class="text-base-black text-start text-xs md:text-base  w-full">
                                                 {{ payments?.billingDetails?.name }}</p>
-                                            <p class="text-base-black text-end  text-xs md:text-base w-full">**** **** ****
+                                            <p class="text-base-black text-end  text-xs md:text-base w-full">**** ****
+                                                ****
                                                 {{ payments?.card?.last4 }}</p>
                                         </div>
                                         <p @click="showOptionNewPaymtent('add-card')"
@@ -121,7 +134,8 @@
                         </div>
                         <div class="form-group">
                             <input type="checkbox" v-model="formData.termsConditions" id="css">
-                            <label for="css" class=" text-xs md:text-base">Please agree to our <a href="#" class="font-semibold underline">Terms &
+                            <label for="css" class=" text-xs md:text-base">Please agree to our <a href="#"
+                                    class="font-semibold underline">Terms &
                                     Conditions</a> to
                                 proceed.</label>
                         </div>
@@ -165,7 +179,8 @@
                             </div>
                             <div class="form-group ">
                                 <input type="checkbox" v-model="formData.termsConditions" id="css">
-                                <label class="text-xs md:text-base " for="css">Please agree to our <a href="#" class="font-semibold underline">Terms &
+                                <label class="text-xs md:text-base " for="css">Please agree to our <a href="#"
+                                        class="font-semibold underline">Terms &
                                         Conditions</a> to
                                     proceed.</label>
                             </div>
@@ -239,8 +254,10 @@
                             </clipPath>
                         </defs>
                     </svg>
-                    <p class="  text-sm md:text-base text-center font-semibold">You're all set! Let's keep your bids winning</p>
-                    <p class=" text-sm md:text-base text-center">Give your maximum bid amount and save the time of watching the bid
+                    <p class="  text-sm md:text-base text-center font-semibold">You're all set! Let's keep your bids
+                        winning</p>
+                    <p class=" text-sm md:text-base text-center">Give your maximum bid amount and save the time of
+                        watching the bid
                         constantly
                         with auto bid. Are you
                         sure you want to set Auto Bid on this auction ? You can change your Auto Bid later as well.</p>
@@ -305,8 +322,10 @@ export default {
         const authStore = useAuthStore()
         const itemCard = ref(null)
         const addAmount = () => {
-            counterKey.value += 1
-            statusModal.data.vehicleDetails.basePrice += 100
+            console.log('statusModal.data.vehicleDetails.basePrice', statusModal.data.vehicleDetails.basePrice)
+            /*  counterKey.value += 1 */
+            formData.value.placeyourbid = (statusModal.data.vehicleDetails.basePrice += 100)
+            console.log('formData.placeyourbid', formData.placeyourbid)
             invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from);
             sizeObjet.value = Object.entries(invalid.value).length
         }
@@ -360,8 +379,16 @@ export default {
 
                     let payload = null
                     if (statusModal.from == 'autoBid') {
+                        let currentBid = statusModal.data?.bids[0]?.amount 
+                        if(!currentBid){
+                           currentBid =  statusModal?.data?.vehicleDetails?.basePrice
+                        }
+                        let currentAmount = currentBid + 100
+                        if(formData.value.placeyourbid < currentAmount ){
+                            currentAmount = formData.value.placeyourbid
+                        }
                         payload = {
-                            amount: formData.value.placeyourbid,
+                            amount: currentAmount,
                             biddingLimit: formData.value.placeyourbid,
                             idPaymentMethod: itemCard.value._id
                         }
@@ -451,6 +478,7 @@ export default {
         }
         const getCard = (card) => {
             console.log('card', card)
+            formData.value.termsConditions = undefined
             itemCard.value = card
             openDropdown.value = false
         }
@@ -473,11 +501,7 @@ export default {
             itemCard.value = null
         }
         watch(formData.value, async (newQuestion, oldQuestion) => {
-          /*   if (authStore.userData.paymentMethods.length > 0) {
-                showPayment.value = false
-            } else {
-                showPayment.value = true
-            } */
+
             invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, showPayment.value, itemCard.value, authStore.userData);
             sizeObjet.value = Object.entries(invalid.value).length
             if (newQuestion.placeyourbid > statusModal?.data?.vehicleDetails?.basePrice) {
@@ -485,6 +509,10 @@ export default {
             }
         })
         onMounted(() => {
+            console.log('statusModal.data', statusModal.data)
+            if (!authStore.userData.paymentMethods.length > 0) {
+                showPayment.value = true
+            }
             if (statusModal.data.bids[0]) {
                 statusModal.data.vehicleDetails.basePrice = statusModal.data.bids[0].amount
                 const formatter = new Intl.NumberFormat('en-US', {

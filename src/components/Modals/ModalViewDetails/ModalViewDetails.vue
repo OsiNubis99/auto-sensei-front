@@ -201,7 +201,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="statusModal.dataAutiont?.status == 'completed'" class="  fixed bottom-2 p-2  w-full">
+                        <div v-if="statusModal.dataAutiont?.status == 'completed'" class=" block md:hidden fixed bottom-2 p-2  w-full">
                     <RouterLink
                         :to="{ name: 'inbox-seller', query: { id: statusModal.dataAutiont?._id + '-' + statusModal.dataAutiont?.bids[0].participant._id } }"
                         class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>

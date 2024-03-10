@@ -155,6 +155,18 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     });
             });
         },
+        autionsBitUpdate({ uuid, payload }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .patch(`/auction/bid/${uuid}`, payload)
+                    .then((response) => {
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
         autionsCancel(uuid) {
             return new Promise((resolve, reject) => {
                 axios

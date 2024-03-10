@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                         </div>
                     </div>
                     <div class="p-2" v-if="sortedData.length > 0"
@@ -140,6 +140,41 @@ export default {
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             const i = data.value.findIndex(x => x._id === newQuestion._id)
             data.value[i] = newQuestion
+            if (autionUpdate.value.status == 'live') {
+                const i = data.value.findIndex(x => x._id === newQuestion._id)
+                data.value[i] = newQuestion
+                let photos = []
+                if (data.value[i]?.vehicleDetails?.additionalDocuments,
+                    data.value[i]?.vehicleDetails?.exteriorPhotos,
+                    data.value[i]?.vehicleDetails?.interiorPhotos,
+                    data.value[i]?.vehicleDetails?.driverLicense) {
+                    var d = photos.concat(
+                        data.value[i]?.vehicleDetails?.additionalDocuments,
+                        data.value[i]?.vehicleDetails?.exteriorPhotos,
+                        data.value[i]?.vehicleDetails?.interiorPhotos,
+                        data.value[i]?.vehicleDetails?.vehicleDamage,
+                        data.value[i]?.vehicleDetails?.driverLicense,
+                        data.value[i]?.vehicleDetails?.originalDocument,
+                    );
+                    let resD = d.map((item, i) => {
+                        let name = item.split("/")
+                        let newObjet = {
+                            name: name[2],
+                            url: item
+                        }
+                        return newObjet
+                    })
+                    return data.value[i].photos = resD
+                } else {
+                    return data.value[i].photos = null
+                }
+            } else {
+                let result = null;
+                result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                data.value = result
+
+            }
+            counter.value++
         })
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const index = async () => {
