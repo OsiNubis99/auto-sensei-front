@@ -1,5 +1,3 @@
-
-
 <template>
     <div v-show="statusModalImage.isActive"
         class="fixed z-[100] inset-0 flex items-end md:items-center md:justify-center bg-base-black  bg-opacity-50">
@@ -7,7 +5,7 @@
             <div class="md:p-4 p-2 rounded-t-lg  bg-base-black flex items-center justify-between">
                 <p class="md:text-xl text-white">Edit & Crop Image</p>
                 <svg @click="statusModalImage.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
-                class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                    class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -35,16 +33,16 @@
                     <cropper ref="croppers" class="twitter-cropper" background-class="twitter-cropper__background"
                         foreground-class="twitter-cropper__foreground" image-restriction="stencil"
                         :stencil-size="stencilSize" :stencil-props="{
-                            lines: {},
-                            handlers: {},
-                            movable: false,
-                            scalable: false,
-                            aspectRatio: 1,
-                            previewClass: 'twitter-cropper__stencil',
-                        }" :transitions="false" :debounce="false" :default-size="defaultSize" :min-width="150"
+        lines: {},
+        handlers: {},
+        movable: false,
+        scalable: false,
+        aspectRatio: 1,
+        previewClass: 'twitter-cropper__stencil',
+    }" :transitions="false" :debounce="false" :default-size="defaultSize" :min-width="150"
                         :min-height="150" :src="imgPreview" @change="onChange" />
                     <div class="flex justify-between gap-12 p-2 md:p-4">
-                        <div class="w-full px-2" >
+                        <div class="w-full px-2">
                             <p class=" text-sm md:text-base">Zoom</p>
                             <Navigation :zoom="zoom" @change="onZoom" />
                         </div>
@@ -61,7 +59,7 @@
         </div>
     </div>
 </template>
-    
+
 <script>
 import { ref, onMounted } from "vue";
 import { Cropper } from "vue-advanced-cropper";
@@ -160,7 +158,7 @@ export default {
                     console.log('file', file)
                     let image = canvas.toDataURL("image/jpeg");
                     console.log('image', image)
-                    
+
                     switch (statusModalImage.typeImg) {
                         case 'document':
                             formData.value.previewDocument = image;
@@ -170,72 +168,72 @@ export default {
                         case 'driver':
                             formData.value.previewDriver = image;
                             formData.value.driverDocument = file;
-                            console.log('driver',formData.value.previewDriver,formData.value.driverDocument)
+                            console.log('driver', formData.value.previewDriver, formData.value.driverDocument)
                             break;
                         case 'frontPhoto':
                             formData.value.previewFrontPhoto = image;
                             formData.value.frontPhoto = file;
-                            
+
                             break;
                         case 'front':
                             formData.value.previewFront = image;
                             formData.value.front = file;
-                            
+
                             break;
                         case 'driverSide':
                             formData.value.previewDriverSide = image;
                             formData.value.driverSide = file;
-                            
+
                             break;
                         case 'back':
                             formData.value.previewBack = image;
                             formData.value.back = file;
-                            
+
                             break;
                         case 'passengerSide':
                             formData.value.previewPassengerSide = image;
                             formData.value.passengerSide = file;
-                            
+
                             break;
                         case 'tireAndRim':
                             formData.value.previewTireAndRim = image;
                             formData.value.tireAndRim = file;
-                            
+
                             break;
                         case 'driversDisplay':
                             formData.value.previewDriversDisplay = image;
                             formData.value.driversDisplay = file;
-                            
+
                             break;
                         case 'driversSide':
                             formData.value.previewDriversSide = image;
                             formData.value.driversSide = file;
-                            
+
                             break;
                         case 'centerConsole':
                             formData.value.previewCenterConsole = image;
                             formData.value.centerConsole = file;
-                            
+
                             break;
                         case 'rearSeats':
                             formData.value.previewRearSeats = image;
                             formData.value.rearSeats = file;
-                            
+
                             break;
                         case 'vehicleDamage':
                             formData.value.previewVehicleDamage = image;
                             formData.value.vehicleDamage = file;
-                            
+
                             break;
                         case 'additionalDocuments':
                             formData.value.previewAdditionalDocuments = image;
                             formData.value.additionalDocuments = file;
-                            
+
                             break;
                         case 'vehicleVideo':
                             formData.value.previewVehicleVideo = image;
                             formData.value.vehicleVideo = file;
-                            
+
                             break;
                         default:
                             break;
@@ -292,8 +290,8 @@ export default {
     }
 };
 </script>
-  
-  
+
+
 <style lang="scss">
 .twitter-cropper {
     height: 521px;

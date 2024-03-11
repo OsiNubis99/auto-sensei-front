@@ -79,7 +79,7 @@
                         <RouterLink
                             :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'home' && '!text-primary')]"
                             class="font-medium text-sm" to="/">Home</RouterLink>
-                       <!--  <RouterLink
+                        <!--  <RouterLink
                             :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'sold-auctions' && '!text-primary')]"
                             class="font-medium text-sm" to="/sold-auctions">Sold Auctions</RouterLink> -->
                         <RouterLink
@@ -178,13 +178,13 @@
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">Dealer Bidding</p>
                             </RouterLink>
-                         <!--    <RouterLink to="#"
+                            <!--    <RouterLink to="#"
                                 :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">Sold Auction</p>
                             </RouterLink> -->
                             <RouterLink to="/faqs-dealers"
-                                :class="path == 'faqs-dealers' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                :class="path == 'faqs-dealers' ? ' text-primary' : ' text-white'"
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">FAQs</p>
                             </RouterLink>
@@ -229,7 +229,7 @@
                                 class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sell a Car</p>
                             </RouterLink>
-                           <!--  <RouterLink @click="open = false" to="#"
+                            <!--  <RouterLink @click="open = false" to="#"
                                 :class="path == 'auto-list' ? ' text-primary' : ' text-white'"
                                 class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
@@ -300,7 +300,7 @@
                         <RouterLink @click="open = false" :class="[(path == 'home' ? '!text-primary' : 'text-white')]"
                             class="font-medium text-xs" to="/">Home
                         </RouterLink>
-                      <!--   <RouterLink @click="open = false"
+                        <!--   <RouterLink @click="open = false"
                             :class="[(path == 'sold-auctions' ? '!text-primary' : 'text-white')]"
                             class="font-medium text-xs" to="/sold-auctions">Sold Auctions</RouterLink> -->
                         <RouterLink @click="open = false"
@@ -357,13 +357,13 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const form = storeData.formData
         let open = ref(false)
-        watch(open, async (newQuestion, oldQuestion) => {
+       /*  watch(open, async (newQuestion, oldQuestion) => {
             if (newQuestion) {
                 document.documentElement.style.overflow = "hidden";
             } else {
                 document.documentElement.style.overflow = "initial";
             }
-        })
+        }) */
         const handleChangeLang = (e) => {
             if (!e) {
                 i18n.global.locale = "en";

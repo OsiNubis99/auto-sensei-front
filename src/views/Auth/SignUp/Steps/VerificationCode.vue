@@ -142,30 +142,30 @@ export default {
                                 axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
                                 localStorage.setItem('token', formdata.token)
                                 let resToken = await store.authProfile()
+                                console.log('resToken', resToken)
                                 if (resToken.statusText = "OK") {
                                     localStorage.removeItem('updateUser')
                                     localStorage.setItem('rol', resToken.data.type)
-                                    setInterval(async () => {
-                                        switch (resToken.data.type) {
-                                            case 0:
-                                                await router.push({ path: '/inicio' })
-                                                router.go()
-                                                break;
-                                            case 1:
-                                                await router.push({ path: '/all' })
-                                                router.go()
-                                                break;
-                                            case 2:
-                                                await router.push({ path: '/upcoming' })
-                                                router.go()
-                                                break;
-                                            default:
-                                                await router.push({ name: 'home' })
-                                                router.go()
-                                                break;
-                                        }
-                                        loading.value = false;
-                                    }, 800);
+                                    switch (resToken.data.type) {
+                                        case 0:
+                                            await router.push({ path: '/inicio' })
+                                            router.go()
+                                            break;
+                                        case 1:
+                                            await router.push({ path: '/all' })
+                                            router.go()
+                                            break;
+                                        case 2:
+                                            await router.push({ path: '/login/dealers' })
+                                            localStorage.clear()
+                                            router.go()
+                                            break;
+                                        default:
+                                            await router.push({ name: 'home' })
+                                            router.go()
+                                            break;
+                                    }
+                                    loading.value = false;
                                 }
                             }
                         } catch (error) {

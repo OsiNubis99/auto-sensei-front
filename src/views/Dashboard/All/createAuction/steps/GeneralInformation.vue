@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
+    <div class="bg-white flex flex-col md:mb-7 gap-5 items-start shadow-steps p-5 w-full">
         <div class="flex gap-6">
             <img src="../../../../../assets/svg/imgGenerals.svg" alt="">
             <div class="flex flex-col ">

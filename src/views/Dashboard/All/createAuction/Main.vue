@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[#BDBDBF66] md:bg=[#F9F9F9] h-screen">
+    <div class="bg-[#BDBDBF66] md:bg=[#F9F9F9] md:h-screen">
         <div>
             <div class="absolute hidden md:block w-full h-[200px] overflow-hidden bg-[#0B1107]">
                 <svg class="w-full " xmlns="http://www.w3.org/2000/svg" width="1768" height="260" viewBox="0 0 1768 260"
@@ -11,7 +11,7 @@
             </div>
             <div class="relative max-w-[85rem] mx-auto z-50 md:top-[60px] ">
                 <Heanding class="hidden md:block" :type="'h3'" :msg="'Create Auctions'" />
-                <div class="flex justify-center flex-col md:flex-row md:mt-5 gap-7 relative">
+                <div class="flex justify-center flex-col md:flex-row md:mt-5 md:gap-7 relative">
                     <div class="md:w-2/4 w-full  ">
                         <div class="w-full   left-0 z-50 block md:hidden ">
                             <div class="py-2 bg-white shadow-md">
@@ -201,10 +201,10 @@
                     <div class="w-full">
                         <template v-if="loading || loadingUploadImages">
                             <div v-if="loading"
-                                class="bg-white h-[50vh] flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
+                                class="bg-white h-[calc(100vh_-_108px)] md:h-[50vh] flex flex-col md:mb-7 gap-5 items-start md:shadow-steps md:p-5 w-full">
                                 <div class="w-full h-full flex justify-center items-center">
                                     <div class="text-indigo-700">
-                                        <div class="h-[80px] w-[80px] ">
+                                        <div class="h-12 w-12 md:h-[80px] md:w-[80px] ">
                                             <div class="animate-bounce">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
                                                     stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
@@ -213,8 +213,8 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <p class=" text-base-gray font-medium pl-2">Loading...</p>
-                                            <p class="text-error" v-if="stateProgressUpload">{{ stateProgressUpload }}</p>
+                                            <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
+                                            <p class=" text-error text-xs md:text-base mt-3 font-medium md:pl-2 " v-if="stateProgressUpload">{{ stateProgressUpload }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -230,8 +230,8 @@
                                                     <img class="w-15 object-cover h-15 rounded-lg shadow-lg"
                                                         :src="nameUpload.preview" alt="">
                                                 </div>
-                                                <div v-if="!nameUpload.completed" class="w-full flex flex-col gap-2">
-                                                    <p class="capitalize">{{ nameUpload.name }}</p>
+                                                <div v-if="!nameUpload.completed" class="w-full flex flex-col md:gap-2">
+                                                    <p class="capitalize text-sm md:text-base">{{ nameUpload.name }}</p>
                                                     <div
                                                         class="bg-[#E5E5E5] whitespace-pre shadow-sm w-full rounded-full  h-4">
                                                         <div :style="{ width: porcertanje + '%' }"
@@ -241,8 +241,8 @@
                                                     </div>
                                                 </div>
                                                 <div v-else-if="index == arrayUpload.length - 1"
-                                                    class="w-full flex flex-col gap-2">
-                                                    <p class="capitalize">{{ nameUpload.name }}</p>
+                                                    class="w-full flex flex-col md:gap-2">
+                                                    <p class="capitalize text-sm md:text-base">{{ nameUpload.name }}</p>
                                                     <div class="bg-[#E5E5E5] rounded-full  shadow-xl h-4">
                                                         <div
                                                             class=" w-full h-4 bg-primary flex justify-center items-center rounded-full">
@@ -250,8 +250,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div v-else class="w-full flex flex-col gap-2">
-                                                    <p class="capitalize">{{ nameUpload.name }}</p>
+                                                <div v-else class="w-full flex flex-col md:gap-2">
+                                                    <p class="capitalize text-sm md:text-base">{{ nameUpload.name }}</p>
                                                     <div class="bg-[#E5E5E5] rounded-full  shadow-xl h-4">
                                                         <div
                                                             class=" w-full h-4 bg-primary flex justify-center items-center rounded-full">
@@ -264,7 +264,7 @@
                                     </div>
                                     <div class="flex justify-center w-full items-center">
                                         <img class="h-16 w-16" src="@/assets/svg/Spin.svg" alt="">
-                                        <p class=" text-base-gray mt-1 font-medium">Uploading...</p>
+                                        <p class=" text-base-gray mt-1 text-xs md:text-base font-medium">Uploading...</p>
                                     </div>
                                 </div>
                             </template>

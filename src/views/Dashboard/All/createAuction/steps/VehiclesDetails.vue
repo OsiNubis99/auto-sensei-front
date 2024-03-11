@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white flex flex-col mb-7 gap-3 md:gap-5 items-start shadow-steps p-5 w-full">
+    <div class="bg-white flex flex-col md:mb-7 gap-3 md:gap-5 items-start shadow-steps p-5 w-full">
         <div class="flex gap-6">
             <img src="../../../../../assets/svg/vehiculoDetails.svg" alt="">
             <div class="flex flex-col ">
@@ -162,7 +162,7 @@
                     <select v-model="form.tireCondition"
                         :class="invalid?.tireCondition ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>Choose Condition</option>
+                        <option selected hidden>Choose Condition</option>
                         <option value="Need Replacement">Need Replacement</option>
                         <option value="Good">Good</option>
                         <option value="Brand New">Brand New</option>
@@ -176,7 +176,7 @@
                     <select v-model="form.lastReplacement"
                         :class="invalid?.lastReplacement ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>Choose Year</option>
+                        <option selected hidden>Choose Year</option>
                         <option value="2023">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
@@ -191,7 +191,7 @@
                     <label class="font-medium text-xs md:text-base " for="">Brake Pads</label>
                     <select v-model="form.brakePads" :class="invalid?.brakePads ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>Choose Condition</option>
+                        <option selected hidden>Choose Condition</option>
                         <option value="Rotors & Pads are good">Rotors & Pads are good</option>
                         <option value="Rotors & Pads need Replacement">Rotors & Pads need Replacement</option>
 
@@ -204,7 +204,7 @@
                     <select v-model="form.lastReplacement2"
                         :class="invalid?.lastReplacement2 ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>Choose Year</option>
+                        <option selected hidden>Choose Year</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>

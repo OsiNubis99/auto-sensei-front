@@ -32,7 +32,7 @@
                 class="flex p-5  flex-col gap-3">
                 <div>
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-                        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
@@ -95,7 +95,6 @@
                         <p class=" text-[10px] capitalize">{{ auction?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
-
                 <RouterLink v-if="auction.status == 'bids completed'"
                     :to="{ name: 'inbox-seller', query: { id: auction._id + '-' + auction?.bids[0]?.participant?._id } }"
                     class="flex gap-4" :class="changeLayouts ? 'flex-col' : ''">
@@ -144,7 +143,8 @@
                         :to="{ name: 'inbox-seller', query: { id: auction._id + '-' + auction?.bids[0]?.participant._id } }"
                         class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>
                 </div>
-                <div v-if="auction.status == 'bids completed'" class="flex gap-4 px-2 pb-2 md:p-5  justify-between w-full">
+                <div v-if="auction.status == 'bids completed'"
+                    class="flex gap-4 px-2 pb-2 md:p-5  justify-between w-full">
                     <button @click="statusModal.openModal({ isActive: true, data: auction })"
                         class="btn w-full bg-primary text-base-black">Accept</button>
                     <button @click="declineAution(auction)"
@@ -155,14 +155,15 @@
                         class="btn w-full bg-white border border-[#E0E0E0]  ">Input Review</button>
                 </div>
                 <div v-if="auction.status == 'reviewed'" class="flex gap-4 px-2 pb-2 md:p-5  justify-between w-full">
-                    <button disabled class="btn w-full bg-white border border-[#E0E0E0] text-[#A3A3A3] ">Reviewed</button>
+                    <button disabled
+                        class="btn w-full bg-white border border-[#E0E0E0] text-[#A3A3A3] ">Reviewed</button>
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
-<script >
+
+<script>
 import { ref, onMounted, computed } from "vue";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -225,7 +226,3 @@ export default {
     },
 };
 </script>
-
-  
-  
-  

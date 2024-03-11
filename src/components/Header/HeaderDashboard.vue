@@ -392,7 +392,7 @@
                             <p class="font-bold">Sold Auction</p>
                         </RouterLink> -->
                         <RouterLink @click="open = false" to="/faqs-dealers"
-                            :class="path == 'faqs-dealers' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            :class="path == 'faqs-dealers' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">FAQs</p>
                         </RouterLink>
