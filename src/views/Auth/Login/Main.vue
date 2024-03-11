@@ -81,10 +81,10 @@
             </div>
         </div>
         <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class="  lg:block md:w-1/2 relative ">
-            <div v-if="rol == 'dealers'" class="h-full  flex justify-start items-start flex-col gap-5 px-16 py-12">
-                <h1 class="p-5 pb-0 !md:p-0  text-5xl text-blue-dark font-bold ">Boost Your Inventory <br> Organically
+            <div v-if="rol == 'dealers'" class="h-full  flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
+                <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br> Organically
                 </h1>
-                <p class="p-5 pt-0 !md:p-0 w-[70%]">Dealers are able to increase their inventory without having to go to
+                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">Dealers are able to increase their inventory without having to go to
                     their local
                     auctions, or online
                     auctions

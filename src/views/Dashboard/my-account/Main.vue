@@ -26,10 +26,11 @@
                 </svg>
             </div>
             <div class="relative max-w-[85rem] mx-auto z-50 md:top-[60px] ">
-                <Heanding :type="'h3'" :msg="'My Account'" />
-                <div class="flex justify-center flex-col md:flex-row mt-5 gap-7">
-                    <div class="md:w-2/4  ">
-                        <div class="bg-white p-5 shadow-steps">
+                <Heanding class=" hidden md:block" :type="'h3'" :msg="'My Account'" />
+                <div class="flex justify-center flex-col md:flex-row md:mt-5 gap-7">
+                    <div class="bg-[#000]  md:hidden block absolute w-full h-[130px] top-0"></div>
+                    <div class="md:w-2/4">
+                        <div class="bg-white p-5 mt-[30px] md:shadow-steps">
                             <div class="flex items-center flex-col gap-6 mb-4 relative">
                                 <div
                                     class="flex justify-center items-end gap-4 relative group transition-all duration-500 ease-linear">

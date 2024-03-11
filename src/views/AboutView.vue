@@ -6,7 +6,7 @@
         <br>
         The Car-Selling Experience
       </h1>
-      <p class="text-base-white p-5">Our mission is to streamline and simplify the process of selling your car.</p>
+      <p class=" text-xs text-center md:text-base text-base-white p-5">Our mission is to streamline and simplify the process of selling your car.</p>
     </div>
     <img class="absolute object-cover left-0 w-full h-full -z-10 top-0" src="../assets/svg/lines/lineAbout.svg" alt="">
   </div>

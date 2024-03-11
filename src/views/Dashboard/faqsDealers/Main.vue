@@ -1,11 +1,11 @@
 
 <template>
-    <div class="w-full  relative z-10 bg-[#E6FCC0] p-20 ">
-        <div class="w-full h-full flex flex-col justify-center items-center">
-            <h1 class="text-4xl md:text-6xl lg:text-6xl font-bold mb-2 text-center text-blue-dark ">Frequently Asked
+    <div class="w-full  relative z-10 p-5 bg-[#E6FCC0] md:p-20 ">
+        <div class="w-full h-full pb-4 flex flex-col justify-center items-center">
+            <h1 class="text-xl md:text-6xl lg:text-6xl font-bold mb-2 text-center text-blue-dark ">Frequently Asked
                 Question
             </h1>
-            <p class="text-blue-dark text-xl p-5 pt-1">If you can't find an answer that you're looking for, feel free to
+            <p class="text-blue-dark text-sm md:text-xl md:p-5 pt-1">If you can't find an answer that you're looking for, feel free to
                 give us an email.</p>
         </div>
         <div class="flex w-full justify-center items-center gap-4">
@@ -15,10 +15,10 @@
         <img class="absolute object-cover left-0 w-full h-full -z-10 top-0" src="@/assets/svg/lines/lineAbout2.svg" alt="">
     </div>
     <div class="bg-[#F9F9F9]  w-full">
-        <div class="max-w-6xl m-auto py-14 flex gap-5  justify-center ">
-            <div class="px-5 bg-white rounded-lg h-fit shadow-lg w-[60%] p-3">
+        <div class="md:max-w-6xl flex-col md:flex-row m-auto md:py-14 flex gap-5  justify-center ">
+            <div class="md:px-5 bg-white rounded-lg h-fit shadow-lg w-full md:w-[60%] md:p-3">
                 <div class="flex justify-between items-center px-5 py-4 ">
-                    <p class="  font-medium">General</p>
+                    <p class="text-sm md:text-base  font-medium">General</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                         <path
                             d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
@@ -26,7 +26,7 @@
                     </svg>
                 </div>
                 <div class="flex justify-between items-center px-5 py-4 ">
-                    <p class="  font-medium">Bid a Car</p>
+                    <p class="text-sm md:text-base  font-medium">Bid a Car</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                         <path
                             d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
@@ -34,7 +34,7 @@
                     </svg>
                 </div>
                 <div class="flex justify-between items-center px-5 py-4 ">
-                    <p class="  font-medium">Payments for Dealer</p>
+                    <p class="text-sm md:text-base  font-medium">Payments for Dealer</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                         <path
                             d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
@@ -43,15 +43,15 @@
                 </div>
 
             </div>
-            <div class=" px-5 bg-white rounded-lg  w-full h-fit shadow-lg ">
+            <div class=" md:px-5 bg-white rounded-lg  w-full h-fit shadow-lg ">
                 <div class="grid divide-y divide-[#E0E0E0]  px-4 ">
-                    <div class="py-5">
-                        <h1 class="text-2xl font-medium ">Payments for Dealer</h1>
+                    <div class="md:py-5 py-2">
+                        <h1 class="md:text-2xl font-medium ">Payments for Dealer</h1>
                     </div>
-                    <div class="py-5">
+                    <div class="md:py-5 py-2">
                         <details class="group">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                                <span> How do I receive payments for my sales?</span>
+                                <span class="text-sm md:text-md" > How do I receive payments for my sales?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -60,16 +60,16 @@
                                     </svg>
                                 </span>
                             </summary>
-                            <p class="text-sm mt-3 group-open:animate-fadeIn">
+                            <p class=" text-xs md:text-sm mt-3 group-open:animate-fadeIn">
                                 Payments for your sales are typically processed through [Specify Payment Method]. You can
                                 set up your payment details in your seller account to receive your earnings securely.
                             </p>
                         </details>
                     </div>
-                    <div class="py-5">
+                    <div class="md:py-5 py-2">
                         <details class="group">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                                <span> When will I receive the payment for my sold cars?</span>
+                                <span class="text-sm md:text-md" > When will I receive the payment for my sold cars?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -78,16 +78,16 @@
                                     </svg>
                                 </span>
                             </summary>
-                            <p class="text-sm mt-3 group-open:animate-fadeIn">
+                            <p class=" text-xs md:text-sm mt-3 group-open:animate-fadeIn">
                                 Payments for your sales are typically processed through [Specify Payment Method]. You can
                                 set up your payment details in your seller account to receive your earnings securely.
                             </p>
                         </details>
                     </div>
-                    <div class="py-5">
+                    <div class="md:py-5 py-2">
                         <details class="group">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                                <span> What if a buyer disputes the payment or not dropped off the vehicles?</span>
+                                <span class="text-sm md:text-md" > What if a buyer disputes the payment or not dropped off the vehicles?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -96,16 +96,16 @@
                                     </svg>
                                 </span>
                             </summary>
-                            <p class="text-sm mt-3 group-open:animate-fadeIn">
+                            <p class=" text-xs md:text-sm mt-3 group-open:animate-fadeIn">
                                 Payments for your sales are typically processed through [Specify Payment Method]. You can
                                 set up your payment details in your seller account to receive your earnings securely.
                             </p>
                         </details>
                     </div>
-                    <div class="py-5">
+                    <div class="md:py-5 py-2">
                         <details class="group">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                                <span>Do I need to provide tax information for my earnings?</span>
+                                <span class="text-sm md:text-md">Do I need to provide tax information for my earnings?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -114,16 +114,16 @@
                                     </svg>
                                 </span>
                             </summary>
-                            <p class="text-sm mt-3 group-open:animate-fadeIn">
+                            <p class=" text-xs md:text-sm mt-3 group-open:animate-fadeIn">
                                 Payments for your sales are typically processed through [Specify Payment Method]. You can
                                 set up your payment details in your seller account to receive your earnings securely.
                             </p>
                         </details>
                     </div>
-                    <div class="py-5">
+                    <div class="md:py-5 py-2">
                         <details class="group">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                                <span>Is it possible to set up automatic payment transfers or withdrawals?</span>
+                                <span class="text-sm md:text-md">Is it possible to set up automatic payment transfers or withdrawals?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -132,16 +132,16 @@
                                     </svg>
                                 </span>
                             </summary>
-                            <p class="text-sm mt-3 group-open:animate-fadeIn">
+                            <p class=" text-xs md:text-sm mt-3 group-open:animate-fadeIn">
                                 Payments for your sales are typically processed through [Specify Payment Method]. You can
                                 set up your payment details in your seller account to receive your earnings securely.
                             </p>
                         </details>
                     </div>
-                    <div class="py-5">
+                    <div class="md:py-5 py-2">
                         <details class="group">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                                <span>How can I resolve payment-related disputes with buyers?</span>
+                                <span class="text-sm md:text-md">How can I resolve payment-related disputes with buyers?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -150,16 +150,16 @@
                                     </svg>
                                 </span>
                             </summary>
-                            <p class="text-sm mt-3 group-open:animate-fadeIn">
+                            <p class=" text-xs md:text-sm mt-3 group-open:animate-fadeIn">
                                 Payments for your sales are typically processed through [Specify Payment Method]. You can
                                 set up your payment details in your seller account to receive your earnings securely.
                             </p>
                         </details>
                     </div>
-                    <div class="py-5">
+                    <div class="md:py-5 py-2">
                         <details class="group">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                                <span>Is there a hold period for payments after a sale is made?</span>
+                                <span class="text-sm md:text-md">Is there a hold period for payments after a sale is made?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -168,16 +168,16 @@
                                     </svg>
                                 </span>
                             </summary>
-                            <p class="text-sm mt-3 group-open:animate-fadeIn">
+                            <p class=" text-xs md:text-sm mt-3 group-open:animate-fadeIn">
                                 Payments for your sales are typically processed through [Specify Payment Method]. You can
                                 set up your payment details in your seller account to receive your earnings securely.
                             </p>
                         </details>
                     </div>
-                    <div class="py-5">
+                    <div class="md:py-5 py-2">
                         <details class="group">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                                <span>Can I receive payments in different currencies?</span>
+                                <span class="text-sm md:text-md">Can I receive payments in different currencies?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -186,7 +186,7 @@
                                     </svg>
                                 </span>
                             </summary>
-                            <p class="text-sm mt-3 group-open:animate-fadeIn">
+                            <p class=" text-xs md:text-sm mt-3 group-open:animate-fadeIn">
                                 Payments for your sales are typically processed through [Specify Payment Method]. You can
                                 set up your payment details in your seller account to receive your earnings securely.
                             </p>

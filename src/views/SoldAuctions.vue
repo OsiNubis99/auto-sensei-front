@@ -5,7 +5,7 @@
       <h1 class="text-4xl md:text-6xl  font-bold mb-7 text-center text-white">Auction your car to dealers <br> right
         from your home
       </h1>
-      <p class="text-base-white p-5">Our mission is to streamline and simplify the process of selling your car.</p>
+      <p class=" text-xs text-center md:text-base text-base-white p-5">Our mission is to streamline and simplify the process of selling your car.</p>
     </div>
     <img class="absolute object-cover left-0 w-full h-full -z-10 top-0" src="../assets/img/png/sould.png" alt="">
   </div>
