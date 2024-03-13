@@ -36,7 +36,8 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="font-semibold">2016 Mazda MX-5 Miata Club</p>
+                    <p class="font-semibold">{{ dataDetails?.vehicleDetails?.year }} {{
+            dataDetails?.vehicleDetails?.make }} {{ dataDetails?.vehicleDetails?.model }}</p>
                 </div>
             </div>
             <div v-else class="hidden md:flex gap-2 items-center">
@@ -57,7 +58,8 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="font-semibold">2016 Mazda MX-5 Miata Club</p>
+                    <p class="font-semibold">{{ dataDetails?.vehicleDetails?.year }} {{
+            dataDetails?.vehicleDetails?.make }} {{ dataDetails?.vehicleDetails?.model }}</p>
                 </div>
             </div>
             <div class="flex flex-col md:mt-7 overflow-hidden md:gap-5">
@@ -94,8 +96,9 @@
                     </swiper>
                 </div>
                 <div class="p-4 pb-0">
-                    <p class=" text-lg md:text-2xl font-semibold ">2016 Mazda MX-5 Miata Club</p>
-                    <p class="text-xs">St. John, Newfoundland & Labrador</p>
+                    <p class=" text-lg md:text-2xl font-semibold ">{{ dataDetails?.vehicleDetails?.year }} {{
+            dataDetails?.vehicleDetails?.make }} {{ dataDetails?.vehicleDetails?.model }}</p>
+                    <p class="text-xs md:text-sm"> {{ dataDetails?.city }}, {{ dataDetails?.province }}</p>
                 </div>
                 <div class="flex flex-col md:flex-row md:gap-4 ">
                     <div class=" p-4  md:w-[65%] md:p-0  ">
@@ -457,7 +460,7 @@
                                                 class="capitalize text-xl font-medium">
                                                 ${{ dataDetails?.bids[0]?.amount }}</p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
-            dataDetails?.vehicleDetails?.basePrice }}</p>
+                                                dataDetails?.vehicleDetails?.basePrice }}</p>
                                             <p v-else>$0</p>
                                         </div>
                                     </div>
@@ -506,7 +509,8 @@
                                     <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
                                         <p class="text-xs md:text-sm">Auction Status</p>
                                         <div class="flex items-center gap-2 ">
-                                            <svg class=" w-[15px] h-[15px] md:h-[20px] md:w-[20px]" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            <svg class=" w-[15px] h-[15px] md:h-[20px] md:w-[20px]"
+                                                xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                 viewBox="0 0 20 20" fill="none">
                                                 <path
                                                     d="M8.33925 1.75273C7.17128 1.37464 5.90159 1.90056 5.34305 2.99381L4.67156 4.30812C4.59178 4.46428 4.46477 4.59129 4.3086 4.67107L2.9943 5.34256C1.90105 5.9011 1.37513 7.17079 1.75322 8.33876L2.20777 9.74292C2.26178 9.90976 2.26178 10.0894 2.20777 10.2563L1.75322 11.6604C1.37513 12.8284 1.90105 14.0981 2.9943 14.6567L4.3086 15.3281C4.46477 15.4079 4.59178 15.5349 4.67156 15.6911L5.34305 17.0054C5.90159 18.0987 7.17128 18.6246 8.33925 18.2465L9.74341 17.7919C9.91025 17.7379 10.0899 17.7379 10.2567 17.7919L11.6609 18.2465C12.8289 18.6246 14.0986 18.0987 14.6572 17.0054L15.3286 15.6911C15.4084 15.5349 15.5354 15.4079 15.6916 15.3281L17.0059 14.6567C18.0992 14.0981 18.6251 12.8284 18.247 11.6604L17.7924 10.2563C17.7384 10.0894 17.7384 9.90976 17.7924 9.74292L18.247 8.33876C18.6251 7.17079 18.0992 5.9011 17.0059 5.34256L15.6916 4.67107C15.5354 4.59129 15.4084 4.46428 15.3286 4.30812L14.6572 2.99381C14.0986 1.90056 12.8289 1.37464 11.6609 1.75273L10.2567 2.20728C10.0899 2.26128 9.91025 2.26129 9.74341 2.20728L8.33925 1.75273ZM5.63322 9.79734L6.81174 8.61876L9.16875 10.9758L13.8828 6.2618L15.0613 7.44031L9.16875 13.3328L5.63322 9.79734Z"
@@ -520,10 +524,10 @@
                                     <div class="flex flex-col gap-2 bg-[#F7F7F7] p-2 md:p-4 rounded-lg ">
                                         <p class="text-sm">Final Bid</p>
                                         <div class="flex items-center gap-2 ">
-                                            <p  v-if="dataDetails?.bids[0]?.amount"
+                                            <p v-if="dataDetails?.bids[0]?.amount"
                                                 class="capitalize text-sm md:text-xl font-medium">
                                                 ${{dataDetails?.bids[0]?.amount}}
-                                             <!--    ${{makeFriendly(dataDetails?.bids[0]?.amount)}} -->
+                                                <!--    ${{makeFriendly(dataDetails?.bids[0]?.amount)}} -->
                                             </p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
                                                 dataDetails?.vehicleDetails?.basePrice }}</p>

@@ -92,9 +92,9 @@
                     <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                         <p class="text-sm md:text-base">Current bid</p>
                         <p class=" text-lg font-medium md:text-2xl text-base-black">
-                            <span v-if="auction?.vehicleDetails?.basePrice">${{auction?.vehicleDetails?.basePrice}}</span>
-                            <span v-else-if="auction?.bids[0]?.amount"> ${{
-                                auction?.bids[0]?.amount }} </span>
+                            <span v-if="auction?.bids[0]?.amount">${{auction?.bids[0]?.amount}}</span>
+                            <span v-else-if="auction?.vehicleDetails?.basePrice"> ${{
+                                auction?.vehicleDetails?.basePrice }} </span>
                             <span v-else>$0</span>
                             <span class="text-[#666666] text-sm md:!text-lg mt-2">/{{ auction.bids.length }}
                                 Bids

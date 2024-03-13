@@ -157,8 +157,7 @@
                     <RouterLink
                         :to="{ name: 'inbox-seller', query: { id: auction?._id + '-' + auction?.bids[0]?.participant._id } }"
                         class="border block md:hidden p-2 rounded-lg border-[#C2C2C2]">
-                        <svg class="  h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                            fill="none">
+                        <svg class="  h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
                             <path
                                 d="M5.37852 15.8333L1.66602 18.75V3.33333C1.66602 3.11232 1.75381 2.90036 1.91009 2.74408C2.06637 2.5878 2.27834 2.5 2.49935 2.5H17.4993C17.7204 2.5 17.9323 2.5878 18.0886 2.74408C18.2449 2.90036 18.3327 3.11232 18.3327 3.33333V15C18.3327 15.221 18.2449 15.433 18.0886 15.5893C17.9323 15.7455 17.7204 15.8333 17.4993 15.8333H5.37852ZM5.83268 8.33333V10H7.49935V8.33333H5.83268ZM9.16602 8.33333V10H10.8327V8.33333H9.16602ZM12.4993 8.33333V10H14.166V8.33333H12.4993Z"
                                 fill="#0A0A0A" />
@@ -186,10 +185,11 @@
                         :to="{ name: 'inbox-seller', query: { id: auction?._id + '-' + auction?.bids[0]?.participant._id } }"
                         class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>
                 </div>
-                <div v-if="auction?.status == 'reviewed'" class="flex gap-1 p-2 md:gap-4 md:p-5  justify-between w-full">
+                <div v-if="auction?.status == 'reviewed'"
+                    class="flex gap-1 p-2 md:gap-4 md:p-5  justify-between w-full">
                     <button disabled
                         class="btn w-full bg-white border border-[#E0E0E0] text-[#A3A3A3] ">Reviewed</button>
-                        <RouterLink
+                    <RouterLink
                         :to="{ name: 'inbox-seller', query: { id: auction?._id + '-' + auction?.bids[0]?.participant._id } }"
                         class="border p-2 rounded-lg border-[#C2C2C2]">
                         <svg class=" block md:hidden h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -204,9 +204,12 @@
                     :class="changeLayouts ? 'flex-row' : 'flex-col '">
                     <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                         <p class="text-sm md:text-base">Current bid</p>
-                        <p class=" font-medium text-base-black  ">${{
-        auction?.vehicleDetails?.basePrice }} <span class="text-[#666666] mt-2">/{{
-        auction?.bids.length }}
+                        <p class=" text-lg font-medium md:text-2xl text-base-black">
+                            <span v-if="auction?.bids[0]?.amount">${{ auction?.bids[0]?.amount }}</span>
+                            <span v-else-if="auction?.vehicleDetails?.basePrice"> ${{
+        auction?.vehicleDetails?.basePrice }} </span>
+                            <span v-else>$0</span>
+                            <span class="text-[#666666] text-sm md:!text-lg mt-2">/{{ auction.bids.length }}
                                 Bids
                             </span>
                         </p>
