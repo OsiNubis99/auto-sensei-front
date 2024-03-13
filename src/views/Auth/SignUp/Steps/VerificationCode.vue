@@ -101,7 +101,7 @@ export default {
             }
             console.log('formdata', formdata)
             loading.value = true
-            if (formdata?.picture || formdata?.driverLicense) {
+            if (formdata.picture || formdata.driverLicense) {
                 let resFile = formdata.picture && await storeFile.uploaderFile({ file: formdata.picture, location: 'profile' })
                 let resLicence = formdata.driverLicense && await storeFile.uploaderFile({ file: formdata.driverLicense, location: 'license' })
                 console.log('resLicence', resLicence)
@@ -110,7 +110,7 @@ export default {
                     try {
                         let typeSeller = {
                             seller: {
-                                picture: resFile.data ? resFile.data : null,
+                                picture: resFile?.data ? resFile?.data : null,
                                 firstName: formdata.firstName,
                                 lastName: formdata.lastName,
                                 driverLicense: resLicence?.data ? resLicence?.data : null,
