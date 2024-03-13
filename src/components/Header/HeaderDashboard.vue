@@ -382,7 +382,7 @@
                 <div v-else class="flex flex-col gap-4 mt-4">
                     <ul class="flex flex-col gap-3">
                         <RouterLink @click="open = false" to="/upcoming"
-                            :class="path == 'upcoming' || path == 'liveDealer' || path == 'current-bits' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            :class="path == 'upcoming' || path == 'liveDealer' || path == 'current-bits' ? 'md:bg-[#303E18] text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">Dealer Bidding</p>
                         </RouterLink>
