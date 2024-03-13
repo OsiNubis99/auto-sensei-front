@@ -35,7 +35,8 @@
 </div> -->
                 <div class="w-full mt-5 flex flex-col gap-2">
                     <label class=" text-sm md:text-base " for="">Vehicle Drop Off Agreement</label>
-                    <VueDatePicker :enable-time-picker="false" :min-date="new Date()" class="custom-picker"
+                    <VueDatePicker :enable-time-picker="false"
+                        :min-date="new Date(new Date().getTime() + 2 * 86400 * 1000)" class="custom-picker"
                         :class="invalid?.date && 'error-picker'" v-model="form.date">
                         <template #calendar-header="{ index, day }">
                             <div :class="index === 5 || index === 6 ? 'red-color' : ''">
@@ -53,12 +54,18 @@
 
         </div>
         <div class="flex flex-col md:grid w-full md:grid-cols-3 gap-5">
-            <div class="w-full flex flex-col gap-2">
+            <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">Province</label>
-                <select v-model="form.province" :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
+                <select v-model="form.province" @change="onChangeGetProvince($event)"
+                    :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
                     class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                    <option selected>Select province</option>
-                    <option value="Alberta">AB | Alberta</option>
+
+                    <option v-if="!form.getState" selected>Laoding city... </option>
+                    <option v-else selected hidden>Select province</option>
+                    <template v-for="(state, index) in form.getState" :key="index">
+                        <option :value="JSON.stringify(state)">{{ state.iso2 }} | {{ state.name }}</option>
+                    </template>
+                    <!--  <option value="Alberta">AB | Alberta</option>
                     <option value="British Columbia">BC | British Columbia</option>
                     <option value="Manitoba">MB | Manitoba</option>
                     <option value="New Brunswick">NB | New Brunswick</option>
@@ -70,20 +77,25 @@
                     <option value="Saskatchewan">SK | Saskatchewan</option>
                     <option value="Northwest Territories">NT | Northwest Territories</option>
                     <option value="Nunavut">NU | Nunavut</option>
-                    <option value="Yukon">YT | Yukon</option>
+                    <option value="Yukon">YT | Yukon</option> -->
                 </select>
+                <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding province...
+                </div>
             </div>
-            <div class="w-full flex flex-col gap-2">
+            <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">City</label>
-                <select v-model="form.city" :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
+                <select v-model="form.city" @change="onChangeGetCity($event)" :disabled="loadingCountrys || !form.getCities ? true : false"
+                    :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
                     class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                    <option selected>Select city </option>
-                    <option value="London">London</option>
-                    <option value="Montreal">Montreal</option>
-                    <option value="Toronto">Toronto </option>
-                    <option value="Winnipeg">Winnipeg</option>
-                    <option value="Abbotsford">Abbotsford</option>
+
+                    <option v-if="loadingCountrys" selected>Laoding city... </option>
+                    <option v-else selected hidden>Select city </option>
+                    <template v-for="(cities, index) in form.getCities" :key="index">
+                        <option :value="JSON.stringify(cities)">{{ cities.name }}</option>
+                    </template>
                 </select>
+                <div v-if="loadingCountrys" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
+                    city...</div>
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class=" text-sm md:text-base " for="">How many keys?</label>
@@ -298,6 +310,7 @@
 <script>
 import { ref, onMounted, watch } from "vue";
 import CurrencyInput from "../../../../../components/Inputs/CurrencyInput.vue";
+import { usePayments } from "@/stores/payments";
 export default {
 
     props: {
@@ -322,21 +335,43 @@ export default {
         invalid: {
             type: Object
         },
+        onChangeGetProvince: {
+            type: Function,
+        },
+        onChangeGetCity: {
+            type: Function,
+        },
+        loadingCountrys:{
+            type:Boolean
+        }
     },
     setup(props) {
         const date = ref(new Date());
         const form = ref(props.form)
         const save = ref(props.launch)
+        const countrys = usePayments()
         const invalid = ref(props.invalid)
+        const getCities = ref([])
+        const loading = ref(false)
         const next = () => {
             props.nextGeneralInformation()
+        }
+        const onChangeGetCity = (event) => {
+            props.onChangeGetCity(event)
+        }
+        const onChangeGetProvince = (event) => {
+            props.onChangeGetProvince(event)
         }
         return {
             date,
             next,
             form,
             invalid,
-            save
+            save,
+            onChangeGetProvince,
+            getCities,
+            loading,
+            onChangeGetCity
         };
     },
     components: { CurrencyInput }

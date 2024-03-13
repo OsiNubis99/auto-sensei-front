@@ -128,8 +128,8 @@
                                     </div>
                                     <div v-if="(checkStep.step1 && !op.step1) || (op.step1 && op.step2 && op.step3)"
                                         class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
-                                            fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            viewBox="0 0 22 22" fill="none">
                                             <path
                                                 d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
                                                 fill="white" />
@@ -152,8 +152,8 @@
                                     </div>
                                     <div v-if="(checkStep.step2 && !op.step2) || (op.step1 && op.step2 && op.step3)"
                                         class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
-                                            fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            viewBox="0 0 22 22" fill="none">
                                             <path
                                                 d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
                                                 fill="white" />
@@ -177,8 +177,8 @@
                                     </div>
                                     <div v-if="op.step1 && op.step2 && op.step3"
                                         class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
-                                            fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            viewBox="0 0 22 22" fill="none">
                                             <path
                                                 d="M9.22232 13.82L17.393 5.64844L18.6508 6.90533L9.22232 16.3338L3.56543 10.6769L4.82232 9.41999L9.22232 13.82Z"
                                                 fill="white" />
@@ -206,21 +206,24 @@
                                     <div class="text-indigo-700">
                                         <div class="h-12 w-12 md:h-[80px] md:w-[80px] ">
                                             <div class="animate-bounce">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
-                                                    stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin"
+                                                    fill="#c1f861" stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
                                                     <path
                                                         d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
-                                            <p class=" text-error text-xs md:text-base mt-3 font-medium md:pl-2 " v-if="stateProgressUpload">{{ stateProgressUpload }}</p>
+                                            <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">
+                                                Loading...</p>
+                                            <p class=" text-error text-xs md:text-base mt-3 font-medium md:pl-2 "
+                                                v-if="stateProgressUpload">{{ stateProgressUpload }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <template v-if="loadingUploadImages">
-                                <div class="bg-white h-fit flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
+                                <div
+                                    class="bg-white h-fit flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
                                     <div class="w-full flex flex-col md:grid md:grid-cols-2 gap-4">
                                         <div v-if="arrayUpload?.length > 0" v-for="(nameUpload, index) in arrayUpload"
                                             :key="index">
@@ -264,7 +267,8 @@
                                     </div>
                                     <div class="flex justify-center w-full items-center">
                                         <img class="h-16 w-16" src="@/assets/svg/Spin.svg" alt="">
-                                        <p class=" text-base-gray mt-1 text-xs md:text-base font-medium">Uploading...</p>
+                                        <p class=" text-base-gray mt-1 text-xs md:text-base font-medium">Uploading...
+                                        </p>
                                     </div>
                                 </div>
                             </template>
@@ -273,10 +277,12 @@
                         <template v-else>
                             <GeneralInformation v-show="op.step1" :key="componentKey"
                                 :nextGeneralInformation="nextGeneralInformation" :form="formData" :op="op"
-                                :checkStep="checkStep" :launch="launch" :invalid="invalid" />
+                                :checkStep="checkStep" :launch="launch" :invalid="invalid"
+                                :loadingCountrys="loadingCountrys" :onChangeGetProvince="onChangeGetProvince"
+                                :onChangeGetCity="onChangeGetCity" />
                             <VehiclesDetails v-show="op.step2" :key="componentKey"
-                                :nextVehiclesDetails="nextVehiclesDetails" :form="formData" :op="op" :checkStep="checkStep"
-                                :launch="launch" :invalid="invalid" />
+                                :nextVehiclesDetails="nextVehiclesDetails" :form="formData" :op="op"
+                                :checkStep="checkStep" :launch="launch" :invalid="invalid" />
                             <UploadPhotos v-show="op.step3" :key="componentKey" :nextUploadPhotos="nextUploadPhotos"
                                 :form="formData" :op="op" :checkStep="checkStep" :launch="launch" :saveData="saveData"
                                 :invalid="invalid" />
@@ -289,7 +295,7 @@
     </div>
 </template>
 <script>
-import { ref, watch, computed } from "vue";
+import { ref, watch, computed, onMounted } from "vue";
 import Heanding from "../../../../components/Headings/Heanding.vue";
 import GeneralInformation from "./steps/GeneralInformation.vue"
 import VehiclesDetails from "./steps/VehiclesDetails.vue";
@@ -300,6 +306,7 @@ import { useAuctionStore } from "@/stores/auctions";
 import { useStoreFile } from "@/stores/uploader";
 import { useRouter, useRoute } from 'vue-router'
 import { ModalLaunch } from '@/stores/modalLaunch';
+import { usePayments } from "@/stores/payments";
 import moment from 'moment';
 export default {
 
@@ -326,8 +333,10 @@ export default {
         const expanded = ref(false)
         const stateProgressUpload = ref('')
         const porcertanje = ref(0)
+        const countrys = usePayments()
         const powerValue = ref(computed(() => { return storeFile.progressUpload }))
         const arrayUpload = ref([])
+        const loadingCountrys = ref(false)
         watch(powerValue, async (newQuestion, oldQuestion) => {
             porcertanje.value = newQuestion
         })
@@ -339,6 +348,8 @@ export default {
             date: undefined,
             startDate: undefined,
             province: 'Select province',
+            getState: undefined,
+            getCities: undefined,
             city: 'Select city',
             keys: 'Select number of keys',
             currently: undefined,
@@ -432,6 +443,8 @@ export default {
             step3: false,
         })
         const nextGeneralInformation = async () => {
+            console.log('formData.value', formData.value.province)
+            console.log('formData.city', formData.value.city)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'generalInformation');
             if (Object.entries(invalid.value).length > 0) {
@@ -446,11 +459,13 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
+                let province = JSON.parse(formData.value.province)
+                let city = JSON.parse(formData.value.city)
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.city,
-                    province: formData.value.province,
+                    city: city.name,
+                    province: province.name,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,
@@ -468,6 +483,7 @@ export default {
                         yearEnd: formData.value.yearToPreferences
                     }
                 }
+                console.log('dataPost', dataPost)
                 loading.value = true
                 try {
 
@@ -731,7 +747,7 @@ export default {
                 arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
                 let resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
                 if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
                 let resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
                 if (resLicence[0]?.data) arrayUpload.value[0].completed = true
@@ -743,70 +759,70 @@ export default {
                     arrayUpload.value[1].completed = true
                     newArrayExterior = [...newArrayExterior, resFronPhoto[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Front Photo', preview: formData.value.previewFront, completed: false, }]
                 let resFron = await Promise.all([storeFile.uploaderFile({ file: formData.value.front, location: `${id_create.value}/front` })])
                 if (resFron[0]?.data) {
                     arrayUpload.value[2].completed = true
                     newArrayExterior = [...newArrayExterior, resFron[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Driver Side Exterior', preview: formData.value.previewDriverSide, completed: false, }]
                 let resDriverSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverSide, location: `${id_create.value}/driver-side-(exterior)` })])
                 if (resDriverSide[0]?.data) {
                     arrayUpload.value[3].completed = true
                     newArrayExterior = [...newArrayExterior, resDriverSide[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Back', preview: formData.value.previewBack, completed: false, }]
                 let resBack = await Promise.all([storeFile.uploaderFile({ file: formData.value.back, location: `${id_create.value}/'back'` })])
                 if (resBack[0]?.data) {
                     arrayUpload.value[4].completed = true
                     newArrayExterior = [...newArrayExterior, resBack[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Passenger Side', preview: formData.value.previewPassengerSide, completed: false, }]
                 let resPassengerSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.passengerSide, location: `${id_create.value}/passenger-side` })])
                 if (resPassengerSide[0]?.data) {
                     arrayUpload.value[5].completed = true
                     newArrayExterior = [...newArrayExterior, resPassengerSide[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Tire And Rim', preview: formData.value.previewTireAndRim, completed: false, }]
                 let resTireAndRim = await Promise.all([storeFile.uploaderFile({ file: formData.value.tireAndRim, location: `${id_create.value}/tire-and-rim` })])
                 if (resTireAndRim[0]?.data) {
                     arrayUpload.value[6].completed = true
                     newArrayExterior = [...newArrayExterior, resTireAndRim[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Display (Odometer)', preview: formData.value.previewDriversDisplay, completed: false, }]
                 let resDriversDisplay = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversDisplay, location: `${id_create.value}/drivers-display-(odometer)` })])
                 if (resDriversDisplay[0]?.data) {
                     arrayUpload.value[7].completed = true
                     newArrayInterior = [...newArrayInterior, resDriversDisplay[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Side (Interior)', preview: formData.value.previewDriversSide, completed: false, }]
                 let resDriverSideInterior = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversSide, location: `${id_create.value}/drivers-side-(interior)` })])
                 if (resDriverSideInterior[0]?.data) {
                     arrayUpload.value[8].completed = true
                     newArrayInterior = [...newArrayInterior, resDriverSideInterior[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Center Console', preview: formData.value.previewCenterConsole, completed: false, }]
                 let resCenterConsole = await Promise.all([storeFile.uploaderFile({ file: formData.value.centerConsole, location: `${id_create.value}/center-console` })])
                 if (resCenterConsole[0]?.data) {
                     arrayUpload.value[9].completed = true
                     newArrayInterior = [...newArrayInterior, resCenterConsole[0]?.data]
                 }
-                
+
                 arrayUpload.value = [...arrayUpload.value, { name: 'Rear Seats', preview: formData.value.previewRearSeats, completed: false, }]
                 let resRearSeats = await Promise.all([storeFile.uploaderFile({ file: formData.value.rearSeats, location: `${id_create.value}/rear-seats` })])
                 if (resRearSeats[0]?.data) {
                     arrayUpload.value[10].completed = true
                     newArrayInterior = [...newArrayInterior, resRearSeats[0]?.data]
                 }
-                
+
                 if (formData.value.vehicleDamage) {
                     arrayUpload.value = [...arrayUpload.value, { name: 'Vehicle Damage', preview: formData.value.previewVehicleDamage, completed: false, }]
                     let resVehicleDamage = await Promise.all([storeFile.uploaderFile({ file: formData.value.vehicleDamage, location: `${id_create.value}/vehicle-damage` })])
@@ -967,8 +983,40 @@ export default {
                 }
             }
         }
+        const getCountry = async () => {
+            try {
+                const res = await countrys.getCountry()
+                console.log('resresresresresres', res)
+                formData.value.getState = res.data
+            } catch (error) {
 
+            }
+        }
+        const onChangeGetProvince = async (event) => {
+            formData.value.getCities = undefined
+            let value = JSON.parse(event.target.value)
+            loadingCountrys.value = true
+            try {
+                const res = await countrys.getCountryCities(value.iso2)
+                formData.value.getCities = res.data
+                console.log('getCountryCities', res)
+            } catch (error) {
+                loadingCountrys.value = false
+            } finally {
+                loadingCountrys.value = false
+            }
 
+        }
+        const onChangeGetCity = async (event) => {
+            let value = JSON.parse(event.target.value)
+            /* formData.value.city = value.name */
+            console.log('value', value)
+        }
+        onMounted(() => {
+            getCountry()
+            let twoDaysLater = new Date(new Date().getTime() + 2 * 86400 * 1000);
+            console.log('twoDaysLater', twoDaysLater)
+        })
 
         return {
             op,
@@ -989,14 +1037,11 @@ export default {
             stateProgressUpload,
             porcertanje,
             arrayUpload,
-            loadingUploadImages
+            loadingUploadImages,
+            onChangeGetProvince,
+            onChangeGetCity,
+            loadingCountrys
         };
     },
 };
 </script>
-
-
-
-
-
-  
