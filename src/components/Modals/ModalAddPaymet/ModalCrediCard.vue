@@ -2,16 +2,16 @@
     <div v-show="storeModal.isActive"
         class="fixed z-[100] inset-0 flex items-end md:items-center justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
-            <div class="p-2 md:p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
+            <div class="p-2 md:p-4 rounded-t-lg  bg-base-black flex gap-4 items-center justify-between">
                 <p class="text-sm md:text-xl text-white">Add Credit Card</p>
                 <svg @click="storeModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
-                class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                    class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
             <div>
-                <div class="flex p-4 flex-col gap-3">
+                <!--  <div class="flex p-4 flex-col gap-3">
                     <div class="flex flex-col gap-3">
                         <div class="flex flex-col gap-2">
                             <label class=" text-base font-medium " for="">Card Number</label>
@@ -40,16 +40,17 @@
                                 placeholder="Input cvv" pattern="[0-9\s]{13,19}" maxlength="4" type="password">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="m-4">
                     <button @click="addpayment"
-                        class="w-full py-2 md:p-2 items-center  bg-base-gray text-white  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
-                        <p class=" text-xs md:text-base" >Add Credit Card</p>
+                        class="w-full py-2 md:p-2 items-center  bg-base-black text-white  border rounded-md flex justify-center gap-3 border-[#C2C2C2] ">
+                        <p class=" text-xs md:text-base">Add Credit Card</p>
                     </button>
                 </div>
             </div>
         </div>
-        <div v-if="loading" class="bg-[#000000a1;] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        <div v-if="loading"
+            class="bg-[#000000a1;] left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
                 <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
                     <div class="animate-bounce">
@@ -111,11 +112,15 @@ export default {
                     cvc: '123'
                 }
             }
+            loading.value = true
             try {
                 let res = await controllerPayment.addPayment(data)
                 console.log('res', res)
             } catch (error) {
-
+                loading.value = false
+            } finally {
+                loading.value = false
+                storeModal.closeModal(false)
             }
         }
         return {

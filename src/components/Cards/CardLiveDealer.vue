@@ -94,12 +94,12 @@
                     <div class=" flex w-full  justify-between items-center">
                         <div class="flex md:gap-3 items-start justify-center flex-col">
                             <p class=" text-sm md:text-base">Current bid</p>
-                            <p v-if="auction?.bids[0]?.amount" class=" font-medium text-lg md:text-2xl text-base-black  ">
-                                ${{ auction.bids[0].amount }}
+                            <p v-if="auction?.vehicleDetails?.basePrice" class=" font-medium text-lg md:text-2xl text-base-black  ">
+                                ${{ auction?.vehicleDetails?.basePrice }}
                             </p>
-                            <p v-else-if="auction?.vehicleDetails?.basePrice"
+                            <p v-else-if="auction.bids[0].amount"
                                 class=" font-medium text-2xl text-base-black  ">
-                                ${{ auction?.vehicleDetails?.basePrice }}</p>
+                                ${{ auction.bids[0].amount }}</p>
                             <p v-else class="font-medium text-2xl text-base-black ">0$</p>
                         </div>
                     </div>

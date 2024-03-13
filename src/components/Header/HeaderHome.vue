@@ -252,7 +252,7 @@
                                 <img class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + store?.userData?.dealer?.picture" alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                    {{ store.userData.dealer.name }}
+                                    {{ store?.userData?.dealer?.name }}
                                 </p>
                             </div>
                             <div @click="logout" class="flex gap-2">

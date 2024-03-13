@@ -426,11 +426,12 @@ export default {
         })
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             console.log('current bits', newQuestion)
-        
+
             if (autionUpdate.value.status == 'live') {
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
                 let photos = []
+                counter.value++
                 if (data.value[i]?.vehicleDetails?.additionalDocuments,
                     data.value[i]?.vehicleDetails?.exteriorPhotos,
                     data.value[i]?.vehicleDetails?.interiorPhotos,
@@ -452,6 +453,7 @@ export default {
                         return newObjet
                     })
                     return data.value[i].photos = resD
+
                 } else {
                     return data.value[i].photos = null
                 }
@@ -461,7 +463,8 @@ export default {
                 data.value = result
 
             }
-            counter.value++
+
+
         })
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;

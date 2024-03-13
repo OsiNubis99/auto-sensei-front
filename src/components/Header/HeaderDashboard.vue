@@ -432,11 +432,11 @@
             </nav>
         </template>
         <div :class="[scrollPosition > 6 ? 'top-0' : ' top-[2%] md:top-[56px]', show ? 'visible opacity-100 transition-all ease-out duration-500 ' : ' invisible opacity-0  transition-all ease-out duration-300 ']"
-            class="fixed z-[1000] md:right-[60px] right-[5%] left-[5%] w-[90%]  shadow-xl  transition-all ease-linear duration-200   md:w-1/4 flex flex-col rounded-lg bg-white modal-notificationes">
+            class="fixed z-[1000] md:right-[60px] md:left-auto right-[5%]  left-[5%] w-[90%]  shadow-xl  transition-all ease-linear duration-200   md:w-1/4 flex flex-col rounded-lg bg-white modal-notificationes">
             <div v-for="(item, index) in notiAutions" :key="index"
                 :class="` border-b p-2 md:px-2 md:py-3 border-[#cfcfcf] md:pb-3 hover:bg-[#d6d6d6] transition-all cursor-pointer ease-linear duration-200 animate-fade-down animate-once animate-duration-2000 animate-delay-600 animate-ease-in-out`">
                 <RouterLink :to="{ name: 'action-details-dealer', params: { id: item?._id } }" class="flex gap-2">
-                    <div class="w-[40%]">
+                    <div class="w-[70%] md:w-[40%]">
                         <img class=" rounded-lg shadow-lg w-full h-full object-cover"
                             :src="bucket + item.vehicleDetails.exteriorPhotos[0]" alt="">
                     </div>

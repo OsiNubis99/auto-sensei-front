@@ -3,7 +3,7 @@
         class="fixed z-[100] inset-0 flex items-end md:items-center justify-center bg-base-black  bg-opacity-50">
         <div class=" w-full md:w-auto md:max-w-xl overflow-auto  bg-white rounded-lg shadow-xl  animation-fade-modal">
             <div class="md:p-4 p-2 rounded-t-lg  bg-base-black flex items-center justify-between">
-                <p v-if="statusModal.from == 'autoBid'" class=" text-sm md:text-xl text-white">PEPITOOOOOOOAuto Bid</p>
+                <p v-if="statusModal.from == 'autoBid'" class=" text-sm md:text-xl text-white">Auto Bid</p>
                 <p v-if="statusModal.from == 'bidNow'" class=" text-sm md:text-xl text-white">Bid Now</p>
                 <svg @click="closet" xmlns="http://www.w3.org/2000/svg" class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer"
                     fill="none" viewBox="0 0 24 24" stroke="#fff">
@@ -71,7 +71,6 @@
                     <div class="mt-2 p-5 flex items-center gap-4 border-[#E0E0E0] border-t-[1px] ">
                         <CurrencyInput :key="counterKey" :error='invalid' v-model="formData.placeyourbid"
                             :options="{ currency: 'USD' }" :label="'Place your bid'" :placeHolder="'$ Min 100,100'" />
-                        {{ formData.placeyourbid }}
                         <button @click="addAmount"
                             class="btn mt-8 bg-blue-dark font-medium rounded-md  text-primary">+$100</button>
                     </div>

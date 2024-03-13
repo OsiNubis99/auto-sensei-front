@@ -550,7 +550,7 @@
             </div>
         </div>
     </div>
-    <div v-if="!showModeMobil" class="md:hidden ">
+    <div v-show="!showModeMobil" class="md:hidden ">
         <div class="border-b-2 border-r-2 border-[#E0E0E0]  p-2 ">
             <div class="flex justify-between items-center gap-2">
                 <input type="text" placeholder="search chatting" v-model="search"
@@ -631,7 +631,7 @@
             </template>
         </div>
     </div>
-    <div v-else class="md:hidden relative bg-white ">
+    <div v-show="showModeMobil" class="md:hidden relative bg-white ">
         <div
             class="p-2 flex fixed top-0 z-[15000] w-full  bg-white border-b border-[#e0e0e0] justify-between items-center">
             <div class="flex items-start gap-2">
@@ -668,31 +668,31 @@
         </div>
         <div style="overscroll-behavior: none;">
             <div class="mt-8 mb-[120px]">
-                <template v-if="dataChat?.length > 0" v-for="(msg, index) in dataChat" :key="index" >
+                <template v-if="dataChat?.length > 0" v-for="(msg, index) in dataChat" :key="index">
                     <div v-if="msg.me" class="clearfix">
-                    <div class="bg-[#1F94F0] text-white w-3/4 mx-2 my-1 p-2 rounded-lg text-xs">
-                        <p> {{ msg.message }}</p>
+                        <div class="bg-[#1F94F0] text-white w-3/4 mx-2 my-1 p-2 rounded-lg text-xs">
+                            <p> {{ msg.message }}</p>
+                        </div>
+                        <div class="flex pl-2 w-3/4   justify-start items-center gap-1">
+                            <p class=" capitalize text-[12px]  py-2">{{ msg.createdAt }} 11:45</p>
+                        </div>
                     </div>
-                    <div class="flex pl-2 w-3/4   justify-start items-center gap-1">
-                        <p class=" capitalize text-[12px]  py-2">{{ msg.createdAt }} 11:45</p>
+                    <div v-else class="clearfix flex items-end flex-col">
+                        <div class=" bg-[#F0F0F0]   float-right w-3/4 mx-2 my-1 text-xs p-2 rounded-lg clearfix">
+                            <p> {{ msg.message }}</p>
+                        </div>
+                        <div class="flex  w-3/4 pr-2  justify-end items-center gap-1">
+                            <p class=" capitalize text-[12px]  py-2">{{ msg.createdAt }} 11:45</p>
+                            <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 16 16" fill="none">
+                                <path
+                                    d="M7.73499 9.17366L8.67632 10.115L14.3203 4.47099L15.263 5.41366L8.67632 12.0003L4.43366 7.75766L5.37633 6.81499L6.79299 8.23166L7.73499 9.17299V9.17366ZM7.73633 7.28833L11.0377 3.98633L11.9777 4.92633L8.67632 8.22833L7.73633 7.28833ZM5.85166 11.0583L4.90966 12.0003L0.666992 7.75766L1.60966 6.81499L2.55166 7.75699L2.55099 7.75766L5.85166 11.0583Z"
+                                    fill="#05A54B" />
+                            </svg>
+                        </div>
                     </div>
-                </div>
-                <div v-else class="clearfix flex items-end flex-col">
-                    <div class=" bg-[#F0F0F0]   float-right w-3/4 mx-2 my-1 text-xs p-2 rounded-lg clearfix">
-                        <p> {{ msg.message }}</p>
-                    </div>
-                    <div class="flex  w-3/4 pr-2  justify-end items-center gap-1">
-                        <p class=" capitalize text-[12px]  py-2">{{ msg.createdAt }} 11:45</p>
-                        <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                            fill="none">
-                            <path
-                                d="M7.73499 9.17366L8.67632 10.115L14.3203 4.47099L15.263 5.41366L8.67632 12.0003L4.43366 7.75766L5.37633 6.81499L6.79299 8.23166L7.73499 9.17299V9.17366ZM7.73633 7.28833L11.0377 3.98633L11.9777 4.92633L8.67632 8.22833L7.73633 7.28833ZM5.85166 11.0583L4.90966 12.0003L0.666992 7.75766L1.60966 6.81499L2.55166 7.75699L2.55099 7.75766L5.85166 11.0583Z"
-                                fill="#05A54B" />
-                        </svg>
-                    </div>
-                </div>
                 </template>
-               
+
             </div>
         </div>
         <div class="w-full bg-white  pt-2 fixed bottom-0">
@@ -808,7 +808,6 @@ export default {
                 new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
             );
         }
-
         const accept = () => {
             termins.value = false
         }
@@ -848,8 +847,8 @@ export default {
             showModeMobil.value = false
         }
         const getMessages = (userF, index, id, screen) => {
-            console.log('screen', screen)
-            listChat.value = []
+            console.log('screen', screen)/* 
+            listChat.value = [] */
             if (screen === 'mobil') {
                 showModeMobil.value = true
             } else {
@@ -907,7 +906,6 @@ export default {
                 }, 5);
             }
         }
-
         const readMessages = (Messages = false) => {
             const dataGet = {
                 userId: 15447,
