@@ -1,13 +1,13 @@
 <template>
     <header>
-        <div v-if="path == 'login' || path == 'signup'" class="h-10 p-6 flex justify-start  items-center bg-base-black">
-            <div class="flex items-center gap-5 cursor-pointer" @click="back">
+        <div v-if="path == 'login' || path == 'signup'" class="md:h-10 p-2 md:p-6 flex justify-start  items-center bg-base-black">
+            <div class="flex items-center gap-2 md:gap-5 cursor-pointer" @click="back">
                 <IconArrow class="rotate-90" />
-                <p class="text-sm text-white font-medium">Back to Home</p>
+                <p class=" text-xs md:text-sm text-white font-medium">Back to Home</p>
             </div>
         </div>
         <div class="font-sans antialiased" id="app">
-            <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
+            <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark hidden md:grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
         (scrollPosition > 100 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md')]"
                 class="flex py-2 px-1 md:p-4   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal md:px-20 md:py-6">
                 <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
@@ -58,7 +58,7 @@
 
                 </div>
                 <div v-else class="flex md:hidden">
-                    <RouterLink to="/login/sellers"
+                    <RouterLink v-if="path !== 'login' || path == 'signup'" to="/login/sellers"
                         class=" text-xs px-4 py-2 rounded-md bg-transparent text-white border border-[#e5e5e5]">
                         Login
                     </RouterLink>
@@ -142,6 +142,31 @@
                     </div>
                 </div>
             </nav>
+            <div v-if="path == 'login' || path == 'signup'" class="bg-blue-dark flex justify-between md:hidden items-center px-3 py-2 ">
+                <RouterLink :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
+                    <p class="text-white text-sm font-medium">
+                        <span v-if="path == 'login'">Don’t have an account?</span>
+                        <span v-if="path == 'signup'"> Already have an account?</span>
+                    </p>
+                </RouterLink>
+                <RouterLink v-if="path !== 'login'" :to="path == 'home' || path == 'about' || path == 'sold-auctions' ||
+            path == 'how-it-works' ||
+            path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`"
+                    :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'"
+                    class="px-3 py-1 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-sm capitalize ">
+                    <span v-if="path == 'signup'">Sign In</span>
+                    <span v-else>Login</span>
+                </RouterLink>
+                <RouterLink v-if="path !== 'signup'" :to="path == 'home' ||
+            path == 'about' ||
+            path == 'sold-auctions' ||
+            path == 'how-it-works' ||
+            path == 'contact-us'
+            ? `/signup/sellers` : `/signup/${route.params.rol}`"
+                    class="px-3 bg-primary py-1 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-sm capitalize">
+                    Sign Up
+                </RouterLink>
+            </div>
 
             <template v-if="storeUser?.userData?._id">
                 <div v-show="open"
@@ -357,13 +382,13 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const form = storeData.formData
         let open = ref(false)
-       /*  watch(open, async (newQuestion, oldQuestion) => {
-            if (newQuestion) {
-                document.documentElement.style.overflow = "hidden";
-            } else {
-                document.documentElement.style.overflow = "initial";
-            }
-        }) */
+        /*  watch(open, async (newQuestion, oldQuestion) => {
+             if (newQuestion) {
+                 document.documentElement.style.overflow = "hidden";
+             } else {
+                 document.documentElement.style.overflow = "initial";
+             }
+         }) */
         const handleChangeLang = (e) => {
             if (!e) {
                 i18n.global.locale = "en";
