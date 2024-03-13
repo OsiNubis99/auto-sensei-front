@@ -7,7 +7,8 @@ export const stepsSignUp = defineStore('stepsSignUp', () => {
         lastName: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        termsconditions: null
     })
     const formAccount = ref({
         img: '',

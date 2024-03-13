@@ -74,7 +74,7 @@
                 <p class=" text-[10px] md:text-xs font-normal text-[#666]">
                     By clicking “Log In”, you acknowledge that you have
                     read & agreed to AutoSensei User's
-                    <RouterLink to="#" class="font-medium underline text-base-black hover:text-indigo-500">
+                    <RouterLink to="/terms-conditions"  target="_blank" class="font-medium underline text-base-black hover:text-indigo-500">
                         Terms & Conditions.
                     </RouterLink>
                 </p>

@@ -268,11 +268,11 @@ const routes = [
         name: 'about',
         component: () => import('../views/AboutView.vue')
       },
-   /*    {
-        path: '/sold-auctions',
-        name: 'sold-auctions',
-        component: () => import('../views/SoldAuctions.vue')
-      }, */
+      /*    {
+           path: '/sold-auctions',
+           name: 'sold-auctions',
+           component: () => import('../views/SoldAuctions.vue')
+         }, */
       {
         path: '/how-it-works',
         name: 'how-it-works',
@@ -317,7 +317,11 @@ const routes = [
         beforeEnter: beforeEnterTokenEmail,
         component: () => import('../views/Auth/Recover-Password/Main.vue')
       },
-
+      {
+        path: '/terms-conditions',
+        name: 'terms-conditions',
+        component: () => import('../views/Terms-Conditions.vue')
+      },
       {
         path: '/test',
         name: 'test',

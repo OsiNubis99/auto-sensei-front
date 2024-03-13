@@ -86,27 +86,56 @@
                                     class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                         </div>
+                        <div class="flex  w-full justify-start dark:bg-gray-950">
+                            <div class="flex justify-between items-center gap-2">
+                                <label class="relative flex cursor-pointer items-center mb-1 rounded-md">
+
+                                    <input type="checkbox" v-model="form.termsconditions"
+                                        :class="form.termsconditions ? 'bg-base-black' : 'bg-white'"
+                                        class="peer cursor-pointer appearance-none relative h-4 w-4  dark:bg-gray-100/25 border border-gray-900 dark:border-gray-100 transition-all checked:border-blue-500 checked:bg-blue-500 rounded-md" />
+                                    <div
+                                        class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20"
+                                            fill="currentColor" stroke="currentColor" stroke-width="1">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+
+                                </label>
+                                <div class="flex flex-col relative">
+
+                                    <p class="!text-sm  font-medium text-gray-700">I accept the <RouterLink
+                                            to="/terms-conditions" target="_blank"
+                                            class="font-medium underline text-base-black hover:text-indigo-500"> terms
+                                            and conditions </RouterLink>
+                                    </p>
+                                    <p class="text-xs text-error absolute whitespace-pre  -bottom-[100%] font-medium text-gray-700"
+                                        v-if="invalid?.termsconditions">{{ invalid?.termsconditions }}</p>
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="!mb-10 !md:m-0">
+
+
                             <button @click="nextStep"
                                 class="animate-fade-up  animate-ease-in-out animate-delay-900 w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Create Account
                             </button>
                         </div>
-                        <!--  <div class="text-sm mt-6 text-center animate-fade-up  animate-ease-in-out animate-delay-800">
-                            <RouterLink to="#" class="font-medium underline text-indigo-600 hover:text-indigo-500">
-                                Forgot your password?
-                            </RouterLink>
-                        </div> -->
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="text-center">
-            <p class="text-[10px] md:text-xs font-normal text-[#666]">
-                By clicking “Log In”, you acknowledge that you have
+            <p class="!text-[10px] md:text-xs font-normal text-[#666]">
+                By clicking “Create Account”, you acknowledge that you have
                 read & agreed to AutoSensei User's
-                <RouterLink to="#" class="font-medium underline text-base-black hover:text-indigo-500">
+                <RouterLink to="/terms-conditions" target="_blank"
+                    class="font-medium underline text-base-black hover:text-indigo-500">
                     Terms & Conditions.
                 </RouterLink>
             </p>
@@ -139,9 +168,10 @@ export default {
         const loading = ref(false)
         const form = storeData.formData
         const nextStep = async () => {
+            console.log('form.', form.termsconditions)
             invalid.value = createAccount(form, rol.value);
             if (Object.entries(invalid.value).length > 0) {
-                toast(invalid?.value?.email || invalid.value.password || invalid.value.confirmPassword, {
+                toast(invalid?.value?.email || invalid.value.password || invalid.value.confirmPassword || invalid.value.termsconditions, {
                     type: "error",
                     autoClose: 2000,
                 });

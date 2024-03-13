@@ -24,6 +24,9 @@ export const createAccount = (form, rol) => {
         } else if (form.password !== form.confirmPassword) {
             error.confirmPassword = 'Passwords do not match'
         }
+        if (!form.termsconditions) {
+            error.termsconditions = 'You must accept terms and conditions.'
+        }
     } else {
         if (!form.email) {
             error.email = 'Required field'
@@ -39,6 +42,9 @@ export const createAccount = (form, rol) => {
         } else if (form.password !== form.confirmPassword) {
             error.confirmPassword = 'Passwords do not match'
         }
+        if (!form.termsconditions) {
+            error.termsconditions = 'You must accept terms and conditions.'
+        }
     }
 
     return error;
@@ -48,9 +54,9 @@ export const infoAccount = (form, rol) => {
     let error = {};
 
     if (rol == "dealers") {
-       /*  if (!form.img) {
-            error.img = 'Required field'
-        } */
+        /*  if (!form.img) {
+             error.img = 'Required field'
+         } */
         if (!form.dealerName) {
             error.dealerName = 'Required field'
         }
@@ -64,9 +70,9 @@ export const infoAccount = (form, rol) => {
             error.phoneNumber = 'Required field'
         }
     } else {
-       /*  if (!form.img) {
-            error.img = 'Required field'
-        } */
+        /*  if (!form.img) {
+             error.img = 'Required field'
+         } */
         if (!form.firtName) {
             error.firtName = 'Required field'
         }
