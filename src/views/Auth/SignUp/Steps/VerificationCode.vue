@@ -101,7 +101,7 @@ export default {
             }
             console.log('formdata', formdata)
             loading.value = true
-            if (formdata.picture || formdata.driverLicense) {
+            if (formdata?.picture || formdata?.driverLicense) {
                 let resFile = formdata.picture && await storeFile.uploaderFile({ file: formdata.picture, location: 'profile' })
                 let resLicence = formdata.driverLicense && await storeFile.uploaderFile({ file: formdata.driverLicense, location: 'license' })
                 console.log('resLicence', resLicence)
@@ -189,6 +189,7 @@ export default {
                     });
                 }
             } else {
+                console.log('entro')
                 try {
                     let typeSeller = {
                         seller: {
@@ -207,11 +208,13 @@ export default {
                         phone: formdata.phone,
                         validationCode: form.value.code
                     }
-                    let dataRegister = rol.value == 'sellers' ? typeSeller : typeDealer
+                    let dataRegister = formdata.rol == 'sellers' ? typeSeller : typeDealer
+                    console.log('dataRegister', dataRegister)
                     let data = {
                         token: formdata.token,
                         payloadData: dataRegister
                     }
+                    
                     try {
                         let res = await storeUser.userData(data)
                         if (res) {
@@ -245,6 +248,7 @@ export default {
                             }
                         }
                     } catch (error) {
+                        console.log('error', error)
                         loading.value = false
                         toast(error?.response?.data?.message[0] || 'error al cargar', {
                             type: "error",
@@ -252,6 +256,7 @@ export default {
                     }
 
                 } catch (error) {
+                    console.log('error', error)
                     if (error?.response?.data?.message == "Unauthorized") {
                         toast(error?.response?.data?.message || 'error al cargar', {
                             type: "error",
