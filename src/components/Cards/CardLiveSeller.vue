@@ -17,7 +17,7 @@
                 class="flex p-4 md:p-5 cursor-pointer flex-col gap-3">
                 <div>
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-                        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
@@ -82,7 +82,8 @@
                 </div>
                 <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
                     <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
-                    <p class=" text-xs md:text-base">Waiting for verification, can take up to <span class="font-bold"> 90
+                    <p class=" text-xs md:text-base">Waiting for verification, can take up to <span class="font-bold">
+                            90
                             mins</span></p>
                 </div>
             </div>
@@ -92,9 +93,9 @@
                     <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                         <p class="text-sm md:text-base">Current bid</p>
                         <p class=" text-lg font-medium md:text-2xl text-base-black">
-                            <span v-if="auction?.bids[0]?.amount">${{auction?.bids[0]?.amount}}</span>
+                            <span v-if="auction?.bids[0]?.amount">${{ auction?.bids[0]?.amount }}</span>
                             <span v-else-if="auction?.vehicleDetails?.basePrice"> ${{
-                                auction?.vehicleDetails?.basePrice }} </span>
+        auction?.vehicleDetails?.basePrice }} </span>
                             <span v-else>$0</span>
                             <span class="text-[#666666] text-sm md:!text-lg mt-2">/{{ auction.bids.length }}
                                 Bids
@@ -124,8 +125,8 @@
         </div>
     </div>
 </template>
-  
-<script >
+
+<script>
 import { ref, onMounted, computed } from "vue";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -169,7 +170,3 @@ export default {
     },
 };
 </script>
-
-  
-  
-  

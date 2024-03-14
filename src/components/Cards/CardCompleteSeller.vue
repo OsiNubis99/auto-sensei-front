@@ -173,6 +173,7 @@ import 'swiper/css/scrollbar';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalReview } from "@/stores/modalReview";
+import { ModalViewDetails } from "@/stores/modalViewDetails";
 export default {
     components: {
         Swiper,
@@ -200,6 +201,7 @@ export default {
         const changeLayouts = ref(props.changeLayouts);
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const statusReview = ModalReview()
+        const statusModalView = ModalViewDetails()
         const statusModal = ModalAcceptAution()
         const declineAution = (auction, option) => {
             console.log('auction', auction)
@@ -221,7 +223,8 @@ export default {
             declineAution,
             cancelAution,
             acceptAution,
-            statusModal
+            statusModal,
+            statusModalView
         };
     },
 };

@@ -63,6 +63,8 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                             item.status == enumState.bidsCompleted ||
                             item.status == enumState.dropOff
                         )
+                        console.log('this.currentBids', this.currentBids)
+                        console.log('this.completedDelaer ', this.completedDelaer )
                         resolve(response);
                     })
                     .catch((error) => {

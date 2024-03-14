@@ -351,6 +351,8 @@ export default {
             getState: undefined,
             getCities: undefined,
             city: 'Select city',
+            saveCity: undefined,
+            saveProvince: undefined,
             keys: 'Select number of keys',
             currently: undefined,
             buyoutVehicle: undefined,
@@ -459,13 +461,13 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-                let province = JSON.parse(formData.value.province)
-                let city = JSON.parse(formData.value.city)
+                formData.value.saveCity = JSON.parse(formData.value.province)
+                formData.value.saveProvince = JSON.parse(formData.value.city)
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: city.name,
-                    province: province.name,
+                    city: formData.value.saveCity.name,
+                    province: formData.value.saveProvince.name,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,
@@ -547,12 +549,13 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-
+                formData.value.saveCity = JSON.parse(formData.value.province)
+                formData.value.saveProvince = JSON.parse(formData.value.city)
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.city,
-                    province: formData.value.province,
+                    city: formData.value.saveCity.name,
+                    province: formData.value.saveProvince.name,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,
@@ -860,11 +863,13 @@ export default {
                     default:
                         break;
                 }
+                formData.value.saveCity = JSON.parse(formData.value.province)
+                formData.value.saveProvince = JSON.parse(formData.value.city)
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.city,
-                    province: formData.value.province,
+                    city: formData.value.saveCity.name,
+                    province: formData.value.saveProvince.name,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,

@@ -155,20 +155,19 @@ export default {
                 canvas.toBlob(async blob => {
                     let nameImg = statusModalImage.img.name
                     var file = new File([blob], nameImg, { lastModified: new Date().getTime(), type: blob.type });
-                    console.log('file', file)
                     let image = canvas.toDataURL("image/jpeg");
-                    console.log('image', image)
+                  
 
                     switch (statusModalImage.typeImg) {
                         case 'document':
                             formData.value.previewDocument = image;
                             formData.value.document = file;
-                            console.log('document', formData.value.previewDocument, formData.value.document)
+                           
                             break;
                         case 'driver':
                             formData.value.previewDriver = image;
                             formData.value.driverDocument = file;
-                            console.log('driver', formData.value.previewDriver, formData.value.driverDocument)
+                           
                             break;
                         case 'frontPhoto':
                             formData.value.previewFrontPhoto = image;

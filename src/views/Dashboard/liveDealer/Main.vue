@@ -4,7 +4,7 @@
     </template>
 
     <template v-else>
-        <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
+        <HeaderOptionsDealer :storeAutions="storeAutions" :key="counter" :data="data" />
 
         <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <template v-if="data.length == 0">
@@ -228,10 +228,12 @@ export default {
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             const i = data.value.findIndex(x => x._id === newQuestion._id)
             data.value[i] = newQuestion
+           
             if (autionUpdate.value.status == 'live') {
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
                 let photos = []
+                counter.value++
                 if (data.value[i]?.vehicleDetails?.additionalDocuments,
                     data.value[i]?.vehicleDetails?.exteriorPhotos,
                     data.value[i]?.vehicleDetails?.interiorPhotos,

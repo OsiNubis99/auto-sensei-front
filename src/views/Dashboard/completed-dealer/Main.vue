@@ -326,11 +326,6 @@ export default {
                 await storeAutions.index()
                 let res = await storeAutions.indexCurrentBids()
                 console.log('storeAutions?.completed', storeAutions?.completed)
-                /*   console.log('storeAutions?.completedDelaer', storeAutions?.completedDelaer)
-                  let resnewArray = newArray.concat(storeAutions.completedDelaer, storeAutions.completed)
-  
-  
-                  console.log('newArray', resnewArray) */
                 data.value = storeAutions?.completed
                 data.value.map((autions, index) => {
                     /*  const formatter = new Intl.NumberFormat();

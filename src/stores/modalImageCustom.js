@@ -9,6 +9,7 @@ export const ModalImageCustom = defineStore("modalImageCustom", {
     }),
     actions: {
         openModal({ active, img, type }) {
+            console.log('active', active)
             this.isActive = active
             this.img = img
             this.typeImg = type

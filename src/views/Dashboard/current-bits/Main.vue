@@ -426,7 +426,7 @@ export default {
         })
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             console.log('current bits', newQuestion)
-
+            console.log('storeAutions completedDelaer', storeAutions.completedDelaer)
             if (autionUpdate.value.status == 'live') {
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion

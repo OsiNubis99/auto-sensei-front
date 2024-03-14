@@ -14,7 +14,7 @@
                 class="flex pb-2 p-5  flex-col gap-3">
                 <div class="">
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-                        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ auction.city }}, {{ auction.province }}
                     </p>
@@ -94,12 +94,12 @@
                     <div class=" flex w-full  justify-between items-center">
                         <div class="flex md:gap-3 items-start justify-center flex-col">
                             <p class=" text-sm md:text-base">Current bid</p>
-                            <p v-if="auction?.vehicleDetails?.basePrice" class=" font-medium text-lg md:text-2xl text-base-black  ">
-                                ${{ auction?.vehicleDetails?.basePrice }}
+                            <p v-if="auction?.bids[0]?.amount "
+                                class=" font-medium text-lg md:text-2xl text-base-black  ">
+                                ${{auction?.bids[0]?.amount }}
                             </p>
-                            <p v-else-if="auction.bids[0].amount"
-                                class=" font-medium text-2xl text-base-black  ">
-                                ${{ auction.bids[0].amount }}</p>
+                            <p v-else-if="auction?.vehicleDetails?.basePrice" class=" font-medium text-2xl text-base-black  ">
+                                ${{ auction?.vehicleDetails?.basePrice }}</p>
                             <p v-else class="font-medium text-2xl text-base-black ">0$</p>
                         </div>
                     </div>
@@ -126,8 +126,10 @@
                     <div @click="statusModal.openModal({ active: true, data: auction, from: 'autoBid' })"
                         class="flex gap-4 px-2 justify-between w-full">
                         <button class="btn !py-2 w-full bg-base-black flex gap-2 items-center text-primary ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                <path d="M9.16699 7.16666H13.8337L7.83366 15.8333V9.83332H3.16699L9.16699 1.16666V7.16666Z"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                fill="none">
+                                <path
+                                    d="M9.16699 7.16666H13.8337L7.83366 15.8333V9.83332H3.16699L9.16699 1.16666V7.16666Z"
                                     fill="#C1F861" />
                             </svg>
                             <p class="text-xs"> Auto Bid</p>
@@ -152,8 +154,8 @@
         </div>
     </div>
 </template>
-  
-<script >
+
+<script>
 import { ref, onMounted, computed } from "vue";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -195,7 +197,3 @@ export default {
     },
 };
 </script>
-
-  
-  
-  
