@@ -123,7 +123,7 @@ export default {
                         let typeDealer = {
                             dealer: {
                                 picture: resFile?.data ? resFile?.data : null,
-                                name: formdata.dealerName,
+                                name: formdata.name,
                                 omvic: formdata.omvic,
                                 address: formdata.address,
                             },
@@ -203,7 +203,7 @@ export default {
                     }
                     let typeDealer = {
                         dealer: {
-                            name: formdata.dealerName,
+                            name: formdata.name,
                             omvic: formdata.registrationNumber,
                             address: formdata.address,
                         },

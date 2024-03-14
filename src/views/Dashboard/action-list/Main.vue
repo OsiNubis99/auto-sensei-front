@@ -181,9 +181,9 @@
                                             <td
                                                 class="py-4 px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                                 <div class="w-10 h-10">
-                                                    <img v-if="aution.owner.seller.picture"
+                                                    <img v-if="aution?.owner?.seller?.picture"
                                                         class="w-full shadow-md   rounded-full h-full object-cover"
-                                                        :src="bucket + aution.owner.seller.picture" alt="">
+                                                        :src="bucket + aution?.owner?.seller?.picture" alt="">
                                                     <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
                                                         src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                                         alt="">
@@ -196,7 +196,7 @@
                                             </td>
                                             <td class="py-4 px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
                                                 <p class="!m-0 font-extrabold capitalize">
-                                                    {{ aution.owner.seller.firstName }} {{ aution.owner.seller.lastName }}
+                                                    {{ aution?.owner?.seller?.firstName }} {{ aution?.owner?.seller?.lastName }}
                                                 </p>
                                                 <p class="!m-0"> {{ aution.city }}, {{ aution.province }}</p>
                                             </td>
