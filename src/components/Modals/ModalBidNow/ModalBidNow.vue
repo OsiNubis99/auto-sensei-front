@@ -109,7 +109,8 @@
                                         }} - **** **** **** {{ itemCard?.card?.last4 }}</p>
                                 </button>
                                 <div v-if="openDropdown"
-                                    class="absolute h-[128px] md:h-[150px] flex flex-col gap-[6px] custom-scroll-payment border border-[#E0E0E0] overflow-auto  z-10 top-auto left-0 w-full py-2 mt-2  rounded-lg border-gray-900 bg-white shadow-xl">
+                                :class="authStore.userData.paymentMethods.length < 4 ? 'h-fit' : 'h-[128px] md:h-[150px]'"
+                                    class="absolute   flex flex-col gap-[6px] custom-scroll-payment border border-[#E0E0E0] overflow-auto  z-10 top-auto left-0 w-full py-2 mt-2  rounded-lg border-gray-900 bg-white shadow-xl">
                                     <div v-for="(payments, index) in authStore.userData.paymentMethods"
                                         class="flex flex-col   "
                                         :class="index !== authStore.userData.paymentMethods.length - 1 ? 'hover:bg-primary gap-6  cursor-pointer transition-all ease-linear duration-300 ' : ''">
