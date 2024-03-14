@@ -14,7 +14,7 @@
                 class="flex md:p-5  p-2 flex-col gap-3">
                 <div class="">
                     <div class="font-bold md:text-xl">{{ aution?.vehicleDetails?.year }} {{
-                        aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
+        aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ aution?.city }}, {{ aution?.province }}
                     </p>
@@ -128,7 +128,7 @@
                                 <div class="flex items-center gap-1">
                                     <!--   <p v-if="days > 0" class="flex gap-1 items-center">{{ days }} </p> -->
                                     <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours
-                                    }}
+                                        }}
                                         Hours</p>
                                     <p v-if="minutes > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
                                         class="flex gap-1 items-center">{{ minutes }}m</p>
@@ -144,7 +144,8 @@
                         class="flex gap-4 px-2 justify-between w-full">
                         <button @click="statusModalAuto.openModal({ active: true, data: aution })"
                             class="btn w-full flex gap-2 items-center  border border-[#E0E0E0]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+                                fill="none">
                                 <path
                                     d="M2.522 2.38402L8 1.16669L13.478 2.38402C13.626 2.41693 13.7584 2.49933 13.8533 2.61762C13.9482 2.73592 14 2.88303 14 3.03469V9.69269C14 10.3512 13.8373 10.9995 13.5266 11.58C13.2158 12.1606 12.7666 12.6554 12.2187 13.0207L8 15.8334L3.78133 13.0207C3.23352 12.6555 2.78431 12.1608 2.47357 11.5803C2.16282 10.9999 2.00016 10.3517 2 9.69335V3.03469C2.00003 2.88303 2.05176 2.73592 2.14666 2.61762C2.24156 2.49933 2.37396 2.41693 2.522 2.38402ZM8.66667 7.16669V3.83335L5.33333 8.50002H7.33333V11.8334L10.6667 7.16669H8.66667Z"
                                     fill="#0B1107" />
@@ -155,8 +156,10 @@
                     <div v-else @click="statusModal.openModal({ active: true, data: aution, from: 'autoBid' })"
                         class="flex gap-4 px-2 justify-between w-full">
                         <button class="btn w-full bg-base-black flex gap-2 items-center text-primary ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                <path d="M9.16699 7.16666H13.8337L7.83366 15.8333V9.83332H3.16699L9.16699 1.16666V7.16666Z"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                fill="none">
+                                <path
+                                    d="M9.16699 7.16666H13.8337L7.83366 15.8333V9.83332H3.16699L9.16699 1.16666V7.16666Z"
                                     fill="#C1F861" />
                             </svg>
                             Auto Bid
@@ -180,7 +183,8 @@
                 </div>
             </div>
             <div class="md:hidden">
-                <div class="flex p-2  md:p-4 pt-1 pb-0 justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col h-full '">
+                <div class="flex p-2  md:p-4 pt-1 pb-0 justify-between "
+                    :class="changeLayouts ? 'flex-row' : 'flex-col h-full '">
                     <div class=" flex w-full  justify-between items-center">
 
                         <div class="flex items-start justify-center flex-col">
@@ -261,9 +265,11 @@
 
                             </button>
                         </div>
-                        <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
+                        <RouterLink
+                            :to="{ name: 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
                             class="border rounded-lg flex justify-center items-center p-2 border-[#C2C2C2]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
+                                fill="none">
                                 <path
                                     d="M5.37852 15.8333L1.66602 18.75V3.33333C1.66602 3.11232 1.75381 2.90036 1.91009 2.74408C2.06637 2.5878 2.27834 2.5 2.49935 2.5H17.4993C17.7204 2.5 17.9323 2.5878 18.0886 2.74408C18.2449 2.90036 18.3327 3.11232 18.3327 3.33333V15C18.3327 15.221 18.2449 15.433 18.0886 15.5893C17.9323 15.7455 17.7204 15.8333 17.4993 15.8333H5.37852ZM5.83268 8.33333V10H7.49935V8.33333H5.83268ZM9.16602 8.33333V10H10.8327V8.33333H9.16602ZM12.4993 8.33333V10H14.166V8.33333H12.4993Z"
                                     fill="#0A0A0A" />
@@ -286,8 +292,8 @@
         </div>
     </div>
 </template>
-  
-<script >
+
+<script>
 import { ref, onMounted, computed } from "vue";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -339,7 +345,3 @@ export default {
     },
 };
 </script>
-
-  
-  
-  

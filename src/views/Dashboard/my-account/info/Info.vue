@@ -40,7 +40,8 @@
                             <p class=" text-xs md:text-base">{{ storeUser.seller?.lastName }}</p>
                         </div>
                         <div v-if="storeUser?.type == 2" class="flex gap-1 capitalize text-[#9ca3af] items-center">
-                            <p class=" text-xs md:text-base">{{ storeUser.dealer?.name }}</p>
+                            <p class=" text-xs md:text-base">{{ storeUser.dealer?.firstName }}</p>
+                            <p class=" text-xs md:text-base">{{ storeUser.dealer?.lastName }}</p>
                         </div>
                     </div>
                 </div>
