@@ -65,7 +65,8 @@
                 <div class="overflow-x-auto shadow-md sm:rounded-lg">
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden ">
-                            <table class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
+                            <table
+                                class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
                                 <template v-if="dataTableSearch?.length > 0">
                                     <thead class="bg-gray-100 dark:bg-gray-700">
                                         <tr>
@@ -168,7 +169,8 @@
                                                     <img v-if="user?.dealer?.picture"
                                                         class="w-full shadow-md   rounded-full h-full object-cover"
                                                         :src="bucket + user?.dealer?.picture" alt="">
-                                                    <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
+                                                    <img v-else
+                                                        class="w-full shadow-md  rounded-full h-full object-cover"
                                                         src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                                         alt="">
                                                 </div>
@@ -233,7 +235,9 @@
                                                 </td>
                                                 <td
                                                     class="w-[50%] justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
-                                                    <button v-if="user.status == 'inactive' || user.status == 'unaproved'" @click="confirmDealer(user)"
+                                                    <button
+                                                        v-if="user.status == 'inactive' || user.status == 'unaproved'"
+                                                        @click="confirmDealer(user)"
                                                         class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         Accept
                                                     </button>
@@ -323,7 +327,8 @@
                             Are you sure you want to Accept/Reject this auction?
                         </p>
                         <div class="flex w-full justify-end">
-                            <button @click="isOpen = false" class="px-6 py-2 text-blue-800 border border-blue-600 rounded">
+                            <button @click="isOpen = false"
+                                class="px-6 py-2 text-blue-800 border border-blue-600 rounded">
                                 Cancel
                             </button>
                             <button class="px-6 py-2 ml-2 text-blue-100 bg-primary rounded">
@@ -354,13 +359,14 @@ export default {
         const current = ref(1)
         const pageSize = ref(10)
         const numberPage = ref(0)
-        
+
         const getUserDealer = async () => {
             isLoading.value = true
             try {
                 await store.getUserDealers()
+                numberPage.value = Math.ceil(store.userDealers?.data.length / 10)
             } catch (error) {
-                 
+
                 isLoading.value = false
 
             } finally {
@@ -415,7 +421,8 @@ export default {
             }
         }
         const dataTableSearch = computed(() => {
-            return store.userDealers?.data?.filter(s => s.dealer.name.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
+            let res = store.userDealers?.data?.filter(s => s.dealer.name?.toLocaleLowerCase().includes(search.value?.toLocaleLowerCase()) || s.dealer.firstName?.toLocaleLowerCase().includes(search.value?.toLocaleLowerCase()))
+            return res?.slice(indexStart.value, indexEnd.value);
         })
         const indexStart = computed(() => {
             return (current.value - 1) * pageSize.value;
@@ -424,12 +431,12 @@ export default {
             return indexStart.value + pageSize.value;
         })
         const paginated = computed(() => {
-            return store.userSellers?.data.slice(indexStart.value, indexEnd.value);
+            return store.userDealers.data.slice(indexStart.value, indexEnd.value);
         })
         const prev = () => {
             current.value--;
         }
-        const next = () => {
+        const next = (page) => {
             if (page) {
                 current.value = page;
             } else {
@@ -461,6 +468,3 @@ export default {
     },
 };
 </script>
-
-
-  

@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 export const stepsSignUp = defineStore('stepsSignUp', () => {
     const formData = ref({
         name: '',
+        firtName: '',
         lastName: '',
         email: '',
         password: '',

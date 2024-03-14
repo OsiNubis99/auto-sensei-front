@@ -38,8 +38,8 @@
                                     Legal First Name*
                                 </label>
                                 <div class="mt-1">
-                                    <input name="name" type="text" v-model="form.name" placeholder="Alex"
-                                        :class="invalid?.name ? 'border-error ' : 'border-[#E0E0E0]'"
+                                    <input name="name" type="text" v-model="form.firtName" placeholder="Alex"
+                                        :class="invalid?.firtName ? 'border-error ' : 'border-[#E0E0E0]'"
                                         class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                             </div>
@@ -168,7 +168,7 @@ export default {
         const loading = ref(false)
         const form = storeData.formData
         const nextStep = async () => {
-            console.log('form.', form.termsconditions)
+            console.log('form.', form)
             invalid.value = createAccount(form, rol.value);
             if (Object.entries(invalid.value).length > 0) {
                 toast(invalid?.value?.email || invalid.value.password || invalid.value.confirmPassword || invalid.value.termsconditions, {
@@ -192,7 +192,8 @@ export default {
                         email: form.email,
                         password: form.password,
                         dealer: {
-                            name: form.name,
+                            firstName: form.firtName,
+                            lastName: form.lastName,
                         },
                     }
 

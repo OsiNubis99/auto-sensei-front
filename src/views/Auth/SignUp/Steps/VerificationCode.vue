@@ -68,6 +68,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from "@/stores/auth";
 import { useStoreFile } from "@/stores/uploader";
 import { useUserStore } from "@/stores/user";
+
 import axios from "@/axios";
 export default {
     props: {
@@ -81,6 +82,7 @@ export default {
     setup(props) {
         const storeData = stepsSignUp()
         const formdata = storeData.getSendData
+        const create = storeData.formData
         const storeUser = useUserStore()
         const store = useAuthStore()
         const form = ref({ code: '' })
@@ -124,7 +126,6 @@ export default {
                                 name: formdata.dealerName,
                                 omvic: formdata.omvic,
                                 address: formdata.address,
-                                phone: formdata.phone ? formdata.phone : null
                             },
                             phone: formdata.phone,
                             validationCode: form.value.code
@@ -140,12 +141,13 @@ export default {
                             let res = await storeUser.userData(data)
                             if (res) {
                                 axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
-                                localStorage.setItem('token', formdata.token)
+
                                 let resToken = await store.authProfile()
                                 console.log('resToken', resToken)
                                 if (resToken.statusText = "OK") {
-                                    localStorage.removeItem('updateUser')
-                                    localStorage.setItem('rol', resToken.data.type)
+                                    if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
+                                    if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
+                                    if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
                                     switch (resToken.data.type) {
                                         case 0:
                                             await router.push({ path: '/inicio' })
@@ -214,16 +216,18 @@ export default {
                         token: formdata.token,
                         payloadData: dataRegister
                     }
-                    
+
                     try {
                         let res = await storeUser.userData(data)
                         if (res) {
                             axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
-                            localStorage.setItem('token', formdata.token)
+
                             let resToken = await store.authProfile()
+
                             if (resToken.statusText = "OK") {
-                                localStorage.removeItem('updateUser')
-                                localStorage.setItem('rol', resToken.data.type)
+                                if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
+                                if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
+                                if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
                                 setInterval(async () => {
                                     switch (resToken.data.type) {
                                         case 0:
@@ -235,7 +239,7 @@ export default {
                                             router.go()
                                             break;
                                         case 2:
-                                            await router.push({ path: '/upcoming' })
+                                            await router.push({ path: '/login/dealers' })
                                             router.go()
                                             break;
                                         default:

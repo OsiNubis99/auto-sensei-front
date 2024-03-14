@@ -10,7 +10,8 @@
                         </path>
                     </svg>
                 </div>
-                <p v-if="codePhone" class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2">Sending code to your phone...</p>
+                <p v-if="codePhone" class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2">Sending code
+                    to your phone...</p>
                 <p v-else class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2">Loading...</p>
             </div>
         </div>
@@ -191,6 +192,7 @@ export default {
         const invalid = ref()
         const storeData = stepsSignUp()
         const form = storeData.formAccount
+        const formCreate = storeData.formData
         const token = ref(null)
         const route = useRoute();
         const typeUser = ref('')
@@ -267,7 +269,8 @@ export default {
                 let data = {
                     phone: codePhone.value
                 }
-
+                console.log('formCreate.firtName', formCreate.firtName)
+                console.log('formCreate.lastName', formCreate.lastName)
                 try {
                     let resCode = await storeUser.getValidation(data)
                     if (resCode.data.status == 'ok') {
@@ -279,6 +282,8 @@ export default {
                             name: form.dealerName ? form.dealerName : null,
                             firstName: form.firtName ? form.firtName : null,
                             lastName: form.lastName ? form.lastName : null,
+                            dealerFirsName: formCreate.firtName,
+                            dealerLastName: formCreate.lastName,
                             omvic: form.registrationNumber ? form.registrationNumber : null,
                             address: form.address ? form.address : null,
                             driverLicense: form.driverLicense ? form.driverLicense : null,

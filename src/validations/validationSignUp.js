@@ -4,11 +4,14 @@ export const createAccount = (form, rol) => {
     let error = {};
 
     if (rol == 'dealers') {
-        if (!form.name) {
+       /*  if (!form.name) {
             error.name = 'Required field'
-        }
+        } */
         if (!form.lastName) {
             error.lastName = 'Required field'
+        }
+        if (!form.firtName) {
+            error.firtName = 'Required field'
         }
         if (!form.email) {
             error.email = 'Required field'

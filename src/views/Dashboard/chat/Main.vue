@@ -921,10 +921,10 @@ export default {
             });
         }
         const dataTableSearch = computed(() => {
-            return listUser.value.filter(s => s.auction?.vehicleDetails?.make?.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
+            return listUser.value.filter(s => s.auction?.vehicleDetails?.make?.toLocaleLowerCase().includes(search.value?.toLocaleLowerCase()))
         })
         const dataChat = computed(() => {
-            return listChat.value.filter(s => s?.message?.toLocaleLowerCase().includes(searchat.value.toLocaleLowerCase()))
+            return listChat.value.filter(s => s?.message?.toLocaleLowerCase().includes(searchat.value?.toLocaleLowerCase()))
         })
         const getDataAution = async (id) => {
             loading.value = true

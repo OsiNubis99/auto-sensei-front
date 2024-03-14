@@ -14,7 +14,7 @@
                 class="flex p-5  flex-col gap-3">
                 <div class="">
                     <div class="font-bold md:text-xl">{{ aution?.vehicleDetails?.year }} {{
-                        aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
+        aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ aution?.city }}, {{ aution?.province }}
                     </p>
@@ -87,20 +87,26 @@
                                 fill="#0A0A0A" />
                         </svg>
                         <p class="capitalize  ">{{ aution.owner.seller.firstName }} {{
-                            aution.owner.seller.lastName }}</p>
+        aution.owner.seller.lastName }}</p>
                     </RouterLink>
                 </div>
             </RouterLink>
             <div :class="changeLayouts ? 'w-full hidden md:block' : 'w-[40%] hidden md:flex flex-col'"
                 class="border-l-2  border-[#E0E0E0]">
-                <div class="flex  p-4 pt-1  justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col h-full '">
-                    <div class=" flex w-full  justify-between items-center">
-                        <div class="flex gap-3 items-center justify-center flex-col">
+                <div class="flex  p-4 pt-1  justify-start " :class="changeLayouts ? 'flex-row' : 'flex-col h-full '">
+                    <div class=" flex w-full  justify-start items-center">
+                        <div class="flex gap-6 items-start justify-start flex-col">
                             <p>Expected drop off date</p>
-                            <p class="text-xl font-medium">{{
-                                moment(aution.dropOffDate).format('MMMM DD, YYYY') }}</p>
+                            <p class="text-xl font-medium">{{ moment(aution.dropOffDate).format('MMMM DD, YYYY') }}</p>
                         </div>
                     </div>
+                    <template v-if="aution?.bids[0].participant._id == auth?.userData?._id">
+                        <div v-if="aution.status == 'completed' || aution.status == 'bids completed'" class="pb-5 flex mt-4 flex-col gap-4">
+                            <p>Final bid</p>
+                            <p class="text-2xl font-semibold">${{ aution.bids[0].amount }}</p>
+                        </div>
+                    </template>
+
                 </div>
                 <div v-if="aution.status == 'drop off'" class="flex justify-between items-center w-full p-5">
                     <div>
@@ -117,11 +123,12 @@
                 </div>
                 <template v-if="aution?.bids[0].participant._id == auth?.userData?._id">
                     <div v-if="aution.status == 'completed' || aution.status == 'bids completed'" class="p-2">
+
                         <button :disabled="loadingButton ? true : false" @click="confirmVehicleAution(aution._id)"
                             class="btn w-full bg-primary flex gap-2 items-center text-base-black">
                             <div v-if="loadingButton && indexShowLoading == aution._id" class="w-8 h-8">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#0B1107" stroke="#fff"
-                                    stroke-width="0" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#0B1107"
+                                    stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
                                     <path
                                         d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
                                     </path>
@@ -139,7 +146,7 @@
                         <div class="flex  items-start gap-1 justify-center flex-col">
                             <p class="text-xs">Expected drop off date</p>
                             <p class="text-md font-medium">{{
-                                moment(aution.dropOffDate).format('MMMM DD, YYYY') }}</p>
+        moment(aution.dropOffDate).format('MMMM DD, YYYY') }}</p>
                         </div>
                     </div>
                 </div>
@@ -156,7 +163,8 @@
                         </p>
                     </div>
                 </div>
-                <div v-if="aution?.bids[0].participant._id == auth?.userData?._id && aution?.status == 'drop off'" class="flex gap-4 mt-5 px-2 justify-center">
+                <div v-if="aution?.bids[0].participant._id == auth?.userData?._id && aution?.status == 'drop off'"
+                    class="flex gap-4 mt-5 px-2 justify-center">
                     <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution._id + '-' + auth?.userData?._id } }"
                         class=" w-full flex gap-3 justify-center py-2 border border-[#e5e5e5] cursor-pointer rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20" fill="none">
@@ -203,8 +211,8 @@
         </div>
     </div>
 </template>
-  
-<script >
+
+<script>
 import { ref, onMounted, computed } from "vue";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -265,7 +273,3 @@ export default {
     },
 };
 </script>
-
-  
-  
-  

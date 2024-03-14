@@ -38,7 +38,7 @@
         statusModal.data?.vehicleDetails?.model }}</p>
                         <div>
                             <p class="capitalize text-sm md:text-base mt-4">Current Bid</p>
-                              <p v-if="statusModal.data?.bids[0]?.amount"
+                            <p v-if="statusModal.data?.bids[0]?.amount"
                                 class=" font-medium text-lg md:text-2xl text-base-black  ">
                                 ${{ statusModal.data.bids[0].amount }}
                             </p>
@@ -304,6 +304,9 @@ export default {
         form: {
             type: Object,
         },
+        index: {
+            type: Function,
+        }
     },
     setup(props) {
         const isOpen = ref(true);
@@ -378,12 +381,12 @@ export default {
 
                     let payload = null
                     if (statusModal.from == 'autoBid') {
-                        let currentBid = statusModal.data?.bids[0]?.amount 
-                        if(!currentBid){
-                           currentBid =  statusModal?.data?.vehicleDetails?.basePrice
+                        let currentBid = statusModal.data?.bids[0]?.amount
+                        if (!currentBid) {
+                            currentBid = statusModal?.data?.vehicleDetails?.basePrice
                         }
                         let currentAmount = currentBid + 100
-                        if(formData.value.placeyourbid < currentAmount ){
+                        if (formData.value.placeyourbid < currentAmount) {
                             currentAmount = formData.value.placeyourbid
                         }
                         payload = {
@@ -409,6 +412,7 @@ export default {
                         loading.value = false
                         statusModal.isActive = false
                         statusModal.finally = 'finally'
+                        props.index(statusModal.data._id)
                         toast('Successfully placed bid', { type: "success", position: "top-center", theme: "colored", });
                     }
                     break;
@@ -508,7 +512,7 @@ export default {
             }
         })
         onMounted(() => {
-            console.log('statusModal.data', statusModal.data)
+            console.log('statusModal.data', statusModal)
             if (!authStore.userData.paymentMethods.length > 0) {
                 showPayment.value = true
             }

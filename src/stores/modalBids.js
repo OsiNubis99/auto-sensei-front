@@ -6,7 +6,8 @@ export const ModalBids = defineStore("modalBids", {
         isActive: false,
         data: null,
         finally: null,
-        from: null
+        from: null,
+        details:false,
 
     }),
     actions: {
@@ -14,12 +15,14 @@ export const ModalBids = defineStore("modalBids", {
             this.isActive = params.active
             this.data = params.data
             this.from = params.from
+            this.details = params.details
         },
         closeModal(params) {
             this.isActive = params
             this.data = null
             this.finally = null
             this.from = null
+            this.details = null
 
         },
     },

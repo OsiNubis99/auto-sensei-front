@@ -460,7 +460,7 @@
                                                 class="capitalize text-xl font-medium">
                                                 ${{ dataDetails?.bids[0]?.amount }}</p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
-                                                dataDetails?.vehicleDetails?.basePrice }}</p>
+            dataDetails?.vehicleDetails?.basePrice }}</p>
                                             <p v-else>$0</p>
                                         </div>
                                     </div>
@@ -475,7 +475,19 @@
                                 </div>
                             </div>
                             <div class="flex flex-col gap-2 mt-4">
-                                <button class="btn w-full bg-base-black flex gap-2 items-center text-primary ">
+                                <button
+                                    v-if="dataDetails?.bids[0].participant._id == auth?.userData._id && dataDetails?.bids[0].biddingLimit"
+                                    @click="statusModalAuto.openModal({ active: true, data: dataDetails })"
+                                    class="btn !p-2 w-full gap-1 flex  items-center  border border-[#E0E0E0] ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                        fill="none">
+                                        <path
+                                            d="M9.16699 7.16666H13.8337L7.83366 15.8333V9.83332H3.16699L9.16699 1.16666V7.16666Z"
+                                            fill="#C1F861" />
+                                    </svg>
+                                    Auto Bid Active
+                                </button>
+                                <button v-else @click="statusModal.openModal({ active: true, data: dataDetails, from: 'autoBid' })" class="btn w-full bg-base-black flex gap-2 items-center text-primary ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
                                         fill="none">
                                         <path
@@ -484,7 +496,9 @@
                                     </svg>
                                     Auto Bid
                                 </button>
-                                <button class="btn w-full bg-primary flex gap-2 items-center text-base-black">
+                                <button
+                                    @click="statusModal.openModal({ active: true, data: dataDetails, from: 'bidNow', details: true })"
+                                    class="btn w-full bg-primary flex gap-2 items-center text-base-black">
                                     Bid Now
                                 </button>
                                 <div class="flex items-center gap-2 mt-3">
@@ -550,7 +564,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="dataDetails?.bids[0].participant._id == auth.userData._id"
+                            <div v-if="dataDetails?.bids[0].participant._id == auth.userData._id && dataDetails.status == 'completed' || dataDetails.status == 'bids completed'"
                                 class="flex flex-col gap-2 mt-4">
                                 <button :disabled="loadingButton ? true : false"
                                     @click="confirmVehicle(dataDetails._id)"
@@ -572,6 +586,8 @@
                 </div>
             </div>
         </div>
+        <ModalBidNow v-if="statusModal.isActive" :form="formData" :index="getDataAution" />
+        <ModalAutoBidVue v-if="statusModalAuto.isActive" :form="formData" :index="getDataAution" />
     </div>
 </template>
 
@@ -588,12 +604,18 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { useAuctionStore } from "@/stores/auctions";
 import { useAuthStore } from "@/stores/auth";
+import { ModalBids } from '@/stores/modalBids';
+import { ModalAutoBid } from '@/stores/modalAutoBid';
+import ModalBidNow from "@/components/Modals/ModalBidNow/ModalBidNow.vue";
+import ModalAutoBidVue from "@/components/Modals/ModalAutoBid/ModalAutoBid.vue";
 import moment from 'moment';
 export default {
 
     components: {
         Swiper,
         SwiperSlide,
+        ModalBidNow,
+        ModalAutoBidVue
     },
     setup() {
         const router = useRouter()
@@ -604,10 +626,24 @@ export default {
         const loading = ref(false)
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const storeIdAution = useAuctionStore()
+        const statusModalAuto = ModalAutoBid()
+        const statusModal = ModalBids()
         const auth = useAuthStore()
+        const idParams = ref()
         const setThumbsSwiper = (swiper) => {
             thumbsSwiper.value = swiper;
         };
+        const formData = ref({
+            placeyourbid: 0,
+            cardNumber: undefined,
+            nameOnCard: undefined,
+            expiryDate: undefined,
+            cvv: undefined,
+            saveCard: undefined,
+            termsConditions: undefined,
+            notify: undefined,
+            creditCard: undefined
+        })
         const remind = async (aution) => {
 
             loadingButton.value = true
@@ -635,7 +671,7 @@ export default {
             }
         }
         const getDataAution = async (id) => {
-            /* loading.value = true */
+            loading.value = true
             try {
                 let res = await storeIdAution.getAutionById({ uuid: id })
                 if (res) {
@@ -713,7 +749,10 @@ export default {
             return intlFormat(num);
         }
         onMounted(() => {
-            getDataAution(route.params.id)
+            if(route.params.id){
+                getDataAution(route.params.id)
+            }
+           
 
         })
         return {
@@ -731,7 +770,11 @@ export default {
             remindCancel,
             loadingButton,
             confirmVehicle,
-            makeFriendly
+            makeFriendly,
+            statusModalAuto,
+            statusModal,
+            formData,
+            getDataAution
         };
     },
 };

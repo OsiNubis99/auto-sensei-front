@@ -117,6 +117,7 @@ export default {
             try {
 
                 let res = await store.authProfile(token)
+                console.log('res', res)
                 if (res.status == 200) {
                     console.log('entro bien')
                     stepsCurrent.value = 1

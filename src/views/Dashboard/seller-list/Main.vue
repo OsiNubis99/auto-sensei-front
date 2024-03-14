@@ -65,7 +65,8 @@
                 <div class="overflow-x-auto shadow-md sm:rounded-lg">
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden ">
-                            <table class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
+                            <table
+                                class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
                                 <template v-if="dataTableSearch?.length > 0">
                                     <thead class="bg-gray-100 dark:bg-gray-700">
                                         <tr>
@@ -159,7 +160,8 @@
                                                     <img v-if="user?.seller?.picture"
                                                         class="w-full shadow-md   rounded-full h-full object-cover"
                                                         :src="bucket + user?.seller?.picture" alt="">
-                                                    <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
+                                                    <img v-else
+                                                        class="w-full shadow-md  rounded-full h-full object-cover"
                                                         src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                                         alt="">
                                                 </div>
@@ -311,7 +313,7 @@ export default {
                 await store.getUserSellers()
                 numberPage.value = Math.ceil(store.userSellers?.data.length / 10)
             } catch (error) {
-                 
+
                 isLoading.value = false
 
             } finally {
@@ -336,8 +338,8 @@ export default {
             }
         }
         const dataTableSearch = computed(() => {
-           
-            return store.userSellers?.data?.filter(s => s.seller?.firstName?.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
+            let res = store.userSellers?.data?.filter(s => s.seller?.firstName?.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
+            return res?.slice(indexStart.value, indexEnd.value);
         })
         const indexStart = computed(() => {
             return (current.value - 1) * pageSize.value;
@@ -381,6 +383,3 @@ export default {
     },
 };
 </script>
-
-
-  
