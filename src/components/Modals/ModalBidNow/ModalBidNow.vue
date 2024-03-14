@@ -141,7 +141,18 @@
                     </template>
 
                     <template v-if="showPayment || authStore.userData?.paymentMethods?.length === 0">
-                        <div class="flex md:pt-4 flex-col gap-3">
+                        <div class="flex justify-center items-center">
+                            <img class=" w-20 h-20 md:w-40 md:h-40" src="@/assets/svg/credit-card-new.svg" alt="">
+                        </div>
+
+
+                        <div class="flex flex-col items-center gap-2">
+                            <p class=" text-xs md:text-base">You do not have payment methods you must add one to bid, In
+                                the profile section you can add a payment method</p>
+                            <RouterLink to="/account-dealer" class="btn bg-primary text-base-black ">Go to Profile
+                            </RouterLink>
+                        </div>
+                      <!--   <div class="flex md:pt-4 flex-col gap-3">
                             <div class="flex flex-col gap-3">
                                 <div class="flex flex-col gap-2">
                                     <label class=" text-sm md:text-base " for="">Card Number</label>
@@ -183,7 +194,7 @@
                                         Conditions</a> to
                                     proceed.</label>
                             </div>
-                        </div>
+                        </div> -->
                     </template>
 
                 </div>

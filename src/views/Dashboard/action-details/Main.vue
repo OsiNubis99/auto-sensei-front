@@ -431,8 +431,8 @@
                                         <p class=" text-xs md:text-sm">Bid Status</p>
                                         <div class="flex gap-2">
 
-                                            <template v-if="dataDetails.participate">
-                                                <p v-if="dataDetails?.bids[0].participant._id == auth.userData._id"
+                                            <template v-if="dataDetails?.participate">
+                                                <p v-if="dataDetails?.bids[0]?.participant?._id == auth.userData?._id"
                                                     class="md:py-2 py-1 px-2 md:px-4 md:text-base text-sm border rounded-full text-[#05A54B] border-[#05A54B] flex justify-center items-center text-left">
                                                     Leading
                                                 </p>
@@ -476,7 +476,7 @@
                             </div>
                             <div class="flex flex-col gap-2 mt-4">
                                 <button
-                                    v-if="dataDetails?.bids[0].participant._id == auth?.userData._id && dataDetails?.bids[0].biddingLimit"
+                                    v-if="dataDetails?.bids[0]?.participant?._id == auth?.userData._id && dataDetails?.bids[0]?.biddingLimit"
                                     @click="statusModalAuto.openModal({ active: true, data: dataDetails })"
                                     class="btn !p-2 w-full gap-1 flex  items-center  border border-[#E0E0E0] ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
@@ -564,7 +564,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="dataDetails?.bids[0].participant._id == auth.userData._id && dataDetails.status == 'completed' || dataDetails.status == 'bids completed'"
+                            <div v-if="dataDetails?.bids[0]?.participant?._id == auth.userData?._id && dataDetails.status == 'completed' || dataDetails.status == 'bids completed'"
                                 class="flex flex-col gap-2 mt-4">
                                 <button :disabled="loadingButton ? true : false"
                                     @click="confirmVehicle(dataDetails._id)"
