@@ -1,7 +1,25 @@
 <template>
-    <div class="main-login  md:flex  md:flex-row-reverse">
-        <swiper @swiper="getRef" :pagination="{ type: 'bullets' }" :simulateTouch="false" :modules="modules"
-            class="stepsSwiper w-full  lg:w-2/4 ">
+    <div class="main-login">
+        <template v-if="loading">
+            <div class="h-screen-login-loading  left-0 top-0  md:w-[50%] h-full flex justify-center items-center">
+                <div>
+                    <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
+                        <div class="animate-bounce">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
+                                stroke-width="0" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <swiper v-show="!loading" @swiper="getRef" :pagination="{ type: 'bullets' }" :simulateTouch="false"
+            :modules="modules" class="stepsSwiper w-full  lg:w-2/4 ">
             <swiper-slide v-if="!loading">
                 <CreateAccount v-if="stepsCurrent == 0" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
@@ -18,6 +36,8 @@
                     :rol="rol" />
             </swiper-slide>
         </swiper>
+
+
         <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" lg:block md:w-1/2 relative ">
             <div v-if="rol == 'dealers'" class="h-full flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br>
@@ -47,23 +67,7 @@
             <img class="h-auto hidden md:block absolute bottom-0 w-full object-cover"
                 src="../../../assets/svg/vehiculosLogin.svg" alt="" />
         </div>
-        <template v-if="loading">
-            <div class="h-screen-login-loading  left-0 top-0  w-full h-full flex justify-center items-center">
-                <div>
-                    <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
-                        <div class="animate-bounce">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
-                                stroke-width="0" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
-                                </path>
-                            </svg>
-                        </div>
-                        <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
-                    </div>
-                </div>
-            </div>
-        </template>
+
 
     </div>
 </template>
@@ -117,7 +121,7 @@ export default {
             try {
 
                 let res = await store.authProfile(token)
-                console.log('res', res)
+                console.log('KENNNYYYY', res)
                 if (res.status == 200) {
                     console.log('entro bien')
                     stepsCurrent.value = 1
@@ -136,8 +140,8 @@ export default {
 
                 }
             } catch (error) {
-                console.log('entro ene l error')
-                if (error.response.data.message == "Unauthorized") {
+                console.log('entro ene l error', error)
+                if (error?.response?.data?.message == "Unauthorized") {
                     toast('Your email verification token has expired', {
                         type: "error",
                         autoClose: 2000,

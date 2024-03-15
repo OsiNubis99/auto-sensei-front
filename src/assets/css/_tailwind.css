@@ -289,6 +289,8 @@ label.label-colors-error {
 
 .main-login {
     height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .swiper-pagination-progressbar-fill {
@@ -1393,5 +1395,13 @@ input.check-toggle-round-flat:checked+label:after {
 
     .form-group {
         margin-bottom: 0px;
+    }
+
+    .main-login {
+        height: 100%;
+        flex-direction: column;
+    }
+    .custom-phone #telephone{
+        padding-left: 60px !important;
     }
 }
