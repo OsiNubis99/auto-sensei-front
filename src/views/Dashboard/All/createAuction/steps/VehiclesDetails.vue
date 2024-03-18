@@ -194,6 +194,7 @@
                         <option selected hidden>Choose Condition</option>
                         <option value="Rotors & Pads are good">Rotors & Pads are good</option>
                         <option value="Rotors & Pads need Replacement">Rotors & Pads need Replacement</option>
+                        <option value="Brand New">Brand New</option>
 
                     </select>
                 </div>

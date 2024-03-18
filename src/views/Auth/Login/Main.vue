@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div v-else
-                class="flex-1 flex flex-col justify-center pt-0 md:py-12 md:px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
+                class="flex-1 flex flex-col justify-center pt-0 md:py-12 sm:px-6 h-full lg:flex-none md:px-10 xl:px-20 xl:px-24">
                 <div class="mx-auto w-full ">
                     <div>
                         <h2 class="md:mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">Welcome to

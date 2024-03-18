@@ -35,7 +35,7 @@
                         </RouterLink>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3">
+                <div class="grid pt-10 grid-cols-2  md:p-0 lg:grid-cols-3">
                     <div class="flex flex-col">
                         <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
                             class="text-base my-2 font-medium">Car Auctions</RouterLink>
@@ -73,7 +73,7 @@
             </div>
 
             <div :class="path == 'about' ? 'border-black' : 'border-white'"
-                class="flex w-full border-t-[1px] flex-col gap-5 items-start md:flex-row p-5 md:py-6 md:px-14  justify-between relative md:items-center">
+                class="flex w-full border-t-[1px]  flex-col-reverse   gap-5 items-start md:flex-row p-5 md:py-6 md:px-14  justify-between relative md:items-center">
                 <div :class="path == 'about' ? 'text-black' : 'text-white'" class="text-sm font-normal">© 2023 AutoSensei.
                     All Rights Reserved.</div>
                 <div class="flex flex-col md:flex-row gap-5">

@@ -60,5 +60,18 @@ export const usePayments = defineStore("payments", {
                     });
             });
         },
+        addCard(payload) {
+            console.log('BERRRR', payload)
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/stripe/session-url`)
+                    .then((response) => {
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
     },
 });

@@ -93,35 +93,48 @@ export default {
         })
         const addpayment = async () => {
             console.log('hola', form.value)
-            let data = {
-                billing_details: {
-                    address: {
-                        city: 'Canada',
-                        country: 'CA',
-                        line1: 'linea 1',
-                        line2: 'linea 2',
-                        postal_code: 'CA',
-                        state: 'state'
-                    },
-                    name: 'KENNY BRYAN',
-                },
-                card: {
-                    number: '4000056655665556',
-                    exp_month: 4,
-                    exp_year: 24,
-                    cvc: '123'
-                }
-            }
-            loading.value = true
             try {
-                let res = await controllerPayment.addPayment(data)
+                let res = await controllerPayment.addCard()
                 console.log('res', res)
+                if (res.data) {
+                    window.location.href = res.data.url
+                }
+
             } catch (error) {
                 loading.value = false
             } finally {
                 loading.value = false
                 storeModal.closeModal(false)
             }
+            /*   let data = {
+                  billing_details: {
+                      address: {
+                          city: 'Canada',
+                          country: 'CA',
+                          line1: 'linea 1',
+                          line2: 'linea 2',
+                          postal_code: 'CA',
+                          state: 'state'
+                      },
+                      name: 'KENNY BRYAN',
+                  },
+                  card: {
+                      number: '4000056655665556',
+                      exp_month: 4,
+                      exp_year: 24,
+                      cvc: '123'
+                  }
+              }
+              loading.value = true
+              try {
+                  let res = await controllerPayment.addPayment(data)
+                  console.log('res', res)
+              } catch (error) {
+                  loading.value = false
+              } finally {
+                  loading.value = false
+                  storeModal.closeModal(false)
+              } */
         }
         return {
             storeModal,

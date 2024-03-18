@@ -1,8 +1,8 @@
 
 <template>
-  <div class="w-full pt-10 relative z-10 h-screen bg-blue-dark ">
+  <div class="w-full pt-20 relative z-10 h-full md:h-screen  bg-blue-dark ">
     <div class="w-full h-full flex flex-col justify-center items-center">
-      <h1 class="text-4xl md:text-6xl lg:text-8xl font-bold mb-7 text-center text-white">AutoSensei is Revolutionizing
+      <h1 class="text-3xl md:text-6xl lg:text-8xl font-bold mb-7 text-center text-white">AutoSensei is Revolutionizing
         <br>
         The Car-Selling Experience
       </h1>
@@ -10,25 +10,25 @@
     </div>
     <img class="absolute object-cover left-0 w-full h-full -z-10 top-0" src="../assets/svg/lines/lineAbout.svg" alt="">
   </div>
-  <div class="py-14 ">
-    <div class="grid lg:grid-cols-2 gap-20 px-5  lg:px-20 lg:pb-0 h-full">
-      <div class="flex w-full flex-col items-start gap-10">
+  <div class="md:py-14 py-4">
+    <div class="grid lg:grid-cols-2 gap-6 md:gap-20 px-5  lg:px-20 lg:pb-0 h-full">
+      <div class="flex w-full flex-col items-start  md:gap-10">
         <h3 class="text-left  text-3xl md:text-5xl font-bold leading-[58px] p ">
           Our Journey
         </h3>
-        <p class="text-lg font-normal ">
+        <p class=" text-sm md:text-lg font-normal ">
           AutoSensei was born from the need to simplify the car-selling process in today's fast-paced world. We understand
           that our busy lives no longer afford us the time and patience to visit multiple dealerships in search of the
           best offer for our vehicles. Selling on platforms like Facebook Marketplace can be a mixed bag, often involving
           frustrating negotiations with potential buyers.
         </p>
-        <p class="text-lg font-normal ">
+        <p class=" text-sm md:text-lg font-normal ">
           With this in mind, we crafted a user-friendly software platform where customers can auction their vehicles,
           connecting them with eager dealers ready to offer top dollar. We've effectively eliminated the need for
           extensive comparison shopping, reducing your effort by 90%, with the remaining 10% involving you simply dropping
           off your car.
         </p>
-        <p class="text-lg font-normal ">
+        <p class=" text-sm md:text-lg font-normal ">
           The best part? We've made our platform 100% free for customers, with no hidden fees. It's a straightforward and
           supportive solution in today's competitive vehicle market.
         </p>
@@ -44,20 +44,20 @@
     </div>
     <div class="grid md:grid-cols-2 p-5 gap-5 relative lg:p-20 h-full">
       <div class=" rounded bg-white overflow-hidden shadow-lg" @click="redirectLogin('sellers')">
-        <img class="w-full" src="../assets/svg/about/Frame2.svg" alt="Sunset in the mountains">
+        <img class="w-full object-cover h-[200px] md:h-auto" src="../assets/svg/about/Frame2.svg" alt="Sunset in the mountains">
         <div class="px-6 py-4">
           <div class=" text-2xl md:text-4xl font-bold mb-2">For Sellers</div>
-          <p class="text-gray-700 text-base">
+          <p class="text-gray-700 text-sm md:text-base">
             We created our platform to ensure clients have the ability to get the best value for their vehicle with their
             busy days & schedules. No more going dealer to dealer looking to see who offers the best price.
           </p>
         </div>
       </div>
       <div class=" rounded bg-white overflow-hidden shadow-lg" @click="redirectLogin('dealers')">
-        <img class="w-full" src="../assets/svg/about/Frame3.svg" alt="Sunset in the mountains">
+        <img class="w-full object-cover h-[200px] md:h-auto" src="../assets/svg/about/Frame3.svg" alt="Sunset in the mountains">
         <div class="px-6 py-4">
           <div class="text-2xl md:text-4xl font-bold mb-2">For Dealers</div>
-          <p class="text-gray-700 text-base">
+          <p class="text-gray-700 text-sm md:text-base">
             Dealers are able to increase their inventory without having to go to their local auctions, or online auctions
             bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
             application.
@@ -84,7 +84,7 @@
               </div>
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-              <p class="p-2  text-white text-justify">
+              <p class="p-2  text-sm md:text-base text-white text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
                 repellat amet doloribus consequuntur eos similique provident
                 tempora voluptates iure quia fuga dicta voluptatibus culpa
@@ -105,7 +105,7 @@
               </div>
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-              <p class="p-2  text-white text-justify">
+              <p class="p-2  text-sm md:text-base text-white text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
                 repellat amet doloribus consequuntur eos similique provident
                 tempora voluptates iure quia fuga dicta voluptatibus culpa
@@ -126,7 +126,7 @@
               </div>
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-              <p class="p-2  text-white text-justify">
+              <p class="p-2  text-sm md:text-base text-white text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
                 repellat amet doloribus consequuntur eos similique provident
                 tempora voluptates iure quia fuga dicta voluptatibus culpa
@@ -153,7 +153,7 @@
               </div>
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-              <p class="p-2  text-white text-justify">
+              <p class="p-2  text-sm md:text-base text-white text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
                 repellat amet doloribus consequuntur eos similique provident
                 tempora voluptates iure quia fuga dicta voluptatibus culpa
@@ -174,7 +174,7 @@
               </div>
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-              <p class="p-2  text-white text-justify">
+              <p class="p-2  text-sm md:text-base text-white text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
                 repellat amet doloribus consequuntur eos similique provident
                 tempora voluptates iure quia fuga dicta voluptatibus culpa
@@ -195,7 +195,7 @@
               </div>
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-              <p class="p-2  text-white text-justify">
+              <p class="p-2  text-sm md:text-base text-white text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
                 repellat amet doloribus consequuntur eos similique provident
                 tempora voluptates iure quia fuga dicta voluptatibus culpa

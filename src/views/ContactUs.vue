@@ -1,6 +1,6 @@
 
 <template>
-    <div class=" mt-20 md:mt-40 flex justify-center  items-center gap-10 p-5 flex-col">
+    <div class=" mt-20 md:mt-40 flex justify-center  items-center gap-10 md:p-5 flex-col">
         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="43" viewBox="0 0 60 43" fill="none">
             <path
                 d="M38.0808 13.2498C38.6829 13.3809 39.0007 13.3008 39.076 13.1988C38.2202 12.1448 35.7366 12.1691 35.0202 13.3906C34.9811 13.6359 35.1233 13.7525 35.3045 13.7161C35.9818 12.9584 37.6543 12.9511 38.0808 13.2498Z"
@@ -17,14 +17,14 @@
             <p class=" text-md md:text-base text-base-black">Let’s us know how we can help.</p>
         </div>
 
-        <div class="flex flex-col md:flex-row gap-10 pt-20 pb-10 max-w-6xl ">
+        <div class="flex flex-col md:flex-row gap-10 pt-20 pb-10 p-5  max-w-6xl ">
             <div class="w-full">
                 <img class="h-full w-full object-cover" src="../assets/img/png/mapa.png" alt="">
             </div>
             <div class="flex gap-4 flex-col w-full">
                 <div>
                     <p class=" text-lg md:text-2xl font-semibold">Send email to us</p>
-                    <p>Description</p>
+                    <p class=" text-sm md:text-base">Description</p>
                 </div>
 
                 <div class="flex gap-2 flex-col">
@@ -51,11 +51,11 @@
         </div>
 
         <div v-if="store?.data?.length > 0" class="w-full  flex flex-col justify-center items-center bg-[#F0F0F0]">
-            <div class="flex justify-center items-center flex-col pt-20 mb-20 ">
-                <h1 class="text-4xl md:text-6xl  font-bold  text-center text-base-black">Frequently asked question</h1>
-                <p class="text-base-black">Let’s us know how we can help</p>
+            <div class="flex justify-center items-center flex-col pt-20 mb-5 md:mb-20 ">
+                <h1 class="text-3xl md:text-6xl  font-bold  text-center text-base-black">Frequently asked question</h1>
+                <p class="text-base-black text-sm pt-2 md:text-base ">Let’s us know how we can help</p>
             </div>
-            <div class="w-[50%] h-96">
+            <div class="md:w-[50%] w-full h-96">
                 <div v-for="(faq, index) in store.data" :key="index">
                     <div class="group outline-none h-fit accordion-section mb-5 border-b-[1px] border-[#C2C2C2]"
                         tabindex="1">
@@ -63,7 +63,7 @@
                             class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-10 relative">
                             <div
                                 class=" text-sm md:text-lg text-base-black  flex items-center gap-2 font-semibold transition ease duration-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="29" viewBox="0 0 24 29"
+                                <svg class="md:w-[40px] w-[24px] md:h-[40px]" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 29"
                                     fill="none">
                                     <g clip-path="url(#clip0_433_147175)">
                                         <path
@@ -80,7 +80,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <p class="mt-2">{{ faq.question }}</p>
+                                <p class="mt-2 font-semibold ">{{ faq.question }}</p>
                             </div>
                             <div
                                 class="h-8 w-8  group-focus:text-primary bg-[#E0E0E0] rounded-lg items-center inline-flex justify-center transform transition ease duration-500  group-focus:-rotate-180 absolute top-0 right-0 mb-auto ml-auto mt-2 mr-2">
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-                            <p class="p-2 px-8  text-base-black text-justify">
+                            <p class="p-2 px-8 text-sm  md:text-base text-base-black text-left">
                                 {{ faq.answer }}
                             </p>
                         </div>

@@ -204,52 +204,44 @@ const routes = [
         name: "action-details-dealer",
         component: () => import('../views/Dashboard/action-details/Main.vue'),
         props: true,
-        meta: {
-          hideNavbar: true,
-        }
       },
       {
         path: '/photos-details/:id',
         name: 'photos-details-dealer',
         props: true,
         component: () => import('../views/Dashboard/photos-details/Main.vue'),
-        meta: {
-          hideNavbar: false,
-        }
       },
 
       {
         path: "/inbox-dealer",
         name: "inbox-dealer",
         component: () => import('../views/Dashboard/chat/Main.vue'),
-        meta: {
-          hideNavbar: true,
-        }
       },
       {
         path: "/faqs-dealers",
         name: "faqs-dealers",
         component: () => import('../views/Dashboard/faqsDealers/Main.vue'),
         props: true,
-        meta: {
-          hideNavbar: true,
-        }
       },
       {
         path: "/account-dealer",
         name: "account-dealer",
         component: () => import('../views/Dashboard/my-account/Main.vue'),
-        meta: {
-          hideNavbar: true,
-        }
+
       },
       {
-        path: "/how-it-works-dealer",
-        name: "how-it-works-dealer",
-        component: () => import('../views/Dashboard/howItWorksDealer/Main.vue'),
+        path: "/success-created-payment-method",
+        name: "success-created-payment-method",
+        component: () => import('../views/Dashboard/payment-message/payment-success.vue'),
+        props: true,
+      },
+      {
+        path: "/payment-error",
+        name: "payment-error",
+        component: () => import('../views/Dashboard/payment-message/payment-error.vue'),
         props: true,
         meta: {
-          hideNavbar: true,
+          hideNavbar: false,
         }
       },
     ],

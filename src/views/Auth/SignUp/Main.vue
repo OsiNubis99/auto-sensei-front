@@ -38,8 +38,8 @@
         </swiper>
 
 
-        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" lg:block md:w-1/2 relative ">
-            <div v-if="rol == 'dealers'" class="h-full flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
+        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" lg:block md:w-1/2 md:px-16 md:py-12 relative ">
+            <div v-if="rol == 'dealers'" class="h-full  flex justify-start items-start flex-col gap-5 ">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br>
                     Organically</h1>
                 <p class="p-5 pt-0 !md:p-0 md:w-[70%]">Dealers are able to increase their inventory without having to go
@@ -52,7 +52,7 @@
                 <img class="h-[50vh] block md:hidden w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg"
                     alt="" />
             </div>
-            <div v-else class="h-full flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
+            <div v-else class="h-full  flex justify-start items-start flex-col gap-5 ">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl  md:text-5xl text-blue-dark font-bold ">Elevate Your Car Selling
                     Journey with AutoSensei</h1>
                 <p class="p-5 pt-0 !md:p-0 md:w-[70%]">AutoSensei revolutionizes the way you sell your vehicle, offering
@@ -64,7 +64,7 @@
                 <img class="h-[50vh] block md:hidden w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg"
                     alt="" />
             </div>
-            <img class="h-auto hidden md:block absolute bottom-0 w-full object-cover"
+            <img class="h-auto hidden md:block absolute bottom-0 left-0 w-full object-cover"
                 src="../../../assets/svg/vehiculosLogin.svg" alt="" />
         </div>
 
@@ -171,8 +171,8 @@ export default {
             if (route.query.token) {
                 getAuth(route.query)
             } else {
-                stepsCurrent.value = 0
-                swiper.value?.slideTo(0)
+                stepsCurrent.value = 3
+                swiper.value?.slideTo(3)
                 router.replace({ query: '' })
             }
 

@@ -15,9 +15,9 @@
         </div>
     </div>
     <div v-else
-        class="flex-1 flex flex-col overflow-auto md:overflow-hidden justify-between py-12 px-4 h-full sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        class="flex-1 flex flex-col overflow-auto md:overflow-hidden justify-between py-12 px-4 h-full sm:px-6 lg:flex-none lg:px-10 xl:px-24">
         <div
-            class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-20 xl:px-24">
+            class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-10 xl:px-24">
             <div class="mx-auto w-full ">
                 <div class="animate-fade-up  animate-ease-in-out animate-delay-100">
                     <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center md:mb-5 ">Create Your

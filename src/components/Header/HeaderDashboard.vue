@@ -181,7 +181,7 @@
             </nav>
         </div>
         <div v-if="store.userData.type == 2">
-            <nav class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
+            <nav v-if="!route.meta?.hideNavbar" class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
                 <div class="hidden md:flex items-center">
                     <div class="flex gap-5 justify-between items-center ">
                         <div class="relative">
@@ -579,6 +579,8 @@ export default {
 
         }
         onMounted(() => {
+            console.log('router', router)
+            console.log('route', route)
             window.addEventListener('scroll', updateScroll);
         })
         return {
