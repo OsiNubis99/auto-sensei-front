@@ -4,7 +4,7 @@
             class="max-w-xl w-full m-2 gap-4 p-2 md:p-5 flex flex-col justify-between items-center md:h-[50%] bg-white shadow-xl rounded-lg  relative ">
             <div>
                 <h1 class="text-blue-dark text-2xl font-medium md:text-4xl">
-                    Payment Save
+                    Payment Saved
                 </h1>
                 <div class="payment-loader mt-5">
                     <div class="pad">
