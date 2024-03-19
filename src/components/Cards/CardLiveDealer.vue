@@ -94,18 +94,36 @@
                     <div class=" flex w-full  justify-between items-center">
                         <div class="flex md:gap-3 items-start justify-center flex-col">
                             <p class=" text-sm md:text-base">Current bid</p>
-                            <p v-if="auction?.bids[0]?.amount "
+                            <p v-if="auction?.bids[0]?.amount"
                                 class=" font-medium text-lg md:text-2xl text-base-black  ">
-                                ${{auction?.bids[0]?.amount }}
+                                ${{ auction?.bids[0]?.amount }}
                             </p>
-                            <p v-else-if="auction?.vehicleDetails?.basePrice" class=" font-medium text-2xl text-base-black  ">
+                            <p v-else-if="auction?.vehicleDetails?.basePrice"
+                                class=" font-medium text-2xl text-base-black  ">
                                 ${{ auction?.vehicleDetails?.basePrice }}</p>
                             <p v-else class="font-medium text-2xl text-base-black ">0$</p>
                         </div>
                     </div>
                 </div>
 
-
+                <div
+                    :class="changeLayouts ? 'flex justify-between items-start flex-col' : 'space-y-2 flex w-full mb-3 justify-start pl-4 items-center gap-2'">
+                    <p>Auction ends in </p>
+                    <p class="text-[#FF9A02] font-medium !m-0">
+                        <vue-countdown :time="timeToEnd(auction.startDate, auction.duration)"
+                            v-slot="{ days, hours, minutes, seconds }">
+                            <div class="flex items-center gap-1">
+                                <!--   <p v-if="days > 0" class="flex gap-1 items-center">{{ days }} </p> -->
+                                <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours }}
+                                    Hours</p>
+                                <p v-if="minutes > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
+                                    class="flex gap-1 items-center">{{ minutes }}m</p>
+                                <p v-if="seconds > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
+                                    class="flex gap-1 items-center">{{ seconds }}s</p>
+                            </div>
+                        </vue-countdown>
+                    </p>
+                </div>
                 <div @click="statusModal.openModal({ active: true, data: auction, from: 'autoBid' })"
                     class=" hidden md:flex gap-4 px-2 justify-between w-full">
                     <button class="btn w-full bg-base-black flex gap-2 items-center text-primary ">
@@ -186,13 +204,20 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const statusModal = ModalBids()
         const auth = ref(props.auth)
+        function timeToEnd(startDate, duration) {
+            if (!startDate || !duration) return 0;
+            return (
+                new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
+            );
+        }
         return {
             modules: [Navigation, Pagination, Scrollbar, A11y],
             auction,
             bucket,
             changeLayouts,
             statusModal,
-            auth
+            auth,
+            timeToEnd
         };
     },
 };

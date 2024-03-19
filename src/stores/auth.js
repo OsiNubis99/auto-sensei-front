@@ -138,6 +138,20 @@ export const useAuthStore = defineStore("authStore", {
           });
       });
     },
+    verifiedCodeEmail({ code, email }) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`/auth/validate-email/${code}`, {
+            email: email
+          })
+          .then((response) => {
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
   },
 });
 

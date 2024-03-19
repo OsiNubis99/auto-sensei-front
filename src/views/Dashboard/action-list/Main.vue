@@ -156,12 +156,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div
+                                                <div 
                                                     class="w-[50%]  justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
                                                     <p
                                                         class="py-3 px-6 pl-0 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
                                                         Confirmation
-                                                    </p>
+                                                    </p> 
 
                                                 </div>
                                             </th>
@@ -253,12 +253,12 @@
                                                 <td
                                                     class="w-[50%] justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
                                                     <button
-                                                        v-if="aution.status !== 'upcoming' && aution.status !== 'live' && aution.status !== 'completed'"
+                                                        v-if="aution.status !== 'upcoming' && aution.status !== 'live' && aution.status !== 'completed' && aution.status !== 'draft'"
                                                         @click="confirmAutions(aution)"
                                                         class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         Aprove
                                                     </button>
-                                                    <button v-if="aution.status !== 'canceled'"
+                                                    <button v-if="aution.status !== 'canceled' && aution.status !== 'draft' "
                                                         @click="rejetAutions(aution)"
                                                         class="flex gap-1 items-center border p-2 bg-error text-white rounded-md border-[#E0E0E0]">
                                                         Reject

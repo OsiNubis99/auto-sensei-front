@@ -87,7 +87,7 @@
                         <div v-for="(auction, index) in sortedData" :key="index"
                             class="bg-white flex mb-2 md:mb-7 gap-5 items-start shadow-steps w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-                            <CardCompleteSeller  :key="counter" :auction="auction" :changeLayouts="changeLayouts"
+                            <CardCompleteSeller :key="counter" :auction="auction" :changeLayouts="changeLayouts"
                                 :decline="declineAution" />
                             <!--  <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <p v-if="auction.status == 'completed'"
@@ -313,8 +313,7 @@
                                     class="font-medium text-sm text-base-black md:text-2xl">
                                     ${{
         autionModal?.bids[0].amount }} </p>
-                                <p v-else-if="autionModal?.vehicleDetails?.basePrice"
-                                    class="font-medium text-base-black 
+                                <p v-else-if="autionModal?.vehicleDetails?.basePrice" class="font-medium text-base-black 
  text-xs md:text-2xl ">${{ auction?.vehicleDetails?.basePrice
                                     }}
                                 </p>
@@ -329,7 +328,7 @@
                 <div class="md:py-10 p-2 md:px-4 pb-2">
                     <p class="text-xs md:text-base">Are you sure you want to cancel the auction for the <span
                             class="font-medium">{{
-                            autionModal?.vehicleDetails?.model }}</span>?</p>
+        autionModal?.vehicleDetails?.model }}</span>?</p>
                     <div class="w-full flex gap-2 mt-4 items-center">
                         <button @click="openDecline = false"
                             class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
@@ -346,7 +345,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect } from "vue";
+import { ref, onMounted, computed, watchEffect ,watch} from "vue";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from 'vue-router'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -396,6 +395,7 @@ export default {
         const changeLayouts = ref(false)
         const storeAutions = useAuctionStore()
         const storeUser = useAuthStore()
+        const autionUpdate = ref(computed(() => storeUser.aution))
         const path = ref(computed(() => route.name))
         const statusModal = ModalAcceptAution()
         const data = ref([])
@@ -405,6 +405,7 @@ export default {
         const counter = ref(0)
         const statusModalView = ModalViewDetails()
         const sortBy = ref('All Status')
+       
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
             counter.value++
@@ -527,6 +528,45 @@ export default {
             else {
                 counter.value++
             }
+        })
+        watch(autionUpdate, async (newQuestion, oldQuestion) => {
+            const i = data.value.findIndex(x => x._id === newQuestion._id)
+            data.value[i] = newQuestion
+            if (autionUpdate.value.status == 'completed') {
+                const i = data.value.findIndex(x => x._id === newQuestion._id)
+                data.value[i] = newQuestion
+                let photos = []
+                if (data.value[i]?.vehicleDetails?.additionalDocuments,
+                    data.value[i]?.vehicleDetails?.exteriorPhotos,
+                    data.value[i]?.vehicleDetails?.interiorPhotos,
+                    data.value[i]?.vehicleDetails?.driverLicense) {
+                    var d = photos.concat(
+                        data.value[i]?.vehicleDetails?.additionalDocuments,
+                        data.value[i]?.vehicleDetails?.exteriorPhotos,
+                        data.value[i]?.vehicleDetails?.interiorPhotos,
+                        data.value[i]?.vehicleDetails?.vehicleDamage,
+                        data.value[i]?.vehicleDetails?.driverLicense,
+                        data.value[i]?.vehicleDetails?.originalDocument,
+                    );
+                    let resD = d.map((item, i) => {
+                        let name = item.split("/")
+                        let newObjet = {
+                            name: name[2],
+                            url: item
+                        }
+                        return newObjet
+                    })
+                    return data.value[i].photos = resD
+                } else {
+                    return data.value[i].photos = null
+                }
+            } else {
+                let result = null;
+                result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                data.value = result
+
+            }
+            counter.value++
         })
         onMounted(() => {
             index()

@@ -38,16 +38,16 @@
                                         fill="#1C274C"></path>
                                 </g>
                             </svg>
-                            <p class=" font-medium ">Full Name:</p>
+                            <p class=" font-medium text-xs  md:text-base ">Full Name:</p>
                         </div>
                         <div v-if="statusModal.datauser?.seller?.firstName || statusModal.datauser?.seller?.lastName"
                             class="flex gap-1 items-center">
-                            <p class="text-xs md:text-base text-[#797979]">{{ statusModal.datauser?.seller?.firstName }}
+                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal.datauser?.seller?.firstName }}
                             </p>
-                            <p class="text-xs md:text-base text-[#797979]">{{ statusModal.datauser?.seller?.lastName }}
+                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal.datauser?.seller?.lastName }}
                             </p>
                         </div>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
 
                     <div
@@ -66,12 +66,12 @@
                                     </path>
                                 </g>
                             </svg>
-                            <p class=" font-medium ">Phone Number:</p>
+                            <p class=" font-medium text-xs  md:text-base ">Phone Number:</p>
                         </div>
 
-                        <p v-if="statusModal.datauser?.seller?.phone" class="text-xs md:text-base text-[#797979]">
+                        <p v-if="statusModal.datauser?.seller?.phone" class="text-xs md:text-base text-[#797979] ">
                             {{ statusModal.datauser?.seller?.phone }}</p>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div :class="statusModal.datauser?.seller?.driverLicense ? 'flex-col items-start' : ' items-center'"
                         class="flex gap-1 p-2  bg-white shadow-lg rounded-lg  animate-fade-up  animate-ease-in-out animate-delay-200">
@@ -95,14 +95,14 @@
                                     </g>
                                 </g>
                             </svg>
-                            <p class="font-medium">Driver License:</p>
+                            <p class="font-medium text-xs  md:text-base ">Driver License:</p>
                         </div>
 
                         <div v-if="statusModal.datauser?.seller?.driverLicense" class="w-full h-[150px]">
                             <img class="w-full h-full shadow-lg rounded-lg object-contain md:object-cover "
                                 :src="bucket + statusModal.datauser?.seller?.driverLicense" alt="">
                         </div>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
                         class="flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up  animate-ease-in-out animate-delay-200">
@@ -121,12 +121,12 @@
                                     </g>
                                 </g>
                             </svg>
-                            <p class="font-medium">Email:</p>
+                            <p class="font-medium text-xs  md:text-base ">Email:</p>
                         </div>
 
-                        <p class="text-xs md:text-base text-[#797979]" v-if="statusModal.datauser?.email">{{
+                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal.datauser?.email">{{
         statusModal.datauser?.email }}</p>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
                         class="flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up  animate-ease-in-out animate-delay-200">
@@ -148,7 +148,7 @@
                                         stroke-linejoin="round"></path>
                                 </g>
                             </svg>
-                            <p>Status:</p>
+                            <p class="  text-xs md:text-base ">Status:</p>
                         </div>
                         <div :class="statusModal.datauser?.status == 'active' ? 'bg-[#30ff527c]' : 'bg-[#ffbbbb]'"
                             class=" flex items-center gap-2 px-2 py-1 shadow-xl w-fit rounded-full">
@@ -211,16 +211,16 @@
                                         fill="#1C274C"></path>
                                 </g>
                             </svg>
-                            <p class=" font-medium ">Full Name:</p>
+                            <p class=" font-medium text-xs  md:text-base ">Full Name:</p>
                         </div>
                         <div v-if="statusModal.datauser?.dealer?.firstName || statusModal.datauser?.dealer?.lastName"
                             class="flex gap-1 items-center">
-                            <p class="text-xs md:text-base text-[#797979]">{{ statusModal.datauser?.dealer?.firstName }}
+                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal.datauser?.dealer?.firstName }}
                             </p>
-                            <p class="text-xs md:text-base text-[#797979]">{{ statusModal.datauser?.dealer?.lastName }}
+                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal.datauser?.dealer?.lastName }}
                             </p>
                         </div>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div class=" flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up
                             animate-ease-in-out animate-delay-200">
@@ -237,14 +237,14 @@
                                     </path>
                                 </g>
                             </svg>
-                            <p class=" font-medium  ">Address:</p>
+                            <p class="font-medium text-xs  md:text-base">Address:</p>
                         </div>
 
 
-                        <p v-if="statusModal.datauser?.dealer?.address" class=" text-xs md:text-base text-[#797979]">
+                        <p v-if="statusModal.datauser?.dealer?.address" class=" text-xs md:text-base text-[#797979] ">
                             {{ statusModal.datauser?.dealer?.address }}
                         </p>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div class=" flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up
                             animate-ease-in-out animate-delay-200">
@@ -260,11 +260,11 @@
                                     </path>
                                 </g>
                             </svg>
-                            <p class="font-medium">Dealer Name:</p>
+                            <p class="font-medium text-xs  md:text-base ">Dealer Name:</p>
                         </div>
-                        <p v-if="statusModal.datauser?.dealer?.name" class="text-xs md:text-base text-[#797979]">{{
+                        <p v-if="statusModal.datauser?.dealer?.name" class="text-xs md:text-base text-[#797979] ">{{
         statusModal.datauser?.dealer?.name }}</p>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
                         class="flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up  animate-ease-in-out animate-delay-200">
@@ -282,12 +282,12 @@
                                     </path>
                                 </g>
                             </svg>
-                            <p class=" font-medium ">Phone Number:</p>
+                            <p class=" font-medium text-xs  md:text-base ">Phone Number:</p>
                         </div>
 
-                        <p v-if="statusModal.datauser?.dealer?.phone" class="text-xs md:text-base text-[#797979]">{{
+                        <p v-if="statusModal.datauser?.dealer?.phone" class="text-xs md:text-base text-[#797979] ">{{
         statusModal.datauser?.dealer?.phone }}</p>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
                         class="flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up  animate-ease-in-out animate-delay-200">
@@ -302,11 +302,11 @@
                                         transform="translate(-46 -28)"></path>
                                 </g>
                             </svg>
-                            <p class="font-medium">OMVIC:</p>
+                            <p class="font-medium text-xs  md:text-base ">OMVIC:</p>
                         </div>
-                        <p class="text-xs md:text-base text-[#797979]" v-if="statusModal.datauser?.dealer?.omvic">{{
+                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal.datauser?.dealer?.omvic">{{
         statusModal.datauser?.dealer?.omvic }}</p>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
                         class="flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up  animate-ease-in-out animate-delay-200">
@@ -325,12 +325,12 @@
                                     </g>
                                 </g>
                             </svg>
-                            <p class="font-medium">Email:</p>
+                            <p class="font-medium text-xs  md:text-base ">Email:</p>
                         </div>
 
-                        <p class="text-xs md:text-base text-[#797979]" v-if="statusModal.datauser?.email">{{
+                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal.datauser?.email">{{
         statusModal.datauser?.email }}</p>
-                        <p v-else class="text-xs md:text-base text-[#797979]">The user did not provide information.</p>
+                        <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
                         class="flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up  animate-ease-in-out animate-delay-200">
@@ -352,7 +352,7 @@
                                         stroke-linejoin="round"></path>
                                 </g>
                             </svg>
-                            <p>Status:</p>
+                            <p class="  text-xs md:text-base ">Status:</p>
                         </div>
                         <div :class="statusModal.datauser?.status == 'active' ? 'bg-[#30ff527c]' : 'bg-[#ffbbbb]'"
                             class=" flex items-center gap-2 px-2 py-1 shadow-xl w-fit rounded-full">
