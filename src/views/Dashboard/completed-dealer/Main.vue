@@ -329,7 +329,7 @@ export default {
                 data.value = storeAutions?.completed
                 data.value.map((autions, index) => {
                     /*  const formatter = new Intl.NumberFormat();
-                     autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer) */
+                     autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer) */
                     let photos = []
                     if (autions?.vehicleDetails?.additionalDocuments,
                         autions?.vehicleDetails?.exteriorPhotos,

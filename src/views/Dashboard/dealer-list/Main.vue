@@ -212,7 +212,7 @@
                                             <div class="flex h-full py-4 px-6 justify-center gap-4 ">
                                                 <td
                                                     class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
-                                                    <button
+                                                    <button @click="statusModal.openModal({ isActive: true,data: user})"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 16 16" fill="none">
@@ -340,13 +340,19 @@
                 </div>
             </div>
         </div>
+        <ModalDetailsUser v-if="statusModal.isActive" />
     </div>
 </template>
 <script>
 import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/stores/user";
 import { toast } from "vue3-toastify";
+import ModalDetailsUser from '../../../components/Modals/ModalDetailsUser/ModalUser.vue'
+import { ModalUserDetails } from '../../../stores/modalUserDetails';
 export default {
+    components: {
+        ModalDetailsUser
+    },
     setup() {
         const store = useUserStore();
         const isLoading = ref(false)
@@ -359,6 +365,7 @@ export default {
         const current = ref(1)
         const pageSize = ref(10)
         const numberPage = ref(0)
+        const statusModal = ModalUserDetails()
 
         const getUserDealer = async () => {
             isLoading.value = true
@@ -463,7 +470,8 @@ export default {
             prev,
             next,
             current,
-            numberPage
+            numberPage,
+            statusModal
         };
     },
 };

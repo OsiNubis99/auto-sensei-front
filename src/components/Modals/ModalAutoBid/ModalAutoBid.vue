@@ -285,7 +285,7 @@ export default {
                     style: 'currency',
                     currency: 'USD',
                 });
-                statusModal.data.amountBid = formatter.format(statusModal.data.amountBid)
+                statusModal.data.amountBid = formatter?.format(statusModal.data.amountBid)
             }
         })
 

@@ -1,11 +1,11 @@
 import { regexEmail, regexPassword } from "../utils/Regex";
 
 
-export const validationsDealerBidding = (form, step, amount, from, showPayment, payment,user) => {
+export const validationsDealerBidding = (form, step, amount, from, showPayment, payment, user) => {
     let error = {};
     if (step.step1) {
         if (from == 'autoBid') {
-            console.log('entro')
+            console.log('entro autoBid')
             if (!form.placeyourbid) {
                 error.placeyourbid = 'Required field'
             } else if (form.placeyourbid == 0) {
@@ -13,17 +13,18 @@ export const validationsDealerBidding = (form, step, amount, from, showPayment, 
             } else if (form.placeyourbid <= amount) {
                 error.placeyourbid = 'Your bid is less than the minimum bid'
             }
-           /*  if (!form.notify) {
-                error.notify = 'Required field'
-            } */
+            /*  if (!form.notify) {
+                 error.notify = 'Required field'
+             } */
         }
         if (from == 'bidNow') {
+            console.log('entro bidNow')
             if (!form.placeyourbid) {
                 error.placeyourbid = 'Required field'
             } else if (form.placeyourbid == 0) {
                 error.placeyourbid = 'Required field'
-            } else if (form.placeyourbid <= (amount + 100)) {
-                console.log('amount + 100', amount + 100)
+            } else if (form.placeyourbid <= amount) {
+                console.log('form.placeyourbid', form.placeyourbid)
                 error.placeyourbid = 'Your bid is less than the minimum bid'
             }
         }
@@ -70,9 +71,9 @@ export const validationsAutoBids = (form, step, amount, from, user) => {
     } else if (form.placeyourbid <= amount) {
         error.placeyourbid = 'Your bid is less than the minimum bid'
     }
-  /*   if (!form.notify) {
-        error.notify = 'Required field'
-    } */
+    /*   if (!form.notify) {
+          error.notify = 'Required field'
+      } */
     return error;
 };
 

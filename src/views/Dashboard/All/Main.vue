@@ -269,7 +269,7 @@ export default {
                 data.value.map((autions, index) => {
                     autions.title = `${autions.vehicleDetails.year} ${autions.vehicleDetails.make} ${autions.vehicleDetails.model}`
                     const formatter = new Intl.NumberFormat();
-                    autions.vehicleDetails.odometer = formatter.format(autions.vehicleDetails.odometer)
+                    autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer)
                     let photos = []
                     if (autions?.vehicleDetails?.additionalDocuments,
                         autions?.vehicleDetails?.exteriorPhotos,

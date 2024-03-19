@@ -683,7 +683,7 @@ export default {
                     })
 
                     const formatter = new Intl.NumberFormat();
-                    dataDetails.value.vehicleDetails.odometer = formatter.format(dataDetails.value.vehicleDetails.odometer)
+                    dataDetails.value.vehicleDetails.odometer = formatter?.format(dataDetails.value.vehicleDetails.odometer)
                     let photos = []
                     if (dataDetails.value?.vehicleDetails?.additionalDocuments,
                         dataDetails.value?.vehicleDetails?.exteriorPhotos,

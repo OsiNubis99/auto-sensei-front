@@ -69,8 +69,17 @@
 
                 <template v-if="statusModal.from == 'bidNow'">
                     <div class="mt-2 p-5 flex items-center gap-4 border-[#E0E0E0] border-t-[1px] ">
-                        <CurrencyInput :key="counterKey" :error='invalid' v-model="formData.placeyourbid"
-                            :options="{ currency: 'USD' }" :label="'Place your bid'" :placeHolder="'$ Min 100,100'" />
+                        <!--      <CurrencyInput :error='invalid' v-model="formData.placeyourbid" :options="{ currency: 'USD' }"
+                            :label="'Place your bid'" :placeHolder="'$ Min 100,100'" /> -->
+                        <div class="w-full relative flex flex-col gap-2">
+                            <label class="text-base font-medium">Place your bid</label>
+                            <input class="p-2  rounded-lg border border-[#C2C2C2] uppercase"
+                                v-model="formData.placeyourbid"
+                                :class="invalid?.placeyourbid && 'bg-[#F6E9E9] border border-[#FF333E] text-[#0A0A0A]'"
+                                ref="inputRef" type="text" :placeHolder="'$ Min 100,100'" />
+                            <p v-if="error" class="text-[#FF333E] whitespace-pre absolute -bottom-8">
+                                {{ invalid?.placeyourbid }}</p>
+                        </div>
                         <button @click="addAmount"
                             class="btn mt-8 bg-blue-dark font-medium rounded-md  text-primary">+$100</button>
                     </div>
@@ -93,7 +102,7 @@
                         <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $250 transaction fee if your bid
                             is
                             successfully won.</span>
-                        <span v-if="statusModal.from == 'bidNow'">You'll be charged a $250 + Harmonized Sales Tax (HST)
+                        <span v-if="statusModal.from == 'bidNow'">You'll be charged a $350 + Harmonized Sales Tax (HST)
                             transaction fee if your bid is
                             successful won.</span>
                     </p>
@@ -109,7 +118,7 @@
                                         }} - **** **** **** {{ itemCard?.card?.last4 }}</p>
                                 </button>
                                 <div v-if="openDropdown"
-                                :class="authStore.userData.paymentMethods.length < 4 ? 'h-fit' : 'h-[128px] md:h-[150px]'"
+                                    :class="authStore.userData.paymentMethods.length < 4 ? 'h-fit' : 'h-[128px] md:h-[150px]'"
                                     class="absolute   flex flex-col gap-[6px] custom-scroll-payment border border-[#E0E0E0] overflow-auto  z-10 top-auto left-0 w-full py-2 mt-2  rounded-lg border-gray-900 bg-white shadow-xl">
                                     <div v-for="(payments, index) in authStore.userData.paymentMethods"
                                         class="flex flex-col   "
@@ -123,10 +132,10 @@
                                                 ****
                                                 {{ payments?.card?.last4 }}</p>
                                         </div>
-                                        <p @click="showOptionNewPaymtent('add-card')"
+                                        <RouterLink to="/account-dealer" 
                                             v-if="index === authStore.userData.paymentMethods.length - 1"
                                             class="text-[#1F94F0] px-2 md:px-6 text-xs md:text-base pt-2 mt-0 cursor-pointer text-start font-semibold ">
-                                            Add another Credit Card</p>
+                                            Add another Credit Card</RouterLink>
                                     </div>
 
                                 </div>
@@ -153,7 +162,7 @@
                             <RouterLink to="/account-dealer" class="btn bg-primary text-base-black ">Go to Profile
                             </RouterLink>
                         </div>
-                      <!--   <div class="flex md:pt-4 flex-col gap-3">
+                        <!--   <div class="flex md:pt-4 flex-col gap-3">
                             <div class="flex flex-col gap-3">
                                 <div class="flex flex-col gap-2">
                                     <label class=" text-sm md:text-base " for="">Card Number</label>
@@ -311,6 +320,8 @@ import { ModalBids } from '@/stores/modalBids';
 import { useAuctionStore } from "@/stores/auctions";
 import { useAuthStore } from "@/stores/auth";
 import { toast } from "vue3-toastify";
+import { useCurrencyInput } from 'vue-currency-input'
+import { RouterLink } from "vue-router";
 export default {
     props: {
         form: {
@@ -321,10 +332,11 @@ export default {
         }
     },
     setup(props) {
+        const { inputRef } = useCurrencyInput({ currency: 'USD' })
         const isOpen = ref(true);
         const openDropdown = ref(false)
         const value = ref('')
-        const formData = ref(props.form);
+        const formData = ref(props.form)
         const statusModal = ModalBids()
         const counterKey = ref(0)
         const invalid = ref(null)
@@ -335,13 +347,22 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const authStore = useAuthStore()
         const itemCard = ref(null)
+        const amountCurrent = ref(null)
         const addAmount = () => {
-            console.log('statusModal.data.vehicleDetails.basePrice', statusModal.data.vehicleDetails.basePrice)
-            /*  counterKey.value += 1 */
-            formData.value.placeyourbid = (statusModal.data.vehicleDetails.basePrice += 100)
-            console.log('formData.placeyourbid', formData.placeyourbid)
-            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from);
+            if (amountCurrent.value) {
+                let newAmout = formData.value.placeyourbid
+                formData.value.placeyourbid = parseInt(newAmout) + parseInt(100)
+                console.log('formData.value.placeyourbid', formData.value.placeyourbid)
+            } else {
+                console.log('paso 2', formData.value.placeyourbid = (amountCurrent.value += 100))
+                amountCurrent.value = statusModal.data.vehicleDetails.basePrice
+                formData.value.placeyourbid = (amountCurrent.value += 100)
+            }
+            console.log('PEPEE ', formData.value.placeyourbid)
+            invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, showPayment.value, itemCard.value, authStore.userData);
+
             sizeObjet.value = Object.entries(invalid.value).length
+            /*  counterKey.value += 1 */
         }
         const steps = ref({
             step1: true,
@@ -490,6 +511,7 @@ export default {
             formData.value.termsConditions = undefined
             formData.value.notify = undefined
             formData.value.creditCard = undefined
+            amountCurrent.value = null
         }
         const getCard = (card) => {
             console.log('card', card)
@@ -534,7 +556,7 @@ export default {
                     style: 'currency',
                     currency: 'USD',
                 });
-                statusModal.data.amountBid = formatter.format(statusModal.data.amountBid)
+                statusModal.data.amountBid = formatter?.format(statusModal.data.amountBid)
 
 
             }
@@ -563,7 +585,8 @@ export default {
             itemCard,
             getCard,
             showPayment,
-            showOptionNewPaymtent
+            showOptionNewPaymtent,
+            inputRef
         };
     },
     components: { CurrencyInput }

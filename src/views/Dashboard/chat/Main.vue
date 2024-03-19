@@ -933,7 +933,7 @@ export default {
                 if (res) {
                     storeAution.value = res.data
                     const formatter = new Intl.NumberFormat();
-                    storeAution.value.vehicleDetails.odometer = formatter.format(storeAution.value.vehicleDetails.odometer)
+                    storeAution.value.vehicleDetails.odometer = formatter?.format(storeAution.value.vehicleDetails.odometer)
                     console.log('storeAution', storeAution.value)
                 }
             } catch (error) {
