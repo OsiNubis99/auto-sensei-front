@@ -72,7 +72,7 @@ const routes = [
       },
 
       {
-        path: "/action-details-admin",
+        path: "/action-details-admin/:id",
         name: "action-details-admin",
         component: () => import('../views/Dashboard/action-details/Main.vue'),
         props: true,

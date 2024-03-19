@@ -229,7 +229,7 @@
                                                 <td
                                                     class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                                     <RouterLink
-                                                        :to="{ name: 'action-details-admin', query: { data: JSON.stringify(aution) } }"
+                                                        :to="{ name: 'action-details-admin', params: { id: aution?._id }  }"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 16 16" fill="none">
