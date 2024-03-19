@@ -296,7 +296,7 @@
 import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/stores/user";
 import ModalDetailsUser from '../../../components/Modals/ModalDetailsUser/ModalUser.vue';
-import { ModalUserDetails } from '../../../stores/modalUserDetails';
+import { ModalUserDetails } from '../../../stores/ModalUserDetails';
 export default {
     components: {
         ModalDetailsUser
