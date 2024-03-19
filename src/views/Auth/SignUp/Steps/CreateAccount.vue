@@ -86,7 +86,8 @@
                                     class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                         </div>
-                        <div class="flex  w-full justify-start dark:bg-gray-950">
+                        <div
+                            class="flex  w-full justify-start dark:bg-gray-950 animate-fade-up  animate-ease-in-out animate-delay-800">
                             <div class="flex justify-between items-center gap-2">
                                 <label class="relative flex cursor-pointer items-center mb-1 rounded-md">
 
@@ -104,7 +105,7 @@
                                     </div>
 
                                 </label>
-                                <div class="flex flex-col relative">
+                                <div class="flex flex-col relative ">
 
                                     <p class="!text-sm  font-medium text-gray-700">I accept the <RouterLink
                                             to="/terms-conditions" target="_blank"

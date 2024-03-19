@@ -124,8 +124,7 @@
                                 class="font-medium text-sm text-base-black md:text-2xl">
                                 ${{
         autionModal?.bids[0].amount }} </p>
-                            <p v-else-if="autionModal?.vehicleDetails?.basePrice"
-                                class="font-medium text-base-black 
+                            <p v-else-if="autionModal?.vehicleDetails?.basePrice" class="font-medium text-base-black 
  text-xs md:text-2xl ">${{ auction?.vehicleDetails?.basePrice }}
                             </p>
                             <p v-else class="font-medium text-base-black text-xs md:text-2xl ">$0 </p>
@@ -314,14 +313,7 @@ export default {
                 new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
             );
         }
-        function dateTomorrow(startHour,startMin=0) {
-            if (!startDate) return 0;
-            let day = 24 * 60 * 60 * 1000
-            let date = new Date()
-            date.setHours(startHour,startMin ,0,0)
-            date.setTime(date.getTime()+day)
-            return date
-        }
+      
         function timeToStart(startDate) {
             if (!startDate) return 0;
             return new Date(startDate) - Date.now();
@@ -344,7 +336,7 @@ export default {
         const setSorBy = (sort) => {
             isOpen.value = false
             sortBy.value = sort
-        
+
         }
 
         const statusOrder = [
