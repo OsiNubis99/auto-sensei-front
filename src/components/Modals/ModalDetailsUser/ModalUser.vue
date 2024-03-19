@@ -1,10 +1,10 @@
 <template>
-    <div v-show="statusModal.isActive"
+    <div v-show="statusModal?.isActive"
         class="fixed inset-0 flex  items-end md:items-center z-50 justify-center bg-base-black overflow-hidden bg-opacity-50">
 
         <div class="max-w-6xl  overflow-hidden   rounded-lg shadow-xl animation-fade-modal bg-[#F9F9F9]">
             <div class="md:p-4 p-2 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
-                <p v-if="statusModal.datauser.type == 1" class="text-sm md:text-xl text-white">Seller Details</p>
+                <p v-if="statusModal?.datauser?.type == 1" class="text-sm md:text-xl text-white">Seller Details</p>
                 <p v-else class="text-sm md:text-xl text-white">Dealer Details</p>
                 <svg @click="cancel" xmlns="http://www.w3.org/2000/svg" class="md:w-8 md:h-8  w-6 cursor-pointer"
                     fill="none" viewBox="0 0 24 24" stroke="#fff">
@@ -12,15 +12,15 @@
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <div v-if="statusModal.datauser.type == 1">
+            <div v-if="statusModal?.datauser?.type == 1">
                 <div class="shadow-primary-custom"
-                    :class="statusModal.datauser?.status == 'active' ? 'paralax-success' : 'paralax-error '"></div>
+                    :class="statusModal?.datauser?.status == 'active' ? 'paralax-success' : 'paralax-error '"></div>
                 <div class=" relative w-full h-[100px] md:h-[250px] flex justify-center items-center">
                     <div
                         class="bg-white w-[100px] h-[100px] md:w-[200px] flex justify-center items-center overflow-hidden md:h-[200px] rounded-full border-[4px] border-primary animate-fade-up  animate-ease-in-out animate-delay-200 ">
-                        <img v-if="statusModal.datauser?.seller?.picture"
+                        <img v-if="statusModal?.datauser?.seller?.picture"
                             class=" w-full h-full  object-contain  shadow-md"
-                            :src="bucket + statusModal.datauser?.seller.picture" alt="">
+                            :src="bucket + statusModal?.datauser?.seller.picture" alt="">
                         <img v-else class=" w-full h-full" src="@/assets/svg/profile.svg" alt="">
                     </div>
                 </div>
@@ -40,11 +40,11 @@
                             </svg>
                             <p class=" font-medium text-xs  md:text-base ">Full Name:</p>
                         </div>
-                        <div v-if="statusModal.datauser?.seller?.firstName || statusModal.datauser?.seller?.lastName"
+                        <div v-if="statusModal?.datauser?.seller?.firstName || statusModal?.datauser?.seller?.lastName"
                             class="flex gap-1 items-center">
-                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal.datauser?.seller?.firstName }}
+                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal?.datauser?.seller?.firstName }}
                             </p>
-                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal.datauser?.seller?.lastName }}
+                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal?.datauser?.seller?.lastName }}
                             </p>
                         </div>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
@@ -69,11 +69,11 @@
                             <p class=" font-medium text-xs  md:text-base ">Phone Number:</p>
                         </div>
 
-                        <p v-if="statusModal.datauser?.seller?.phone" class="text-xs md:text-base text-[#797979] ">
-                            {{ statusModal.datauser?.seller?.phone }}</p>
+                        <p v-if="statusModal?.datauser?.seller?.phone" class="text-xs md:text-base text-[#797979] ">
+                            {{ statusModal?.datauser?.seller?.phone }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
-                    <div :class="statusModal.datauser?.seller?.driverLicense ? 'flex-col items-start' : ' items-center'"
+                    <div :class="statusModal?.datauser?.seller?.driverLicense ? 'flex-col items-start' : ' items-center'"
                         class="flex gap-1 p-2  bg-white shadow-lg rounded-lg  animate-fade-up  animate-ease-in-out animate-delay-200">
                         <div class="flex gap-2 items-center">
                             <svg fill="#000000" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -98,9 +98,9 @@
                             <p class="font-medium text-xs  md:text-base ">Driver License:</p>
                         </div>
 
-                        <div v-if="statusModal.datauser?.seller?.driverLicense" class="w-full h-[150px]">
+                        <div v-if="statusModal?.datauser?.seller?.driverLicense" class="w-full h-[150px]">
                             <img class="w-full h-full shadow-lg rounded-lg object-contain md:object-cover "
-                                :src="bucket + statusModal.datauser?.seller?.driverLicense" alt="">
+                                :src="bucket + statusModal?.datauser?.seller?.driverLicense" alt="">
                         </div>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
@@ -124,8 +124,8 @@
                             <p class="font-medium text-xs  md:text-base ">Email:</p>
                         </div>
 
-                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal.datauser?.email">{{
-        statusModal.datauser?.email }}</p>
+                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal?.datauser?.email">{{
+        statusModal?.datauser?.email }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
@@ -150,13 +150,13 @@
                             </svg>
                             <p class="  text-xs md:text-base ">Status:</p>
                         </div>
-                        <div :class="statusModal.datauser?.status == 'active' ? 'bg-[#30ff527c]' : 'bg-[#ffbbbb]'"
+                        <div :class="statusModal?.datauser?.status == 'active' ? 'bg-[#30ff527c]' : 'bg-[#ffbbbb]'"
                             class=" flex items-center gap-2 px-2 py-1 shadow-xl w-fit rounded-full">
                             <p class="capitalize text-xs "
-                                :class="statusModal.datauser?.status == 'active' ? 'text-[#008000]' : 'text-[#ff0000]'">
-                                {{ statusModal.datauser?.status }}
+                                :class="statusModal?.datauser?.status == 'active' ? 'text-[#008000]' : 'text-[#ff0000]'">
+                                {{ statusModal?.datauser?.status }}
                             </p>
-                            <svg v-if="statusModal.datauser?.status == 'active'" viewBox="0 0 512 512" width="15"
+                            <svg v-if="statusModal?.datauser?.status == 'active'" viewBox="0 0 512 512" width="15"
                                 version="1.1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -185,15 +185,15 @@
                     </div>
                 </div>
             </div>
-            <div v-if="statusModal.datauser.type == 2" class=" flex justify-center relative items-center flex-col">
+            <div v-if="statusModal?.datauser?.type == 2" class=" flex justify-center relative items-center flex-col">
                 <div class="shadow-primary-custom"
-                    :class="statusModal.datauser?.status == 'active' ? 'paralax-success' : 'paralax-error '"></div>
+                    :class="statusModal?.datauser?.status == 'active' ? 'paralax-success' : 'paralax-error '"></div>
                 <div class=" relative w-full h-[100px] md:h-[250px] flex justify-center items-center">
                     <div
                         class="bg-white w-[100px] h-[100px] md:w-[200px] flex justify-center items-center overflow-hidden md:h-[200px] rounded-full border-[4px] border-primary animate-fade-up  animate-ease-in-out animate-delay-200 ">
-                        <img v-if="statusModal.datauser?.dealer?.picture"
+                        <img v-if="statusModal?.datauser?.dealer?.picture"
                             class=" w-full h-full  object-contain  shadow-md"
-                            :src="bucket + statusModal.datauser?.dealer.picture" alt="">
+                            :src="bucket + statusModal?.datauser?.dealer.picture" alt="">
                         <img v-else class=" w-full h-full" src="@/assets/svg/profile.svg" alt="">
                     </div>
                 </div>
@@ -213,11 +213,11 @@
                             </svg>
                             <p class=" font-medium text-xs  md:text-base ">Full Name:</p>
                         </div>
-                        <div v-if="statusModal.datauser?.dealer?.firstName || statusModal.datauser?.dealer?.lastName"
+                        <div v-if="statusModal?.datauser?.dealer?.firstName || statusModal?.datauser?.dealer?.lastName"
                             class="flex gap-1 items-center">
-                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal.datauser?.dealer?.firstName }}
+                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal?.datauser?.dealer?.firstName }}
                             </p>
-                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal.datauser?.dealer?.lastName }}
+                            <p class="text-xs md:text-base text-[#797979] ">{{ statusModal?.datauser?.dealer?.lastName }}
                             </p>
                         </div>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
@@ -241,8 +241,8 @@
                         </div>
 
 
-                        <p v-if="statusModal.datauser?.dealer?.address" class=" text-xs md:text-base text-[#797979] ">
-                            {{ statusModal.datauser?.dealer?.address }}
+                        <p v-if="statusModal?.datauser?.dealer?.address" class=" text-xs md:text-base text-[#797979] ">
+                            {{ statusModal?.datauser?.dealer?.address }}
                         </p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
@@ -262,8 +262,8 @@
                             </svg>
                             <p class="font-medium text-xs  md:text-base ">Dealer Name:</p>
                         </div>
-                        <p v-if="statusModal.datauser?.dealer?.name" class="text-xs md:text-base text-[#797979] ">{{
-        statusModal.datauser?.dealer?.name }}</p>
+                        <p v-if="statusModal?.datauser?.dealer?.name" class="text-xs md:text-base text-[#797979] ">{{
+        statusModal?.datauser?.dealer?.name }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
@@ -285,8 +285,8 @@
                             <p class=" font-medium text-xs  md:text-base ">Phone Number:</p>
                         </div>
 
-                        <p v-if="statusModal.datauser?.dealer?.phone" class="text-xs md:text-base text-[#797979] ">{{
-        statusModal.datauser?.dealer?.phone }}</p>
+                        <p v-if="statusModal?.datauser?.dealer?.phone" class="text-xs md:text-base text-[#797979] ">{{
+        statusModal?.datauser?.dealer?.phone }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
@@ -304,8 +304,8 @@
                             </svg>
                             <p class="font-medium text-xs  md:text-base ">OMVIC:</p>
                         </div>
-                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal.datauser?.dealer?.omvic">{{
-        statusModal.datauser?.dealer?.omvic }}</p>
+                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal?.datauser?.dealer?.omvic">{{
+        statusModal?.datauser?.dealer?.omvic }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
@@ -328,8 +328,8 @@
                             <p class="font-medium text-xs  md:text-base ">Email:</p>
                         </div>
 
-                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal.datauser?.email">{{
-        statusModal.datauser?.email }}</p>
+                        <p class="text-xs md:text-base text-[#797979] " v-if="statusModal?.datauser?.email">{{
+        statusModal?.datauser?.email }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide information.</p>
                     </div>
                     <div
@@ -354,13 +354,13 @@
                             </svg>
                             <p class="  text-xs md:text-base ">Status:</p>
                         </div>
-                        <div :class="statusModal.datauser?.status == 'active' ? 'bg-[#30ff527c]' : 'bg-[#ffbbbb]'"
+                        <div :class="statusModal?.datauser?.status == 'active' ? 'bg-[#30ff527c]' : 'bg-[#ffbbbb]'"
                             class=" flex items-center gap-2 px-2 py-1 shadow-xl w-fit rounded-full">
                             <p class="capitalize text-xs "
-                                :class="statusModal.datauser?.status == 'active' ? 'text-[#008000]' : 'text-[#ff0000]'">
-                                {{ statusModal.datauser?.status }}
+                                :class="statusModal?.datauser?.status == 'active' ? 'text-[#008000]' : 'text-[#ff0000]'">
+                                {{ statusModal?.datauser?.status }}
                             </p>
-                            <svg v-if="statusModal.datauser?.status == 'active'" viewBox="0 0 512 512" width="15"
+                            <svg v-if="statusModal?.datauser?.status == 'active'" viewBox="0 0 512 512" width="15"
                                 version="1.1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -408,7 +408,7 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const cancel = () => {
             console.log('hola')
-            statusModal.closeModal(false)
+            statusModal?.closeModal(false)
         }
 
         return {
