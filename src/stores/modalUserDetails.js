@@ -10,12 +10,12 @@ export const ModalUserDetails = defineStore("ModalUserDetails", {
         openModal({ isActive, data }) {
 
             this.isActive = isActive
-            this.dataAutiont = data
-            console.log('this.dataAutiont', this.dataAutiont)
+            this.datauser = data
+            console.log('this.dataAutiont', this.datauser)
         },
         closeModal(params) {
             this.isActive = params
-            this.dataAutiont = null
+            this.datauser = null
         },
     },
 });

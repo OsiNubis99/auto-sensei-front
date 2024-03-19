@@ -201,7 +201,7 @@
                                             </td>
                                             <div class="flex h-full py-4 px-6 justify-center gap-4 ">
                                                 <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
-                                                    <button
+                                                    <button @click="statusModal.openModal({ isActive: true,data: user})"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 16 16" fill="none">
@@ -289,13 +289,18 @@
                 </div>
             </div>
         </template>
-
+        <ModalDetailsUser v-if="statusModal.isActive" />
     </div>
 </template>
 <script>
 import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/stores/user";
+import ModalDetailsUser from '../../../components/Modals/ModalDetailsUser/ModalUser.vue';
+import { ModalUserDetails } from '../../../stores/modalUserDetails';
 export default {
+    components: {
+        ModalDetailsUser
+    },
     setup() {
         const store = useUserStore();
         const isLoading = ref(false)
@@ -306,6 +311,7 @@ export default {
         const search = ref('')
         const current = ref(1)
         const pageSize = ref(10)
+        const statusModal = ModalUserDetails()
         const numberPage = ref(0)
         const getUserSeller = async () => {
             isLoading.value = true
@@ -378,7 +384,8 @@ export default {
             next,
             current,
             numberPage,
-            orderStatus
+            orderStatus,
+            statusModal
         };
     },
 };
