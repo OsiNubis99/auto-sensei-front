@@ -289,7 +289,7 @@
                 </div>
             </div>
         </template>
-        <ModalDetailsUser v-if="statusModal.isActive" />
+        <ModalDetailsUser v-if="statusModal?.isActive" />
     </div>
 </template>
 <script>

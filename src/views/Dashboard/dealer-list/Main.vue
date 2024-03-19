@@ -340,7 +340,7 @@
                 </div>
             </div>
         </div>
-        <ModalDetailsUser v-if="statusModal.isActive" />
+        <ModalDetailsUser v-if="statusModal?.isActive" />
     </div>
 </template>
 <script>
