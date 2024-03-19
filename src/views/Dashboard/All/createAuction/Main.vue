@@ -675,6 +675,14 @@ export default {
                 duration: Math.floor(((monday - currDate) / 1000) / 60)
             };
         }
+        function dateTomorrow(startHour, startMin = 0) {
+            let date = new Date()
+            if (!startHour) return date
+            let day = 24 * 60 * 60 * 1000
+            date.setHours(startHour, startMin, 0, 0)
+            date.setTime(date.getTime() + day)
+            return date
+        }
         const postFile = async (string) => {
             let newArrayExterior = []
             let newArrayInterior = []
@@ -859,6 +867,12 @@ export default {
                     case 'Choose after hours (weekend)':
                         duration = resWeekend.duration
                         startDate = resWeekend.startDate
+                        break;
+                    case 'none':
+                        console.log('entroaqui ')
+                        let resStart = dateTomorrow(9)
+                        duration = 480
+                        startDate = resStart
                         break;
                     default:
                         break;

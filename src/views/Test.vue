@@ -71,6 +71,10 @@
         PARA QUE NO TE DE ERROR</p>
     </div>
     <div>
+   <!--    {{ dateTomorrow(9) }}
+      <button @click="dateTomorrow(9)">probar fecha</button> -->
+      {{ moment("2024-03-19T13:00:00.000Z").format('MMMM DD, h:mm: A') }}
+      
 
     </div>
 
@@ -270,7 +274,7 @@
           vehicle within 3 days of the Invoice Date hereof or if payment has been reversed,
           stopped or defaulted on, the vendor may repossess this vehicle at any time and without
           notice. Such repossession will be without liability to the vendor for any incurred
-          damages and Purchaser will hold Vendor harmless for any liability or loss caused by
+          damages and Purchaser will hold3Vendor harmless for any liability or loss caused by
           the repossession. Vendor may sell any such repossessed vehicle and the Purchaser
           agrees to pay the Vendor the balance of the Sales Price above plus applicable taxes.
           No warranties of any kind apply to this vehicle and none are expressed or implied. The
@@ -333,6 +337,7 @@
 <script>
 import { ref, onMounted, watch, computed } from "vue";
 import { useStoreFile } from "@/stores/uploader";
+import moment from 'moment';
 export default {
   components: {},
   setup() {
@@ -532,6 +537,14 @@ export default {
       if (res9[0]?.data) arrayName.value[9].completed = true
       console.log('arrayName.value', arrayName.value)
     }
+    function dateTomorrow(startHour, startMin = 0) {
+      let date = new Date()
+      if (!startHour) return date
+      let day = 24 * 60 * 60 * 1000
+      date.setHours(startHour, startMin, 0, 0)
+      date.setTime(date.getTime() + day)
+      return date
+    }
     onMounted(() => {
     })
     return {
@@ -543,7 +556,9 @@ export default {
       uploadName,
       storeFile,
       porcertanje,
-      arrayName
+      arrayName,
+      dateTomorrow,
+      moment
     };
   },
 };

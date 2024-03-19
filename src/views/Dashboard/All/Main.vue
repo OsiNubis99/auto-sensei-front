@@ -314,6 +314,14 @@ export default {
                 new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
             );
         }
+        function dateTomorrow(startHour,startMin=0) {
+            if (!startDate) return 0;
+            let day = 24 * 60 * 60 * 1000
+            let date = new Date()
+            date.setHours(startHour,startMin ,0,0)
+            date.setTime(date.getTime()+day)
+            return date
+        }
         function timeToStart(startDate) {
             if (!startDate) return 0;
             return new Date(startDate) - Date.now();

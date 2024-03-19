@@ -1,5 +1,6 @@
 <template>
-    <div v-show="statusModal.isActive" class="fixed inset-0 flex items-end md:items-center md:justify-center bg-base-black  bg-opacity-50">
+    <div v-show="statusModal.isActive"
+        class="fixed inset-0 flex items-end md:items-center md:justify-center bg-base-black  bg-opacity-50">
         <div class="max-w-md overflow-auto  bg-white rounded-lg shadow-xl  animation-fade-modal">
             <div class="md:p-4 p-2 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
                 <p class="text-sm md:text-xl text-white">Launch Auction</p>
@@ -21,28 +22,35 @@
                 </div>
                 <div class="flex gap-3 items-start ">
                     <div class=" w-[90px] h-[70px] md:w-[120px] md:h-[90px]">
-                        <img class="w-full h-full rounded-lg object-cover"
-                            :src="formData?.previewFront"
-                            alt="">
+                        <img class="w-full h-full rounded-lg object-cover" :src="formData?.previewFront" alt="">
                     </div>
                     <div>
-                        <p class="font-semibold text-xs md:text-base ">212 Chevrolet Captiva SP</p>
-                        <p class="text-[10px] md:text-base">St. John, Newfoundland & Labrador</p>
+                        <p class="font-semibold text-xs md:text-base ">{{ formData?.year }} {{ formData?.make }} {{
+        formData?.model }}</p>
+                        <p class="text-[10px] md:text-base">{{ formData?.saveCity?.name }}, {{
+        formData?.saveProvince?.name }}</p>
                     </div>
                 </div>
             </div>
             <div class="mt-2 border-[#E0E0E0] border-t-[1px] ">
                 <div class=" p-2  md:p-4">
-                    <template v-if="(stepsVerifiqued.step1 && formData.launchOptions == 'Launch now after verified') ||
-                        (stepsDateTime.step1 && formData.launchOptions == 'Choose the date & time') ||
-                        (stepsDateWeekeng.step1 && formData.launchOptions == 'Choose after hours (weekend)' ||
-                            formData.launchOptions == null)">
+                    <template v-if="(stepsVerifiqued.step1 && formData.launchOptions == 'none') ||
+        (stepsVerifiqued.step1 && formData.launchOptions == 'Launch now after verified') ||
+        (stepsDateTime.step1 && formData.launchOptions == 'Choose the date & time') ||
+        (stepsDateWeekeng.step1 && formData.launchOptions == 'Choose after hours (weekend)' ||
+            formData.launchOptions == null)">
                         <p class="md:font-semibold text-xs md:text-base ">Launch Options</p>
-                        <p class=" text-[#858585] text-[10px] md:text-base">After you launch the auction there is a 90 minute
+                        <p class=" text-[#858585] text-[10px] md:text-base">After you launch the auction there is a 90
+                            minute
                             buffer for our team to
                             review your posting
                         </p>
                         <div class="w-full flex-col items-start mt-4 flex gap-2">
+                            <label class="label-radio text-[12px] md:text-base !justify-start">
+                                <input v-model="formData.launchOptions" type="radio" value="none" class="input-radio on"
+                                    name="launch-option">
+                                Next Day
+                            </label>
                             <label class="label-radio text-[12px] md:text-base !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Launch now after verified"
                                     class="input-radio on" name="launch-option">
@@ -54,18 +62,20 @@
                                 Choose the date & time
                             </label>
                             <label class="label-radio text-[12px] md:text-base !justify-start">
-                                <input v-model="formData.launchOptions" type="radio" value="Choose after hours (weekend)"
-                                    class="input-radio on" name="launch-option">
+                                <input v-model="formData.launchOptions" type="radio"
+                                    value="Choose after hours (weekend)" class="input-radio on" name="launch-option">
                                 Choose after hours (weekend)
                             </label>
                         </div>
                     </template>
+                    <NextDay v-if="formData.launchOptions == 'none'" :steps="stepsVerifiqued"
+                        :form="formData" :save="save" />
                     <AfterVerified v-if="formData.launchOptions == 'Launch now after verified'" :steps="stepsVerifiqued"
                         :form="formData" :save="save" />
                     <DateAndTime v-if="formData.launchOptions == 'Choose the date & time'" :steps="stepsDateTime"
                         :form="formData" :save="save" />
-                    <HoursWeekeng v-if="formData.launchOptions == 'Choose after hours (weekend)'" :steps="stepsDateWeekeng"
-                        :form="formData" :save="save" />
+                    <HoursWeekeng v-if="formData.launchOptions == 'Choose after hours (weekend)'"
+                        :steps="stepsDateWeekeng" :form="formData" :save="save" />
                 </div>
             </div>
         </div>
@@ -77,7 +87,7 @@ import { ref, onMounted, watch } from "vue";
 import DateAndTime from "./steps/DateAndTime.vue";
 import HoursWeekeng from "./steps/HoursWeekeng.vue";
 import AfterVerified from "./steps/AfterVerified.vue";
-
+import NextDay from "./steps/NextDay.vue";
 import { ModalLaunch } from '@/stores/modalLaunch';
 export default {
     props: {
@@ -101,7 +111,8 @@ export default {
     components: {
         DateAndTime,
         HoursWeekeng,
-        AfterVerified
+        AfterVerified,
+        NextDay
     },
     setup(props) {
         const isOpen = ref(props.isActive)
@@ -140,6 +151,13 @@ export default {
 
             }
         })
+
+        const newtDayDate = () => {
+            console.log('formData', formData.value)
+            let resDay = dateTomorrow(9)
+
+
+        }
         const save = () => {
             props.modalLaunch()
         }
@@ -151,7 +169,8 @@ export default {
             stepsVerifiqued,
             stepsDateTime,
             stepsDateWeekeng,
-            statusModal
+            statusModal,
+            newtDayDate
         };
     },
 };
