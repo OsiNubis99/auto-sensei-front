@@ -270,14 +270,13 @@
                                                             Winner</p>
                                                     </div>
 
-                                                    <p class="text-[10px] md:text-lg whitespace-pre">Oct 20, 2023 at
-                                                        2:41 AM</p>
+                                                    <p class="text-[10px] md:text-lg whitespace-pre">{{ moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h: mm: ss a') }}</p>
                                                 </template>
                                                 <template v-else>
                                                     <p class=" truncate w-[150px] md:w-fit font-semibold">{{
         dealerBit.participant.dealer.name }}</p>
-                                                    <!--  <p class="text-[10px] md:text-lg whitespace-pre">
-                                                        {{ moment(dealerBit?.participant?.updatedAt).format('MMMM DD YYYY, h: mm: ss a') }}</p> -->
+                                                     <p class="text-[10px] md:text-lg whitespace-pre">
+                                                        {{ moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h: mm: ss a') }}</p>
                                                 </template>
 
                                             </div>
