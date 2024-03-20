@@ -368,6 +368,7 @@ export default {
             odometer: undefined,
             doors: undefined,
             color: undefined,
+            customColor: undefined,
             driveTrain: undefined,
             additionalPackages: undefined,
             tireCondition: undefined,
@@ -534,6 +535,7 @@ export default {
                     invalid?.value?.odometer ||
                     invalid?.value?.doors ||
                     invalid?.value?.color ||
+                    invalid?.value?.customColor ||
                     invalid?.value?.driveTrain ||
                     invalid?.value?.additionalPackages ||
                     invalid?.value?.tireCondition ||
@@ -549,6 +551,11 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
+                if (formData.value.color !== 'other') {
+                    formData.value.customColor = undefined
+                } else {
+                    formData.value.color = formData.value.customColor
+                }
                 formData.value.saveCity = JSON.parse(formData.value.province)
                 formData.value.saveProvince = JSON.parse(formData.value.city)
                 let dataPost = {
@@ -876,6 +883,11 @@ export default {
                         break;
                     default:
                         break;
+                }
+                if (formData.value.color !== 'other') {
+                    formData.value.customColor = undefined
+                } else {
+                    formData.value.color = formData.value.customColor
                 }
                 formData.value.saveCity = JSON.parse(formData.value.province)
                 formData.value.saveProvince = JSON.parse(formData.value.city)

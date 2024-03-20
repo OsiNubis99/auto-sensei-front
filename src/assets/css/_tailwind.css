@@ -248,7 +248,10 @@ label.label-colors-error {
     box-shadow: 0px 0px 0px 2px #1F94F0;
     background-color: #1F94F0;
 }
-
+.input-radio.on-other:checked {
+    box-shadow: 0px 0px 0px 2px #3f3000;
+    background-color: #3f3000;
+}
 
 
 

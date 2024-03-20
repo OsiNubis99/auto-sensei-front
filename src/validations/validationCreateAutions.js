@@ -55,12 +55,12 @@ export const validateData = (form, step, typeLaunch) => {
             if (!form.anyVehicle) {
                 error.anyVehicle = 'Required field'
             }
-           /*  if (!form.makePreferences) {
-                error.makePreferences = 'Required field'
-            } */
-           /*  if (!form.modelPreferences) {
-                error.modelPreferences = 'Required field'
-            } */
+            /*  if (!form.makePreferences) {
+                 error.makePreferences = 'Required field'
+             } */
+            /*  if (!form.modelPreferences) {
+                 error.modelPreferences = 'Required field'
+             } */
             if (!form.modelFromPreferences) {
                 error.modelFromPreferences = 'Required field'
             }
@@ -110,6 +110,11 @@ export const validateData = (form, step, typeLaunch) => {
         }
         if (!form.color) {
             error.color = 'Required field'
+        }
+        if (form.color == 'other') {
+            if (!form.customColor) {
+                error.customColor = 'Required field'
+            }
         }
         if (!form.driveTrain) {
             error.driveTrain = 'Required field'
@@ -173,16 +178,16 @@ export const validateData = (form, step, typeLaunch) => {
         if (!form.rearSeats) {
             error.rearSeats = 'Required field'
         }
-       /*  if (!form.vehicleDamage) {
-            error.vehicleDamage = 'Required field'
-        }
-        if (!form.additionalDocuments) {
-            error.additionalDocuments = 'Required field'
-        }
-
-        if (!form.vehicleVideo) {
-            error.vehicleVideo = 'Required field'
-        } */
+        /*  if (!form.vehicleDamage) {
+             error.vehicleDamage = 'Required field'
+         }
+         if (!form.additionalDocuments) {
+             error.additionalDocuments = 'Required field'
+         }
+ 
+         if (!form.vehicleVideo) {
+             error.vehicleVideo = 'Required field'
+         } */
     }
 
     if (step == 'confirmation') {
@@ -237,12 +242,12 @@ export const validateData = (form, step, typeLaunch) => {
             if (!form.anyVehicle) {
                 error.anyVehicle = 'Required field'
             }
-           /*  if (!form.makePreferences) {
-                error.makePreferences = 'Required field'
-            } */
-           /*  if (!form.modelPreferences) {
-                error.modelPreferences = 'Required field'
-            } */
+            /*  if (!form.makePreferences) {
+                 error.makePreferences = 'Required field'
+             } */
+            /*  if (!form.modelPreferences) {
+                 error.modelPreferences = 'Required field'
+             } */
             if (!form.modelFromPreferences) {
                 error.modelFromPreferences = 'Required field'
             }
@@ -295,6 +300,11 @@ export const validateData = (form, step, typeLaunch) => {
         }
         if (!form.color) {
             error.color = 'Required field'
+        }
+        if (form.color == 'other') {
+            if (!form.customColor) {
+                error.customColor = 'Required field'
+            }
         }
         if (!form.driveTrain) {
             error.driveTrain = 'Required field'
@@ -356,16 +366,16 @@ export const validateData = (form, step, typeLaunch) => {
         if (!form.rearSeats) {
             error.rearSeats = 'Required field'
         }
-       /*  if (!form.vehicleDamage) {
-            error.vehicleDamage = 'Required field'
-        }
-        if (!form.additionalDocuments) {
-            error.additionalDocuments = 'Required field'
-        }
-
-        if (!form.vehicleVideo) {
-            error.vehicleVideo = 'Required field'
-        } */
+        /*  if (!form.vehicleDamage) {
+             error.vehicleDamage = 'Required field'
+         }
+         if (!form.additionalDocuments) {
+             error.additionalDocuments = 'Required field'
+         }
+ 
+         if (!form.vehicleVideo) {
+             error.vehicleVideo = 'Required field'
+         } */
     }
 
     if (step == 'Launch Auction') {

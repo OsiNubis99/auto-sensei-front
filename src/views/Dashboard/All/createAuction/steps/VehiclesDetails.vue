@@ -4,13 +4,15 @@
             <img src="../../../../../assets/svg/vehiculoDetails.svg" alt="">
             <div class="flex flex-col ">
                 <p class=" font-semibold    md:text-xl  ">Vehicle Details</p>
-                <p class="md:font-medium text-[#4D4D4D] text-xs md:text-base ">Related to your vehicle to help get the right bids !</p>
+                <p class="md:font-medium text-[#4D4D4D] text-xs md:text-base ">Related to your vehicle to help get the
+                    right bids !</p>
             </div>
         </div>
         <div class="w-full">
             <label class="font-medium text-xs md:text-base " for="">Vehicle Identification Number (VIN)</label>
             <input class="p-2 w-full mt-3 uppercase bg-[#F0F0F0] border rounded-lg" v-model="form.numberVin"
-                :class="invalid?.numberVin ? 'border-error' : 'border-none'" placeholder="1HGCM82633A123456" type="text">
+                :class="invalid?.numberVin ? 'border-error' : 'border-none'" placeholder="1HGCM82633A123456"
+                type="text">
         </div>
         <div class="flex w-full justify-between items-center gap-5">
             <div class="w-full">
@@ -65,7 +67,8 @@
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Odometer</label>
                 <input step="0.01" :class="invalid?.odometer ? 'border-error' : ''" v-model="form.odometer"
-                    class="p-2 w-full md:mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="Enter odometer" type="number">
+                    class="p-2 w-full md:mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="Enter odometer"
+                    type="number">
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col md:gap-2">
@@ -96,11 +99,13 @@
                 White
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-silver" value="silver" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-silver" value="silver"
+                    name="color-redio">
                 Silver
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-grey" value="grey" name="color-redio"> Grey
+                <input type="radio" v-model="form.color" class="input-radio on-grey" value="grey" name="color-redio">
+                Grey
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
                 <input type="radio" v-model="form.color" class="input-radio on-greendark" value="greenDark"
@@ -114,7 +119,8 @@
                 <input type="radio" v-model="form.color" class="input-radio on-red" value="red" name="color-redio"> Red
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-yellow" value="yellow" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-yellow" value="yellow"
+                    name="color-redio">
                 Yellow
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
@@ -122,8 +128,19 @@
                 Green
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-blue" value="blue" name="color-redio"> Blue
+                <input type="radio" v-model="form.color" class="input-radio on-blue" value="blue" name="color-redio">
+                Blue
             </label>
+            <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
+                <input type="radio" v-model="form.color" class="input-radio on-other" value="other" name="color-redio">
+                Other
+            </label>
+            <div v-if="form.color == 'other'" class="w-full flex items-start flex-col">
+                <label class="font-medium text-xs md:text-base " for="">Custom color</label>
+                <input :class="invalid?.customColor ? 'border-error' : 'border-none'" v-model="form.customColor"
+                    class="p-2  border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Pink" type="text">
+            </div>
+
         </div>
         <div class="flex flex-col gap-4">
             <p class="font-medium text-xs md:text-base">Drive Train</p>
@@ -295,9 +312,3 @@ export default {
     },
 };
 </script>
-
-
-
-
-
-  
