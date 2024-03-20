@@ -215,7 +215,7 @@
                 </div>
                 <div :class="termins && listChat.length === 0 ? 'bg-[#A3A3A3] pointer-events-none ' : ''"
                     class="p-5 pt-0 mb-2 border flex gap-3 flex-col shadow-xl   rounded-lg border-[#E0E0E0]">
-                    <input v-model="textForm"
+                    <input v-model="textForm" v-on:keyup.enter="sendMessage" 
                         class="w-full input-shat bg-transparent  mt-5 rounded-xl focus:outline-none  focus:ring-0 "
                         type="text" placeholder="type your message here..." />
                     <div class="flex justify-between items-center w-full">
@@ -712,7 +712,7 @@
             </div>
             <div :class="termins && listChat.length === 0 ? 'bg-[#A3A3A3] pointer-events-none ' : ''"
                 class="p-2 pt-0  border flex gap-3 flex-col w-full shadow-xl bg-white  border-[#E0E0E0]">
-                <input v-model="textForm"
+                <input v-model="textForm" v-on:keyup.enter="sendMessage" 
                     class="w-full input-shat bg-transparent   rounded-xl focus:outline-none  focus:ring-0 " type="text"
                     placeholder="type your message here..." />
                 <div class="flex justify-between items-center w-full">
