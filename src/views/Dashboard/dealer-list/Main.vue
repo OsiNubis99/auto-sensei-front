@@ -348,7 +348,7 @@ import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/stores/user";
 import { toast } from "vue3-toastify";
 import ModalDetailsUser from '../../../components/Modals/ModalDetailsUser/ModalUser.vue'
-import { ModalUserDetails } from '../../../stores/ModalUserDetails';
+import { ModalUserDetails } from '@/stores/ModalUserDetails';
 export default {
     components: {
         ModalDetailsUser

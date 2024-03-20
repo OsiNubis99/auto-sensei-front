@@ -142,7 +142,8 @@
 
                                     <p v-if="statusModal.dataAutiont?.status == 'bids completed'"
                                         class="text-sm md:text-lg font-medium capitalize ">Completed</p>
-                                    <p v-else class="text-sm md:text-lg font-medium capitalize ">{{ statusModal.dataAutiont?.status }}
+                                    <p v-else class="text-sm md:text-lg font-medium capitalize ">{{
+        statusModal.dataAutiont?.status }}
                                     </p>
                                 </div>
                             </div>
@@ -317,9 +318,9 @@
                                 d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                        <div v-if="loading" class=" w-[400px] h-[400px]">
-                            <Basic />
-                        </div>
+                    <div v-if="loading" class=" w-[400px] h-[400px]">
+                        <Basic />
+                    </div>
                     <template v-else>
                         <div v-if="steps.step1" class=" p-2 md:p-4 flex md:gap-3 flex-col  ">
                             <div class="flex justify-start items-center gap-2">
@@ -447,8 +448,6 @@ export default {
                 });
                 loading.value = false
             }
-
-
         }
         const close = () => {
             modal.value = false
