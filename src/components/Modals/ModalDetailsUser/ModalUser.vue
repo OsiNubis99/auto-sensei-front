@@ -395,7 +395,7 @@
 
 <script>
 import { ref, onMounted, watch, computed } from "vue";
-import { ModalUserDetails } from '@/stores/ModalUserDetails';
+import { ModalUserDetails } from '@/stores/modalUser';
 import moment from "moment";
 export default {
     props: {
