@@ -15,48 +15,88 @@
         </div>
     </div>
     <div v-else class="flex-1 flex flex-col justify-between py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
-        <div class="flex-1 flex flex-col justify-center md:py-12 px-4 sm:px-6 h-full lg:flex-none  xl:px-24">
-            <div class="mx-auto w-full ">
-                <div>
-                    <h2 @click="openCode" class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">
-                        Enter Verification
-                        Code</h2>
-                    <p class=" text-sm font-normal text-[#666] text-center  ">A text message with a 6-digit code has
-                        been sent to <strong> {{ formdata?.phone }} </strong>
-                    </p>
+        <template v-if="showSuccessRegister">
+            <div class="h-full w-[60%] mx-auto flex justify-center flex-col items-center  p-5">
+                <div class="bg-white h-fit flex flex-col gap-6 items-center justify-center shadow-lg  rounded-lg p-4">
+                    <div class="check-container">
+                        <div class="check-background">
+                            <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="check-shadow"></div>
+                    </div>
+                    <div>
+                        <p class="text-center text-2xl font-medium">Your account have been successfully created.</p>
+                        <p class="text-center">Our administrators will validate your info and activate your
+                            account. This process may take a few moments.</p>
+                    </div>
+                    <div>
+                        <button @click="refirectToLogin" class="btn bg-primary" to="/login/dealers">Login</button>
+                    </div>
                 </div>
-                <div class="mt-8">
-                    <div class="mt-6">
-                        <div class="space-y-7 ">
-                            <div>
-                                <label htmlFor="email" class="block text-sm font-medium text-gray-700">
-                                    Code
-                                </label>
-                                <div class="mt-1">
-                                    <input v-model="form.code" type="text" placeholder="Enter the 6-digit code"
-                                        class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            </div>
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </template>
+        <template v-else>
+            <div class="flex-1 flex flex-col justify-center md:py-12 px-4 sm:px-6 h-full lg:flex-none  xl:px-24">
+                <div class="mx-auto w-full ">
+                    <div>
+                        <h2 @click="openCode"
+                            class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">
+                            Enter Verification
+                            Code</h2>
+                        <p class=" text-sm font-normal text-[#666] text-center  ">A text message with a 6-digit code has
+                            been sent to <strong> {{ formdata?.phone }} </strong>
+                        </p>
+                    </div>
+                    <div class="mt-8">
+                        <div class="mt-6">
+                            <div class="space-y-7 ">
+                                <div>
+                                    <label htmlFor="email" class="block text-sm font-medium text-gray-700">
+                                        Code
+                                    </label>
+                                    <div class="mt-1">
+                                        <input v-model="form.code" type="text" placeholder="Enter the 6-digit code"
+                                            class="appearance-none block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <button @click="nextStep"
-                                    class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Continue
-                                </button>
+                                <div>
+                                    <button @click="nextStep"
+                                        class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Continue
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center mt-5 flex justify-center gap-2 md:flex-col">
-            <p class=" text-xs font-normal text-[#666]  ">
-                Didn’t receive the code? </p>
-            <p @click="backStep"
-                class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
-                Resend Code
-            </p>
+            <div class="text-center mt-5 flex justify-center gap-2 md:flex-col">
+                <p class=" text-xs font-normal text-[#666]  ">
+                    Didn’t receive the code? </p>
+                <p @click="backStep"
+                    class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
+                    Resend Code
+                </p>
 
-        </div>
+            </div>
+        </template>
+
+
     </div>
 </template>
 
@@ -64,7 +104,7 @@
 import { onMounted, ref, computed } from 'vue'
 import { stepsSignUp } from "@/stores/stepsSignUp";
 import { toast } from "vue3-toastify";
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter, useRoute, RouterLink } from 'vue-router'
 import { useAuthStore } from "@/stores/auth";
 import { useStoreFile } from "@/stores/uploader";
 import { useUserStore } from "@/stores/user";
@@ -93,6 +133,7 @@ export default {
         const storeFile = useStoreFile()
         const token = ref(null)
         const dataForm = ref(props.getDataRegister)
+        const showSuccessRegister = ref(false)
         const nextStep = async () => {
 
             if (!form.value.code) {
@@ -158,9 +199,10 @@ export default {
                                             router.go()
                                             break;
                                         case 2:
-                                            await router.push({ path: '/login/dealers' })
+                                            /* await router.push({ path: '/login/dealers' }) */
                                             localStorage.clear()
-                                            router.go()
+                                            /*  router.go() */
+                                            showSuccessRegister.value = true
                                             break;
                                         default:
                                             await router.push({ name: 'home' })
@@ -283,6 +325,11 @@ export default {
         const backStep = () => {
             props.back()
         }
+        const refirectToLogin = async () => {
+            await router.push({ path: '/login/dealers' })
+            showSuccessRegister.value = false
+            router.go()
+        }
         const openCode = () => {
             alert(formdata.validationCode)
         }
@@ -295,7 +342,10 @@ export default {
             backStep,
             form,
             loading,
-            openCode, formdata
+            openCode,
+            formdata,
+            refirectToLogin,
+            showSuccessRegister
         };
     },
 };
