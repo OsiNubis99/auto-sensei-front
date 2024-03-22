@@ -37,7 +37,7 @@
                 :class="auction?.status == 'live' || auction?.status == 'bids completed' || auction?.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
                 class="flex p-2 md:p-5  flex-col gap-3">
                 <div>
-                    <div class="font-bold md:text-xl">{{ auction.title }}</div>
+                   <!--  <div class="font-bold md:text-xl">{{ auction.title }}</div> -->
                     <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>

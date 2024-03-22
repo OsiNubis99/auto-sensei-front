@@ -1,6 +1,6 @@
 <template>
     <div class=" fixed z-[100] bottom-2 w-full gap-3 px-4 flex justify-between items-center ">
-        <RouterLink to="/draft" class=" btn w-full !py-2 !text-sm bg-white border border-base-black font-medium">
+        <RouterLink v-if="path !== 'draft'" to="/draft" class=" btn w-full !py-2 !text-sm bg-white border border-base-black font-medium">
             Draft
             <span class="text-[#858585] ml-1">{{ autions?.draft?.length }}</span>
         </RouterLink>
@@ -17,6 +17,7 @@
   
 <script >
 import { ref, onMounted, computed } from "vue";
+import { useRoute, useRouter } from 'vue-router'
 export default {
     components: {
     },
@@ -30,6 +31,8 @@ export default {
     },
     setup(props) {
         const data = ref(props.data);
+        const route = useRoute();
+        const path = ref(computed(() => route.name))
         const autions = ref(props.autions);
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         onMounted(() => {
@@ -38,7 +41,8 @@ export default {
         return {
             data,
             autions,
-            bucket
+            bucket,
+            path
         };
     },
 };

@@ -17,8 +17,6 @@ export const usePayments = defineStore("payments", {
             return new Promise((resolve, reject) => {
                 axios(config)
                     .then((response) => {
-                        console.log('HOLAAAAAAAAAAAAAAAAAAAA', JSON.stringify(response.data))
-                        /*   this.data = response.data */
                         resolve(response);
                     })
                     .catch((error) => {

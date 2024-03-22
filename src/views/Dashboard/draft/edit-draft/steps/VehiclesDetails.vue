@@ -22,11 +22,6 @@
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col md:gap-2">
-                    <!--  <label class="font-medium text-xs md:text-base " for="">Make</label>
-                    <select  v-model="form.make" :class="invalid?.make ? 'border-error' : 'border-none'"
-                        class=" border bg-[#F0F0F0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg  w-full ">
-                        <option value="make">make</option>
-                    </select> -->
                     <label class="font-medium text-xs md:text-base " for="">Make </label>
                     <input :class="invalid?.make ? 'border-error' : 'border-none'" v-model="form.make"
                         class="p-2 w-full border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Forester" type="text">
@@ -76,14 +71,10 @@
                     <select :class="invalid?.doors ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.doors"
                         placeholder="Number of Doors"
                         class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                        <option selected hidden>Select Doors </option>
                         <option value="2 Doors">2 Doors</option>
                         <option value="3 Doors">3 Doors</option>
                         <option value="4 Doors">4 Doors</option>
                         <option value="5 Doors">5 Doors</option>
-
-
                     </select>
                 </div>
             </div>
@@ -162,7 +153,6 @@
                         class="input-radio on" value="4WD" name="drive-train"> 4WD (Four-Wheel Drive)
                 </label>
             </div>
-
         </div>
         <div class="w-full">
             <label class="font-medium text-xs md:text-base " for="">Additional Packages</label>
@@ -183,7 +173,6 @@
                         <option value="Need Replacement">Need Replacement</option>
                         <option value="Good">Good</option>
                         <option value="Brand New">Brand New</option>
-
                     </select>
                 </div>
             </div>
@@ -232,35 +221,7 @@
                     </select>
                 </div>
             </div>
-            <!-- <div class="w-full">
-                <div class="w-full flex flex-col md:gap-2">
-                    <label class="font-medium text-xs md:text-base " for="">Rotor Condition</label>
-                    <select v-model="form.rotorCondition"
-                        :class="invalid?.rotorCondition ? 'border-error' : 'border-[#E0E0E0]'"
-                        class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>Choose Condition</option>
-                        <option value="US">United States</option>
-
-                    </select>
-                </div>
-            </div>
-            <div class="w-full">
-                <div class="w-full flex flex-col md:gap-2">
-                    <label class="font-medium text-xs md:text-base " for="">Last Replacement</label>
-                    <select v-model="form.lastReplacement3"
-                        :class="invalid?.lastReplacement3 ? 'border-error' : 'border-[#E0E0E0]'"
-                        class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>Choose Year</option>
-                        <option value="US">United States</option>
-
-                    </select>
-                </div>
-            </div> -->
         </div>
-        <button v-if="!save" @click="next"
-            class=" btn flex justify-center bg-[#303E18] py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Continue
-        </button>
     </div>
 </template>
 <script>

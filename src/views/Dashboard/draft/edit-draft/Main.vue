@@ -1,11 +1,11 @@
 <template>
-    <div :class="op.step1 ? 'md:h-screen' : 'h-fit' "class="bg-[#BDBDBF66] md:bg=[#F9F9F9] ">
+    <div class="bg-[#BDBDBF66] md:bg=[#F9F9F9] ">
         <div>
             <div class="absolute hidden md:block w-full h-[200px] overflow-hidden bg-[#0B1107]">
                 <svg class="w-full " xmlns="http://www.w3.org/2000/svg" width="1768" height="260" viewBox="0 0 1768 260"
                     fill="none">
                     <path opacity="0.2"
-                        d="M-244.713 -277.057L-486.999 758.702C-356.9 497.892 -38.9499 -s21.2623 192.061 -11.3982C480.824 0.931761 -164.304 688.32 75.2107 782.511C266.823 857.864 592.581 203.318 731.509 -133.374C687.698 197.671 645.281 866.416 826.098 893.029C1052.12 926.295 1064.94 -23.957 1219.25 -8.96303C1342.7 3.03212 1314.53 642.392 1285.01 960.573L1707.71 62.9291"
+                        d="M-244.713 -277.057L-486.999 758.702C-356.9 497.892 -38.9499 -21.2623 192.061 -11.3982C480.824 0.931761 -164.304 688.32 75.2107 782.511C266.823 857.864 592.581 203.318 731.509 -133.374C687.698 197.671 645.281 866.416 826.098 893.029C1052.12 926.295 1064.94 -23.957 1219.25 -8.96303C1342.7 3.03212 1314.53 642.392 1285.01 960.573L1707.71 62.9291"
                         stroke="#272D35" stroke-width="132" />
                 </svg>
             </div>
@@ -33,11 +33,8 @@
                                         <div class="p-5 pt-0">
                                             <div class=" flex justify-between  gap-[100px] mt-7 items-center">
                                                 <div class="flex hr-custims-1 items-center gap-5 ">
-                                                    <div v-if="op.step1 && !checkStep.step1"
-                                                        class="flex justify-center bg-[#1F94F0] items-center w-8 h-8 text-white  rounded-full">
-                                                        1
-                                                    </div>
-                                                    <div v-if="(checkStep.step1 && !op.step1) || (op.step1 && op.step2 && op.step3)"
+
+                                                    <div
                                                         class="flex justify-center items-center w-8 h-8 text-white bg-[#000] rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                                             viewBox="0 0 22 22" fill="none">
@@ -57,12 +54,8 @@
                                             </div>
                                             <div class=" flex justify-between gap-[100px] mt-7 items-center">
                                                 <div class="flex items-center hr-custims-2 gap-5 ">
-                                                    <div v-if="!checkStep.step2"
-                                                        :class="op.step2 ? 'bg-[#1F94F0]' : 'bg-[#E0E0E0]'"
-                                                        class="flex justify-center items-center w-8 h-8 text-white  rounded-full">
-                                                        2
-                                                    </div>
-                                                    <div v-if="(checkStep.step2 && !op.step2) || (op.step1 && op.step2 && op.step3)"
+
+                                                    <div
                                                         class="flex justify-center items-center w-8 h-8 text-white bg-[#000] rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                                             viewBox="0 0 22 22" fill="none">
@@ -71,8 +64,7 @@
                                                                 fill="white" />
                                                         </svg>
                                                     </div>
-                                                    <p
-                                                        :class="op.step2 || checkStep.step2 ? 'text-[#000]' : 'text-[#E0E0E0]'">
+                                                    <p>
                                                         Vehicles
                                                         Details</p>
                                                 </div>
@@ -85,12 +77,8 @@
                                             </div>
                                             <div class=" flex justify-between gap-[100px] mt-7 items-center">
                                                 <div class="flex items-center gap-5 ">
-                                                    <div v-if="!checkStep.step3"
-                                                        :class="op.step3 ? 'bg-[#1F94F0]' : 'bg-[#E0E0E0]'"
-                                                        class="flex justify-center items-center w-8 h-8 text-white  rounded-full">
-                                                        3
-                                                    </div>
-                                                    <div v-if="op.step1 && op.step2 && op.step3"
+
+                                                    <div
                                                         class="flex justify-center items-center w-8 h-8 text-white bg-[#000] rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                                             viewBox="0 0 22 22" fill="none">
@@ -99,8 +87,7 @@
                                                                 fill="white" />
                                                         </svg>
                                                     </div>
-                                                    <p
-                                                        :class="op.step3 || checkStep.step3 ? 'text-[#000]' : 'text-[#E0E0E0]'">
+                                                    <p class="text-[#000]">
                                                         Upload
                                                         Photos
                                                     </p>
@@ -122,11 +109,8 @@
                             <p class="text-[#666] font-medium  text-lg uppercase ">COMPLETE OUR 3 STEP PROCESS</p>
                             <div class=" flex justify-between gap-[100px] mt-7 items-center">
                                 <div class="flex hr-custim-1 items-center gap-5 ">
-                                    <div v-if="op.step1 && !checkStep.step1"
-                                        class="flex justify-center bg-[#1F94F0] items-center w-10 h-10 text-white  rounded-full">
-                                        1
-                                    </div>
-                                    <div v-if="(checkStep.step1 && !op.step1) || (op.step1 && op.step2 && op.step3)"
+
+                                    <div
                                         class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                             viewBox="0 0 22 22" fill="none">
@@ -146,11 +130,8 @@
                             </div>
                             <div class=" flex justify-between gap-[100px] mt-7 items-center">
                                 <div class="flex items-center hr-custim-2 gap-5 ">
-                                    <div v-if="!checkStep.step2" :class="op.step2 ? 'bg-[#1F94F0]' : 'bg-[#E0E0E0]'"
-                                        class="flex justify-center items-center w-10 h-10 text-white  rounded-full">
-                                        2
-                                    </div>
-                                    <div v-if="(checkStep.step2 && !op.step2) || (op.step1 && op.step2 && op.step3)"
+
+                                    <div
                                         class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                             viewBox="0 0 22 22" fill="none">
@@ -159,7 +140,7 @@
                                                 fill="white" />
                                         </svg>
                                     </div>
-                                    <p :class="op.step2 || checkStep.step2 ? 'text-[#000]' : 'text-[#E0E0E0]'">Vehicles
+                                    <p class="text-[#000]">Vehicles
                                         Details</p>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -171,11 +152,8 @@
                             </div>
                             <div class=" flex justify-between gap-[100px] mt-7 items-center">
                                 <div class="flex items-center hr-custim-2 gap-5 ">
-                                    <div v-if="!checkStep.step3" :class="op.step3 ? 'bg-[#1F94F0]' : 'bg-[#E0E0E0]'"
-                                        class="flex justify-center items-center w-10 h-10 text-white  rounded-full">
-                                        3
-                                    </div>
-                                    <div v-if="op.step1 && op.step2 && op.step3"
+
+                                    <div
                                         class="flex justify-center items-center w-10 h-10 text-white bg-[#000] rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                             viewBox="0 0 22 22" fill="none">
@@ -184,7 +162,7 @@
                                                 fill="white" />
                                         </svg>
                                     </div>
-                                    <p :class="op.step3 || checkStep.step3 ? 'text-[#000]' : 'text-[#E0E0E0]'">Upload
+                                    <p class="text-[#000]">Upload
                                         Photos
                                     </p>
                                 </div>
@@ -275,19 +253,17 @@
                         </template>
 
                         <template v-else>
-                            <GeneralInformation v-show="op.step1" :key="componentKey"
-                                :nextGeneralInformation="nextGeneralInformation" :form="formData" :op="op"
-                                :checkStep="checkStep" :launch="launch" :invalid="invalid"
+                            <GeneralInformation :key="componentKey" :nextGeneralInformation="nextGeneralInformation"
+                                :form="formData" :op="op" :checkStep="checkStep" :launch="launch" :invalid="invalid"
                                 :loadingCountrys="loadingCountrys" :onChangeGetProvince="onChangeGetProvince"
                                 :onChangeGetCity="onChangeGetCity" />
-                            <VehiclesDetails v-show="op.step2" :key="componentKey"
-                                :nextVehiclesDetails="nextVehiclesDetails" :form="formData" :op="op"
-                                :checkStep="checkStep" :launch="launch" :invalid="invalid" />
-                            <UploadPhotos v-show="op.step3" :key="componentKey" :nextUploadPhotos="nextUploadPhotos"
-                                :form="formData" :op="op" :checkStep="checkStep" :launch="launch" :saveData="saveData"
+                            <VehiclesDetails :key="componentKey" :nextVehiclesDetails="nextVehiclesDetails"
+                                :form="formData" :op="op" :checkStep="checkStep" :launch="launch" :invalid="invalid" />
+                            <UploadPhotos :key="componentKey" :nextUploadPhotos="nextUploadPhotos" :form="formData"
+                                :op="op" :checkStep="checkStep" :launch="launch" :saveData="saveData"
                                 :invalid="invalid" />
-
                         </template>
+
                     </div>
                 </div>
             </div>
@@ -296,11 +272,11 @@
 </template>
 <script>
 import { ref, watch, computed, onMounted } from "vue";
-import Heanding from "../../../../components/Headings/Heanding.vue";
+import Heanding from "@/components/Headings/Heanding.vue";
 import GeneralInformation from "./steps/GeneralInformation.vue"
 import VehiclesDetails from "./steps/VehiclesDetails.vue";
 import UploadPhotos from "./steps/UploadPhotos.vue";
-import { validateData } from '../../../../validations/validationCreateAutions'
+import { validateData } from '@/validations/validationCreateAutions'
 import { toast } from "vue3-toastify";
 import { useAuctionStore } from "@/stores/auctions";
 import { useStoreFile } from "@/stores/uploader";
@@ -332,11 +308,14 @@ export default {
         const router = useRouter()
         const expanded = ref(false)
         const stateProgressUpload = ref('')
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const porcertanje = ref(0)
         const countrys = usePayments()
         const powerValue = ref(computed(() => { return storeFile.progressUpload }))
         const arrayUpload = ref([])
         const loadingCountrys = ref(false)
+        const dataAuction = ref(null)
+        const progress = ref(0)
         watch(powerValue, async (newQuestion, oldQuestion) => {
             porcertanje.value = newQuestion
         })
@@ -366,7 +345,7 @@ export default {
             cylinder: undefined,
             transmission: undefined,
             odometer: undefined,
-            doors: 'Select Doors',
+            doors: undefined,
             color: undefined,
             customColor: undefined,
             driveTrain: undefined,
@@ -491,13 +470,12 @@ export default {
                 try {
 
                     let res = await store.create(dataPost)
-                    console.log('nextGeneralInformation', res)
+                    console.log('res', res)
                     if (res) {
                         id_create.value = res.data._id
                         formData.value.numberVin = res.data.vehicleDetails.vin
                         formData.value.make = res.data.vehicleDetails.make
                         formData.value.model = res.data.vehicleDetails.model
-                        formData.value.doors = `${res.data.vehicleDetails.doors} Doors`
                         formData.value.trim = res.data.vehicleDetails.trim
                         formData.value.year = res.data.vehicleDetails.year
                         formData.value.bodyType = res.data.vehicleDetails.bodyType
@@ -698,50 +676,6 @@ export default {
             let newAdditionalDocuments = []
             let vehicleDamage = []
             let additionalDocuments = []
-            let exterior = [
-                {
-                    file: formData.value.frontPhoto,
-                    name: 'front-photo'
-                },
-                {
-                    file: formData.value.front,
-                    name: 'front'
-                },
-                {
-                    file: formData.value.driverSide,
-                    name: 'driver-side-(exterior)'
-                },
-                {
-                    file: formData.value.back,
-                    name: 'back'
-                },
-                {
-                    file: formData.value.passengerSide,
-                    name: 'passenger-side'
-                },
-                {
-                    file: formData.value.tireAndRim,
-                    name: 'tire-and-rim'
-                },
-            ]
-            let interior = [
-                {
-                    file: formData.value.driversDisplay,
-                    name: 'drivers-display-(odometer)'
-                },
-                {
-                    file: formData.value.driverSide,
-                    name: 'drivers-side-(interior)'
-                },
-                {
-                    file: formData.value.centerConsole,
-                    name: 'center-console'
-                },
-                {
-                    file: formData.value.rearSeats,
-                    name: 'rear-seats'
-                }
-            ]
             if (formData.value.vehicleDamage) {
                 vehicleDamage = [
                     {
@@ -761,103 +695,211 @@ export default {
 
                 ]
             }
-
+            let resOriginalDocument = null;
+            let resLicence = null;
+            let resFronPhoto = null;
+            let resFron = null;
+            let resDriverSide = null;
+            let resBack = null;
+            let resPassengerSide = null;
+            let resTireAndRim = null;
+            let resDriversDisplay = null;
+            let resDriverSideInterior = null;
+            let resCenterConsole = null;
+            let resRearSeats = null;
+            let resVehicleDamage = null;
+            let resAdditionalDocuments = null;
             try {
-                arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
-                let resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
-                if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
 
-                arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
-                let resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
-                if (resLicence[0]?.data) arrayUpload.value[0].completed = true
-
-
-                arrayUpload.value = [...arrayUpload.value, { name: 'Main Photo (3/4 Front Photo)', preview: formData.value.previewFrontPhoto, completed: false, }]
-                let resFronPhoto = await Promise.all([storeFile.uploaderFile({ file: formData.value.frontPhoto, location: `${id_create.value}/front-photo` })])
-                if (resFronPhoto[0]?.data) {
-                    arrayUpload.value[1].completed = true
-                    newArrayExterior = [...newArrayExterior, resFronPhoto[0]?.data]
+                if (typeof formData.value.document?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
+                    resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
+                    if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
+                }
+                if (typeof formData.value.driverDocument?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
+                    resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
+                    if (resLicence[0]?.data) arrayUpload.value[0].completed = true
                 }
 
-                arrayUpload.value = [...arrayUpload.value, { name: 'Front Photo', preview: formData.value.previewFront, completed: false, }]
-                let resFron = await Promise.all([storeFile.uploaderFile({ file: formData.value.front, location: `${id_create.value}/front` })])
-                if (resFron[0]?.data) {
-                    arrayUpload.value[2].completed = true
-                    newArrayExterior = [...newArrayExterior, resFron[0]?.data]
+                if (typeof formData.value.frontPhoto?.type == 'string' ||
+                    typeof formData.value.front?.type == 'string' ||
+                    typeof formData.value.driverSide?.type == 'string' ||
+                    typeof formData.value.back?.type == 'string' ||
+                    typeof formData.value.passengerSide?.type == 'string' ||
+                    typeof formData.value.tireAndRim?.type == 'string'
+                ) {
+                    if (dataAuction.value?.vehicleDetails?.exteriorPhotos) {
+                        newArrayExterior = [...dataAuction.value?.vehicleDetails?.exteriorPhotos]
+                    }
+
+                }
+                if (typeof formData.value.driversDisplay?.type == 'string' ||
+                    typeof formData.value.driversSide?.type == 'string' ||
+                    typeof formData.value.centerConsole?.type == 'string' ||
+                    typeof formData.value.rearSeats?.type == 'string'
+                ) {
+                    if (dataAuction.value?.vehicleDetails?.interiorPhotos) {
+                        newArrayInterior = [...dataAuction.value?.vehicleDetails?.interiorPhotos]
+                    }
+
                 }
 
-                arrayUpload.value = [...arrayUpload.value, { name: 'Driver Side Exterior', preview: formData.value.previewDriverSide, completed: false, }]
-                let resDriverSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverSide, location: `${id_create.value}/driver-side-(exterior)` })])
-                if (resDriverSide[0]?.data) {
-                    arrayUpload.value[3].completed = true
-                    newArrayExterior = [...newArrayExterior, resDriverSide[0]?.data]
-                }
 
-                arrayUpload.value = [...arrayUpload.value, { name: 'Back', preview: formData.value.previewBack, completed: false, }]
-                let resBack = await Promise.all([storeFile.uploaderFile({ file: formData.value.back, location: `${id_create.value}/'back'` })])
-                if (resBack[0]?.data) {
-                    arrayUpload.value[4].completed = true
-                    newArrayExterior = [...newArrayExterior, resBack[0]?.data]
-                }
+                if (typeof formData.value.frontPhoto?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Main Photo (3/4 Front Photo)', preview: formData.value.previewFrontPhoto, completed: false, }]
+                    resFronPhoto = await Promise.all([storeFile.uploaderFile({ file: formData.value.frontPhoto, location: `${id_create.value}/front-photo` })])
+                    if (resFronPhoto[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            console.log('file', file)
+                            if (file.name == 'Main Photo (3/4 Front Photo)') {
+                                file.completed = true
+                            }
+                        })
 
-                arrayUpload.value = [...arrayUpload.value, { name: 'Passenger Side', preview: formData.value.previewPassengerSide, completed: false, }]
-                let resPassengerSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.passengerSide, location: `${id_create.value}/passenger-side` })])
-                if (resPassengerSide[0]?.data) {
-                    arrayUpload.value[5].completed = true
-                    newArrayExterior = [...newArrayExterior, resPassengerSide[0]?.data]
-                }
-
-                arrayUpload.value = [...arrayUpload.value, { name: 'Tire And Rim', preview: formData.value.previewTireAndRim, completed: false, }]
-                let resTireAndRim = await Promise.all([storeFile.uploaderFile({ file: formData.value.tireAndRim, location: `${id_create.value}/tire-and-rim` })])
-                if (resTireAndRim[0]?.data) {
-                    arrayUpload.value[6].completed = true
-                    newArrayExterior = [...newArrayExterior, resTireAndRim[0]?.data]
-                }
-
-                arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Display (Odometer)', preview: formData.value.previewDriversDisplay, completed: false, }]
-                let resDriversDisplay = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversDisplay, location: `${id_create.value}/drivers-display-(odometer)` })])
-                if (resDriversDisplay[0]?.data) {
-                    arrayUpload.value[7].completed = true
-                    newArrayInterior = [...newArrayInterior, resDriversDisplay[0]?.data]
-                }
-
-                arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Side (Interior)', preview: formData.value.previewDriversSide, completed: false, }]
-                let resDriverSideInterior = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversSide, location: `${id_create.value}/drivers-side-(interior)` })])
-                if (resDriverSideInterior[0]?.data) {
-                    arrayUpload.value[8].completed = true
-                    newArrayInterior = [...newArrayInterior, resDriverSideInterior[0]?.data]
-                }
-
-                arrayUpload.value = [...arrayUpload.value, { name: 'Center Console', preview: formData.value.previewCenterConsole, completed: false, }]
-                let resCenterConsole = await Promise.all([storeFile.uploaderFile({ file: formData.value.centerConsole, location: `${id_create.value}/center-console` })])
-                if (resCenterConsole[0]?.data) {
-                    arrayUpload.value[9].completed = true
-                    newArrayInterior = [...newArrayInterior, resCenterConsole[0]?.data]
-                }
-
-                arrayUpload.value = [...arrayUpload.value, { name: 'Rear Seats', preview: formData.value.previewRearSeats, completed: false, }]
-                let resRearSeats = await Promise.all([storeFile.uploaderFile({ file: formData.value.rearSeats, location: `${id_create.value}/rear-seats` })])
-                if (resRearSeats[0]?.data) {
-                    arrayUpload.value[10].completed = true
-                    newArrayInterior = [...newArrayInterior, resRearSeats[0]?.data]
-                }
-
-                if (formData.value.vehicleDamage) {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Vehicle Damage', preview: formData.value.previewVehicleDamage, completed: false, }]
-                    let resVehicleDamage = await Promise.all([storeFile.uploaderFile({ file: formData.value.vehicleDamage, location: `${id_create.value}/vehicle-damage` })])
-                    if (resVehicleDamage[0]?.data) {
-                        arrayUpload.value[11].completed = true
-                        newArrayVehicleDamage = [...newArrayVehicleDamage, resVehicleDamage[0]?.data]
+                        newArrayExterior[0] = resFronPhoto[0]?.data
                     }
                 }
-                if (formData.value.additionalDocuments) {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Additional Documents', preview: formData.value.previewAdditionalDocuments, completed: false, }]
-                    let resAdditionalDocuments = await Promise.all([storeFile.uploaderFile({ file: formData.value.additionalDocuments, location: `${id_create.value}/additional-documents` })])
-                    if (resAdditionalDocuments[0]?.data) {
-                        arrayUpload.value[12].completed = true
-                        newAdditionalDocuments = [...newAdditionalDocuments, resAdditionalDocuments[0]?.data]
+                if (typeof formData.value.front?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Front Photo', preview: formData.value.previewFront, completed: false, }]
+                    resFron = await Promise.all([storeFile.uploaderFile({ file: formData.value.front, location: `${id_create.value}/front` })])
+                    if (resFron[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Front Photo') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayExterior[1] = resFron[0]?.data
                     }
                 }
+                if (typeof formData.value.driverSide?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Driver Side Exterior', preview: formData.value.previewDriverSide, completed: false, }]
+                    resDriverSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverSide, location: `${id_create.value}/driver-side-(exterior)` })])
+                    if (resDriverSide[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Driver Side Exterior') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayExterior[2] = resDriverSide[0]?.data
+                    }
+                }
+                if (typeof formData.value.back?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Back', preview: formData.value.previewBack, completed: false, }]
+                    resBack = await Promise.all([storeFile.uploaderFile({ file: formData.value.back, location: `${id_create.value}/'back'` })])
+                    if (resBack[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Back') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayExterior[3] = resBack[0]?.data
+                    }
+                }
+                if (typeof formData.value.passengerSide?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Passenger Side', preview: formData.value.previewPassengerSide, completed: false, }]
+                    resPassengerSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.passengerSide, location: `${id_create.value}/passenger-side` })])
+                    if (resPassengerSide[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Passenger Side') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayExterior[4] = resPassengerSide[0]?.data
+                    }
+                }
+                if (typeof formData.value.tireAndRim?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Tire And Rim', preview: formData.value.previewTireAndRim, completed: false, }]
+                    resTireAndRim = await Promise.all([storeFile.uploaderFile({ file: formData.value.tireAndRim, location: `${id_create.value}/tire-and-rim` })])
+                    if (resTireAndRim[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Tire And Rim') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayExterior[5] = resPassengerSide[0]?.data
+                    }
+                }
+                if (typeof formData.value.driversDisplay?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Display (Odometer)', preview: formData.value.previewDriversDisplay, completed: false, }]
+                    resDriversDisplay = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversDisplay, location: `${id_create.value}/drivers-display-(odometer)` })])
+                    if (resDriversDisplay[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Drivers Display (Odometer)') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayInterior[0] = resDriversDisplay[0]?.data
+                    }
+                }
+                if (typeof formData.value.driversSide?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Side (Interior)', preview: formData.value.previewDriversSide, completed: false, }]
+                    resDriverSideInterior = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversSide, location: `${id_create.value}/drivers-side-(interior)` })])
+                    if (resDriverSideInterior[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Drivers Side (Interior)') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayInterior[1] = resDriverSideInterior[0]?.data
+                    }
+                }
+                if (typeof formData.value.centerConsole?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Center Console', preview: formData.value.previewCenterConsole, completed: false, }]
+                    resCenterConsole = await Promise.all([storeFile.uploaderFile({ file: formData.value.centerConsole, location: `${id_create.value}/center-console` })])
+                    if (resCenterConsole[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Center Console') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayInterior[2] = resCenterConsole[0]?.data
+                    }
+
+                }
+                if (typeof formData.value.rearSeats?.type == 'string') {
+                    arrayUpload.value = [...arrayUpload.value, { name: 'Rear Seats', preview: formData.value.previewRearSeats, completed: false, }]
+                    resRearSeats = await Promise.all([storeFile.uploaderFile({ file: formData.value.rearSeats, location: `${id_create.value}/rear-seats` })])
+                    if (resRearSeats[0]?.data) {
+                        arrayUpload.value.map((file) => {
+                            if (file.name == 'Rear Seats') {
+                                file.completed = true
+                            }
+                        })
+                        newArrayInterior[3] = resRearSeats[0]?.data
+                    }
+                }
+                if (typeof formData.value.vehicleDamage?.type == 'string') {
+                    if (formData.value.vehicleDamage) {
+                        arrayUpload.value = [...arrayUpload.value, { name: 'Vehicle Damage', preview: formData.value.previewVehicleDamage, completed: false, }]
+                        resVehicleDamage = await Promise.all([storeFile.uploaderFile({ file: formData.value.vehicleDamage, location: `${id_create.value}/vehicle-damage` })])
+                        if (resVehicleDamage[0]?.data) {
+                            arrayUpload.value.map((file) => {
+                                if (file.name == 'Vehicle Damage') {
+                                    file.completed = true
+                                }
+                            })
+                            newArrayVehicleDamage[0] = resVehicleDamage[0]?.data
+                        }
+                    }
+                }
+                if (typeof formData.value.additionalDocuments?.type == 'string') {
+                    if (formData.value.additionalDocuments) {
+                        arrayUpload.value = [...arrayUpload.value, { name: 'Additional Documents', preview: formData.value.previewAdditionalDocuments, completed: false, }]
+                        resAdditionalDocuments = await Promise.all([storeFile.uploaderFile({ file: formData.value.additionalDocuments, location: `${id_create.value}/additional-documents` })])
+                        if (resAdditionalDocuments[0]?.data) {
+                            arrayUpload.value.map((file) => {
+                                if (file.name == 'Additional Documents') {
+                                    file.completed = true
+                                }
+                            })
+                            newAdditionalDocuments[0] = resAdditionalDocuments[0]?.data
+                        }
+                    }
+                }
+
+
+
                 let resWeekend = getDateAndMinutes(+formData.value.dayMonday)
                 let hour = moment(`${formData.value.auctionTime}:${formData.value.auctionDuration}`, "H:mm").format('HH:mm:ss')
                 let date = moment(formData.value.auctionDate).format('YYYY-MM-DD');
@@ -892,6 +934,7 @@ export default {
                 }
                 formData.value.saveCity = JSON.parse(formData.value.city)
                 formData.value.saveProvince = JSON.parse(formData.value.province)
+                console.log('formData.value.document ', formData.value.document)
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -927,12 +970,12 @@ export default {
                         brakeReplacement: formData.value.lastReplacement2,
                         rotorCondition: formData.value.rotorCondition,
                         rotorReplacement: formData.value.lastReplacement3,
-                        originalDocument: resOriginalDocument[0]?.data,
-                        driverLicense: resLicence[0]?.data,
-                        exteriorPhotos: newArrayExterior,
-                        interiorPhotos: newArrayInterior,
-                        vehicleDamage: newArrayVehicleDamage,
-                        additionalDocuments: newAdditionalDocuments,
+                        originalDocument: typeof formData.value.document == "string" ? formData.value.document : resOriginalDocument[0]?.data,
+                        driverLicense: typeof formData.value.driverDocument == "string" ? formData.value.driverDocument : resLicence[0]?.data,
+                        exteriorPhotos: newArrayExterior.length == 0 ? dataAuction.value.vehicleDetails.exteriorPhotos : newArrayExterior,
+                        interiorPhotos: newArrayInterior.length == 0 ? dataAuction.value.vehicleDetails.interiorPhotos : newArrayInterior,
+                        vehicleDamage: newArrayVehicleDamage.length == 0 ? dataAuction.value.vehicleDetails.vehicleDamage : newArrayVehicleDamage,
+                        additionalDocuments: newAdditionalDocuments.length == 0 ? dataAuction.value.vehicleDetails.additionalDocuments : newAdditionalDocuments,
                         vehicleVideo: formData.value.vehicleVideo,
 
                     },
@@ -950,8 +993,10 @@ export default {
 
         }
         const saveData = async (string) => {
+            console.log('BY IDDDDDDDDD', formData.value)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'confirmation');
+            console.log('invalid.value', invalid.value)
             if (Object.entries(invalid.value).length > 0) {
                 toast(
                     invalid?.value?.numberVinGenerals ||
@@ -1003,6 +1048,7 @@ export default {
                 if (resFiles) {
                     try {
                         let res = await store.update({ uuid: id_create.value, payload: resFiles })
+                        console.log('res SAVE DRAFT', res)
                         if (res) {
                             await router.push({ path: '/all' })
                             router.go()
@@ -1016,21 +1062,45 @@ export default {
             }
         }
         const getCountry = async () => {
+
             try {
                 const res = await countrys.getCountry()
-                console.log('resresresresresres', res)
                 formData.value.getState = res.data
+                if (formData.value.province) {
+                    let resCountry = formData.value.getState.filter((c) => c.name == formData.value.province)
+                    formData.value.province = JSON.stringify(resCountry[0])
+                    await onChangeGetProvince(resCountry)
+                }
+
+
             } catch (error) {
+                console.log('error', error)
 
             }
         }
         const onChangeGetProvince = async (event) => {
+            console.log('event', event)
             formData.value.getCities = undefined
-            let value = JSON.parse(event.target.value)
+            let props = null;
+            if (event?.target?.value) {
+                props = JSON.parse(event.target.value)
+            } else {
+                props = event
+            }
+
             loadingCountrys.value = true
             try {
-                const res = await countrys.getCountryCities(value.iso2)
+                const res = await countrys.getCountryCities(props.iso2 ? props.iso2 : props[0].iso2)
                 formData.value.getCities = res.data
+                if (formData.value.city) {
+                    console.log('RAMONNNNNNNNN', res)
+                    console.log('RAMONAAAAAAA', formData.value.city)
+                    let resCity = res.data.filter((c) => c.name == formData.value.city)
+                    console.log('resCity', resCity)
+                    formData.value.city = JSON.stringify(resCity[0])
+                }
+
+
                 console.log('getCountryCities', res)
             } catch (error) {
                 loadingCountrys.value = false
@@ -1044,10 +1114,77 @@ export default {
             /* formData.value.city = value.name */
             console.log('value', value)
         }
+        const getAutionById = async (id) => {
+            loading.value = true
+            try {
+                let res = await store.getAutionById({ uuid: id })
+                console.log('RESPUESTA AUTION BY ID', res)
+
+                if (res.data) {
+                    dataAuction.value = res.data
+                    formData.value.numberVinGenerals = res.data.vin ? res.data.vin : undefined;
+                    formData.value.date = res.data.dropOffDate;
+                    formData.value.province = res.data.province;
+                    formData.value.city = res.data.city;
+                    formData.value.keys = res.data.keysNumber;
+                    formData.value.currently = res.data.vehicleStatus.status;
+                    formData.value.numberVin = res.data.vin;
+                    formData.value.year = res.data.vehicleDetails?.year;
+                    formData.value.make = res.data.vehicleDetails?.make;
+                    formData.value.model = res.data.vehicleDetails?.model;
+                    formData.value.trim = res.data.vehicleDetails?.trim;
+                    formData.value.bodyType = res.data.vehicleDetails?.bodyType;
+                    formData.value.cylinder = res.data.vehicleDetails?.cylinder;
+                    formData.value.transmission = res.data.vehicleDetails?.transmission;
+                    formData.value.odometer = res.data.vehicleDetails?.odometer;
+                    formData.value.doors = res.data.vehicleDetails?.doors;
+                    formData.value.color = res.data.vehicleDetails?.color;
+                    formData.value.driveTrain = res.data.vehicleDetails?.driveTrain;
+                    formData.value.additionalPackages = res.data.vehicleDetails?.aditionals;
+                    formData.value.tireCondition = res.data.vehicleDetails?.tireCondition;
+                    formData.value.lastReplacement = res.data.vehicleDetails?.tireReplacement;
+                    formData.value.brakePads = res.data.vehicleDetails?.brakeCondition;
+                    formData.value.lastReplacement2 = res.data.vehicleDetails?.brakeReplacement;
+                    formData.value.previewDocument = res.data?.vehicleDetails?.originalDocument ? bucket.value + res.data.vehicleDetails?.originalDocument : undefined;
+                    formData.value.document = res.data?.vehicleDetails?.originalDocument ? res.data.vehicleDetails?.originalDocument : undefined;
+                    formData.value.previewDriver = res.data.vehicleDetails?.driverLicense ? bucket.value + res.data.vehicleDetails?.driverLicense : undefined;
+                    formData.value.driverDocument = res.data.vehicleDetails?.driverLicense ? res.data.vehicleDetails?.driverLicense : undefined;
+                    formData.value.previewFrontPhoto = res.data.vehicleDetails?.exteriorPhotos[0].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[0] : undefined;
+                    formData.value.frontPhoto = res.data.vehicleDetails?.exteriorPhotos[0].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[0] : undefined;
+                    formData.value.previewFront = res.data.vehicleDetails?.exteriorPhotos[1].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[1] : undefined;
+                    formData.value.front = res.data.vehicleDetails?.exteriorPhotos[1].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[1] : undefined;
+                    formData.value.previewDriverSide = res.data.vehicleDetails?.exteriorPhotos[2].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[2] : undefined;
+                    formData.value.driverSide = res.data.vehicleDetails?.exteriorPhotos[2].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[2] : undefined;
+                    formData.value.previewBack = res.data.vehicleDetails?.exteriorPhotos[3].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[3] : undefined;
+                    formData.value.back = res.data.vehicleDetails?.exteriorPhotos[3].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[3] : undefined;
+                    formData.value.previewPassengerSide = res.data.vehicleDetails?.exteriorPhotos[4].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[4] : undefined;
+                    formData.value.passengerSide = res.data.vehicleDetails?.exteriorPhotos[4].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[4] : undefined;
+                    formData.value.previewTireAndRim = res.data.vehicleDetails?.exteriorPhotos[5].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[5] : undefined;
+                    formData.value.tireAndRim = res.data.vehicleDetails?.exteriorPhotos[5].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[5] : undefined;
+                    formData.value.previewDriversDisplay = bucket.value + res.data.vehicleDetails?.interiorPhotos[0];
+                    formData.value.driversDisplay = res.data.vehicleDetails?.interiorPhotos[0];
+                    formData.value.previewDriversSide = bucket.value + res.data.vehicleDetails?.interiorPhotos[1];
+                    formData.value.driversSide = res.data.vehicleDetails?.interiorPhotos[1];
+                    formData.value.previewCenterConsole = bucket.value + res.data.vehicleDetails?.interiorPhotos[2];
+                    formData.value.centerConsole = res.data.vehicleDetails?.interiorPhotos[2];
+                    formData.value.previewRearSeats = bucket.value + res.data.vehicleDetails?.interiorPhotos[3];
+                    formData.value.rearSeats = res.data.vehicleDetails?.interiorPhotos[3];
+                    formData.value.previewAdditionalDocuments = res.data.vehicleDetails?.additionalDocuments[0].length > 0 ? bucket.value + res.data.vehicleDetails?.additionalDocuments[0] : undefined;
+                    formData.value.previewVehicleDamage = bucket.value + res.data.vehicleDetails?.vehicleDamage[0];
+                }
+            } catch (error) {
+                loading.value = false
+            } finally {
+                loading.value = false
+            }
+        }
         onMounted(() => {
             getCountry()
-            let twoDaysLater = new Date(new Date().getTime() + 2 * 86400 * 1000);
-            console.log('twoDaysLater', twoDaysLater)
+            if (route.query?.id) {
+                id_create.value = route.query?.id
+                progress.value = route.query?.progress
+                getAutionById(route.query?.id)
+            }
         })
 
         return {
@@ -1072,7 +1209,8 @@ export default {
             loadingUploadImages,
             onChangeGetProvince,
             onChangeGetCity,
-            loadingCountrys
+            loadingCountrys,
+            progress
         };
     },
 };

@@ -17,101 +17,23 @@
         </div>
     </template>
     <template v-else>
-        <nav class="bg-[#22282F] flex items-center gap-6 p-5 ">
-            <RouterLink to="/all" :class="path == 'all' ? 'bg-primary' : 'bg-[#464B50] text-white'"
-                class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto  ease-linear duration-500 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M2.5 9.16667H17.5V10.8333H2.5V9.16667ZM15 15V17.5H13.3333V15H10.8333L14.1667 11.6667L17.5 15H15ZM6.66667 15V17.5H5V15H2.5L5.83333 11.6667L9.16667 15H6.66667ZM15 5H17.5L14.1667 8.33333L10.8333 5H13.3333V2.5H15V5ZM6.66667 5H9.16667L5.83333 8.33333L2.5 5H5V2.5H6.66667V5Z"
-                        :fill="path == 'all' ? '#09121F' : '#C2C2C2'" />
-                </svg>
-                <p>All ({{ data.length }})</p>
-            </RouterLink>
-            <RouterLink to="/upcoming-auctions"
-                :class="path == 'upcoming-auctions' ? 'bg-primary' : 'bg-[#464B50] text-white'"
-                class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto  ease-linear duration-500 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M7.5 14.1667C7.5 14.1667 13.3333 15 15.8333 17.5H16.6667C17.1269 17.5 17.5 17.1269 17.5 16.6667V11.6142C18.2188 11.4292 18.75 10.7766 18.75 10C18.75 9.22342 18.2188 8.57083 17.5 8.38583V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5H15.8333C13.3333 5 7.5 5.83333 7.5 5.83333H4.16667C3.24619 5.83333 2.5 6.57952 2.5 7.5V12.5C2.5 13.4205 3.24619 14.1667 4.16667 14.1667H5L5.83333 18.3333H7.5V14.1667ZM9.16667 7.21767C9.73608 7.0955 10.4396 6.92661 11.1994 6.70311C12.5979 6.29178 14.375 5.64385 15.8333 4.64548V15.3545C14.375 14.3562 12.5979 13.7083 11.1994 13.2969C10.4396 13.0734 9.73608 12.9045 9.16667 12.7823V7.21767ZM4.16667 7.5H7.5V12.5H4.16667V7.5Z"
-                        :fill="path == 'upcoming-auctions' ? '#09121F' : '#C2C2C2'" />
-                </svg>
-                <p>Upcoming Auctions ({{ storeAutions.upcoming.length }})</p>
-
-            </RouterLink>
-            <RouterLink to="/live" :class="path == 'live' ? 'bg-primary' : 'bg-[#464B50] text-white'"
-                class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto  ease-linear duration-500 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M15.304 15.3037C18.2329 12.3747 18.2329 7.626 15.304 4.69706L16.4825 3.51855C20.0622 7.09836 20.0622 12.9024 16.4825 16.4822L15.304 15.3037ZM4.69735 4.69706C1.76842 7.626 1.76842 12.3747 4.69735 15.3037L3.51884 16.4822C-0.060968 12.9024 -0.060968 7.09836 3.51884 3.51855L4.69735 4.69706ZM12.9469 12.9466C14.5741 11.3194 14.5741 8.68115 12.9469 7.05399L14.1254 5.87548C16.4035 8.15354 16.4035 11.847 14.1254 14.1251L12.9469 12.9466ZM7.05438 7.05399C5.42718 8.68115 5.42718 11.3194 7.05438 12.9466L5.87586 14.1251C3.5978 11.847 3.5978 8.15354 5.87586 5.87548L7.05438 7.05399ZM10.0007 11.667C10.9211 11.667 11.6673 10.9208 11.6673 10.0003C11.6673 9.07982 10.9211 8.33366 10.0007 8.33366C9.08015 8.33366 8.33398 9.07982 8.33398 10.0003C8.33398 10.9208 9.08015 11.667 10.0007 11.667Z"
-                        :fill="path == 'live' ? '#09121F' : '#C2C2C2'" />
-                </svg>
-                <p>Live ({{ storeAutions.live.length }})</p>
-            </RouterLink>
-            <RouterLink to="/completed" :class="path == 'completed' ? 'bg-primary' : 'bg-[#464B50] text-white'"
-                class="flex gap-3 h-5 rounded-[8px]  items-center p-5  w-auto  ease-linear duration-500 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M4.55149 3.6932C6.01232 2.43008 7.9166 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39697 18.3327 9.99935C18.3327 11.7794 17.7745 13.4292 16.8237 14.7832L14.166 9.99935H16.666C16.666 6.31745 13.6813 3.33268 9.99935 3.33268C8.20753 3.33268 6.58082 4.03957 5.38287 5.1897L4.55149 3.6932ZM15.4472 16.3055C13.9863 17.5686 12.0821 18.3327 9.99935 18.3327C5.39697 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 8.21923 2.22417 6.56948 3.17502 5.21555L5.83268 9.99935H3.33268C3.33268 13.6813 6.31745 16.666 9.99935 16.666C11.7912 16.666 13.4179 15.9591 14.6159 14.809L15.4472 16.3055Z"
-                        :fill="path == 'completed' ? '#09121F' : '#C2C2C2'" />
-                </svg>
-                <p>Completed ({{ storeAutions.completed.length }})</p>
-            </RouterLink>
-        </nav>
+        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="w-[29%]">
-                    <div class="bg-white p-5 shadow-steps">
-                        <div class="flex items-center gap-6 mb-4  relative cursor-pointer">
-                            <RouterLink to="/account-seller">
-                                <img v-if="storeUser.userData?.seller?.picture" class="w-14 h-14 object-cover rounded-full"
-                                    :src="bucket + storeUser.userData.seller.picture" alt="">
-                                <img v-else class="w-14 h-14 rounded-full" src="@/assets/img/jpg/image.jpg" alt="">
-                            </RouterLink>
-                            <div>
-                                <p class=" font-semibold capitalize ">
-                                    <span v-if="storeUser.userData.seller?.firstName"> {{
-                                        storeUser.userData.seller?.firstName }}</span> <span
-                                        v-if="storeUser.userData.seller?.lastName"> {{ storeUser.userData.seller?.lastName
-                                        }}</span>
-                                </p>
-                                <!--  <p class="text-[#666] text-sm uppercase ">Ottawa, Ontario</p> -->
-                            </div>
-                            <svg class=" absolute right-0 top-1 " xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                viewBox="0 0 20 21" fill="none">
-                                <path
-                                    d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
-                                    fill="#858585" />
-                            </svg>
-                        </div>
-                        <hr class="border-[#cfcfcf] border-1 ">
-                        <div class="flex pt-5 cursor-pointer justify-between">
-                            <RouterLink to="/draft" class="font-medium w-full p-2 rounded-lg bg-[#F0F0F0]">Draft <span
-                                    class="text-[#858585]">{{
-                                        storeAutions?.draft?.length
-                                    }}</span>
-                            </RouterLink>
-                        </div>
-                        <RouterLink to="/all/create"
-                            class="btn w-full bg-base-black mt-7 flex gap-2 justify-center items-center text-primary ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 17 17" fill="none">
-                                <path
-                                    d="M7.83398 7.83398V3.83398H9.16732V7.83398H13.1673V9.16732H9.16732V13.1673H7.83398V9.16732H3.83398V7.83398H7.83398Z"
-                                    fill="#C1F861" />
-                            </svg>
-                            <p class="text-primary pt-1">Create Auction</p>
-                        </RouterLink>
-                    </div>
+                <div class="hidden md:w-[29%] md:block">
+                    <CreateAution class="hidden md:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
-                <div class="w-[70%]">
-                    <div class="flex items-center justify-between mb-4">
+                <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="w-full md:w-[70%]">
+                    <div class="flex items-center justify-between px-2 pt-4 md:p-0  mb-4">
                         <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
                         <div class="flex items-center gap-2 ">
-                            <p class="mt-2">Sort by:</p>
+                            <p class="mt-2 hidden md:block">Sort by:</p>
                             <div class="flex items-center gap-5">
                                 <div class="navbar-right relative">
                                     <button @click="isOpen = !isOpen"
                                         class="flex gap-2 rounded-md  shadow-md px-2 bg-white items-center">
-                                        <p class="p-2 pb-1">Auction Status & Date</p>
+                                        <p class="p-2 text-xs md:text-[16px] pb-1">Uncompleted</p>
                                         <div class=" p-2 border-l-2 pr-0 border-[#efefef] ">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 viewBox="0 0 18 18" fill="none">
@@ -123,31 +45,28 @@
                                     </button>
                                     <div v-if="isOpen"
                                         class="absolute  z-10 top-auto left-0 w-full py-2 mt-2 rounded-lg border-gray-900 bg-white shadow-xl">
-                                        <div
-                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
-                                            Auction
-                                            Title
+                                        <div @click="isOpen = false"
+                                            class=" text-[10px] md:text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">
+                                            Uncompleted
                                         </div>
-                                        <a href=""
-                                            class="text-sm text-gray-900 hover:bg-base-black hover:text-white block px-4 py-2 cursor-pointer">Auction
-                                            Start</a>
 
                                     </div>
                                 </div>
-                                <div class="shadow-md  rounded-md flex bg-white">
-                                    <div @click="changeGridTemplate" :class="changeLayouts ? 'bg-white' : 'bg-[#EFF8E0]'"
-                                        class="p-2 cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none">
+                                <div class="shadow-md md:flex rounded-md hidden bg-white">
+                                    <div @click="changeGridTemplate"
+                                        :class="changeLayouts ? 'bg-white' : 'bg-[#EFF8E0]'" class="p-2 cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
                                             <path
                                                 d="M19 11V5H5V11H19ZM19 13H5V19H19V13ZM4 3H20C20.2652 3 20.5196 3.10536 20.7071 3.29289C20.8946 3.48043 21 3.73478 21 4V20C21 20.2652 20.8946 20.5196 20.7071 20.7071C20.5196 20.8946 20.2652 21 20 21H4C3.73478 21 3.48043 20.8946 3.29289 20.7071C3.10536 20.5196 3 20.2652 3 20V4C3 3.73478 3.10536 3.48043 3.29289 3.29289C3.48043 3.10536 3.73478 3 4 3Z"
                                                 :fill="changeLayouts ? '#09121F' : '#7EC600'" />
                                         </svg>
                                     </div>
-                                    <div @click="changeGridTemplate" :class="changeLayouts ? 'bg-[#EFF8E0]' : 'bg-white'"
+                                    <div @click="changeGridTemplate"
+                                        :class="changeLayouts ? 'bg-[#EFF8E0]' : 'bg-white'"
                                         class=" p-2 flex item-center justify-center cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
                                             <path
                                                 d="M21 3C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V20C22 20.2652 21.8946 20.5196 21.7071 20.7071C21.5196 20.8946 21.2652 21 21 21H3C2.73478 21 2.48043 20.8946 2.29289 20.7071C2.10536 20.5196 2 20.2652 2 20V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21ZM11 13H4V19H11V13ZM20 13H13V19H20V13ZM11 5H4V11H11V5ZM20 5H13V11H20V5Z"
                                                 :fill="changeLayouts ? '#7EC600' : '#09121F'" />
@@ -158,40 +77,46 @@
                         </div>
                     </div>
                     <div
-                        :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
+                        :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up p-2 animate-ease-in-out animate-delay-200'">
                         <div v-for="(auction, index) in data" :key="index"
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-                            <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+                            <div class="w-full flex  flex-col md:flex-row  sm:p-0 relative"
+                                :class="changeLayouts ? 'flex-col' : ''">
                                 <p v-if="auction.status == 'completed'"
                                     class="font-semibold fixed left-0 z-50 text-white bg-[#05A54B] rounded-lg ml-2 mt-2 px-4 py-1">
                                     Complete
                                 </p>
-                                <p class="font-semibold fixed left-0 z-50  bg-[#FFFFFF] rounded-lg ml-2 mt-2 px-4 py-1">
+                                <p
+                                    class="font-semibold text-xs px-4  md:text-base fixed left-2 md:left-0 z-50  bg-[#FFFFFF] rounded-lg ml-2 mt-2 md:px-4 md:py-1">
                                     Draft
                                 </p>
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
-                                    :class="changeLayouts ? 'w-full' : 'w-[40%]'">
+                                    :class="changeLayouts ? 'w-full' : 'w-full md:w-[40%] md:h-[250px]  '">
                                     <swiper-slide v-for="(img, index) in auction?.photos" :key="index">
-                                        <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
+                                        <img class="w-full rounded-s-lg  h-full object-cover" :src="bucket + img.url"
+                                            alt="">
                                     </swiper-slide>
-                                    <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
+                                    <div v-if="!auction?.photos" class=" md:absolute w-full h-[250px] top-0 ">
                                         <img class="w-full rounded-s-lg h-full object-cover"
                                             src="../../../assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
-                                <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+                                <div class="w-full flex flex-col md:flex-row justify-between gap-3 "
+                                    :class="changeLayouts ? 'flex-col' : ''">
                                     <div @click="(auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed') && statusModalView.openModal({ isActive: true, data: auction })"
                                         :class="auction.status == 'live' || auction.status == 'bids completed' || auction.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
-                                        class="flex p-5  flex-col gap-3">
+                                        class="flex p-2 md:p-5  flex-col gap-3">
                                         <div>
-                                            <div class="font-bold text-xl">{{ auction?.vehicleDetails?.year }} {{
-                                                auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
-                                            <p class=" text-base">
+                                            <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
+        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}
+                                            </div>
+                                            <p class="text-xs md:text-base">
                                                 {{ auction?.city }}, {{ auction?.province }}
                                             </p>
                                         </div>
-                                        <div class="grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                                        <div class=" hidden md:grid grid-cols-2 gap-1"
+                                            :class="changeLayouts ? 'flex-col' : ''">
                                             <div v-if="auction?.vehicleDetails?.vin" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
@@ -212,7 +137,8 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                                        <div class="hidden md:grid grid-cols-2 gap-1"
+                                            :class="changeLayouts ? 'flex-col' : ''">
                                             <div v-if="auction?.vehicleDetails?.color" class="flex gap-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     viewBox="0 0 16 16" fill="none">
@@ -232,27 +158,29 @@
                                                 <p class="capitalize">{{ auction?.vehicleDetails?.driveTrain }}</p>
                                             </div>
                                         </div>
-                                        <div class="grid grid-cols-2 gap-1 "
+                                        <div class=" flex  items-center md:grid md:grid-cols-2  gap-1 "
                                             :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
                                             <div v-if="auction?.vehicleDetails?.tireCondition"
-                                                class="bg-[#F0F0F0] flex px-5 py-1 gap-3 rounded-lg items-center">
+                                                class="bg-[#F0F0F0] flex px-1 md:px-5 py-1 gap-1 md:gap-3  rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
                                                         d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                                         fill="#0B1107" />
                                                 </svg>
-                                                <p class="capitalize">{{ auction?.vehicleDetails?.tireCondition }}</p>
+                                                <p class=" text-[10px] capitalize">{{
+        auction?.vehicleDetails?.tireCondition }}</p>
                                             </div>
-                                            <div v-if="auction?.vehicleDetails?.rotorCondition"
-                                                class="bg-[#F0F0F0] flex  px-5 py-1  gap-3 rounded-lg items-center">
+                                            <div v-if="auction?.vehicleDetails?.brakeCondition"
+                                                class="bg-[#F0F0F0] flex px-1  md:px-5 py-1  gap-1 md:gap-3 rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
                                                         d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                                         fill="#0B1107" />
                                                 </svg>
-                                                <p class="capitalize">{{ auction?.vehicleDetails?.rotorCondition }}</p>
+                                                <p class=" text-[10px] capitalize">{{
+        auction?.vehicleDetails?.brakeCondition }}</p>
                                             </div>
                                         </div>
                                         <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
@@ -260,25 +188,30 @@
                                             <p>Waiting for verification, can take up to <span> 90 mins</span></p>
                                         </div>
                                     </div>
-                                    <div :class="changeLayouts ? 'w-full' : 'w-[40%] flex flex-col h-full justify-between'"
-                                        class="border-l-2  p-5 border-[#E0E0E0]">
-                                        <div class="flex flex-col gap-4">
+                                    <div :class="changeLayouts ? 'w-full' : 'md:w-[40%] flex flex-col h-full justify-between'"
+                                        class="border-l-2 p-2 md:p-5 border-[#E0E0E0]">
+                                        <div class="flex flex-col gap-2 md:gap-4">
                                             <div class="bg-[#E0E0E0] w-full h-[8px]  rounded-md">
-                                                <div class="w-[70%] bg-[#05A54B] rounded-md h-full"></div>
+                                                <div :style="[auction.percentage ? { 'width': `${auction.percentage}% !important` } : { 'width': '0px' }]"
+                                                    class="  custom-progress rounded-md h-full"></div>
                                             </div>
                                             <div class="flex gap-2 items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-                                                    viewBox="0 0 16 16" fill="none">
+                                                <svg class=" w-5 h-5 md:w-[23px] md:h-[23px]"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
                                                     <path
                                                         d="M7.99967 14.6663C4.31767 14.6663 1.33301 11.6817 1.33301 7.99967C1.33301 4.31767 4.31767 1.33301 7.99967 1.33301C11.6817 1.33301 14.6663 4.31767 14.6663 7.99967C14.6663 11.6817 11.6817 14.6663 7.99967 14.6663ZM7.33501 10.6663L12.0483 5.95234L11.1057 5.00967L7.33501 8.78101L5.44901 6.89501L4.50634 7.83767L7.33501 10.6663Z"
                                                         fill="#05A54B" />
                                                 </svg>
-                                                <p class="text-lg pt-[2px]">75% completed</p>
+                                                <p class=" text-xs md:text-lg pt-[2px]">{{auction.percentage}} %
+                                                    completed</p>
                                             </div>
                                         </div>
-                                        <div v-if="index !== 4" class="flex w-full justify-between gap-4 items-center">
-                                            <button class="btn bg-primary w-full ">Continue to edit</button>
-                                            <button class=" bg-transparent border p-3 rounded-xl border-[#E0E0E0] ">
+                                        <div class="flex w-full justify-between mt-2 gap-2 md:gap-4 items-center">
+                                            <RouterLink
+                                                :to="{ name: 'edit-draft', query: { id: auction._id,progress: auction.percentage} }"
+                                                class="btn bg-primary w-full ">Continue to edit</RouterLink>
+                                            <button
+                                                class=" bg-transparent border p-2 md:p-3 rounded-md md:rounded-xl border-[#E0E0E0] ">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     viewBox="0 0 15 15" fill="none">
                                                     <path
@@ -287,13 +220,13 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <div v-if="index == 4" class="flex w-full justify-between gap-4 items-center">
+                                        <!--  <div v-if="index == 4" class="flex w-full justify-between gap-4 items-center">
                                             <button class="btn bg-primary w-full ">Launch</button>
                                             <button
                                                 class=" w-full bg-transparent border p-3 font-medium rounded-xl border-[#E0E0E0] ">
                                                 Edit
                                             </button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -392,11 +325,18 @@ import 'swiper/css/scrollbar';
 import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalReview } from "@/stores/modalReview";
 import { ModalViewDetails } from "@/stores/modalViewDetails";
+import HeaderOptionesSeller from "../../../components/Header/HeaderOptionesSeller.vue";
+import CreateAution from "../../../components/Cards/CreateAution.vue";
+import CardAutionMobile from "../../../components/Cards/CardAutionMobile.vue";
+import { arrayPhotos } from '../../../utils/packPhotos'
 export default {
 
     components: {
         Swiper,
         SwiperSlide,
+        HeaderOptionesSeller,
+        CreateAution,
+        CardAutionMobile
     },
     setup() {
         const route = useRoute();
@@ -423,35 +363,55 @@ export default {
                 let res = await storeAutions.index()
                 data.value = storeAutions.draft
                 data.value.map((autions, index) => {
+                    let counter = 0;
+                    let progress = 0;
+                    progress = autions.city && counter++
+                    progress = autions.dropOffDate && counter++
+                    progress = autions.keysNumber && counter++
+                    progress = autions.province && counter++
+                    progress = autions.vin && counter++
+                    progress = autions.vehicleStatus.status && counter++
+                    progress = autions.vehicleDetails?.bodyType && counter++
+                    progress = autions.vehicleDetails?.brakeCondition && counter++
+                    progress = autions.vehicleDetails?.brakeReplacement && counter++
+                    progress = autions.vehicleDetails?.color && counter++
+                    progress = autions.vehicleDetails?.cylinder && counter++
+                    progress = autions.vehicleDetails?.doors && counter++
+                    progress = autions.vehicleDetails?.driveTrain && counter++
+                    progress = autions.vehicleDetails?.driverLicense && counter++
+                    progress = autions.vehicleDetails?.make && counter++
+                    progress = autions.vehicleDetails?.model && counter++
+                    progress = autions.vehicleDetails?.odometer && counter++
+                    progress = autions.vehicleDetails?.originalDocument && counter++
+                    progress = autions.vehicleDetails?.suggestedPrice && counter++
+                    progress = autions.vehicleDetails?.tireCondition && counter++
+                    progress = autions.vehicleDetails?.tireReplacement && counter++
+                    progress = autions.vehicleDetails?.transmission && counter++
+                    progress = autions.vehicleDetails?.year && counter++
+                    if (autions.vehicleDetails.exteriorPhotos) {
+                        progress = autions.vehicleDetails.exteriorPhotos.length > 0 && counter + 6
+                        console.log('exteriorPhotos', progress)
+                    }
+                    if (autions.vehicleDetails.interiorPhotos) {
+                        progress = autions.vehicleDetails.interiorPhotos.length > 0 && counter + 6
+                        console.log('interiorPhotos', progress)
+                    }
+                    console.log('progress res.data', progress)
+
+                    let currentValue = progress;
+                    let percentage = (currentValue / 32) * 100
+                    autions.percentage = percentage ? Number(percentage.toFixed(0)) : 25
+                    console.log('autions', autions)
                     const formatter = new Intl.NumberFormat();
                     autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer)
-                    let photos = []
-                    if (autions?.vehicleDetails?.additionalDocuments,
-                        autions?.vehicleDetails?.exteriorPhotos,
-                        autions?.vehicleDetails?.interiorPhotos,
-                        autions?.vehicleDetails?.driverLicense) {
-                        var d = photos.concat(
-                            autions?.vehicleDetails?.additionalDocuments,
-                            autions?.vehicleDetails?.exteriorPhotos,
-                            autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.vehicleDamage,
-                            autions?.vehicleDetails?.driverLicense,
-                            autions?.vehicleDetails?.originalDocument,
-                        );
-                        let resD = d.map((item, i) => {
-                            let name = item.split("/")
-                            let newObjet = {
-                                name: name[2],
-                                url: item
-                            }
-                            return newObjet
-                        })
-                        return autions.photos = resD
+                    let photos = null;
+                    photos = arrayPhotos(autions.vehicleDetails)
+                    if (photos.length > 0) {
+                        autions.photos = photos
                     } else {
-                        return autions.photos = null
+                        photos = null
                     }
                 })
-                console.log('data.value', data.value)
                 loading.value = false
             } catch (error) {
                 loading.value = false
@@ -517,9 +477,3 @@ export default {
     },
 };
 </script>
-
-
-
-
-
-  

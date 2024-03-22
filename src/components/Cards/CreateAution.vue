@@ -8,8 +8,7 @@
             </RouterLink>
             <div>
                 <p class=" font-semibold capitalize ">
-                    <span v-if="data.seller?.firstName"> {{
-                        data.seller?.firstName }}</span> <span v-if="data.seller?.lastName"> {{
+                    <span v-if="data.seller?.firstName"> {{data.seller?.firstName }}</span> <span v-if="data.seller?.lastName"> {{
         data.seller?.lastName
     }}</span>
                 </p>

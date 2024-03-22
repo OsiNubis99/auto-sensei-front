@@ -142,6 +142,14 @@ const routes = [
         }
       },
       {
+        path: "/edit-draft",
+        name: "edit-draft",
+        component: () => import('../views/Dashboard/draft/edit-draft/Main.vue'),
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
         path: "/action-details-seller/:id",
         name: "action-details-seller",
         component: () => import('../views/Dashboard/action-details/Main.vue'),

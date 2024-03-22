@@ -120,8 +120,7 @@
                                     class="font-medium text-sm text-base-black md:text-2xl">
                                     ${{
         autionModal?.bids[0].amount }} </p>
-                                <p v-else-if="autionModal?.vehicleDetails?.basePrice"
-                                    class="font-medium text-base-black 
+                                <p v-else-if="autionModal?.vehicleDetails?.basePrice" class="font-medium text-base-black 
  text-xs md:text-2xl ">${{ auction?.vehicleDetails?.basePrice
                                     }}
                                 </p>
@@ -167,6 +166,7 @@ import CardAutionMobile from '../../../components/Cards/CardAutionMobile.vue'
 import Basic from '../../../components/Loading/Basic.vue'
 import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
 import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
+import { arrayPhotos } from '../../../utils/packPhotos'
 export default {
 
     components: {
@@ -224,31 +224,12 @@ export default {
                     data.value.map((autions, index) => {
                         /*  const formatter = new Intl.NumberFormat();
                          autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer) */
-                        let photos = []
-                        if (autions?.vehicleDetails?.additionalDocuments,
-                            autions?.vehicleDetails?.exteriorPhotos,
-                            autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.driverLicense) {
-                            console.log('entro en if')
-                            var d = photos.concat(
-                                autions?.vehicleDetails?.additionalDocuments,
-                                autions?.vehicleDetails?.exteriorPhotos,
-                                autions?.vehicleDetails?.interiorPhotos,
-                                autions?.vehicleDetails?.vehicleDamage,
-                                autions?.vehicleDetails?.driverLicense,
-                                autions?.vehicleDetails?.originalDocument,
-                            );
-                            let resD = d.map((item, i) => {
-                                let name = item.split("/")
-                                let newObjet = {
-                                    name: name[2],
-                                    url: item
-                                }
-                                return newObjet
-                            })
-                            return autions.photos = resD
+                        let photos = null;
+                        photos = arrayPhotos(autions.vehicleDetails)
+                        if (photos.length > 0) {
+                            autions.photos = photos
                         } else {
-                            return autions.photos = null
+                            photos = null
                         }
                     })
                 }

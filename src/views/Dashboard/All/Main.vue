@@ -172,6 +172,7 @@ import HeaderOptionesSeller from '../../../components/Header/HeaderOptionesSelle
 import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
 import SorBy from '../../../components/Filters/SorBy.vue'
 import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
+import { arrayPhotos } from '../../../utils/packPhotos'
 export default {
 
     components: {
@@ -270,30 +271,12 @@ export default {
                     autions.title = `${autions.vehicleDetails.year} ${autions.vehicleDetails.make} ${autions.vehicleDetails.model}`
                     const formatter = new Intl.NumberFormat();
                     autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer)
-                    let photos = []
-                    if (autions?.vehicleDetails?.additionalDocuments,
-                        autions?.vehicleDetails?.exteriorPhotos,
-                        autions?.vehicleDetails?.interiorPhotos,
-                        autions?.vehicleDetails?.driverLicense) {
-                        var d = photos.concat(
-                            autions?.vehicleDetails?.additionalDocuments,
-                            autions?.vehicleDetails?.exteriorPhotos,
-                            autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.vehicleDamage,
-                            autions?.vehicleDetails?.driverLicense,
-                            autions?.vehicleDetails?.originalDocument,
-                        );
-                        let resD = d.map((item, i) => {
-                            let name = item.split("/")
-                            let newObjet = {
-                                name: name[2],
-                                url: item
-                            }
-                            return newObjet
-                        })
-                        return autions.photos = resD
+                    let photos = null;
+                    photos = arrayPhotos(autions.vehicleDetails)
+                    if (photos.length > 0) {
+                        autions.photos = photos
                     } else {
-                        return autions.photos = null
+                        photos = null
                     }
                 })
                 loading.value = false
@@ -313,7 +296,7 @@ export default {
                 new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
             );
         }
-      
+
         function timeToStart(startDate) {
             if (!startDate) return 0;
             return new Date(startDate) - Date.now();

@@ -325,7 +325,11 @@
                                 <p class="md:text-base font-bold text-sm">Additional Package</p>
                             </div>
                             <div>
-                                <p class="text-[#858585] text-xs md:text-base ">The seller did not include additional
+                                <p v-if="dataDetails?.vehicleDetails?.aditionals"
+                                    class="text-blue-dark text-xs md:text-base ">
+                                    {{ dataDetails?.vehicleDetails?.aditionals }}</p>
+                                <p v-else class="text-[#858585] text-xs md:text-base ">The seller did not include
+                                    additional
                                     package information</p>
                             </div>
 
@@ -487,7 +491,9 @@
                                     </svg>
                                     Auto Bid Active
                                 </button>
-                                <button v-else @click="statusModal.openModal({ active: true, data: dataDetails, from: 'autoBid' })" class="btn w-full bg-base-black flex gap-2 items-center text-primary ">
+                                <button v-else
+                                    @click="statusModal.openModal({ active: true, data: dataDetails, from: 'autoBid' })"
+                                    class="btn w-full bg-base-black flex gap-2 items-center text-primary ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
                                         fill="none">
                                         <path
@@ -609,6 +615,7 @@ import { ModalAutoBid } from '@/stores/modalAutoBid';
 import ModalBidNow from "@/components/Modals/ModalBidNow/ModalBidNow.vue";
 import ModalAutoBidVue from "@/components/Modals/ModalAutoBid/ModalAutoBid.vue";
 import moment from 'moment';
+import {arrayPhotos} from '../../../utils/packPhotos'
 export default {
 
     components: {
@@ -670,53 +677,33 @@ export default {
                 loadingButton.value = false
             }
         }
+       
         const getDataAution = async (id) => {
             loading.value = true
             try {
                 let res = await storeIdAution.getAutionById({ uuid: id })
                 if (res) {
+                    console.log('dataDetails.value', res.data)
                     dataDetails.value = res.data
                     dataDetails.value.bids.map((bit) => {
                         if (bit.participant._id == auth.userData._id) {
                             return dataDetails.value.participate = bit.participant._id == auth.userData._id
                         }
                     })
-
                     const formatter = new Intl.NumberFormat();
                     dataDetails.value.vehicleDetails.odometer = formatter?.format(dataDetails.value.vehicleDetails.odometer)
-                    let photos = []
-                    if (dataDetails.value?.vehicleDetails?.additionalDocuments,
-                        dataDetails.value?.vehicleDetails?.exteriorPhotos,
-                        dataDetails.value?.vehicleDetails?.interiorPhotos,
-                        dataDetails.value?.vehicleDetails?.driverLicense) {
-                        var d = photos.concat(
-                            dataDetails.value?.vehicleDetails?.additionalDocuments,
-                            dataDetails.value?.vehicleDetails?.exteriorPhotos,
-                            dataDetails.value?.vehicleDetails?.interiorPhotos,
-                            dataDetails.value?.vehicleDetails?.vehicleDamage,
-                            dataDetails.value?.vehicleDetails?.driverLicense,
-                            dataDetails.value?.vehicleDetails?.originalDocument,
-                        );
-                        let resD = d.map((item, i) => {
-                            let name = item.split("/")
-                            let newObjet = {
-                                name: name[2],
-                                url: item
-                            }
-                            return newObjet
-                        })
-
-                        dataDetails.value.photos = resD
-                        dataDetails.value.remindList.map((remind, index) => {
-                            if (auth.userData._id == remind._id) {
-                                dataDetails.value.remind = true
-                            }
-                        })
-                        console.log('dataDetails', dataDetails.value)
-
+                    let photos = null;
+                    photos = arrayPhotos(dataDetails.value.vehicleDetails)
+                    if (photos.length > 0) {
+                        dataDetails.value.photos = photos
                     } else {
-                        dataDetails.photos = null
+                        photos = null
                     }
+                    dataDetails.value.remindList.map((remind, index) => {
+                        if (auth.userData._id == remind._id) {
+                            dataDetails.value.remind = true
+                        }
+                    })
                 }
             } catch (error) {
                 loading.value = false
@@ -749,10 +736,10 @@ export default {
             return intlFormat(num);
         }
         onMounted(() => {
-            if(route.params.id){
+            if (route.params.id) {
                 getDataAution(route.params.id)
             }
-           
+
 
         })
         return {

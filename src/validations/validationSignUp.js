@@ -4,9 +4,9 @@ export const createAccount = (form, rol) => {
     let error = {};
 
     if (rol == 'dealers') {
-       /*  if (!form.name) {
-            error.name = 'Required field'
-        } */
+        /*  if (!form.name) {
+             error.name = 'Required field'
+         } */
         if (!form.lastName) {
             error.lastName = 'Required field'
         }
@@ -20,8 +20,8 @@ export const createAccount = (form, rol) => {
         }
         if (!form.password) {
             error.password = 'Required field'
-        } else if (!regexPassword.test(form.password.trim())) {
-            error.password = 'Verify that your password is 8 characters long containing only characters, numeric digits, lower case and capital letters'
+        } else if (form.password.length < 8) {
+            error.password = 'Verify that your password is 8 characters long'
         } else if (!form.confirmPassword) {
             error.confirmPassword = 'Required field'
         } else if (form.password !== form.confirmPassword) {
@@ -38,10 +38,10 @@ export const createAccount = (form, rol) => {
         }
         if (!form.password) {
             error.password = 'Required field'
+        } else if (form.password.length < 8) {
+            error.password = 'Verify that your password is 8 characters long'
         } else if (!form.confirmPassword) {
             error.confirmPassword = 'Required field'
-        } else if (!regexPassword.test(form.password.trim())) {
-            error.password = 'Verify that your password is 8 characters long containing only characters, numeric digits, lower case and capital letters'
         } else if (form.password !== form.confirmPassword) {
             error.confirmPassword = 'Passwords do not match'
         }
