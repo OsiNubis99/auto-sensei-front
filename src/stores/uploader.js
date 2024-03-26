@@ -22,7 +22,6 @@ export const useStoreFile = defineStore("useStoreFile", {
                         },
                         onUploadProgress: progressEvent => {
                             this.progressUpload = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-                            console.log('this.progressUpload', this.progressUpload)
 
                         },
                         transformRequest: [function (data, headers) {

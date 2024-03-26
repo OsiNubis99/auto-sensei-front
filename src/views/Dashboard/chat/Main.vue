@@ -1,5 +1,5 @@
 <template>
-    <div class="text-blue-800 md:grid hidden h-custom-chat overflow-hidden relative  grid-cols-9 grid-rows-7 ">
+    <div class="text-blue-800  md:grid hidden h-custom-chat overflow-hidden relative  grid-cols-9 grid-rows-7 ">
         <div v-if="!activateLayout" class="absolute w-[70%] h-full right-0 -z-0  top-0">
             <div class="flex   flex-col top-0 w-full h-full justify-center gap-4 items-center ">
                 <img src="../../../assets/svg/Layer_chat.svg" alt="">
@@ -163,7 +163,7 @@
                     </div>
                 </div>
             </template>
-            <div v-else class="w-full  flex flex-col h-full justify-between">
+            <div v-else class="w-full  flex flex-col h-full relative justify-between">
                 <div class="flex overflow-auto section-message-chat relative h-custom-chat-panel mb-3 flex-col ">
 
                     <template v-if="dataChat?.length > 0" v-for="(msg, index) in dataChat" :key="index">
@@ -175,10 +175,62 @@
                         </div> -->
                         <div v-if="msg.me" class="flex justify-end pt-4 mb-4" :class="index == 0 ? 'pt-5' : ''">
                             <div>
-                                <p
+
+                                <div v-if="msg.typeMedia == 'webp' || msg.typeMedia == 'jpeg' || msg.typeMedia == 'png'"
+                                    class=" shadow-lg rounded-lg flex flex-col gap-2 p-2  ">
+                                    <img class="w-full h-[300px] rounded-lg  object-contain" :src="bucket + msg.url"
+                                        alt="">
+                                    {{ msg.message }}
+                                </div>
+                                <div class=" bg-[#fff]  flex items-start flex-col  " v-else-if="msg.typeMedia == 'pdf'">
+                                    <div @click="downloadItem(msg)"
+                                        class="flex p-2 mb-2 bg-[#eaeaea] items-center cursor-pointer gap-2 shadow-sm hover:shadow-lg transition-all ease-out duration-300 rounded-lg ">
+                                        <div class="bg-[#1F94F0] flex gap-2 items-center rounded-md p-2">
+                                            <svg version="1.1" width="12" height="12" id="Layer_1"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33 32"
+                                                enable-background="new 0 0 33 32" xml:space="preserve" fill="#000000">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                </g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <g>
+                                                        <path fill="#fff"
+                                                            d="M20.219,8.125c0.198-0.193,0.202-0.51,0.009-0.707c-0.193-0.198-0.509-0.201-0.707-0.009L7.325,19.313 c-0.799,0.78-1.239,1.822-1.239,2.934s0.44,2.154,1.239,2.934c1.647,1.608,4.329,1.608,5.976,0l13.892-13.561 c1.313-1.282,2.036-2.993,2.036-4.819c0-1.826-0.723-3.538-2.036-4.819c-2.712-2.647-7.127-2.647-9.838,0L2.764,16.226 C0.981,17.965,0,20.288,0,22.766c0,2.479,0.981,4.802,2.764,6.542c1.842,1.798,4.263,2.698,6.683,2.698 c2.42,0,4.841-0.899,6.683-2.698l16.72-16.321c0.198-0.193,0.202-0.51,0.009-0.707c-0.192-0.198-0.509-0.201-0.707-0.009 l-16.72,16.321c-3.3,3.222-8.67,3.222-11.969,0C1.874,27.042,1,24.973,1,22.767s0.875-4.275,2.462-5.825L18.053,2.698 c2.327-2.272,6.114-2.273,8.442,0c1.118,1.092,1.734,2.549,1.734,4.104c0,1.554-0.616,3.011-1.734,4.103L12.603,24.466 c-1.263,1.232-3.317,1.232-4.58,0c-0.604-0.59-0.938-1.378-0.938-2.218s0.333-1.628,0.938-2.218L20.219,8.125z">
+                                                        </path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                            <a class="hidden" :href="bucket + msg.url" v-text="msg.nameFile" />
+                                            <p class="text-xs text-white">PDF</p>
+                                        </div>
+
+                                        <p>{{ msg.nameFile }}</p>
+                                        <svg fill="#000000" width="25" height="25" viewBox="0 0 1024 1024"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                            </g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M512 666.5L367.2 521.7l36.2-36.2 83 83V256h51.2v312.5l83-83 36.2 36.2L512 666.5zm-204.8 50.3V768h409.6v-51.2H307.2z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </div>
+
+                                    <div class="w-full text-end flex justify-end items-end">
+                                        <p> {{ msg.message }}</p>
+
+                                    </div>
+                                </div>
+                                <p v-else
                                     class=" py-3 px-4 bg-[#1F94F0] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                                     {{ msg.message }}
                                 </p>
+
                                 <div class="flex items-center w-full justify-end gap-1">
                                     <p class=" capitalize text-[12px]  py-2"> {{ msg.createdAt }}</p>
                                     <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -214,30 +266,124 @@
                     </div> -->
                 </div>
                 <div :class="termins && listChat.length === 0 ? 'bg-[#A3A3A3] pointer-events-none ' : ''"
-                    class="p-5 pt-0 mb-2 border flex gap-3 flex-col shadow-xl   rounded-lg border-[#E0E0E0]">
-                    <input v-model="textForm" v-on:keyup.enter="sendMessage" 
-                        class="w-full input-shat bg-transparent  mt-5 rounded-xl focus:outline-none  focus:ring-0 "
-                        type="text" placeholder="type your message here..." />
+                    class="p-5 pt-0  absolute bottom-0 h-fit w-full bg-white  mb-2 border flex gap-3 flex-col shadow-xl   rounded-lg border-[#E0E0E0]">
+                    <div>
+                        <div v-if="form?.preview" class="w-[400px] relative mt-5 shadow-xl h-[400px]">
+                            <img :class="porcertanje > 0 ? ' blur-sm transition-all ease-out duration-300 ' : 'transition-all ease-out duration-300 ' "
+                                class="w-full  h-full rounded-lg object-cover " :src="form?.preview" alt="">
+                            <div v-if="porcertanje > 0"
+                                class=" absolute left-0 top-0 flex justify-center items-center w-full h-full  ">
+                                <div class="card">
+                                    <div class="percent">
+                                        <svg>
+                                            <circle cx="105" cy="105" r="100"></circle>
+                                            <circle cx="105" cy="105" r="100" ref="circle"></circle>
+                                        </svg>
+                                        <div class="card-img number">
+                                            <p  v-if="porcertanje == 100">Upload...</p>
+                                            <h3 v-else>
+                                                {{ porcertanje }}%
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="form.docuemnt"
+                            class="bg-white flex flex-col relative items-start gap-2 mt-2 w-fit py-2 px-4 shadow-xl rounded-lg">
+                            <div class="flex items-center">
+                                <div>
+                                    <svg viewBox="0 0 1024 1024" width="24" height="24" ass="icon" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M719.8 651.8m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z"
+                                                fill="#42ff4f">
+                                            </path>
+                                            <path
+                                                d="M512.1 64H172v896h680V385.6L512.1 64z m278.8 324.3h-280v-265l280 265zM808 916H216V108h278.6l0.2 0.2v296.2h312.9l0.2 0.2V916z"
+                                                fill="#000000"></path>
+                                            <path d="M280.5 530h325.9v16H280.5z" fill="#000000"></path>
+                                            <path d="M639.5 530h90.2v16h-90.2z" fill="#42ff4f"></path>
+                                            <path d="M403.5 641.8h277v16h-277z" fill="#000000"></path>
+                                            <path d="M280.6 641.8h91.2v16h-91.2z" fill="#42ff4f"></path>
+                                            <path d="M279.9 753.7h326.5v16H279.9z" fill="#000000"></path>
+                                            <path d="M655.8 753.7h73.9v16h-73.9z" fill="#42ff4f"></path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center gap-2 ">
+                                    <p class="text-[#727272]">File:
+                                        <span class="text-[#000] font-medium lowercase ">
+                                            {{ form.docuemnt.name }}
+                                        </span>
+                                    </p>
+                                    <p class="text-[#727272]">Size:
+                                        <span class="text-[#000] font-medium lowercase ">
+                                            {{ form.docuemnt.mb }}Mb
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div v-if="loadingFile" class=" h-2 w-full flex justify-center items-center   ">
+
+                                <p class="text-[10px] text-center">upload...</p>
+                                <!--  <p v-else-if="!loadingFile && porcertanje == 100" class="text-[10px] ">{{ porcertanje }}%
+                                </p> -->
+                            </div>
+
+
+                        </div>
+                        <input v-model="textForm" v-on:keyup.enter="sendMessage"
+                            class="w-full input-shat bg-transparent  mt-5 rounded-xl focus:outline-none  focus:ring-0 "
+                            type="text" placeholder="type your message here..." />
+                    </div>
+
                     <div class="flex justify-between items-center w-full">
                         <div class="flex gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
-                                fill="none">
-                                <path
-                                    d="M17.5 6.66602V17.4935C17.5008 17.603 17.48 17.7115 17.4388 17.8129C17.3976 17.9143 17.3369 18.0066 17.2601 18.0845C17.1832 18.1624 17.0918 18.2244 16.991 18.267C16.8902 18.3096 16.7819 18.3319 16.6725 18.3327H3.3275C3.10818 18.3327 2.89783 18.2456 2.74266 18.0906C2.5875 17.9356 2.50022 17.7253 2.5 17.506V2.49268C2.5 2.04518 2.87417 1.66602 3.335 1.66602H12.4975L17.5 6.66602ZM15.8333 7.49935H11.6667V3.33268H4.16667V16.666H15.8333V7.49935ZM6.66667 5.83268H9.16667V7.49935H6.66667V5.83268ZM6.66667 9.16602H13.3333V10.8327H6.66667V9.16602ZM6.66667 12.4993H13.3333V14.166H6.66667V12.4993Z"
-                                    fill="#858585" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
-                                fill="none">
-                                <path
-                                    d="M17.4998 12.5V15H19.9998V16.6667H17.4998V19.1667H15.8332V16.6667H13.3332V15H15.8332V12.5H17.4998ZM17.5065 2.5C17.9632 2.5 18.3332 2.87083 18.3332 3.3275V10.8333H16.6665V4.16667H3.33317V15.8325L11.6665 7.5L14.1665 10V12.3575L11.6665 9.8575L5.689 15.8333H11.6665V17.5H2.49317C2.27385 17.4998 2.06358 17.4125 1.90858 17.2573C1.75357 17.1022 1.6665 16.8918 1.6665 16.6725V3.3275C1.66803 3.10865 1.75559 2.89918 1.91026 2.74435C2.06494 2.58951 2.27432 2.50175 2.49317 2.5H17.5065ZM6.6665 5.83333C7.10853 5.83333 7.53245 6.00893 7.84502 6.32149C8.15758 6.63405 8.33317 7.05797 8.33317 7.5C8.33317 7.94203 8.15758 8.36595 7.84502 8.67851C7.53245 8.99107 7.10853 9.16667 6.6665 9.16667C6.22448 9.16667 5.80055 8.99107 5.48799 8.67851C5.17543 8.36595 4.99984 7.94203 4.99984 7.5C4.99984 7.05797 5.17543 6.63405 5.48799 6.32149C5.80055 6.00893 6.22448 5.83333 6.6665 5.83333Z"
-                                    fill="#858585" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
-                                fill="none">
-                                <path
-                                    d="M9.99984 18.3327C5.39734 18.3327 1.6665 14.6018 1.6665 9.99935C1.6665 5.39685 5.39734 1.66602 9.99984 1.66602C14.6023 1.66602 18.3332 5.39685 18.3332 9.99935C18.3332 14.6018 14.6023 18.3327 9.99984 18.3327ZM9.99984 16.666C11.7679 16.666 13.4636 15.9636 14.7139 14.7134C15.9641 13.4632 16.6665 11.7675 16.6665 9.99935C16.6665 8.23124 15.9641 6.53555 14.7139 5.2853C13.4636 4.03506 11.7679 3.33268 9.99984 3.33268C8.23173 3.33268 6.53604 4.03506 5.28579 5.2853C4.03555 6.53555 3.33317 8.23124 3.33317 9.99935C3.33317 11.7675 4.03555 13.4632 5.28579 14.7134C6.53604 15.9636 8.23173 16.666 9.99984 16.666ZM5.83317 10.8327H7.49984C7.49984 11.4957 7.76323 12.1316 8.23207 12.6005C8.70091 13.0693 9.3368 13.3327 9.99984 13.3327C10.6629 13.3327 11.2988 13.0693 11.7676 12.6005C12.2364 12.1316 12.4998 11.4957 12.4998 10.8327H14.1665C14.1665 11.9378 13.7275 12.9976 12.9461 13.779C12.1647 14.5604 11.1049 14.9993 9.99984 14.9993C8.89477 14.9993 7.83496 14.5604 7.05356 13.779C6.27216 12.9976 5.83317 11.9378 5.83317 10.8327ZM6.6665 9.16602C6.33498 9.16602 6.01704 9.03432 5.78262 8.7999C5.5482 8.56548 5.4165 8.24754 5.4165 7.91602C5.4165 7.5845 5.5482 7.26655 5.78262 7.03213C6.01704 6.79771 6.33498 6.66602 6.6665 6.66602C6.99802 6.66602 7.31597 6.79771 7.55039 7.03213C7.78481 7.26655 7.9165 7.5845 7.9165 7.91602C7.9165 8.24754 7.78481 8.56548 7.55039 8.7999C7.31597 9.03432 6.99802 9.16602 6.6665 9.16602ZM13.3332 9.16602C13.0017 9.16602 12.6837 9.03432 12.4493 8.7999C12.2149 8.56548 12.0832 8.24754 12.0832 7.91602C12.0832 7.5845 12.2149 7.26655 12.4493 7.03213C12.6837 6.79771 13.0017 6.66602 13.3332 6.66602C13.6647 6.66602 13.9826 6.79771 14.2171 7.03213C14.4515 7.26655 14.5832 7.5845 14.5832 7.91602C14.5832 8.24754 14.4515 8.56548 14.2171 8.7999C13.9826 9.03432 13.6647 9.16602 13.3332 9.16602Z"
-                                    fill="#858585" />
-                            </svg>
+
+                            <div>
+                                <label>
+                                    <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20"
+                                        height="20" viewBox="0 0 20 20" fill="none">
+                                        <path
+                                            d="M17.5 6.66602V17.4935C17.5008 17.603 17.48 17.7115 17.4388 17.8129C17.3976 17.9143 17.3369 18.0066 17.2601 18.0845C17.1832 18.1624 17.0918 18.2244 16.991 18.267C16.8902 18.3096 16.7819 18.3319 16.6725 18.3327H3.3275C3.10818 18.3327 2.89783 18.2456 2.74266 18.0906C2.5875 17.9356 2.50022 17.7253 2.5 17.506V2.49268C2.5 2.04518 2.87417 1.66602 3.335 1.66602H12.4975L17.5 6.66602ZM15.8333 7.49935H11.6667V3.33268H4.16667V16.666H15.8333V7.49935ZM6.66667 5.83268H9.16667V7.49935H6.66667V5.83268ZM6.66667 9.16602H13.3333V10.8327H6.66667V9.16602ZM6.66667 12.4993H13.3333V14.166H6.66667V12.4993Z"
+                                            fill="#858585" />
+                                    </svg>
+                                    <input type="file" accept=".pdf,.docx,.odt,.rtf,.epub" @change="previewDocument"
+                                        class="hidden">
+
+                                </label>
+
+                            </div>
+                            <div>
+                                <label>
+                                    <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20"
+                                        height="20" viewBox="0 0 20 20" fill="none">
+                                        <path
+                                            d="M17.4998 12.5V15H19.9998V16.6667H17.4998V19.1667H15.8332V16.6667H13.3332V15H15.8332V12.5H17.4998ZM17.5065 2.5C17.9632 2.5 18.3332 2.87083 18.3332 3.3275V10.8333H16.6665V4.16667H3.33317V15.8325L11.6665 7.5L14.1665 10V12.3575L11.6665 9.8575L5.689 15.8333H11.6665V17.5H2.49317C2.27385 17.4998 2.06358 17.4125 1.90858 17.2573C1.75357 17.1022 1.6665 16.8918 1.6665 16.6725V3.3275C1.66803 3.10865 1.75559 2.89918 1.91026 2.74435C2.06494 2.58951 2.27432 2.50175 2.49317 2.5H17.5065ZM6.6665 5.83333C7.10853 5.83333 7.53245 6.00893 7.84502 6.32149C8.15758 6.63405 8.33317 7.05797 8.33317 7.5C8.33317 7.94203 8.15758 8.36595 7.84502 8.67851C7.53245 8.99107 7.10853 9.16667 6.6665 9.16667C6.22448 9.16667 5.80055 8.99107 5.48799 8.67851C5.17543 8.36595 4.99984 7.94203 4.99984 7.5C4.99984 7.05797 5.17543 6.63405 5.48799 6.32149C5.80055 6.00893 6.22448 5.83333 6.6665 5.83333Z"
+                                            fill="#858585" />
+                                    </svg>
+                                    <input type="file" accept="image/png,image/jpeg" @change="previewImage"
+                                        class="hidden">
+                                </label>
+
+                            </div>
+                            <div class="relative z-50">
+                                <svg @click="showEmoji" class="cursor-pointer" xmlns="http://www.w3.org/2000/svg"
+                                    width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path
+                                        d="M9.99984 18.3327C5.39734 18.3327 1.6665 14.6018 1.6665 9.99935C1.6665 5.39685 5.39734 1.66602 9.99984 1.66602C14.6023 1.66602 18.3332 5.39685 18.3332 9.99935C18.3332 14.6018 14.6023 18.3327 9.99984 18.3327ZM9.99984 16.666C11.7679 16.666 13.4636 15.9636 14.7139 14.7134C15.9641 13.4632 16.6665 11.7675 16.6665 9.99935C16.6665 8.23124 15.9641 6.53555 14.7139 5.2853C13.4636 4.03506 11.7679 3.33268 9.99984 3.33268C8.23173 3.33268 6.53604 4.03506 5.28579 5.2853C4.03555 6.53555 3.33317 8.23124 3.33317 9.99935C3.33317 11.7675 4.03555 13.4632 5.28579 14.7134C6.53604 15.9636 8.23173 16.666 9.99984 16.666ZM5.83317 10.8327H7.49984C7.49984 11.4957 7.76323 12.1316 8.23207 12.6005C8.70091 13.0693 9.3368 13.3327 9.99984 13.3327C10.6629 13.3327 11.2988 13.0693 11.7676 12.6005C12.2364 12.1316 12.4998 11.4957 12.4998 10.8327H14.1665C14.1665 11.9378 13.7275 12.9976 12.9461 13.779C12.1647 14.5604 11.1049 14.9993 9.99984 14.9993C8.89477 14.9993 7.83496 14.5604 7.05356 13.779C6.27216 12.9976 5.83317 11.9378 5.83317 10.8327ZM6.6665 9.16602C6.33498 9.16602 6.01704 9.03432 5.78262 8.7999C5.5482 8.56548 5.4165 8.24754 5.4165 7.91602C5.4165 7.5845 5.5482 7.26655 5.78262 7.03213C6.01704 6.79771 6.33498 6.66602 6.6665 6.66602C6.99802 6.66602 7.31597 6.79771 7.55039 7.03213C7.78481 7.26655 7.9165 7.5845 7.9165 7.91602C7.9165 8.24754 7.78481 8.56548 7.55039 8.7999C7.31597 9.03432 6.99802 9.16602 6.6665 9.16602ZM13.3332 9.16602C13.0017 9.16602 12.6837 9.03432 12.4493 8.7999C12.2149 8.56548 12.0832 8.24754 12.0832 7.91602C12.0832 7.5845 12.2149 7.26655 12.4493 7.03213C12.6837 6.79771 13.0017 6.66602 13.3332 6.66602C13.6647 6.66602 13.9826 6.79771 14.2171 7.03213C14.4515 7.26655 14.5832 7.5845 14.5832 7.91602C14.5832 8.24754 14.4515 8.56548 14.2171 8.7999C13.9826 9.03432 13.6647 9.16602 13.3332 9.16602Z"
+                                        fill="#858585" />
+                                </svg>
+                                <EmojiPicker class="absolute -top-[300px]" v-if="showModalEmoji" :native="true"
+                                    @select="onSelectEmoji" />
+                            </div>
+
                         </div>
                         <div>
                             <svg @click="sendMessage" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -567,7 +713,7 @@
         </div>
         <div class="row-span-5  col-span-2 border-r-2 border-t-[1px] border-[#E0E0E0] ">
             <div v-if="loadingUser" class="chat">
-                <div class="flex " v-for="(n, index) in 20" :key="index">
+                <div class="flex " v-for="( n, index ) in  20 " :key="index">
                     <figure class="chat-avatar loading"></figure>
                     <div class="chat-content">
                         <div class="chat-text--small loading"></div>
@@ -577,7 +723,7 @@
             </div>
 
             <template v-else>
-                <template v-if="dataTableSearch.length > 0" v-for="(user, indexx) in dataTableSearch" :key="indexx">
+                <template v-if="dataTableSearch.length > 0" v-for="( user, indexx ) in  dataTableSearch " :key="indexx">
                     <RouterLink
                         :to="{ name: auth?.userData.type == 1 ? 'inbox-seller' : 'inbox-dealer', query: { id: user.auction._id + '-' + user.participant._id } }"
                         @click="getMessages(user, indexx, user.auction._id + '-' + user.participant._id, 'mobil')"
@@ -668,7 +814,7 @@
         </div>
         <div style="overscroll-behavior: none;">
             <div class="mt-8 mb-[120px]">
-                <template v-if="dataChat?.length > 0" v-for="(msg, index) in dataChat" :key="index">
+                <template v-if="dataChat?.length > 0" v-for="( msg, index ) in  dataChat " :key="index">
                     <div v-if="msg.me" class="clearfix">
                         <div class="bg-[#1F94F0] text-white w-3/4 mx-2 my-1 p-2 rounded-lg text-xs">
                             <p> {{ msg.message }}</p>
@@ -712,7 +858,7 @@
             </div>
             <div :class="termins && listChat.length === 0 ? 'bg-[#A3A3A3] pointer-events-none ' : ''"
                 class="p-2 pt-0  border flex gap-3 flex-col w-full shadow-xl bg-white  border-[#E0E0E0]">
-                <input v-model="textForm" v-on:keyup.enter="sendMessage" 
+                <input v-model="textForm" v-on:keyup.enter="sendMessage"
                     class="w-full input-shat bg-transparent   rounded-xl focus:outline-none  focus:ring-0 " type="text"
                     placeholder="type your message here..." />
                 <div class="flex justify-between items-center w-full">
@@ -722,6 +868,10 @@
                                 d="M17.5 6.66602V17.4935C17.5008 17.603 17.48 17.7115 17.4388 17.8129C17.3976 17.9143 17.3369 18.0066 17.2601 18.0845C17.1832 18.1624 17.0918 18.2244 16.991 18.267C16.8902 18.3096 16.7819 18.3319 16.6725 18.3327H3.3275C3.10818 18.3327 2.89783 18.2456 2.74266 18.0906C2.5875 17.9356 2.50022 17.7253 2.5 17.506V2.49268C2.5 2.04518 2.87417 1.66602 3.335 1.66602H12.4975L17.5 6.66602ZM15.8333 7.49935H11.6667V3.33268H4.16667V16.666H15.8333V7.49935ZM6.66667 5.83268H9.16667V7.49935H6.66667V5.83268ZM6.66667 9.16602H13.3333V10.8327H6.66667V9.16602ZM6.66667 12.4993H13.3333V14.166H6.66667V12.4993Z"
                                 fill="#858585" />
                         </svg>
+                        <p>HOLA
+                            <EmojiPicker :native="true" @select="onSelectEmoji" />
+                        </p>
+
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path
                                 d="M17.4998 12.5V15H19.9998V16.6667H17.4998V19.1667H15.8332V16.6667H13.3332V15H15.8332V12.5H17.4998ZM17.5065 2.5C17.9632 2.5 18.3332 2.87083 18.3332 3.3275V10.8333H16.6665V4.16667H3.33317V15.8325L11.6665 7.5L14.1665 10V12.3575L11.6665 9.8575L5.689 15.8333H11.6665V17.5H2.49317C2.27385 17.4998 2.06358 17.4125 1.90858 17.2573C1.75357 17.1022 1.6665 16.8918 1.6665 16.6725V3.3275C1.66803 3.10865 1.75559 2.89918 1.91026 2.74435C2.06494 2.58951 2.27432 2.50175 2.49317 2.5H17.5065ZM6.6665 5.83333C7.10853 5.83333 7.53245 6.00893 7.84502 6.32149C8.15758 6.63405 8.33317 7.05797 8.33317 7.5C8.33317 7.94203 8.15758 8.36595 7.84502 8.67851C7.53245 8.99107 7.10853 9.16667 6.6665 9.16667C6.22448 9.16667 5.80055 8.99107 5.48799 8.67851C5.17543 8.36595 4.99984 7.94203 4.99984 7.5C4.99984 7.05797 5.17543 6.63405 5.48799 6.32149C5.80055 6.00893 6.22448 5.83333 6.6665 5.83333Z"
@@ -773,10 +923,14 @@ import { toast } from "vue3-toastify";
 import { useAuthStore } from "@/stores/auth";
 import { useAuctionStore } from "@/stores/auctions";
 import CurrencyInput from "../../../components/Inputs/CurrencyInput.vue";
+import EmojiPicker from 'vue3-emoji-picker'
+import { useStoreFile } from "@/stores/uploader";
+import 'vue3-emoji-picker/css'
 export default {
 
     components: {
-        CurrencyInput
+        CurrencyInput,
+        EmojiPicker
     },
     setup() {
         const router = useRouter()
@@ -788,6 +942,7 @@ export default {
         const searchat = ref('')
         const textForm = ref('')
         const loading = ref(false)
+        const storeFile = useStoreFile()
         const loadingUser = ref(false)
         const termins = ref(false)
         const storeIdAution = useAuctionStore()
@@ -801,7 +956,88 @@ export default {
         const auth = useAuthStore()
         const showModeMobil = ref(false)
         const socketChat = auth.socketChat
+        const powerValue = ref(computed(() => { return storeFile.progressUpload }))
         const isModal = ref(false)
+        const showModalEmoji = ref(false)
+        const loadingFile = ref(false)
+        const circle = ref(null)
+        const porcertanje = ref(0)
+        const form = ref({
+            img: null,
+            preview: null,
+            docuemnt: null,
+            previewDocuemnt: null,
+        })
+        watch(powerValue, async (newQuestion, oldQuestion) => {
+            console.log('ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+            if (newQuestion) {
+                if (circle.value) {
+                    circle.value.style.cssText = ` --percent: ${newQuestion}`;
+                }
+
+            }
+
+            porcertanje.value = newQuestion
+        })
+        const showEmoji = () => {
+            showModalEmoji.value = true
+        }
+
+        const onSelectEmoji = (emoji) => {
+            console.log(emoji)
+            textForm.value = textForm.value ? `${textForm.value + emoji.i}` : emoji.i
+            showModalEmoji.value = false
+            /*
+              // result
+              { 
+                  i: "😚", 
+                  n: ["kissing face"], 
+                  r: "1f61a", // with skin tone
+                  t: "neutral", // skin tone
+                  u: "1f61a" // without tone
+              }
+              */
+        }
+        const previewDocument = (event) => {
+
+            form.value.img = null;
+            form.value.preview = null;
+            var input = event.target;
+            var maxfilesize = 1024 * 1024  // 1 Mb
+            var filesize = input.files[0].size
+            let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
+            if (input.files) {
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    form.value.previewDocuemnt = e.target.result;
+                }
+
+                form.value.docuemnt = input.files[0];
+                form.value.docuemnt.mb = convertion
+                reader.readAsDataURL(input.files[0]);
+                console.log('form.value', form.value)
+                console.log('form.value.docuemnt ', form.value.docuemnt)
+                event.target.value = ''
+            }
+        }
+        const previewImage = (event) => {
+            form.value.docuemnt = null;
+            form.value.previewDocuemnt = null;
+            var input = event.target;
+            var maxfilesize = 1024 * 1024  // 1 Mb
+            var filesize = input.files[0].size
+            let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
+            if (input.files) {
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    form.value.preview = e.target.result;
+                }
+                form.value.img = input.files[0];
+                form.value.img.mb = convertion
+                reader.readAsDataURL(input.files[0]);
+            }
+            event.target.value = ''
+        }
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
             return (
@@ -826,22 +1062,42 @@ export default {
             });
 
         }
-        const sendMessage = (params) => {
-            if (!textForm.value) {
-                toast("Campos Requerido", {
-                    type: "error",
+        const sendMessage = async (params) => {
+            /*  if (!textForm.value) {
+                 toast("Campos Requerido", {
+                     type: "error",
+                 });
+                 return ``
+             } */
+            loadingFile.value = true
+            let file = null;
+            file = form.value.img ? form.value.img : form.value.docuemnt
+            console.log('file', file)
+            try {
+                let resFile = file && await storeFile.uploaderFile({ file: file, location: form.value.img ? 'chat' : `chat/${file?.name}` })
+                const emoji = textForm.value
+                const encodeemoji = encodeURIComponent(emoji)
+                const dataSend = {
+                    chatId: route.query.id,
+                    message: encodeemoji ? encodeemoji : '',
+                    url: resFile?.data ? resFile?.data : null
+                };
+                socketChat?.emit("createMessage", dataSend, (data) => {
+                    console.log('data', data)
+                    textForm.value = '';
+                    loadingFile.value = false;
+                    form.value.img = null;
+                    form.value.preview = null;
+                    form.value.docuemnt = null;
+                    form.value.previewDocuemnt = null;
+                    porcertanje.value = 0
                 });
-                return
+
+            } catch (error) {
+                console.log('error', error)
+
             }
-            const emoji = textForm.value
-            const encodeemoji = encodeURIComponent(emoji)
-            const dataSend = {
-                chatId: route.query.id,
-                message: encodeemoji
-            };
-            socketChat?.emit("createMessage", dataSend, (data) => {
-                textForm.value = ''
-            });
+
         }
         const backChat = () => {
             showModeMobil.value = false
@@ -849,6 +1105,11 @@ export default {
         const getMessages = (userF, index, id, screen) => {
             console.log('screen', screen)/* 
             listChat.value = [] */
+            textForm.value = '';
+            form.value.docuemnt = null;
+            form.value.previewDocuemnt = null;
+            form.value.img = null;
+            form.value.preview = null;
             if (screen === 'mobil') {
                 showModeMobil.value = true
             } else {
@@ -864,15 +1125,19 @@ export default {
                 chatId: id ? id : route.query.id,
             };
             socketChat?.emit("getMessages", dataGet, (response) => {
-                console.log('response', response)
+                console.log('PEPITOOOOOOOO', response)
                 storeAution.value = response.auction
                 userFriend.value = response.participant
                 listChat.value = response.messages
                 listChat.value.map((chat, index) => {
                     let today = moment(new Date()).format('dddd')
                     let res = moment(chat.createdAt).format('dddd')
-                    chat.today = res === today
-                    chat.day = res
+                    chat.today = res === today;
+                    chat.day = res;
+                    let resName = chat?.url?.split("/")
+                    chat.nameFile = resName ? resName[2] : null;
+                    chat.typeMedia = chat?.url ? chat?.url?.split("?")[0]?.split("#")[0]?.split('.')?.pop() : null;
+
 
                 })
                 response.messages.map((msg) => {
@@ -963,6 +1228,27 @@ export default {
             modalFinalBit.value = false
 
         }
+        const downloadItem = ({ url, nameFile }) => {
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'file.png'); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+            /*   axios.get(url, { responseType: 'blob' })
+                  .then(response => {
+                      const blob = new Blob([response.data], { type: 'application/pdf' })
+                      const link = document.createElement('a')
+                      link.href = URL.createObjectURL(blob)
+                      link.download = nameFile
+                      link.click()
+                      URL.revokeObjectURL(link.href)
+                  }).catch(console.error) */
+        }
+        const example = () => {
+            console.log('circle', circle.value.style)
+            /*     circle.value.style.strokeWidth = 50 */
+
+        }
         onMounted(async () => {
             auth.authProfile().then(async (res) => {
                 if (res.data) {
@@ -1016,8 +1302,19 @@ export default {
             currencyBit,
             errorCurrencyBit,
             showModeMobil,
+            onSelectEmoji,
             backChat,
-            isModal
+            previewImage,
+            previewDocument,
+            form,
+            isModal,
+            showEmoji,
+            showModalEmoji,
+            porcertanje,
+            loadingFile,
+            downloadItem,
+            circle,
+            example
         };
     },
 };

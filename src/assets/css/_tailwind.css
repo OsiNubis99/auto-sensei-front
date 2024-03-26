@@ -1116,6 +1116,88 @@ input.check-toggle-round-flat:checked+label:after {
     padding-top: 30px;
 }
 
+.card .percent {
+    position: relative;
+}
+
+.card svg {
+    position: relative;
+    width: 210px;
+    height: 210px;
+    transform: rotate(-90deg);
+}
+
+.card svg circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 10;
+    stroke-linecap: round;
+}
+
+.card svg circle:last-of-type {
+    stroke-dasharray: 625px;
+    stroke-dashoffset: calc(625px - (625px * var(--percent)) / 100);
+    stroke: #3498db;
+}
+
+.card .number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.card .number h3{
+    font-weight: 600;
+    color: white;
+}
+.number {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.number div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.number div h3 {
+    font-weight: 700;
+    font-size: 2rem;
+    color: white;
+}
+
+.number p {
+    font-weight: 700;
+    font-size: 12px;
+    color: white;
+    margin-bottom: 0px !important;
+}
+
+.card .number h3 span {
+    font-size: 2rem;
+}
+
+.card .title h2 {
+    margin: 25px 0 0;
+}
+
+.card:nth-child(1) svg circle:last-of-type {
+    stroke: #c1f861;
+}
+
+.card:nth-child(2) svg circle:last-of-type {
+    stroke: #c1f861;
+}
+
 /* a {
     text-decoration: none;
     font-size: 16px;
@@ -1129,24 +1211,6 @@ input.check-toggle-round-flat:checked+label:after {
     color: #9598a7;
 } */
 
-
-.card {
-    margin-top: 100px;
-    padding-bottom: 100px;
-    /*  height : 1950px; */
-    width: 1200px;
-    border-radius: 30px;
-    background-color: #333541;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 20px;
-}
-
-.card .primary-heading {
-    text-align: center;
-    color: white;
-    font-size: 2em;
-}
 
 .paragraph {
     color: rgb(179, 179, 179);

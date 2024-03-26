@@ -212,7 +212,7 @@
                                             <div class="flex h-full py-4 px-6 justify-center gap-4 ">
                                                 <td
                                                     class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
-                                                    <button @click="statusModal.openModal({ isActive: true,data: user})"
+                                                    <button @click="statusModal.openModal({ isActive: true, data: user })"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 16 16" fill="none">
@@ -400,9 +400,11 @@ export default {
             }
         }
         const confirmDealer = async (user) => {
+            console.log('user', user)
 
             try {
                 let res = await store.activeUser(user._id)
+                console.log('HOLAAAAAAA', res)
                 if (res.status) {
                     getUserDealer()
                 }
