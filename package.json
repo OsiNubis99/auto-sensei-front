@@ -21,6 +21,7 @@
     "intl-tel-input": "^19.5.3",
     "moment": "^2.29.4",
     "pinia": "^2.1.7",
+    "pspdfkit": "^2024.2.0",
     "socket.io": "^4.7.4",
     "socket.io-client": "^4.7.4",
     "swiper": "^11.0.4",

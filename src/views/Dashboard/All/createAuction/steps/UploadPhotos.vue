@@ -9,14 +9,15 @@
         </div>
         <div>
             <p class="font-medium text-[14px] md:text-base">Original Documents</p>
-            <p class="text-[10px] md:text-sm text-[#666666]">Such as ownership certificate, financing documents, etc.</p>
+            <p class="text-[10px] md:text-sm text-[#666666]">Such as ownership certificate, financing documents, etc.
+            </p>
         </div>
         <div class="flex w-full md:max-w-[320px] relative  flex-col gap-5 group  ">
             <div v-if="form?.previewDocument"
                 class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                 <div @click="viewPhoto(form.previewDocument)"
                     class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                    <svg   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 16" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 16" fill="none">
                         <path
                             d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                             fill="#1F94F0" />
@@ -30,32 +31,38 @@
                                 fill="#0B1107" />
                         </svg>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'document')" class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'document')" class="hidden">
                 </label>
             </div>
             <div :class="[invalid?.document ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewDocument ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
                 class="border w-[100%] md:w-[320px] flex flex-col gap-4 items-center py-2 md:p-5">
                 <div class="w-full flex justify-center ">
-                    <img v-if="form?.previewDocument" class="w-full h-[160px]  md:h-[190px] object-contain " :src="form?.previewDocument"
-                        alt="">
+                    <img v-if="form?.previewDocument" class="w-full h-[160px]  md:h-[190px] object-contain "
+                        :src="form?.previewDocument" alt="">
                     <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
                         src="../../../../../assets/img/png/exampleDocuemnt.png" alt="">
                 </div>
-                <p v-if="!form?.previewDocument" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of original documents
+                <p v-if="!form?.previewDocument"
+                    class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of original
+                    documents
                     photo <br> use JPG, PNG,
                     or BMP file</p>
             </div>
             <label v-if="!form?.previewDocument"
                 class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                 <div class="flex gap-2 items-center">
-                    <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                        fill="none">
                         <path
                             d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                             fill="#1F94F0" />
                     </svg>
-                    <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                    <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                        Select Image</p>
                 </div>
-                <input type="file" accept="image/*" @change="(event) => previewImage(event, 'document')" class="hidden">
+                <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'document')"
+                    class="hidden">
             </label>
         </div>
         <div>
@@ -66,7 +73,8 @@
                 class="w-full group-hover:bg-[#0000009f] group-hover:flex transition-all duration-500 ease-linear hidden justify-center items-center gap-4  absolute h-full top-0">
                 <div @click="viewPhoto(form.previewDriver)"
                     class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                    <svg   xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                        fill="none">
                         <path
                             d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                             fill="#1F94F0" />
@@ -80,18 +88,21 @@
                                 fill="#0B1107" />
                         </svg>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driver')" class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'driver')" class="hidden">
                 </label>
             </div>
             <div :class="[invalid?.driverDocument ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewDriver ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
                 class="border md:w-[320px]  flex flex-col gap-4 items-center  p-5">
                 <div class="w-full flex justify-center">
-                    <img class="w-full h-[160px]  md:h-[190px] object-contain " v-if="form?.previewDriver" :src="form?.previewDriver"
-                        alt="">
+                    <img class="w-full h-[160px]  md:h-[190px] object-contain " v-if="form?.previewDriver"
+                        :src="form?.previewDriver" alt="">
                     <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
                         src="../../../../../assets/img/png/exampleLicencie.png" alt="">
                 </div>
-                <p v-if="!form?.previewDriver" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drive license photo
+                <p v-if="!form?.previewDriver"
+                    class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drive license
+                    photo
                     <br> use JPG, PNG, or
                     BMP file
                 </p>
@@ -99,14 +110,17 @@
             <label v-if="!form?.previewDriver"
                 class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                 <div class="flex gap-2 items-center">
-                    <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                        fill="none">
                         <path
                             d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                             fill="#1F94F0" />
                     </svg>
-                    <p class="text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                    <p class="text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                        Select Image</p>
                 </div>
-                <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driver')" class="hidden">
+                <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driver')"
+                    class="hidden">
             </label>
         </div>
         <div>
@@ -125,7 +139,8 @@
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewFrontPhoto)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -140,8 +155,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'frontPhoto')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'frontPhoto')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -150,22 +165,26 @@
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
                             src="../../../../../assets/img/png/mainphoto.png" alt="">
                     </div>
-                    <p v-if="!form?.previewFrontPhoto" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front photo
+                    <p v-if="!form?.previewFrontPhoto"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front
+                        photo
                         use JPG, PNG, or BMP file
                     </p>
                 </div>
                 <label v-if="!form?.previewFrontPhoto"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'frontPhoto')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'frontPhoto')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -176,7 +195,8 @@
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewFront)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -191,31 +211,36 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'front')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'front')" class="hidden">
                         </label>
                     </div>
                     <div>
-                        <img class="w-full h-[190px]   object-contain " v-if="form?.previewFront" :src="form?.previewFront"
-                            alt="">
-                        <img v-else class="w-full md:h-[190px] h-[90px] object-contain " src="../../../../../assets/img/png/front.png"
-                            alt="">
+                        <img class="w-full h-[190px]   object-contain " v-if="form?.previewFront"
+                            :src="form?.previewFront" alt="">
+                        <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
+                            src="../../../../../assets/img/png/front.png" alt="">
                     </div>
-                    <p v-if="!form?.previewFront" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front photo use
+                    <p v-if="!form?.previewFront"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front
+                        photo use
                         JPG, PNG, or BMP file
                     </p>
                 </div>
                 <label v-if="!form?.previewFront"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'front')" class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'front')"
+                        class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -226,7 +251,8 @@
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewDriverSide)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -241,8 +267,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driverSide')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'driverSide')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -252,22 +278,26 @@
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
                             src="../../../../../assets/img/png/driverside.png" alt="">
                     </div>
-                    <p v-if="!form?.previewDriverSide" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front photo
+                    <p v-if="!form?.previewDriverSide"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front
+                        photo
                         use JPG, PNG, or BMP file
                     </p>
                 </div>
                 <label v-if="!form?.previewDriverSide"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driverSide')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'driverSide')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -278,7 +308,8 @@
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewBack)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -293,43 +324,48 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'back')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'back')" class="hidden">
                         </label>
                     </div>
                     <div>
-                        <img class="w-full h-[190px]   object-contain " v-if="form?.previewBack" :src="form?.previewBack"
-                            alt="">
-                        <img v-else class="w-full md:h-[190px] h-[90px] object-contain " src="../../../../../assets/img/png/back.png"
-                            alt="">
+                        <img class="w-full h-[190px]   object-contain " v-if="form?.previewBack"
+                            :src="form?.previewBack" alt="">
+                        <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
+                            src="../../../../../assets/img/png/back.png" alt="">
                     </div>
-                    <p v-if="!form?.previewBack" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of back photo use JPG, PNG, or BMP file
+                    <p v-if="!form?.previewBack"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of back photo
+                        use JPG, PNG, or BMP file
                     </p>
                 </div>
                 <label v-if="!form?.previewBack"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center p-3 tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'back')" class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'back')"
+                        class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
                 <p class="font-medium text-sm ">Passenger Side</p>
                 <div class="border flex flex-col gap-4 relative group items-center p-5"
-                :class="[invalid?.passengerSide ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewPassengerSide ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
-                   >
-                    
+                    :class="[invalid?.passengerSide ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewPassengerSide ? '!border-none shadow-lg !p-0 shado-yes-img' : '']">
+
                     <div v-if="form?.previewPassengerSide"
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewPassengerSide)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -344,8 +380,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'passengerSide')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'passengerSide')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -354,33 +390,37 @@
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
                             src="../../../../../assets/img/png/passenger.png" alt="">
                     </div>
-                    <p v-if="!form?.previewPassengerSide" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of passenger side photo use JPG, PNG, or
+                    <p v-if="!form?.previewPassengerSide"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of passenger
+                        side photo use JPG, PNG, or
                         BMP file</p>
                 </div>
-                <label  v-if="!form?.previewPassengerSide"
+                <label v-if="!form?.previewPassengerSide"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'passengerSide')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'passengerSide')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
                 <p class="font-medium text-sm ">Tire and Rim</p>
                 <div class="border flex flex-col gap-4 items-center p-5 group relative"
-                :class="[invalid?.tireAndRim ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewTireAndRim ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
-                   >
+                    :class="[invalid?.tireAndRim ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewTireAndRim ? '!border-none shadow-lg !p-0 shado-yes-img' : '']">
                     <div v-if="form?.previewTireAndRim"
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewTireAndRim)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -395,31 +435,35 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'tireAndRim')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'tireAndRim')" class="hidden">
                         </label>
                     </div>
                     <div>
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewTireAndRim"
                             :src="form?.previewTireAndRim" alt="">
-                        <img v-else class="w-full md:h-[190px] h-[90px] object-contain " src="../../../../../assets/img/png/rin.png"
-                            alt="">
+                        <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
+                            src="../../../../../assets/img/png/rin.png" alt="">
                     </div>
-                    <p v-if="!form?.previewTireAndRim" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of tire and rim photo use JPG, PNG, or BMP
+                    <p v-if="!form?.previewTireAndRim"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of tire and
+                        rim photo use JPG, PNG, or BMP
                         file</p>
                 </div>
                 <label v-if="!form?.previewTireAndRim"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'tireAndRim')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'tireAndRim')" class="hidden">
                 </label>
             </div>
 
@@ -431,13 +475,13 @@
             <div class="flex max-w-xs flex-col gap-2">
                 <p class="font-medium text-sm ">Drivers Display (Odometer)</p>
                 <div class="border flex flex-col gap-4 items-center p-5 group relative"
-                :class="[invalid?.driversDisplay ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewDriversDisplay ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
-                    >
+                    :class="[invalid?.driversDisplay ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewDriversDisplay ? '!border-none shadow-lg !p-0 shado-yes-img' : '']">
                     <div v-if="form?.previewDriversDisplay"
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewDriversDisplay)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -452,8 +496,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driversDisplay')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'driversDisplay')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -462,33 +506,37 @@
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
                             src="../../../../../assets/img/png/tacomentro.png" alt="">
                     </div>
-                    <p v-if="!form?.previewDriversDisplay" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers display photo use JPG, PNG, or
+                    <p v-if="!form?.previewDriversDisplay"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers
+                        display photo use JPG, PNG, or
                         BMP file</p>
                 </div>
                 <label v-if="!form?.previewDriversDisplay"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driversDisplay')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'driversDisplay')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
                 <p class="font-medium text-sm ">Drivers Side</p>
                 <div class="border flex flex-col gap-4 items-center p-5 group relative"
-                :class="[invalid?.driversSide ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewDriversSide ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
-                    >
+                    :class="[invalid?.driversSide ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewDriversSide ? '!border-none shadow-lg !p-0 shado-yes-img' : '']">
                     <div v-if="form?.previewDriversSide"
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewDriversSide)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -503,28 +551,32 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'driversSide')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'driversSide')" class="hidden">
                         </label>
                     </div>
                     <div>
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewDriversSide"
                             :src="form?.previewDriversSide" alt="">
-                        <img v-else class="w-full md:h-[190px] h-[90px] object-contain " src="../../../../../assets/img/png/dentro.png"
-                            alt="">
+                        <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
+                            src="../../../../../assets/img/png/dentro.png" alt="">
                     </div>
-                    <p v-if="!form?.previewDriversSide" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers side photo use JPG, PNG, or BMP
+                    <p v-if="!form?.previewDriversSide"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers
+                        side photo use JPG, PNG, or BMP
                         file</p>
                 </div>
                 <label v-if="!form?.previewDriversSide"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
                     <input type="file" aOccept="image/*" @change="(event) => previewImage(event, 'driversSide')"
                         class="hidden">
@@ -533,13 +585,13 @@
             <div class="flex max-w-xs flex-col gap-2">
                 <p class="font-medium text-sm ">Center Console</p>
                 <div class="border flex flex-col gap-4 items-center group relative p-5"
-                :class="[invalid?.centerConsole ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewCenterConsole ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
-                   >
+                    :class="[invalid?.centerConsole ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewCenterConsole ? '!border-none shadow-lg !p-0 shado-yes-img' : '']">
                     <div v-if="form?.previewCenterConsole"
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewCenterConsole)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -554,8 +606,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'centerConsole')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'centerConsole')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -564,33 +616,37 @@
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
                             src="../../../../../assets/img/png/tavblero.png" alt="">
                     </div>
-                    <p v-if="!form?.previewCenterConsole" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of center console photo use JPG, PNG, or
+                    <p v-if="!form?.previewCenterConsole"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of center
+                        console photo use JPG, PNG, or
                         BMP file</p>
                 </div>
                 <label v-if="!form?.previewCenterConsole"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'centerConsole')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'centerConsole')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
                 <p class="font-medium text-sm ">Rear Seats</p>
                 <div class="border flex flex-col gap-4 items-center p-5 group relative"
-                    :class="[invalid?.rearSeats ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewRearSeats ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
-                    >
+                    :class="[invalid?.rearSeats ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewRearSeats ? '!border-none shadow-lg !p-0 shado-yes-img' : '']">
                     <div v-if="form?.previewRearSeats"
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewRearSeats)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -605,8 +661,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'rearSeats')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'rearSeats')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -615,21 +671,25 @@
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
                             src="../../../../../assets/img/png/asientosatras.png" alt="">
                     </div>
-                    <p  v-if="!form?.previewRearSeats" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers display photo use JPG, PNG, or
+                    <p v-if="!form?.previewRearSeats"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers
+                        display photo use JPG, PNG, or
                         BMP file</p>
                 </div>
-                <label  v-if="!form?.previewRearSeats"
+                <label v-if="!form?.previewRearSeats"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'rearSeats')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'rearSeats')" class="hidden">
                 </label>
             </div>
 
@@ -642,13 +702,13 @@
                 <p class="font-medium text-sm ">Upload Vehicle Damage</p>
                 <p class="text-xs md:text-sm text-[#666666] ">Please upload damages on vehicle if applicable</p>
                 <div class="border flex flex-col gap-4 group relative items-center p-5"
-                :class="[invalid?.vehicleDamage ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewVehicleDamage ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
-                    >
+                    :class="[invalid?.vehicleDamage ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewVehicleDamage ? '!border-none shadow-lg !p-0 shado-yes-img' : '']">
                     <div v-if="form?.previewVehicleDamage"
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewVehicleDamage)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -663,47 +723,53 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'vehicleDamage')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'vehicleDamage')" class="hidden">
                         </label>
                     </div>
                     <div>
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewVehicleDamage"
                             :src="form?.previewVehicleDamage" alt="">
-                        <svg v-else class="w-[100px] h-[100px]" :fill="invalid?.vehicleDamage ? '#ff000075' : '#6d6d6d42'"
+                        <svg v-else class="w-[100px] h-[100px]"
+                            :fill="invalid?.vehicleDamage ? '#ff000075' : '#6d6d6d42'"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path
                                 d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                         </svg>
                     </div>
-                    <p  v-if="!form?.previewVehicleDamage" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Use JPG, PNG or BMP files</p>
+                    <p v-if="!form?.previewVehicleDamage"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Use JPG, PNG or BMP
+                        files</p>
                 </div>
                 <label v-if="!form?.previewVehicleDamage"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'vehicleDamage')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'vehicleDamage')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
                 <p class="font-medium text-sm ">Upload Additional Documents</p>
-                <p class="text-xs md:text-sm text-[#666666] ">Please upload additional documents such as service records if available
+                <p class="text-xs md:text-sm text-[#666666] ">Please upload additional documents such as service records
+                    if available
                 </p>
                 <div class="border flex flex-col gap-4 group relative items-center p-5"
-                :class="[invalid?.additionalDocuments ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewAdditionalDocuments ? '!border-none shadow-lg !p-0 shado-yes-img' : '']"
-                    >
+                    :class="[invalid?.additionalDocuments ? 'border-[#ff000075]' : 'border-[#E0E0E0]', form?.previewAdditionalDocuments ? '!border-none shadow-lg !p-0 shado-yes-img' : '']">
                     <div v-if="form?.previewAdditionalDocuments"
                         class="w-full group-hover:bg-[#0000009f] group-hover:visible flex transition-all duration-200 ease-linear invisible justify-center items-center gap-4  absolute h-full top-0">
                         <div @click="viewPhoto(form.previewAdditionalDocuments)"
                             class="bg-white relative z-[100] cursor-pointer rounded-md p-4 flex justify-center items-center ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12"
+                                fill="none">
                                 <path
                                     d="M7.99978 0C11.5944 0 14.5851 2.58667 15.2124 6C14.5858 9.41333 11.5944 12 7.99978 12C4.40511 12 1.41444 9.41333 0.787109 6C1.41378 2.58667 4.40511 0 7.99978 0ZM7.99978 10.6667C9.35942 10.6664 10.6787 10.2045 11.7417 9.35678C12.8047 8.50901 13.5484 7.32552 13.8511 6C13.5473 4.67554 12.8031 3.49334 11.7402 2.64668C10.6773 1.80003 9.35865 1.33902 7.99978 1.33902C6.64091 1.33902 5.32224 1.80003 4.25936 2.64668C3.19648 3.49334 2.45229 4.67554 2.14844 6C2.45117 7.32552 3.19489 8.50901 4.25787 9.35678C5.32085 10.2045 6.64013 10.6664 7.99978 10.6667ZM7.99978 9C7.20413 9 6.44107 8.68393 5.87846 8.12132C5.31585 7.55871 4.99978 6.79565 4.99978 6C4.99978 5.20435 5.31585 4.44129 5.87846 3.87868C6.44107 3.31607 7.20413 3 7.99978 3C8.79543 3 9.55849 3.31607 10.1211 3.87868C10.6837 4.44129 10.9998 5.20435 10.9998 6C10.9998 6.79565 10.6837 7.55871 10.1211 8.12132C9.55849 8.68393 8.79543 9 7.99978 9ZM7.99978 7.66667C8.4418 7.66667 8.86573 7.49107 9.17829 7.17851C9.49085 6.86595 9.66644 6.44203 9.66644 6C9.66644 5.55797 9.49085 5.13405 9.17829 4.82149C8.86573 4.50893 8.4418 4.33333 7.99978 4.33333C7.55775 4.33333 7.13383 4.50893 6.82127 4.82149C6.5087 5.13405 6.33311 5.55797 6.33311 6C6.33311 6.44203 6.5087 6.86595 6.82127 7.17851C7.13383 7.49107 7.55775 7.66667 7.99978 7.66667Z"
                                     fill="#09121F" />
@@ -718,8 +784,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept="image/*" @change="(event) => previewImage(event, 'additionalDocuments')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'additionalDocuments')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -732,25 +798,30 @@
                                 d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                         </svg>
                     </div>
-                    <p v-if="!form?.previewAdditionalDocuments" class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Use JPG, PNG or BMP files</p>
+                    <p v-if="!form?.previewAdditionalDocuments"
+                        class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Use JPG, PNG or BMP
+                        files</p>
                 </div>
                 <label v-if="!form?.previewAdditionalDocuments"
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Image</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Image</p>
                     </div>
-                    <input type="file" accept="image/*" @change="(event) => previewImage(event, 'additionalDocuments')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'additionalDocuments')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
                 <p class="font-medium text-sm ">360-Degree Vehicle Video</p>
-                <p class="text-xs md:text-sm text-[#666666] ">Users tend to get more for their vehicle with a detailed 30 second video
+                <p class="text-xs md:text-sm text-[#666666] ">Users tend to get more for their vehicle with a detailed
+                    30 second video
                 </p>
                 <div class="border flex flex-col gap-4 items-center p-5"
                     :class="invalid?.vehicleVideo ? 'border-[#ff000075]' : 'border-[#E0E0E0]'">
@@ -770,29 +841,33 @@
 
                         <video v-if="form?.previewVehicleVideo" ref="videoPlayer" muted loop
                             class="w-full h-[190px] object-contain" :src="form?.previewVehicleVideo" @click="paused" />
-                        <svg v-else class="w-[100px] h-[100px]" :fill="invalid?.vehicleVideo ? '#ff000075' : '#6d6d6d42'"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <svg v-else class="w-[100px] h-[100px]"
+                            :fill="invalid?.vehicleVideo ? '#ff000075' : '#6d6d6d42'" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20">
                             <path
                                 d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                         </svg>
                     </div>
                     <div v-if="form?.vehicleVideo?.name" class="flex w-full items-start flex-col justify-start gap-1">
                         <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
-                            form?.vehicleVideo?.mb }}Mb - </p>
+                form?.vehicleVideo?.mb }}Mb - </p>
                         <p class="text-xs font-medium w-[200px] text-[#666] truncate"><strong>Name:</strong>
                             {{ form?.vehicleVideo?.name }}</p>
                     </div>
-                    <p v-else class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Use MP4, MOV video up to 100mb</p>
+                    <p v-else class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Use MP4, MOV
+                        video up to 100mb</p>
                 </div>
                 <label
                     class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
                     <div class="flex gap-2 items-center">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
                             <path
                                 d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
                                 fill="#1F94F0" />
                         </svg>
-                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or Select Video</p>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Video</p>
                     </div>
                     <input type="file" accept="video/mp4, video/mov"
                         @change="(event) => previewImage(event, 'vehicleVideo')" class="hidden">
@@ -898,10 +973,10 @@ export default {
                 } else {
                     var reader = new FileReader();
                     reader.onload = (e) => {
-                        if(typeFile[0] !== 'video'){
+                        if (typeFile[0] !== 'video') {
                             statusModalImage.openModal({ active: true, img: input.files[0], type: string })
                         }
-                       
+
                         switch (string) {
                             case 'document':
                                 form.value.previewDocument = e.target.result;
@@ -1035,9 +1110,3 @@ export default {
     },
 };
 </script>
-
-
-
-
-
-  
