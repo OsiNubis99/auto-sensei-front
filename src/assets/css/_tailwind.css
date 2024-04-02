@@ -1908,4 +1908,16 @@ input.check-toggle-round-flat:checked+label:after {
     .custom-phone #telephone {
         padding-left: 60px !important;
     }
+    .check-background{
+        position: relative;
+        top: 30px;
+    }
+    .check-container {
+        width: 3.25rem;
+        height: 4.5rem;
+    }
+    .check-container .check-background svg {
+        width: 50%;
+        transform: translateY(0);
+    }
 }

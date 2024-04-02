@@ -1,5 +1,5 @@
 <template>
-    <div v-if="loading" class="h-screen-login-loading w-full h-full flex justify-center items-center">
+    <div v-if="isLoading" class="h-screen-login-loading w-full h-full flex justify-center items-center">
         <div>
             <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
                 <div class="animate-bounce">
@@ -16,9 +16,10 @@
             </div>
         </div>
     </div>
-    <div v-else class="flex-1 flex flex-col  justify-between py-12 px-4 h-full sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div class="flex-1 flex flex-col justify-center md:py-12 md:px-4 sm:px-6 h-full lg:flex-none ">
-            <div class="mx-auto w-full ">
+    <div v-else
+        class="flex-1 flex flex-col h-auto  justify-between py-12 px-4  sm:px-6 lg:flex-none  lg:mx-20 2xl:mx-32   2xl:my-0">
+        <div class="flex-1 flex flex-col justify-center md:p-0 md:mb-10 md:mx-4 sm:px-6 h-full lg:flex-none ">
+            <div class="mx-auto  w-full ">
                 <div>
                     <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">Create Your Dealer
                         Account
@@ -78,17 +79,90 @@
                                         class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                             </div>
-                            <div v-if="rol === 'dealers'" class="space-y-1">
-                                <label htmlFor="password" class="block text-sm font-medium text-gray-700">
-                                    Address
-                                </label>
-                                <div class="mt-1">
-                                    <input name="address" v-model="form.address" type="text"
-                                        placeholder="San Fransisco, California"
-                                        :class="invalid?.address ? 'border-error' : 'border-[#F0F0F0]'"
-                                        class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+
+                            <div v-if="rol === 'dealers'">
+                                <div class="space-y-1">
+                                    <p class="block text-sm font-medium text-gray-700">
+                                        Address
+                                    </p>
+                                </div>
+                                <div class="grid grid-cols-1 gap-4  md:grid-cols-3  mt-2 ">
+                                    <div class="space-y-1">
+                                        <label htmlFor="password" class="block text-sm font-medium text-gray-700">
+                                            Line 1
+                                        </label>
+                                        <div class="mt-1">
+                                            <input name="address" v-model="form.linea1" type="text"
+                                                placeholder="San Fransisco, California"
+                                                :class="invalid?.linea1 ? 'border-error' : 'border-[#F0F0F0]'"
+                                                class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label htmlFor="password" class="block text-sm font-medium text-gray-700">
+                                            Line 2
+                                        </label>
+                                        <div class="mt-1">
+                                            <input name="address" v-model="form.linea2" type="text"
+                                                placeholder="San Fransisco, California"
+                                                :class="invalid?.linea2 ? 'border-error' : 'border-[#F0F0F0]'"
+                                                class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label htmlFor="password" class="block text-sm font-medium text-gray-700">
+                                            Zip Code
+                                        </label>
+                                        <div class="mt-1">
+                                            <input name="zipCode" v-model="form.zipCode" type="number"
+                                                placeholder="587469"
+                                                :class="invalid?.zipCode ? 'border-error' : 'border-[#F0F0F0]'"
+                                                class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="flex items-center gap-3" v-if="rol === 'dealers'">
+                                <div class="w-full flex flex-col gap-2 relative">
+                                    <label class=" text-sm md:text-base " for="">Province</label>
+                                    <select v-model="form.province" @change="onChangeGetProvince($event)"
+                                        :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
+                                        class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+
+                                        <option v-if="!form.getState" selected>Laoding city... </option>
+                                        <option v-else selected hidden>Select province</option>
+                                        <template v-for="(state, index) in form.getState" :key="index">
+                                            <option :value="JSON.stringify(state)">{{ state.iso2 }} | {{ state.name }}
+                                            </option>
+                                        </template>
+                                    </select>
+                                    <div v-if="!form.getState"
+                                        class="absolute text-xs md:text-sm text-[#858585] bottom-2 left-4 ">
+                                        Laoding
+                                        province...
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-col gap-2 relative">
+                                    <label class=" text-sm md:text-base " for="">City</label>
+                                    <select v-model="form.city" @change="onChangeGetCity($event)"
+                                        :disabled="loadingCountrys || !form.getCities ? true : false"
+                                        :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'" class=" border text-[#858585] md:p-3  text-gray-900 text-xs
+                                         md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+
+                                        <option v-if="loadingCountrys" selected>Laoding city... </option>
+                                        <option v-else selected hidden>Select city </option>
+                                        <template v-for="(cities, index) in form.getCities" :key="index">
+                                            <option :value="JSON.stringify(cities)">{{ cities.name }}</option>
+                                        </template>
+                                    </select>
+                                    <div v-if="loadingCountrys"
+                                        class="absolute text-sm text-[#858585] bottom-2 left-4 ">
+                                        Laoding
+                                        city...</div>
                                 </div>
                             </div>
+
                             <div v-if="rol == 'sellers'"
                                 class="flex flex-col md:flex-row gap-6 justify-between items-center">
                                 <div class="w-full animate-fade-up  animate-ease-in-out animate-delay-200">
@@ -172,6 +246,7 @@ import { useRouter, useRoute } from 'vue-router'
 import "intl-tel-input/build/css/intlTelInput.css";
 import "intl-tel-input/build/js/intlTelInput.js";
 import intlTelInput from "intl-tel-input";
+import { usePayments } from "@/stores/payments";
 export default {
     props: {
         next: {
@@ -192,6 +267,9 @@ export default {
         const invalid = ref()
         const storeData = stepsSignUp()
         const form = storeData.formAccount
+        const formData = storeData.formData
+        const countrys = usePayments()
+        const loadingCountrys = ref(false)
         const formCreate = storeData.formData
         const token = ref(null)
         const route = useRoute();
@@ -271,6 +349,16 @@ export default {
                 }
                 console.log('formCreate.firtName', formCreate.firtName)
                 console.log('formCreate.lastName', formCreate.lastName)
+                let address = null
+                isLoading.value = true
+                address = {
+                    linea1: form.linea1,
+                    linea2: form.linea2,
+                    zipCode: form.zipCode,
+                    province: JSON.parse(form.province)?.name,
+                    city: JSON.parse(form.city)?.name
+                }
+                console.log('address', address)
                 try {
                     let resCode = await storeUser.getValidation(data)
                     if (resCode.data.status == 'ok') {
@@ -285,7 +373,7 @@ export default {
                             dealerFirsName: formCreate.firtName,
                             dealerLastName: formCreate.lastName,
                             omvic: form.registrationNumber ? form.registrationNumber : null,
-                            address: form.address ? form.address : null,
+                            address: address ? address : null,
                             driverLicense: form.driverLicense ? form.driverLicense : null,
                             validationCode: resCode.data.code
                         }
@@ -293,143 +381,54 @@ export default {
                         console.log('dataSenCode', dataSenCode)
                         props.next()
                     }
+                    isLoading.value = false
                     console.log('resCode', resCode)
                 } catch (error) {
-                    console.log('errro', errro)
+                    toast(error.response.data.message, {
+                        type: "error",
+                        autoClose: 2000,
+                    });
+                    isLoading.value = false
+                    console.log('errro', error)
 
                 }
-                /*  let typeSeller = {
-                     seller: {
-                         picture: form.img ? form.img : null,
-                         firstName: form.firtName,
-                         lastName: form.lastName,
-                         driverLicense: form.driverLicense ? form.driverLicense : null,
-                         phone: idCode ? idCode : null,
-                     }
-                 }
-                 let typeDealer = {
-                     dealer: {
-                         picture: form.img ? form.img : null,
-                         name: form.dealerName,
-                         omvic: form.registrationNumber,
-                         address: form.address,
-                         phone: idCode ? idCode : null
-                     },
-                 }
-                 typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer */
-
-
-                /*  isLoading.value = true
-                 if (form.img || form.driverLicense) {
-                     let resFile = form.img && await storeFile.uploaderFile({ file: form.img, location: 'profile' })
-                     let resLicence = form.driverLicense && await storeFile.uploaderFile({ file: form.driverLicense, location: 'license' })
-                     console.log('resLicence', resLicence)
-                     if (resFile.data || resLicence.data) {
-                         try {
-                             let typeSeller = {
-                                 seller: {
-                                     picture: resFile.data ? resFile.data : null,
-                                     firstName: form.firtName,
-                                     lastName: form.lastName,
-                                     driverLicense: resLicence.data ? resLicence.data : null,
-                                     phone: idCode ? idCode : null,
-                                 }
-                             }
-                             let typeDealer = {
-                                 dealer: {
-                                     picture: resFile.data ? resFile.data : null,
-                                     name: form.dealerName,
-                                     omvic: form.registrationNumber,
-                                     address: form.address,
-                                     phone: idCode ? idCode : null
-                                 },
-                             }
-                             typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
- 
-                             let data = {
-                                 token: token.value,
-                                 payloadData: typeUser.value
-                             }
- 
-                             try {
-                                 let res = await storeUser.userData(data)
-                                 if (res) {
-                                     props.next()
-                                     isLoading.value = false
-                                 }
-                             } catch (error) {
-                                 isLoading.value = false
-                                 toast(error?.response?.data?.message[0] || 'error al cargar', {
-                                     type: "error",
-                                 });
-                             }
- 
- 
- 
-                         } catch (error) {
-                             toast(error?.response?.data?.message || 'error al cargar', {
-                                 type: "error",
-                             });
-                             isLoading.value = false
-                         }
-                     } else {
-                         isLoading.value = false
-                         toast('Intente de nuevo', {
-                             type: "error",
-                         });
-                     }
-                 } else {
-                     try {
-                         let typeSeller = {
-                             seller: {
-                                 firstName: form.firtName,
-                                 lastName: form.lastName,
-                                 phone: idCode ? idCode : null,
-                             }
-                         }
-                         let typeDealer = {
-                             dealer: {
-                                 name: form.dealerName,
-                                 omvic: form.registrationNumber,
-                                 address: form.address,
-                                 phone: idCode ? idCode : null,
-                             },
-                         }
-                         typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
-                         let data = {
-                             token: token.value,
-                             payloadData: typeUser.value
-                         }
-                         try {
-                             let res = await storeUser.userData(data)
-                             if (res) {
-                                 props.next()
-                                 isLoading.value = false
-                             }
-                         } catch (error) {
-                             isLoading.value = false
-                             toast(error?.response?.data?.message[0] || 'error al cargar', {
-                                 type: "error",
-                             });
-                         }
- 
-                     } catch (error) {
-                         if (error?.response?.data?.message == "Unauthorized") {
-                             toast(error?.response?.data?.message || 'error al cargar', {
-                                 type: "error",
-                                 autoClose: 2000,
-                             });
-                             props.backEmailToken()
-                         }
-                         isLoading.value = false
-                     }
-                 } */
             }
+        }
+        const getCountry = async () => {
+            try {
+                const res = await countrys.getCountry()
+                form.getState = res.data
+                console.log('resresresresresres', res)
+            } catch (error) {
+
+            }
+        }
+        const onChangeGetProvince = async (event) => {
+            form.getCities = undefined;
+            form.city = undefined;
+            let value = JSON.parse(event.target.value)
+            loadingCountrys.value = true
+            try {
+                const res = await countrys.getCountryCities(value.iso2)
+                form.getCities = res.data
+                console.log('getCountryCities', res)
+            } catch (error) {
+                loadingCountrys.value = false
+            } finally {
+                loadingCountrys.value = false
+            }
+
+        }
+        const onChangeGetCity = async (event) => {
+            let value = JSON.parse(event.target.value)
+            /* formData.city = value.name */
+            console.log('value', value)
         }
         onUpdated(() => {
             rol.value = route.params.rol
         })
         onMounted(() => {
+            getCountry()
             rol.value = route.params.rol
             token.value = localStorage.getItem('updateUser')
             /* if (token.value) {
@@ -455,7 +454,11 @@ export default {
             rol,
             isLoading,
             filterinput,
-            codePhone
+            codePhone,
+            loadingCountrys,
+            formData,
+            onChangeGetProvince,
+            onChangeGetCity
         };
     },
 };

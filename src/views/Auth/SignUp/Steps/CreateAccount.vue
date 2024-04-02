@@ -15,9 +15,9 @@
         </div>
     </div>
     <div v-else
-        class="flex-1 flex flex-col overflow-auto md:overflow-hidden justify-between py-12 px-4 h-full sm:px-6 lg:flex-none lg:px-10 xl:px-24">
+        class="flex-1 flex flex-col overflow-auto  justify-between py-12 px-4  sm:px-6 lg:flex-none lg:px-10 xl:px-24">
         <div
-            class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-10 xl:px-24">
+            class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12 px-4 sm:px-6 md:h-full lg:flex-none lg:px-10 2xl:px-24">
             <div class="mx-auto w-full ">
                 <div class="animate-fade-up  animate-ease-in-out animate-delay-100">
                     <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center md:mb-5 ">Create Your
@@ -65,6 +65,7 @@
                                     class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                         </div>
+                      
                         <div class="space-y-1 animate-fade-up  animate-ease-in-out animate-delay-600">
                             <label htmlFor="password" class="block text-sm font-medium text-gray-700">
                                 Password
@@ -151,6 +152,7 @@ import { createAccount } from '../../../../validations/validationSignUp'
 import { stepsSignUp } from "@/stores/stepsSignUp";
 import { useAuthStore } from "@/stores/auth";
 import { toast } from "vue3-toastify";
+
 export default {
     props: {
         next: {
@@ -168,6 +170,7 @@ export default {
         const storeAuth = useAuthStore()
         const loading = ref(false)
         const form = storeData.formData
+    
         const nextStep = async () => {
             console.log('form.', form)
             invalid.value = createAccount(form, rol.value);
@@ -218,6 +221,7 @@ export default {
                 }
             }
         }
+     
         onUpdated(() => {
             rol.value = props.rol
         })

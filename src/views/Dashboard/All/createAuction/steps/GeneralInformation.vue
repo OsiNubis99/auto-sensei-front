@@ -65,26 +65,14 @@
                     <template v-for="(state, index) in form.getState" :key="index">
                         <option :value="JSON.stringify(state)">{{ state.iso2 }} | {{ state.name }}</option>
                     </template>
-                    <!--  <option value="Alberta">AB | Alberta</option>
-                    <option value="British Columbia">BC | British Columbia</option>
-                    <option value="Manitoba">MB | Manitoba</option>
-                    <option value="New Brunswick">NB | New Brunswick</option>
-                    <option value="Newfoundland and Labrador">NL | Newfoundland and Labrador</option>
-                    <option value="Nova Scotia">NS | Nova Scotia</option>
-                    <option value="Ontario">ON | Ontario</option>
-                    <option value="Prince Edward Island">PE | Prince Edward Island</option>
-                    <option value="Quebec">QC | Quebec</option>
-                    <option value="Saskatchewan">SK | Saskatchewan</option>
-                    <option value="Northwest Territories">NT | Northwest Territories</option>
-                    <option value="Nunavut">NU | Nunavut</option>
-                    <option value="Yukon">YT | Yukon</option> -->
                 </select>
                 <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding province...
                 </div>
             </div>
             <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">City</label>
-                <select v-model="form.city" @change="onChangeGetCity($event)" :disabled="loadingCountrys || !form.getCities ? true : false"
+                <select v-model="form.city" @change="onChangeGetCity($event)"
+                    :disabled="loadingCountrys || !form.getCities ? true : false"
                     :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
                     class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -341,8 +329,8 @@ export default {
         onChangeGetCity: {
             type: Function,
         },
-        loadingCountrys:{
-            type:Boolean
+        loadingCountrys: {
+            type: Boolean
         }
     },
     setup(props) {

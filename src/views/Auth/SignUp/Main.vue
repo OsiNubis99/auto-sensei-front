@@ -20,25 +20,26 @@
 
         <swiper v-show="!loading" @swiper="getRef" :pagination="{ type: 'bullets' }" :simulateTouch="false"
             :modules="modules" class="stepsSwiper w-full  lg:w-2/4 ">
-            <swiper-slide v-if="!loading">
+            <swiper-slide v-if="!loading" class="!overflow-auto">
                 <CreateAccount v-if="stepsCurrent == 0" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
-            <swiper-slide v-if="!loading">
+            <swiper-slide v-if="!loading" class="!overflow-auto">
                 <CheckYourEmail v-if="stepsCurrent == 1" :back="back" :next="next" :gobackError="gobackError"
                     :rol="rol" />
             </swiper-slide>
-            <swiper-slide v-if="!loading">
+            <swiper-slide v-if="!loading" class="!overflow-auto">
                 <InfoAccount v-if="stepsCurrent == 2" :back="back" :next="next" :backEmailToken="backEmailToken"
                     :rol="rol" />
             </swiper-slide>
-            <swiper-slide v-if="!loading">
+            <swiper-slide v-if="!loading" class="!overflow-auto">
                 <VerificationCode v-if="stepsCurrent == 3" :back="back" :next="next" :backEmailToken="backEmailToken"
                     :rol="rol" />
             </swiper-slide>
         </swiper>
 
 
-        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" lg:block md:w-1/2 md:px-16 md:py-12 relative ">
+        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'"
+            class=" lg:block md:w-1/2 md:px-16 md:py-12 relative ">
             <div v-if="rol == 'dealers'" class="h-full  flex justify-start items-start flex-col gap-5 ">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br>
                     Organically</h1>
@@ -171,8 +172,8 @@ export default {
             if (route.query.token) {
                 getAuth(route.query)
             } else {
-                stepsCurrent.value = 0
-                swiper.value?.slideTo(0)
+                stepsCurrent.value = 0;
+                swiper.value?.slideTo(0);
                 router.replace({ query: '' })
             }
 
@@ -197,3 +198,15 @@ export default {
     },
 };
 </script>
+
+<style>
+body {
+    overflow: hidden;
+}
+
+@media (max-width: 640px) {
+    body {
+        overflow: initial;
+    }
+}
+</style>

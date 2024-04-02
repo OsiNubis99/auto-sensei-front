@@ -14,41 +14,49 @@
             </div>
         </div>
     </div>
-    <div v-else class="flex-1 flex flex-col justify-between py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
+    <div v-else :class="showSuccessRegister ? '!p-0' : ''"
+        class="flex-1 flex flex-col justify-between py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
         <template v-if="showSuccessRegister">
-            <div class="h-full w-[60%] mx-auto flex justify-center flex-col items-center  p-5">
-                <div class="bg-white h-fit flex flex-col gap-6 items-center justify-center shadow-lg  rounded-lg p-4">
-                    <div class="check-container">
-                        <div class="check-background">
-                            <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+            <div class="w-full h-full overflow-hidden relative ">
+                <div class="h-full w-full md:w-[60%] mx-auto flex justify-center flex-col items-center  p-5">
+                    <div
+                        class="bg-white h-fit flex flex-col gap-2 md:gap-6 items-center justify-center shadow-lg  rounded-lg p-4">
+                        <div class="check-container">
+                            <div class="check-background">
+                                <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="check-shadow"></div>
                         </div>
-                        <div class="check-shadow"></div>
-                    </div>
-                    <div>
-                        <p class="text-center text-2xl font-medium">Your account have been successfully created.</p>
-                        <p class="text-center">Our administrators will validate your info and activate your
-                            account. This process may take a few moments.</p>
-                    </div>
-                    <div>
-                        <button @click="refirectToLogin" class="btn bg-primary" to="/login/dealers">Login</button>
+                        <div>
+                            <p class="text-center text-sm md:text-2xl font-medium">Your account have been successfully
+                                created.</p>
+                            <p class="text-center text-xs md:text-base">Our administrators will validate your info and
+                                activate your
+                                account. This process may take a few moments.</p>
+                        </div>
+                        <div>
+                            <button @click="refirectToLogin" class="btn bg-primary" to="/login/dealers">Login</button>
+                        </div>
                     </div>
                 </div>
+                <ul class="bg-bubbles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
             </div>
-            <ul class="bg-bubbles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+
+
         </template>
         <template v-else>
             <div class="flex-1 flex flex-col justify-center md:py-12 px-4 sm:px-6 h-full lg:flex-none  xl:px-24">
@@ -166,7 +174,15 @@ export default {
                                 picture: resFile?.data ? resFile?.data : null,
                                 name: formdata.name,
                                 omvic: formdata.omvic,
-                                address: formdata.address,
+                            },
+                            address: {
+                                city: formdata.address.city,
+                                country: 'Canada',
+                                line1: formdata.address.linea1,
+                                line2: formdata.address.linea2,
+                                postal_code: formdata.address.zipCode,
+                                state: formdata.address.province
+
                             },
                             phone: formdata.phone,
                             validationCode: form.value.code
@@ -199,9 +215,7 @@ export default {
                                             router.go()
                                             break;
                                         case 2:
-                                            /* await router.push({ path: '/login/dealers' }) */
                                             localStorage.clear()
-                                            /*  router.go() */
                                             showSuccessRegister.value = true
                                             break;
                                         default:
@@ -247,7 +261,15 @@ export default {
                         dealer: {
                             name: formdata.name,
                             omvic: formdata.registrationNumber,
-                            address: formdata.address,
+                        },
+                        address: {
+                            city: formdata.address.city,
+                            country: 'Canada',
+                            line1: formdata.address.linea1,
+                            line2: formdata.address.linea2,
+                            postal_code: formdata.address.zipCode,
+                            state: formdata.address.province
+
                         },
                         phone: formdata.phone,
                         validationCode: form.value.code
@@ -281,8 +303,8 @@ export default {
                                             router.go()
                                             break;
                                         case 2:
-                                            await router.push({ path: '/login/dealers' })
-                                            router.go()
+                                            localStorage.clear()
+                                            showSuccessRegister.value = true
                                             break;
                                         default:
                                             await router.push({ name: 'home' })
