@@ -1,5 +1,5 @@
 <template>
-    <div :class="op.step1 ? 'md:h-screen' : 'h-fit' "class="bg-[#BDBDBF66] md:bg=[#F9F9F9] ">
+    <div :class="op.step1 ? 'md:h-screen' : 'h-fit'" class="bg-[#BDBDBF66] md:bg=[#F9F9F9] ">
         <div>
             <div class="absolute hidden md:block w-full h-[200px] overflow-hidden bg-[#0B1107]">
                 <svg class="w-full " xmlns="http://www.w3.org/2000/svg" width="1768" height="260" viewBox="0 0 1768 260"
@@ -307,6 +307,7 @@ import { useStoreFile } from "@/stores/uploader";
 import { useRouter, useRoute } from 'vue-router'
 import { ModalLaunch } from '@/stores/modalLaunch';
 import { usePayments } from "@/stores/payments";
+import { useAuthStore } from "@/stores/auth";
 import moment from 'moment';
 export default {
 
@@ -325,6 +326,7 @@ export default {
         const loadingUploadImages = ref(false)
         const store = useAuctionStore()
         const id_create = ref(null)
+        const auth = useAuthStore()
         const storeFile = useStoreFile()
         const route = useRoute();
         const statusLauch = ModalLaunch()
@@ -337,6 +339,7 @@ export default {
         const powerValue = ref(computed(() => { return storeFile.progressUpload }))
         const arrayUpload = ref([])
         const loadingCountrys = ref(false)
+        const modalErrorCreate = ref(false)
         watch(powerValue, async (newQuestion, oldQuestion) => {
             porcertanje.value = newQuestion
         })
@@ -446,77 +449,81 @@ export default {
             step3: false,
         })
         const nextGeneralInformation = async () => {
-            console.log('formData.value', formData.value.province)
-            console.log('formData.city', formData.value.city)
-            componentKey.value += 1
-            invalid.value = validateData(formData.value, 'generalInformation');
-            if (Object.entries(invalid.value).length > 0) {
-                toast(
-                    invalid?.value?.numberVinGenerals ||
-                    invalid?.value?.date ||
-                    invalid?.value?.province ||
-                    invalid?.value?.city ||
-                    invalid?.value?.keys ||
-                    invalid?.value?.currently
-                    , { type: "error" });
-                return
-            }
-            if (Object.entries(invalid.value).length === 0) {
-                formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province)
-                let dataPost = {
-                    vin: formData.value.numberVinGenerals,
-                    dropOffDate: formData.value.date,
-                    city: formData.value.saveCity.name,
-                    province: formData.value.saveProvince.name,
-                    keysNumber: formData.value.keys,
-                    vehicleStatus: {
-                        status: formData.value.currently,
-                        financingCompany: formData.value.financingCompany,
-                        remainingPayments: formData.value.remainingPayments,
-                    },
-                    buyout: formData.value.yourVehicleAmount,
-                    buyNew: {
-                        anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
-                        make: formData.value.makePreferences,
-                        model: formData.value.modelPreferences,
-                        mileageStart: formData.value.modelFromPreferences,
-                        mileageEnd: formData.value.modelToPreferences,
-                        yearStart: formData.value.yearFromPreferences,
-                        yearEnd: formData.value.yearToPreferences
-                    }
+            console.log('hola', auth.userData.anddress)
+            if (auth.userData.address) {
+                componentKey.value += 1
+                invalid.value = validateData(formData.value, 'generalInformation');
+                if (Object.entries(invalid.value).length > 0) {
+                    toast(
+                        invalid?.value?.numberVinGenerals ||
+                        invalid?.value?.date ||
+                        invalid?.value?.province ||
+                        invalid?.value?.city ||
+                        invalid?.value?.keys ||
+                        invalid?.value?.currently
+                        , { type: "error" });
+                    return
                 }
-                console.log('dataPost', dataPost)
-                loading.value = true
-                try {
+                if (Object.entries(invalid.value).length === 0) {
+                    formData.value.saveCity = JSON.parse(formData.value.city)
+                    formData.value.saveProvince = JSON.parse(formData.value.province)
+                    let dataPost = {
+                        vin: formData.value.numberVinGenerals,
+                        dropOffDate: formData.value.date,
+                        city: formData.value.saveCity.name,
+                        province: formData.value.saveProvince.name,
+                        keysNumber: formData.value.keys,
+                        vehicleStatus: {
+                            status: formData.value.currently,
+                            financingCompany: formData.value.financingCompany,
+                            remainingPayments: formData.value.remainingPayments,
+                        },
+                        buyout: formData.value.yourVehicleAmount,
+                        buyNew: {
+                            anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
+                            make: formData.value.makePreferences,
+                            model: formData.value.modelPreferences,
+                            mileageStart: formData.value.modelFromPreferences,
+                            mileageEnd: formData.value.modelToPreferences,
+                            yearStart: formData.value.yearFromPreferences,
+                            yearEnd: formData.value.yearToPreferences
+                        }
+                    }
+                    console.log('dataPost', dataPost)
+                    loading.value = true
+                    try {
 
-                    let res = await store.create(dataPost)
-                    console.log('nextGeneralInformation', res)
-                    if (res) {
-                        id_create.value = res.data._id
-                        formData.value.numberVin = res.data.vehicleDetails.vin
-                        formData.value.make = res.data.vehicleDetails.make
-                        formData.value.model = res.data.vehicleDetails.model
-                        formData.value.doors = `${res.data.vehicleDetails.doors} Doors`
-                        formData.value.trim = res.data.vehicleDetails.trim
-                        formData.value.year = res.data.vehicleDetails.year
-                        formData.value.bodyType = res.data.vehicleDetails.bodyType
-                        formData.value.cylinder = res.data.vehicleDetails.cylinder
-                        formData.value.transmission = res.data.vehicleDetails.transmission
-                        op.value.step1 = false
-                        op.value.step2 = true
-                        op.value.step3 = false
-                        checkStep.value.step1 = true
-                        checkStep.value.step2 = false
-                        checkStep.value.step3 = false
+                        let res = await store.create(dataPost)
+                        console.log('nextGeneralInformation', res)
+                        if (res) {
+                            id_create.value = res.data._id
+                            formData.value.numberVin = res.data.vehicleDetails.vin
+                            formData.value.make = res.data.vehicleDetails.make
+                            formData.value.model = res.data.vehicleDetails.model
+                            formData.value.doors = `${res.data.vehicleDetails.doors} Doors`
+                            formData.value.trim = res.data.vehicleDetails.trim
+                            formData.value.year = res.data.vehicleDetails.year
+                            formData.value.bodyType = res.data.vehicleDetails.bodyType
+                            formData.value.cylinder = res.data.vehicleDetails.cylinder
+                            formData.value.transmission = res.data.vehicleDetails.transmission
+                            op.value.step1 = false
+                            op.value.step2 = true
+                            op.value.step3 = false
+                            checkStep.value.step1 = true
+                            checkStep.value.step2 = false
+                            checkStep.value.step3 = false
+                            loading.value = false
+
+                        }
+                    } catch (error) {
+                        toast(error.response.data.message, { type: "error", position: "top-center", theme: "colored", });
                         loading.value = false
-
                     }
-                } catch (error) {
-                    toast(error.response.data.message, { type: "error", position: "top-center", theme: "colored", });
-                    loading.value = false
                 }
+            } else {
+                toast('You need to add your address in order to create an auction. Please update your profile', { autoClose: 4000, type: "error" });
             }
+
         }
         const nextVehiclesDetails = async () => {
             componentKey.value += 1

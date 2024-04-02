@@ -69,9 +69,6 @@ export const infoAccount = (form, rol) => {
         if (!form.linea1) {
             error.linea1 = 'Required field'
         }
-        if (!form.linea2) {
-            error.linea2 = 'Required field'
-        }
         if (!form.zipCode) {
             error.zipCode = 'Required field'
         }

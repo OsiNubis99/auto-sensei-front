@@ -166,9 +166,109 @@
                             Phone</button>
                     </div>
                 </div>
+                <div
+                    class="flex w-full flex-col md:flex-row md:items-center justify-between md:gap-3 border-b-2  border-[#dbdbdb93]">
+                    <p class="font-medium text-xs md:text-base">Address</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex gap-1 text-xs md:text-base capitalize text-[#9ca3af] items-center">
+                            {{ storeUser?.address?.country }}, {{ storeUser?.address?.state }} {{
+            storeUser?.address?.city
+        }}
+                        </div>
+                        <button @click="onOption('address')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+                                fill="none">
+                                <path
+                                    d="M8.6 5.07206L11.428 7.90072L4.828 14.5001H2V11.6714L8.6 5.07139V5.07206ZM9.54267 4.12939L10.9567 2.71472C11.0817 2.58974 11.2512 2.51953 11.428 2.51953C11.6048 2.51953 11.7743 2.58974 11.8993 2.71472L13.7853 4.60072C13.9103 4.72574 13.9805 4.89528 13.9805 5.07206C13.9805 5.24883 13.9103 5.41837 13.7853 5.54339L12.3707 6.95739L9.54267 4.12939Z"
+                                    fill="#0B1107" />
+                            </svg>
+                        </button>
+                    </div>
+
+
+                </div>
+                <div v-show="activeInputAddress" class="w-full">
+                    <div class="mt-1 grid md:grid-cols-2 gap-4 ">
+                        <div class="grid grid-cols-8 gap-1 col-span-2">
+                            <div class="animate-fade-up   animate-ease-in-out animate-delay-600 col-span-3">
+                                <label htmlFor="line1" class="block text-xs md:text-sm font-medium text-gray-700">
+                                    Linea 1
+                                </label>
+                                <div class="mt-1">
+                                    <input v-model="form.line1" name="line1" type="text"
+                                        placeholder="Street address or P.O. Box"
+                                        class="appearance-none block w-full px-3 py-2  border border-[#E0E0E0]   rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                </div>
+                            </div>
+                            <div class="animate-fade-up   animate-ease-in-out animate-delay-600 col-span-3">
+                                <label htmlFor="line2" class="block text-xs md:text-sm font-medium text-gray-700">
+                                    Linea 2
+                                </label>
+                                <div class="mt-1">
+                                    <input v-model="form.line2" name="line2" type="text"
+                                        placeholder="Apt, suite, unit, building, floor, etc."
+                                        class="appearance-none block w-full px-3 py-2  border border-[#E0E0E0]   rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                </div>
+                            </div>
+                            <div class="animate-fade-up   animate-ease-in-out animate-delay-600 col-span-2">
+                                <label htmlFor="zip" class="block text-xs md:text-sm font-medium text-gray-700">
+                                    Zip Code
+                                </label>
+                                <div class="mt-1">
+                                    <input v-model="form.zipCode" name="zip" type="number" placeholder="014747"
+                                        class="appearance-none block w-full px-3 py-2  border border-[#E0E0E0]   rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full flex flex-col gap-2 relative">
+                            <label class=" text-sm md:text-base " for="">Province</label>
+                            <select v-model="form.province" @change="onChangeGetProvince($event)"
+                                class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+
+                                <option v-if="!form.getState" selected>Laoding city... </option>
+                                <option v-else selected hidden>Select province</option>
+                                <template v-for="(state, index) in form.getState" :key="index">
+                                    <option class="text-xs md:text-sm" :value="JSON.stringify(state)">{{ state.iso2 }} |
+                                        {{
+            state.name }}</option>
+                                </template>
+                            </select>
+                            <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
+                                province...
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-col gap-2 relative">
+                            <label class=" text-sm md:text-base " for="">City</label>
+                            <select v-model="form.city" @change="onChangeGetCity($event)"
+                                :disabled="loadingCountrys || !form.getCities ? true : false"
+                                class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm  rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
+
+                                <option v-if="loadingCountrys" selected>Laoding city... </option>
+                                <option v-else selected hidden>Select city </option>
+                                <template v-for="(cities, index) in form.getCities" :key="index">
+                                    <option class="text-xs md:text-sm" :value="JSON.stringify(cities)">{{ cities.name }}
+                                    </option>
+                                </template>
+                            </select>
+                            <div v-if="loadingCountrys" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
+                                city...</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center pt-4 justify-end gap-2 w-full">
+                        <button @click="offOption('address')"
+                            class="btn btn-mobil-account bg-white border border-[#E0E0E0]">Cancel</button>
+                        <button @click="update('address')"
+                            class="btn btn-mobil-account bg-blue-dark text-primary ">Update
+                            Address
+                        </button>
+                    </div>
+                </div>
+               
             </div>
 
         </div>
+
         <div class="flex justify-between w-full flex-col md:flex-row  ">
             <div v-if="storeUser.type == 1" class="flex flex-col md:w-[60%] ">
                 <p class="font-semibold text-xs md:text-lg">Driver License</p>
@@ -225,104 +325,7 @@
 
                 </div>
 
-                <div
-                    class="flex w-full flex-col md:flex-row md:items-center justify-between md:gap-3 border-b-2  border-[#dbdbdb93]">
-                    <p class="font-medium text-xs md:text-base">Address</p>
-                    <!--  <div class="flex items-center font-medium text-xs md:text-base ">
-                        <div class="flex gap-1 capitalize text-[#9ca3af] items-center">
-                            <p>{{ storeUser.dealer?.address }}</p>
-                        </div>
-                    </div> -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex gap-1 text-xs md:text-base capitalize text-[#9ca3af] items-center">
-                            {{ storeUser.address.country }}, {{ storeUser.address.state }} {{ storeUser.address.city }}
-                        </div>
-                        <button @click="onOption('address')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
-                                fill="none">
-                                <path
-                                    d="M8.6 5.07206L11.428 7.90072L4.828 14.5001H2V11.6714L8.6 5.07139V5.07206ZM9.54267 4.12939L10.9567 2.71472C11.0817 2.58974 11.2512 2.51953 11.428 2.51953C11.6048 2.51953 11.7743 2.58974 11.8993 2.71472L13.7853 4.60072C13.9103 4.72574 13.9805 4.89528 13.9805 5.07206C13.9805 5.24883 13.9103 5.41837 13.7853 5.54339L12.3707 6.95739L9.54267 4.12939Z"
-                                    fill="#0B1107" />
-                            </svg>
-                        </button>
-                    </div>
 
-
-                </div>
-                <div v-show="activeInputAddress" class="w-full">
-                    <div class="mt-1 grid md:grid-cols-2 gap-4 ">
-                        <div class="grid grid-cols-8 gap-1 col-span-2">
-                            <div class="animate-fade-up   animate-ease-in-out animate-delay-600 col-span-3">
-                                <label htmlFor="line1" class="block text-xs md:text-sm font-medium text-gray-700">
-                                    Linea 1
-                                </label>
-                                <div class="mt-1">
-                                    <input v-model="form.line1" name="line1" type="text"
-                                        placeholder="Street address or P.O. Box"
-                                        class="appearance-none block w-full px-3 py-2  border border-[#E0E0E0]   rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                </div>
-                            </div>
-                            <div class="animate-fade-up   animate-ease-in-out animate-delay-600 col-span-3">
-                                <label htmlFor="line2" class="block text-xs md:text-sm font-medium text-gray-700">
-                                    Linea 2
-                                </label>
-                                <div class="mt-1">
-                                    <input v-model="form.line2" name="line2" type="text"
-                                        placeholder="Apt, suite, unit, building, floor, etc."
-                                        class="appearance-none block w-full px-3 py-2  border border-[#E0E0E0]   rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                </div>
-                            </div>
-                            <div class="animate-fade-up   animate-ease-in-out animate-delay-600 col-span-2">
-                                <label htmlFor="zip" class="block text-xs md:text-sm font-medium text-gray-700">
-                                    Zip Code
-                                </label>
-                                <div class="mt-1">
-                                    <input v-model="form.zipCode" name="zip" type="number" placeholder="014747"
-                                        class="appearance-none block w-full px-3 py-2  border border-[#E0E0E0]   rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full flex flex-col gap-2 relative">
-                            <label class=" text-sm md:text-base " for="">Province</label>
-                            <select v-model="form.province" @change="onChangeGetProvince($event)"
-                                class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                                <option v-if="!form.getState" selected>Laoding city... </option>
-                                <option v-else selected hidden>Select province</option>
-                                <template v-for="(state, index) in form.getState" :key="index">
-                                    <option class="text-xs md:text-sm" :value="JSON.stringify(state)">{{ state.iso2 }} | {{ state.name }}</option>
-                                </template>
-                            </select>
-                            <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
-                                province...
-                            </div>
-                        </div>
-                        <div class="w-full flex flex-col gap-2 relative">
-                            <label class=" text-sm md:text-base " for="">City</label>
-                            <select v-model="form.city" @change="onChangeGetCity($event)"
-                                :disabled="loadingCountrys || !form.getCities ? true : false"
-                                class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm  rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                                <option v-if="loadingCountrys" selected>Laoding city... </option>
-                                <option v-else selected hidden>Select city </option>
-                                <template v-for="(cities, index) in form.getCities" :key="index">
-                                    <option class="text-xs md:text-sm" :value="JSON.stringify(cities)">{{ cities.name }}</option>
-                                </template>
-                            </select>
-                            <div v-if="loadingCountrys" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
-                                city...</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center pt-4 justify-end gap-2 w-full">
-                        <button @click="offOption('address')"
-                            class="btn btn-mobil-account bg-white border border-[#E0E0E0]">Cancel</button>
-                        <button @click="update('address')"
-                            class="btn btn-mobil-account bg-blue-dark text-primary ">Update
-                            Address
-                        </button>
-                    </div>
-                </div>
                 <div class="flex w-full flex-col md:flex-row md:items-center md:justify-between md:gap-3 ">
                     <p class="font-medium text-xs md:text-base">Mobile Number</p>
                     <div class="flex items-center font-medium text-xs md:text-base ">
@@ -332,6 +335,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
         <div v-show="activeInputDriver"
@@ -531,6 +535,7 @@ export default {
                     }
                     loading.value = true
                     try {
+
                         let update = {
                             password: form.value.password,
                         }
@@ -614,6 +619,14 @@ export default {
                     break;
                 case 'address':
                     /*  loading.value = true */
+                    if (storeUser.type == 1) {
+                        if (!form.value.province || !form.value.city || !form.value.line1  || !form.value.zipCode) {
+                            toast('Required address fields', {
+                                type: "error",
+                            });
+                            return
+                        }
+                    }
                     let city = JSON.parse(form.value.city)?.name;
                     let province = JSON.parse(form.value.province)?.name;
                     try {
@@ -659,6 +672,7 @@ export default {
             }
         }
         const onChangeGetProvince = async (event) => {
+            console.log('entro aqo')
             form.value.getCities = undefined
             let props = null;
             if (event?.target?.value) {

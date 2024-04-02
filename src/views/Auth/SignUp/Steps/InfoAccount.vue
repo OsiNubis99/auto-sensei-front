@@ -93,7 +93,7 @@
                                         </label>
                                         <div class="mt-1">
                                             <input name="address" v-model="form.linea1" type="text"
-                                                placeholder="San Fransisco, California"
+                                            placeholder="Street address or P.O. Box"
                                                 :class="invalid?.linea1 ? 'border-error' : 'border-[#F0F0F0]'"
                                                 class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                         </div>
@@ -104,7 +104,7 @@
                                         </label>
                                         <div class="mt-1">
                                             <input name="address" v-model="form.linea2" type="text"
-                                                placeholder="San Fransisco, California"
+                                            placeholder="Apt, suite, unit, building, floor, etc."
                                                 :class="invalid?.linea2 ? 'border-error' : 'border-[#F0F0F0]'"
                                                 class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                         </div>
