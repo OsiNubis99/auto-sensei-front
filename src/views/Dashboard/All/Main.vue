@@ -8,12 +8,12 @@
         <div v-if="data?.length > 0"
             class="relative max-w-[100rem] bg-[#BDBDBF66] md:bg-white mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="hidden md:w-[29%] md:block">
-                    <CreateAution class="hidden md:block" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="hidden md:w-[29%] lg:block">
+                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
-                <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
-                <div class="w-full md:w-[70%] ">
-                    <div class="flex items-center justify-between px-2 pt-4 md:p-0  mb-4">
+                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="w-full lg:w-[70%] ">
+                    <div class="flex items-center justify-between px-2 pt-4 lg:p-0  mb-4">
                         <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
                         <!--  <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" /> -->
                         <div class="flex items-center gap-2 ">
@@ -50,7 +50,7 @@
 
                                     </div>
                                 </div>
-                                <div class="shadow-md md:flex rounded-md hidden bg-white">
+                                <div class="shadow-md lg:flex rounded-md hidden bg-white">
                                     <div @click="changeGridTemplate"
                                         :class="changeLayouts ? 'bg-white' : 'bg-[#EFF8E0]'" class="p-2 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -301,10 +301,11 @@ export default {
             if (!startDate) return 0;
             return new Date(startDate) - Date.now();
         }
-        const acceptAution = () => {
+        const acceptAution = (url) => {
+            console.log('REVISAR SI LLEGA', url)
             loading.value = true
             try {
-                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id)
+                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id,url)
                 if (res) {
                     return '200'
                 }

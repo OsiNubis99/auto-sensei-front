@@ -958,6 +958,7 @@ input.check-toggle-round-flat:checked+label:after {
 .custom-phone #telephone {
     border: 1px solid #E0E0E0;
     width: 100%;
+    padding-left: 48px;
 }
 
 .custom-phone #telephone:focus {
@@ -1151,10 +1152,12 @@ input.check-toggle-round-flat:checked+label:after {
     gap: 10px;
     flex-direction: column;
 }
-.card .number h3{
+
+.card .number h3 {
     font-weight: 600;
     color: white;
 }
+
 .number {
     display: flex;
     justify-content: center;
@@ -1713,6 +1716,11 @@ input.check-toggle-round-flat:checked+label:after {
         min-height: fit-content !important;
     }
 
+    .PSPDFKit-upyueavav3kv33ygfhr93t7hn {
+        width: 90% !important;
+        height: 90% !important;
+    }
+
     .Toastify__toast-body>div:last-child {
         font-size: 10px !important;
     }
@@ -1908,14 +1916,17 @@ input.check-toggle-round-flat:checked+label:after {
     .custom-phone #telephone {
         padding-left: 60px !important;
     }
-    .check-background{
+
+    .check-background {
         position: relative;
         top: 30px;
     }
+
     .check-container {
         width: 3.25rem;
         height: 4.5rem;
     }
+
     .check-container .check-background svg {
         width: 50%;
         transform: translateY(0);

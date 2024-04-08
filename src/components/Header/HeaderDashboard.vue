@@ -1,7 +1,7 @@
 <template>
     <header class="relative">
         <div v-show="store?.userData?.type == 0">
-            <nav class="md:flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
+            <nav class="lg:flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
                 <div class=" flex items-center">
                     <div class="flex gap-5 ">
                         <IconSearch />
@@ -27,7 +27,8 @@
                         class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
 
-                            <RouterLink to="/inicio" :class="path == 'inicio' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/inicio"
+                                :class="path == 'inicio' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dashboard</p>
                             </RouterLink>
@@ -62,7 +63,7 @@
         </div>
         <div v-if="store.userData.type == 1">
             <nav class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
-                <div class="hidden md:flex  items-center">
+                <div class="hidden lg:flex  items-center">
                     <div class="flex gap-8 justify-between items-center ">
                         <div class="relative">
                             <svg class="w-6 h-6 text-gray-700 absolute top-3 left-2" fill="none" stroke="white"
@@ -158,14 +159,14 @@
                         <LogoIcon class=" w-[90%] md:w-full" />
                     </RouterLink>
                     <div
-                        class="navLinks hidden md:flex duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]   md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
+                        class="navLinks hidden lg:flex duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]   md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
                             <RouterLink to="/all"
                                 :class="path == 'all' || path == 'upcoming-auctions' || path == 'live' || path == 'completed' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sell a Car</p>
                             </RouterLink>
-                          <!--   <RouterLink to="#"
+                            <!--   <RouterLink to="#"
                                 :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
@@ -181,8 +182,9 @@
             </nav>
         </div>
         <div v-if="store.userData.type == 2">
-            <nav v-if="!route.meta?.hideNavbar" class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
-                <div class="hidden md:flex items-center">
+            <nav v-if="!route.meta?.hideNavbar"
+                class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
+                <div class="hidden lg:flex items-center">
                     <div class="flex gap-5 justify-between items-center ">
                         <div class="relative">
                             <svg class="w-6 h-6 text-gray-700 absolute top-3 left-2" fill="none" stroke="white"
@@ -217,7 +219,6 @@
                                         src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                         alt="">
                                 </div>
-
                             </button>
                             <button v-if="isOpen" @click="isOpen = false" tabindex="-1"
                                 class="fixed top-0 inset-0 h-full w-full bg-black opacity-0 cursor-default"></button>
@@ -273,21 +274,20 @@
                             </svg>
                         </button>
                     </div>
-
                 </div>
                 <div class="flex items-center gap-3">
                     <RouterLink :to="{ name: 'home' }" class="flex items-center gap-2">
                         <LogoIcon class="w-[90%] md:w-full" />
                     </RouterLink>
                     <div
-                        class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh] hidden md:flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
+                        class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh] hidden lg:flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
                             <RouterLink to="/upcoming"
                                 :class="path == 'upcoming' || path == 'liveDealer' || path == 'current-bits' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dealer Bidding</p>
                             </RouterLink>
-                        <!--     <RouterLink to="#"
+                            <!--     <RouterLink to="#"
                                 :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
@@ -311,7 +311,7 @@
         <template v-if="store?.userData?._id">
             <div v-show="open" class="fixed bg-[#0b1107b5] left-0 animation-menu-modal top-0 h-screen w-full z-[580]">
             </div>
-            <nav v-show="open" class="fixed animation-menu-modal top-0 md:hidden z-[600] bg-[#141f0d] w-full  p-5">
+            <nav v-show="open" class="fixed animation-menu-modal top-0 lg:hidden z-[600] bg-[#141f0d] w-full  p-5">
                 <div class=" flex gap-3 justify-between items-center">
                     <div class=" flex gap-3 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="21" viewBox="0 0 25 21" fill="none">
@@ -341,7 +341,7 @@
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>Sell a Car</p>
                         </RouterLink>
-                      <!--   <RouterLink @click="open = false" to="#"
+                        <!--   <RouterLink @click="open = false" to="#"
                             :class="path == 'auto-list' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>Sold Auction</p>
@@ -386,7 +386,7 @@
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">Dealer Bidding</p>
                         </RouterLink>
-                     <!--    <RouterLink @click="open = false" to="#"
+                        <!--    <RouterLink @click="open = false" to="#"
                             :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">Sold Auction</p>
@@ -442,8 +442,8 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <svg class="h-[17px] w-[17px] md:h-[25px] md:w-[25px]" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 17"
-                                fill="none">
+                            <svg class="h-[17px] w-[17px] md:h-[25px] md:w-[25px]" xmlns="http://www.w3.org/2000/svg"
+                                width="25" height="25" viewBox="0 0 16 17" fill="none">
                                 <path
                                     d="M8.00016 15.1668C4.31816 15.1668 1.3335 12.1822 1.3335 8.50016C1.3335 4.81816 4.31816 1.8335 8.00016 1.8335C11.6822 1.8335 14.6668 4.81816 14.6668 8.50016C14.6668 12.1822 11.6822 15.1668 8.00016 15.1668ZM7.3335 10.5002V11.8335H8.66683V10.5002H7.3335ZM7.3335 5.16683V9.16683H8.66683V5.16683H7.3335Z"
                                     fill="#FF333E" />
@@ -463,7 +463,8 @@
                     </div>
                 </RouterLink>
             </div>
-            <p class="md:p-4 p-2 animate-fade-down animate-once text-xs md:text-base animate-duration-2000 font-medium text-center">
+            <p
+                class="md:p-4 p-2 animate-fade-down animate-once text-xs md:text-base animate-duration-2000 font-medium text-center">
                 See All Outbid
                 {{ notiAutions?.length }}
             </p>

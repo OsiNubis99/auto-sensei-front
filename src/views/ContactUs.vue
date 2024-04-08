@@ -1,4 +1,3 @@
-
 <template>
     <div class=" mt-20 md:mt-40 flex justify-center  items-center gap-10 md:p-5 flex-col">
         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="43" viewBox="0 0 60 43" fill="none">
@@ -21,34 +20,54 @@
             <div class="w-full">
                 <img class="h-full w-full object-cover" src="../assets/img/png/mapa.png" alt="">
             </div>
-            <div class="flex gap-4 flex-col w-full">
+            <div v-show="loading" class=" w-full h-auto flex justify-center items-center">
                 <div>
-                    <p class=" text-lg md:text-2xl font-semibold">Send email to us</p>
-                    <p class=" text-sm md:text-base">Description</p>
+                    <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
+                        <div class="animate-bounce">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
+                                stroke-width="0" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2 ">Loading...</p>
+                    </div>
                 </div>
-
+            </div>
+            <div v-show="!loading" class="flex gap-4 flex-col w-full">
                 <div class="flex gap-2 flex-col">
                     <label for="" class="font-medium">Name</label>
-                    <input type="text"
-                        class="appearance-none mblock w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    <input type="text" v-model="form.name" :class="invalid?.name ? 'border-error' : 'border-[#E0E0E0]'"
+                        class="appearance-none mblock w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         placeholder="Enter name">
                 </div>
                 <div class="flex gap-2 flex-col">
                     <label for="" class="font-medium">Email</label>
-                    <input type="text"
-                        class="appearance-none mblock w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    <input type="text" v-model="form.email"
+                        :class="invalid?.email ? 'border-error' : 'border-[#E0E0E0]'"
+                        class="appearance-none mblock w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         placeholder="Enter email">
                 </div>
-                <div class="flex gap-2 flex-col">
-                    <label for="" class="font-medium">Phone Number</label>
-                    <input type="text"
-                        class="appearance-none  block w-full px-3 py-2 border border-[#E0E0E0] rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        placeholder="Enter phone number">
+                <div class="space-y-1 custom-phone">
+                    <label htmlFor="phoneNumber" class="block text-sm font-medium text-gray-700">
+                        Phone Number
+                    </label>
+                    <input :class="invalid?.phone ? ' !border !border-error' : ''" type="tel" @input="filterinput"
+                        v-model="form.phone" class="border rounded-md h-[48px] w-full" id="telephone" />
                 </div>
-
-                <button class="btn bg-primary">Send</button>
+                <div class="flex gap-2 flex-col">
+                    <label for="" class="font-medium">Description</label>
+                    <textarea v-model="form.description"
+                        :class="invalid?.description ? 'border-error' : 'border-[#E0E0E0]'"
+                        class="appearance-none  block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        name="textarea" placeholder="Description" rows="10" cols="40"></textarea>
+                </div>
+                <button @click="sendContact" class="btn bg-primary">Send</button>
             </div>
+
         </div>
+
 
         <div v-if="store?.data?.length > 0" class="w-full  flex flex-col justify-center items-center bg-[#F0F0F0]">
             <div class="flex justify-center items-center flex-col pt-20 mb-5 md:mb-20 ">
@@ -63,8 +82,8 @@
                             class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-10 relative">
                             <div
                                 class=" text-sm md:text-lg text-base-black  flex items-center gap-2 font-semibold transition ease duration-500">
-                                <svg class="md:w-[40px] w-[24px] md:h-[40px]" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 29"
-                                    fill="none">
+                                <svg class="md:w-[40px] w-[24px] md:h-[40px]" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 29" fill="none">
                                     <g clip-path="url(#clip0_433_147175)">
                                         <path
                                             d="M20.0447 9.26498C19.3555 8.57575 18.5924 8.00344 17.7862 7.52344C16.6847 11.6527 12.8447 13.665 12.6539 13.7573L11.817 14.1819L10.9801 13.7573C10.7893 13.6588 6.98007 11.665 5.86007 7.57267C5.09084 8.04036 4.35238 8.60036 3.68777 9.26498C-0.823005 13.7757 -0.823005 21.1111 3.68777 25.6219C5.94007 27.8742 8.90623 29.0065 11.8662 29.0065C14.8262 29.0065 17.7862 27.8804 20.0447 25.6219C24.5555 21.1111 24.5555 13.7757 20.0447 9.26498ZM6.89392 25.7758C6.217 25.3758 5.577 24.8958 4.99854 24.3111C1.99546 21.3081 1.38007 16.8157 3.14007 13.1911C4.74623 12.3604 6.86315 13.4065 6.8693 15.4373C6.88777 19.4742 10.7401 16.1019 11.8662 19.4742C12.7216 22.0404 9.98315 24.5942 6.88777 25.7696L6.89392 25.7758ZM18.7401 24.3111C18.1493 24.9019 17.5032 25.3819 16.8201 25.7881C15.5032 22.2988 19.6755 20.8711 16.8508 18.0527C14.8693 16.0711 16.457 14.1265 20.3401 12.6927C22.4078 16.3911 21.8847 21.1665 18.7401 24.3111Z"
@@ -92,7 +111,8 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
+                        <div
+                            class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
                             <p class="p-2 px-8 text-sm  md:text-base text-base-black text-left">
                                 {{ faq.answer }}
                             </p>
@@ -105,13 +125,19 @@
         </div>
     </div>
 </template>
-  
-<script >
+
+<script>
 import { ref, onMounted, computed } from "vue";
 import iconArrow from '../components/icons/iconArrow.vue'
 import Heanding from '../components/Headings/Heanding.vue'
 import { useRouter, useRoute } from 'vue-router'
+import { toast } from "vue3-toastify";
+import "intl-tel-input/build/css/intlTelInput.css";
+import "intl-tel-input/build/js/intlTelInput.js";
+import intlTelInput from "intl-tel-input";
 import { useFaqStore } from "@/stores/faq";
+import { useContactStore } from "@/stores/contactForm";
+import { validationContactUs } from "../validations/validationContactUs";
 export default {
     components: {
         iconArrow,
@@ -120,28 +146,104 @@ export default {
     setup() {
         const route = useRouter();
         const store = useFaqStore();
+        const invalid = ref();
+        const telInput = ref();
+        const loading = ref(false)
+        const contactStore = useContactStore()
         const redirectLogin = (redirect) => {
             route.push({ name: 'signup', params: { rol: redirect } })
         }
+        const form = ref({
+            name: null,
+            email: null,
+            phone: null,
+            description: null,
+        })
         const index = async () => {
             try {
                 let res = await store.index();
             } catch (error) {
-
+                toast(error?.response?.data?.message, {
+                    type: "error",
+                });
             }
         };
+        const filterinput = (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]+/g, '');
+            let value = e.target.value;
+            form.phoneNumber = value
+        }
+        const sendContact = async () => {
+            invalid.value = validationContactUs(form.value);
+            if (Object.entries(invalid.value).length > 0) {
+                toast(invalid?.value?.name || invalid.value.email || invalid.value.phone || invalid.value.description, {
+                    type: "error",
+                    autoClose: 2000,
+                });
+                return
+            }
+            loading.value = true
+            const formattedNumber = telInput.value.selectedCountryData.dialCode;
+            form.value.phone = `+${formattedNumber + form.phoneNumber}`;
+            console.log('form.value', form.value)
+            try {
+                let data = {
+                    name: form.value.name,
+                    email: form.value.email,
+                    phone: form.value.phone,
+                    description: form.value.description,
+                }
+                let res = await contactStore.sendContact(data);
+                if (res) {
+                    console.log('res', res)
+                    toast('Your information has been sent', {
+                        type: "success",
+                        position: "top-center",
+                    });
+                }
+            } catch (error) {
+                toast(error?.response?.data?.message || 'Please try later', {
+                    type: "error",
+                });
+            } finally {
+                form.value.name = null
+                form.value.email = null
+                form.value.phone = null
+                form.value.description = null
+                const input = document.getElementById("telephone");
+                telInput.value = intlTelInput(input, {
+                    preferredCountries: ["ca", "in", "us"],
+                    // Otros opciones de inicialización si es necesario
+                });
+                input.addEventListener("countrychange", function (e) {
+                    console.log(telInput);
+                });
+                loading.value = false
+            }
+            console.log('form', form.value)
+        }
         onMounted(() => {
             index();
+            const input = document.getElementById("telephone");
+            telInput.value = intlTelInput(input, {
+                preferredCountries: ["ca", "in", "us"],
+                // Otros opciones de inicialización si es necesario
+            });
+            input.addEventListener("countrychange", function (e) {
+                console.log(telInput);
+            });
         });
         return {
             iconArrow,
             Heanding,
             redirectLogin,
-            store
+            store,
+            sendContact,
+            form,
+            invalid,
+            filterinput,
+            loading
         };
     },
 };
 </script>
-  
-    
-  

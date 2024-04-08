@@ -233,9 +233,9 @@
                                 <option value="option 4">option 4</option>
                             </select>
                         </div> -->
-                        <div class="w-full flex flex-col gap-2">
+                       <!--  <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Model</label>
-                            <select v-model="form.modelPreferences"
+                            <select v-model="form.c"
                                 :class="invalid?.modelPreferences ? 'border-error' : 'border-[#E0E0E0]'"
                                 class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -244,7 +244,7 @@
                                 <option value="option 3">option 3</option>
                                 <option value="option 4">option 4</option>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="w-full flex items-center  flex-col md:flex-row justify-between gap-4 ">
                         <div class="w-full flex flex-col gap-2">

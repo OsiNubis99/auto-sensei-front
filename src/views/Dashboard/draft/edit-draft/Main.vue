@@ -1093,15 +1093,10 @@ export default {
                 const res = await countrys.getCountryCities(props.iso2 ? props.iso2 : props[0].iso2)
                 formData.value.getCities = res.data
                 if (formData.value.city) {
-                    console.log('RAMONNNNNNNNN', res)
-                    console.log('RAMONAAAAAAA', formData.value.city)
                     let resCity = res.data.filter((c) => c.name == formData.value.city)
                     console.log('resCity', resCity)
                     formData.value.city = JSON.stringify(resCity[0])
                 }
-
-
-                console.log('getCountryCities', res)
             } catch (error) {
                 loadingCountrys.value = false
             } finally {

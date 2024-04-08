@@ -1,7 +1,7 @@
 <template>
     <div v-if="isLoading" class="h-screen-login-loading w-full h-full flex justify-center items-center">
         <div>
-            <div class=" h-12 w-12 md:h-[80px] md:w-[80px] ">
+            <div class=" h-12 w-12 md:h-[80px] relative md:w-[80px] ">
                 <div class="animate-bounce">
                     <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                         stroke-width="0" viewBox="0 0 16 16">
@@ -10,8 +10,10 @@
                         </path>
                     </svg>
                 </div>
-                <p v-if="codePhone" class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2">Sending code
-                    to your phone...</p>
+                <div v-if="codePhone" class=" absolute md:-left-[100%]  -left-[127%]   mt-3 md:pl-2">
+                    <p class="text-xs md:text-base font-medium text-base-gray whitespace-pre">Sending code to your
+                        phone...</p>
+                </div>
                 <p v-else class=" text-base-gray text-xs md:text-base mt-3 font-medium md:pl-2">Loading...</p>
             </div>
         </div>
@@ -21,7 +23,8 @@
         <div class="flex-1 flex flex-col justify-center md:p-0 md:mb-10 md:mx-4 sm:px-6 h-full lg:flex-none ">
             <div class="mx-auto  w-full ">
                 <div>
-                    <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">Create Your Dealer
+                    <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center md:mb-5 ">Create Your
+                        <span v-if="rol == 'dealers'"> Dealer</span> <span v-if="rol == 'sellers'"> Sellers</span>
                         Account
                     </h2>
                     <p class=" text-xs md:text-sm font-normal text-[#666] text-center  ">Auction your car to dealers
@@ -93,7 +96,7 @@
                                         </label>
                                         <div class="mt-1">
                                             <input name="address" v-model="form.linea1" type="text"
-                                            placeholder="Street address or P.O. Box"
+                                                placeholder="Street address or P.O. Box"
                                                 :class="invalid?.linea1 ? 'border-error' : 'border-[#F0F0F0]'"
                                                 class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                         </div>
@@ -104,7 +107,7 @@
                                         </label>
                                         <div class="mt-1">
                                             <input name="address" v-model="form.linea2" type="text"
-                                            placeholder="Apt, suite, unit, building, floor, etc."
+                                                placeholder="Apt, suite, unit, building, floor, etc."
                                                 :class="invalid?.linea2 ? 'border-error' : 'border-[#F0F0F0]'"
                                                 class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                         </div>
@@ -347,8 +350,6 @@ export default {
                 let data = {
                     phone: codePhone.value
                 }
-                console.log('formCreate.firtName', formCreate.firtName)
-                console.log('formCreate.lastName', formCreate.lastName)
                 let address = null
                 isLoading.value = true
                 address = {
@@ -360,30 +361,143 @@ export default {
                 }
                 console.log('address', address)
                 try {
+                    let dataSenCode = {
+                        token: token.value,
+                        rol: rol.value,
+                        phone: codePhone.value ? codePhone.value : null,
+                        picture: form.img ? form.img : null,
+                        name: form.dealerName ? form.dealerName : null,
+                        firstName: form.firtName ? form.firtName : null,
+                        lastName: form.lastName ? form.lastName : null,
+                        dealerFirsName: formCreate.firtName,
+                        dealerLastName: formCreate.lastName,
+                        omvic: form.registrationNumber ? form.registrationNumber : null,
+                        address: address ? address : null,
+                        driverLicense: form.driverLicense ? form.driverLicense : null,
+                    }
+                    storeData.getSendData = dataSenCode
                     let resCode = await storeUser.getValidation(data)
                     if (resCode.data.status == 'ok') {
-                        let dataSenCode = {
-                            token: token.value,
-                            rol: rol.value,
-                            phone: codePhone.value ? codePhone.value : null,
-                            picture: form.img ? form.img : null,
-                            name: form.dealerName ? form.dealerName : null,
-                            firstName: form.firtName ? form.firtName : null,
-                            lastName: form.lastName ? form.lastName : null,
-                            dealerFirsName: formCreate.firtName,
-                            dealerLastName: formCreate.lastName,
-                            omvic: form.registrationNumber ? form.registrationNumber : null,
-                            address: address ? address : null,
-                            driverLicense: form.driverLicense ? form.driverLicense : null,
-                            validationCode: resCode.data.code
+                        isLoading.value = true
+                        if (form.img || form.driverLicense) {
+                            let resFile = form.img && await storeFile.uploaderFile({ file: form.img, location: 'profile' })
+                            let resLicence = form.driverLicense && await storeFile.uploaderFile({ file: form.driverLicense, location: 'license' })
+                            console.log('resLicence', resLicence)
+                            if (resFile.data || resLicence.data) {
+                                try {
+                                    let typeSeller = {
+                                        seller: {
+                                            picture: resFile?.data ? resFile?.data : null,
+                                            firstName: form.firstName,
+                                            lastName: form.lastName,
+                                            driverLicense: resLicence?.data ? resLicence?.data : null,
+                                        },
+                                    }
+                                    let typeDealer = {
+                                        dealer: {
+                                            picture: resFile?.data ? resFile?.data : null,
+                                            name: form.dealerName ? form.dealerName : null,
+                                            omvic: form.registrationNumber ? form.registrationNumber : null,
+                                        },
+                                        address: {
+                                            city: address.city,
+                                            country: 'Canada',
+                                            line1: address.linea1,
+                                            line2: address.linea2,
+                                            postal_code: address.zipCode,
+                                            state: address.province
+                                        },
+                                    }
+                                    typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
+
+                                    let data = {
+                                        token: token.value,
+                                        payloadData: typeUser.value
+                                    }
+
+                                    try {
+                                        let res = await storeUser.userData(data)
+                                        if (res) {
+                                            props.next()
+                                            isLoading.value = false
+                                        }
+                                    } catch (error) {
+                                        isLoading.value = false
+                                        toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                            type: "error",
+                                        });
+                                    }
+
+
+
+                                } catch (error) {
+                                    toast(error?.response?.data?.message || 'error al cargar', {
+                                        type: "error",
+                                    });
+                                    isLoading.value = false
+                                }
+                            } else {
+                                isLoading.value = false
+                                toast('Intente de nuevo', {
+                                    type: "error",
+                                });
+                            }
+                        } else {
+                            try {
+                                let typeSeller = {
+                                    seller: {
+                                        firstName: form.firtName,
+                                        lastName: form.lastName,
+                                    }
+                                }
+                                let typeDealer = {
+                                    dealer: {
+                                        name: form.dealerName ? form.dealerName : null,
+                                        omvic: form.registrationNumber ? form.registrationNumber : null,
+                                    },
+                                    address: {
+                                        city: address.city,
+                                        country: 'Canada',
+                                        line1: address.linea1,
+                                        line2: address.linea2,
+                                        postal_code: address.zipCode,
+                                        state: address.province
+                                    },
+                                }
+                                typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
+                                let data = {
+                                    token: token.value,
+                                    payloadData: typeUser.value
+                                }
+                                try {
+                                    let res = await storeUser.userData(data)
+                                    if (res) {
+                                        props.next()
+                                        isLoading.value = false
+                                    }
+                                } catch (error) {
+                                    isLoading.value = false
+                                    toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                        type: "error",
+                                    });
+                                }
+
+                            } catch (error) {
+                                if (error?.response?.data?.message == "Unauthorized") {
+                                    toast(error?.response?.data?.message || 'error al cargar', {
+                                        type: "error",
+                                        autoClose: 2000,
+                                    });
+                                    props.backEmailToken()
+                                }
+                                isLoading.value = false
+                            }
                         }
-                        storeData.getSendData = dataSenCode
-                        console.log('dataSenCode', dataSenCode)
-                        props.next()
+                        isLoading.value = false
                     }
-                    isLoading.value = false
-                    console.log('resCode', resCode)
+
                 } catch (error) {
+                    console.log('error', error)
                     toast(error.response.data.message, {
                         type: "error",
                         autoClose: 2000,

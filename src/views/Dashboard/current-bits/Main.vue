@@ -13,7 +13,7 @@
                 <div class=" hidden md:w-[29%] md:block">
                     <FilterBig />
                 </div>
-                <div class="w-full md:w-[70%] ">
+                <div class="w-full lg:w-[70%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }}
                             Vehicles

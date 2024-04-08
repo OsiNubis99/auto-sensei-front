@@ -7,11 +7,11 @@
         <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="hidden md:w-[29%] md:block">
-                    <CreateAution class="hidden md:block" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="hidden md:w-[29%] lg:block">
+                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
-                <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
-                <div class="w-full md:w-[70%] ">
+                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="w-full lg:w-[70%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class=" text-xs font-semibold md:text-base  ">{{ sortedData?.length }} Vehicles</p>
                         <div class="flex items-center gap-2 ">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="p-2" v-if="sortedData.length > 0"
-                        :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
+                        :class="changeLayouts ? 'grid md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
                         <div v-for="(auction, index) in sortedData" :key="index"
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
@@ -135,7 +135,9 @@ export default {
         const sortBy = ref('year')
         const counter = ref(0)
         const changeGridTemplate = () => {
+          
             changeLayouts.value = !changeLayouts.value
+            counter.value++
         }
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             const i = data.value.findIndex(x => x._id === newQuestion._id)

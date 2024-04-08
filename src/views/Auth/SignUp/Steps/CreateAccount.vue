@@ -21,7 +21,7 @@
             <div class="mx-auto w-full ">
                 <div class="animate-fade-up  animate-ease-in-out animate-delay-100">
                     <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center md:mb-5 ">Create Your
-                        <span v-if="rol == 'dealers'"> Dealer</span> <span v-if="rol !== 'dealers'"> Sellers</span>
+                        <span v-if="rol == 'dealers'"> Dealer</span> <span v-if="rol == 'sellers'"> Sellers</span>
                         Account
                     </h2>
                     <p class=" text-sm font-normal text-[#666] text-center  ">Auction your car to <span

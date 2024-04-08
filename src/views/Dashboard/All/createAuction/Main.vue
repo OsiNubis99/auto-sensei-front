@@ -9,11 +9,11 @@
                         stroke="#272D35" stroke-width="132" />
                 </svg>
             </div>
-            <div class="relative max-w-[85rem] mx-auto z-50 md:pt-[60px] ">
-                <Heanding class="hidden md:block" :type="'h3'" :msg="'Create Auctions'" />
-                <div class="flex justify-center flex-col md:flex-row md:mt-5 md:gap-7 relative">
-                    <div class="md:w-2/4 w-full  ">
-                        <div class="w-full   left-0 z-50 block md:hidden ">
+            <div class="relative max-w-[85rem] mx-auto z-50 lg:pt-[60px] ">
+                <Heanding class="hidden lg:block" :type="'h3'" :msg="'Create Auctions'" />
+                <div class="flex justify-center flex-col lg:flex-row lg:mt-5 md:gap-7 relative">
+                    <div class="lg:w-2/4 w-full  ">
+                        <div class="w-full   left-0 z-50 block lg:hidden ">
                             <div class="py-2 bg-white shadow-md">
                                 <div class="flex items-center cursor-pointer  justify-between uppercase w-full text-sm px-4 py-2"
                                     @click="expanded = !expanded">
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white hidden md:block p-5 shadow-steps">
+                        <div class="bg-white hidden lg:block p-5 shadow-steps">
                             <p class="text-[#666] font-medium  text-lg uppercase ">COMPLETE OUR 3 STEP PROCESS</p>
                             <div class=" flex justify-between gap-[100px] mt-7 items-center">
                                 <div class="flex hr-custim-1 items-center gap-5 ">

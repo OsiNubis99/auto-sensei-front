@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+export const template = `<html>
 
 <head>
     <style>
@@ -201,39 +200,6 @@
 
         .t-l {
             text-align: left;
-        }
-
-        .firma {
-            width: 70%;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .firma_section-1 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-            gap: 25px;
-        }
-
-        .firma-1 {
-            display: flex;
-            gap: 30px;
-            grid-column: 1/5;
-            width: 100%;
-        }
-
-        .firma-2 {
-            display: flex;
-            gap: 30px;
-            grid-column: 5 / 9;
-            width: 100%;
-        }
-
-        .firma-2_contend {
-            display: flex;
-            text-align: center;
-            gap: 30px;
         }
     </style>
 </head>
@@ -463,27 +429,27 @@
         </div>
 
         <div>
-            <div class="firma">
-                <div class="firma_section-1">
-                    <div class="firma-1">
+            <div style="width: 70%; display: flex; flex-direction: column; gap: 20px;">
+                <div style="display:grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;gap:25px;">
+                    <div style="display:flex;gap:30px;grid-column: 1/5;width: 100%;">
                         <p>Accepted by Purchaser:</p>
                         <p style="letter-spacing: -3px;">____________________________________________</p>
                     </div>
-                    <div class="firma-2">
-                        <div class="firma-2_contend">
+                    <div style="display: flex;gap: 30px;grid-column: 5 / 9;width: 100%;">
+                        <div style="display: flex; text-align: center; gap: 30px;">
                             <p>Reg. #</p>
                             <p style="letter-spacing: -3px;">_________________</p>
                         </div>
                     </div>
 
                 </div>
-                <div class="firma_section-1">
-                    <div class="firma-1">
+                <div style="display:grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;gap:25px;">
+                    <div style="display:flex;gap:30px;grid-column: 1/5;width: 100%;">
                         <p>Accepted by Purchaser:</p>
                         <p style="letter-spacing: -3px;">____________________________________________</p>
                     </div>
-                    <div class="firma-2">
-                        <div class="firma-2_contend">
+                    <div style="display: flex;gap: 30px;grid-column: 5 / 9;width: 100%;">
+                        <div style="display: flex; text-align: center; gap: 30px;">
                             <p>Reg. #</p>
                             <p style="letter-spacing: -3px;">_________________</p>
                         </div>
@@ -502,4 +468,4 @@
     </div>
 </body>
 
-</html>
+</html>`

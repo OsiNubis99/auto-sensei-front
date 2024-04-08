@@ -99,10 +99,10 @@
             <template v-if="steps.step2">
                 <div class="md:p-5 p-2 pt-0">
                     <p class="text-xs  md:text-base">
-                        <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $250 transaction fee if your bid
+                        <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $300 transaction fee if your bid
                             is
                             successfully won.</span>
-                        <span v-if="statusModal.from == 'bidNow'">You'll be charged a $350 + Harmonized Sales Tax (HST)
+                        <span v-if="statusModal.from == 'bidNow'">You'll be charged a $300 + Harmonized Sales Tax (HST)
                             transaction fee if your bid is
                             successful won.</span>
                     </p>

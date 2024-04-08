@@ -101,7 +101,8 @@
                         </div>
                     </div>
                     <template v-if="aution?.bids[0].participant._id == auth?.userData?._id">
-                        <div v-if="aution.status == 'completed' || aution.status == 'bids completed'" class="pb-5 flex mt-4 flex-col gap-4">
+                        <div v-if="aution.status == 'completed' || aution.status == 'bids completed'"
+                            class="pb-5 flex mt-4 flex-col gap-4">
                             <p>Final bid</p>
                             <p class="text-2xl font-semibold">${{ aution.bids[0].amount }}</p>
                         </div>
@@ -124,7 +125,7 @@
                 <template v-if="aution?.bids[0].participant._id == auth?.userData?._id">
                     <div v-if="aution.status == 'completed' || aution.status == 'bids completed'" class="p-2">
 
-                        <button :disabled="loadingButton ? true : false" @click="confirmVehicleAution(aution._id)"
+                        <button :disabled="loadingButton ? true : false" @click="confirmVehicleAution(aution)"
                             class="btn w-full bg-primary flex gap-2 items-center text-base-black">
                             <div v-if="loadingButton && indexShowLoading == aution._id" class="w-8 h-8">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#0B1107"
@@ -178,7 +179,7 @@
                 <template v-if="aution?.bids[0].participant._id == auth?.userData?._id">
                     <div class="flex w-full items-center gap-2 pb-2 px-2">
                         <div v-if="aution.status == 'completed' || aution.status == 'bids completed'" class="w-full">
-                            <button :disabled="loadingButton ? true : false" @click="confirmVehicleAution(aution._id)"
+                            <button :disabled="loadingButton ? true : false" @click="confirmVehicleAution(aution)"
                                 class="btn !py-2 w-full bg-primary flex gap-2 items-center text-base-black">
                                 <div v-if="loadingButton && indexShowLoading == aution._id" class="w-8 h-8">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#0B1107"
@@ -223,6 +224,8 @@ import moment from "moment";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalBids } from '@/stores/modalBids';
 import { ModalAutoBid } from '@/stores/modalAutoBid';
+import PSPDFKit from 'pspdfkit';
+import axios from "@/axios";
 export default {
     components: {
         Swiper,
@@ -255,8 +258,8 @@ export default {
                 new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
             );
         }
-        const confirmVehicleAution = (id) => {
-            props.confirmVehicle(id)
+        const confirmVehicleAution = (aution) => {
+             props.confirmVehicle(aution)
         }
         return {
             modules: [Navigation, Pagination, Scrollbar, A11y],

@@ -1,6 +1,7 @@
 <template>
     <header>
-        <div v-if="path == 'login' || path == 'signup'" class="md:h-10 p-2 md:p-6 flex justify-start  items-center bg-base-black">
+        <div v-if="path == 'login' || path == 'signup'"
+            class="md:h-10 p-2 md:p-6 flex justify-start  items-center bg-base-black">
             <div class="flex items-center gap-2 md:gap-5 cursor-pointer" @click="back">
                 <IconArrow class="rotate-90" />
                 <p class=" text-xs md:text-sm text-white font-medium">Back to Home</p>
@@ -8,10 +9,10 @@
         </div>
         <div class="font-sans antialiased" id="app">
             <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark hidden md:grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
-        (scrollPosition > 100 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md')]"
-                class="flex py-2 px-1 md:p-4   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal md:px-20 md:py-6">
+        (scrollPosition > 100 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md bg-white')]"
+                class="flex py-2 px-1 md:p-4   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal md:px-20  lg:px-12 md:py-6">
                 <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
-                    <LogoBlack class="md:w-[80%]" v-if="path == 'contact-us' && scrollPosition < 110" />
+                    <LogoBlack class=" w-[70%] md:w-[80%]" v-if="path == 'contact-us' && scrollPosition < 110" />
                     <LogoIcon v-else
                         :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]' : 'w-[90%] md:w-fit'" />
                     <p v-if="path == 'login' || path == 'signup'"
@@ -57,13 +58,15 @@
                     </div>
 
                 </div>
-                <div v-else class="flex md:hidden">
+                <div v-else class="flex lg:hidden">
                     <RouterLink v-if="path !== 'login' || path == 'signup'" to="/login/sellers"
-                        class=" text-xs px-4 py-2 rounded-md bg-transparent text-white border border-[#e5e5e5]">
+                        :class="path == 'contact-us' && scrollPosition < 110 ? 'text-blue-dark  border-blue-dark' : 'text-white  border-[#e5e5e5]'"
+                        class=" text-xs px-4 py-2 rounded-md bg-transparent border ">
                         Login
                     </RouterLink>
                     <button @click="toggle"
-                        class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
+                    :class="path == 'contact-us' && scrollPosition < 110 ? 'text-[#000] ' : 'text-white'"
+                        class="flex items-center px-3 py-2   rounded text-teal-lighter  hover:text-white hover:border-white">
                         <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <title>Menu</title>
                             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
@@ -71,7 +74,7 @@
                     </button>
                 </div>
                 <div :class="(path == 'login' || path == 'signup' ? 'justify-end' : '')"
-                    class="w-full flex-grow hidden  md:flex sm:items-center sm:w-auto">
+                    class="w-full flex-grow hidden  lg:flex sm:items-center sm:w-auto">
                     <div :class="[(path === 'login' || path === 'signup' ? 'hidden' : 'flex'), (open && 'flex-col p-5')]"
                         class="text-sm gap-6 sm:flex-grow text-white">
                         <p v-if="open" @click="open = false"
@@ -142,7 +145,8 @@
                     </div>
                 </div>
             </nav>
-            <div v-if="path == 'login' || path == 'signup'" class="bg-blue-dark flex justify-between md:hidden items-center px-3 py-2 ">
+            <div v-if="path == 'login' || path == 'signup'"
+                class="bg-blue-dark flex justify-between md:hidden items-center px-3 py-2 ">
                 <RouterLink :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
                     <p class="text-white text-sm font-medium">
                         <span v-if="path == 'login'">Don’t have an account?</span>
@@ -297,7 +301,7 @@
 
             <template v-else>
                 <nav v-show="open"
-                    class="fixed animation-menu-modal top-0 md:hidden z-[600] bg-[#141f0d] w-full h-full p-5">
+                    class="fixed animation-menu-modal top-0 lg:hidden z-[600] bg-[#141f0d] w-full h-full p-5">
                     <div class=" flex gap-3 justify-between items-center">
                         <div class=" flex gap-3 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="21" viewBox="0 0 25 21"

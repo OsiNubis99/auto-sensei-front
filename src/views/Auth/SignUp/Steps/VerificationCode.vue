@@ -150,199 +150,64 @@ export default {
                 });
                 return
             }
-            console.log('formdata', formdata)
             loading.value = true
-            if (formdata.picture || formdata.driverLicense) {
-                let resFile = formdata.picture && await storeFile.uploaderFile({ file: formdata.picture, location: 'profile' })
-                let resLicence = formdata.driverLicense && await storeFile.uploaderFile({ file: formdata.driverLicense, location: 'license' })
-                console.log('resLicence', resLicence)
-                if (resFile?.data || resLicence?.data) {
-                    console.log('entro aqi')
-                    try {
-                        let typeSeller = {
-                            seller: {
-                                picture: resFile?.data ? resFile?.data : null,
-                                firstName: formdata.firstName,
-                                lastName: formdata.lastName,
-                                driverLicense: resLicence?.data ? resLicence?.data : null,
-                            },
-                            phone: formdata.phone,
-                            validationCode: form.value.code
-                        }
-                        let typeDealer = {
-                            dealer: {
-                                picture: resFile?.data ? resFile?.data : null,
-                                name: formdata.name,
-                                omvic: formdata.omvic,
-                            },
-                            address: {
-                                city: formdata.address.city,
-                                country: 'Canada',
-                                line1: formdata.address.linea1,
-                                line2: formdata.address.linea2,
-                                postal_code: formdata.address.zipCode,
-                                state: formdata.address.province
+            console.log('formdata', formdata)
+            try {
+                let dataRegister = {
+                    phone: formdata.phone,
+                    validationCode: form.value.code
+                }
+                let data = {
+                    token: formdata.token,
+                    payloadData: dataRegister
+                }
 
-                            },
-                            phone: formdata.phone,
-                            validationCode: form.value.code
-                        }
-                        let dataRegister = formdata.rol == 'sellers' ? typeSeller : typeDealer
-                        let data = {
-                            token: formdata.token,
-                            payloadData: dataRegister
-                        }
-
-                        try {
-                            console.log('entro aqi')
-                            let res = await storeUser.userData(data)
-                            if (res) {
-                                axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
-
-                                let resToken = await store.authProfile()
-                                console.log('resToken', resToken)
-                                if (resToken.statusText = "OK") {
-                                    if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
-                                    if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
-                                    if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
-                                    switch (resToken.data.type) {
-                                        case 0:
-                                            await router.push({ path: '/inicio' })
-                                            router.go()
-                                            break;
-                                        case 1:
-                                            await router.push({ path: '/all' })
-                                            router.go()
-                                            break;
-                                        case 2:
-                                            localStorage.clear()
-                                            showSuccessRegister.value = true
-                                            break;
-                                        default:
-                                            await router.push({ name: 'home' })
-                                            router.go()
-                                            break;
-                                    }
-                                    loading.value = false;
-                                }
+                try {
+                    let res = await storeUser.userData(data)
+                    console.log('res', res)
+                    if (res) {
+                        axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
+                        let resToken = await store.authProfile()
+                        console.log('resToken', resToken)
+                        if (resToken.statusText = "OK") {
+                            if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
+                            if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
+                            if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
+                            switch (resToken.data.type) {
+                                case 0:
+                                    await router.push({ path: '/inicio' })
+                                    router.go()
+                                    break;
+                                case 1:
+                                    await router.push({ path: '/all' })
+                                    router.go()
+                                    break;
+                                case 2:
+                                    localStorage.clear()
+                                    showSuccessRegister.value = true
+                                    break;
+                                default:
+                                    await router.push({ name: 'home' })
+                                    router.go()
+                                    break;
                             }
-                        } catch (error) {
-                            console.log('entro aqi', error)
-                            loading.value = false
-                            toast(error?.response?.data?.message[0] || 'error al cargar', {
-                                type: "error",
-                            });
+                            loading.value = false;
                         }
-                    } catch (error) {
-                        console.log('entro aqi', error)
-                        toast(error?.response?.data?.message || 'error al cargar', {
-                            type: "error",
-                        });
-                        loading.value = false
                     }
-                } else {
+                } catch (error) {
+                    console.log('entro aqi', error)
                     loading.value = false
-                    toast('Intente de nuevo', {
+                    toast(error?.response?.data?.message[0] || 'error al cargar', {
                         type: "error",
                     });
                 }
-            } else {
-                console.log('entro')
-                try {
-                    let typeSeller = {
-                        seller: {
-                            firstName: formdata.firtName,
-                            lastName: formdata.lastName,
-                        },
-                        phone: formdata.phone,
-                        validationCode: form.value.code
-                    }
-                    let typeDealer = {
-                        dealer: {
-                            name: formdata.name,
-                            omvic: formdata.registrationNumber,
-                        },
-                        address: {
-                            city: formdata.address.city,
-                            country: 'Canada',
-                            line1: formdata.address.linea1,
-                            line2: formdata.address.linea2,
-                            postal_code: formdata.address.zipCode,
-                            state: formdata.address.province
-
-                        },
-                        phone: formdata.phone,
-                        validationCode: form.value.code
-                    }
-                    let dataRegister = formdata.rol == 'sellers' ? typeSeller : typeDealer
-                    console.log('dataRegister', dataRegister)
-                    let data = {
-                        token: formdata.token,
-                        payloadData: dataRegister
-                    }
-
-                    try {
-                        let res = await storeUser.userData(data)
-                        if (res) {
-                            axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
-
-                            let resToken = await store.authProfile()
-
-                            if (resToken.statusText = "OK") {
-                                if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
-                                if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
-                                if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
-                                setInterval(async () => {
-                                    switch (resToken.data.type) {
-                                        case 0:
-                                            await router.push({ path: '/inicio' })
-                                            router.go()
-                                            break;
-                                        case 1:
-                                            await router.push({ path: '/all' })
-                                            router.go()
-                                            break;
-                                        case 2:
-                                            localStorage.clear()
-                                            showSuccessRegister.value = true
-                                            break;
-                                        default:
-                                            await router.push({ name: 'home' })
-                                            router.go()
-                                            break;
-                                    }
-                                    loading.value = false;
-                                }, 800);
-                            }
-                        }
-                    } catch (error) {
-                        console.log('error', error)
-                        loading.value = false
-                        toast(error?.response?.data?.message[0] || 'error al cargar', {
-                            type: "error",
-                        });
-                    }
-
-                } catch (error) {
-                    console.log('error', error)
-                    if (error?.response?.data?.message == "Unauthorized") {
-                        toast(error?.response?.data?.message || 'error al cargar', {
-                            type: "error",
-                            autoClose: 2000,
-                        });
-                    }
-                    loading.value = false
-                }
+            } catch (error) {
+                console.log('entro aqi', error)
+                toast(error?.response?.data?.message || 'error al cargar', {
+                    type: "error",
+                });
+                loading.value = false
             }
-
-            /*  console.log('res', resToken)
-             setTimeout(async () => {
-                 await router.push({ path: `/login/${route.params.rol}` })
-                 router.go()
-                 loading.value = false
-             }, 2000);
-
-            /*  props.next() */
         }
         const backStep = () => {
             props.back()
