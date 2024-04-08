@@ -202,6 +202,7 @@ export default {
         const data = ref([])
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
+            counter.value++
         }
         function timeToStart(startDate) {
             if (!startDate) return 0;

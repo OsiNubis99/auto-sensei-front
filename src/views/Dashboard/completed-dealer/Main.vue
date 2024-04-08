@@ -79,7 +79,7 @@
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
                             <CardCompletedDealer :key="counter" :aution="aution" :data="data" :auth="authStore"
-                                :confirmVehicle="confirmVehicle" />
+                                :confirmVehicle="confirmVehicle" :changeLayouts="changeLayouts" />
                             <!--   <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
@@ -280,8 +280,21 @@
 
                 </template>
                 <template v-else>
-                    <div v-if="steps.step1">Debe firma el pdf para continuar
-                        <button @click="nextContract">Siguiente</button>
+                    <div v-if="steps.step1" class="w-full p-5 flex flex-col justify-center items-center">
+                        <div class="flex justify-center items-center flex-col gap-3">
+                            <img src="../../../assets/img/png/icon-signature.png" alt="">
+                            <p class=" text-center text-lg p-5 font-medium ">Thank you for completing the process! Enjoy
+                                your new vehicle and continue bidding with us!</p>
+                        </div>
+
+                        <div class="flex gap-3 items-center w-full mt-4 justify-center">
+                            <button
+                                class="bg-white border-error text-error hover:bg-error transition-all ease-out duration-200 hover:text-white py-2 shadow-lg rounded-lg w-full"
+                                @click="closetModalPdf">No</button>
+                            <button class="bg-primary py-2 shadow-lg rounded-lg w-full"
+                                @click="nextContract">Yes</button>
+                        </div>
+
                     </div>
                     <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 70vh;"></div>
                     <div v-if="steps.step3" class="p-4 flex justify-center items-center flex-col gap-3">
@@ -498,7 +511,29 @@ export default {
             steps.value.step1 = false
             steps.value.step2 = true
             if (steps.value.step2) {
-                const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
+                loadingPdf.value = true
+                try {
+                    let res = await storeAutions.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
+                    console.log('res', res)
+                    if (res) {
+                        showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                        loadingPdf.value = false
+                        steps.value.step1 = false
+                        steps.value.step2 = false
+                        steps.value.step3 = true
+
+                    }
+                } catch (error) {
+                    loadingPdf.value = false
+                    toast(error.response.data.message, {
+                        type: "error",
+                    });
+                } finally {
+                    loadingPdf.value = false
+                    index()
+                }
+
+                /* const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
                 PSPDFKit.load({
                     baseUrl,
                     container: "#pspdfkit",
@@ -530,7 +565,7 @@ export default {
                         dataBuffer.value = buffer
                         sutmibPDF(buffer)
                     });
-                })
+                }) */
             }
 
         }

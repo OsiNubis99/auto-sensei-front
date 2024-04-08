@@ -221,7 +221,7 @@
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <!--  <div class="w-full flex flex-col gap-2">
+                        <!--   <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Make</label>
                             <select v-model="form.makePreferences"
                                 :class="invalid?.makePreferences ? 'border-error' : 'border-[#E0E0E0]'"
@@ -232,8 +232,8 @@
                                 <option value="option 3">option 3</option>
                                 <option value="option 4">option 4</option>
                             </select>
-                        </div> -->
-                       <!--  <div class="w-full flex flex-col gap-2">
+                        </div>
+                        <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Model</label>
                             <select v-model="form.c"
                                 :class="invalid?.modelPreferences ? 'border-error' : 'border-[#E0E0E0]'"
@@ -245,6 +245,21 @@
                                 <option value="option 4">option 4</option>
                             </select>
                         </div> -->
+                        <div class="w-full flex flex-col gap-2">
+                            <label class=" text-sm md:text-base " for="">Make</label>
+                            <input v-model="form.makePreferences"
+                                :class="invalid?.makePreferences ? 'border-error' : 'border-[#E0E0E0]'"
+                                class="p-2 rounded-lg border "
+                                placeholder="Make">
+                        </div>
+                        <div class="w-full flex flex-col gap-2">
+                            <label class=" text-sm md:text-base " for="">Model</label>
+                            <input v-model="form.modelPreferences"
+                                :class="invalid?.modelPreferences ? 'border-error' : 'border-[#E0E0E0]'"
+                                class="p-2 rounded-lg border "
+                                placeholder="Model">
+                        </div>
+                      
                     </div>
                     <div class="w-full flex items-center  flex-col md:flex-row justify-between gap-4 ">
                         <div class="w-full flex flex-col gap-2">

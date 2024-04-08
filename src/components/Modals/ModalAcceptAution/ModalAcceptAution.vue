@@ -42,7 +42,7 @@
                                 <img v-if="statusModal.dataAutiont?.photos"
                                     class="w-full h-full shadow-xl rounded-lg object-cover"
                                     :src="bucket + statusModal.dataAutiont?.photos[0].url" alt="">
-                                <img class=" shadow-xl w-full rounded-lg object-cover " v-else
+                                <img class=" shadow-xl w-full h-full rounded-lg object-cover " v-else
                                     src="@/assets/img/jpg/image.jpg" alt="">
                             </div>
                             <div class="flex justify-between flex-col h-full">
@@ -148,9 +148,7 @@ export default {
                         steps.value.step2 = false
                         steps.value.step3 = true
                     }
-
                 }
-
                 console.log(result);
             } catch (e) {
                 loading.value = false
@@ -206,56 +204,69 @@ export default {
                     const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
                     let pdf = null;
                     if (statusModal.dataAutiont.contract) {
-                        pdf = statusModal.dataAutiont.contract
-                        loading.value = false
+                        let res = await props.acceptAution(statusModal.dataAutiont.contract)
+                        if (res) {
+                            showPdf.value = 'https://apidev.autosensei.ca/files/' + statusModal.dataAutiont.contract
+                            steps.value.step1 = false
+                            steps.value.step2 = false
+                            steps.value.step3 = true
+                            loading.value = false
+                        }
                     } else {
                         axios
                             .get(`/auction/contract/${statusModal.dataAutiont._id}`)
-                            .then((response) => {
+                            .then(async (response) => {
                                 console.log('resPDF', response)
-                                pdf = response.data.contract
-                                loading.value = false
-                            })
-                    }
-                    if (!loading.value && steps.value.step2) {
-                        PSPDFKit.load({
-                            baseUrl,
-                            container: "#pspdfkit",
-                            document: 'https://apidev.autosensei.ca/files/' + pdf,
-                        }).then(async function (instance) {
-                            steps.value.step2 = true
-                            const widget = new PSPDFKit.Annotations.WidgetAnnotation({
-                                id: PSPDFKit.generateInstantId(),
-                                pageIndex: 0,
-                                isEditable: false,
-                                locked: false,
-                                lockedContents: false,
-                                isReadOnly: true,
-                                boundingBox: new PSPDFKit.Geometry.Rect({
-                                    left: 125,
-                                    top: 740,
-                                    width: 100,
-                                    height: 20
-                                }),
-                                formFieldName: "my signature form field"
-                            })
-                            const formField = new PSPDFKit.FormFields.SignatureFormField({
-                                name: "my signature form field",
-                                annotationIds: new PSPDFKit.Immutable.List([widget.id])
-                            });
-                            await instance.create([widget, formField]);
-                            instance.addEventListener("annotations.create", async (e) => {
-                                const buffer = await instance.exportPDF({ flatten: true });
-                                dataBuffer.value = buffer
-                                sutmibPDF(buffer)
+                                let res = await props.acceptAution(response.data.contract)
+                                if (res) {
+                                    showPdf.value = 'https://apidev.autosensei.ca/files/' + response.data.contract
+                                    steps.value.step1 = false
+                                    steps.value.step2 = false
+                                    steps.value.step3 = true
+                                    loading.value = false
+                                }
 
-                            });
-                            instance.addEventListener("document.saveStateChange", async (event) => { })
-                            steps.value.step1 = false
-                            steps.value.step2 = true
-                            loading.value = false
-                        })
+                            })
                     }
+                    /*   if (!loading.value && steps.value.step2) {
+                          PSPDFKit.load({
+                              baseUrl,
+                              container: "#pspdfkit",
+                              document: 'https://apidev.autosensei.ca/files/' + pdf,
+                          }).then(async function (instance) {
+                              steps.value.step2 = true
+                              const widget = new PSPDFKit.Annotations.WidgetAnnotation({
+                                  id: PSPDFKit.generateInstantId(),
+                                  pageIndex: 0,
+                                  isEditable: false,
+                                  locked: false,
+                                  lockedContents: false,
+                                  isReadOnly: true,
+                                  boundingBox: new PSPDFKit.Geometry.Rect({
+                                      left: 125,
+                                      top: 740,
+                                      width: 100,
+                                      height: 20
+                                  }),
+                                  formFieldName: "my signature form field"
+                              })
+                              const formField = new PSPDFKit.FormFields.SignatureFormField({
+                                  name: "my signature form field",
+                                  annotationIds: new PSPDFKit.Immutable.List([widget.id])
+                              });
+                              await instance.create([widget, formField]);
+                              instance.addEventListener("annotations.create", async (e) => {
+                                  const buffer = await instance.exportPDF({ flatten: true });
+                                  dataBuffer.value = buffer
+                                  sutmibPDF(buffer)
+  
+                              });
+                              instance.addEventListener("document.saveStateChange", async (event) => { })
+                              steps.value.step1 = false
+                              steps.value.step2 = true
+                              loading.value = false
+                          })
+                      } */
 
 
 

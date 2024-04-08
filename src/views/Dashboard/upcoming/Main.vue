@@ -535,6 +535,7 @@ export default {
         }
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
+            counter.value++
         }
         const applyPairFilters = (event, type, filter) => {
             console.log(filter);

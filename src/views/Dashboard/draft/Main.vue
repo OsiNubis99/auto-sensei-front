@@ -355,6 +355,7 @@ export default {
         const statusModalView = ModalViewDetails()
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
+            counter.value++
         }
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const index = async () => {

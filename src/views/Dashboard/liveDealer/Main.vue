@@ -203,6 +203,7 @@ export default {
         const changeLayouts = ref(false)
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
+            counter.value++
         }
         const formData = ref({
             placeyourbid: 0,

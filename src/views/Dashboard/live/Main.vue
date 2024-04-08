@@ -135,7 +135,7 @@ export default {
         const sortBy = ref('year')
         const counter = ref(0)
         const changeGridTemplate = () => {
-          
+
             changeLayouts.value = !changeLayouts.value
             counter.value++
         }

@@ -55,12 +55,12 @@ export const validateData = (form, step, typeLaunch) => {
             if (!form.anyVehicle) {
                 error.anyVehicle = 'Required field'
             }
-            /*  if (!form.makePreferences) {
+             if (!form.makePreferences) {
                  error.makePreferences = 'Required field'
-             } */
-            /*  if (!form.modelPreferences) {
+             }
+             if (!form.modelPreferences) {
                  error.modelPreferences = 'Required field'
-             } */
+             }
             if (!form.modelFromPreferences) {
                 error.modelFromPreferences = 'Required field'
             }

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col md:flex-row  sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+    <div class="w-full flex   sm:p-0 relative" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
         <p v-if="auction?.status == 'completed'"
             class="md:font-semibold  text-xs md:text-base fixed left-2 z-50 text-white bg-[#05A54B] rounded-lg ml-2 mt-2 px-4 py-1">
             Complete
@@ -32,7 +32,7 @@
                 <img class="w-full rounded-s-lg h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
             </div>
         </swiper>
-        <div class="w-full flex flex-col md:flex-row justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+        <div class="w-full flex  justify-between gap-3 " :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
             <div @click="(auction?.status == 'live' || auction?.status == 'bids completed' || auction?.status == 'completed') && statusModalView.openModal({ isActive: true, data: auction })"
                 :class="auction?.status == 'live' || auction?.status == 'bids completed' || auction?.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
                 class="flex p-2 md:p-5  flex-col gap-3">

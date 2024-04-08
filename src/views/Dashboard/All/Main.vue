@@ -303,9 +303,9 @@ export default {
         }
         const acceptAution = (url) => {
             console.log('REVISAR SI LLEGA', url)
-            loading.value = true
+            /* loading.value = true
             try {
-                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id,url)
+                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id, url)
                 if (res) {
                     return '200'
                 }
@@ -313,7 +313,7 @@ export default {
 
             } finally {
                 index()
-            }
+            } */
 
         }
 

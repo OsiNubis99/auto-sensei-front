@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col md:flex-row sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+    <div class="w-full flex  sm:p-0 relative" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
         <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
             :class="changeLayouts ? 'w-full' : 'w-full md:w-[40%]'">
             <swiper-slide v-for="(img, index) in aution?.photos" :key="index">
@@ -9,7 +9,7 @@
                 <img class="w-full rounded-s-lg h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
             </div>
         </swiper>
-        <div class="w-full flex flex-col md:flex-row justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : ''">
+        <div class="w-full flex  justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
             <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
                 class="flex p-5  flex-col gap-3">
                 <div class="">
