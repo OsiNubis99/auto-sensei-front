@@ -37,7 +37,7 @@
                 :class="auction?.status == 'live' || auction?.status == 'bids completed' || auction?.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
                 class="flex p-2 md:p-5  flex-col gap-3">
                 <div>
-                   <!--  <div class="font-bold md:text-xl">{{ auction.title }}</div> -->
+                    <!--  <div class="font-bold md:text-xl">{{ auction.title }}</div> -->
                     <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
@@ -150,8 +150,7 @@
                 </div>
                 <div v-if="auction?.status == 'bids completed'"
                     class="flex md:gap-4 p-2 gap-1 md:p-5  justify-between w-full">
-                    <button @click="statusModal.openModal({ isActive: true, data: auction })"
-                        class="btn w-full bg-primary text-base-black">Accept</button>
+                    <button @click="openModal()" class="btn w-full bg-primary text-base-black">Accept</button>
                     <button @click="declineAution(auction, 'decline')"
                         class="btn w-full bg-white border border-[#E0E0E0] text-error">Decline</button>
                     <RouterLink
@@ -281,6 +280,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalViewDetails } from "@/stores/modalViewDetails";
 import { ModalReview } from "@/stores/modalReview";
+import { useAuthStore } from "@/stores/auth";
+import { toast } from "vue3-toastify";
 export default {
     components: {
         Swiper,
@@ -310,6 +311,7 @@ export default {
         const statusModalView = ModalViewDetails()
         const statusModal = ModalAcceptAution()
         const statusReview = ModalReview()
+        const auth = useAuthStore()
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
             return (
@@ -331,6 +333,14 @@ export default {
         const acceptAution = () => {
             props.acceptAution()
         }
+        const openModal = () => {
+            if (auth.userData.address) {
+                statusModal.openModal({ isActive: true, data: auction })
+            } else {
+                toast('You need to add your address in order to create an auction. Please update your profile', { autoClose: 4000, type: "error" });
+            }
+
+        }
         onMounted(() => {
 
         })
@@ -346,7 +356,8 @@ export default {
             acceptAution,
             statusModal,
             statusModalView,
-            statusReview
+            statusReview,
+            openModal
         };
     },
 };

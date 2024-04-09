@@ -109,18 +109,7 @@ export default {
         .catch((error) => {
           console.log('error', error)
         });
-      /* axios
-        .get("/auction/contract/65f9f495a8bcef6813f9e16f")
-        .then((response) => {
-          console.log('resPDF', response)
-          getPdf.value = `http://files.autosensei.ca/${response.data.contract}`
-          console.log('resPDF ', getPdf.value)
-          const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
-         
-        })
-        .catch((error) => {
-          console.log('error', error)
-        }); */
+     
 
 
 

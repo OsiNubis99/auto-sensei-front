@@ -220,46 +220,20 @@
                             </label>
                         </div>
                     </div>
-                    <div class="flex gap-4">
-                        <!--   <div class="w-full flex flex-col gap-2">
-                            <label class=" text-sm md:text-base " for="">Make</label>
-                            <select v-model="form.makePreferences"
-                                :class="invalid?.makePreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                                <option value="option 1">option 1</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
-                        </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <label class=" text-sm md:text-base " for="">Model</label>
-                            <select v-model="form.c"
-                                :class="invalid?.modelPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                                <option value="option 1">option 1</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
-                        </div> -->
+                    <div class="flex flex-col lg:flex-row gap-4">
                         <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Make</label>
                             <input v-model="form.makePreferences"
                                 :class="invalid?.makePreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class="p-2 rounded-lg border "
-                                placeholder="Make">
+                                class="p-2 rounded-lg border " type="text" placeholder="Make">
                         </div>
                         <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Model</label>
                             <input v-model="form.modelPreferences"
                                 :class="invalid?.modelPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class="p-2 rounded-lg border "
-                                placeholder="Model">
+                                class="p-2 rounded-lg border " type="text" placeholder="Model">
                         </div>
-                      
+
                     </div>
                     <div class="w-full flex items-center  flex-col md:flex-row justify-between gap-4 ">
                         <div class="w-full flex flex-col gap-2">
@@ -275,30 +249,17 @@
                                 class="p-2 md:mt-8 rounded-lg border uppercase" placeholder="Mileage To" type="number">
                         </div>
                     </div>
-                    <div class="flex gap-4 items-center ">
+                    <div class="flex flex-col lg:flex-row  gap-4 items-center ">
                         <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Year</label>
-                            <select v-model="form.yearFromPreferences"
+                            <input v-model="form.yearFromPreferences"
                                 :class="invalid?.yearFromPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                                <option selected>From 1996</option>
-                                <option value="option 1">option 1</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
+                                class="p-2  rounded-lg border uppercase" placeholder="From 1996" type="number">
                         </div>
                         <div class="w-full flex flex-col gap-2">
-
-                            <select v-model="form.yearToPreferences"
+                            <input v-model="form.yearToPreferences"
                                 :class="invalid?.yearToPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] md:p-3 mt-8  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                                <option selected>To 2020</option>
-                                <option value="option 1">option 1</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
+                                class="p-2 lg:mt-8 rounded-lg border uppercase" placeholder="From 1996" type="number">
                         </div>
                     </div>
                 </div>

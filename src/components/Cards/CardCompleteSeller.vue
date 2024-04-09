@@ -145,8 +145,7 @@
                 </div>
                 <div v-if="auction.status == 'bids completed'"
                     class="flex gap-4 px-2 pb-2 md:p-5  justify-between w-full">
-                    <button @click="statusModal.openModal({ isActive: true, data: auction })"
-                        class="btn w-full bg-primary text-base-black">Accept</button>
+                    <button @click="openModal()" class="btn w-full bg-primary text-base-black">Accept</button>
                     <button @click="declineAution(auction)"
                         class="btn w-full bg-white border border-[#E0E0E0] text-error">Decline</button>
                 </div>
@@ -174,6 +173,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalReview } from "@/stores/modalReview";
 import { ModalViewDetails } from "@/stores/modalViewDetails";
+import { useAuthStore } from "@/stores/auth";
+import { toast } from "vue3-toastify";
 export default {
     components: {
         Swiper,
@@ -203,6 +204,7 @@ export default {
         const statusReview = ModalReview()
         const statusModalView = ModalViewDetails()
         const statusModal = ModalAcceptAution()
+        const auth = useAuthStore()
         const declineAution = (auction, option) => {
             console.log('auction', auction)
             console.log('option', option)
@@ -214,6 +216,15 @@ export default {
         const acceptAution = () => {
             props.acceptAution()
         }
+        const openModal = () => {
+            console.log('auth.userData.anddress', auth.userData.address)
+            if (auth.userData.address) {
+                statusModal.openModal({ isActive: true, data: auction })
+            } else {
+                toast('You need to add your address in order to create an auction. Please update your profile', { autoClose: 4000, type: "error" });
+            }
+
+        }
         return {
             modules: [Navigation, Pagination, Scrollbar, A11y],
             auction,
@@ -224,7 +235,8 @@ export default {
             cancelAution,
             acceptAution,
             statusModal,
-            statusModalView
+            statusModalView,
+            openModal
         };
     },
 };

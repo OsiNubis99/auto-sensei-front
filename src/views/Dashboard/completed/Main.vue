@@ -371,6 +371,7 @@ import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vu
 import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
 import SorBy from '../../../components/Filters/SorBy.vue'
 import { arrayPhotos } from "../../../utils/packPhotos";
+
 export default {
 
     components: {
