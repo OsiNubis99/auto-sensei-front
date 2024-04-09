@@ -10,12 +10,24 @@
                 <ScreenNoDataDealer />
             </template>
             <div v-else class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class=" hidden md:w-[29%] md:block">
+                <div :class="showFilter ? ' top-0 z-50 visible  w-full h-screen overflow-y-auto overflow-x-hidden shadow-xl animation-fade-modal' : ' invisible md:visible '"
+                    class="fixed  lg:relative  md:w-[29%] md:block">
                     <div class="bg-white p-5 shadow-steps">
                         <div class="flex w-full justify-between items-center">
-                            <p class=" text-2xl font-semibold">Filter Auction</p>
-                            <p @click="resetFilterValue" class="cursor-pointer text-md text-error font-semibold">Reset
-                                Filter</p>
+                            <p class=" lg:text-2xl font-semibold">Filter Auction</p>
+                            <div class="flex  items-center gap-2 justify-end">
+                                <p @click="resetFilterValue"
+                                    class="cursor-pointer text-xs lg:text-[15px] text-error font-semibold">
+                                    Reset
+                                    Filter</p>
+                                <svg @click="showFilter = false" xmlns="http://www.w3.org/2000/svg"
+                                    class=" w-6 h-8 md:w-8 lg:hidden block  md:h-8  cursor-pointer" fill="none"
+                                    viewBox="0 0 24 24" stroke="#ff4545">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+
                         </div>
 
                         <div class="mt-4 flex flex-col gap-4">
@@ -440,7 +452,8 @@
             </div>
         </div>
 
-        <div class="fixed md:hidden flex justify-center items-center bottom-2 w-full z-50">
+        <div v-show="!showFilter" @click="showFilter = true"
+            class="fixed md:hidden flex justify-center items-center bottom-2 w-full z-50">
             <div class="flex items-center py-2 rounded-lg px-3 gap-2 bg-base-black">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
                     <path
@@ -493,6 +506,7 @@ export default {
         const changeLayouts = ref(false)
         const filteredItems = ref([])
         const authStore = useAuthStore()
+        const showFilter = ref(false)
         const formData = ref({
             placeyourbid: 0,
             cardNumber: undefined,
@@ -729,7 +743,8 @@ export default {
             applyPairFilters,
             label,
             formFilter,
-            resetFilterValue
+            resetFilterValue,
+            showFilter
         };
     },
 };
