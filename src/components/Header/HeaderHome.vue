@@ -403,17 +403,17 @@ export default {
         const goAccount = async () => {
             if (storeUser.userData.dealer) {
                 await router.push('/account-dealer')
-                router.go()
+                
             } else {
                 await router.push('/account-seller')
-                router.go()
+                
             }
 
         }
         const logout = async () => {
             localStorage.clear()
             await router.push({ name: 'home' })
-            router.go()
+            
 
         }
         const back = async () => {
@@ -429,7 +429,7 @@ export default {
             storeData.formAccount.phoneNumber = ''
             storeData.formAccount.preview = ''
             await router.push('/')
-            router.go()
+            
         }
         const toggle = () => {
             open.value = !open.value

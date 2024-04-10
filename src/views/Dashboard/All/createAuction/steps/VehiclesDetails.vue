@@ -10,7 +10,7 @@
         </div>
         <div class="w-full">
             <label class="font-medium text-xs md:text-base " for="">Vehicle Identification Number (VIN)</label>
-            <input class="p-2 w-full mt-3 uppercase  border rounded-lg" v-model="form.numberVin"
+            <input class="p-2 w-full mt-3 uppercase  border rounded-lg" disabled v-model="form.numberVin"
                 :class="invalid?.numberVin ? 'border-error' : 'border-[#E0E0E0]'" placeholder="1HGCM82633A123456"
                 type="text">
         </div>
