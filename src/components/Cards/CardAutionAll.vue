@@ -165,12 +165,12 @@
 
                 </div>
                 <div v-if="auction?.status == 'drop off'"
-                    class="flex gap-1 p-2 md:gap-4 md:p-5  justify-between w-full">
+                    class=" md:flex gap-1  p-2 md:gap-4 md:p-5  justify-between w-full">
                     <button @click="statusReview.openModal({ isActive: true, data: auction })"
                         class="btn w-full bg-white border border-[#E0E0E0]  ">Input Review</button>
-                    <RouterLink
+                    <RouterLink 
                         :to="{ name: 'inbox-seller', query: { id: auction?._id + '-' + auction?.bids[0]?.participant._id } }"
-                        class="border p-2 rounded-lg border-[#C2C2C2]">
+                        class="border block md:hidden p-2 rounded-lg border-[#C2C2C2]">
                         <svg class=" block md:hidden h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="none">
                             <path

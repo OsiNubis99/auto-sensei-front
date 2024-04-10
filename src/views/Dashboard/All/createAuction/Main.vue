@@ -501,7 +501,8 @@ export default {
                         formData.value.doors = `${res.data.vehicleDetails.doors} Doors`
                         formData.value.trim = res.data.vehicleDetails.trim
                         formData.value.year = res.data.vehicleDetails.year
-                        formData.value.driveTrain = res.data.vehicleDetails.bodyType
+                        formData.value.driveTrain = res.data.vehicleDetails.driveTrain,
+                        formData.value.bodyType = res.data.vehicleDetails.bodyType
                         formData.value.cylinder = res.data.vehicleDetails.cylinder
                         formData.value.transmission = res.data.vehicleDetails.transmission
                         op.value.step1 = false
@@ -599,6 +600,7 @@ export default {
                 loading.value = true
                 try {
                     let res = await store.update({ uuid: id_create.value, payload: dataPost })
+                   
                     if (res.data.status == 401) {
                         toast(res.data.message || 'Error', {
                             type: "error",

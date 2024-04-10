@@ -10,26 +10,21 @@
         </div>
         <div class="w-full">
             <label class="font-medium text-xs md:text-base " for="">Vehicle Identification Number (VIN)</label>
-            <input class="p-2 w-full mt-3 uppercase bg-[#F0F0F0] border rounded-lg" v-model="form.numberVin"
-                :class="invalid?.numberVin ? 'border-error' : 'border-none'" placeholder="1HGCM82633A123456"
+            <input class="p-2 w-full mt-3 uppercase  border rounded-lg" v-model="form.numberVin"
+                :class="invalid?.numberVin ? 'border-error' : 'border-[#E0E0E0]'" placeholder="1HGCM82633A123456"
                 type="text">
         </div>
         <div class="flex w-full justify-between items-center gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Year</label>
-                <input v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-none'"
-                    class="p-2 w-full md:mt-3 border bg-[#F0F0F0] rounded-lg" placeholder="2013" type="text">
+                <input v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 w-full md:mt-3 border  rounded-lg" placeholder="2013" type="text">
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col md:gap-2">
-                    <!--  <label class="font-medium text-xs md:text-base " for="">Make</label>
-                    <select  v-model="form.make" :class="invalid?.make ? 'border-error' : 'border-none'"
-                        class=" border bg-[#F0F0F0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg  w-full ">
-                        <option value="make">make</option>
-                    </select> -->
                     <label class="font-medium text-xs md:text-base " for="">Make </label>
-                    <input :class="invalid?.make ? 'border-error' : 'border-none'" v-model="form.make"
-                        class="p-2 w-full border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Forester" type="text">
+                    <input :class="invalid?.make ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.make"
+                        class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Forester" type="text">
                 </div>
             </div>
 
@@ -37,32 +32,32 @@
         <div class="flex w-full justify-between items-center flex-row gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Model</label>
-                <input :class="invalid?.model ? 'border-error' : 'border-none'" v-model="form.model"
-                    class="p-2 w-full border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Forester" type="text">
+                <input :class="invalid?.model ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.model"
+                    class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Forester" type="text">
             </div>
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Trim</label>
-                <input :class="invalid?.trim ? 'border-error' : 'border-none'" v-model="form.trim"
-                    class="p-2 w-full border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Premium Plus" type="text">
+                <input :class="invalid?.trim ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.trim"
+                    class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Premium Plus" type="text">
             </div>
         </div>
         <div class="flex w-full justify-between items-center gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Body Type</label>
-                <input :class="invalid?.bodyType ? 'border-error' : 'border-none'" v-model="form.bodyType"
-                    class="p-2 w-full  md:mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="SUV" type="text">
+                <input :class="invalid?.bodyType ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.bodyType"
+                    class="p-2 w-full  md:mt-3  border rounded-lg" placeholder="SUV" type="text">
             </div>
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Cylinder</label>
-                <input :class="invalid?.cylinder ? 'border-error' : 'border-none'" v-model="form.cylinder"
-                    class="p-2 w-full  md:mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="4" type="text">
+                <input :class="invalid?.cylinder ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.cylinder"
+                    class="p-2 w-full  md:mt-3  border rounded-lg" placeholder="4" type="text">
             </div>
         </div>
         <div class="flex w-full justify-between items-center flex-col md:flex-row gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Transmission</label>
-                <input v-model="form.transmission" :class="invalid?.transmission ? 'border-error' : 'border-none'"
-                    class="p-2 w-full  md:mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="SUV" type="text">
+                <input v-model="form.transmission" :class="invalid?.transmission ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 w-full  md:mt-3 border  rounded-lg" placeholder="SUV" type="text">
             </div>
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Odometer</label>
