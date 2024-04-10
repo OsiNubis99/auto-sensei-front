@@ -116,7 +116,7 @@ export default {
                     setTimeout(async () => {
                         localStorage.clear()
                         await  router.push({ path: '/' })
-                        router.go()
+                         
                         loading.value = false
                     }, 2500);
                 } finally {

@@ -176,11 +176,11 @@ export default {
                             switch (resToken.data.type) {
                                 case 0:
                                     await router.push({ path: '/inicio' })
-                                    router.go()
+                                     
                                     break;
                                 case 1:
                                     await router.push({ path: '/all' })
-                                    router.go()
+                                     
                                     break;
                                 case 2:
                                     localStorage.clear()
@@ -188,7 +188,7 @@ export default {
                                     break;
                                 default:
                                     await router.push({ name: 'home' })
-                                    router.go()
+                                     
                                     break;
                             }
                             loading.value = false;
@@ -215,7 +215,7 @@ export default {
         const refirectToLogin = async () => {
             await router.push({ path: '/login/dealers' })
             showSuccessRegister.value = false
-            router.go()
+             
         }
         const openCode = () => {
             alert(formdata.validationCode)

@@ -115,7 +115,7 @@ export default {
                     token.value = null
                     localStorage.clear()
                     await router.push('/login/sellers')
-                   router.go()
+                    
                 }
 
             } catch (error) {

@@ -1007,7 +1007,7 @@ export default {
                         let res = await store.update({ uuid: id_create.value, payload: resFiles })
                         if (res) {
                             await router.push({ path: '/all' })
-                            router.go()
+                             
                         }
                     } catch (error) {
                         loadingUploadImages.value = false

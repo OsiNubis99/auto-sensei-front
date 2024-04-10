@@ -1051,7 +1051,7 @@ export default {
                         console.log('res SAVE DRAFT', res)
                         if (res) {
                             await router.push({ path: '/all' })
-                            router.go()
+                             
                         }
                     } catch (error) {
                         loadingUploadImages.value = false

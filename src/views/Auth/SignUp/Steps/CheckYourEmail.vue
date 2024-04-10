@@ -109,7 +109,7 @@ export default {
         }
         const sendResendEmail = async () => {
             await router.push({ name: 'resend-email' })
-            router.go()
+             
         }
         const backError = () => {
             props.gobackError()

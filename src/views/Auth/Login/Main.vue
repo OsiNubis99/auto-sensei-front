@@ -165,12 +165,12 @@ export default {
                         switch (resProfile.data.type) {
                             case 0:
                                 await router.push({ path: '/inicio' })
-                                router.go()
+                                 
                                 break;
                             case 1:
                                 if (rol.value == 'sellers') {
                                     await router.push({ path: '/all' })
-                                    router.go()
+                                     
                                 } else {
                                     localStorage.clear()
                                     isLoadingLogin.value = false;
@@ -184,7 +184,7 @@ export default {
 
                                 if (rol.value == 'dealers') {
                                     await router.push({ path: '/upcoming' })
-                                    router.go()
+                                     
                                 } else {
                                     localStorage.clear()
                                     isLoadingLogin.value = false;
@@ -196,7 +196,7 @@ export default {
                                 break;
                             default:
                                 await router.push({ name: 'home' })
-                                router.go()
+                                 
                                 break;
                         }
 

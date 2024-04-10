@@ -572,10 +572,8 @@ export default {
         const goAccount = async () => {
             if (store.userData.dealer) {
                 await router.push('/account-dealer')
-                router.go()
             } else {
                 await router.push('/account-seller')
-                router.go()
             }
 
         }
