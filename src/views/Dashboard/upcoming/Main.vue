@@ -452,7 +452,7 @@
             </div>
         </div>
 
-        <div v-show="!showFilter" @click="showFilter = true"
+        <div v-show="!showFilter && data.length > 0" @click="showFilter = true"
             class="fixed md:hidden flex justify-center items-center bottom-2 w-full z-50">
             <div class="flex items-center py-2 rounded-lg px-3 gap-2 bg-base-black">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
@@ -636,30 +636,12 @@ export default {
                 data.value.map((autions, index) => {
                     /*   const formatter = new Intl.NumberFormat();
                       autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer) */
-                    let photos = []
-                    if (autions?.vehicleDetails?.additionalDocuments,
-                        autions?.vehicleDetails?.exteriorPhotos,
-                        autions?.vehicleDetails?.interiorPhotos,
-                        autions?.vehicleDetails?.driverLicense) {
-                        var d = photos.concat(
-                            autions?.vehicleDetails?.additionalDocuments,
-                            autions?.vehicleDetails?.exteriorPhotos,
-                            autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.vehicleDamage,
-                            autions?.vehicleDetails?.driverLicense,
-                            autions?.vehicleDetails?.originalDocument,
-                        );
-                        let resD = d.map((item, i) => {
-                            let name = item.split("/")
-                            let newObjet = {
-                                name: name[2],
-                                url: item
-                            }
-                            return newObjet
-                        })
-                        return autions.photos = resD
+                    let photos = null;
+                    photos = arrayPhotos(autions.vehicleDetails)
+                    if (photos.length > 0) {
+                        autions.photos = photos
                     } else {
-                        return autions.photos = null
+                        photos = null
                     }
                 })
 

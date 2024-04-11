@@ -65,7 +65,7 @@
                         Login
                     </RouterLink>
                     <button @click="toggle"
-                    :class="path == 'contact-us' && scrollPosition < 110 ? 'text-[#000] ' : 'text-white'"
+                        :class="path == 'contact-us' && scrollPosition < 110 ? 'text-[#000] ' : 'text-white'"
                         class="flex items-center px-3 py-2   rounded text-teal-lighter  hover:text-white hover:border-white">
                         <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <title>Menu</title>
@@ -226,15 +226,23 @@
                         <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                             <div @click="goAccount" class="flex items-center gap-2"
                                 v-if="storeUser?.userData?.type == 1">
-                                <img class="h-10 rounded-full w-10 object-cover"
+                                <img v-if="storeUser?.userData?.seller?.picture"
+                                    class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + storeUser?.userData?.seller?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                     {{ storeUser.userData.seller.name }}
                                 </p>
                             </div>
                             <div @click="goAccount" v-else class="flex items-center gap-2">
-                                <img class="h-10 rounded-full w-10 object-cover"
+                                <img v-if="storeUser?.userData?.dealer?.picture"
+                                    class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + storeUser?.userData?.dealer?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                     {{ storeUser.userData.dealer.name }}
                                 </p>
@@ -271,15 +279,21 @@
                         </ul>
                         <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                             <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
-                                <img class="h-10 rounded-full w-10 object-cover"
+                                <img v-if="store?.userData?.seller?.picture" class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + store?.userData?.seller?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                     {{ store.userData.seller.firstName }} {{ store.userData.seller.lastName }}
                                 </p>
                             </div>
                             <div @click="goAccount" v-else class="flex items-center gap-2">
-                                <img class="h-10 rounded-full w-10 object-cover"
+                                <img v-if="store?.userData?.dealer?.picture" class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + store?.userData?.dealer?.picture" alt="">
+                                    <img v-else class="h-10 rounded-full w-10 object-cover"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                     {{ store?.userData?.dealer?.name }}
                                 </p>
@@ -403,17 +417,17 @@ export default {
         const goAccount = async () => {
             if (storeUser.userData.dealer) {
                 await router.push('/account-dealer')
-                
+
             } else {
                 await router.push('/account-seller')
-                
+
             }
 
         }
         const logout = async () => {
             localStorage.clear()
             await router.push({ name: 'home' })
-            
+
 
         }
         const back = async () => {
@@ -429,7 +443,7 @@ export default {
             storeData.formAccount.phoneNumber = ''
             storeData.formAccount.preview = ''
             await router.push('/')
-            
+
         }
         const toggle = () => {
             open.value = !open.value

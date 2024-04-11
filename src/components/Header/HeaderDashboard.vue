@@ -52,10 +52,10 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Settings</p>
                             </RouterLink>
-                            <RouterLink to="/faqs" :class="path == 'faqs' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <!--  <RouterLink to="/faqs" :class="path == 'faqs' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Faq</p>
-                            </RouterLink>
+                            </RouterLink> -->
                         </ul>
                     </div>
                 </div>
@@ -171,11 +171,11 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink> -->
-                            <RouterLink to="/faqs-seller"
+                            <!--  <RouterLink to="/faqs-seller"
                                 :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
-                            </RouterLink>
+                            </RouterLink> -->
                         </ul>
                     </div>
                 </div>
@@ -292,16 +292,16 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink> -->
-                            <RouterLink to="/faqs-dealers"
+                            <!-- <RouterLink to="/faqs-dealers"
                                 :class="path == 'faqs-dealers' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
-                            </RouterLink>
-                            <RouterLink to="/how-it-works-dealer"
+                            </RouterLink> -->
+                            <!--    <RouterLink to="/how-it-works-dealer"
                                 :class="path == 'how-it-works-dealer' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>How It Works?</p>
-                            </RouterLink>
+                            </RouterLink> -->
 
                         </ul>
                     </div>
@@ -346,23 +346,29 @@
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>Sold Auction</p>
                         </RouterLink> -->
-                        <RouterLink @click="open = false" to="/faqs-seller"
+                        <!--  <RouterLink @click="open = false" to="/faqs-seller"
                             :class="path == 'dealer-list' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>FAQs</p>
-                        </RouterLink>
+                        </RouterLink> -->
                     </ul>
                     <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                         <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
-                            <img class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="store?.userData?.seller?.picture" class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.seller?.picture" alt="">
+                            <img v-else class="h-10 rounded-full w-10 object-cover"
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                 {{ store.userData.seller.firstName }} {{ store.userData.seller.lastName }}
                             </p>
                         </div>
                         <div @click="goAccount" v-else class="flex items-center gap-2">
-                            <img class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="store?.userData?.dealer?.picture" class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.dealer?.picture" alt="">
+                            <img v-else class="h-10 rounded-full w-10 object-cover"
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                 {{ store.userData?.dealer?.name }}
                             </p>
@@ -391,28 +397,34 @@
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">Sold Auction</p>
                         </RouterLink> -->
-                        <RouterLink @click="open = false" to="/faqs-dealers"
+                        <!--   <RouterLink @click="open = false" to="/faqs-dealers"
                             :class="path == 'faqs-dealers' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">FAQs</p>
-                        </RouterLink>
-                        <RouterLink @click="open = false" to="/how-it-works-dealer"
+                        </RouterLink> -->
+                        <!--  <RouterLink @click="open = false" to="/how-it-works-dealer"
                             :class="path == 'how-it-works-dealer' ? 'bg-[#303E18] text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">How It Works?</p>
-                        </RouterLink>
+                        </RouterLink> -->
                     </ul>
                     <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                         <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
-                            <img class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="bucket + store?.userData?.seller?.picture" class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.seller?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                 {{ store.userData?.seller?.name }}
                             </p>
                         </div>
                         <div @click="goAccount" v-else class="flex items-center gap-2">
-                            <img class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="store?.userData?.dealer?.picture" class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.dealer?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                 {{ store.userData?.dealer?.name }}
                             </p>
@@ -575,6 +587,7 @@ export default {
             } else {
                 await router.push('/account-seller')
             }
+            isOpen.value = false
 
         }
         onMounted(() => {

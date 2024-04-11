@@ -283,6 +283,7 @@ export default {
         const storeFile = useStoreFile()
         const telInput = ref();
         const codePhone = ref(null)
+        const formattedNumber = ref(null)
         const dataForm = ref(props.getDataRegister)
         const previewImage = (event) => {
             var input = event.target;
@@ -343,10 +344,13 @@ export default {
             form.phoneNumber = value
         }
         const nextStep = async () => {
+            console.log('formattedNumber.value', formattedNumber.value)
             invalid.value = infoAccount(form, rol.value);
             if (Object.entries(invalid.value).length === 0) {
-                const formattedNumber = telInput.value.selectedCountryData.dialCode;
-                codePhone.value = `+${formattedNumber + form.phoneNumber}`;
+                if (!formattedNumber.value) {
+                    formattedNumber.value = telInput.value.selectedCountryData.dialCode;
+                    codePhone.value = `+${formattedNumber.value + form.phoneNumber}`;
+                }
                 let data = {
                     phone: codePhone.value
                 }
@@ -359,7 +363,6 @@ export default {
                     province: JSON.parse(form.province)?.name,
                     city: JSON.parse(form.city)?.name
                 }
-                console.log('address', address)
                 try {
                     let dataSenCode = {
                         token: token.value,
@@ -377,6 +380,7 @@ export default {
                     }
                     storeData.getSendData = dataSenCode
                     let resCode = await storeUser.getValidation(data)
+                    console.log('resCode', resCode)
                     if (resCode.data.status == 'ok') {
                         isLoading.value = true
                         if (form.img || form.driverLicense) {
@@ -542,6 +546,7 @@ export default {
             rol.value = route.params.rol
         })
         onMounted(() => {
+            console.log('entro al paso 3')
             getCountry()
             rol.value = route.params.rol
             token.value = localStorage.getItem('updateUser')

@@ -1715,7 +1715,9 @@ input.check-toggle-round-flat:checked+label:after {
         margin: 20px !important;
         min-height: fit-content !important;
     }
-
+    .custom-line-swiper .swiper-pagination-bullet{
+        width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 100%)) !important;
+    }
     .PSPDFKit-upyueavav3kv33ygfhr93t7hn {
         width: 90% !important;
         height: 90% !important;

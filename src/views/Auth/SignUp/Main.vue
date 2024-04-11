@@ -19,7 +19,7 @@
         </template>
 
         <swiper v-show="!loading" @swiper="getRef" :pagination="{ type: 'bullets' }" :simulateTouch="false"
-            :modules="modules" class="stepsSwiper w-full  lg:w-2/4 ">
+            :modules="modules" class="stepsSwiper w-full custom-line-swiper lg:w-2/4 ">
             <swiper-slide v-if="!loading" class="!overflow-auto">
                 <CreateAccount v-if="stepsCurrent == 0" :back="back" :next="next" :rol="rol" />
             </swiper-slide>
@@ -39,7 +39,7 @@
 
 
         <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'"
-            class=" lg:block md:w-1/2 md:px-16 md:py-12 relative ">
+            class=" hidden lg:block md:w-1/2 md:px-16 md:py-12 relative ">
             <div v-if="rol == 'dealers'" class="h-full  flex justify-start items-start flex-col gap-5 ">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br>
                     Organically</h1>

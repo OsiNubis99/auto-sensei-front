@@ -495,7 +495,7 @@ export default {
                     console.log('nextGeneralInformation', res)
                     if (res) {
                         id_create.value = res.data._id
-                        formData.value.numberVin = res.data.vehicleDetails.vin
+                        formData.value.numberVin = res.data.vin
                         formData.value.make = res.data.vehicleDetails.make
                         formData.value.model = res.data.vehicleDetails.model
                         formData.value.doors = `${res.data.vehicleDetails.doors} Doors`

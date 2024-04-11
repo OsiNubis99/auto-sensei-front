@@ -62,8 +62,7 @@
             <div class="flex-1 flex flex-col justify-center md:py-12 px-4 sm:px-6 h-full lg:flex-none  xl:px-24">
                 <div class="mx-auto w-full ">
                     <div>
-                        <h2 @click="openCode"
-                            class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">
+                        <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">
                             Enter Verification
                             Code</h2>
                         <p class=" text-sm font-normal text-[#666] text-center  ">A text message with a 6-digit code has
@@ -90,18 +89,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-center mt-5 flex justify-center gap-2 md:flex-col">
+                            <p class=" text-xs font-normal text-[#666]  ">
+                                Didn’t receive the code? </p>
+                            <p @click="backStep"
+                                class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
+                                Resend Code
+                            </p>
+
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-5 flex justify-center gap-2 md:flex-col">
-                <p class=" text-xs font-normal text-[#666]  ">
-                    Didn’t receive the code? </p>
-                <p @click="backStep"
-                    class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
-                    Resend Code
-                </p>
 
-            </div>
         </template>
 
 
@@ -164,23 +164,25 @@ export default {
 
                 try {
                     let res = await storeUser.userData(data)
-                    console.log('res', res)
+                    console.log('res USERRR', res.data)
                     if (res) {
                         axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
                         let resToken = await store.authProfile()
                         console.log('resToken', resToken)
                         if (resToken.statusText = "OK") {
+                            let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
+                            console.log('resDtaLate', resDtaLate)
                             if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
                             if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
                             if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
                             switch (resToken.data.type) {
                                 case 0:
                                     await router.push({ path: '/inicio' })
-                                     
+
                                     break;
                                 case 1:
                                     await router.push({ path: '/all' })
-                                     
+
                                     break;
                                 case 2:
                                     localStorage.clear()
@@ -188,7 +190,7 @@ export default {
                                     break;
                                 default:
                                     await router.push({ name: 'home' })
-                                     
+
                                     break;
                             }
                             loading.value = false;
@@ -215,11 +217,11 @@ export default {
         const refirectToLogin = async () => {
             await router.push({ path: '/login/dealers' })
             showSuccessRegister.value = false
-             
+
         }
-        const openCode = () => {
+        /* const openCode = () => {
             alert(formdata.validationCode)
-        }
+        } */
         onMounted(() => {
             token.value = localStorage.getItem('updateUser')
         })
@@ -229,7 +231,6 @@ export default {
             backStep,
             form,
             loading,
-            openCode,
             formdata,
             refirectToLogin,
             showSuccessRegister

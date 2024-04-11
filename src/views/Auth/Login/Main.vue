@@ -81,7 +81,7 @@
                 </p>
             </div>
         </div>
-        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class="  lg:block md:w-1/2 relative ">
+        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" hidden lg:block md:w-1/2 relative ">
             <div v-if="rol == 'dealers'"
                 class="h-full  flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br>
