@@ -87,7 +87,7 @@
                                     </swiper-slide>
                                     <div v-if="!aution.photos" class=" absolute w-full h-full top-0 ">
                                         <img class="w-full rounded-s-lg h-full object-cover"
-                                            src="../../../assets/img/jpg/image.jpg" alt="">
+                                            src="@/assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">

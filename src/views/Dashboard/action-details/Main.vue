@@ -75,7 +75,7 @@
 
                         </swiper-slide>
                         <swiper-slide v-else v-for="(img, indexx) in 6" :key="indexx">
-                            <img class="w-full h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                            <img class="w-full h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
                         </swiper-slide>
                     </swiper>
                     <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="6" :freeMode="true"
@@ -91,7 +91,7 @@
                             <img v-else :src="bucket + photo.url" alt="">
                         </swiper-slide>
                         <swiper-slide v-else v-for="(img, indexx) in 6" :key="indexx">
-                            <img class="w-full h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                            <img class="w-full h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
                         </swiper-slide>
                     </swiper>
                 </div>

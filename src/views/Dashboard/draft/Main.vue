@@ -99,7 +99,7 @@
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" md:absolute w-full h-[250px] top-0 ">
                                         <img class="w-full rounded-s-lg h-full object-cover"
-                                            src="../../../assets/img/jpg/image.jpg" alt="">
+                                            src="@/assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex flex-col md:flex-row justify-between gap-3 "
