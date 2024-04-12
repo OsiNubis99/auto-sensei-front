@@ -660,7 +660,6 @@ export default {
         const getCountry = async () => {
             try {
                 const res = await countrys.getCountry()
-                console.log('beeeeeeeeeeeee', res)
                 form.value.getState = res.data
                 if (form.value.province) {
                     let resCountry = form.value.getState.filter((c) => c.name == form.value.province)
@@ -672,7 +671,6 @@ export default {
             }
         }
         const onChangeGetProvince = async (event) => {
-            console.log('entro aqo')
             form.value.getCities = undefined
             let props = null;
             if (event?.target?.value) {
