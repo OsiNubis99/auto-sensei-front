@@ -52,10 +52,10 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Settings</p>
                             </RouterLink>
-                             <RouterLink to="/faqs" :class="path == 'faqs' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <!-- <RouterLink to="/faqs" :class="path == 'faqs' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Faq</p>
-                            </RouterLink>
+                            </RouterLink> -->
                         </ul>
                     </div>
                 </div>
@@ -410,9 +410,10 @@
                     </ul>
                     <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                         <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
-                            <img v-if="bucket + store?.userData?.seller?.picture" class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="bucket + store?.userData?.seller?.picture"
+                                class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.seller?.picture" alt="">
-                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                            <img v-else class="h-10 rounded-full w-10 object-cover"
                                 src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                 alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
@@ -422,7 +423,7 @@
                         <div @click="goAccount" v-else class="flex items-center gap-2">
                             <img v-if="store?.userData?.dealer?.picture" class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.dealer?.picture" alt="">
-                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                            <img v-else class="h-10 rounded-full w-10 object-cover"
                                 src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                 alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
