@@ -128,7 +128,10 @@
                                                 </svg>
                                                 <p class=" text-xs  md:text-base">Vehicle Sell</p>
                                             </div>
-                                            <p class="text-[#858585] text-xs  md:text-base">0%</p>
+                                            <p v-if="statusAction.stats?.total_auciton"
+                                                class="text-[#858585] text-xs  md:text-base">
+                                                {{ statusAction.stats?.total_auciton }} Vehicles</p>
+                                            <p v-else class="text-[#858585] text-xs  md:text-base">0 Vehicles</p>
                                         </div>
                                     </div>
                                     <hr class="border-[#cfcfcf] border-1 hidden md:block ">
@@ -149,7 +152,10 @@
                                             </svg>
                                             <p class=" text-xs  md:text-base">Success Rate</p>
                                         </div>
-                                        <p class="text-[#858585] text-xs  md:text-base">0%</p>
+                                        <p v-if="statusAction.stats?.success_rate"
+                                            class="text-[#858585] text-xs  md:text-base">
+                                            {{ statusAction.stats?.success_rate }}%</p>
+                                        <p v-else class="text-[#858585] text-xs  md:text-base">0%</p>
                                     </div>
                                 </div>
 
@@ -403,7 +409,7 @@ export default {
             const token = localStorage.getItem('token')
             storeUser.authProfile({ token: token }).then(async (res) => {
                 if (res.data) {
-                    if (res.data.type == 2) await statusAction.getStats()
+                    await statusAction.getStats()
                     console.log('STATSASSSSSSSSSSSSSSSSSSSS', statusAction.stats)
                     dataUser.value = res.data
                     loading.value = false

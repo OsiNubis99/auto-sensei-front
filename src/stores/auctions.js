@@ -224,6 +224,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                 axios
                     .get(`/user/stats`)
                     .then((response) => {
+                        console.log('S   T   A    T     S', response)
                         this.stats = response.data
                         resolve(response);
                     })
