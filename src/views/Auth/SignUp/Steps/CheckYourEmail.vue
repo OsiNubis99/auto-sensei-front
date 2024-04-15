@@ -60,7 +60,7 @@
         </div>
         <div v-if="route.query?.error !== 'expired'" class="text-center mt-4 pb-5 flex justify-center gap-2 flex-col">
             <p class=" text-xs font-normal text-[#666]  ">
-                Send Code Didn’t receive the email?
+                Didn’t receive the email?
             </p>
             <p class=" text-xs font-normal text-[#666]  ">
                 Please check your junk mail if you cannot find the code in your general inbox. </p>
