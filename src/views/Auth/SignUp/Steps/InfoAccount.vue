@@ -189,7 +189,7 @@
                                     </div>
                                 </div>
                             </div>
-                           <!--  <div v-if="rol == 'sellers'">
+                            <!--  <div v-if="rol == 'sellers'">
                                 <label htmlFor="lastName" class="block text-sm font-medium text-gray-700">
                                     Driver License
                                 </label>
@@ -282,6 +282,7 @@ export default {
         const storeUser = useUserStore()
         const storeFile = useStoreFile()
         const telInput = ref();
+        const inputPhone = ref(null)
         const codePhone = ref(null)
         const formattedNumber = ref(null)
         const dataForm = ref(props.getDataRegister)
@@ -427,7 +428,7 @@ export default {
                                         }
                                     } catch (error) {
                                         isLoading.value = false
-                                        toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                        toast(error?.response?.data?.message[0] || 'error', {
                                             type: "error",
                                         });
                                     }
@@ -435,14 +436,14 @@ export default {
 
 
                                 } catch (error) {
-                                    toast(error?.response?.data?.message || 'error al cargar', {
+                                    toast(error?.response?.data?.message || 'error', {
                                         type: "error",
                                     });
                                     isLoading.value = false
                                 }
                             } else {
                                 isLoading.value = false
-                                toast('Intente de nuevo', {
+                                toast('error', {
                                     type: "error",
                                 });
                             }
@@ -547,13 +548,19 @@ export default {
         })
         onMounted(() => {
             console.log('entro al paso 3')
+            form.phoneNumber = undefined;
+            telInput.value = undefined;
+            formattedNumber.value = undefined;
+            codePhone.value = undefined;
+            let input = undefined;
             getCountry()
             rol.value = route.params.rol
             token.value = localStorage.getItem('updateUser')
             /* if (token.value) {
                 localStorage.clear()
             } */
-            const input = document.getElementById("telephone");
+           
+            input = document.getElementById("telephone");
             telInput.value = intlTelInput(input, {
                 preferredCountries: ["ca", "in", "us"],
                 // Otros opciones de inicialización si es necesario

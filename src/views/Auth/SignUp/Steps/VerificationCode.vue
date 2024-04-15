@@ -86,6 +86,9 @@
                                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Continue
                                     </button>
+                                    <p class="mt-2 cursor-pointer  text-xs font-normal text-[#666]  " @click="backCode">
+                                        Change Phone
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -238,6 +241,9 @@ export default {
                 loading.value = false
             }
         }
+        const backCode = async () => {
+            props.back()
+        }
         const backStep = async () => {
             console.log('formdata?.phone', formdata?.phone)
             if (formdata.phone) {
@@ -250,8 +256,8 @@ export default {
                     if (resCode) {
                         console.log('resCode', resCode)
                         toast('Code succesfully resent', {
-                        type: "success",
-                    });
+                            type: "success",
+                        });
                         loading.value = false
                     }
                 } catch (error) {
@@ -284,7 +290,8 @@ export default {
             loading,
             formdata,
             refirectToLogin,
-            showSuccessRegister
+            showSuccessRegister,
+            backCode
         };
     },
 };

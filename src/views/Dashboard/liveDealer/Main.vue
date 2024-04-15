@@ -604,16 +604,16 @@ export default {
             filteredItems.value = data.value
         }
         const resetFilterValue = () => {
-            formFilter.value.make = 'Select make',
-                formFilter.value.model = 'Select model',
-                formFilter.value.year = 'Select make',
-                formFilter.value.bodyType = 'Select body type',
-                formFilter.value.cilynder = 'Select cylinder',
-                formFilter.value.transmission = 'Select transmission',
-                formFilter.value.doors = 'Select doors',
-                formFilter.value.driver = 'Select drivetrain',
-                formFilter.value.color = 'Select color',
-                resetFilters()
+            formFilter.value.make = 'Select make'
+            formFilter.value.model = 'Select model'
+            formFilter.value.year = 'Select make'
+            formFilter.value.bodyType = 'Select body type'
+            formFilter.value.cilynder = 'Select cylinder'
+            formFilter.value.transmission = 'Select transmission'
+            formFilter.value.doors = 'Select doors'
+            formFilter.value.driver = 'Select drivetrain'
+            formFilter.value.color = 'Select color'
+            resetFilters()
         }
         const sortedData = computed(() => {
             switch (sortBy.value) {

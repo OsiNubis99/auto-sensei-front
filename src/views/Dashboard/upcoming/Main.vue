@@ -251,7 +251,8 @@
                 </div>
                 <div class="w-full md:w-[70%]">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length }} Vehicles
+                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
+                            }} Vehicles
                         </p>
                         <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
                         </p>
@@ -490,6 +491,7 @@ import ScreenNoDataDealer from '../../../components/Screen/ScreenNoDataDealer.vu
 import CardUpcoming from '../../../components/Cards/CardUpcoming.vue'
 import Basic from '../../../components/Loading/Basic.vue'
 import FilterBig from "../../../components/Filters/FilterBig.vue";
+import { arrayPhotos } from "../../../utils/packPhotos";
 export default {
 
     components: {
@@ -540,8 +542,6 @@ export default {
             doors: 'Select doors',
             driver: 'Select drivetrain',
             color: 'Select color',
-
-
         })
         const removeDuplicate = (array) => {
             return [...new Set(array)]

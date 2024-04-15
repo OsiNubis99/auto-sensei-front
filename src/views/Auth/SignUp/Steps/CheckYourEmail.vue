@@ -53,12 +53,17 @@
                                 class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                         </div>
                     </div>
-                    <button class="btn bg-primary w-full h-10 mt-2 " @click="verifiedCode()">Send Code</button>
+                    <div class="animate-fade-up  animate-ease-in-out animate-delay-200">
+                        <button class="btn bg-primary w-full h-10 mt-2 " @click="verifiedCode()">Send Code</button>
+                        <p class="mt-2 cursor-pointer  text-xs font-normal text-[#666]  "@click="backStep">Change email</p>
+                    </div>
+                   
                 </div>
 
             </div>
         </div>
         <div v-if="route.query?.error !== 'expired'" class="text-center mt-4 pb-5 flex justify-center gap-2 flex-col">
+          
             <p class=" text-xs font-normal text-[#666]  ">
                 Didn’t receive the email?
             </p>
@@ -185,7 +190,7 @@ export default {
             verifiedCode,
             errorCode,
             loading,
-            sendRecover
+            sendRecover,
         };
     },
 };
