@@ -55,26 +55,34 @@
                     </div>
                     <div class="animate-fade-up  animate-ease-in-out animate-delay-200">
                         <button class="btn bg-primary w-full h-10 mt-2 " @click="verifiedCode()">Send Code</button>
-                        <p class="mt-2 cursor-pointer  text-xs font-normal text-[#666]  "@click="backStep">Change email</p>
+
+                        <div v-if="route.query?.error !== 'expired'"
+                            class="text-center mt-4 pb-5 flex justify-center gap-2 flex-col">
+
+                            <p class=" text-xs font-normal text-[#666]  ">
+                                Didn’t receive the email?
+                            </p>
+                            <p class=" text-xs font-normal text-[#666]  ">
+                                Please check your junk mail if you cannot find the code in your general inbox. </p>
+                            <div class="flex justify-center gap-4 items-center">
+                                <p @click="sendRecover"
+                                    class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
+                                    Resend Email
+                                </p>
+                                <p class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500"
+                                    @click="backStep">Change email
+                                </p>
+                            </div>
+
+
+                        </div>
                     </div>
-                   
+
                 </div>
 
             </div>
         </div>
-        <div v-if="route.query?.error !== 'expired'" class="text-center mt-4 pb-5 flex justify-center gap-2 flex-col">
-          
-            <p class=" text-xs font-normal text-[#666]  ">
-                Didn’t receive the email?
-            </p>
-            <p class=" text-xs font-normal text-[#666]  ">
-                Please check your junk mail if you cannot find the code in your general inbox. </p>
-            <p @click="sendRecover"
-                class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
-                Resend Email
-            </p>
 
-        </div>
     </div>
 </template>
 <script>

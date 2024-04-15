@@ -39,7 +39,7 @@
                                     fill="white" />
                             </svg>
                         </div>
-                        <div class="relative">
+                        <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -47,7 +47,7 @@
                                     d="M20 17H22V19H2V17H4V10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10V17ZM18 17V10C18 8.4087 17.3679 6.88258 16.2426 5.75736C15.1174 4.63214 13.5913 4 12 4C10.4087 4 8.88258 4.63214 7.75736 5.75736C6.63214 6.88258 6 8.4087 6 10V17H18ZM9 21H15V23H9V21Z"
                                     fill="white" />
                             </svg>
-                        </div>
+                        </div> -->
                         <button @click="toggle"
                             class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
                             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -212,7 +212,7 @@
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">Sold Auction</p>
                             </RouterLink> -->
-                            <RouterLink to="/faqs-dealers"
+                            <!-- <RouterLink to="/faqs-dealers"
                                 :class="path == 'faqs-dealers' ? ' text-primary' : ' text-white'"
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">FAQs</p>
@@ -221,7 +221,7 @@
                                 :class="path == 'how-it-works-dealer' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">How It Works?</p>
-                            </RouterLink>
+                            </RouterLink> -->
                         </ul>
                         <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                             <div @click="goAccount" class="flex items-center gap-2"
@@ -244,7 +244,7 @@
                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                     alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                    {{ storeUser.userData.dealer.name }}
+                                    {{ store.userData?.dealer?.firstName }} {{ store.userData.dealer.lastName }}
                                 </p>
                             </div>
                             <div @click="logout" class="flex gap-2">
@@ -271,11 +271,11 @@
                                 class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink> -->
-                            <RouterLink @click="open = false" to="/faqs-seller"
+                            <!--   <RouterLink @click="open = false" to="/faqs-seller"
                                 :class="path == 'dealer-list' ? ' text-primary' : ' text-white'"
                                 class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
-                            </RouterLink>
+                            </RouterLink> -->
                         </ul>
                         <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                             <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
@@ -291,11 +291,11 @@
                             <div @click="goAccount" v-else class="flex items-center gap-2">
                                 <img v-if="store?.userData?.dealer?.picture" class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + store?.userData?.dealer?.picture" alt="">
-                                    <img v-else class="h-10 rounded-full w-10 object-cover"
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                     alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                    {{ store?.userData?.dealer?.name }}
+                                    {{ store.userData?.dealer?.firstName }} {{ store.userData.dealer.lastName }}
                                 </p>
                             </div>
                             <div @click="logout" class="flex gap-2">
@@ -399,7 +399,7 @@ export default {
         const storeUser = useAuthStore()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const form = storeData.formData
-        let open = ref(false)
+        const open = ref(false)
         /*  watch(open, async (newQuestion, oldQuestion) => {
              if (newQuestion) {
                  document.documentElement.style.overflow = "hidden";
@@ -417,9 +417,11 @@ export default {
         const goAccount = async () => {
             if (storeUser.userData.dealer) {
                 await router.push('/account-dealer')
+                open.value = false
 
             } else {
                 await router.push('/account-seller')
+                open.value = false
 
             }
 
@@ -427,7 +429,7 @@ export default {
         const logout = async () => {
             localStorage.clear()
             await router.push({ name: 'home' })
-
+            open.value = false
 
         }
         const back = async () => {
@@ -443,6 +445,7 @@ export default {
             storeData.formAccount.phoneNumber = ''
             storeData.formAccount.preview = ''
             await router.push('/')
+            router.go()
 
         }
         const toggle = () => {

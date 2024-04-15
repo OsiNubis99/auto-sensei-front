@@ -86,19 +86,24 @@
                                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Continue
                                     </button>
-                                    <p class="mt-2 cursor-pointer  text-xs font-normal text-[#666]  " @click="backCode">
-                                        Change Phone
-                                    </p>
+
                                 </div>
                             </div>
                         </div>
                         <div class="text-center mt-5 flex justify-center gap-2 md:flex-col">
                             <p class=" text-xs font-normal text-[#666]  ">
                                 Didn’t receive the code? </p>
-                            <p @click="backStep"
-                                class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
-                                Resend Code
-                            </p>
+                            <div class="flex justify-center items-center gap-3">
+                                <p @click="backStep"
+                                    class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
+                                    Resend Code
+                                </p>
+                                <p class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500"
+                                    @click="backCode">
+                                    Change Phone
+                                </p>
+                            </div>
+
 
                         </div>
                     </div>

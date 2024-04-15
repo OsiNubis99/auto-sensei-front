@@ -83,7 +83,7 @@
                                     fill="white" />
                             </svg>
                         </RouterLink>
-                       <!--  <IconNotifications /> -->
+                        <!--  <IconNotifications /> -->
                         <div class="navbar-right  relative">
                             <button
                                 class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
@@ -135,7 +135,7 @@
                                     fill="white" />
                             </svg>
                         </div>
-                       <!--  <div class="relative">
+                        <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -257,7 +257,7 @@
                                     fill="white" />
                             </svg>
                         </div>
-                       <!--  <div class="relative">
+                        <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -417,7 +417,7 @@
                                 src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                 alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                {{ store.userData?.seller?.name }}
+                                {{ store.userData?.seller?.name }} 
                             </p>
                         </div>
                         <div @click="goAccount" v-else class="flex items-center gap-2">
@@ -427,7 +427,7 @@
                                 src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                 alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                {{ store.userData?.dealer?.name }}
+                                {{ store.userData?.dealer?.firstName }} {{ store.userData.dealer.lastName }}
                             </p>
                         </div>
                         <div @click="logout" class="flex gap-2">
@@ -505,7 +505,7 @@ export default {
         IconSearch
     },
     setup() {
-        let open = ref(false)
+        const open = ref(false)
         let openAccount = ref(false)
         const store = useAuthStore()
         const route = useRoute();
@@ -530,13 +530,13 @@ export default {
                 }
             }
         })
-       /*  watch(open, async (newQuestion, oldQuestion) => {
-            if (newQuestion) {
-                document.documentElement.style.overflow = "hidden";
-            } else {
-                document.documentElement.style.overflow = "initial";
-            }
-        }) */
+        /*  watch(open, async (newQuestion, oldQuestion) => {
+             if (newQuestion) {
+                 document.documentElement.style.overflow = "hidden";
+             } else {
+                 document.documentElement.style.overflow = "initial";
+             }
+         }) */
         function progressBar() {
             show.value = true
             resetProgressBar();
@@ -589,6 +589,7 @@ export default {
                 await router.push('/account-seller')
             }
             isOpen.value = false
+            open.value = false
 
         }
         onMounted(() => {
