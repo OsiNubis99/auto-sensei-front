@@ -215,6 +215,7 @@ export default {
                             formdata.driverLicense = '';
                             formdata.numberCode = '';
                             formdata.previewDriverLicense = '';
+                            loading.value = false
 
                         }
                     }
