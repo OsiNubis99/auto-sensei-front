@@ -55,9 +55,15 @@
                             <p class="font-semibold text-sm md:text-base">Maximum Bid Amount</p>
                             <p class="text-xs md:text-base">Please enter a price higher than the current bid</p>
                         </div>
-                        <CurrencyInput :key="counterKey" v-model="formData.placeyourbid"
+                        <!--   <CurrencyInput :key="counterKey" v-model="formData.placeyourbid"
                             :error='invalid?.placeyourbid ? true : false' :options="{ currency: 'USD' }"
-                            :placeHolder="`$ Min ${statusModal?.data?.vehicleDetails?.basePrice}`" />
+                            :placeHolder="`$ Min ${statusModal?.data?.vehicleDetails?.basePrice}`" /> -->
+
+                        <input class="p-2 w-full rounded-lg border border-[#C2C2C2] uppercase"
+                            v-model="formData.placeyourbid"
+                            :class="invalid?.placeyourbid && 'bg-[#F6E9E9] border border-[#FF333E] text-[#0A0A0A]'"
+                            ref="inputRef" type="text"
+                            :placeHolder="`$ Min ${statusModal.data?.bids[0]?.amount ? statusModal.data?.bids[0]?.amount : statusModal?.data?.vehicleDetails?.basePrice}`" />
                         <p class="text-[#858585] text-xs md:text-base mt-2"> {{ invalid?.placeyourbid }} </p>
                         <div class="form-group md:mt-4">
                             <input type="checkbox" v-model="formData.notify" id="html">
@@ -77,7 +83,7 @@
                                 v-model="formData.placeyourbid"
                                 :class="invalid?.placeyourbid && 'bg-[#F6E9E9] border border-[#FF333E] text-[#0A0A0A]'"
                                 ref="inputRef" type="text" :placeHolder="'$ Min 100,100'" />
-                            <p v-if="error" class="text-[#FF333E] whitespace-pre absolute -bottom-8">
+                            <p v-if="invalid" class="text-[#FF333E] whitespace-pre absolute -bottom-8">
                                 {{ invalid?.placeyourbid }}</p>
                         </div>
                         <button @click="addAmount"
@@ -132,7 +138,7 @@
                                                 ****
                                                 {{ payments?.card?.last4 }}</p>
                                         </div>
-                                        <RouterLink to="/account-dealer" 
+                                        <RouterLink to="/account-dealer"
                                             v-if="index === authStore.userData.paymentMethods.length - 1"
                                             class="text-[#1F94F0] px-2 md:px-6 text-xs md:text-base pt-2 mt-0 cursor-pointer text-start font-semibold ">
                                             Add another Credit Card</RouterLink>

@@ -251,7 +251,9 @@
                 </div>
                 <div class="w-full md:w-[70%]">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class="text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }} Vehicles
+                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length }} Vehicles
+                        </p>
+                        <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
                         </p>
                         <div class="flex items-center gap-5">
                             <div class="navbar-right relative">
@@ -608,16 +610,16 @@ export default {
             );
         }
         const resetFilterValue = () => {
-            formFilter.value.make = 'Select make',
-                formFilter.value.model = 'Select model',
-                formFilter.value.year = 'Select make',
-                formFilter.value.bodyType = 'Select body type',
-                formFilter.value.cilynder = 'Select cylinder',
-                formFilter.value.transmission = 'Select transmission',
-                formFilter.value.doors = 'Select doors',
-                formFilter.value.driver = 'Select drivetrain',
-                formFilter.value.color = 'Select color',
-                resetFilters()
+            formFilter.value.make = 'Select make'
+            formFilter.value.model = 'Select model'
+            formFilter.value.year = 'Select make'
+            formFilter.value.bodyType = 'Select body type'
+            formFilter.value.cilynder = 'Select cylinder'
+            formFilter.value.transmission = 'Select transmission'
+            formFilter.value.doors = 'Select doors'
+            formFilter.value.driver = 'Select drivetrain'
+            formFilter.value.color = 'Select color'
+            resetFilters()
         }
         const index = async () => {
             loading.value = true

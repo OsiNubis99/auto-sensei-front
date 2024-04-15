@@ -203,8 +203,9 @@
                 </div>
                 <div class="w-full md:w-[70%]">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }}
-                            Vehicles
+                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length }} Vehicles
+                        </p>
+                        <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
                         </p>
                         <!--   <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" /> -->
                         <div class="flex items-center gap-5">

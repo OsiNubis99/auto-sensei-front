@@ -189,7 +189,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="rol == 'sellers'">
+                           <!--  <div v-if="rol == 'sellers'">
                                 <label htmlFor="lastName" class="block text-sm font-medium text-gray-700">
                                     Driver License
                                 </label>
@@ -213,7 +213,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="space-y-1 custom-phone">
                                 <label htmlFor="phoneNumber" class="block text-sm font-medium text-gray-700">
@@ -392,7 +392,7 @@ export default {
                                     let typeSeller = {
                                         seller: {
                                             picture: resFile?.data ? resFile?.data : null,
-                                            firstName: form.firstName,
+                                            firstName: form.firtName,
                                             lastName: form.lastName,
                                             driverLicense: resLicence?.data ? resLicence?.data : null,
                                         },

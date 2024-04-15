@@ -178,11 +178,9 @@ export default {
                             switch (resToken.data.type) {
                                 case 0:
                                     await router.push({ path: '/inicio' })
-
                                     break;
                                 case 1:
                                     await router.push({ path: '/all' })
-
                                     break;
                                 case 2:
                                     localStorage.clear()
@@ -190,16 +188,44 @@ export default {
                                     break;
                                 default:
                                     await router.push({ name: 'home' })
-
                                     break;
                             }
-                            loading.value = false;
+                            create.name = '';
+                            create.firtName = '';
+                            create.lastName = '';
+                            create.email = '';
+                            create.password = '';
+                            create.confirmPassword = '';
+                            create.termsconditions = null;
+                            formdata.img = '';
+                            formdata.dealerName = '';
+                            formdata.registrationNumber = '';
+                            formdata.address = '';
+                            formdata.linea1 = '';
+                            formdata.linea2 = '';
+                            formdata.zipCode = '';
+                            formdata.province = null;
+                            formdata.getState = null;
+                            formdata.city = null;
+                            formdata.getCities = null;
+                            formdata.phoneNumber = '';
+                            formdata.preview = '';
+                            formdata.firtName = '';
+                            formdata.lastName = '';
+                            formdata.driverLicense = '';
+                            formdata.numberCode = '';
+                            formdata.previewDriverLicense = '';
+
                         }
                     }
                 } catch (error) {
                     console.log('entro aqi', error)
                     loading.value = false
-                    toast(error?.response?.data?.message[0] || 'error al cargar', {
+                    let errorMessage = error?.response?.data?.message[0]
+                    if (typeof error?.response?.data?.message === 'string') {
+                        errorMessage = error?.response?.data?.message
+                    }
+                    toast(errorMessage || 'error al cargar', {
                         type: "error",
                     });
                 }
@@ -211,8 +237,32 @@ export default {
                 loading.value = false
             }
         }
-        const backStep = () => {
-            props.back()
+        const backStep = async () => {
+            console.log('formdata?.phone', formdata?.phone)
+            if (formdata.phone) {
+                loading.value = true
+                let data = {
+                    phone: formdata?.phone
+                }
+                try {
+                    let resCode = await storeUser.getValidation(data)
+                    if (resCode) {
+                        console.log('resCode', resCode)
+                        toast('Code succesfully resent', {
+                        type: "success",
+                    });
+                        loading.value = false
+                    }
+                } catch (error) {
+
+                    toast(error?.response?.data?.message || 'error', {
+                        type: "error",
+                    });
+                }
+            }
+
+
+            /* props.back() */
         }
         const refirectToLogin = async () => {
             await router.push({ path: '/login/dealers' })

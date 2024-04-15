@@ -275,15 +275,15 @@
                         </template>
 
                         <template v-else>
-                            <GeneralInformation v-show="op.step1" :key="componentKey"
+                            <GeneralInformation v-if="op.step1" :key="componentKey"
                                 :nextGeneralInformation="nextGeneralInformation" :form="formData" :op="op"
                                 :checkStep="checkStep" :launch="launch" :invalid="invalid"
                                 :loadingCountrys="loadingCountrys" :onChangeGetProvince="onChangeGetProvince"
                                 :onChangeGetCity="onChangeGetCity" />
-                            <VehiclesDetails v-show="op.step2" :key="componentKey"
+                            <VehiclesDetails v-if="op.step2" :key="componentKey"
                                 :nextVehiclesDetails="nextVehiclesDetails" :form="formData" :op="op"
                                 :checkStep="checkStep" :launch="launch" :invalid="invalid" />
-                            <UploadPhotos v-show="op.step3" :key="componentKey" :nextUploadPhotos="nextUploadPhotos"
+                            <UploadPhotos v-if="op.step3" :key="componentKey" :nextUploadPhotos="nextUploadPhotos"
                                 :form="formData" :op="op" :checkStep="checkStep" :launch="launch" :saveData="saveData"
                                 :invalid="invalid" />
 
@@ -494,17 +494,17 @@ export default {
                     let res = await store.create(dataPost)
                     console.log('nextGeneralInformation', res)
                     if (res) {
-                        id_create.value = res.data._id
-                        formData.value.numberVin = res.data.vin
-                        formData.value.make = res.data.vehicleDetails.make
-                        formData.value.model = res.data.vehicleDetails.model
-                        formData.value.doors = `${res.data.vehicleDetails.doors} Doors`
-                        formData.value.trim = res.data.vehicleDetails.trim
-                        formData.value.year = res.data.vehicleDetails.year
-                        formData.value.driveTrain = res.data.vehicleDetails.driveTrain,
-                        formData.value.bodyType = res.data.vehicleDetails.bodyType
-                        formData.value.cylinder = res.data.vehicleDetails.cylinder
-                        formData.value.transmission = res.data.vehicleDetails.transmission
+                        id_create.value = res.data._id;
+                        formData.value.numberVin = res.data.vin;
+                        formData.value.make = res.data.vehicleDetails.make;
+                        formData.value.model = res.data.vehicleDetails.model;
+                        formData.value.doors = res.data.vehicleDetails.doors ? `${res.data.vehicleDetails.doors} Doors` : undefined;
+                        formData.value.trim = res.data.vehicleDetails.trim;
+                        formData.value.year = res.data.vehicleDetails.year;
+                        formData.value.driveTrain = res.data.vehicleDetails.driveTrain;
+                        formData.value.bodyType = res.data.vehicleDetails.bodyType;
+                        formData.value.cylinder = res.data.vehicleDetails.cylinder;
+                        formData.value.transmission = res.data.vehicleDetails.transmission;
                         op.value.step1 = false
                         op.value.step2 = true
                         op.value.step3 = false
@@ -600,7 +600,7 @@ export default {
                 loading.value = true
                 try {
                     let res = await store.update({ uuid: id_create.value, payload: dataPost })
-                   
+
                     if (res.data.status == 401) {
                         toast(res.data.message || 'Error', {
                             type: "error",
@@ -1009,7 +1009,7 @@ export default {
                         let res = await store.update({ uuid: id_create.value, payload: resFiles })
                         if (res) {
                             await router.push({ path: '/all' })
-                             
+
                         }
                     } catch (error) {
                         loadingUploadImages.value = false

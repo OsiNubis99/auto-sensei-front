@@ -324,13 +324,13 @@
                                                 d="M12.1665 17.1673V18.8339H2.1665V17.1673H12.1665ZM12.6548 1.07227L19.1365 7.55393L17.9582 8.73393L17.0748 8.43893L15.0107 10.5006L19.7248 15.2148L18.5465 16.3931L13.8332 11.6789L11.8298 13.6823L12.0657 14.6256L10.8865 15.8039L4.40484 9.32227L5.584 8.14393L6.52567 8.37893L11.7707 3.13477L11.4765 2.25143L12.6548 1.07227Z"
                                                 fill="white" />
                                         </svg>
-                                        <p class="text-white text-xs md:text-base">Top 3 Highest Bid</p>
+                                        <p class="text-white text-xs md:text-base">Top {{statusAction.stats?.top?.length }} Highest Bid</p>
                                     </div>
                                     <div class="flex justify-between gap-3  p-4 items-center"
                                         v-for="(item, index) in  statusAction.stats?.top" :key="index">
                                         <div class="w-10 h-10">
-                                            <img class="w-full h-full rounded-full object-cover"
-                                                :src="bucket + item.seller?.owner?.picture" alt="">
+                                            <img class="w-full h-full rounded-full shadow-lg object-cover"
+                                                :src="bucket + item?.vehicleDetails?.exteriorPhotos[0]" alt="">
                                         </div>
                                         <div class="flex flex-col ">
                                             <p class="font-medium text-xs  md:text-md">{{ item?.vehicleDetails?.make }}
@@ -338,7 +338,7 @@
                                             <p class="text-[#4D4D4D] text-xs  md:text-md">Beat 20 bidders</p>
                                         </div>
                                         <div>
-                                            <p class="font-medium text-xs md:text-2xl">$35,800</p>
+                                            <p class="font-medium text-xs md:text-2xl">${{item?.bids[0]?.amount}}</p>
                                         </div>
 
                                     </div>

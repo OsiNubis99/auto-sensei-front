@@ -200,10 +200,6 @@ export default {
 </script>
 
 <style>
-body {
-    overflow: hidden;
-}
-
 @media (max-width: 640px) {
     body {
         overflow: initial;

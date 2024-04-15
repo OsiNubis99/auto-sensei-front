@@ -15,6 +15,7 @@
       </svg>
       <div class="absolute top-0 right-0 w-2.5 h-2.5 bg-rose-500 border-2 border-white dark:border-[#182235] rounded-full"></div>
     </button>
+    
     <transition
       enter-active-class="transition ease-out duration-200 transform"
       enter-from-class="opacity-0 -translate-y-2"

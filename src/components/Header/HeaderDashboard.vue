@@ -5,7 +5,7 @@
                 <div class=" flex items-center">
                     <div class="flex gap-5 ">
                         <IconSearch />
-                        <IconNotifications />
+                        <!-- <IconNotifications /> -->
                         <div class="relative ">
                             <IconUser @click="toggleAccount" class="cursor-pointer" />
                             <ul :class="openAccount ? 'block' : 'hidden'"
@@ -83,7 +83,7 @@
                                     fill="white" />
                             </svg>
                         </RouterLink>
-                        <IconNotifications />
+                       <!--  <IconNotifications /> -->
                         <div class="navbar-right  relative">
                             <button
                                 class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
@@ -135,7 +135,7 @@
                                     fill="white" />
                             </svg>
                         </div>
-                        <div class="relative">
+                       <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -143,7 +143,7 @@
                                     d="M20 17H22V19H2V17H4V10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10V17ZM18 17V10C18 8.4087 17.3679 6.88258 16.2426 5.75736C15.1174 4.63214 13.5913 4 12 4C10.4087 4 8.88258 4.63214 7.75736 5.75736C6.63214 6.88258 6 8.4087 6 10V17H18ZM9 21H15V23H9V21Z"
                                     fill="white" />
                             </svg>
-                        </div>
+                        </div> -->
                         <button @click="toggle"
                             class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
                             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -206,7 +206,7 @@
                             </svg>
                         </RouterLink>
 
-                        <IconNotifications />
+                        <!-- <IconNotifications /> -->
                         <div class="navbar-right  relative">
                             <button
                                 class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
@@ -257,7 +257,7 @@
                                     fill="white" />
                             </svg>
                         </div>
-                        <div class="relative">
+                       <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -265,7 +265,7 @@
                                     d="M20 17H22V19H2V17H4V10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10V17ZM18 17V10C18 8.4087 17.3679 6.88258 16.2426 5.75736C15.1174 4.63214 13.5913 4 12 4C10.4087 4 8.88258 4.63214 7.75736 5.75736C6.63214 6.88258 6 8.4087 6 10V17H18ZM9 21H15V23H9V21Z"
                                     fill="white" />
                             </svg>
-                        </div>
+                        </div> -->
                         <button @click="toggle"
                             class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
                             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -530,13 +530,13 @@ export default {
                 }
             }
         })
-        watch(open, async (newQuestion, oldQuestion) => {
+       /*  watch(open, async (newQuestion, oldQuestion) => {
             if (newQuestion) {
                 document.documentElement.style.overflow = "hidden";
             } else {
                 document.documentElement.style.overflow = "initial";
             }
-        })
+        }) */
         function progressBar() {
             show.value = true
             resetProgressBar();
