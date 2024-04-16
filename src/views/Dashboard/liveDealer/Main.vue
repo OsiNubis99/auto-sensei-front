@@ -4,7 +4,7 @@
     </template>
 
     <template v-else>
-        <HeaderOptionsDealer :storeAutions="storeAutions" :key="counter" :data="data" />
+        <HeaderOptionsDealer />
         <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
@@ -480,43 +480,12 @@ export default {
 
         })
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
-            const i = data.value.findIndex(x => x._id === newQuestion._id)
-            data.value[i] = newQuestion
-
-            if (autionUpdate.value.status == 'live') {
-                const i = data.value.findIndex(x => x._id === newQuestion._id)
-                data.value[i] = newQuestion
-                let photos = []
-                counter.value++
-                if (data.value[i]?.vehicleDetails?.additionalDocuments,
-                    data.value[i]?.vehicleDetails?.exteriorPhotos,
-                    data.value[i]?.vehicleDetails?.interiorPhotos,
-                    data.value[i]?.vehicleDetails?.driverLicense) {
-                    var d = photos.concat(
-                        data.value[i]?.vehicleDetails?.additionalDocuments,
-                        data.value[i]?.vehicleDetails?.exteriorPhotos,
-                        data.value[i]?.vehicleDetails?.interiorPhotos,
-                        data.value[i]?.vehicleDetails?.vehicleDamage,
-                        data.value[i]?.vehicleDetails?.driverLicense,
-                        data.value[i]?.vehicleDetails?.originalDocument,
-                    );
-                    let resD = d.map((item, i) => {
-                        let name = item.split("/")
-                        let newObjet = {
-                            name: name[2],
-                            url: item
-                        }
-                        return newObjet
-                    })
-                    return data.value[i].photos = resD
-                } else {
-                    return data.value[i].photos = null
-                }
-            } else {
+            let resUser = null;
+            resUser = newQuestion.bids.filter((user) => user.participant._id === auth.userData._id)
+            if (resUser.length > 0) {
                 let result = null;
                 result = data.value.filter((remove) => remove._id !== newQuestion._id)
                 data.value = result
-
             }
             counter.value++
         })
@@ -528,8 +497,8 @@ export default {
 
                 data.value = storeAutions?.live
                 data.value.map((autions, index) => {
-                    const formatter = new Intl.NumberFormat();
-                    autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer)
+                    /*   const formatter = new Intl.NumberFormat();
+                      autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer) */
                     let photos = null;
                     photos = arrayPhotos(autions.vehicleDetails)
                     if (photos.length > 0) {

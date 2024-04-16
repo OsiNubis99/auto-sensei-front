@@ -127,9 +127,7 @@
                                 v-slot="{ days, hours, minutes, seconds }">
                                 <div class="flex items-center gap-1">
                                     <!--   <p v-if="days > 0" class="flex gap-1 items-center">{{ days }} </p> -->
-                                    <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours
-                                        }}
-                                        Hours</p>
+                                    <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours}}h</p>
                                     <p v-if="minutes > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
                                         class="flex gap-1 items-center">{{ minutes }}m</p>
                                     <p v-if="seconds > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"

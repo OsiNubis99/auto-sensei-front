@@ -559,7 +559,7 @@ export default {
             /* if (token.value) {
                 localStorage.clear()
             } */
-           
+
             input = document.getElementById("telephone");
             telInput.value = intlTelInput(input, {
                 preferredCountries: ["ca", "in", "us"],

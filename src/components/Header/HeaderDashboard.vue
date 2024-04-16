@@ -417,7 +417,7 @@
                                 src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                 alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                {{ store.userData?.seller?.name }} 
+                                {{ store.userData?.seller?.name }}
                             </p>
                         </div>
                         <div @click="goAccount" v-else class="flex items-center gap-2">
@@ -448,29 +448,46 @@
             class="fixed z-[1000] md:right-[60px] md:left-auto right-[5%]  left-[5%] w-[90%]  shadow-xl  transition-all ease-linear duration-200   md:w-1/4 flex flex-col rounded-lg bg-white modal-notificationes">
             <div v-for="(item, index) in notiAutions" :key="index"
                 :class="` border-b p-2 md:px-2 md:py-3 border-[#cfcfcf] md:pb-3 hover:bg-[#d6d6d6] transition-all cursor-pointer ease-linear duration-200 animate-fade-down animate-once animate-duration-2000 animate-delay-600 animate-ease-in-out`">
-                <RouterLink :to="{ name: 'action-details-dealer', params: { id: item?._id } }" class="flex gap-2">
-                    <div class="w-[70%] md:w-[40%]">
+                <RouterLink :to="{ name: 'action-details-dealer', params: { id: item._id } }"
+                    class="grid grid-cols-6 place-content-start place-items-start gap-3">
+                    <div class=" col-span-2 w-[90%] md:h-[100px] ">
                         <img class=" rounded-lg shadow-lg w-full h-full object-cover"
                             :src="bucket + item.vehicleDetails.exteriorPhotos[0]" alt="">
                     </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <svg class="h-[17px] w-[17px] md:h-[25px] md:w-[25px]" xmlns="http://www.w3.org/2000/svg"
-                                width="25" height="25" viewBox="0 0 16 17" fill="none">
+                    <div class=" col-span-4">
+                        <div class="flex items-start gap-2">
+                            <svg v-if="item.bidExceeded" class="h-[17px] w-[17px] md:h-[25px] md:w-[25px]"
+                                xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 17"
+                                fill="none">
                                 <path
                                     d="M8.00016 15.1668C4.31816 15.1668 1.3335 12.1822 1.3335 8.50016C1.3335 4.81816 4.31816 1.8335 8.00016 1.8335C11.6822 1.8335 14.6668 4.81816 14.6668 8.50016C14.6668 12.1822 11.6822 15.1668 8.00016 15.1668ZM7.3335 10.5002V11.8335H8.66683V10.5002H7.3335ZM7.3335 5.16683V9.16683H8.66683V5.16683H7.3335Z"
                                     fill="#FF333E" />
                             </svg>
-                            <p class="text-error text-sm md:text-lg">Outbid Alert!</p>
+                            <svg class="md:w-[25px] w-4 h-4 md:h-[25px]" v-if="item.bidsFinished"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 17" fill="none">
+                                <path
+                                    d="M8.00016 15.1668C4.31816 15.1668 1.3335 12.1822 1.3335 8.50016C1.3335 4.81816 4.31816 1.8335 8.00016 1.8335C11.6822 1.8335 14.6668 4.81816 14.6668 8.50016C14.6668 12.1822 11.6822 15.1668 8.00016 15.1668ZM7.3355 11.1668L12.0488 6.45283L11.1062 5.51016L7.3355 9.2815L5.4495 7.3955L4.50683 8.33816L7.3355 11.1668Z"
+                                    fill="#05A54B" />
+                            </svg>
+                            <p v-if="item.bidExceeded" class="text-error text-xs md:text-xl">Outbid Alert!</p>
+                            <p v-if="item.bidsFinished" class="text-[#05A54B] text-xs md:text-lg">Congratulations,
+                                You've
+                                Won!</p>
                         </div>
-                        <p class=" text-xs md:text-sm">Your bid for the
+                        <p v-if="item.bidExceeded" class=" text-xs md:text-lg">Your bid for the
                             <span class="font-bold">
-                                {{ item?.vehicleDetails?.year }} {{ item?.vehicleDetails?.make }}{{
-            item?.vehicleDetails?.model }}
+                                {{ item.vehicleDetails?.year }} {{ item.vehicleDetails?.make
+                                }}{{ item.vehicleDetails?.model
+                                }}
                             </span>
-                            has
-                            been outbid, keep
-                            bidding to win!
+                            has been outbid, keep bidding to win!
+                        </p>
+                        <p v-if="item.bidsFinished" class=" text-xs md:text-lg">Congratulations! You've won the
+                            <span class="font-bold">
+                                {{ item.vehicleDetails?.year }} {{ item.vehicleDetails?.make }}
+                                {{ item.vehicleDetails?.model
+                                }}
+                            </span>
                         </p>
 
                     </div>
@@ -522,6 +539,7 @@ export default {
         const data = ref({ soundurl: 'https://soundbible.com/mp3/Air%20Plane%20Ding-SoundBible.com-496729130.mp3' })
         const idInterval = ref(null)
         watch(notiAutions, async (newQuestion, oldQuestion) => {
+            console.log('SOKET NOTIFICACIONES', newQuestion)
             var audio = new Audio(data.value.soundurl);
             if (newQuestion) {
                 if (audio.play()) {

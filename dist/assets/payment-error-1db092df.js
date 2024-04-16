@@ -1,1 +1,0 @@
-import{_ as e,b as o,o as r,c as t}from"./index-e2fc11f7.js";const n={components:{},setup(){return o(()=>{}),{}}};function s(c,a,p,_,u,m){return r(),t("div",null," payment-error ")}const f=e(n,[["render",s]]);export{f as default};

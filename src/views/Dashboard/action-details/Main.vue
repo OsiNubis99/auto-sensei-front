@@ -573,7 +573,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="dataDetails?.bids[0]?.participant?._id == auth.userData?._id && dataDetails.status == 'completed' || dataDetails.status == 'bids completed'"
+                            <div v-if="dataDetails?.bids[0]?.participant?._id == auth.userData?._id && (dataDetails.status == 'completed' || dataDetails.status == 'bids completed')"
                                 class="flex flex-col gap-2 mt-4">
                                 <button :disabled="loadingButton ? true : false"
                                     @click="confirmVehicle(dataDetails)"

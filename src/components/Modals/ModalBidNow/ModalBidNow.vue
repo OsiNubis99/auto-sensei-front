@@ -450,8 +450,8 @@ export default {
                     } finally {
                         loading.value = false
                         statusModal.isActive = false
-                        statusModal.finally = 'finally'
-                        props.index(statusModal.data._id)
+                      /*   statusModal.finally = 'finally'
+                        props.index(statusModal.data._id) */
                         toast('Successfully placed bid', { type: "success", position: "top-center", theme: "colored", });
                     }
                     break;

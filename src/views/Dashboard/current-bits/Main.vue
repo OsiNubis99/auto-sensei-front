@@ -251,7 +251,9 @@
                 </div>
                 <div class="w-full lg:w-[70%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length }} Vehicles
+                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
+                            }}
+                            Vehicles
                         </p>
                         <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
                         </p>
@@ -604,8 +606,6 @@ export default {
         const path = ref(computed(() => route.name))
         const route = useRoute();
         const sortBy = ref('Current Bid')
-
-
         const filteredItems = ref([])
         const showFilter = ref(false)
         const formFilter = ref({
@@ -664,45 +664,28 @@ export default {
             }
         })
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
-            console.log('current bits', newQuestion)
-            console.log('storeAutions completedDelaer', storeAutions.completedDelaer)
-            if (autionUpdate.value.status == 'live') {
+            if (newQuestion.status == 'live') {
+                console.log('CURRENT BITS ENTRO EN LIVE', newQuestion)
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
-                let photos = []
-                counter.value++
-                if (data.value[i]?.vehicleDetails?.additionalDocuments,
-                    data.value[i]?.vehicleDetails?.exteriorPhotos,
-                    data.value[i]?.vehicleDetails?.interiorPhotos,
-                    data.value[i]?.vehicleDetails?.driverLicense) {
-                    var d = photos.concat(
-                        data.value[i]?.vehicleDetails?.additionalDocuments,
-                        data.value[i]?.vehicleDetails?.exteriorPhotos,
-                        data.value[i]?.vehicleDetails?.interiorPhotos,
-                        data.value[i]?.vehicleDetails?.vehicleDamage,
-                        data.value[i]?.vehicleDetails?.driverLicense,
-                        data.value[i]?.vehicleDetails?.originalDocument,
-                    );
-                    let resD = d.map((item, i) => {
-                        let name = item.split("/")
-                        let newObjet = {
-                            name: name[2],
-                            url: item
-                        }
-                        return newObjet
-                    })
-                    return data.value[i].photos = resD
-
+                let photos = null;
+                photos = arrayPhotos(data.value[i].vehicleDetails)
+                if (photos.length > 0) {
+                    data.value[i].photos = photos
                 } else {
-                    return data.value[i].photos = null
+                    photos = null
                 }
             } else {
+                console.log('CURRENT BITS ENTRO EN EL ELSE', data.value)
+                data.value = []
                 let result = null;
                 result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                console.log('result FILTER', result)
                 data.value = result
+                console.log('data.value.length despues', data.value.length)
 
             }
-
+            counter.value++
 
         })
         function timeToEnd(startDate, duration) {
@@ -745,16 +728,16 @@ export default {
             filteredItems.value = data.value
         }
         const resetFilterValue = () => {
-            formFilter.value.make = 'Select make',
-                formFilter.value.model = 'Select model',
-                formFilter.value.year = 'Select make',
-                formFilter.value.bodyType = 'Select body type',
-                formFilter.value.cilynder = 'Select cylinder',
-                formFilter.value.transmission = 'Select transmission',
-                formFilter.value.doors = 'Select doors',
-                formFilter.value.driver = 'Select drivetrain',
-                formFilter.value.color = 'Select color',
-                resetFilters()
+            formFilter.value.make = 'Select make';
+            formFilter.value.model = 'Select model';
+            formFilter.value.year = 'Select make';
+            formFilter.value.bodyType = 'Select body type';
+            formFilter.value.cilynder = 'Select cylinder';
+            formFilter.value.transmission = 'Select transmission';
+            formFilter.value.doors = 'Select doors';
+            formFilter.value.driver = 'Select drivetrain';
+            formFilter.value.color = 'Select color';
+            resetFilters()
         }
         const setSorBy = (sort) => {
             sortBy.value = sort

@@ -471,7 +471,7 @@ export default {
             loading.value = true
             console.log('REVISAR SI LLEGAaaaaaaaaaaaaa', url)
             try {
-                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id,url)
+                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id, url)
                 if (res) {
                     return '200'
                 }
@@ -520,30 +520,12 @@ export default {
             if (autionUpdate.value.status == 'completed') {
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
-                let photos = []
-                if (data.value[i]?.vehicleDetails?.additionalDocuments,
-                    data.value[i]?.vehicleDetails?.exteriorPhotos,
-                    data.value[i]?.vehicleDetails?.interiorPhotos,
-                    data.value[i]?.vehicleDetails?.driverLicense) {
-                    var d = photos.concat(
-                        data.value[i]?.vehicleDetails?.additionalDocuments,
-                        data.value[i]?.vehicleDetails?.exteriorPhotos,
-                        data.value[i]?.vehicleDetails?.interiorPhotos,
-                        data.value[i]?.vehicleDetails?.vehicleDamage,
-                        data.value[i]?.vehicleDetails?.driverLicense,
-                        data.value[i]?.vehicleDetails?.originalDocument,
-                    );
-                    let resD = d.map((item, i) => {
-                        let name = item.split("/")
-                        let newObjet = {
-                            name: name[2],
-                            url: item
-                        }
-                        return newObjet
-                    })
-                    return data.value[i].photos = resD
+                let photos = null;
+                photos = arrayPhotos(data.value[i].vehicleDetails)
+                if (photos.length > 0) {
+                    data.value[i].photos = photos
                 } else {
-                    return data.value[i].photos = null
+                    photos = null
                 }
             } else {
                 let result = null;

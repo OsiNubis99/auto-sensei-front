@@ -511,7 +511,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect } from "vue";
+import { ref, onMounted, computed, watchEffect, watch } from "vue";
 import { toast } from "vue3-toastify";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -572,6 +572,7 @@ export default {
         })
         const authStore = useAuthStore()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+        const autionUpdate = ref(computed(() => authStore.aution))
         const data = ref([])
         const storeAutions = useAuctionStore()
         const path = ref(computed(() => route.name))
@@ -600,6 +601,27 @@ export default {
 
         })
         const dataBuffer = ref(null)
+        watch(autionUpdate, async (newQuestion, oldQuestion) => {
+            const i = data.value.findIndex(x => x._id === newQuestion._id)
+            data.value[i] = newQuestion
+            if (autionUpdate.value.status == 'completed') {
+                const i = data.value.findIndex(x => x._id === newQuestion._id)
+                data.value[i] = newQuestion
+                let photos = null;
+                photos = arrayPhotos(data.value[i].vehicleDetails)
+                if (photos.length > 0) {
+                    data.value[i].photos = photos
+                } else {
+                    photos = null
+                }
+            } else {
+                let result = null;
+                result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                data.value = result
+
+            }
+            counter.value++
+        })
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
             return (
@@ -736,7 +758,7 @@ export default {
                     });
                 } finally {
                     loadingPdf.value = false
-                    index()
+                   /*  index() */
                 }
 
                 /* const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;

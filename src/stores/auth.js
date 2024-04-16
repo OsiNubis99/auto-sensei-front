@@ -108,22 +108,24 @@ export const useAuthStore = defineStore("authStore", {
 
                 });
                 this.socketNotification.on("bidExceeded", (response) => {
+                  response.bidExceeded = true;
+                  /*  const result = this.notifications.reduce((accumulator, current) => {
+                     let exists = accumulator.find(item => {
+                       return item.id === current.id;
+                     });
+                     if (!exists) {
+                       accumulator = accumulator.concat(current);
+                     }
+                     return accumulator;
+                   }, []); */
                   this.notifications = [...this.notifications, response]
-                  const result = this.notifications.reduce((accumulator, current) => {
-                    let exists = accumulator.find(item => {
-                      return item.id === current.id;
-                    });
-                    if (!exists) {
-                      accumulator = accumulator.concat(current);
-                    }
-                    return accumulator;
-                  }, []);
-                  this.notifications = result
                   console.log('auth bidExeeded', response)
 
                 });
                 this.socketNotification.on("bidsFinished", (response) => {
+                  response.bidsFinished = true;
                   this.notifications = [...this.notifications, response]
+                  console.log('bidsFinished', this.notifications)
 
                 });
               });

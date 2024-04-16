@@ -1,7 +1,7 @@
 <template>
     <div v-show="statusModal.isActive"
         class="fixed inset-0 overflow-auto flex items-center z-50 justify-center bg-base-black  bg-opacity-50">
-        <div class=" w-full md:w-fit h-full md:h-fit bg-white rounded-lg shadow-xl animation-fade-modal">
+        <div class=" w-full overflow-auto h-full md:h-[85%] md:w-[90%] bg-white rounded-lg shadow-xl animation-fade-modal">
             <div class=" p-2 md:p-4 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
                 <p class="md:text-xl text-xs text-white">View Details</p>
                 <svg @click="statusModal.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
@@ -34,8 +34,8 @@
                         <button class="btn w-full bg-white border border-error text-error rounded-lg">Decline</button>
                     </div>
                 </div>
-                <div class="border-r flex-col md:flex-row flex pt-0 border-r-[#F0F0F0]">
-                    <div class=" w-full md:w-[70%] border border-[#E0E0E0] md:border-none p-2 md:p-4">
+                <div class="border-r flex-col lg:flex-row flex pt-0 border-r-[#F0F0F0]">
+                    <div class=" w-full lg:w-[70%] border border-[#E0E0E0] md:border-none p-2 md:p-4">
                         <div>
                             <div class="flex justify-between gap-2 md:hidden">
                                 <div class="w-[60%]">

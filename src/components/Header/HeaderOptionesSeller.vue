@@ -17,7 +17,8 @@
                     d="M7.5 14.1667C7.5 14.1667 13.3333 15 15.8333 17.5H16.6667C17.1269 17.5 17.5 17.1269 17.5 16.6667V11.6142C18.2188 11.4292 18.75 10.7766 18.75 10C18.75 9.22342 18.2188 8.57083 17.5 8.38583V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5H15.8333C13.3333 5 7.5 5.83333 7.5 5.83333H4.16667C3.24619 5.83333 2.5 6.57952 2.5 7.5V12.5C2.5 13.4205 3.24619 14.1667 4.16667 14.1667H5L5.83333 18.3333H7.5V14.1667ZM9.16667 7.21767C9.73608 7.0955 10.4396 6.92661 11.1994 6.70311C12.5979 6.29178 14.375 5.64385 15.8333 4.64548V15.3545C14.375 14.3562 12.5979 13.7083 11.1994 13.2969C10.4396 13.0734 9.73608 12.9045 9.16667 12.7823V7.21767ZM4.16667 7.5H7.5V12.5H4.16667V7.5Z"
                     :fill="path == 'upcoming-auctions' ? '#09121F' : '#C2C2C2'" />
             </svg>
-            <p class=" whitespace-nowrap text-xs md:text-base ">Upcoming Auctions ({{ storeAutions.upcoming.length }})</p>
+            <p class=" whitespace-nowrap text-xs md:text-base ">Upcoming Auctions ({{ storeAutions.upcoming.length }})
+            </p>
         </RouterLink>
         <RouterLink to="/live" :class="path == 'live' ? 'bg-primary' : 'bg-[#464B50] text-white'"
             class="flex gap-3 h-5 rounded-[8px]  items-center py-4 px-3 md:p-5  w-auto  ease-linear duration-500 ">
@@ -41,8 +42,10 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch, watchEffect } from "vue";
 import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from "@/stores/auth";
+import { useAuctionStore } from "@/stores/auctions";
 export default {
     components: {
     },
@@ -57,11 +60,18 @@ export default {
     },
     setup(props) {
         const route = useRoute();
-        const router = useRouter();
         const path = ref(computed(() => route.name))
         const data = ref(props.data)
+        const useAutions = useAuctionStore()
+        const useAuth = useAuthStore()
         const storeAutions = ref(props.storeAutions)
+        watchEffect(async () => {
+            console.log('useAuth', useAuth)
+            console.log('useAutions', useAutions)
+        })
         onMounted(() => {
+            console.log('useAuth', useAuth)
+            console.log('useAutions', useAutions)
 
         })
         return {
