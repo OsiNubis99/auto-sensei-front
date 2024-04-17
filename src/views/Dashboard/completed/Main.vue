@@ -4,7 +4,7 @@
     </template>
 
     <template v-else>
-        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
+        <HeaderOptionesSeller  />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class="hidden md:w-[29%] lg:block">
@@ -444,6 +444,7 @@ export default {
                 let res = await storeAutions.index()
                 if (res) {
                     data.value = storeAutions.completed
+                    console.log('data.value', data.value)
                     data.value.map((autions, index) => {
                         const formatter = new Intl.NumberFormat();
                         autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer)
@@ -527,12 +528,12 @@ export default {
                 } else {
                     photos = null
                 }
-            } else {
+            } /* else {
                 let result = null;
                 result = data.value.filter((remove) => remove._id !== newQuestion._id)
                 data.value = result
 
-            }
+            } */
             counter.value++
         })
         onMounted(() => {

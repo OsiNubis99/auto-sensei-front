@@ -450,8 +450,22 @@ export default {
                     } finally {
                         loading.value = false
                         statusModal.isActive = false
-                      /*   statusModal.finally = 'finally'
-                        props.index(statusModal.data._id) */
+                        steps.value.step1 = true
+                        steps.value.step2 = false
+                        steps.value.step3 = false
+                        openDropdown.value = false
+                        formData.value.cardNumber = undefined;
+                        formData.value.creditCard = undefined;
+                        formData.value.cvv = undefined;
+                        formData.value.expiryDate = undefined;
+                        formData.value.nameOnCard = undefined;
+                        formData.value.notify = undefined;
+                        formData.value.saveCard = undefined;
+                        formData.value.termsConditions = false;
+                        itemCard.value = null;
+                        formData.value.placeyourbid = null;
+                        /*   statusModal.finally = 'finally'
+                          props.index(statusModal.data._id) */
                         toast('Successfully placed bid', { type: "success", position: "top-center", theme: "colored", });
                     }
                     break;

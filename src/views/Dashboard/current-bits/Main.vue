@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <template v-if="loading">
+        <Basic />
+    </template>
+    <template v-else>
         <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
-        <template v-if="loading">
-            <Basic />
-        </template>
-        <div v-else class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
 
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
@@ -172,16 +172,16 @@
                                         class="label-colors !p-2 !h-[40px] !capitalize whitespace-pre w-full">
                                         <input @change="applyFilter($event, 'color')" :value="color" type="radio"
                                             class="input-radio" :class="[
-            color == 'silver' && 'on-silver',
-            color == 'white' && 'on-white',
-            color == 'grey' && 'on-grey',
-            color == 'greenDark' && 'on-greenDark',
-            color == 'red' && 'on-red',
-            color == 'yellow' && 'on-yellow',
-            color == 'blue' && 'on-blue',
-            color == 'white' && 'on-white',
-            color == 'white' && 'on-white',
-        ]" name="color-redio">
+        color == 'silver' && 'on-silver',
+        color == 'white' && 'on-white',
+        color == 'grey' && 'on-grey',
+        color == 'greenDark' && 'on-greenDark',
+        color == 'red' && 'on-red',
+        color == 'yellow' && 'on-yellow',
+        color == 'blue' && 'on-blue',
+        color == 'white' && 'on-white',
+        color == 'white' && 'on-white',
+    ]" name="color-redio">
                                         {{ color }}
                                     </label>
                                     <!--  <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
@@ -316,8 +316,7 @@
                         <div v-for="(aution, index) in sortedData" :key="index"
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-                            <CardsCurrentBits :key="counter" :aution="aution" :changeLayouts="changeLayouts"
-                                :auth="authStore" />
+                            <CardsCurrentBits :key="counter":aution="aution" :changeLayouts="changeLayouts" :auth="authStore" />
                             <!--  <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
@@ -538,7 +537,7 @@
         </div>
         <ModalBidNow v-if="statusModal.isActive" :form="formData" />
         <ModalAutoBidVue v-if="statusModalAuto.isActive" :form="formData" :index="index" />
-    </div>
+    </template>
 </template>
 
 <script>
@@ -666,22 +665,25 @@ export default {
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             if (newQuestion.status == 'live') {
                 console.log('CURRENT BITS ENTRO EN LIVE', newQuestion)
-                const i = data.value.findIndex(x => x._id === newQuestion._id)
-                data.value[i] = newQuestion
+                const i = filteredItems.value.findIndex(x => x._id === newQuestion._id)
+                console.log('i', i)
+                filteredItems.value[i] = newQuestion
+                console.log('filteredItems.value[i]', filteredItems.value[i])
                 let photos = null;
-                photos = arrayPhotos(data.value[i].vehicleDetails)
+              /*   photos = arrayPhotos(data.value[i].vehicleDetails)
                 if (photos.length > 0) {
                     data.value[i].photos = photos
                 } else {
                     photos = null
-                }
+                } */
+
             } else {
                 console.log('CURRENT BITS ENTRO EN EL ELSE', data.value)
-                data.value = []
                 let result = null;
                 result = data.value.filter((remove) => remove._id !== newQuestion._id)
                 console.log('result FILTER', result)
-                data.value = result
+                filteredItems.value = result
+                console.log('data.value', data.value)
                 console.log('data.value.length despues', data.value.length)
 
             }

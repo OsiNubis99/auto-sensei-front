@@ -4,7 +4,7 @@
     </template>
 
     <template v-else>
-        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
+        <HeaderOptionesSeller />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class="hidden md:w-[29%] lg:block">
@@ -149,7 +149,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect } from "vue";
+import { ref, onMounted, computed, watchEffect, watch } from "vue";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from 'vue-router'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -159,14 +159,14 @@ import { useAuthStore } from "@/stores/auth";
 import { ModalDetailsLive } from '@/stores/modalDetailsLive';
 import { enumState } from "@/utils/auction-status.enum";
 import ModalDetailsLiveVue from "../../../components/Modals/ModalDetailsLive/ModalDetailsLive.vue";
-import HeaderOptionesSeller from '../../../components/Header/HeaderOptionesSeller.vue'
-import CreateAution from '../../../components/Cards/CreateAution.vue'
-import CardUpcomingAutions from '../../../components/Cards/CardUpcomingAutions.vue'
-import CardAutionMobile from '../../../components/Cards/CardAutionMobile.vue'
-import Basic from '../../../components/Loading/Basic.vue'
-import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
-import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
-import { arrayPhotos } from '../../../utils/packPhotos'
+import HeaderOptionesSeller from '../../../components/Header/HeaderOptionesSeller.vue';
+import CreateAution from '../../../components/Cards/CreateAution.vue';
+import CardUpcomingAutions from '../../../components/Cards/CardUpcomingAutions.vue';
+import CardAutionMobile from '../../../components/Cards/CardAutionMobile.vue';
+import Basic from '../../../components/Loading/Basic.vue';
+import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue';
+import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue';
+import { arrayPhotos } from '../../../utils/packPhotos';
 export default {
 
     components: {
@@ -192,6 +192,7 @@ export default {
         const openDecline = ref(false)
         const autionModal = ref(null)
         const path = ref(computed(() => route.name))
+        const autionUpdate = ref(computed(() => storeUser.aution))
         const statusModal = ModalDetailsLive()
         const sortBy = ref('Start date')
         const counter = ref(0)
@@ -204,6 +205,15 @@ export default {
             changeLayouts.value = !changeLayouts.value
             counter.value++
         }
+        watch(autionUpdate, async (newQuestion, oldQuestion) => {
+            if (newQuestion.status == "live") {
+                let result = null;
+                result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                data.value = result
+                counter.value++
+            }
+
+        })
         function timeToStart(startDate) {
             if (!startDate) return 0;
             return new Date(startDate) - Date.now();
@@ -223,8 +233,6 @@ export default {
                 if (res) {
                     data.value = storeAutions.upcoming
                     data.value.map((autions, index) => {
-                        /*  const formatter = new Intl.NumberFormat();
-                         autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer) */
                         let photos = null;
                         photos = arrayPhotos(autions.vehicleDetails)
                         if (photos.length > 0) {

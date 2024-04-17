@@ -1,10 +1,11 @@
 <template>
-    <div>
+    <template v-if="loading">
+        <Basic />
+    </template>
+    <template v-else>
         <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
-        <template v-if="loading">
-            <Basic />
-        </template>
-        <div v-else class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+
+        <div  class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
 
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
@@ -172,16 +173,16 @@
                                         class="label-colors !p-2 !h-[40px] !capitalize whitespace-pre w-full">
                                         <input @change="applyFilter($event, 'color')" :value="color" type="radio"
                                             class="input-radio" :class="[
-            color == 'silver' && 'on-silver',
-            color == 'white' && 'on-white',
-            color == 'grey' && 'on-grey',
-            color == 'greenDark' && 'on-greenDark',
-            color == 'red' && 'on-red',
-            color == 'yellow' && 'on-yellow',
-            color == 'blue' && 'on-blue',
-            color == 'white' && 'on-white',
-            color == 'white' && 'on-white',
-        ]" name="color-redio">
+        color == 'silver' && 'on-silver',
+        color == 'white' && 'on-white',
+        color == 'grey' && 'on-grey',
+        color == 'greenDark' && 'on-greenDark',
+        color == 'red' && 'on-red',
+        color == 'yellow' && 'on-yellow',
+        color == 'blue' && 'on-blue',
+        color == 'white' && 'on-white',
+        color == 'white' && 'on-white',
+    ]" name="color-redio">
                                         {{ color }}
                                     </label>
                                 </div>
@@ -203,7 +204,9 @@
                 </div>
                 <div class="w-full md:w-[70%]">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length }} Vehicles
+                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
+                            }}
+                            Vehicles
                         </p>
                         <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
                         </p>
@@ -507,7 +510,7 @@
 
             </div>
         </div>
-    </div>
+    </template>
 </template>
 
 <script>
@@ -602,9 +605,10 @@ export default {
         })
         const dataBuffer = ref(null)
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
+            console.log('autionUpdate COMPLETED DEALER', autionUpdate)
             const i = data.value.findIndex(x => x._id === newQuestion._id)
             data.value[i] = newQuestion
-            if (autionUpdate.value.status == 'completed') {
+            if (autionUpdate.value.status == 'completed' || autionUpdate.value.status == 'drop off' ) {
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
                 let photos = null;
@@ -758,7 +762,7 @@ export default {
                     });
                 } finally {
                     loadingPdf.value = false
-                   /*  index() */
+                    /*  index() */
                 }
 
                 /* const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;

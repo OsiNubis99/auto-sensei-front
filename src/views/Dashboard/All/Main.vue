@@ -4,7 +4,7 @@
     </template>
 
     <template v-else>
-        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
+        <HeaderOptionesSeller  />
         <div v-if="data?.length > 0"
             class="relative max-w-[100rem] bg-[#BDBDBF66] md:bg-white mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
@@ -153,7 +153,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect } from "vue";
+import { ref, onMounted, computed, watchEffect ,watch} from "vue";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from 'vue-router'
 import { useAuctionStore } from "@/stores/auctions";
@@ -198,6 +198,7 @@ export default {
         const storeUser = useAuthStore()
         const statusModal = ModalAcceptAution()
         const path = ref(computed(() => route.name))
+        const autionUpdate = ref(computed(() => storeUser.aution))
         const statusModalR = ModalReview()
         const openDecline = ref(false)
         const autionModal = ref(null)
@@ -209,6 +210,18 @@ export default {
             changeLayouts.value = !changeLayouts.value
             counter.value++
         }
+        watch(autionUpdate, async (newQuestion, oldQuestion) => {
+            const i = data.value.findIndex(x => x._id === newQuestion._id)
+            data.value[i] = newQuestion
+            let photos = null;
+            photos = arrayPhotos(data.value[i].vehicleDetails)
+            if (photos.length > 0) {
+                data.value[i].photos = photos
+            } else {
+                photos = null
+            }
+            counter.value++
+        })
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const cancelAution = async () => {
             switch (autionModal.value.option) {

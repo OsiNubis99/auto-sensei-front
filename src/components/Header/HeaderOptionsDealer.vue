@@ -67,7 +67,7 @@ export default {
         const live = ref([])
         const completed = ref([])
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
-            console.log('newQuestion', newQuestion)
+            console.log('newQuestion DEALER HEADER', newQuestion)
 
             if (newQuestion) {
                 let photos = null;
@@ -78,7 +78,6 @@ export default {
                     photos = null
                 }
                 if (newQuestion.status == 'live') {
-
                     if (newQuestion.bids.length > 0) {
                         let resUser = null;
                         resUser = newQuestion.bids.filter((user) => user.participant._id === useAuth.userData._id)
@@ -97,12 +96,40 @@ export default {
                     }
                 }
                 if (newQuestion.status == 'live' && newQuestion.bids.length > 0) {
+                    let resUser = null;
+                    resUser = newQuestion.bids.filter((user) => user.participant._id === useAuth.userData._id)
+                    console.log('resUser', resUser)
+                    if (resUser.length > 0) {
+                        currentBits.value.push(newQuestion)
+                    }
 
-                    currentBits.value.push(newQuestion)
+                }
+                if (newQuestion.status == 'completed') {
+                    if (newQuestion.bids.length > 0) {
+                        let resUser = null;
+                        resUser = newQuestion.bids.filter((user) => user.participant._id === useAuth.userData._id)
+                        console.log('resUser', resUser)
+                        if (resUser.length > 0) {
+                            let result = null;
+                            result = currentBits.value.filter((remove) => remove._id !== newQuestion._id)
+                            currentBits.value = []
+                            currentBits.value = result
+                        }
+                    }
+                }
+                if (newQuestion.status == 'bids completed') {
+                    let resUser = null;
+                    resUser = newQuestion.bids.filter((user) => user.participant._id === useAuth.userData._id)
+                    if (resUser.length > 0) {
+                        let result = null;
+                        result = currentBits.value.filter((remove) => remove._id !== newQuestion._id)
+                        currentBits.value = result
+                        completed.value.push(newQuestion)
+                    }
+
                 }
             }
 
-            console.log('LIVE', useAutions.live)
 
 
         })

@@ -136,13 +136,13 @@ export default {
                 form.value.raiting = null
                 statusModal.closeModal(false)
                 loading.value = false
-                props.index()
+              /*   props.index() */
             } finally {
                 loading.value = false
                 form.value.comment = null
                 form.value.raiting = null
                 statusModal.closeModal(false)
-                props.index()
+              /*   props.index() */
 
             }
 

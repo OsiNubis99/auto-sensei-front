@@ -4,7 +4,7 @@
     </template>
 
     <template v-else>
-        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
+        <HeaderOptionesSeller />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class="hidden md:w-[29%] lg:block">
@@ -108,6 +108,7 @@ import CardLiveSeller from '../../../components/Cards/CardLiveSeller.vue'
 import Basic from '../../../components/Loading/Basic.vue'
 import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
 import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
+import { arrayPhotos } from "../../../utils/packPhotos";
 export default {
 
     components: {
@@ -140,11 +141,13 @@ export default {
             counter.value++
         }
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
-            const i = data.value.findIndex(x => x._id === newQuestion._id)
-            data.value[i] = newQuestion
+
             if (autionUpdate.value.status == 'live') {
+                data.value.push(newQuestion)
+                console.log('data.value antes', data.value.length)
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
+                console.log('data.value antes', data.value.length)
                 let photos = null;
                 photos = arrayPhotos(data.value[i].vehicleDetails)
                 if (photos.length > 0) {
@@ -152,9 +155,24 @@ export default {
                 } else {
                     photos = null
                 }
-            } else {
+            }
+            if (autionUpdate.value?.status == 'completed') {
+                console.log('ENTRO EN EL WACTH completed')
                 let result = null;
-                result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                result = data.value.filter((remove) => remove._id !== autionUpdate.value._id)
+                console.log('result', result)
+                console.log(' data.value', data.value)
+                data.value = []
+                data.value = result
+            }
+
+            if (autionUpdate.value?.status == 'bids completed') {
+                console.log('ENTRO EN EL WACTH bids completed')
+                let result = null;
+                result = data.value.filter((remove) => remove._id !== autionUpdate.value._id)
+                console.log('result', result)
+                console.log(' data.value', data.value)
+                data.value = []
                 data.value = result
 
             }
