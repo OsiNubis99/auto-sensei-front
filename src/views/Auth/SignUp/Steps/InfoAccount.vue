@@ -114,10 +114,10 @@
                                     </div>
                                     <div class="space-y-1">
                                         <label htmlFor="password" class="block text-sm font-medium text-gray-700">
-                                            Zip Code
+                                            Postal Code
                                         </label>
                                         <div class="mt-1">
-                                            <input name="zipCode" v-model="form.zipCode" type="number"
+                                            <input name="postalCode" v-model="form.zipCode" type="text"
                                                 placeholder="587469"
                                                 :class="invalid?.zipCode ? 'border-error' : 'border-[#F0F0F0]'"
                                                 class="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
@@ -129,7 +129,10 @@
                             <div class="flex items-center gap-3" v-if="rol === 'dealers'">
                                 <div class="w-full flex flex-col gap-2 relative">
                                     <label class=" text-sm md:text-base " for="">Province</label>
-                                    <select v-model="form.province" @change="onChangeGetProvince($event)"
+                                    <input v-model="form.province"
+                                        :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
+                                        class="p-2 rounded-lg border " type="text">
+                                    <!--  <select v-model="form.province" @change="onChangeGetProvince($event)"
                                         :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
                                         class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -139,16 +142,18 @@
                                             <option :value="JSON.stringify(state)">{{ state.iso2 }} | {{ state.name }}
                                             </option>
                                         </template>
-                                    </select>
-                                    <div v-if="!form.getState"
-                                        class="absolute text-xs md:text-sm text-[#858585] bottom-2 left-4 ">
-                                        Laoding
-                                        province...
-                                    </div>
+</select>
+<div v-if="!form.getState" class="absolute text-xs md:text-sm text-[#858585] bottom-2 left-4 ">
+    Laoding
+    province...
+</div> -->
                                 </div>
                                 <div class="w-full flex flex-col gap-2 relative">
                                     <label class=" text-sm md:text-base " for="">City</label>
-                                    <select v-model="form.city" @change="onChangeGetCity($event)"
+                                    <input v-model="form.city"
+                                        :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
+                                        class="p-2 rounded-lg border " type="text">
+                                    <!--  <select v-model="form.city" @change="onChangeGetCity($event)"
                                         :disabled="loadingCountrys || !form.getCities ? true : false"
                                         :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'" class=" border text-[#858585] md:p-3  text-gray-900 text-xs
                                          md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
@@ -162,7 +167,7 @@
                                     <div v-if="loadingCountrys"
                                         class="absolute text-sm text-[#858585] bottom-2 left-4 ">
                                         Laoding
-                                        city...</div>
+                                        city...</div> -->
                                 </div>
                             </div>
 
@@ -361,8 +366,10 @@ export default {
                     linea1: form.linea1,
                     linea2: form.linea2,
                     zipCode: form.zipCode,
-                    province: JSON.parse(form.province)?.name,
-                    city: JSON.parse(form.city)?.name
+                    province: form.province,
+                    city: form.city
+                    /*  province: JSON.parse(form.province)?.name,
+                     city: JSON.parse(form.city)?.name */
                 }
                 try {
                     let dataSenCode = {

@@ -212,10 +212,10 @@
                             </div>
                             <div class="animate-fade-up   animate-ease-in-out animate-delay-600 col-span-2">
                                 <label htmlFor="zip" class="block text-xs md:text-sm font-medium text-gray-700">
-                                    Zip Code
+                                    Postal Code
                                 </label>
                                 <div class="mt-1">
-                                    <input v-model="form.zipCode" name="zip" type="number" placeholder="014747"
+                                    <input v-model="form.zipCode" name="zip" type="text" placeholder="014747"
                                         class="appearance-none block w-full px-3 py-2  border border-[#E0E0E0]   rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                             </div>
@@ -223,7 +223,10 @@
 
                         <div class="w-full flex flex-col gap-2 relative">
                             <label class=" text-sm md:text-base " for="">Province</label>
-                            <select v-model="form.province" @change="onChangeGetProvince($event)"
+                            <input v-model="form.province"
+                    :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 rounded-lg border "  type="text">
+                            <!-- <select v-model="form.province" @change="onChangeGetProvince($event)"
                                 class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
                                 <option v-if="!form.getState" selected>Laoding city... </option>
@@ -236,11 +239,14 @@
                             </select>
                             <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
                                 province...
-                            </div>
+                            </div> -->
                         </div>
                         <div class="w-full flex flex-col gap-2 relative">
                             <label class=" text-sm md:text-base " for="">City</label>
-                            <select v-model="form.city" @change="onChangeGetCity($event)"
+                            <input v-model="form.city"
+                    :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 rounded-lg border "  type="text">
+                           <!--  <select v-model="form.city" @change="onChangeGetCity($event)"
                                 :disabled="loadingCountrys || !form.getCities ? true : false"
                                 class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm  rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -252,7 +258,7 @@
                                 </template>
                             </select>
                             <div v-if="loadingCountrys" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
-                                city...</div>
+                                city...</div> -->
                         </div>
                     </div>
                     <div class="flex items-center pt-4 justify-end gap-2 w-full">
@@ -627,17 +633,17 @@ export default {
                             return
                         }
                     }
-                    let city = JSON.parse(form.value.city)?.name;
-                    let province = JSON.parse(form.value.province)?.name;
+                  /*   let city = JSON.parse(form.value.city)?.name;
+                    let province = JSON.parse(form.value.province)?.name; */
                     try {
                         let resUpdate = await storeProfile.updateUser({
                             address: {
-                                city: city,
+                                city: form.value.city,
                                 country: 'Canada',
                                 line1: form.value.line1,
                                 line2: form.value.line2,
                                 postal_code: form.value.zipCode,
-                                state: province
+                                state: form.value.province
                             }
                         })
                         if (resUpdate) {

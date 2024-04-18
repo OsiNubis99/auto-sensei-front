@@ -151,7 +151,7 @@
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.line2 }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
-                                    <p>Zip code:</p>
+                                    <p>Postal Code:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.postal_code }}</p>
                                 </div>
                                
@@ -325,7 +325,7 @@
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.line2 }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
-                                    <p>Zip code:</p>
+                                    <p>Postal Code:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.postal_code }}</p>
                                 </div>
                                

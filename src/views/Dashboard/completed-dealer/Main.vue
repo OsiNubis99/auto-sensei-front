@@ -5,7 +5,7 @@
     <template v-else>
         <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
 
-        <div  class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
 
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
@@ -608,7 +608,7 @@ export default {
             console.log('autionUpdate COMPLETED DEALER', autionUpdate)
             const i = data.value.findIndex(x => x._id === newQuestion._id)
             data.value[i] = newQuestion
-            if (autionUpdate.value.status == 'completed' || autionUpdate.value.status == 'drop off' ) {
+            if (autionUpdate.value.status == 'completed' || autionUpdate.value.status == 'drop off') {
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
                 let photos = null;
