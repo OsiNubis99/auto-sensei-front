@@ -708,35 +708,15 @@ export default {
             }
         }
         const pdfDonwload = () => {
-            const supportsDownloadAttribute = HTMLAnchorElement.prototype.hasOwnProperty("download");
-            const blob = new Blob([dataBuffer.value], { type: "application/pdf" });
-            sutmibPDF(blob)
-            if (navigator.msSaveOrOpenBlob) {
-                navigator.msSaveOrOpenBlob(blob, "download.pdf");
-            } else if (!supportsDownloadAttribute) {
-                const reader = new FileReader();
-                reader.onloadend = function () {
-                    const dataUrl = reader.result;
+            const link = document.createElement('a');
+            link.href = showPdf.value;
+            link.target = '_blank';
+            link.download = 'contect-file.pdf';
 
-                    downloadPdf(dataUrl);
-                };
-                reader.readAsDataURL(blob);
-            } else {
-                const objectUrl = window.URL.createObjectURL(blob);
-                downloadPdf(objectUrl);
-                window.URL.revokeObjectURL(objectUrl);
-            }
-            function downloadPdf(blob) {
-                const a = document.createElement("a");
-                a.href = blob;
-                a.style.display = "none";
-                a.download = "download.pdf";
-                a.setAttribute("download", "download.pdf");
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                closetModalPdf()
-            }
+            // Simulate a click on the element <a>
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
 
         }
         const nextContract = async () => {
@@ -746,9 +726,9 @@ export default {
                 loadingPdf.value = true
                 try {
                     let res = await storeAutions.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
+                    showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
                     console.log('res', res)
                     if (res) {
-                        showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
                         loadingPdf.value = false
                         steps.value.step1 = false
                         steps.value.step2 = false

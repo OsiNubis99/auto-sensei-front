@@ -17,7 +17,8 @@
                     vehicle accurately.
                 </p>
             </div>
-            <div class="flex gap-2 items-center justify-between">   <div class="w-full mt-5 flex flex-col gap-2">
+            <div class="flex gap-2 items-center justify-between">
+                <div class="w-full mt-5 flex flex-col gap-2">
                     <label class=" text-sm md:text-base " for="">Vehicle Drop Off Agreement</label>
                     <VueDatePicker :enable-time-picker="false"
                         :min-date="new Date(new Date().getTime() + 2 * 86400 * 1000)" class="custom-picker"
@@ -40,7 +41,10 @@
         <div class="flex flex-col md:grid w-full md:grid-cols-3 gap-5">
             <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">Province</label>
-                <select v-model="form.province" @change="onChangeGetProvince($event)"
+                <input v-model="form.province" placeholder="Province"
+                    :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'" class="p-2 rounded-lg border "
+                    type="text">
+                <!--  <select v-model="form.province" @change="onChangeGetProvince($event)"
                     :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
                     class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -51,11 +55,14 @@
                     </template>
                 </select>
                 <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding province...
-                </div>
+                </div> -->
             </div>
             <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">City</label>
-                <select v-model="form.city" @change="onChangeGetCity($event)" :disabled="loadingCountrys || !form.getCities ? true : false"
+                <input v-model="form.city" placeholder="City"
+                    :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'" class="p-2 rounded-lg border "
+                    type="text">
+                <!--  <select v-model="form.city" @change="onChangeGetCity($event)" :disabled="loadingCountrys || !form.getCities ? true : false"
                     :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
                     class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -66,7 +73,7 @@
                     </template>
                 </select>
                 <div v-if="loadingCountrys" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
-                    city...</div>
+                    city...</div> -->
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class=" text-sm md:text-base " for="">How many keys?</label>
@@ -293,8 +300,8 @@ export default {
         onChangeGetCity: {
             type: Function,
         },
-        loadingCountrys:{
-            type:Boolean
+        loadingCountrys: {
+            type: Boolean
         }
     },
     setup(props) {

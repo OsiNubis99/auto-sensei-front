@@ -441,13 +441,13 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-                formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province)
+              /*   formData.value.saveCity = JSON.parse(formData.value.city)
+                formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.saveCity.name,
-                    province: formData.value.saveProvince.name,
+                    city: formData.value.city,
+                    province: formData.value.province,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,
@@ -535,13 +535,13 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-                formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province)
+               /*  formData.value.saveCity = JSON.parse(formData.value.city)
+                formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.saveCity.name,
-                    province: formData.value.saveProvince.name,
+                    city: formData.value.city,
+                    province: formData.value.province,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,
@@ -932,14 +932,14 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-                formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province)
+              /*   formData.value.saveCity = JSON.parse(formData.value.city)
+                formData.value.saveProvince = JSON.parse(formData.value.province) */
                 console.log('formData.value.document ', formData.value.document)
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.saveCity.name,
-                    province: formData.value.saveProvince.name,
+                    city: formData.value.city,
+                    province: formData.value.province,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,

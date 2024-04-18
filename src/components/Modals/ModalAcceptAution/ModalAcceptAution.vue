@@ -163,35 +163,15 @@ export default {
             step3: false
         })
         const pdfDonwload = () => {
-            const supportsDownloadAttribute = HTMLAnchorElement.prototype.hasOwnProperty("download");
-            const blob = new Blob([dataBuffer.value], { type: "application/pdf" });
-            sutmibPDF(blob)
-            if (navigator.msSaveOrOpenBlob) {
-                navigator.msSaveOrOpenBlob(blob, "download.pdf");
-            } else if (!supportsDownloadAttribute) {
-                const reader = new FileReader();
-                reader.onloadend = function () {
-                    const dataUrl = reader.result;
+            const link = document.createElement('a');
+            link.href = showPdf.value;
+            link.target = '_blank';
+            link.download = 'contect-file.pdf';
 
-                    downloadPdf(dataUrl);
-                };
-                reader.readAsDataURL(blob);
-            } else {
-                const objectUrl = window.URL.createObjectURL(blob);
-                downloadPdf(objectUrl);
-                window.URL.revokeObjectURL(objectUrl);
-            }
-            function downloadPdf(blob) {
-                const a = document.createElement("a");
-                a.href = blob;
-                a.style.display = "none";
-                a.download = "download.pdf";
-                a.setAttribute("download", "download.pdf");
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                close()
-            }
+            // Simulate a click on the element <a>
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
 
         }
         const next = async (step) => {
@@ -204,9 +184,9 @@ export default {
                     const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
                     let pdf = null;
                     if (statusModal.dataAutiont.contract) {
+                        showPdf.value = 'https://apidev.autosensei.ca/files/' + statusModal.dataAutiont.contract
                         let res = await props.acceptAution(statusModal.dataAutiont.contract)
                         if (res) {
-                            showPdf.value = 'https://apidev.autosensei.ca/files/' + statusModal.dataAutiont.contract
                             steps.value.step1 = false
                             steps.value.step2 = false
                             steps.value.step3 = true
@@ -217,9 +197,9 @@ export default {
                             .get(`/auction/contract/${statusModal.dataAutiont._id}`)
                             .then(async (response) => {
                                 console.log('resPDF', response)
+                                showPdf.value = 'https://apidev.autosensei.ca/files/' + response.data.contract
                                 let res = await props.acceptAution(response.data.contract)
                                 if (res) {
-                                    showPdf.value = 'https://apidev.autosensei.ca/files/' + response.data.contract
                                     steps.value.step1 = false
                                     steps.value.step2 = false
                                     steps.value.step3 = true

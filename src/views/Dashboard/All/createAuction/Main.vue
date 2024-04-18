@@ -1008,7 +1008,7 @@ export default {
                     try {
                         let res = await store.update({ uuid: id_create.value, payload: resFiles })
                         if (res) {
-                            let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
+                            let resDtaLate = await dataLayer.push({ 'event': 'LaunchAuction', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
                             console.log('resDtaLate Create', resDtaLate)
                             await router.push({ path: '/all' })
 
