@@ -1,22 +1,261 @@
 <template>
-    <div>
+    <template v-if="loading">
+        <Basic />
+    </template>
+    <template v-else>
         <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
-        <template v-if="loading">
-            <Basic />
-        </template>
-        <div v-else class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
 
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
             <div v-else class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class=" hidden md:w-[29%] md:block">
-                    <FilterBig />
+                <div :class="showFilter ? ' top-0 z-50 visible  w-full h-screen overflow-y-auto overflow-x-hidden shadow-xl animation-fade-modal' : ' invisible md:visible '"
+                    class="fixed  lg:relative  md:w-[29%] md:block">
+                    <div class="bg-white p-5 shadow-steps">
+                        <div class="flex w-full justify-between items-center">
+                            <p class=" lg:text-2xl font-semibold">Filter Auction</p>
+                            <div class="flex  items-center gap-2 justify-end">
+                                <p @click="resetFilterValue"
+                                    class="cursor-pointer text-xs lg:text-[15px] text-error font-semibold">
+                                    Reset
+                                    Filter</p>
+                                <svg @click="showFilter = false" xmlns="http://www.w3.org/2000/svg"
+                                    class=" w-6 h-8 md:w-8 lg:hidden block  md:h-8  cursor-pointer" fill="none"
+                                    viewBox="0 0 24 24" stroke="#ff4545">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+
+                        </div>
+
+                        <div class="mt-4 flex flex-col gap-4">
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Reminder Status</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option>all</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Make</label>
+                                <option selected hidden>Select make</option>
+                                <select @change="applyFilter($event, 'make')" v-model="formFilter.make"
+                                    class="border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select make</option>
+                                    <template v-for="(make, index) in filterValues('make')" :key="index">
+                                        <option :value="make">{{ make }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Model</label>
+                                <select @change="applyFilter($event, 'model')" v-model="formFilter.model"
+                                    class=" border-none text-[#858585] md:p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select model</option>
+                                    <template v-for="(model, index) in filterValues('model')" :key="index">
+                                        <option :value="model">{{ model }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Trim</label>
+
+                                <select @change="applyFilter($event, 'trim')"
+                                    class=" border-none text-[#858585] md:p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select trim</option>
+                                    <option selected>Select trim</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="make">Year</label>
+                                <div class="flex justify-center gap-6 items-center ">
+                                    <select @change="applyPairFilters($event, 'start', label.year)"
+                                        class="border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                        <option selected hidden id="make">Select make</option>
+                                        <template v-for="(year, index) in filterValues('year')" :key="index">
+                                            <option :value="year">{{ year }}</option>
+                                        </template>
+                                    </select>
+                                    <!--  <VueDatePicker v-model="filterValues('year')" range
+                                        @update:model-value="applyPairFilters(event, 'start')" year-picker
+                                        class="custom-picker">
+                                        <template #calendar-header="{ index, day }">
+                                            <div :class="index === 5 || index === 6 ? 'red-color' : ''">
+                                                {{ day }}
+                                            </div>
+                                        </template>
+                                    </VueDatePicker> -->
+                                    <p> - </p>
+                                    <select @change="applyPairFilters($event, 'end', label.year)"
+                                        class="border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                        <option selected hidden>Select make</option>
+                                        <template v-for="(year, index) in filterValues('year')" :key="index">
+                                            <option :value="year">{{ year }}</option>
+                                        </template>
+                                    </select>
+                                    <!--   <VueDatePicker v-model="formPair.dateEnd"
+                                        @update:model-value="applyPairFilters(event, 'end')" year-picker
+                                        class="custom-picker">
+                                        <template #calendar-header="{ index, day }">
+                                            <div :class="index === 5 || index === 6 ? 'red-color' : ''">
+                                                {{ day }}
+                                            </div>
+                                        </template>
+                                    </VueDatePicker> -->
+                                </div>
+
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Body Type</label>
+                                <select @change="applyFilter($event, 'bodyType')" v-model="formFilter.bodyType"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select body type</option>
+                                    <template v-for="(typeCar, index) in filterValues('bodyType')" :key="index">
+                                        <option :value="typeCar">{{ typeCar }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Cylinder</label>
+                                <select @change="applyFilter($event, 'cylinder')" v-model="formFilter.cilynder"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select cylinder</option>
+                                    <template v-for="(cilynder, index) in filterValues('cylinder')" :key="index">
+                                        <option :value="cilynder">{{ cilynder }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Transmission</label>
+                                <select @change="applyFilter($event, 'transmission')" v-model="formFilter.transmission"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select transmission</option>
+                                    <template v-for="(transmission, index) in filterValues('transmission')"
+                                        :key="index">
+                                        <option v-if="transmission" :value="transmission">{{ transmission }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Doors</label>
+                                <select @change="applyFilter($event, 'doors')" v-model="formFilter.doors"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">\
+                                    <option selected hidden>Select doors</option>
+                                    <template v-for="(doors, index) in filterValues('doors')" :key="index">
+                                        <option :value="doors">{{ doors }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Drivetrain</label>
+                                <select @change="applyFilter($event, 'driveTrain')" v-model="formFilter.driver"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select drivetrain</option>
+                                    <template v-for="(driver, index) in filterValues('driveTrain')" :key="index">
+                                        <option :value="driver">{{ driver }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Vehicle Condition</label>
+                                <select @change="applyFilter($event, 'vehicle-condition')"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select condition</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Exterior Color</label>
+                                <div class="grid grid-cols-3  place-items-start gap-4">
+                                    <label v-for="(color, index) in filterValues('color')" :key="index"
+                                        class="label-colors !p-2 !h-[40px] !capitalize whitespace-pre w-full">
+                                        <input @change="applyFilter($event, 'color')" :value="color" type="radio"
+                                            class="input-radio" :class="[
+        color == 'silver' && 'on-silver',
+        color == 'white' && 'on-white',
+        color == 'grey' && 'on-grey',
+        color == 'greenDark' && 'on-greenDark',
+        color == 'red' && 'on-red',
+        color == 'yellow' && 'on-yellow',
+        color == 'blue' && 'on-blue',
+        color == 'white' && 'on-white',
+        color == 'white' && 'on-white',
+    ]" name="color-redio">
+                                        {{ color }}
+                                    </label>
+                                    <!--  <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-white" value="white"
+                                            name="color-redio">
+                                        White
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-silver" value="silver"
+                                            name="color-redio">
+                                        Silver
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-grey" value="grey"
+                                            name="color-redio">
+                                        Grey
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-greendark" value="greenDark"
+                                            name="color-redio">
+                                        Green
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-brown" value="brown"
+                                            name="color-redio">
+                                        Brown
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-red" value="red" name="color-redio">
+                                        Red
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-yellow" value="yellow"
+                                            name="color-redio">
+                                        Yellow
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-green" value="green"
+                                            name="color-redio">
+                                        Green
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+                                        <input type="radio" class="input-radio  on-blue" value="blue"
+                                            name="color-redio">
+                                        Blue
+                                    </label>
+                                    <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
+
+                                        Other
+                                    </label> -->
+                                </div>
+                            </div>
+                            <div class="w-full">
+                                <label class="font-medium text-base " for="">Kilometers</label>
+                                <div class="flex justify-between items-center gap-6 ">
+                                    <input @change="applyPairFilters($event, 'start', label.klmtr)"
+                                        class="p-2 w-full mt-3 uppercase  border border-[#E0E0E0] text-[#858585] rounded-lg"
+                                        placeholder="0                                 Kms" type="number">
+                                    <p>-</p>
+                                    <input @change="applyPairFilters($event, 'end')" type="number"
+                                        class="p-2 w-full mt-3 uppercase  border border-[#E0E0E0] text-[#858585] rounded-lg"
+                                        placeholder="0                                 Kms">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-full md:w-[70%] ">
+                <div class="w-full lg:w-[70%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }}
+                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
+                            }}
                             Vehicles
+                        </p>
+                        <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
                         </p>
                         <div class="flex items-center gap-5">
                             <div class="navbar-right relative">
@@ -77,8 +316,7 @@
                         <div v-for="(aution, index) in sortedData" :key="index"
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-                            <CardsCurrentBits :key="counter" :aution="aution" :changeLayouts="changeLayouts"
-                                :auth="authStore" />
+                            <CardsCurrentBits :key="counter":aution="aution" :changeLayouts="changeLayouts" :auth="authStore" />
                             <!--  <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
@@ -87,7 +325,7 @@
                                     </swiper-slide>
                                     <div v-if="!aution.photos" class=" absolute w-full h-full top-0 ">
                                         <img class="w-full rounded-s-lg h-full object-cover"
-                                            src="../../../assets/img/jpg/image.jpg" alt="">
+                                            src="@/assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
@@ -285,7 +523,8 @@
                 </div>
             </div>
         </div>
-        <div class="fixed md:hidden flex justify-center items-center bottom-2 w-full z-50">
+        <div v-show="!showFilter && data.length > 0" @click="showFilter = true"
+            class="fixed md:hidden flex justify-center items-center bottom-2 w-full z-50">
             <div class="flex items-center py-2 rounded-lg px-3 gap-2 bg-base-black">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
                     <path
@@ -298,7 +537,7 @@
         </div>
         <ModalBidNow v-if="statusModal.isActive" :form="formData" />
         <ModalAutoBidVue v-if="statusModalAuto.isActive" :form="formData" :index="index" />
-    </div>
+    </template>
 </template>
 
 <script>
@@ -322,6 +561,7 @@ import CardsCurrentBits from '../../../components/Cards/CardsCurrentBits.vue'
 import Basic from '../../../components/Loading/Basic.vue'
 import FilterBig from "../../../components/Filters/FilterBig.vue";
 import SorBy from '../../../components/Filters/SorBy.vue'
+import { arrayPhotos } from "../../../utils/packPhotos";
 export default {
 
     components: {
@@ -365,6 +605,21 @@ export default {
         const path = ref(computed(() => route.name))
         const route = useRoute();
         const sortBy = ref('Current Bid')
+        const filteredItems = ref([])
+        const showFilter = ref(false)
+        const formFilter = ref({
+            make: 'Select make',
+            model: 'Select model',
+            year: 'Select make',
+            bodyType: 'Select body type',
+            cilynder: 'Select cylinder',
+            transmission: 'Select transmission',
+            doors: 'Select doors',
+            driver: 'Select drivetrain',
+            color: 'Select color',
+
+
+        })
         const autionUpdate = ref(computed(() => authStore.aution))
         const index = async () => {
             loading.value = true
@@ -376,32 +631,15 @@ export default {
                 data.value.map((autions, index) => {
                     /*  const formatter = new Intl.NumberFormat();
                      autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer) */
-                    let photos = []
-                    if (autions?.vehicleDetails?.additionalDocuments,
-                        autions?.vehicleDetails?.exteriorPhotos,
-                        autions?.vehicleDetails?.interiorPhotos,
-                        autions?.vehicleDetails?.driverLicense) {
-                        var d = photos.concat(
-                            autions?.vehicleDetails?.additionalDocuments,
-                            autions?.vehicleDetails?.exteriorPhotos,
-                            autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.vehicleDamage,
-                            autions?.vehicleDetails?.driverLicense,
-                            autions?.vehicleDetails?.originalDocument,
-                        );
-                        let resD = d.map((item, i) => {
-                            let name = item.split("/")
-                            let newObjet = {
-                                name: name[2],
-                                url: item
-                            }
-                            return newObjet
-                        })
-                        return autions.photos = resD
+                    let photos = null;
+                    photos = arrayPhotos(autions.vehicleDetails)
+                    if (photos.length > 0) {
+                        autions.photos = photos
                     } else {
-                        return autions.photos = null
+                        photos = null
                     }
                 })
+                resetFilters()
             } catch (error) {
 
             } finally {
@@ -425,45 +663,31 @@ export default {
             }
         })
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
-            console.log('current bits', newQuestion)
-            console.log('storeAutions completedDelaer', storeAutions.completedDelaer)
-            if (autionUpdate.value.status == 'live') {
-                const i = data.value.findIndex(x => x._id === newQuestion._id)
-                data.value[i] = newQuestion
-                let photos = []
-                counter.value++
-                if (data.value[i]?.vehicleDetails?.additionalDocuments,
-                    data.value[i]?.vehicleDetails?.exteriorPhotos,
-                    data.value[i]?.vehicleDetails?.interiorPhotos,
-                    data.value[i]?.vehicleDetails?.driverLicense) {
-                    var d = photos.concat(
-                        data.value[i]?.vehicleDetails?.additionalDocuments,
-                        data.value[i]?.vehicleDetails?.exteriorPhotos,
-                        data.value[i]?.vehicleDetails?.interiorPhotos,
-                        data.value[i]?.vehicleDetails?.vehicleDamage,
-                        data.value[i]?.vehicleDetails?.driverLicense,
-                        data.value[i]?.vehicleDetails?.originalDocument,
-                    );
-                    let resD = d.map((item, i) => {
-                        let name = item.split("/")
-                        let newObjet = {
-                            name: name[2],
-                            url: item
-                        }
-                        return newObjet
-                    })
-                    return data.value[i].photos = resD
-
+            if (newQuestion.status == 'live') {
+                console.log('CURRENT BITS ENTRO EN LIVE', newQuestion)
+                const i = filteredItems.value.findIndex(x => x._id === newQuestion._id)
+                console.log('i', i)
+                filteredItems.value[i] = newQuestion
+                console.log('filteredItems.value[i]', filteredItems.value[i])
+                let photos = null;
+              /*   photos = arrayPhotos(data.value[i].vehicleDetails)
+                if (photos.length > 0) {
+                    data.value[i].photos = photos
                 } else {
-                    return data.value[i].photos = null
-                }
+                    photos = null
+                } */
+
             } else {
+                console.log('CURRENT BITS ENTRO EN EL ELSE', data.value)
                 let result = null;
                 result = data.value.filter((remove) => remove._id !== newQuestion._id)
-                data.value = result
+                console.log('result FILTER', result)
+                filteredItems.value = result
+                console.log('data.value', data.value)
+                console.log('data.value.length despues', data.value.length)
 
             }
-
+            counter.value++
 
         })
         function timeToEnd(startDate, duration) {
@@ -471,6 +695,51 @@ export default {
             return (
                 new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
             );
+        }
+        const removeDuplicate = (array) => {
+            return [...new Set(array)]
+        }
+        const filterValues = (key) => {
+            return removeDuplicate(filteredItems.value.map(item => item.vehicleDetails[key])).sort()
+        }
+        const applyPairFilters = (event, type, filter) => {
+            console.log(filter);
+            console.log(filteredItems.value);
+            filteredItems.value = filteredItems.value.filter((item) => {
+                if (type === 'start') {
+                    return item.vehicleDetails[filter] >= event.target.value
+                }
+                if (type === 'end') {
+                    return item.vehicleDetails[filter] <= event.target.value
+                }
+
+            })
+
+            console.log('filter', filter, ':', event.target.value)
+            counter.value++
+        }
+        const applyFilter = (event, filter) => {
+            console.log(filter);
+            filteredItems.value = filteredItems.value.filter((item) => {
+                console.log(item);
+                return item.vehicleDetails[filter] == event.target.value
+            })
+            counter.value++
+        }
+        const resetFilters = () => {
+            filteredItems.value = data.value
+        }
+        const resetFilterValue = () => {
+            formFilter.value.make = 'Select make';
+            formFilter.value.model = 'Select model';
+            formFilter.value.year = 'Select make';
+            formFilter.value.bodyType = 'Select body type';
+            formFilter.value.cilynder = 'Select cylinder';
+            formFilter.value.transmission = 'Select transmission';
+            formFilter.value.doors = 'Select doors';
+            formFilter.value.driver = 'Select drivetrain';
+            formFilter.value.color = 'Select color';
+            resetFilters()
         }
         const setSorBy = (sort) => {
             sortBy.value = sort
@@ -487,7 +756,7 @@ export default {
                 case 'Current Bid':
                     console.log('current-bid')
                     let sortStatus = {}
-                    data.value.forEach(auction => {
+                    filteredItems.value.forEach(auction => {
                         if (!sortStatus[auction.status]) sortStatus[auction.status] = []
                         sortStatus[auction.status].push(auction)
                     })
@@ -499,13 +768,13 @@ export default {
                     return sortedItems.reverse().flat()
                 case 'Odometer':
                     console.log('odometer')
-                    return data.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
+                    return filteredItems.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
                 case 'year':
                     console.log('Year')
-                    return data.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
+                    return filteredItems.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
                 default:
 
-                    return data.value
+                    return filteredItems.value
             }
         })
         watchEffect(() => {
@@ -538,7 +807,15 @@ export default {
             setSorBy,
             sortedData,
             counter,
-            sortBy
+            sortBy,
+            filterValues,
+            applyPairFilters,
+            applyFilter,
+            resetFilterValue,
+            removeDuplicate,
+            filteredItems,
+            showFilter,
+            formFilter
         };
     },
 };

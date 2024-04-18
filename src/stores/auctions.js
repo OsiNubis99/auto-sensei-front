@@ -64,7 +64,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                             item.status == enumState.dropOff
                         )
                         console.log('this.currentBids', this.currentBids)
-                        console.log('this.completedDelaer ', this.completedDelaer )
+                        console.log('this.completedDelaer ', this.completedDelaer)
                         resolve(response);
                     })
                     .catch((error) => {
@@ -193,10 +193,12 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     });
             });
         },
-        acceptAutions(uuid) {
+        acceptAutions(uuid, url) {
             return new Promise((resolve, reject) => {
                 axios
-                    .patch(`/auction/accept/${uuid}`)
+                    .patch(`/auction/accept/${uuid}`, {
+                        url: url
+                    })
                     .then((response) => {
                         resolve(response);
                     })
@@ -222,6 +224,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                 axios
                     .get(`/user/stats`)
                     .then((response) => {
+                        console.log('S   T   A    T     S', response)
                         this.stats = response.data
                         resolve(response);
                     })
@@ -254,10 +257,12 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     });
             });
         },
-        vehicleReceived({ uuid }) {
+        vehicleReceived(uuid, url) {
             return new Promise((resolve, reject) => {
                 axios
-                    .patch(`/auction/drop-off/${uuid}`)
+                    .patch(`/auction/drop-off/${uuid}`, {
+                        url: url
+                    })
                     .then((response) => {
                         console.log('response', response)
                         resolve(response);

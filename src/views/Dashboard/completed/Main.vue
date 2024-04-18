@@ -4,14 +4,14 @@
     </template>
 
     <template v-else>
-        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
+        <HeaderOptionesSeller  />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="hidden md:w-[29%] md:block">
-                    <CreateAution class="hidden md:block" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="hidden md:w-[29%] lg:block">
+                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
-                <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
-                <div class="w-full md:w-[70%] ">
+                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="w-full lg:w-[70%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ sortedData.length }}
                             Vehicles
@@ -115,7 +115,7 @@
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
                                         <img class="w-full rounded-s-lg h-full object-cover"
-                                            src="../../../assets/img/jpg/image.jpg" alt="">
+                                            src="@/assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
@@ -345,7 +345,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect ,watch} from "vue";
+import { ref, onMounted, computed, watchEffect, watch } from "vue";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from 'vue-router'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -370,6 +370,8 @@ import CardAutionMobile from '../../../components/Cards/CardAutionMobile.vue'
 import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
 import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
 import SorBy from '../../../components/Filters/SorBy.vue'
+import { arrayPhotos } from "../../../utils/packPhotos";
+
 export default {
 
     components: {
@@ -405,7 +407,7 @@ export default {
         const counter = ref(0)
         const statusModalView = ModalViewDetails()
         const sortBy = ref('All Status')
-       
+
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
             counter.value++
@@ -442,33 +444,16 @@ export default {
                 let res = await storeAutions.index()
                 if (res) {
                     data.value = storeAutions.completed
+                    console.log('data.value', data.value)
                     data.value.map((autions, index) => {
                         const formatter = new Intl.NumberFormat();
                         autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer)
-                        let photos = []
-                        if (autions?.vehicleDetails?.additionalDocuments,
-                            autions?.vehicleDetails?.exteriorPhotos,
-                            autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.driverLicense) {
-                            var d = photos.concat(
-                                autions?.vehicleDetails?.additionalDocuments,
-                                autions?.vehicleDetails?.exteriorPhotos,
-                                autions?.vehicleDetails?.interiorPhotos,
-                                autions?.vehicleDetails?.vehicleDamage,
-                                autions?.vehicleDetails?.driverLicense,
-                                autions?.vehicleDetails?.originalDocument,
-                            );
-                            let resD = d.map((item, i) => {
-                                let name = item.split("/")
-                                let newObjet = {
-                                    name: name[2],
-                                    url: item
-                                }
-                                return newObjet
-                            })
-                            return autions.photos = resD
+                        let photos = null;
+                        photos = arrayPhotos(autions.vehicleDetails)
+                        if (photos.length > 0) {
+                            autions.photos = photos
                         } else {
-                            return autions.photos = null
+                            photos = null
                         }
                     })
                 }
@@ -483,10 +468,11 @@ export default {
             openDecline.value = true
             autionModal.value = auction
         }
-        const acceptAution = () => {
+        const acceptAution = (url) => {
             loading.value = true
+            console.log('REVISAR SI LLEGAaaaaaaaaaaaaa', url)
             try {
-                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id)
+                let res = storeAutions.acceptAutions(statusModal.dataAutiont._id, url)
                 if (res) {
                     return '200'
                 }
@@ -535,37 +521,19 @@ export default {
             if (autionUpdate.value.status == 'completed') {
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
-                let photos = []
-                if (data.value[i]?.vehicleDetails?.additionalDocuments,
-                    data.value[i]?.vehicleDetails?.exteriorPhotos,
-                    data.value[i]?.vehicleDetails?.interiorPhotos,
-                    data.value[i]?.vehicleDetails?.driverLicense) {
-                    var d = photos.concat(
-                        data.value[i]?.vehicleDetails?.additionalDocuments,
-                        data.value[i]?.vehicleDetails?.exteriorPhotos,
-                        data.value[i]?.vehicleDetails?.interiorPhotos,
-                        data.value[i]?.vehicleDetails?.vehicleDamage,
-                        data.value[i]?.vehicleDetails?.driverLicense,
-                        data.value[i]?.vehicleDetails?.originalDocument,
-                    );
-                    let resD = d.map((item, i) => {
-                        let name = item.split("/")
-                        let newObjet = {
-                            name: name[2],
-                            url: item
-                        }
-                        return newObjet
-                    })
-                    return data.value[i].photos = resD
+                let photos = null;
+                photos = arrayPhotos(data.value[i].vehicleDetails)
+                if (photos.length > 0) {
+                    data.value[i].photos = photos
                 } else {
-                    return data.value[i].photos = null
+                    photos = null
                 }
-            } else {
+            } /* else {
                 let result = null;
                 result = data.value.filter((remove) => remove._id !== newQuestion._id)
                 data.value = result
 
-            }
+            } */
             counter.value++
         })
         onMounted(() => {

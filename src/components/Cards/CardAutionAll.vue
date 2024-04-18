@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col md:flex-row  sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+    <div class="w-full flex   sm:p-0 relative" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
         <p v-if="auction?.status == 'completed'"
             class="md:font-semibold  text-xs md:text-base fixed left-2 z-50 text-white bg-[#05A54B] rounded-lg ml-2 mt-2 px-4 py-1">
             Complete
@@ -29,15 +29,15 @@
                 <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
             </swiper-slide>
             <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
-                <img class="w-full rounded-s-lg h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                <img class="w-full rounded-s-lg h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
             </div>
         </swiper>
-        <div class="w-full flex flex-col md:flex-row justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+        <div class="w-full flex  justify-between gap-3 " :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
             <div @click="(auction?.status == 'live' || auction?.status == 'bids completed' || auction?.status == 'completed') && statusModalView.openModal({ isActive: true, data: auction })"
                 :class="auction?.status == 'live' || auction?.status == 'bids completed' || auction?.status == 'completed' ? 'cursor-pointer hover:shadow-xl' : ''"
                 class="flex p-2 md:p-5  flex-col gap-3">
                 <div>
-                   <!--  <div class="font-bold md:text-xl">{{ auction.title }}</div> -->
+                    <!--  <div class="font-bold md:text-xl">{{ auction.title }}</div> -->
                     <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
@@ -150,8 +150,7 @@
                 </div>
                 <div v-if="auction?.status == 'bids completed'"
                     class="flex md:gap-4 p-2 gap-1 md:p-5  justify-between w-full">
-                    <button @click="statusModal.openModal({ isActive: true, data: auction })"
-                        class="btn w-full bg-primary text-base-black">Accept</button>
+                    <button @click="openModal()" class="btn w-full bg-primary text-base-black">Accept</button>
                     <button @click="declineAution(auction, 'decline')"
                         class="btn w-full bg-white border border-[#E0E0E0] text-error">Decline</button>
                     <RouterLink
@@ -166,12 +165,12 @@
 
                 </div>
                 <div v-if="auction?.status == 'drop off'"
-                    class="flex gap-1 p-2 md:gap-4 md:p-5  justify-between w-full">
+                    class=" md:flex gap-1  p-2 md:gap-4 md:p-5  justify-between w-full">
                     <button @click="statusReview.openModal({ isActive: true, data: auction })"
                         class="btn w-full bg-white border border-[#E0E0E0]  ">Input Review</button>
-                    <RouterLink
+                    <RouterLink 
                         :to="{ name: 'inbox-seller', query: { id: auction?._id + '-' + auction?.bids[0]?.participant._id } }"
-                        class="border p-2 rounded-lg border-[#C2C2C2]">
+                        class="border block md:hidden p-2 rounded-lg border-[#C2C2C2]">
                         <svg class=" block md:hidden h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="none">
                             <path
@@ -191,7 +190,7 @@
                         class="btn w-full bg-white border border-[#E0E0E0] text-[#A3A3A3] ">Reviewed</button>
                     <RouterLink
                         :to="{ name: 'inbox-seller', query: { id: auction?._id + '-' + auction?.bids[0]?.participant._id } }"
-                        class="border p-2 rounded-lg border-[#C2C2C2]">
+                        class="border block lg:hidden p-2 rounded-lg border-[#C2C2C2]">
                         <svg class=" block md:hidden h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="none">
                             <path
@@ -281,6 +280,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalViewDetails } from "@/stores/modalViewDetails";
 import { ModalReview } from "@/stores/modalReview";
+import { useAuthStore } from "@/stores/auth";
+import { toast } from "vue3-toastify";
 export default {
     components: {
         Swiper,
@@ -310,6 +311,7 @@ export default {
         const statusModalView = ModalViewDetails()
         const statusModal = ModalAcceptAution()
         const statusReview = ModalReview()
+        const auth = useAuthStore()
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
             return (
@@ -331,6 +333,14 @@ export default {
         const acceptAution = () => {
             props.acceptAution()
         }
+        const openModal = () => {
+            if (auth.userData.address) {
+                statusModal.openModal({ isActive: true, data: auction })
+            } else {
+                toast('You need to add your address in order to create an auction. Please update your profile', { autoClose: 4000, type: "error" });
+            }
+
+        }
         onMounted(() => {
 
         })
@@ -346,7 +356,8 @@ export default {
             acceptAution,
             statusModal,
             statusModalView,
-            statusReview
+            statusReview,
+            openModal
         };
     },
 };

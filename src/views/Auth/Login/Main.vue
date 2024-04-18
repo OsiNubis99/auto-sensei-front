@@ -74,17 +74,21 @@
                 <p class=" text-[10px] md:text-xs font-normal text-[#666]">
                     By clicking “Log In”, you acknowledge that you have
                     read & agreed to AutoSensei User's
-                    <RouterLink to="/terms-conditions"  target="_blank" class="font-medium underline text-base-black hover:text-indigo-500">
+                    <RouterLink to="/terms-conditions" target="_blank"
+                        class="font-medium underline text-base-black hover:text-indigo-500">
                         Terms & Conditions.
                     </RouterLink>
                 </p>
             </div>
         </div>
-        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class="  lg:block md:w-1/2 relative ">
-            <div v-if="rol == 'dealers'" class="h-full  flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
-                <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br> Organically
+        <div :class="rol == 'dealers' ? 'bg-yellow-light' : 'bg-primary'" class=" hidden lg:block md:w-1/2 relative ">
+            <div v-if="rol == 'dealers'"
+                class="h-full  flex justify-start items-start flex-col gap-5 md:px-16 md:py-12">
+                <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Boost Your Inventory <br>
+                    Organically
                 </h1>
-                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">Dealers are able to increase their inventory without having to go to
+                <p class="p-5 pt-0 !md:p-0 md:w-[70%]">Dealers are able to increase their inventory without having to go
+                    to
                     their local
                     auctions, or online
                     auctions
@@ -150,32 +154,53 @@ export default {
             isLoadingLogin.value = true;
             try {
                 let res = await store.login(payloadData.value);
+                console.log('res login', res)
                 if (res.data.access_token) {
                     let resProfile = await store.authProfile()
-
+                    console.log('resProfile', resProfile)
                     if (resProfile.statusText = "OK") {
                         localStorage.setItem('rol', resProfile.data.type)
-                        setInterval(async () => {
-                            switch (resProfile.data.type) {
-                                case 0:
-                                    await router.push({ path: '/inicio' })
-                                    router.go()
-                                    break;
-                                case 1:
+                        console.log('rol.value', rol.value)
+
+                        switch (resProfile.data.type) {
+                            case 0:
+                                await router.push({ path: '/inicio' })
+                                 
+                                break;
+                            case 1:
+                                if (rol.value == 'sellers') {
                                     await router.push({ path: '/all' })
-                                    router.go()
-                                    break;
-                                case 2:
+                                     
+                                } else {
+                                    localStorage.clear()
+                                    isLoadingLogin.value = false;
+                                    toast("You must be a seller to login.", {
+                                        type: "error",
+                                    });
+                                }
+
+                                break;
+                            case 2:
+
+                                if (rol.value == 'dealers') {
                                     await router.push({ path: '/upcoming' })
-                                    router.go()
-                                    break;
-                                default:
-                                    await router.push({ name: 'home' })
-                                    router.go()
-                                    break;
-                            }
-                            isLoadingLogin.value = false;
-                        }, 800);
+                                     
+                                } else {
+                                    localStorage.clear()
+                                    isLoadingLogin.value = false;
+                                    toast("You must be a dealers to login.", {
+                                        type: "error",
+                                    });
+                                }
+
+                                break;
+                            default:
+                                await router.push({ name: 'home' })
+                                 
+                                break;
+                        }
+
+
                     }
                 }
             } catch (error) {
@@ -185,7 +210,11 @@ export default {
             }
         };
         onMounted(() => {
+            console.log('router', router)
+            console.log('route', route)
             rol.value = route.params.rol
+
+            console.log('rol.value', rol.value)
         })
         return {
             rol,

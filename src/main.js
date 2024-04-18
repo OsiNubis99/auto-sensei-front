@@ -14,13 +14,13 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import StarRating from 'vue-star-rating'
 const app = createApp(App)
+
 app.use(Vue3Toastify, {
     autoClose: 2000,
     position: 'top-right',
     hideProgressBar: true,
     closeOnClick: true,
 });
-
 app.component('VueDatePicker', VueDatePicker);
 app.component(VueCountdown.name, VueCountdown);
 app.component('star-rating', StarRating)
@@ -28,7 +28,7 @@ app.use(createPinia())
 app.use(i18n);
 app.use(VueTheMask)
 utils(app);
-app.use(router)
+
 let token = null;
 token = localStorage.getItem('token')
 let store = useAuthStore()
@@ -41,6 +41,7 @@ if (token) {
         }
     });
 }
+app.use(router)
 app.mount('#app')
 
 

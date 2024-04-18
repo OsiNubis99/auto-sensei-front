@@ -1,6 +1,7 @@
 <template>
     <header>
-        <div v-if="path == 'login' || path == 'signup'" class="md:h-10 p-2 md:p-6 flex justify-start  items-center bg-base-black">
+        <div v-if="path == 'login' || path == 'signup'"
+            class="md:h-10 p-2 md:p-6 flex justify-start  items-center bg-base-black">
             <div class="flex items-center gap-2 md:gap-5 cursor-pointer" @click="back">
                 <IconArrow class="rotate-90" />
                 <p class=" text-xs md:text-sm text-white font-medium">Back to Home</p>
@@ -8,10 +9,10 @@
         </div>
         <div class="font-sans antialiased" id="app">
             <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark hidden md:grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
-        (scrollPosition > 100 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md')]"
-                class="flex py-2 px-1 md:p-4   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal md:px-20 md:py-6">
+        (scrollPosition > 100 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md bg-white')]"
+                class="flex py-2 px-1 md:p-4   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal md:px-20  lg:px-12 md:py-6">
                 <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
-                    <LogoBlack class="md:w-[80%]" v-if="path == 'contact-us' && scrollPosition < 110" />
+                    <LogoBlack class=" w-[70%] md:w-[80%]" v-if="path == 'contact-us' && scrollPosition < 110" />
                     <LogoIcon v-else
                         :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]' : 'w-[90%] md:w-fit'" />
                     <p v-if="path == 'login' || path == 'signup'"
@@ -38,7 +39,7 @@
                                     fill="white" />
                             </svg>
                         </div>
-                        <div class="relative">
+                        <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -46,7 +47,7 @@
                                     d="M20 17H22V19H2V17H4V10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10V17ZM18 17V10C18 8.4087 17.3679 6.88258 16.2426 5.75736C15.1174 4.63214 13.5913 4 12 4C10.4087 4 8.88258 4.63214 7.75736 5.75736C6.63214 6.88258 6 8.4087 6 10V17H18ZM9 21H15V23H9V21Z"
                                     fill="white" />
                             </svg>
-                        </div>
+                        </div> -->
                         <button @click="toggle"
                             class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
                             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -57,13 +58,15 @@
                     </div>
 
                 </div>
-                <div v-else class="flex md:hidden">
+                <div v-else class="flex lg:hidden">
                     <RouterLink v-if="path !== 'login' || path == 'signup'" to="/login/sellers"
-                        class=" text-xs px-4 py-2 rounded-md bg-transparent text-white border border-[#e5e5e5]">
+                        :class="path == 'contact-us' && scrollPosition < 110 ? 'text-blue-dark  border-blue-dark' : 'text-white  border-[#e5e5e5]'"
+                        class=" text-xs px-4 py-2 rounded-md bg-transparent border ">
                         Login
                     </RouterLink>
                     <button @click="toggle"
-                        class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
+                        :class="path == 'contact-us' && scrollPosition < 110 ? 'text-[#000] ' : 'text-white'"
+                        class="flex items-center px-3 py-2   rounded text-teal-lighter  hover:text-white hover:border-white">
                         <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <title>Menu</title>
                             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
@@ -71,7 +74,7 @@
                     </button>
                 </div>
                 <div :class="(path == 'login' || path == 'signup' ? 'justify-end' : '')"
-                    class="w-full flex-grow hidden  md:flex sm:items-center sm:w-auto">
+                    class="w-full flex-grow hidden  lg:flex sm:items-center sm:w-auto">
                     <div :class="[(path === 'login' || path === 'signup' ? 'hidden' : 'flex'), (open && 'flex-col p-5')]"
                         class="text-sm gap-6 sm:flex-grow text-white">
                         <p v-if="open" @click="open = false"
@@ -142,7 +145,8 @@
                     </div>
                 </div>
             </nav>
-            <div v-if="path == 'login' || path == 'signup'" class="bg-blue-dark flex justify-between md:hidden items-center px-3 py-2 ">
+            <div v-if="path == 'login' || path == 'signup'"
+                class="bg-blue-dark flex justify-between md:hidden items-center px-3 py-2 ">
                 <RouterLink :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
                     <p class="text-white text-sm font-medium">
                         <span v-if="path == 'login'">Don’t have an account?</span>
@@ -208,7 +212,7 @@
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">Sold Auction</p>
                             </RouterLink> -->
-                            <RouterLink to="/faqs-dealers"
+                            <!-- <RouterLink to="/faqs-dealers"
                                 :class="path == 'faqs-dealers' ? ' text-primary' : ' text-white'"
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">FAQs</p>
@@ -217,22 +221,30 @@
                                 :class="path == 'how-it-works-dealer' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p class="font-bold">How It Works?</p>
-                            </RouterLink>
+                            </RouterLink> -->
                         </ul>
                         <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                             <div @click="goAccount" class="flex items-center gap-2"
                                 v-if="storeUser?.userData?.type == 1">
-                                <img class="h-10 rounded-full w-10 object-cover"
+                                <img v-if="storeUser?.userData?.seller?.picture"
+                                    class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + storeUser?.userData?.seller?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                     {{ storeUser.userData.seller.name }}
                                 </p>
                             </div>
                             <div @click="goAccount" v-else class="flex items-center gap-2">
-                                <img class="h-10 rounded-full w-10 object-cover"
+                                <img v-if="storeUser?.userData?.dealer?.picture"
+                                    class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + storeUser?.userData?.dealer?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                    {{ storeUser.userData.dealer.name }}
+                                    {{ store.userData?.dealer?.firstName }} {{ store?.userData?.dealer?.lastName }}
                                 </p>
                             </div>
                             <div @click="logout" class="flex gap-2">
@@ -259,25 +271,31 @@
                                 class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink> -->
-                            <RouterLink @click="open = false" to="/faqs-seller"
+                            <!--   <RouterLink @click="open = false" to="/faqs-seller"
                                 :class="path == 'dealer-list' ? ' text-primary' : ' text-white'"
                                 class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
-                            </RouterLink>
+                            </RouterLink> -->
                         </ul>
                         <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                             <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
-                                <img class="h-10 rounded-full w-10 object-cover"
+                                <img v-if="store?.userData?.seller?.picture" class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + store?.userData?.seller?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                     {{ store.userData.seller.firstName }} {{ store.userData.seller.lastName }}
                                 </p>
                             </div>
                             <div @click="goAccount" v-else class="flex items-center gap-2">
-                                <img class="h-10 rounded-full w-10 object-cover"
+                                <img v-if="store?.userData?.dealer?.picture" class="h-10 rounded-full w-10 object-cover"
                                     :src="bucket + store?.userData?.dealer?.picture" alt="">
+                                <img v-else class="h-10 rounded-full w-10 object-cover"
+                                    src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                    alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                    {{ store?.userData?.dealer?.name }}
+                                    {{ store.userData?.dealer?.firstName }} {{ store.userData.dealer.lastName }}
                                 </p>
                             </div>
                             <div @click="logout" class="flex gap-2">
@@ -297,7 +315,7 @@
 
             <template v-else>
                 <nav v-show="open"
-                    class="fixed animation-menu-modal top-0 md:hidden z-[600] bg-[#141f0d] w-full h-full p-5">
+                    class="fixed animation-menu-modal top-0 lg:hidden z-[600] bg-[#141f0d] w-full h-full p-5">
                     <div class=" flex gap-3 justify-between items-center">
                         <div class=" flex gap-3 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="21" viewBox="0 0 25 21"
@@ -381,7 +399,7 @@ export default {
         const storeUser = useAuthStore()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const form = storeData.formData
-        let open = ref(false)
+        const open = ref(false)
         /*  watch(open, async (newQuestion, oldQuestion) => {
              if (newQuestion) {
                  document.documentElement.style.overflow = "hidden";
@@ -399,17 +417,19 @@ export default {
         const goAccount = async () => {
             if (storeUser.userData.dealer) {
                 await router.push('/account-dealer')
-                router.go()
+                open.value = false
+
             } else {
                 await router.push('/account-seller')
-                router.go()
+                open.value = false
+
             }
 
         }
         const logout = async () => {
             localStorage.clear()
             await router.push({ name: 'home' })
-            router.go()
+            open.value = false
 
         }
         const back = async () => {
@@ -426,6 +446,7 @@ export default {
             storeData.formAccount.preview = ''
             await router.push('/')
             router.go()
+
         }
         const toggle = () => {
             open.value = !open.value

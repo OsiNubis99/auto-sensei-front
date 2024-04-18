@@ -19,10 +19,13 @@
                             alt="">
                     </div>
                     <div class="h-[100px] mb-2 flex md:justify-between flex-col">
-                        <p class=" font-semibold capitalize md:text-base text-sm">{{statusModal.data?.vehicleDetails?.year }} {{statusModal.data?.vehicleDetails?.make }} {{statusModal.data?.vehicleDetails?.model }}</p>
+                        <p class=" font-semibold capitalize md:text-base text-sm">
+                            {{ statusModal.data?.vehicleDetails?.year }} {{ statusModal.data?.vehicleDetails?.make }}
+                            {{ statusModal.data?.vehicleDetails?.model }}</p>
                         <div>
                             <p class="capitalize text-sm md:text-base mt-8">Current Bid</p>
-                            <p class="font-medium text-sm text-base-black md:text-2xl">${{statusModal.data?.bids[0]?.amount }}</p>
+                            <p class="font-medium text-sm text-base-black md:text-2xl">
+                                ${{ statusModal.data?.bids[0]?.amount }}</p>
                         </div>
                     </div>
                 </div>
@@ -41,7 +44,8 @@
                                     </svg>
                                     <p class=" text-xs font-medium md:text-base">Maximum Bid Amount</p>
                                 </div>
-                                <p class="font-medium text-xs md:text-base">${{ statusModal.data?.bids[0]?.biddingLimit }}</p>
+                                <p class="font-medium text-xs md:text-base">${{ statusModal.data?.bids[0]?.biddingLimit
+                                    }}</p>
                             </div>
                             <div class="flex gap-2 items-center justify-between">
                                 <div class="flex gap-2 items-center">
@@ -54,7 +58,8 @@
                                     </svg>
                                     <p class=" text-xs font-medium md:text-base">Credit Card Name</p>
                                 </div>
-                                <p class="font-medium text-xs md:text-base">{{ statusModal.data?.bids[0]?.paymentMethod?.billingDetails?.name }}</p>
+                                <p class="font-medium text-xs md:text-base">{{
+        statusModal.data?.bids[0]?.paymentMethod?.billingDetails?.name }}</p>
                             </div>
                             <div class="flex gap-2 items-center justify-between">
                                 <div class="flex gap-2 items-center">
@@ -66,7 +71,8 @@
                                     </svg> -->
                                     <p class=" text-xs whitespace-pre font-medium md:text-base">Credit Card Number</p>
                                 </div>
-                                <p class="font-medium text-xs whitespace-pre md:text-base">**** **** **** {{ statusModal.data?.bids[0]?.paymentMethod?.card?.last4 }}</p>
+                                <p class="font-medium text-xs whitespace-pre md:text-base">**** **** **** {{
+        statusModal.data?.bids[0]?.paymentMethod?.card?.last4 }}</p>
                             </div>
                         </div>
 
@@ -89,9 +95,17 @@
                             <p class="font-semibold text-sm md:text-base">Maximum Bid Amount</p>
                             <p class="text-xs md:text-base">Please enter a price higher than the current bid</p>
                         </div>
-                        <CurrencyInput :key="counterKey" v-model="formData.placeyourbid"
+                        <!-- <CurrencyInput :key="counterKey" v-model="formData.placeyourbid"
                             :error='invalid?.placeyourbid ? true : false' :options="{ currency: 'USD' }"
-                            :placeHolder="`$ Min ${statusModal?.data?.vehicleDetails?.basePrice}`" />
+                            :placeHolder="`$ Min ${statusModal?.data?.vehicleDetails?.basePrice}`" /> -->
+
+
+
+                        <input :key="counterKey" class="p-2 w-full rounded-lg border border-[#C2C2C2] uppercase"
+                            v-model="formData.placeyourbid"
+                            :class="invalid?.placeyourbid && 'bg-[#F6E9E9] border border-[#FF333E] text-[#0A0A0A]'"
+                            ref="inputRef" type="text"
+                            :placeHolder="`$ Min ${statusModal.data?.bids[0]?.amount ? statusModal.data?.bids[0]?.amount : statusModal?.data?.vehicleDetails?.basePrice}`" />
                         <p class="text-[#858585] mt-2"> {{ invalid?.placeyourbid }} </p>
                         <div class="form-group mt-4">
                             <input type="checkbox" v-model="formData.notify" id="html">
@@ -135,6 +149,7 @@ import { validationsAutoBids } from "../../../validations/validationsDealerBiddi
 import { ModalAutoBid } from '@/stores/modalAutoBid';
 import { useAuctionStore } from "@/stores/auctions";
 import { useAuthStore } from "@/stores/auth";
+import { useCurrencyInput } from 'vue-currency-input'
 import { toast } from "vue3-toastify";
 export default {
     props: {
@@ -146,6 +161,7 @@ export default {
         },
     },
     setup(props) {
+        const { inputRef } = useCurrencyInput({ currency: 'USD' })
         const isOpen = ref(true);
         const value = ref('')
         const formData = ref(props.form);
@@ -160,6 +176,9 @@ export default {
         const addAmount = () => {
             counterKey.value += 1
             statusModal.data.vehicleDetails.basePrice += 100
+
+
+            
             invalid.value = validationsAutoBids(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from);
             sizeObjet.value = Object.entries(invalid.value).length
         }
@@ -306,7 +325,8 @@ export default {
             editAutobid,
             state,
             updateAmounBit,
-            bucket
+            bucket,
+            inputRef
         };
     },
     components: { CurrencyInput }

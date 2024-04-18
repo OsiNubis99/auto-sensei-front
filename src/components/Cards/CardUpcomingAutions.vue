@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col md:flex-row  sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+    <div class="w-full flex   sm:p-0 relative" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
         <p
             class="md:font-semibold font-medium text-xs md:text-base absolute top-0 left-0 z-50 bg-[#fff] rounded-lg ml-2 mt-2 px-4 py-1">
             Launching Soon</p>
@@ -9,10 +9,10 @@
                 <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
             </swiper-slide>
             <div v-if="!auction?.photos" class=" absolute w-full h-full top-0 ">
-                <img class="w-full rounded-s-lg h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                <img class="w-full rounded-s-lg h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
             </div>
         </swiper>
-        <div class="w-full flex flex-col md:flex-row justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+        <div class="w-full flex  justify-between gap-3 " :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
             <div class="flex p-4 pb-0 md:p-5  flex-col gap-3">
                 <div>
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{

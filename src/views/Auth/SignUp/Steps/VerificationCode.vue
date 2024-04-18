@@ -14,48 +14,55 @@
             </div>
         </div>
     </div>
-    <div v-else class="flex-1 flex flex-col justify-between py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
+    <div v-else :class="showSuccessRegister ? '!p-0' : ''"
+        class="flex-1 flex flex-col justify-between py-12 px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
         <template v-if="showSuccessRegister">
-            <div class="h-full w-[60%] mx-auto flex justify-center flex-col items-center  p-5">
-                <div class="bg-white h-fit flex flex-col gap-6 items-center justify-center shadow-lg  rounded-lg p-4">
-                    <div class="check-container">
-                        <div class="check-background">
-                            <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+            <div class="w-full h-full overflow-hidden relative ">
+                <div class="h-full w-full md:w-[60%] mx-auto flex justify-center flex-col items-center  p-5">
+                    <div
+                        class="bg-white h-fit flex flex-col gap-2 md:gap-6 items-center justify-center shadow-lg  rounded-lg p-4">
+                        <div class="check-container">
+                            <div class="check-background">
+                                <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="check-shadow"></div>
                         </div>
-                        <div class="check-shadow"></div>
-                    </div>
-                    <div>
-                        <p class="text-center text-2xl font-medium">Your account have been successfully created.</p>
-                        <p class="text-center">Our administrators will validate your info and activate your
-                            account. This process may take a few moments.</p>
-                    </div>
-                    <div>
-                        <button @click="refirectToLogin" class="btn bg-primary" to="/login/dealers">Login</button>
+                        <div>
+                            <p class="text-center text-sm md:text-2xl font-medium">Your account have been successfully
+                                created.</p>
+                            <p class="text-center text-xs md:text-base">Our administrators will validate your info and
+                                activate your
+                                account. This process may take a few moments.</p>
+                        </div>
+                        <div>
+                            <button @click="refirectToLogin" class="btn bg-primary" to="/login/dealers">Login</button>
+                        </div>
                     </div>
                 </div>
+                <ul class="bg-bubbles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
             </div>
-            <ul class="bg-bubbles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+
+
         </template>
         <template v-else>
             <div class="flex-1 flex flex-col justify-center md:py-12 px-4 sm:px-6 h-full lg:flex-none  xl:px-24">
                 <div class="mx-auto w-full ">
                     <div>
-                        <h2 @click="openCode"
-                            class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">
+                        <h2 class="mt-6 text-3xl md:text-4xl font-bold text-base-black text-center mb-5 ">
                             Enter Verification
                             Code</h2>
                         <p class=" text-sm font-normal text-[#666] text-center  ">A text message with a 6-digit code has
@@ -79,21 +86,30 @@
                                         class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Continue
                                     </button>
+
                                 </div>
                             </div>
+                        </div>
+                        <div class="text-center mt-5 flex justify-center gap-2 md:flex-col">
+                            <p class=" text-xs font-normal text-[#666]  ">
+                                Didn’t receive the code? </p>
+                            <div class="flex justify-center items-center gap-3">
+                                <p @click="backStep"
+                                    class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
+                                    Resend Code
+                                </p>
+                                <p class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500"
+                                    @click="backCode">
+                                    Change Phone
+                                </p>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-5 flex justify-center gap-2 md:flex-col">
-                <p class=" text-xs font-normal text-[#666]  ">
-                    Didn’t receive the code? </p>
-                <p @click="backStep"
-                    class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
-                    Resend Code
-                </p>
 
-            </div>
         </template>
 
 
@@ -142,197 +158,132 @@ export default {
                 });
                 return
             }
-            console.log('formdata', formdata)
             loading.value = true
-            if (formdata.picture || formdata.driverLicense) {
-                let resFile = formdata.picture && await storeFile.uploaderFile({ file: formdata.picture, location: 'profile' })
-                let resLicence = formdata.driverLicense && await storeFile.uploaderFile({ file: formdata.driverLicense, location: 'license' })
-                console.log('resLicence', resLicence)
-                if (resFile?.data || resLicence?.data) {
-                    console.log('entro aqi')
-                    try {
-                        let typeSeller = {
-                            seller: {
-                                picture: resFile?.data ? resFile?.data : null,
-                                firstName: formdata.firstName,
-                                lastName: formdata.lastName,
-                                driverLicense: resLicence?.data ? resLicence?.data : null,
-                            },
-                            phone: formdata.phone,
-                            validationCode: form.value.code
-                        }
-                        let typeDealer = {
-                            dealer: {
-                                picture: resFile?.data ? resFile?.data : null,
-                                name: formdata.name,
-                                omvic: formdata.omvic,
-                                address: formdata.address,
-                            },
-                            phone: formdata.phone,
-                            validationCode: form.value.code
-                        }
-                        let dataRegister = formdata.rol == 'sellers' ? typeSeller : typeDealer
-                        let data = {
-                            token: formdata.token,
-                            payloadData: dataRegister
-                        }
+            console.log('formdata', formdata)
+            try {
+                let dataRegister = {
+                    phone: formdata.phone,
+                    validationCode: form.value.code
+                }
+                let data = {
+                    token: formdata.token,
+                    payloadData: dataRegister
+                }
 
-                        try {
-                            console.log('entro aqi')
-                            let res = await storeUser.userData(data)
-                            if (res) {
-                                axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
-
-                                let resToken = await store.authProfile()
-                                console.log('resToken', resToken)
-                                if (resToken.statusText = "OK") {
-                                    if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
-                                    if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
-                                    if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
-                                    switch (resToken.data.type) {
-                                        case 0:
-                                            await router.push({ path: '/inicio' })
-                                            router.go()
-                                            break;
-                                        case 1:
-                                            await router.push({ path: '/all' })
-                                            router.go()
-                                            break;
-                                        case 2:
-                                            /* await router.push({ path: '/login/dealers' }) */
-                                            localStorage.clear()
-                                            /*  router.go() */
-                                            showSuccessRegister.value = true
-                                            break;
-                                        default:
-                                            await router.push({ name: 'home' })
-                                            router.go()
-                                            break;
-                                    }
-                                    loading.value = false;
-                                }
+                try {
+                    let res = await storeUser.userData(data)
+                    console.log('res USERRR', res.data)
+                    if (res) {
+                        axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
+                        let resToken = await store.authProfile()
+                        console.log('resToken', resToken)
+                        if (resToken.statusText = "OK") {
+                            let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
+                            console.log('resDtaLate', resDtaLate)
+                            if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
+                            if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
+                            if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
+                            switch (resToken.data.type) {
+                                case 0:
+                                    await router.push({ path: '/inicio' })
+                                    break;
+                                case 1:
+                                    await router.push({ path: '/all' })
+                                    break;
+                                case 2:
+                                    localStorage.clear()
+                                    showSuccessRegister.value = true
+                                    break;
+                                default:
+                                    await router.push({ name: 'home' })
+                                    break;
                             }
-                        } catch (error) {
-                            console.log('entro aqi', error)
+                            create.name = '';
+                            create.firtName = '';
+                            create.lastName = '';
+                            create.email = '';
+                            create.password = '';
+                            create.confirmPassword = '';
+                            create.termsconditions = null;
+                            formdata.img = '';
+                            formdata.dealerName = '';
+                            formdata.registrationNumber = '';
+                            formdata.address = '';
+                            formdata.linea1 = '';
+                            formdata.linea2 = '';
+                            formdata.zipCode = '';
+                            formdata.province = null;
+                            formdata.getState = null;
+                            formdata.city = null;
+                            formdata.getCities = null;
+                            formdata.phoneNumber = '';
+                            formdata.preview = '';
+                            formdata.firtName = '';
+                            formdata.lastName = '';
+                            formdata.driverLicense = '';
+                            formdata.numberCode = '';
+                            formdata.previewDriverLicense = '';
                             loading.value = false
-                            toast(error?.response?.data?.message[0] || 'error al cargar', {
-                                type: "error",
-                            });
+
                         }
-                    } catch (error) {
-                        console.log('entro aqi', error)
-                        toast(error?.response?.data?.message || 'error al cargar', {
-                            type: "error",
-                        });
-                        loading.value = false
                     }
-                } else {
+                } catch (error) {
+                    console.log('entro aqi', error)
                     loading.value = false
-                    toast('Intente de nuevo', {
+                    let errorMessage = error?.response?.data?.message[0]
+                    if (typeof error?.response?.data?.message === 'string') {
+                        errorMessage = error?.response?.data?.message
+                    }
+                    toast(errorMessage || 'error al cargar', {
                         type: "error",
                     });
                 }
-            } else {
-                console.log('entro')
+            } catch (error) {
+                console.log('entro aqi', error)
+                toast(error?.response?.data?.message || 'error al cargar', {
+                    type: "error",
+                });
+                loading.value = false
+            }
+        }
+        const backCode = async () => {
+            props.back()
+        }
+        const backStep = async () => {
+            console.log('formdata?.phone', formdata?.phone)
+            if (formdata.phone) {
+                loading.value = true
+                let data = {
+                    phone: formdata?.phone
+                }
                 try {
-                    let typeSeller = {
-                        seller: {
-                            firstName: formdata.firtName,
-                            lastName: formdata.lastName,
-                        },
-                        phone: formdata.phone,
-                        validationCode: form.value.code
-                    }
-                    let typeDealer = {
-                        dealer: {
-                            name: formdata.name,
-                            omvic: formdata.registrationNumber,
-                            address: formdata.address,
-                        },
-                        phone: formdata.phone,
-                        validationCode: form.value.code
-                    }
-                    let dataRegister = formdata.rol == 'sellers' ? typeSeller : typeDealer
-                    console.log('dataRegister', dataRegister)
-                    let data = {
-                        token: formdata.token,
-                        payloadData: dataRegister
-                    }
-
-                    try {
-                        let res = await storeUser.userData(data)
-                        if (res) {
-                            axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
-
-                            let resToken = await store.authProfile()
-
-                            if (resToken.statusText = "OK") {
-                                if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
-                                if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
-                                if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
-                                setInterval(async () => {
-                                    switch (resToken.data.type) {
-                                        case 0:
-                                            await router.push({ path: '/inicio' })
-                                            router.go()
-                                            break;
-                                        case 1:
-                                            await router.push({ path: '/all' })
-                                            router.go()
-                                            break;
-                                        case 2:
-                                            await router.push({ path: '/login/dealers' })
-                                            router.go()
-                                            break;
-                                        default:
-                                            await router.push({ name: 'home' })
-                                            router.go()
-                                            break;
-                                    }
-                                    loading.value = false;
-                                }, 800);
-                            }
-                        }
-                    } catch (error) {
-                        console.log('error', error)
+                    let resCode = await storeUser.getValidation(data)
+                    if (resCode) {
+                        console.log('resCode', resCode)
+                        toast('Code succesfully resent', {
+                            type: "success",
+                        });
                         loading.value = false
-                        toast(error?.response?.data?.message[0] || 'error al cargar', {
-                            type: "error",
-                        });
                     }
-
                 } catch (error) {
-                    console.log('error', error)
-                    if (error?.response?.data?.message == "Unauthorized") {
-                        toast(error?.response?.data?.message || 'error al cargar', {
-                            type: "error",
-                            autoClose: 2000,
-                        });
-                    }
-                    loading.value = false
+
+                    toast(error?.response?.data?.message || 'error', {
+                        type: "error",
+                    });
                 }
             }
 
-            /*  console.log('res', resToken)
-             setTimeout(async () => {
-                 await router.push({ path: `/login/${route.params.rol}` })
-                 router.go()
-                 loading.value = false
-             }, 2000);
 
-            /*  props.next() */
-        }
-        const backStep = () => {
-            props.back()
+            /* props.back() */
         }
         const refirectToLogin = async () => {
             await router.push({ path: '/login/dealers' })
             showSuccessRegister.value = false
-            router.go()
+
         }
-        const openCode = () => {
+        /* const openCode = () => {
             alert(formdata.validationCode)
-        }
+        } */
         onMounted(() => {
             token.value = localStorage.getItem('updateUser')
         })
@@ -342,10 +293,10 @@ export default {
             backStep,
             form,
             loading,
-            openCode,
             formdata,
             refirectToLogin,
-            showSuccessRegister
+            showSuccessRegister,
+            backCode
         };
     },
 };

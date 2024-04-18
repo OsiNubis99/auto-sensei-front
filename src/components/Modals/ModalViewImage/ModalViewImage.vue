@@ -16,12 +16,12 @@
                 <div class="w-full h-full">
                     <img :src="img" class="w-full h-full object-contain " alt="">
                 </div>
-                <div class="flex w-full justify-end border-t-2 border-[#E0E0E0] p-4 gap-3">
+                <!-- <div class="flex w-full justify-end border-t-2 border-[#E0E0E0] p-4 gap-3">
                     <label class="label-upload btn bg-white border border-[#E0E0E0]">
-                        <input type="file" hidden ref="file" @change="uploadImage($event)" accept="image/*" />
+                        <input type="file" hidden ref="file" @change="uploadImage($event)" accept=".jpg, .jpeg,.png,.webp" />
                         <div class="btn-up">Replace</div>
                     </label>
-                </div>
+                </div> -->
             </div>
 
         </div>
@@ -48,6 +48,7 @@ export default {
         const croppers = ref(null)
         const img = ref(statusModalView.img)
         const uploadImage = (event) => {
+            console.log('statusModalView', statusModalView.typeImg)
             var input = event.target;
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

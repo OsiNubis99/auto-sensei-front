@@ -10,26 +10,21 @@
         </div>
         <div class="w-full">
             <label class="font-medium text-xs md:text-base " for="">Vehicle Identification Number (VIN)</label>
-            <input class="p-2 w-full mt-3 uppercase bg-[#F0F0F0] border rounded-lg" v-model="form.numberVin"
-                :class="invalid?.numberVin ? 'border-error' : 'border-none'" placeholder="1HGCM82633A123456"
+            <input class="p-2 w-full mt-3 uppercase  border rounded-lg" disabled v-model="form.numberVin"
+                :class="invalid?.numberVin ? 'border-error' : 'border-[#E0E0E0]'" placeholder="1HGCM82633A123456"
                 type="text">
         </div>
         <div class="flex w-full justify-between items-center gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Year</label>
-                <input v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-none'"
-                    class="p-2 w-full md:mt-3 border bg-[#F0F0F0] rounded-lg" placeholder="2013" type="text">
+                <input v-model="form.year" :disabled="formDisable.year ? true : false" :class="invalid?.year ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 w-full md:mt-3 border  rounded-lg" placeholder="2013" type="text">
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col md:gap-2">
-                    <!--  <label class="font-medium text-xs md:text-base " for="">Make</label>
-                    <select  v-model="form.make" :class="invalid?.make ? 'border-error' : 'border-none'"
-                        class=" border bg-[#F0F0F0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg  w-full ">
-                        <option value="make">make</option>
-                    </select> -->
                     <label class="font-medium text-xs md:text-base " for="">Make </label>
-                    <input :class="invalid?.make ? 'border-error' : 'border-none'" v-model="form.make"
-                        class="p-2 w-full border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Forester" type="text">
+                    <input :class="invalid?.make ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.make"
+                    :disabled="formDisable.make ? true : false"   class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Forester" type="text">
                 </div>
             </div>
 
@@ -37,43 +32,43 @@
         <div class="flex w-full justify-between items-center flex-row gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Model</label>
-                <input :class="invalid?.model ? 'border-error' : 'border-none'" v-model="form.model"
-                    class="p-2 w-full border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Forester" type="text">
+                <input :class="invalid?.model ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.model"
+                :disabled="formDisable.model ? true : false" class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Forester" type="text">
             </div>
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Trim</label>
-                <input :class="invalid?.trim ? 'border-error' : 'border-none'" v-model="form.trim"
-                    class="p-2 w-full border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Premium Plus" type="text">
+                <input :class="invalid?.trim ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.trim"
+                :disabled="formDisable.trim ? true : false"  class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Premium Plus" type="text">
             </div>
         </div>
         <div class="flex w-full justify-between items-center gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Body Type</label>
-                <input :class="invalid?.bodyType ? 'border-error' : 'border-none'" v-model="form.bodyType"
-                    class="p-2 w-full  md:mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="SUV" type="text">
+                <input :class="invalid?.bodyType ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.bodyType"
+                :disabled="formDisable.bodyType ? true : false" class="p-2 w-full  md:mt-3  border rounded-lg" placeholder="SUV" type="text">
             </div>
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Cylinder</label>
-                <input :class="invalid?.cylinder ? 'border-error' : 'border-none'" v-model="form.cylinder"
-                    class="p-2 w-full  md:mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="4" type="text">
+                <input :class="invalid?.cylinder ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.cylinder"
+                :disabled="formDisable.cylinder ? true : false"  class="p-2 w-full  md:mt-3  border rounded-lg" placeholder="4" type="text">
             </div>
         </div>
         <div class="flex w-full justify-between items-center flex-col md:flex-row gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Transmission</label>
-                <input v-model="form.transmission" :class="invalid?.transmission ? 'border-error' : 'border-none'"
-                    class="p-2 w-full  md:mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="SUV" type="text">
+                <input v-model="form.transmission" :class="invalid?.transmission ? 'border-error' : 'border-[#E0E0E0]'"
+                :disabled="formDisable.transmission ? true : false" class="p-2 w-full  md:mt-3 border  rounded-lg" placeholder="SUV" type="text">
             </div>
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Odometer</label>
                 <input step="0.01" :class="invalid?.odometer ? 'border-error' : ''" v-model="form.odometer"
-                    class="p-2 w-full md:mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="Enter odometer"
+                :disabled="formDisable.odometer ? true : false"  class="p-2 w-full md:mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="Enter odometer"
                     type="number">
             </div>
             <div class="w-full">
                 <div class="w-full flex flex-col md:gap-2">
                     <label class="font-medium text-xs md:text-base " for="">Doors</label>
-                    <select :class="invalid?.doors ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.doors"
+                    <select :disabled="formDisable.doors ? true : false" :class="[invalid?.doors ? 'border-error' : 'border-[#E0E0E0]',formDisable.doors ? 'bg-[#fafafa]' : '']" v-model="form.doors"
                         placeholder="Number of Doors"
                         class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -91,53 +86,53 @@
         <p class="font-medium text-xs md:text-base">Exterior Color</p>
         <div class=" grid grid-cols-3 gap-[8px]  md:flex md:flex-wrap md:gap-4">
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-black" value="black" name="color-redio">
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-black" value="black" name="color-redio">
                 Black
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-white" value="white" name="color-redio">
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-white" value="white" name="color-redio">
                 White
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-silver" value="silver"
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-silver" value="silver"
                     name="color-redio">
                 Silver
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-grey" value="grey" name="color-redio">
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-grey" value="grey" name="color-redio">
                 Grey
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-greendark" value="greenDark"
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-greendark" value="greenDark"
                     name="color-redio"> Green Dark
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-brown" value="brown" name="color-redio">
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-brown" value="brown" name="color-redio">
                 Brown
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-red" value="red" name="color-redio"> Red
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-red" value="red" name="color-redio"> Red
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-yellow" value="yellow"
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-yellow" value="yellow"
                     name="color-redio">
                 Yellow
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-green" value="green" name="color-redio">
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-green" value="green" name="color-redio">
                 Green
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-blue" value="blue" name="color-redio">
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-blue" value="blue" name="color-redio">
                 Blue
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" v-model="form.color" class="input-radio on-other" value="other" name="color-redio">
+                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color" class="input-radio on-other" value="other" name="color-redio">
                 Other
             </label>
             <div v-if="form.color == 'other'" class="w-full flex items-start flex-col">
                 <label class="font-medium text-xs md:text-base " for="">Custom color</label>
-                <input :class="invalid?.customColor ? 'border-error' : 'border-none'" v-model="form.customColor"
+                <input :disabled="formDisable.color ? true : false" :class="invalid?.customColor ? 'border-error' : 'border-none'" v-model="form.customColor"
                     class="p-2  border  md:mt-3 bg-[#F0F0F0] rounded-lg" placeholder="Pink" type="text">
             </div>
 
@@ -146,19 +141,19 @@
             <p class="font-medium text-xs md:text-base">Drive Train</p>
             <div class="flex flex-col md:grid md:grid-cols-2 place-items-baseline  place-content-center gap-4">
                 <label class="label-radio">
-                    <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
+                    <input :disabled="formDisable.driveTrain ? true : false" type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
                         class="input-radio on" value="FWD" name="drive-train"> FWD (Front-Wheel Drive)
                 </label>
                 <label class="label-radio">
-                    <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
+                    <input :disabled="formDisable.driveTrain ? true : false" type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
                         class="input-radio on" value="AWD" name="drive-train"> AWD (All-Wheel Drive)
                 </label>
                 <label class="label-radio">
-                    <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
+                    <input :disabled="formDisable.driveTrain ? true : false" type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
                         class="input-radio on" value="RWD" name="drive-train"> RWD (Rear-Wheel Drive)
                 </label>
                 <label class="label-radio">
-                    <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
+                    <input :disabled="formDisable.driveTrain ? true : false" type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
                         class="input-radio on" value="4WD" name="drive-train"> 4WD (Four-Wheel Drive)
                 </label>
             </div>
@@ -294,6 +289,20 @@ export default {
     components: {
     },
     setup(props) {
+        const formDisable = ref({
+            year: false,
+            make: false,
+            model: false,
+            trim: false,
+            bodyType: false,
+            cylinder: false,
+            transmission: false,
+            odometer: false,
+            doors: false,
+            color: false,
+            driveTrain: false,
+
+        })
         const date = ref(new Date());
         const form = ref(props.form)
         const save = ref(props.launch)
@@ -301,13 +310,27 @@ export default {
         const next = () => {
             props.nextVehiclesDetails()
         }
-
+        onMounted(() => {
+            console.log('form', form.value)
+            form.value.year ? formDisable.value.year = true : formDisable.value.year = false;
+            form.value.make ? formDisable.value.make = true : formDisable.value.make = false;
+            form.value.model ? formDisable.value.model = true : formDisable.value.model = false;
+            form.value.trim ? formDisable.value.trim = true : formDisable.value.trim = false;
+            form.value.bodyType ? formDisable.value.bodyType = true : formDisable.value.bodyType = false;
+            form.value.cylinder ? formDisable.value.cylinder = true : formDisable.value.cylinder = false;
+            form.value.transmission ? formDisable.value.transmission = true : formDisable.value.transmission = false;
+            form.value.odometer ? formDisable.value.odometer = true : formDisable.value.odometer = false;
+            form.value.doors ? formDisable.value.doors = true : formDisable.value.doors = false;
+            form.value.color ? formDisable.value.color = true : formDisable.value.color = false;
+            form.value.driveTrain ? formDisable.value.driveTrain = true : formDisable.value.driveTrain = false;
+        })
         return {
             date,
             next,
             invalid,
             form,
-            save
+            save,
+            formDisable
         };
     },
 };

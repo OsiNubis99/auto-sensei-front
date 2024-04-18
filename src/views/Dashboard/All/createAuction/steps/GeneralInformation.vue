@@ -56,7 +56,11 @@
         <div class="flex flex-col md:grid w-full md:grid-cols-3 gap-5">
             <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">Province</label>
-                <select v-model="form.province" @change="onChangeGetProvince($event)"
+                <input v-model="form.province" placeholder="Province"
+                    :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 rounded-lg border "  type="text">
+                <!--  <select v-model="form.province" :disabled="!form.getState ? true : false"
+                    @change="onChangeGetProvince($event)"
                     :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
                     class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -65,26 +69,17 @@
                     <template v-for="(state, index) in form.getState" :key="index">
                         <option :value="JSON.stringify(state)">{{ state.iso2 }} | {{ state.name }}</option>
                     </template>
-                    <!--  <option value="Alberta">AB | Alberta</option>
-                    <option value="British Columbia">BC | British Columbia</option>
-                    <option value="Manitoba">MB | Manitoba</option>
-                    <option value="New Brunswick">NB | New Brunswick</option>
-                    <option value="Newfoundland and Labrador">NL | Newfoundland and Labrador</option>
-                    <option value="Nova Scotia">NS | Nova Scotia</option>
-                    <option value="Ontario">ON | Ontario</option>
-                    <option value="Prince Edward Island">PE | Prince Edward Island</option>
-                    <option value="Quebec">QC | Quebec</option>
-                    <option value="Saskatchewan">SK | Saskatchewan</option>
-                    <option value="Northwest Territories">NT | Northwest Territories</option>
-                    <option value="Nunavut">NU | Nunavut</option>
-                    <option value="Yukon">YT | Yukon</option> -->
                 </select>
                 <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding province...
-                </div>
+                </div> -->
             </div>
             <div class="w-full flex flex-col gap-2 relative">
-                <label class=" text-sm md:text-base " for="">City</label>
-                <select v-model="form.city" @change="onChangeGetCity($event)" :disabled="loadingCountrys || !form.getCities ? true : false"
+                <label class=" text-sm md:text-base "  for="">City</label>
+                <input v-model="form.city" placeholder="City"
+                    :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
+                    class="p-2 rounded-lg border "  type="text">
+                <!--   <select v-model="form.city" @change="onChangeGetCity($event)"
+                    :disabled="loadingCountrys || !form.getCities ? true : false"
                     :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
                     class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -95,7 +90,7 @@
                     </template>
                 </select>
                 <div v-if="loadingCountrys" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
-                    city...</div>
+                    city...</div> -->
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class=" text-sm md:text-base " for="">How many keys?</label>
@@ -232,31 +227,20 @@
                             </label>
                         </div>
                     </div>
-                    <div class="flex gap-4">
-                        <!--  <div class="w-full flex flex-col gap-2">
+                    <div class="flex flex-col lg:flex-row gap-4">
+                        <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Make</label>
-                            <select v-model="form.makePreferences"
+                            <input v-model="form.makePreferences"
                                 :class="invalid?.makePreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                                <option value="option 1">option 1</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
-                        </div> -->
+                                class="p-2 rounded-lg border " type="text" placeholder="Make">
+                        </div>
                         <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Model</label>
-                            <select v-model="form.modelPreferences"
+                            <input v-model="form.modelPreferences"
                                 :class="invalid?.modelPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                                <option value="option 1">option 1</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
+                                class="p-2 rounded-lg border " type="text" placeholder="Model">
                         </div>
+
                     </div>
                     <div class="w-full flex items-center  flex-col md:flex-row justify-between gap-4 ">
                         <div class="w-full flex flex-col gap-2">
@@ -272,30 +256,17 @@
                                 class="p-2 md:mt-8 rounded-lg border uppercase" placeholder="Mileage To" type="number">
                         </div>
                     </div>
-                    <div class="flex gap-4 items-center ">
+                    <div class="flex flex-col lg:flex-row  gap-4 items-center ">
                         <div class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Year</label>
-                            <select v-model="form.yearFromPreferences"
+                            <input v-model="form.yearFromPreferences"
                                 :class="invalid?.yearFromPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                                <option selected>From 1996</option>
-                                <option value="option 1">option 1</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
+                                class="p-2  rounded-lg border uppercase" placeholder="From 1996" type="number">
                         </div>
                         <div class="w-full flex flex-col gap-2">
-
-                            <select v-model="form.yearToPreferences"
+                            <input v-model="form.yearToPreferences"
                                 :class="invalid?.yearToPreferences ? 'border-error' : 'border-[#E0E0E0]'"
-                                class=" border text-[#858585] md:p-3 mt-8  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                                <option selected>To 2020</option>
-                                <option value="option 1">option 1</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
+                                class="p-2 lg:mt-8 rounded-lg border uppercase" placeholder="From 1996" type="number">
                         </div>
                     </div>
                 </div>
@@ -341,8 +312,8 @@ export default {
         onChangeGetCity: {
             type: Function,
         },
-        loadingCountrys:{
-            type:Boolean
+        loadingCountrys: {
+            type: Boolean
         }
     },
     setup(props) {

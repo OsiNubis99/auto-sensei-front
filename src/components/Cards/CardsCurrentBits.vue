@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col md:flex-row sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+    <div class="w-full flex  sm:p-0 relative" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
         <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
             :class="changeLayouts ? 'w-full' : 'w-full md:w-[40%]'">
             <swiper-slide v-for="(img, index) in aution?.photos" :key="index">
@@ -9,7 +9,7 @@
                 <img class="w-full rounded-s-lg h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
             </div>
         </swiper>
-        <div class="w-full flex flex-col md:flex-row justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : ''">
+        <div class="w-full flex justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row '">
             <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
                 class="flex md:p-5  p-2 flex-col gap-3">
                 <div class="">
@@ -127,9 +127,7 @@
                                 v-slot="{ days, hours, minutes, seconds }">
                                 <div class="flex items-center gap-1">
                                     <!--   <p v-if="days > 0" class="flex gap-1 items-center">{{ days }} </p> -->
-                                    <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours
-                                        }}
-                                        Hours</p>
+                                    <p v-if="hours > 0" class="flex gap-1 items-center">{{ hours}}h</p>
                                     <p v-if="minutes > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"
                                         class="flex gap-1 items-center">{{ minutes }}m</p>
                                     <p v-if="seconds > 0" :class="hours == 0 && minutes > 0 ? '!text-error' : ''"

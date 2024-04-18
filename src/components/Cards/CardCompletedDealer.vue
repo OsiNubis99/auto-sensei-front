@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col md:flex-row sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+    <div class="w-full flex  sm:p-0 relative" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
         <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
             :class="changeLayouts ? 'w-full' : 'w-full md:w-[40%]'">
             <swiper-slide v-for="(img, index) in aution?.photos" :key="index">
@@ -9,7 +9,7 @@
                 <img class="w-full rounded-s-lg h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
             </div>
         </swiper>
-        <div class="w-full flex flex-col md:flex-row justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : ''">
+        <div class="w-full flex  justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
             <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
                 class="flex p-5  flex-col gap-3">
                 <div class="">
@@ -101,7 +101,8 @@
                         </div>
                     </div>
                     <template v-if="aution?.bids[0].participant._id == auth?.userData?._id">
-                        <div v-if="aution.status == 'completed' || aution.status == 'bids completed'" class="pb-5 flex mt-4 flex-col gap-4">
+                        <div v-if="aution.status == 'completed' || aution.status == 'bids completed'"
+                            class="pb-5 flex mt-4 flex-col gap-4">
                             <p>Final bid</p>
                             <p class="text-2xl font-semibold">${{ aution.bids[0].amount }}</p>
                         </div>
@@ -124,17 +125,10 @@
                 <template v-if="aution?.bids[0].participant._id == auth?.userData?._id">
                     <div v-if="aution.status == 'completed' || aution.status == 'bids completed'" class="p-2">
 
-                        <button :disabled="loadingButton ? true : false" @click="confirmVehicleAution(aution._id)"
+                        <button  @click="confirmVehicleAution(aution)"
                             class="btn w-full bg-primary flex gap-2 items-center text-base-black">
-                            <div v-if="loadingButton && indexShowLoading == aution._id" class="w-8 h-8">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#0B1107"
-                                    stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <span v-else> Vehicle Received</span>
+                           
+                            <span > Vehicle Received</span>
                         </button>
                     </div>
                 </template>
@@ -178,17 +172,10 @@
                 <template v-if="aution?.bids[0].participant._id == auth?.userData?._id">
                     <div class="flex w-full items-center gap-2 pb-2 px-2">
                         <div v-if="aution.status == 'completed' || aution.status == 'bids completed'" class="w-full">
-                            <button :disabled="loadingButton ? true : false" @click="confirmVehicleAution(aution._id)"
+                            <button  @click="confirmVehicleAution(aution)"
                                 class="btn !py-2 w-full bg-primary flex gap-2 items-center text-base-black">
-                                <div v-if="loadingButton && indexShowLoading == aution._id" class="w-8 h-8">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#0B1107"
-                                        stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <span class="text-xs" v-else> Vehicle Received</span>
+                                
+                                <span class="text-xs"> Vehicle Received</span>
                             </button>
                         </div>
                         <div v-if="aution.status == 'completed' || aution.status == 'bids completed'">
@@ -223,6 +210,8 @@ import moment from "moment";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalBids } from '@/stores/modalBids';
 import { ModalAutoBid } from '@/stores/modalAutoBid';
+import PSPDFKit from 'pspdfkit';
+import axios from "@/axios";
 export default {
     components: {
         Swiper,
@@ -255,8 +244,8 @@ export default {
                 new Date(new Date(startDate).getTime() + duration * 1000 * 60).valueOf() - Date.now()
             );
         }
-        const confirmVehicleAution = (id) => {
-            props.confirmVehicle(id)
+        const confirmVehicleAution = (aution) => {
+             props.confirmVehicle(aution)
         }
         return {
             modules: [Navigation, Pagination, Scrollbar, A11y],

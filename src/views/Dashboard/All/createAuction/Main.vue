@@ -1,5 +1,5 @@
 <template>
-    <div :class="op.step1 ? 'md:h-screen' : 'h-fit' "class="bg-[#BDBDBF66] md:bg=[#F9F9F9] ">
+    <div :class="op.step1 ? 'md:h-screen' : 'h-fit'" class="bg-[#BDBDBF66] md:bg=[#F9F9F9] ">
         <div>
             <div class="absolute hidden md:block w-full h-[200px] overflow-hidden bg-[#0B1107]">
                 <svg class="w-full " xmlns="http://www.w3.org/2000/svg" width="1768" height="260" viewBox="0 0 1768 260"
@@ -9,11 +9,11 @@
                         stroke="#272D35" stroke-width="132" />
                 </svg>
             </div>
-            <div class="relative max-w-[85rem] mx-auto z-50 md:pt-[60px] ">
-                <Heanding class="hidden md:block" :type="'h3'" :msg="'Create Auctions'" />
-                <div class="flex justify-center flex-col md:flex-row md:mt-5 md:gap-7 relative">
-                    <div class="md:w-2/4 w-full  ">
-                        <div class="w-full   left-0 z-50 block md:hidden ">
+            <div class="relative max-w-[85rem] mx-auto z-50 lg:pt-[60px] ">
+                <Heanding class="hidden lg:block" :type="'h3'" :msg="'Create Auctions'" />
+                <div class="flex justify-center flex-col lg:flex-row lg:mt-5 md:gap-7 relative">
+                    <div class="lg:w-2/4 w-full  ">
+                        <div class="w-full   left-0 z-50 block lg:hidden ">
                             <div class="py-2 bg-white shadow-md">
                                 <div class="flex items-center cursor-pointer  justify-between uppercase w-full text-sm px-4 py-2"
                                     @click="expanded = !expanded">
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white hidden md:block p-5 shadow-steps">
+                        <div class="bg-white hidden lg:block p-5 shadow-steps">
                             <p class="text-[#666] font-medium  text-lg uppercase ">COMPLETE OUR 3 STEP PROCESS</p>
                             <div class=" flex justify-between gap-[100px] mt-7 items-center">
                                 <div class="flex hr-custim-1 items-center gap-5 ">
@@ -275,15 +275,15 @@
                         </template>
 
                         <template v-else>
-                            <GeneralInformation v-show="op.step1" :key="componentKey"
+                            <GeneralInformation v-if="op.step1" :key="componentKey"
                                 :nextGeneralInformation="nextGeneralInformation" :form="formData" :op="op"
                                 :checkStep="checkStep" :launch="launch" :invalid="invalid"
                                 :loadingCountrys="loadingCountrys" :onChangeGetProvince="onChangeGetProvince"
                                 :onChangeGetCity="onChangeGetCity" />
-                            <VehiclesDetails v-show="op.step2" :key="componentKey"
+                            <VehiclesDetails v-if="op.step2" :key="componentKey"
                                 :nextVehiclesDetails="nextVehiclesDetails" :form="formData" :op="op"
                                 :checkStep="checkStep" :launch="launch" :invalid="invalid" />
-                            <UploadPhotos v-show="op.step3" :key="componentKey" :nextUploadPhotos="nextUploadPhotos"
+                            <UploadPhotos v-if="op.step3" :key="componentKey" :nextUploadPhotos="nextUploadPhotos"
                                 :form="formData" :op="op" :checkStep="checkStep" :launch="launch" :saveData="saveData"
                                 :invalid="invalid" />
 
@@ -307,6 +307,7 @@ import { useStoreFile } from "@/stores/uploader";
 import { useRouter, useRoute } from 'vue-router'
 import { ModalLaunch } from '@/stores/modalLaunch';
 import { usePayments } from "@/stores/payments";
+import { useAuthStore } from "@/stores/auth";
 import moment from 'moment';
 export default {
 
@@ -325,6 +326,7 @@ export default {
         const loadingUploadImages = ref(false)
         const store = useAuctionStore()
         const id_create = ref(null)
+        const auth = useAuthStore()
         const storeFile = useStoreFile()
         const route = useRoute();
         const statusLauch = ModalLaunch()
@@ -337,6 +339,7 @@ export default {
         const powerValue = ref(computed(() => { return storeFile.progressUpload }))
         const arrayUpload = ref([])
         const loadingCountrys = ref(false)
+        const modalErrorCreate = ref(false)
         watch(powerValue, async (newQuestion, oldQuestion) => {
             porcertanje.value = newQuestion
         })
@@ -347,10 +350,10 @@ export default {
             numberVinGenerals: undefined,
             date: undefined,
             startDate: undefined,
-            province: 'Select province',
+            province: '',
             getState: undefined,
             getCities: undefined,
-            city: 'Select city',
+            city: '',
             saveCity: undefined,
             saveProvince: undefined,
             keys: 'Select number of keys',
@@ -446,8 +449,6 @@ export default {
             step3: false,
         })
         const nextGeneralInformation = async () => {
-            console.log('formData.value', formData.value.province)
-            console.log('formData.city', formData.value.city)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'generalInformation');
             if (Object.entries(invalid.value).length > 0) {
@@ -462,13 +463,13 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-                formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province)
+               /*  formData.value.saveCity = JSON.parse(formData.value.city)
+                formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.saveCity.name,
-                    province: formData.value.saveProvince.name,
+                    city: formData.value.city,
+                    province: formData.value.province,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,
@@ -493,16 +494,17 @@ export default {
                     let res = await store.create(dataPost)
                     console.log('nextGeneralInformation', res)
                     if (res) {
-                        id_create.value = res.data._id
-                        formData.value.numberVin = res.data.vehicleDetails.vin
-                        formData.value.make = res.data.vehicleDetails.make
-                        formData.value.model = res.data.vehicleDetails.model
-                        formData.value.doors = `${res.data.vehicleDetails.doors} Doors`
-                        formData.value.trim = res.data.vehicleDetails.trim
-                        formData.value.year = res.data.vehicleDetails.year
-                        formData.value.bodyType = res.data.vehicleDetails.bodyType
-                        formData.value.cylinder = res.data.vehicleDetails.cylinder
-                        formData.value.transmission = res.data.vehicleDetails.transmission
+                        id_create.value = res.data._id;
+                        formData.value.numberVin = res.data.vin;
+                        formData.value.make = res.data.vehicleDetails.make;
+                        formData.value.model = res.data.vehicleDetails.model;
+                        formData.value.doors = res.data.vehicleDetails.doors ? `${res.data.vehicleDetails.doors} Doors` : undefined;
+                        formData.value.trim = res.data.vehicleDetails.trim;
+                        formData.value.year = res.data.vehicleDetails.year;
+                        formData.value.driveTrain = res.data.vehicleDetails.driveTrain;
+                        formData.value.bodyType = res.data.vehicleDetails.bodyType;
+                        formData.value.cylinder = res.data.vehicleDetails.cylinder;
+                        formData.value.transmission = res.data.vehicleDetails.transmission;
                         op.value.step1 = false
                         op.value.step2 = true
                         op.value.step3 = false
@@ -517,6 +519,7 @@ export default {
                     loading.value = false
                 }
             }
+
         }
         const nextVehiclesDetails = async () => {
             componentKey.value += 1
@@ -557,13 +560,13 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-                formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province)
+              /*   formData.value.saveCity = JSON.parse(formData.value.city)
+                formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.saveCity.name,
-                    province: formData.value.saveProvince.name,
+                    city: formData.value.city,
+                    province: formData.value.province,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,
@@ -597,6 +600,7 @@ export default {
                 loading.value = true
                 try {
                     let res = await store.update({ uuid: id_create.value, payload: dataPost })
+
                     if (res.data.status == 401) {
                         toast(res.data.message || 'Error', {
                             type: "error",
@@ -890,13 +894,13 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-                formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province)
+               /*  formData.value.saveCity = JSON.parse(formData.value.city)
+                formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
-                    city: formData.value.saveCity.name,
-                    province: formData.value.saveProvince.name,
+                    city: formData.value.city,
+                    province: formData.value.province,
                     keysNumber: formData.value.keys,
                     vehicleStatus: {
                         status: formData.value.currently,
@@ -1004,8 +1008,10 @@ export default {
                     try {
                         let res = await store.update({ uuid: id_create.value, payload: resFiles })
                         if (res) {
+                            let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
+                            console.log('resDtaLate Create', resDtaLate)
                             await router.push({ path: '/all' })
-                            router.go()
+
                         }
                     } catch (error) {
                         loadingUploadImages.value = false

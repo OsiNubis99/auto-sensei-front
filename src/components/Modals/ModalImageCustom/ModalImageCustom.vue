@@ -39,8 +39,8 @@
         scalable: false,
         aspectRatio: 1,
         previewClass: 'twitter-cropper__stencil',
-    }" :transitions="false" :debounce="false" :default-size="defaultSize" :min-width="150"
-                        :min-height="150" :src="imgPreview" @change="onChange" />
+    }" :transitions="false" :debounce="false" :default-size="defaultSize" :min-width="150" :min-height="150"
+                        :src="imgPreview" @change="onChange" />
                     <div class="flex justify-between gap-12 p-2 md:p-4">
                         <div class="w-full px-2">
                             <p class=" text-sm md:text-base">Zoom</p>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="flex w-full justify-end p-2 md:p-4 gap-3">
                         <label class="label-upload btn bg-white border border-[#E0E0E0]">
-                            <input type="file" hidden ref="file" @change="uploadImage($event)" accept="image/*" />
+                            <input type="file" hidden ref="file" @change="uploadImage($event)" accept=".jpg, .jpeg,.png,.webp" />
                             <div class="btn-up">Replace</div>
                         </label>
                         <button @click="saveEditPhoto" class="btn bg-primary ">Upload</button>
@@ -95,16 +95,21 @@ export default {
                 height: Math.min(boundaries.height, boundaries.width) - 48,
             };
         }
-        const uploadImage = (event) => {
+        const uploadImage = async (event) => {
             var input = event.target;
             if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                loading.value = true
-                reader.onload = (e) => {
-                    img.value = e.target.result;
+                try {
+                    const result = await toBase64(input.files[0]);
+                    if (result) {
+                        imgPreview.value = result
+                        loading.value = false
+                    }
+                    return result
+                } catch (error) {
                     loading.value = false
-                };
-                reader.readAsDataURL(input.files[0]);
+                    console.error(error);
+                    return;
+                }
             }
         }
         const onChange = (result) => {
@@ -156,18 +161,16 @@ export default {
                     let nameImg = statusModalImage.img.name
                     var file = new File([blob], nameImg, { lastModified: new Date().getTime(), type: blob.type });
                     let image = canvas.toDataURL("image/jpeg");
-                  
-
                     switch (statusModalImage.typeImg) {
                         case 'document':
                             formData.value.previewDocument = image;
                             formData.value.document = file;
-                           
+
                             break;
                         case 'driver':
                             formData.value.previewDriver = image;
                             formData.value.driverDocument = file;
-                           
+
                             break;
                         case 'frontPhoto':
                             formData.value.previewFrontPhoto = image;

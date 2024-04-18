@@ -1,22 +1,214 @@
 <template>
-    <div>
+    <template v-if="loading">
+        <Basic />
+    </template>
+    <template v-else>
         <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
-        <template v-if="loading">
-            <Basic />
-        </template>
-        <div v-else class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+
+        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
 
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
             <div v-else class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class=" hidden md:w-[29%] md:block">
-                    <FilterBig />
+                <div :class="showFilter ? ' top-0 z-50 visible  w-full h-screen overflow-y-auto overflow-x-hidden shadow-xl animation-fade-modal' : ' invisible md:visible '"
+                    class="fixed  lg:relative  md:w-[29%] md:block">
+                    <div class="bg-white p-5 shadow-steps">
+                        <div class="flex w-full justify-between items-center">
+                            <p class=" lg:text-2xl font-semibold">Filter Auction</p>
+                            <div class="flex  items-center gap-2 justify-end">
+                                <p @click="resetFilterValue"
+                                    class="cursor-pointer text-xs lg:text-[15px] text-error font-semibold">
+                                    Reset
+                                    Filter</p>
+                                <svg @click="showFilter = false" xmlns="http://www.w3.org/2000/svg"
+                                    class=" w-6 h-8 md:w-8 lg:hidden block  md:h-8  cursor-pointer" fill="none"
+                                    viewBox="0 0 24 24" stroke="#ff4545">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+
+                        </div>
+
+                        <div class="mt-4 flex flex-col gap-4">
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Reminder Status</label>
+                                <select
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option>all</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Make</label>
+                                <option selected hidden>Select make</option>
+                                <select @change="applyFilter($event, 'make')" v-model="formFilter.make"
+                                    class="border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select make</option>
+                                    <template v-for="(make, index) in filterValues('make')" :key="index">
+                                        <option :value="make">{{ make }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Model</label>
+                                <select @change="applyFilter($event, 'model')" v-model="formFilter.model"
+                                    class=" border-none text-[#858585] md:p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select model</option>
+                                    <template v-for="(model, index) in filterValues('model')" :key="index">
+                                        <option :value="model">{{ model }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Trim</label>
+
+                                <select @change="applyFilter($event, 'trim')"
+                                    class=" border-none text-[#858585] md:p-3 bg-[#F0F0F0]  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select trim</option>
+                                    <option selected>Select trim</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="make">Year</label>
+                                <div class="flex justify-center gap-6 items-center ">
+                                    <select @change="applyPairFilters($event, 'start', label.year)"
+                                        class="border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                        <option selected hidden id="make">Select make</option>
+                                        <template v-for="(year, index) in filterValues('year')" :key="index">
+                                            <option :value="year">{{ year }}</option>
+                                        </template>
+                                    </select>
+                                    <!--  <VueDatePicker v-model="filterValues('year')" range
+                                        @update:model-value="applyPairFilters(event, 'start')" year-picker
+                                        class="custom-picker">
+                                        <template #calendar-header="{ index, day }">
+                                            <div :class="index === 5 || index === 6 ? 'red-color' : ''">
+                                                {{ day }}
+                                            </div>
+                                        </template>
+                                    </VueDatePicker> -->
+                                    <p> - </p>
+                                    <select @change="applyPairFilters($event, 'end', label.year)"
+                                        class="border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                        <option selected hidden>Select make</option>
+                                        <template v-for="(year, index) in filterValues('year')" :key="index">
+                                            <option :value="year">{{ year }}</option>
+                                        </template>
+                                    </select>
+                                    <!--   <VueDatePicker v-model="formPair.dateEnd"
+                                        @update:model-value="applyPairFilters(event, 'end')" year-picker
+                                        class="custom-picker">
+                                        <template #calendar-header="{ index, day }">
+                                            <div :class="index === 5 || index === 6 ? 'red-color' : ''">
+                                                {{ day }}
+                                            </div>
+                                        </template>
+                                    </VueDatePicker> -->
+                                </div>
+
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Body Type</label>
+                                <select @change="applyFilter($event, 'bodyType')" v-model="formFilter.bodyType"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select body type</option>
+                                    <template v-for="(typeCar, index) in filterValues('bodyType')" :key="index">
+                                        <option :value="typeCar">{{ typeCar }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Cylinder</label>
+                                <select @change="applyFilter($event, 'cylinder')" v-model="formFilter.cilynder"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select cylinder</option>
+                                    <template v-for="(cilynder, index) in filterValues('cylinder')" :key="index">
+                                        <option :value="cilynder">{{ cilynder }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Transmission</label>
+                                <select @change="applyFilter($event, 'transmission')" v-model="formFilter.transmission"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select transmission</option>
+                                    <template v-for="(transmission, index) in filterValues('transmission')"
+                                        :key="index">
+                                        <option v-if="transmission" :value="transmission">{{ transmission }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Doors</label>
+                                <select @change="applyFilter($event, 'doors')" v-model="formFilter.doors"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">\
+                                    <option selected hidden>Select doors</option>
+                                    <template v-for="(doors, index) in filterValues('doors')" :key="index">
+                                        <option :value="doors">{{ doors }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Drivetrain</label>
+                                <select @change="applyFilter($event, 'driveTrain')" v-model="formFilter.driver"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected hidden>Select drivetrain</option>
+                                    <template v-for="(driver, index) in filterValues('driveTrain')" :key="index">
+                                        <option :value="driver">{{ driver }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Vehicle Condition</label>
+                                <select @change="applyFilter($event, 'vehicle-condition')"
+                                    class=" border border-[#E0E0E0] text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg   w-full ">
+                                    <option selected>Select condition</option>
+                                </select>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <label class="font-medium text-sm " for="">Exterior Color</label>
+                                <div class="grid grid-cols-3  place-items-start gap-4">
+                                    <label v-for="(color, index) in filterValues('color')" :key="index"
+                                        class="label-colors !p-2 !h-[40px] !capitalize whitespace-pre w-full">
+                                        <input @change="applyFilter($event, 'color')" :value="color" type="radio"
+                                            class="input-radio" :class="[
+        color == 'silver' && 'on-silver',
+        color == 'white' && 'on-white',
+        color == 'grey' && 'on-grey',
+        color == 'greenDark' && 'on-greenDark',
+        color == 'red' && 'on-red',
+        color == 'yellow' && 'on-yellow',
+        color == 'blue' && 'on-blue',
+        color == 'white' && 'on-white',
+        color == 'white' && 'on-white',
+    ]" name="color-redio">
+                                        {{ color }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="w-full">
+                                <label class="font-medium text-base " for="">Kilometers</label>
+                                <div class="flex justify-between items-center gap-6 ">
+                                    <input @change="applyPairFilters($event, 'start', label.klmtr)"
+                                        class="p-2 w-full mt-3 uppercase  border border-[#E0E0E0] text-[#858585] rounded-lg"
+                                        placeholder="0                                 Kms" type="number">
+                                    <p>-</p>
+                                    <input @change="applyPairFilters($event, 'end')" type="number"
+                                        class="p-2 w-full mt-3 uppercase  border border-[#E0E0E0] text-[#858585] rounded-lg"
+                                        placeholder="0                                 Kms">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="w-full md:w-[70%]">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }}
+                        <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
+                            }}
                             Vehicles
+                        </p>
+                        <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
                         </p>
                         <!--   <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" /> -->
                         <div class="flex items-center gap-5">
@@ -79,7 +271,7 @@
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
                             <CardCompletedDealer :key="counter" :aution="aution" :data="data" :auth="authStore"
-                                :confirmVehicle="confirmVehicle" />
+                                :confirmVehicle="confirmVehicle" :changeLayouts="changeLayouts" />
                             <!--   <div class="w-full flex   p-5 sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
                                 <swiper pagination :modules="modules" :slides-per-view="1" class="swiper-autions"
                                     :class="changeLayouts ? 'w-full' : 'w-[40%]'">
@@ -88,7 +280,7 @@
                                     </swiper-slide>
                                     <div v-if="!aution.photos" class=" absolute w-full h-full top-0 ">
                                         <img class="w-full rounded-s-lg h-full object-cover"
-                                            src="../../../assets/img/jpg/image.jpg" alt="">
+                                            src="@/assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
@@ -237,7 +429,8 @@
                 </div>
             </div>
         </div>
-        <div class="fixed md:hidden flex justify-center items-center bottom-2 w-full z-50">
+        <div v-show="!showFilter && data.length > 0" @click="showFilter = true"
+            class="fixed md:hidden flex justify-center items-center bottom-2 w-full z-50">
             <div class="flex items-center py-2 rounded-lg px-3 gap-2 bg-base-black">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
                     <path
@@ -248,11 +441,80 @@
             </div>
 
         </div>
-    </div>
+        <div v-if="openPdf"
+            class="fixed inset-0 flex items-end md:items-center z-50 justify-center bg-base-black  bg-opacity-50">
+            <div class="max-w-lg overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
+                <div class="p-2 md:p-4  rounded-t-lg  bg-blue-dark flex items-center justify-between">
+                    <p class=" text-sm md:text-xl text-white">Contract Auction</p>
+                    <svg @click="closetModalPdf()" xmlns="http://www.w3.org/2000/svg"
+                        class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <template v-if="loadingPdf">
+                    <div class="w-full h-[30vh]">
+                        <div class=" w-full h-full flex justify-center items-center">
+                            <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
+                                <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+                                    <div class="animate-bounce">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
+                                            stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </template>
+                <template v-else>
+                    <div v-if="steps.step1" class="w-full p-5 flex flex-col justify-center items-center">
+                        <div class="flex justify-center items-center flex-col gap-3">
+                            <img src="../../../assets/img/png/icon-signature.png" alt="">
+                            <p class=" text-center text-lg p-5 font-medium ">Thank you for completing the process! Enjoy
+                                your new vehicle and continue bidding with us!</p>
+                        </div>
+
+                        <div class="flex gap-3 items-center w-full mt-4 justify-center">
+                            <button
+                                class="bg-white border-error text-error hover:bg-error transition-all ease-out duration-200 hover:text-white py-2 shadow-lg rounded-lg w-full"
+                                @click="closetModalPdf">No</button>
+                            <button class="bg-primary py-2 shadow-lg rounded-lg w-full"
+                                @click="nextContract">Yes</button>
+                        </div>
+
+                    </div>
+                    <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 70vh;"></div>
+                    <div v-if="steps.step3" class="p-4 flex justify-center items-center flex-col gap-3">
+                        <p class=" font-semibold capitalize md:text-xl">Final Bid Approved!</p>
+                        <p class="capitalize text-xs md:text-base ">Download the Actual Sheet Below and Hand It to the
+                            Buyer
+                            During the Vehicle
+                            Drop-Off
+                            Process.</p>
+                        <div class="w-full">
+                            <iframe class="w-full h-[60vh]" :src="showPdf" frameborder="0"></iframe>
+                        </div>
+
+                        <button @click="pdfDonwload" class="btn w-full bg-primary rounded-md">
+                            Download PDF
+                        </button>
+
+                    </div>
+                </template>
+
+            </div>
+        </div>
+    </template>
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect } from "vue";
+import { ref, onMounted, computed, watchEffect, watch } from "vue";
 import { toast } from "vue3-toastify";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -271,6 +533,9 @@ import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vu
 import FilterBig from "../../../components/Filters/FilterBig.vue";
 import CardCompletedDealer from "../../../components/Cards/CardCompletedDealer.vue";
 import SorBy from '../../../components/Filters/SorBy.vue'
+import PSPDFKit from 'pspdfkit';
+import axios from "@/axios";
+import { arrayPhotos } from "../../../utils/packPhotos";
 export default {
 
     components: {
@@ -287,8 +552,12 @@ export default {
     setup() {
         const isOpen = ref(false)
         const loading = ref(false)
+        const loadingPdf = ref(false)
+        const openPdf = ref(false)
+        const autionPdf = ref(null)
         const changeLayouts = ref(false)
         const counter = ref(0)
+        const showPdf = ref('')
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
             counter.value++
@@ -306,6 +575,7 @@ export default {
         })
         const authStore = useAuthStore()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+        const autionUpdate = ref(computed(() => authStore.aution))
         const data = ref([])
         const storeAutions = useAuctionStore()
         const path = ref(computed(() => route.name))
@@ -313,6 +583,49 @@ export default {
         const indexShowLoading = ref(false)
         const loadingButton = ref(false)
         const sortBy = ref('Drop off Date')
+        const steps = ref({
+            step1: true,
+            step2: false,
+            step3: false
+        })
+        const filteredItems = ref([])
+        const showFilter = ref(false)
+        const formFilter = ref({
+            make: 'Select make',
+            model: 'Select model',
+            year: 'Select make',
+            bodyType: 'Select body type',
+            cilynder: 'Select cylinder',
+            transmission: 'Select transmission',
+            doors: 'Select doors',
+            driver: 'Select drivetrain',
+            color: 'Select color',
+
+
+        })
+        const dataBuffer = ref(null)
+        watch(autionUpdate, async (newQuestion, oldQuestion) => {
+            console.log('autionUpdate COMPLETED DEALER', autionUpdate)
+            const i = data.value.findIndex(x => x._id === newQuestion._id)
+            data.value[i] = newQuestion
+            if (autionUpdate.value.status == 'completed' || autionUpdate.value.status == 'drop off') {
+                const i = data.value.findIndex(x => x._id === newQuestion._id)
+                data.value[i] = newQuestion
+                let photos = null;
+                photos = arrayPhotos(data.value[i].vehicleDetails)
+                if (photos.length > 0) {
+                    data.value[i].photos = photos
+                } else {
+                    photos = null
+                }
+            } else {
+                let result = null;
+                result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                data.value = result
+
+            }
+            counter.value++
+        })
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
             return (
@@ -328,34 +641,15 @@ export default {
                 console.log('storeAutions?.completed', storeAutions?.completed)
                 data.value = storeAutions?.completed
                 data.value.map((autions, index) => {
-                    /*  const formatter = new Intl.NumberFormat();
-                     autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer) */
-                    let photos = []
-                    if (autions?.vehicleDetails?.additionalDocuments,
-                        autions?.vehicleDetails?.exteriorPhotos,
-                        autions?.vehicleDetails?.interiorPhotos,
-                        autions?.vehicleDetails?.driverLicense) {
-                        var d = photos.concat(
-                            autions?.vehicleDetails?.additionalDocuments,
-                            autions?.vehicleDetails?.exteriorPhotos,
-                            autions?.vehicleDetails?.interiorPhotos,
-                            autions?.vehicleDetails?.vehicleDamage,
-                            autions?.vehicleDetails?.driverLicense,
-                            autions?.vehicleDetails?.originalDocument,
-                        );
-                        let resD = d.map((item, i) => {
-                            let name = item.split("/")
-                            let newObjet = {
-                                name: name[2],
-                                url: item
-                            }
-                            return newObjet
-                        })
-                        return autions.photos = resD
+                    let photos = null;
+                    photos = arrayPhotos(autions.vehicleDetails)
+                    if (photos.length > 0) {
+                        autions.photos = photos
                     } else {
-                        return autions.photos = null
+                        photos = null
                     }
                 })
+                resetFilters()
             } catch (error) {
                 toast(error.response.data.message, {
                     type: "error",
@@ -364,37 +658,224 @@ export default {
                 loading.value = false
             }
         }
-        const confirmVehicle = async (id) => {
-            indexShowLoading.value = id
-            console.log('id', id)
-            loadingButton.value = true
+        const sutmibPDF = async (pdf) => {
+            console.log('recivied', pdf)
+            loadingPdf.value = true
             try {
-                await storeAutions.vehicleReceived({ uuid: id })
-            } catch (error) {
-                toast(error.response.data.message, {
-                    type: "error",
-                });
+                const blob = new Blob([pdf], { type: 'application/pdf' }, { name: Date.now() + '.' + pdf.extension });
+                const formData = new FormData();
+                formData.append("file", blob);
+                formData.append("location", 'test/pdf');
+                const options = {
+                    url: "/uploader/create",
+                    method: 'POST',
+                    headers: { 'content-type': 'multipart/form-data' },
+                    data: formData
+                };
+                let result = await axios(options);
+                if (result.data) {
+                    console.log('result', result)
+                    console.log('autionPdf.value._id, result.data', autionPdf.value._id, result.data)
+                    try {
+                        let res = await storeAutions.vehicleReceived(autionPdf.value._id, result.data)
+                        console.log('res', res)
+                        if (res) {
+                            showPdf.value = 'https://apidev.autosensei.ca/files/' + result.data
+                            steps.value.step1 = false
+                            steps.value.step2 = false
+                            steps.value.step3 = true
+                        }
+                    } catch (error) {
+                        loadingPdf.value = false
+                        toast(error.response.data.message, {
+                            type: "error",
+                        });
+                    } finally {
+                        loadingPdf.value = false
+                        index()
+                    }
+
+
+
+                }
+
+                console.log(result);
+            } catch (e) {
+                loading.value = false
+                console.error("error", e);
             } finally {
-                loadingButton.value = false
-                index()
+                loading.value = false
             }
+        }
+        const pdfDonwload = () => {
+            const supportsDownloadAttribute = HTMLAnchorElement.prototype.hasOwnProperty("download");
+            const blob = new Blob([dataBuffer.value], { type: "application/pdf" });
+            sutmibPDF(blob)
+            if (navigator.msSaveOrOpenBlob) {
+                navigator.msSaveOrOpenBlob(blob, "download.pdf");
+            } else if (!supportsDownloadAttribute) {
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    const dataUrl = reader.result;
+
+                    downloadPdf(dataUrl);
+                };
+                reader.readAsDataURL(blob);
+            } else {
+                const objectUrl = window.URL.createObjectURL(blob);
+                downloadPdf(objectUrl);
+                window.URL.revokeObjectURL(objectUrl);
+            }
+            function downloadPdf(blob) {
+                const a = document.createElement("a");
+                a.href = blob;
+                a.style.display = "none";
+                a.download = "download.pdf";
+                a.setAttribute("download", "download.pdf");
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                closetModalPdf()
+            }
+
+        }
+        const nextContract = async () => {
+            steps.value.step1 = false
+            steps.value.step2 = true
+            if (steps.value.step2) {
+                loadingPdf.value = true
+                try {
+                    let res = await storeAutions.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
+                    console.log('res', res)
+                    if (res) {
+                        showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                        loadingPdf.value = false
+                        steps.value.step1 = false
+                        steps.value.step2 = false
+                        steps.value.step3 = true
+
+                    }
+                } catch (error) {
+                    loadingPdf.value = false
+                    toast(error.response.data.message, {
+                        type: "error",
+                    });
+                } finally {
+                    loadingPdf.value = false
+                    /*  index() */
+                }
+
+                /* const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
+                PSPDFKit.load({
+                    baseUrl,
+                    container: "#pspdfkit",
+                    document: 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing,
+                }).then(async function (instance) {
+                    loadingPdf.value = false
+                    const widget2 = new PSPDFKit.Annotations.WidgetAnnotation({
+                        id: PSPDFKit.generateInstantId(),
+                        pageIndex: 0,
+                        isEditable: true,
+                        locked: true,
+                        lockedContents: true,
+                        isReadOnly: true,
+                        boundingBox: new PSPDFKit.Geometry.Rect({
+                            left: 125,
+                            top: 765,
+                            width: 100,
+                            height: 20
+                        }),
+                        formFieldName: "my signature form field"
+                    })
+                    const formField = new PSPDFKit.FormFields.SignatureFormField({
+                        name: "my signature form field",
+                        annotationIds: new PSPDFKit.Immutable.List([widget2.id])
+                    });
+                    await instance.create([widget2, formField]);
+                    instance.addEventListener("annotations.create", async (e) => {
+                        const buffer = await instance.exportPDF({ flatten: true });
+                        dataBuffer.value = buffer
+                        sutmibPDF(buffer)
+                    });
+                }) */
+            }
+
+        }
+        const confirmVehicle = async (aution) => {
+            console.log('aution', aution)
+            autionPdf.value = aution
+            openPdf.value = true
         }
         const setSorBy = (sort) => {
             sortBy.value = sort
             isOpen.value = false
 
         }
+        const closetModalPdf = () => {
+            steps.value.step1 = true
+            steps.value.step2 = false
+            steps.value.step3 = false
+            dataBuffer.value = null
+            autionPdf.value = null
+            showPdf.value = null
+            loadingPdf.value = false
+            openPdf.value = false
+        }
+        const removeDuplicate = (array) => {
+            return [...new Set(array)]
+        }
+        const filterValues = (key) => {
+            return removeDuplicate(filteredItems.value.map(item => item.vehicleDetails[key])).sort()
+        }
+        const applyPairFilters = (event, type, filter) => {
+            console.log(filter);
+            console.log(filteredItems.value);
+            filteredItems.value = filteredItems.value.filter((item) => {
+                if (type === 'start') {
+                    return item.vehicleDetails[filter] >= event.target.value
+                }
+                if (type === 'end') {
+                    return item.vehicleDetails[filter] <= event.target.value
+                }
 
+            })
+
+            console.log('filter', filter, ':', event.target.value)
+            counter.value++
+        }
+        const applyFilter = (event, filter) => {
+            console.log(filter);
+            filteredItems.value = filteredItems.value.filter((item) => {
+                console.log(item);
+                return item.vehicleDetails[filter] == event.target.value
+            })
+            counter.value++
+        }
+        const resetFilters = () => {
+            filteredItems.value = data.value
+        }
+        const resetFilterValue = () => {
+            formFilter.value.make = 'Select make',
+                formFilter.value.model = 'Select model',
+                formFilter.value.year = 'Select make',
+                formFilter.value.bodyType = 'Select body type',
+                formFilter.value.cilynder = 'Select cylinder',
+                formFilter.value.transmission = 'Select transmission',
+                formFilter.value.doors = 'Select doors',
+                formFilter.value.driver = 'Select drivetrain',
+                formFilter.value.color = 'Select color',
+                resetFilters()
+        }
         const sortedData = computed(() => {
             switch (sortBy.value) {
                 case 'Drop off Date':
-                    return data.value.filter(p => true).sort((a, b) => timeToEnd(b.startDate, b.duration) - timeToEnd(a.startDate, a.duration))
+                    return filteredItems.value.filter(p => true).sort((a, b) => timeToEnd(b.startDate, b.duration) - timeToEnd(a.startDate, a.duration))
                 case 'Odometer':
-                    return data.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
+                    return filteredItems.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
                 case 'Year':
-                    return data.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
+                    return filteredItems.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
                 default:
-                    return data.value
+                    return filteredItems.value
             }
         })
         watchEffect(() => {
@@ -428,7 +909,23 @@ export default {
             counter,
             sortedData,
             setSorBy,
-            sortBy
+            sortBy,
+            openPdf,
+            autionPdf,
+            loadingPdf,
+            steps,
+            nextContract,
+            showPdf,
+            pdfDonwload,
+            closetModalPdf,
+            filterValues,
+            applyPairFilters,
+            applyFilter,
+            resetFilterValue,
+            removeDuplicate,
+            filteredItems,
+            showFilter,
+            formFilter
         };
     },
 };

@@ -4,14 +4,14 @@
     </template>
 
     <template v-else>
-        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
+        <HeaderOptionesSeller />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="hidden md:w-[29%] md:block">
-                    <CreateAution class="hidden md:block" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="hidden md:w-[29%] lg:block">
+                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
-                <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
-                <div class="w-full md:w-[70%] ">
+                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="w-full lg:w-[70%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class=" text-xs font-semibold md:text-base  ">{{ sortedData?.length }} Vehicles</p>
                         <div class="flex items-center gap-2 ">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="p-2" v-if="sortedData.length > 0"
-                        :class="changeLayouts ? 'grid grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
+                        :class="changeLayouts ? 'grid md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-5' : 'animate-fade-up  animate-ease-in-out animate-delay-200'">
                         <div v-for="(auction, index) in sortedData" :key="index"
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full  "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
@@ -108,6 +108,7 @@ import CardLiveSeller from '../../../components/Cards/CardLiveSeller.vue'
 import Basic from '../../../components/Loading/Basic.vue'
 import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue'
 import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
+import { arrayPhotos } from "../../../utils/packPhotos";
 export default {
 
     components: {
@@ -135,42 +136,43 @@ export default {
         const sortBy = ref('year')
         const counter = ref(0)
         const changeGridTemplate = () => {
+
             changeLayouts.value = !changeLayouts.value
+            counter.value++
         }
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
-            const i = data.value.findIndex(x => x._id === newQuestion._id)
-            data.value[i] = newQuestion
+
             if (autionUpdate.value.status == 'live') {
+                data.value.push(newQuestion)
+                console.log('data.value antes', data.value.length)
                 const i = data.value.findIndex(x => x._id === newQuestion._id)
                 data.value[i] = newQuestion
-                let photos = []
-                if (data.value[i]?.vehicleDetails?.additionalDocuments,
-                    data.value[i]?.vehicleDetails?.exteriorPhotos,
-                    data.value[i]?.vehicleDetails?.interiorPhotos,
-                    data.value[i]?.vehicleDetails?.driverLicense) {
-                    var d = photos.concat(
-                        data.value[i]?.vehicleDetails?.additionalDocuments,
-                        data.value[i]?.vehicleDetails?.exteriorPhotos,
-                        data.value[i]?.vehicleDetails?.interiorPhotos,
-                        data.value[i]?.vehicleDetails?.vehicleDamage,
-                        data.value[i]?.vehicleDetails?.driverLicense,
-                        data.value[i]?.vehicleDetails?.originalDocument,
-                    );
-                    let resD = d.map((item, i) => {
-                        let name = item.split("/")
-                        let newObjet = {
-                            name: name[2],
-                            url: item
-                        }
-                        return newObjet
-                    })
-                    return data.value[i].photos = resD
+                console.log('data.value antes', data.value.length)
+                let photos = null;
+                photos = arrayPhotos(data.value[i].vehicleDetails)
+                if (photos.length > 0) {
+                    data.value[i].photos = photos
                 } else {
-                    return data.value[i].photos = null
+                    photos = null
                 }
-            } else {
+            }
+            if (autionUpdate.value?.status == 'completed') {
+                console.log('ENTRO EN EL WACTH completed')
                 let result = null;
-                result = data.value.filter((remove) => remove._id !== newQuestion._id)
+                result = data.value.filter((remove) => remove._id !== autionUpdate.value._id)
+                console.log('result', result)
+                console.log(' data.value', data.value)
+                data.value = []
+                data.value = result
+            }
+
+            if (autionUpdate.value?.status == 'bids completed') {
+                console.log('ENTRO EN EL WACTH bids completed')
+                let result = null;
+                result = data.value.filter((remove) => remove._id !== autionUpdate.value._id)
+                console.log('result', result)
+                console.log(' data.value', data.value)
+                data.value = []
                 data.value = result
 
             }

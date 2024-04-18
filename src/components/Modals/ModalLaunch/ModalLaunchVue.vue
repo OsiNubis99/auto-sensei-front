@@ -51,7 +51,7 @@
                                     name="launch-option">
                                 Next Day
                             </label>
-                            <label class="label-radio text-[12px] md:text-base !justify-start">
+                           <!--  <label class="label-radio text-[12px] md:text-base !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Launch now after verified"
                                     class="input-radio on" name="launch-option">
                                 Launch now after verified
@@ -65,17 +65,17 @@
                                 <input v-model="formData.launchOptions" type="radio"
                                     value="Choose after hours (weekend)" class="input-radio on" name="launch-option">
                                 Choose after hours (weekend)
-                            </label>
+                            </label> -->
                         </div>
                     </template>
                     <NextDay v-if="formData.launchOptions == 'none'" :steps="stepsVerifiqued"
                         :form="formData" :save="save" />
-                    <AfterVerified v-if="formData.launchOptions == 'Launch now after verified'" :steps="stepsVerifiqued"
+                  <!--   <AfterVerified v-if="formData.launchOptions == 'Launch now after verified'" :steps="stepsVerifiqued"
                         :form="formData" :save="save" />
                     <DateAndTime v-if="formData.launchOptions == 'Choose the date & time'" :steps="stepsDateTime"
                         :form="formData" :save="save" />
                     <HoursWeekeng v-if="formData.launchOptions == 'Choose after hours (weekend)'"
-                        :steps="stepsDateWeekeng" :form="formData" :save="save" />
+                        :steps="stepsDateWeekeng" :form="formData" :save="save" /> -->
                 </div>
             </div>
         </div>

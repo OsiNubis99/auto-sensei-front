@@ -55,9 +55,15 @@
                             <p class="font-semibold text-sm md:text-base">Maximum Bid Amount</p>
                             <p class="text-xs md:text-base">Please enter a price higher than the current bid</p>
                         </div>
-                        <CurrencyInput :key="counterKey" v-model="formData.placeyourbid"
+                        <!--   <CurrencyInput :key="counterKey" v-model="formData.placeyourbid"
                             :error='invalid?.placeyourbid ? true : false' :options="{ currency: 'USD' }"
-                            :placeHolder="`$ Min ${statusModal?.data?.vehicleDetails?.basePrice}`" />
+                            :placeHolder="`$ Min ${statusModal?.data?.vehicleDetails?.basePrice}`" /> -->
+
+                        <input class="p-2 w-full rounded-lg border border-[#C2C2C2] uppercase"
+                            v-model="formData.placeyourbid"
+                            :class="invalid?.placeyourbid && 'bg-[#F6E9E9] border border-[#FF333E] text-[#0A0A0A]'"
+                            ref="inputRef" type="text"
+                            :placeHolder="`$ Min ${statusModal.data?.bids[0]?.amount ? statusModal.data?.bids[0]?.amount : statusModal?.data?.vehicleDetails?.basePrice}`" />
                         <p class="text-[#858585] text-xs md:text-base mt-2"> {{ invalid?.placeyourbid }} </p>
                         <div class="form-group md:mt-4">
                             <input type="checkbox" v-model="formData.notify" id="html">
@@ -77,7 +83,7 @@
                                 v-model="formData.placeyourbid"
                                 :class="invalid?.placeyourbid && 'bg-[#F6E9E9] border border-[#FF333E] text-[#0A0A0A]'"
                                 ref="inputRef" type="text" :placeHolder="'$ Min 100,100'" />
-                            <p v-if="error" class="text-[#FF333E] whitespace-pre absolute -bottom-8">
+                            <p v-if="invalid" class="text-[#FF333E] whitespace-pre absolute -bottom-8">
                                 {{ invalid?.placeyourbid }}</p>
                         </div>
                         <button @click="addAmount"
@@ -99,10 +105,10 @@
             <template v-if="steps.step2">
                 <div class="md:p-5 p-2 pt-0">
                     <p class="text-xs  md:text-base">
-                        <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $250 transaction fee if your bid
+                        <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $300 transaction fee if your bid
                             is
                             successfully won.</span>
-                        <span v-if="statusModal.from == 'bidNow'">You'll be charged a $350 + Harmonized Sales Tax (HST)
+                        <span v-if="statusModal.from == 'bidNow'">You'll be charged a $300 + Harmonized Sales Tax (HST)
                             transaction fee if your bid is
                             successful won.</span>
                     </p>
@@ -132,7 +138,7 @@
                                                 ****
                                                 {{ payments?.card?.last4 }}</p>
                                         </div>
-                                        <RouterLink to="/account-dealer" 
+                                        <RouterLink to="/account-dealer"
                                             v-if="index === authStore.userData.paymentMethods.length - 1"
                                             class="text-[#1F94F0] px-2 md:px-6 text-xs md:text-base pt-2 mt-0 cursor-pointer text-start font-semibold ">
                                             Add another Credit Card</RouterLink>
@@ -444,8 +450,22 @@ export default {
                     } finally {
                         loading.value = false
                         statusModal.isActive = false
-                        statusModal.finally = 'finally'
-                        props.index(statusModal.data._id)
+                        steps.value.step1 = true
+                        steps.value.step2 = false
+                        steps.value.step3 = false
+                        openDropdown.value = false
+                        formData.value.cardNumber = undefined;
+                        formData.value.creditCard = undefined;
+                        formData.value.cvv = undefined;
+                        formData.value.expiryDate = undefined;
+                        formData.value.nameOnCard = undefined;
+                        formData.value.notify = undefined;
+                        formData.value.saveCard = undefined;
+                        formData.value.termsConditions = false;
+                        itemCard.value = null;
+                        formData.value.placeyourbid = null;
+                        /*   statusModal.finally = 'finally'
+                          props.index(statusModal.data._id) */
                         toast('Successfully placed bid', { type: "success", position: "top-center", theme: "colored", });
                     }
                     break;

@@ -1,11 +1,11 @@
 <template>
     <header class="relative">
         <div v-show="store?.userData?.type == 0">
-            <nav class="md:flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
+            <nav class="lg:flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
                 <div class=" flex items-center">
                     <div class="flex gap-5 ">
                         <IconSearch />
-                        <IconNotifications />
+                        <!-- <IconNotifications /> -->
                         <div class="relative ">
                             <IconUser @click="toggleAccount" class="cursor-pointer" />
                             <ul :class="openAccount ? 'block' : 'hidden'"
@@ -27,7 +27,8 @@
                         class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
 
-                            <RouterLink to="/inicio" :class="path == 'inicio' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/inicio"
+                                :class="path == 'inicio' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dashboard</p>
                             </RouterLink>
@@ -62,7 +63,7 @@
         </div>
         <div v-if="store.userData.type == 1">
             <nav class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
-                <div class="hidden md:flex  items-center">
+                <div class="hidden lg:flex  items-center">
                     <div class="flex gap-8 justify-between items-center ">
                         <div class="relative">
                             <svg class="w-6 h-6 text-gray-700 absolute top-3 left-2" fill="none" stroke="white"
@@ -82,7 +83,7 @@
                                     fill="white" />
                             </svg>
                         </RouterLink>
-                        <IconNotifications />
+                        <!--  <IconNotifications /> -->
                         <div class="navbar-right  relative">
                             <button
                                 class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
@@ -134,7 +135,7 @@
                                     fill="white" />
                             </svg>
                         </div>
-                        <div class="relative">
+                        <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -142,7 +143,7 @@
                                     d="M20 17H22V19H2V17H4V10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10V17ZM18 17V10C18 8.4087 17.3679 6.88258 16.2426 5.75736C15.1174 4.63214 13.5913 4 12 4C10.4087 4 8.88258 4.63214 7.75736 5.75736C6.63214 6.88258 6 8.4087 6 10V17H18ZM9 21H15V23H9V21Z"
                                     fill="white" />
                             </svg>
-                        </div>
+                        </div> -->
                         <button @click="toggle"
                             class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
                             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -158,31 +159,32 @@
                         <LogoIcon class=" w-[90%] md:w-full" />
                     </RouterLink>
                     <div
-                        class="navLinks hidden md:flex duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]   md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
+                        class="navLinks hidden lg:flex duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]   md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
                             <RouterLink to="/all"
                                 :class="path == 'all' || path == 'upcoming-auctions' || path == 'live' || path == 'completed' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sell a Car</p>
                             </RouterLink>
-                          <!--   <RouterLink to="#"
+                            <!--   <RouterLink to="#"
                                 :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink> -->
-                            <RouterLink to="/faqs-seller"
+                            <!--  <RouterLink to="/faqs-seller"
                                 :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
-                            </RouterLink>
+                            </RouterLink> -->
                         </ul>
                     </div>
                 </div>
             </nav>
         </div>
         <div v-if="store.userData.type == 2">
-            <nav v-if="!route.meta?.hideNavbar" class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
-                <div class="hidden md:flex items-center">
+            <nav v-if="!route.meta?.hideNavbar"
+                class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
+                <div class="hidden lg:flex items-center">
                     <div class="flex gap-5 justify-between items-center ">
                         <div class="relative">
                             <svg class="w-6 h-6 text-gray-700 absolute top-3 left-2" fill="none" stroke="white"
@@ -204,7 +206,7 @@
                             </svg>
                         </RouterLink>
 
-                        <IconNotifications />
+                        <!-- <IconNotifications /> -->
                         <div class="navbar-right  relative">
                             <button
                                 class="relative z-50 block  overflow-hidden   leading-loose   rounded cursor-pointer "
@@ -217,7 +219,6 @@
                                         src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                         alt="">
                                 </div>
-
                             </button>
                             <button v-if="isOpen" @click="isOpen = false" tabindex="-1"
                                 class="fixed top-0 inset-0 h-full w-full bg-black opacity-0 cursor-default"></button>
@@ -256,7 +257,7 @@
                                     fill="white" />
                             </svg>
                         </div>
-                        <div class="relative">
+                        <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -264,7 +265,7 @@
                                     d="M20 17H22V19H2V17H4V10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10V17ZM18 17V10C18 8.4087 17.3679 6.88258 16.2426 5.75736C15.1174 4.63214 13.5913 4 12 4C10.4087 4 8.88258 4.63214 7.75736 5.75736C6.63214 6.88258 6 8.4087 6 10V17H18ZM9 21H15V23H9V21Z"
                                     fill="white" />
                             </svg>
-                        </div>
+                        </div> -->
                         <button @click="toggle"
                             class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
                             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -273,35 +274,34 @@
                             </svg>
                         </button>
                     </div>
-
                 </div>
                 <div class="flex items-center gap-3">
                     <RouterLink :to="{ name: 'home' }" class="flex items-center gap-2">
                         <LogoIcon class="w-[90%] md:w-full" />
                     </RouterLink>
                     <div
-                        class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh] hidden md:flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
+                        class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh] hidden lg:flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
                             <RouterLink to="/upcoming"
                                 :class="path == 'upcoming' || path == 'liveDealer' || path == 'current-bits' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dealer Bidding</p>
                             </RouterLink>
-                        <!--     <RouterLink to="#"
+                            <!--     <RouterLink to="#"
                                 :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sold Auction</p>
                             </RouterLink> -->
-                            <RouterLink to="/faqs-dealers"
+                            <!-- <RouterLink to="/faqs-dealers"
                                 :class="path == 'faqs-dealers' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>FAQs</p>
-                            </RouterLink>
-                            <RouterLink to="/how-it-works-dealer"
+                            </RouterLink> -->
+                            <!--    <RouterLink to="/how-it-works-dealer"
                                 :class="path == 'how-it-works-dealer' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>How It Works?</p>
-                            </RouterLink>
+                            </RouterLink> -->
 
                         </ul>
                     </div>
@@ -311,7 +311,7 @@
         <template v-if="store?.userData?._id">
             <div v-show="open" class="fixed bg-[#0b1107b5] left-0 animation-menu-modal top-0 h-screen w-full z-[580]">
             </div>
-            <nav v-show="open" class="fixed animation-menu-modal top-0 md:hidden z-[600] bg-[#141f0d] w-full  p-5">
+            <nav v-show="open" class="fixed animation-menu-modal top-0 lg:hidden z-[600] bg-[#141f0d] w-full  p-5">
                 <div class=" flex gap-3 justify-between items-center">
                     <div class=" flex gap-3 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="21" viewBox="0 0 25 21" fill="none">
@@ -341,28 +341,34 @@
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>Sell a Car</p>
                         </RouterLink>
-                      <!--   <RouterLink @click="open = false" to="#"
+                        <!--   <RouterLink @click="open = false" to="#"
                             :class="path == 'auto-list' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>Sold Auction</p>
                         </RouterLink> -->
-                        <RouterLink @click="open = false" to="/faqs-seller"
+                        <!--  <RouterLink @click="open = false" to="/faqs-seller"
                             :class="path == 'dealer-list' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
                             <p>FAQs</p>
-                        </RouterLink>
+                        </RouterLink> -->
                     </ul>
                     <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                         <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
-                            <img class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="store?.userData?.seller?.picture" class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.seller?.picture" alt="">
+                            <img v-else class="h-10 rounded-full w-10 object-cover"
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                 {{ store.userData.seller.firstName }} {{ store.userData.seller.lastName }}
                             </p>
                         </div>
                         <div @click="goAccount" v-else class="flex items-center gap-2">
-                            <img class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="store?.userData?.dealer?.picture" class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.dealer?.picture" alt="">
+                            <img v-else class="h-10 rounded-full w-10 object-cover"
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                 {{ store.userData?.dealer?.name }}
                             </p>
@@ -386,35 +392,42 @@
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">Dealer Bidding</p>
                         </RouterLink>
-                     <!--    <RouterLink @click="open = false" to="#"
+                        <!--    <RouterLink @click="open = false" to="#"
                             :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">Sold Auction</p>
                         </RouterLink> -->
-                        <RouterLink @click="open = false" to="/faqs-dealers"
+                        <!--   <RouterLink @click="open = false" to="/faqs-dealers"
                             :class="path == 'faqs-dealers' ? ' text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">FAQs</p>
-                        </RouterLink>
-                        <RouterLink @click="open = false" to="/how-it-works-dealer"
+                        </RouterLink> -->
+                        <!--  <RouterLink @click="open = false" to="/how-it-works-dealer"
                             :class="path == 'how-it-works-dealer' ? 'bg-[#303E18] text-primary' : ' text-white'"
                             class="relative  max-w-fit text-sm  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                             <p class="font-bold">How It Works?</p>
-                        </RouterLink>
+                        </RouterLink> -->
                     </ul>
                     <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                         <div @click="goAccount" class="flex items-center gap-2" v-if="store?.userData?.type == 1">
-                            <img class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="bucket + store?.userData?.seller?.picture"
+                                class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.seller?.picture" alt="">
+                            <img v-else class="h-10 rounded-full w-10 object-cover"
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
                                 {{ store.userData?.seller?.name }}
                             </p>
                         </div>
                         <div @click="goAccount" v-else class="flex items-center gap-2">
-                            <img class="h-10 rounded-full w-10 object-cover"
+                            <img v-if="store?.userData?.dealer?.picture" class="h-10 rounded-full w-10 object-cover"
                                 :src="bucket + store?.userData?.dealer?.picture" alt="">
+                            <img v-else class="h-10 rounded-full w-10 object-cover"
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
                             <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                {{ store.userData?.dealer?.name }}
+                                {{ store.userData?.dealer?.firstName }} {{ store.userData?.dealer?.lastName }}
                             </p>
                         </div>
                         <div @click="logout" class="flex gap-2">
@@ -435,35 +448,53 @@
             class="fixed z-[1000] md:right-[60px] md:left-auto right-[5%]  left-[5%] w-[90%]  shadow-xl  transition-all ease-linear duration-200   md:w-1/4 flex flex-col rounded-lg bg-white modal-notificationes">
             <div v-for="(item, index) in notiAutions" :key="index"
                 :class="` border-b p-2 md:px-2 md:py-3 border-[#cfcfcf] md:pb-3 hover:bg-[#d6d6d6] transition-all cursor-pointer ease-linear duration-200 animate-fade-down animate-once animate-duration-2000 animate-delay-600 animate-ease-in-out`">
-                <RouterLink :to="{ name: 'action-details-dealer', params: { id: item?._id } }" class="flex gap-2">
-                    <div class="w-[70%] md:w-[40%]">
+                <RouterLink :to="{ name: 'action-details-dealer', params: { id: item._id } }"
+                    class="grid grid-cols-6 place-content-start place-items-start gap-3">
+                    <div class=" col-span-2 w-[90%] md:h-[100px] ">
                         <img class=" rounded-lg shadow-lg w-full h-full object-cover"
                             :src="bucket + item.vehicleDetails.exteriorPhotos[0]" alt="">
                     </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <svg class="h-[17px] w-[17px] md:h-[25px] md:w-[25px]" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 17"
+                    <div class=" col-span-4">
+                        <div class="flex items-start gap-2">
+                            <svg v-if="item.bidExceeded" class="h-[17px] w-[17px] md:h-[25px] md:w-[25px]"
+                                xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 17"
                                 fill="none">
                                 <path
                                     d="M8.00016 15.1668C4.31816 15.1668 1.3335 12.1822 1.3335 8.50016C1.3335 4.81816 4.31816 1.8335 8.00016 1.8335C11.6822 1.8335 14.6668 4.81816 14.6668 8.50016C14.6668 12.1822 11.6822 15.1668 8.00016 15.1668ZM7.3335 10.5002V11.8335H8.66683V10.5002H7.3335ZM7.3335 5.16683V9.16683H8.66683V5.16683H7.3335Z"
                                     fill="#FF333E" />
                             </svg>
-                            <p class="text-error text-sm md:text-lg">Outbid Alert!</p>
+                            <svg class="md:w-[25px] w-4 h-4 md:h-[25px]" v-if="item.bidsFinished"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 17" fill="none">
+                                <path
+                                    d="M8.00016 15.1668C4.31816 15.1668 1.3335 12.1822 1.3335 8.50016C1.3335 4.81816 4.31816 1.8335 8.00016 1.8335C11.6822 1.8335 14.6668 4.81816 14.6668 8.50016C14.6668 12.1822 11.6822 15.1668 8.00016 15.1668ZM7.3355 11.1668L12.0488 6.45283L11.1062 5.51016L7.3355 9.2815L5.4495 7.3955L4.50683 8.33816L7.3355 11.1668Z"
+                                    fill="#05A54B" />
+                            </svg>
+                            <p v-if="item.bidExceeded" class="text-error text-xs md:text-xl">Outbid Alert!</p>
+                            <p v-if="item.bidsFinished" class="text-[#05A54B] text-xs md:text-lg">Congratulations,
+                                You've
+                                Won!</p>
                         </div>
-                        <p class=" text-xs md:text-sm">Your bid for the
+                        <p v-if="item.bidExceeded" class=" text-xs md:text-lg">Your bid for the
                             <span class="font-bold">
-                                {{ item?.vehicleDetails?.year }} {{ item?.vehicleDetails?.make }}{{
-            item?.vehicleDetails?.model }}
+                                {{ item.vehicleDetails?.year }} {{ item.vehicleDetails?.make
+                                }}{{ item.vehicleDetails?.model
+                                }}
                             </span>
-                            has
-                            been outbid, keep
-                            bidding to win!
+                            has been outbid, keep bidding to win!
+                        </p>
+                        <p v-if="item.bidsFinished" class=" text-xs md:text-lg">Congratulations! You've won the
+                            <span class="font-bold">
+                                {{ item.vehicleDetails?.year }} {{ item.vehicleDetails?.make }}
+                                {{ item.vehicleDetails?.model
+                                }}
+                            </span>
                         </p>
 
                     </div>
                 </RouterLink>
             </div>
-            <p class="md:p-4 p-2 animate-fade-down animate-once text-xs md:text-base animate-duration-2000 font-medium text-center">
+            <p
+                class="md:p-4 p-2 animate-fade-down animate-once text-xs md:text-base animate-duration-2000 font-medium text-center">
                 See All Outbid
                 {{ notiAutions?.length }}
             </p>
@@ -491,7 +522,7 @@ export default {
         IconSearch
     },
     setup() {
-        let open = ref(false)
+        const open = ref(false)
         let openAccount = ref(false)
         const store = useAuthStore()
         const route = useRoute();
@@ -508,6 +539,7 @@ export default {
         const data = ref({ soundurl: 'https://soundbible.com/mp3/Air%20Plane%20Ding-SoundBible.com-496729130.mp3' })
         const idInterval = ref(null)
         watch(notiAutions, async (newQuestion, oldQuestion) => {
+            console.log('SOKET NOTIFICACIONES', newQuestion)
             var audio = new Audio(data.value.soundurl);
             if (newQuestion) {
                 if (audio.play()) {
@@ -516,13 +548,13 @@ export default {
                 }
             }
         })
-        watch(open, async (newQuestion, oldQuestion) => {
-            if (newQuestion) {
-                document.documentElement.style.overflow = "hidden";
-            } else {
-                document.documentElement.style.overflow = "initial";
-            }
-        })
+        /*  watch(open, async (newQuestion, oldQuestion) => {
+             if (newQuestion) {
+                 document.documentElement.style.overflow = "hidden";
+             } else {
+                 document.documentElement.style.overflow = "initial";
+             }
+         }) */
         function progressBar() {
             show.value = true
             resetProgressBar();
@@ -571,11 +603,11 @@ export default {
         const goAccount = async () => {
             if (store.userData.dealer) {
                 await router.push('/account-dealer')
-                router.go()
             } else {
                 await router.push('/account-seller')
-                router.go()
             }
+            isOpen.value = false
+            open.value = false
 
         }
         onMounted(() => {

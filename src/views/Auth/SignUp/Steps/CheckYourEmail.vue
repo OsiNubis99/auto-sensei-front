@@ -14,9 +14,10 @@
             </div>
         </div>
     </div>
-    <div v-else class="flex-1 flex flex-col  justify-between h-full py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+    <div v-else
+        class="flex-1 flex flex-col overflow-auto  justify-between py-12 pt-4 px-4  sm:px-6 lg:flex-none lg:px-10 xl:px-24">
         <div
-            class="flex-1 flex flex-col justify-center py-0 md:py-12 md:px-4 sm:px-6 h-full lg:flex-none lg:px-20 xl:px-24">
+            class="flex-1 flex flex-col  h-creen gap-6 md:gap-0 justify-center md:py-12  px-4 sm:px-6 md:h-full lg:flex-none lg:px-10 2xl:px-24">
             <div class="mx-auto w-full ">
                 <div v-if="route.query?.error == 'expired'">
                     <h2 class="mt-6 text-2xl md:text-4xl font-bold text-base-black text-center mb-5 ">Your email
@@ -52,20 +53,36 @@
                                 class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                         </div>
                     </div>
-                    <button class="btn bg-primary w-full h-10 mt-2 " @click="verifiedCode()">Send Code</button>
+                    <div class="animate-fade-up  animate-ease-in-out animate-delay-200">
+                        <button class="btn bg-primary w-full h-10 mt-2 " @click="verifiedCode()">Send Code</button>
+
+                        <div v-if="route.query?.error !== 'expired'"
+                            class="text-center mt-4 pb-5 flex justify-center gap-2 flex-col">
+
+                            <p class=" text-xs font-normal text-[#666]  ">
+                                Didn’t receive the email?
+                            </p>
+                            <p class=" text-xs font-normal text-[#666]  ">
+                                Please check your junk mail if you cannot find the code in your general inbox. </p>
+                            <div class="flex justify-center gap-4 items-center">
+                                <p @click="sendRecover"
+                                    class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
+                                    Resend Email
+                                </p>
+                                <p class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500"
+                                    @click="backStep">Change email
+                                </p>
+                            </div>
+
+
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
         </div>
-        <div v-if="route.query?.error !== 'expired'" class="text-center flex justify-center gap-2 md:flex-col">
-            <p class=" text-xs font-normal text-[#666]  ">
-                Didn’t receive the email? </p>
-            <p @click="sendResendEmail"
-                class="font-medium cursor-pointer text-xs  underline text-base-black hover:text-indigo-500">
-                Resend Email
-            </p>
 
-        </div>
     </div>
 </template>
 <script>
@@ -108,12 +125,33 @@ export default {
             props.back()
         }
         const sendResendEmail = async () => {
-            await router.push({ name: 'resend-email' })
-            router.go()
+            /* await router.push({ name: 'resend-email' }) */
+
         }
         const backError = () => {
             props.gobackError()
 
+        }
+        const sendRecover = async () => {
+            loading.value = true
+            try {
+                let data = {
+                    email: form.email
+                }
+                let res = await auth.resendEmail(data)
+                if (res.status == 200) {
+                    loading.value = false
+                    toast('Email succesfully resent', {
+                        type: "success",
+                    });
+                }
+
+            } catch (error) {
+                loading.value = false
+                toast(error.response.data.message || "Your request could not be sent", {
+                    type: "error",
+                });
+            }
         }
         const verifiedCode = async () => {
             console.log('form', form)
@@ -159,7 +197,8 @@ export default {
             codeEmail,
             verifiedCode,
             errorCode,
-            loading
+            loading,
+            sendRecover,
         };
     },
 };

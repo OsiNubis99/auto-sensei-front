@@ -75,7 +75,7 @@
 
                         </swiper-slide>
                         <swiper-slide v-else v-for="(img, indexx) in 6" :key="indexx">
-                            <img class="w-full h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                            <img class="w-full h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
                         </swiper-slide>
                     </swiper>
                     <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="6" :freeMode="true"
@@ -91,7 +91,7 @@
                             <img v-else :src="bucket + photo.url" alt="">
                         </swiper-slide>
                         <swiper-slide v-else v-for="(img, indexx) in 6" :key="indexx">
-                            <img class="w-full h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                            <img class="w-full h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
                         </swiper-slide>
                     </swiper>
                 </div>
@@ -304,8 +304,11 @@
                                     <div class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2  md:text-base text-xs">Vehicle Reports</p>
                                         <div class="flex w-full items-center gap-2 col-span-3 justify-between">
-                                            <img class=" w-12 h-12 md:w-auto md:h-auto" src="@/assets/svg/carfax.svg"
+                                            <a href="https://www.carfax.ca/order" target="_blank" rel="noopener noreferrer">
+                                                <img class=" w-12 h-12 md:w-auto md:h-auto" src="@/assets/svg/carfax.svg"
                                                 alt="">
+                                            </a>
+                                          
                                             <p class="text-[#7EC600] whitespace-pre text-xs md:text-lg font-medium ">
                                                 View History</p>
 
@@ -570,10 +573,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="dataDetails?.bids[0]?.participant?._id == auth.userData?._id && dataDetails.status == 'completed' || dataDetails.status == 'bids completed'"
+                            <div v-if="dataDetails?.bids[0]?.participant?._id == auth.userData?._id && (dataDetails.status == 'completed' || dataDetails.status == 'bids completed')"
                                 class="flex flex-col gap-2 mt-4">
                                 <button :disabled="loadingButton ? true : false"
-                                    @click="confirmVehicle(dataDetails._id)"
+                                    @click="confirmVehicle(dataDetails)"
                                     class="btn w-full bg-primary flex gap-2 items-center text-base-black">
                                     <div v-if="loadingButton" class="w-8 h-8">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#0B1107"
@@ -590,6 +593,75 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div v-if="openPdf"
+            class="fixed inset-0 flex items-end md:items-center z-50 justify-center bg-base-black  bg-opacity-50">
+            <div class="max-w-lg overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
+                <div class="p-2 md:p-4  rounded-t-lg  bg-blue-dark flex items-center justify-between">
+                    <p class=" text-sm md:text-xl text-white">Contract Auction</p>
+                    <svg @click="closetModalPdf()" xmlns="http://www.w3.org/2000/svg"
+                        class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <template v-if="loadingPdf">
+                    <div class="w-full h-[30vh]">
+                        <div class=" w-full h-full flex justify-center items-center">
+                            <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
+                                <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+                                    <div class="animate-bounce">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
+                                            stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </template>
+                <template v-else>
+                    <div v-if="steps.step1" class="w-full p-5 flex flex-col justify-center items-center">
+                        <div class="flex justify-center items-center flex-col gap-3">
+                            <img src="../../../assets/img/png/icon-signature.png" alt="">
+                            <p class=" text-center text-lg p-5 font-medium ">Thank you for completing the process! Enjoy
+                                your new vehicle and continue bidding with us!</p>
+                        </div>
+
+                        <div class="flex gap-3 items-center w-full mt-4 justify-center">
+                            <button
+                                class="bg-white border-error text-error hover:bg-error transition-all ease-out duration-200 hover:text-white py-2 shadow-lg rounded-lg w-full"
+                                @click="closetModalPdf">No</button>
+                            <button class="bg-primary py-2 shadow-lg rounded-lg w-full"
+                                @click="nextContract">Yes</button>
+                        </div>
+
+                    </div>
+                    <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 70vh;"></div>
+                    <div v-if="steps.step3" class="p-4 flex justify-center items-center flex-col gap-3">
+                        <p class=" font-semibold capitalize md:text-xl">Final Bid Approved!</p>
+                        <p class="capitalize text-xs md:text-base ">Download the Actual Sheet Below and Hand It to the
+                            Buyer
+                            During the Vehicle
+                            Drop-Off
+                            Process.</p>
+                        <div class="w-full">
+                            <iframe class="w-full h-[60vh]" :src="showPdf" frameborder="0"></iframe>
+                        </div>
+
+                        <button @click="pdfDonwload" class="btn w-full bg-primary rounded-md">
+                            Download PDF
+                        </button>
+
+                    </div>
+                </template>
+
             </div>
         </div>
         <ModalBidNow v-if="statusModal.isActive" :form="formData" :index="getDataAution" />
@@ -634,9 +706,19 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const storeIdAution = useAuctionStore()
         const statusModalAuto = ModalAutoBid()
+        const dataBuffer = ref(null)
         const statusModal = ModalBids()
         const auth = useAuthStore()
+        const openPdf = ref(false)
+        const autionPdf = ref(null)
+        const showPdf = ref('')
+        const loadingPdf = ref(false)
         const idParams = ref()
+        const steps = ref({
+            step1: true,
+            step2: false,
+            step3: false
+        })
         const setThumbsSwiper = (swiper) => {
             thumbsSwiper.value = swiper;
         };
@@ -712,9 +794,11 @@ export default {
             }
 
         }
-        const confirmVehicle = async (id) => {
-            loadingButton.value = true
-            try {
+        const confirmVehicle = async (aution) => {
+            console.log('aution', aution)
+            autionPdf.value = aution
+            openPdf.value = true
+            /* try {
                 await storeIdAution.vehicleReceived({ uuid: id })
             } catch (error) {
                 toast(error.response.data.message, {
@@ -723,7 +807,80 @@ export default {
             } finally {
                 loadingButton.value = false
                 getDataAution(route.params.id)
+            } */
+        }
+        const nextContract = async () => {
+            steps.value.step1 = false
+            steps.value.step2 = true
+            if (steps.value.step2) {
+                loadingPdf.value = true
+                try {
+                    let res = await storeIdAution.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
+                    console.log('res', res)
+                    if (res) {
+                        showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                        loadingPdf.value = false
+                        steps.value.step1 = false
+                        steps.value.step2 = false
+                        steps.value.step3 = true
+
+                    }
+                } catch (error) {
+                    loadingPdf.value = false
+                    toast(error.response.data.message, {
+                        type: "error",
+                    });
+                } finally {
+                    loadingPdf.value = false
+                    getDataAution(route.params.id)
+                }
+
+                /* const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
+                PSPDFKit.load({
+                    baseUrl,
+                    container: "#pspdfkit",
+                    document: 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing,
+                }).then(async function (instance) {
+                    loadingPdf.value = false
+                    const widget2 = new PSPDFKit.Annotations.WidgetAnnotation({
+                        id: PSPDFKit.generateInstantId(),
+                        pageIndex: 0,
+                        isEditable: true,
+                        locked: true,
+                        lockedContents: true,
+                        isReadOnly: true,
+                        boundingBox: new PSPDFKit.Geometry.Rect({
+                            left: 125,
+                            top: 765,
+                            width: 100,
+                            height: 20
+                        }),
+                        formFieldName: "my signature form field"
+                    })
+                    const formField = new PSPDFKit.FormFields.SignatureFormField({
+                        name: "my signature form field",
+                        annotationIds: new PSPDFKit.Immutable.List([widget2.id])
+                    });
+                    await instance.create([widget2, formField]);
+                    instance.addEventListener("annotations.create", async (e) => {
+                        const buffer = await instance.exportPDF({ flatten: true });
+                        dataBuffer.value = buffer
+                        sutmibPDF(buffer)
+                    });
+                }) */
             }
+
+        }
+        const closetModalPdf = () => {
+            steps.value.step1 = true
+            steps.value.step2 = false
+            steps.value.step3 = false
+            dataBuffer.value = null
+            autionPdf.value = null
+            showPdf.value = null
+            loadingPdf.value = false
+            openPdf.value = false
+            getDataAution(route.params.id)
         }
         function intlFormat(num) {
             return new Intl.NumberFormat().format(Math.round(num * 10) / 10);
@@ -761,7 +918,14 @@ export default {
             statusModalAuto,
             statusModal,
             formData,
-            getDataAution
+            getDataAution,
+            openPdf,
+            steps,
+            autionPdf,
+            loadingPdf,
+            showPdf,
+            nextContract,
+            closetModalPdf
         };
     },
 };

@@ -303,15 +303,15 @@ export default {
         switch (authStore.userData.type) {
           case 0:
             await router.push({ path: '/inicio' })
-            router.go()
+             
             break;
           case 1:
             await router.push({ path: '/all' })
-            router.go()
+             
             break;
           case 2:
             await router.push({ path: '/upcoming' })
-            router.go()
+             
             break;
 
           default:
@@ -319,7 +319,7 @@ export default {
         }
       } else {
         await router.push({ path: '/login/sellers' })
-        router.go()
+         
       }
     }
     const play = () => {

@@ -11,7 +11,6 @@ const beforeEnterGuard = (to, from, next) => {
 };
 const beforeEnterTokenEmail = async (to, from, next) => {
   const store = useAuthStore();
-  const router = useRouter()
   try {
     let res = await store.authProfile(to.query)
     if (res?.status == 200) {
@@ -339,8 +338,13 @@ const routes = [
 ];
 
 const router = createRouter({
+  mode: 'history',
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  },
 });
 
 
@@ -349,22 +353,22 @@ router.beforeEach((to, from, next) => {
   const authStore = localStorage.getItem("token");
   let token = null;
   let rol = null
-  if (authStore) {
-
-    let store = useAuthStore()
-    store.authProfile().then((res) => {
-      if (res.data.type == 1 || res.data.type == 2) {
-        store.socketChat.on("connect", () => {
-          console.log('socketChat Connect')
-        });
-        store.socketNotification.on("connect", () => {
-          console.log('socketNotifications Connect')
-        });
-      }
-    }).catch((error) => { console.log('error', error) });
-    token = authStore;
-    rol = localStorage.getItem('rol')
-  }
+  /*  if (authStore) {
+     let store = useAuthStore()
+     store.authProfile().then((res) => {
+       if (res.data.type == 1 || res.data.type == 2) {
+         store.socketChat.on("connect", () => {
+           console.log('socketChat Connect')
+         });
+         store.socketNotification.on("connect", () => {
+           console.log('socketNotifications Connect')
+         });
+       }
+     }).catch((error) => { console.log('error', error) });
+     token = authStore;
+     rol = localStorage.getItem('rol')
+   } */
+  rol = localStorage.getItem('rol')
   if (to.meta.requiresAuth) {
     if (!authStore) {
       next({ name: 'home' })

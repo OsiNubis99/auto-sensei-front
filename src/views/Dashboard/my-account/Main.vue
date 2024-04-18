@@ -89,72 +89,80 @@
 
                                 </div>
                                 <button v-if="form.preview && form.img" @click="updateiMG()"
-                                    class="btn  animate-fade-up  animate-ease-in-out animate-delay-600  bg-blue-dark text-primary ">Update
-                                    Photo</button>
+                                    class="btn  animate-fade-up  animate-ease-in-out animate-delay-600  bg-blue-dark text-primary ">
+                                    Update Photo
+                                </button>
 
                                 <div v-if="storeUser.userData?.type == 1" class="flex gap-1 items-center  ">
-                                    <p class=" text-md md:text-2xl font-semibold capitalize ">{{
-            storeUser.userData?.seller?.firstName
-        }}
+                                    <p class=" text-md md:text-2xl font-semibold capitalize ">
+                                        {{ storeUser.userData?.seller?.firstName }}
                                     </p>
-                                    <p class=" text-md md:text-2xl font-semibold capitalize ">{{
-                storeUser.userData?.seller?.lastName }}
+                                    <p class=" text-md md:text-2xl font-semibold capitalize ">
+                                        {{ storeUser.userData?.seller?.lastName }}
                                     </p>
                                 </div>
                                 <div v-if="storeUser.userData?.type == 2" class="flex gap-1 items-center  ">
-                                    <p class=" text-md md:text-2xl font-semibold capitalize ">{{ storeUser.userData?.dealer?.name }}
+                                    <p class=" text-md md:text-2xl font-semibold capitalize ">
+                                        {{ storeUser.userData?.dealer?.name }}
                                     </p>
                                 </div>
                             </div>
 
                             <template v-if="storeUser.userData?.type == 1">
                                 <div class="flex md:flex-col">
-                                    <div class="flex w-full flex-col md:flex-row md:justify-between items-center md:py-2">
+                                    <div
+                                        class="flex w-full flex-col md:flex-row md:justify-between items-center md:py-2">
                                         <div class="flex w-full flex-col md:flex-row justify-between items-center">
                                             <div class="flex gap-2">
-                                                <svg class="hidden md:block" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    viewBox="0 0 20 20" fill="none">
+                                                <svg class="hidden md:block" xmlns="http://www.w3.org/2000/svg"
+                                                    width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                     <path
                                                         d="M15.8327 16.6663H4.16602V17.4997C4.16602 17.7207 4.07822 17.9326 3.92194 18.0889C3.76566 18.2452 3.5537 18.333 3.33268 18.333H2.49935C2.27834 18.333 2.06637 18.2452 1.91009 18.0889C1.75381 17.9326 1.66602 17.7207 1.66602 17.4997V9.16634L3.73268 4.34301C3.86128 4.04301 4.07515 3.78737 4.34773 3.60782C4.62031 3.42828 4.93961 3.33272 5.26602 3.33301H14.7327C15.0588 3.33304 15.3777 3.42876 15.65 3.60828C15.9223 3.78781 16.1359 4.04327 16.2643 4.34301L18.3327 9.16634V17.4997C18.3327 17.7207 18.2449 17.9326 18.0886 18.0889C17.9323 18.2452 17.7204 18.333 17.4993 18.333H16.666C16.445 18.333 16.233 18.2452 16.0768 18.0889C15.9205 17.9326 15.8327 17.7207 15.8327 17.4997V16.6663ZM16.666 10.833H3.33268V14.9997H16.666V10.833ZM3.47935 9.16634H16.5193L14.7335 4.99967H5.26602L3.48018 9.16634H3.47935ZM5.41602 14.1663C5.0845 14.1663 4.76655 14.0346 4.53213 13.8002C4.29771 13.5658 4.16602 13.2479 4.16602 12.9163C4.16602 12.5848 4.29771 12.2669 4.53213 12.0325C4.76655 11.798 5.0845 11.6663 5.41602 11.6663C5.74754 11.6663 6.06548 11.798 6.2999 12.0325C6.53432 12.2669 6.66602 12.5848 6.66602 12.9163C6.66602 13.2479 6.53432 13.5658 6.2999 13.8002C6.06548 14.0346 5.74754 14.1663 5.41602 14.1663ZM14.5827 14.1663C14.2512 14.1663 13.9332 14.0346 13.6988 13.8002C13.4644 13.5658 13.3327 13.2479 13.3327 12.9163C13.3327 12.5848 13.4644 12.2669 13.6988 12.0325C13.9332 11.798 14.2512 11.6663 14.5827 11.6663C14.9142 11.6663 15.2321 11.798 15.4666 12.0325C15.701 12.2669 15.8327 12.5848 15.8327 12.9163C15.8327 13.2479 15.701 13.5658 15.4666 13.8002C15.2321 14.0346 14.9142 14.1663 14.5827 14.1663Z"
                                                         fill="#09121F" />
                                                 </svg>
-                                                <svg  class="block md:hidden" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                    viewBox="0 0 20 20" fill="none">
+                                                <svg class="block md:hidden" xmlns="http://www.w3.org/2000/svg"
+                                                    width="12" height="12" viewBox="0 0 20 20" fill="none">
                                                     <path
                                                         d="M15.8327 16.6663H4.16602V17.4997C4.16602 17.7207 4.07822 17.9326 3.92194 18.0889C3.76566 18.2452 3.5537 18.333 3.33268 18.333H2.49935C2.27834 18.333 2.06637 18.2452 1.91009 18.0889C1.75381 17.9326 1.66602 17.7207 1.66602 17.4997V9.16634L3.73268 4.34301C3.86128 4.04301 4.07515 3.78737 4.34773 3.60782C4.62031 3.42828 4.93961 3.33272 5.26602 3.33301H14.7327C15.0588 3.33304 15.3777 3.42876 15.65 3.60828C15.9223 3.78781 16.1359 4.04327 16.2643 4.34301L18.3327 9.16634V17.4997C18.3327 17.7207 18.2449 17.9326 18.0886 18.0889C17.9323 18.2452 17.7204 18.333 17.4993 18.333H16.666C16.445 18.333 16.233 18.2452 16.0768 18.0889C15.9205 17.9326 15.8327 17.7207 15.8327 17.4997V16.6663ZM16.666 10.833H3.33268V14.9997H16.666V10.833ZM3.47935 9.16634H16.5193L14.7335 4.99967H5.26602L3.48018 9.16634H3.47935ZM5.41602 14.1663C5.0845 14.1663 4.76655 14.0346 4.53213 13.8002C4.29771 13.5658 4.16602 13.2479 4.16602 12.9163C4.16602 12.5848 4.29771 12.2669 4.53213 12.0325C4.76655 11.798 5.0845 11.6663 5.41602 11.6663C5.74754 11.6663 6.06548 11.798 6.2999 12.0325C6.53432 12.2669 6.66602 12.5848 6.66602 12.9163C6.66602 13.2479 6.53432 13.5658 6.2999 13.8002C6.06548 14.0346 5.74754 14.1663 5.41602 14.1663ZM14.5827 14.1663C14.2512 14.1663 13.9332 14.0346 13.6988 13.8002C13.4644 13.5658 13.3327 13.2479 13.3327 12.9163C13.3327 12.5848 13.4644 12.2669 13.6988 12.0325C13.9332 11.798 14.2512 11.6663 14.5827 11.6663C14.9142 11.6663 15.2321 11.798 15.4666 12.0325C15.701 12.2669 15.8327 12.5848 15.8327 12.9163C15.8327 13.2479 15.701 13.5658 15.4666 13.8002C15.2321 14.0346 14.9142 14.1663 14.5827 14.1663Z"
                                                         fill="#09121F" />
                                                 </svg>
                                                 <p class=" text-xs  md:text-base">Vehicle Sell</p>
                                             </div>
-                                            <p class="text-[#858585] text-xs  md:text-base">12 Vehicles</p>
+                                            <p v-if="statusAction.stats?.total_auciton"
+                                                class="text-[#858585] text-xs  md:text-base">
+                                                {{ statusAction.stats?.total_auciton }} Vehicles</p>
+                                            <p v-else class="text-[#858585] text-xs  md:text-base">0 Vehicles</p>
                                         </div>
                                     </div>
                                     <hr class="border-[#cfcfcf] border-1 hidden md:block ">
-                                    <div class="flex w-full flex-col md:flex-row md:justify-between items-center md:py-2">
+                                    <div
+                                        class="flex w-full flex-col md:flex-row md:justify-between items-center md:py-2">
                                         <div class="flex gap-2">
-                                            <svg class="hidden md:block" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="0 0 20 20" fill="none">
+                                            <svg class="hidden md:block" xmlns="http://www.w3.org/2000/svg" width="20"
+                                                height="20" viewBox="0 0 20 20" fill="none">
                                                 <path
                                                     d="M14.5833 17.5C13.8098 17.5 13.0679 17.1927 12.5209 16.6457C11.974 16.0987 11.6667 15.3569 11.6667 14.5833C11.6667 13.8098 11.974 13.0679 12.5209 12.5209C13.0679 11.974 13.8098 11.6667 14.5833 11.6667C15.3569 11.6667 16.0987 11.974 16.6457 12.5209C17.1927 13.0679 17.5 13.8098 17.5 14.5833C17.5 15.3569 17.1927 16.0987 16.6457 16.6457C16.0987 17.1927 15.3569 17.5 14.5833 17.5ZM14.5833 15.8333C14.9149 15.8333 15.2328 15.7016 15.4672 15.4672C15.7016 15.2328 15.8333 14.9149 15.8333 14.5833C15.8333 14.2518 15.7016 13.9339 15.4672 13.6995C15.2328 13.465 14.9149 13.3333 14.5833 13.3333C14.2518 13.3333 13.9339 13.465 13.6995 13.6995C13.465 13.9339 13.3333 14.2518 13.3333 14.5833C13.3333 14.9149 13.465 15.2328 13.6995 15.4672C13.9339 15.7016 14.2518 15.8333 14.5833 15.8333ZM5.41667 8.33333C5.03364 8.33333 4.65437 8.25789 4.30051 8.11132C3.94664 7.96474 3.62511 7.7499 3.35427 7.47906C3.08343 7.20822 2.86859 6.88669 2.72202 6.53283C2.57544 6.17896 2.5 5.79969 2.5 5.41667C2.5 5.03364 2.57544 4.65437 2.72202 4.30051C2.86859 3.94664 3.08343 3.62511 3.35427 3.35427C3.62511 3.08343 3.94664 2.86859 4.30051 2.72202C4.65437 2.57544 5.03364 2.5 5.41667 2.5C6.19021 2.5 6.93208 2.80729 7.47906 3.35427C8.02604 3.90125 8.33333 4.64312 8.33333 5.41667C8.33333 6.19021 8.02604 6.93208 7.47906 7.47906C6.93208 8.02604 6.19021 8.33333 5.41667 8.33333ZM5.41667 6.66667C5.74819 6.66667 6.06613 6.53497 6.30055 6.30055C6.53497 6.06613 6.66667 5.74819 6.66667 5.41667C6.66667 5.08515 6.53497 4.7672 6.30055 4.53278C6.06613 4.29836 5.74819 4.16667 5.41667 4.16667C5.08515 4.16667 4.7672 4.29836 4.53278 4.53278C4.29836 4.7672 4.16667 5.08515 4.16667 5.41667C4.16667 5.74819 4.29836 6.06613 4.53278 6.30055C4.7672 6.53497 5.08515 6.66667 5.41667 6.66667ZM15.8925 2.92917L17.0708 4.1075L4.10833 17.0708L2.93 15.8925L15.8917 2.92917H15.8925Z"
                                                     fill="#09121F" />
                                             </svg>
-                                            <svg class="block md:hidden" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                viewBox="0 0 20 20" fill="none">
+                                            <svg class="block md:hidden" xmlns="http://www.w3.org/2000/svg" width="12"
+                                                height="12" viewBox="0 0 20 20" fill="none">
                                                 <path
                                                     d="M14.5833 17.5C13.8098 17.5 13.0679 17.1927 12.5209 16.6457C11.974 16.0987 11.6667 15.3569 11.6667 14.5833C11.6667 13.8098 11.974 13.0679 12.5209 12.5209C13.0679 11.974 13.8098 11.6667 14.5833 11.6667C15.3569 11.6667 16.0987 11.974 16.6457 12.5209C17.1927 13.0679 17.5 13.8098 17.5 14.5833C17.5 15.3569 17.1927 16.0987 16.6457 16.6457C16.0987 17.1927 15.3569 17.5 14.5833 17.5ZM14.5833 15.8333C14.9149 15.8333 15.2328 15.7016 15.4672 15.4672C15.7016 15.2328 15.8333 14.9149 15.8333 14.5833C15.8333 14.2518 15.7016 13.9339 15.4672 13.6995C15.2328 13.465 14.9149 13.3333 14.5833 13.3333C14.2518 13.3333 13.9339 13.465 13.6995 13.6995C13.465 13.9339 13.3333 14.2518 13.3333 14.5833C13.3333 14.9149 13.465 15.2328 13.6995 15.4672C13.9339 15.7016 14.2518 15.8333 14.5833 15.8333ZM5.41667 8.33333C5.03364 8.33333 4.65437 8.25789 4.30051 8.11132C3.94664 7.96474 3.62511 7.7499 3.35427 7.47906C3.08343 7.20822 2.86859 6.88669 2.72202 6.53283C2.57544 6.17896 2.5 5.79969 2.5 5.41667C2.5 5.03364 2.57544 4.65437 2.72202 4.30051C2.86859 3.94664 3.08343 3.62511 3.35427 3.35427C3.62511 3.08343 3.94664 2.86859 4.30051 2.72202C4.65437 2.57544 5.03364 2.5 5.41667 2.5C6.19021 2.5 6.93208 2.80729 7.47906 3.35427C8.02604 3.90125 8.33333 4.64312 8.33333 5.41667C8.33333 6.19021 8.02604 6.93208 7.47906 7.47906C6.93208 8.02604 6.19021 8.33333 5.41667 8.33333ZM5.41667 6.66667C5.74819 6.66667 6.06613 6.53497 6.30055 6.30055C6.53497 6.06613 6.66667 5.74819 6.66667 5.41667C6.66667 5.08515 6.53497 4.7672 6.30055 4.53278C6.06613 4.29836 5.74819 4.16667 5.41667 4.16667C5.08515 4.16667 4.7672 4.29836 4.53278 4.53278C4.29836 4.7672 4.16667 5.08515 4.16667 5.41667C4.16667 5.74819 4.29836 6.06613 4.53278 6.30055C4.7672 6.53497 5.08515 6.66667 5.41667 6.66667ZM15.8925 2.92917L17.0708 4.1075L4.10833 17.0708L2.93 15.8925L15.8917 2.92917H15.8925Z"
                                                     fill="#09121F" />
                                             </svg>
                                             <p class=" text-xs  md:text-base">Success Rate</p>
                                         </div>
-                                        <p class="text-[#858585] text-xs  md:text-base">94%</p>
+                                        <p v-if="statusAction.stats?.success_rate"
+                                            class="text-[#858585] text-xs  md:text-base">
+                                            {{ statusAction.stats?.success_rate }}%</p>
+                                        <p v-else class="text-[#858585] text-xs  md:text-base">0%</p>
                                     </div>
                                 </div>
 
                             </template>
 
                             <template v-if="storeUser.userData?.type == 2">
-                                <div v-if="statusAction.stats?.total_auciton"
-                                    class=" pt-5 hidden md:flex  cursor-pointer justify-between py-2">
+                                <div class=" pt-5 hidden md:flex  cursor-pointer justify-between py-2">
                                     <div class="flex w-full justify-between items-center">
                                         <div class="flex gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -165,12 +173,13 @@
                                             </svg>
                                             <p class="font-medium">Total Auction</p>
                                         </div>
-                                        <p class="text-[#858585] ">{{ statusAction.stats?.total_auciton }} Vehicles</p>
+                                        <p v-if="statusAction.stats?.total_auciton" class="text-[#858585]  ">{{
+            statusAction.stats?.total_auciton }} Vehicles</p>
+                                        <p v-else class="text-[#858585]  ">0 Vehicles</p>
                                     </div>
                                 </div>
                                 <hr class="border-[#cfcfcf] border-1 hidden md:block ">
-                                <div v-if="statusAction.stats?.total_won"
-                                    class=" hidden md:flex   w-full justify-between items-center py-2">
+                                <div class=" hidden md:flex   w-full justify-between items-center py-2">
                                     <div class="flex gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 20 20" fill="none">
@@ -180,11 +189,12 @@
                                         </svg>
                                         <p class="font-medium">Total Won</p>
                                     </div>
-                                    <p class="text-[#858585] ">{{ statusAction.stats?.total_won }} Vehicles</p>
+                                    <p v-if="statusAction.stats?.total_won" class="text-[#858585] ">{{
+            statusAction.stats?.total_won }} Vehicles</p>
+                                    <p v-else class="text-[#858585] ">0 Vehicles</p>
                                 </div>
                                 <hr class="border-[#cfcfcf] border-1 hidden md:block ">
-                                <div v-if="statusAction.stats?.success_rate"
-                                    class=" hidden md:flex   w-full justify-between items-center py-2">
+                                <div class=" hidden md:flex   w-full justify-between items-center py-2">
                                     <div class="flex gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 20 20" fill="none">
@@ -194,11 +204,16 @@
                                         </svg>
                                         <p class="font-medium">Success Rate</p>
                                     </div>
-                                    <p class="text-[#858585] ">{{ Math.round(statusAction.stats?.success_rate) }} %</p>
+                                    <p v-if="statusAction.stats?.success_rate" class="text-[#858585]">
+                                        <span v-if="statusAction.stats?.success_rate === 'NaN'"> 0%</span>
+                                        <span v-else> {{ Math.round(statusAction.stats?.success_rate) }}%</span>
+                                    </p>
+                                    <p v-else class="text-[#858585]">
+                                        <span>0%</span>
+                                    </p>
                                 </div>
                                 <hr class="border-[#cfcfcf] border-1 hidden md:block ">
-                                <div v-if="statusAction.stats?.total_purchase"
-                                    class=" hidden md:flex   w-full justify-between items-center py-2">
+                                <div class=" hidden md:flex   w-full justify-between items-center py-2">
                                     <div class="flex gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 20 20" fill="none">
@@ -208,12 +223,13 @@
                                         </svg>
                                         <p class="font-medium">Total Purchase</p>
                                     </div>
-                                    <p class="text-[#858585] ">${{ statusAction.stats?.total_purchase }}</p>
+                                    <p v-if="statusAction.stats?.total_purchase" class="text-[#858585] ">${{
+            statusAction.stats?.total_purchase }}</p>
+                                    <p v-else class="text-[#858585] ">$0</p>
                                 </div>
                                 <div class=" w-full md:hidden flex flex-col justify-between">
                                     <div class="border-[#cfcfcf] border-b flex justify-between">
-                                        <div v-if="statusAction.stats?.total_auciton"
-                                            class=" pt-5 w-full   cursor-pointer justify-between py-2">
+                                        <div class=" pt-5 w-full   cursor-pointer justify-between py-2">
                                             <div class="flex w-full flex-col justify-between items-center">
                                                 <div class="flex gap-2 items-center justify-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
@@ -224,14 +240,15 @@
                                                     </svg>
                                                     <p class="font-medium text-xs">Total Auction</p>
                                                 </div>
-                                                <p class="text-[#858585] text-center  text-xs">{{
-            statusAction.stats?.total_auciton
-        }}
+                                                <p v-if="statusAction.stats?.total_auciton"
+                                                    class="text-[#858585] text-center  text-xs">
+                                                    {{ statusAction.stats?.total_auciton }}
+                                                    Vehicles</p>
+                                                <p v-else class="text-[#858585] text-center  text-xs"> 0
                                                     Vehicles</p>
                                             </div>
                                         </div>
-                                        <div v-if="statusAction.stats?.total_won"
-                                            class=" pt-5 w-full   cursor-pointer justify-between py-2">
+                                        <div class=" pt-5 w-full   cursor-pointer justify-between py-2">
                                             <div class="flex gap-2 items-center justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                                     viewBox="0 0 20 20" fill="none">
@@ -241,15 +258,18 @@
                                                 </svg>
                                                 <p class="font-medium text-xs">Total Won</p>
                                             </div>
-                                            <p class="text-[#858585] text-center  text-xs">{{
-            statusAction.stats?.total_won }}
-                                                Vehicles</p>
+                                            <p v-if="statusAction.stats?.total_won"
+                                                class="text-[#858585] text-center  text-xs">
+                                                {{ statusAction.stats?.total_won }} Vehicles
+                                            </p>
+                                            <p v-else class="text-[#858585] text-center  text-xs">
+                                                0 Vehicles
+                                            </p>
                                         </div>
                                     </div>
 
                                     <div class=" flex justify-between">
-                                        <div v-if="statusAction.stats?.success_rate"
-                                            class="  pt-5 w-full   cursor-pointer justify-between py-2">
+                                        <div class="  pt-5 w-full   cursor-pointer justify-between py-2">
                                             <div class="flex gap-2 items-center justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                                     viewBox="0 0 20 20" fill="none">
@@ -259,13 +279,17 @@
                                                 </svg>
                                                 <p class="font-medium text-xs">Success Rate</p>
                                             </div>
-                                            <p class="text-[#858585] text-center  text-xs">{{
-            Math.round(statusAction.stats?.success_rate)
-        }} %</p>
+                                            <p v-if="statusAction.stats?.success_rate"
+                                                class="text-[#858585] text-center  text-xs">
+                                                <span v-if="statusAction.stats?.success_rate == 'NaN'">0%</span>
+                                                <span v-else>{{ Math.round(statusAction.stats?.success_rate) }}%</span>
+                                            </p>
+                                            <p v-else class="text-[#858585] text-center  text-xs">
+                                                0%
+                                            </p>
                                         </div>
                                         <hr class="border-[#cfcfcf] border-1 hidden md:block ">
-                                        <div v-if="statusAction.stats?.total_purchase"
-                                            class="  pt-5 w-full   cursor-pointer justify-between py-2">
+                                        <div class="  pt-5 w-full   cursor-pointer justify-between py-2">
                                             <div class="flex gap-2 items-center justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                                     viewBox="0 0 20 20" fill="none">
@@ -275,8 +299,13 @@
                                                 </svg>
                                                 <p class="font-medium text-xs">Total Purchase</p>
                                             </div>
-                                            <p class="text-[#858585] text-center  text-xs">${{
-            statusAction.stats?.total_purchase }}</p>
+                                            <p v-if="statusAction.stats?.total_purchase"
+                                                class="text-[#858585] text-center  text-xs">
+                                                ${{ statusAction.stats?.total_purchase }}
+                                            </p>
+                                            <p v-else class="text-[#858585] text-center  text-xs">
+                                                $0
+                                            </p>
                                         </div>
                                     </div>
 
@@ -295,13 +324,13 @@
                                                 d="M12.1665 17.1673V18.8339H2.1665V17.1673H12.1665ZM12.6548 1.07227L19.1365 7.55393L17.9582 8.73393L17.0748 8.43893L15.0107 10.5006L19.7248 15.2148L18.5465 16.3931L13.8332 11.6789L11.8298 13.6823L12.0657 14.6256L10.8865 15.8039L4.40484 9.32227L5.584 8.14393L6.52567 8.37893L11.7707 3.13477L11.4765 2.25143L12.6548 1.07227Z"
                                                 fill="white" />
                                         </svg>
-                                        <p class="text-white text-xs md:text-base">Top 3 Highest Bid</p>
+                                        <p class="text-white text-xs md:text-base">Top {{statusAction.stats?.top?.length }} Highest Bid</p>
                                     </div>
                                     <div class="flex justify-between gap-3  p-4 items-center"
                                         v-for="(item, index) in  statusAction.stats?.top" :key="index">
                                         <div class="w-10 h-10">
-                                            <img class="w-full h-full rounded-full object-cover"
-                                                :src="bucket + item.seller?.owner?.picture" alt="">
+                                            <img class="w-full h-full rounded-full shadow-lg object-cover"
+                                                :src="bucket + item?.vehicleDetails?.exteriorPhotos[0]" alt="">
                                         </div>
                                         <div class="flex flex-col ">
                                             <p class="font-medium text-xs  md:text-md">{{ item?.vehicleDetails?.make }}
@@ -309,7 +338,7 @@
                                             <p class="text-[#4D4D4D] text-xs  md:text-md">Beat 20 bidders</p>
                                         </div>
                                         <div>
-                                            <p class="font-medium text-xs md:text-2xl">$35,800</p>
+                                            <p class="font-medium text-xs md:text-2xl">${{item?.bids[0]?.amount}}</p>
                                         </div>
 
                                     </div>
@@ -380,8 +409,8 @@ export default {
             const token = localStorage.getItem('token')
             storeUser.authProfile({ token: token }).then(async (res) => {
                 if (res.data) {
-                    if (res.data.type == 2) await statusAction.getStats()
-
+                    await statusAction.getStats()
+                    console.log('STATSASSSSSSSSSSSSSSSSSSSS', statusAction.stats)
                     dataUser.value = res.data
                     loading.value = false
                     counter.value += 1
@@ -475,17 +504,16 @@ export default {
                 }
             }
         }
-        const getCountry = async () => {
-              try {
-                  const res = await payment.getCountry()
-                  console.log('resresresresresres', res)
-              } catch (error) {
-  
-              }
-        }
+        /*   const getCountry = async () => {
+                try {
+                    const res = await payment.getCountry()
+                    console.log('resresresresresres', res)
+                } catch (error) {
+    
+                }
+          } */
 
         onMounted(() => {
-            getCountry()
             getProfile()
         })
         return {

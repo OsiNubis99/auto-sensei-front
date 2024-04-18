@@ -20,11 +20,11 @@
         <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
         <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="hidden md:w-[29%] md:block">
-                    <CreateAution class="hidden md:block" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="hidden md:w-[29%] lg:block">
+                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
-                <CardAutionMobile class="block md:hidden" :data="storeUser.userData" :autions="storeAutions" />
-                <div class="w-full md:w-[70%]">
+                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <div class="w-full lg:w-[70%]">
                     <div class="flex items-center justify-between px-2 pt-4 md:p-0  mb-4">
                         <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
                         <div class="flex items-center gap-2 ">
@@ -99,7 +99,7 @@
                                     </swiper-slide>
                                     <div v-if="!auction?.photos" class=" md:absolute w-full h-[250px] top-0 ">
                                         <img class="w-full rounded-s-lg h-full object-cover"
-                                            src="../../../assets/img/jpg/image.jpg" alt="">
+                                            src="@/assets/img/jpg/image.jpg" alt="">
                                     </div>
                                 </swiper>
                                 <div class="w-full flex flex-col md:flex-row justify-between gap-3 "
@@ -355,6 +355,7 @@ export default {
         const statusModalView = ModalViewDetails()
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
+            counter.value++
         }
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const index = async () => {

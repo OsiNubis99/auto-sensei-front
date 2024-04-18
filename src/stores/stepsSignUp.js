@@ -9,13 +9,21 @@ export const stepsSignUp = defineStore('stepsSignUp', () => {
         email: '',
         password: '',
         confirmPassword: '',
-        termsconditions: null
+        termsconditions: null,
+
     })
     const formAccount = ref({
         img: '',
         dealerName: '',
         registrationNumber: '',
         address: '',
+        linea1: '',
+        linea2: '',
+        zipCode: '',
+        province: null,
+        getState: null,
+        city: null,
+        getCities: null,
         phoneNumber: '',
         preview: '',
         firtName: '',

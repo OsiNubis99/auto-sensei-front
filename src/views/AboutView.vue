@@ -61,7 +61,7 @@
           contributing towards providing better healthcare and support for sick children in our community.
         </p>
       </div>
-     
+
     </div>
   </div>
   <div class="bg-blue-dark relative py-14">
@@ -115,10 +115,7 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                repellat amet doloribus consequuntur eos similique provident
-                tempora voluptates iure quia fuga dicta voluptatibus culpa
-                mollitia recusandae delectus id suscipit labore?
+
               </p>
             </div>
           </div>
@@ -136,10 +133,9 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                repellat amet doloribus consequuntur eos similique provident
-                tempora voluptates iure quia fuga dicta voluptatibus culpa
-                mollitia recusandae delectus id suscipit labore?
+                We created our platform to ensure clients have the ability to get the best value for their vehicle with
+                their busy days & schedules. No more going dealer to dealer looking to see who offers the best price,
+                getting tired of the whole process, and possibly settling for a number that may not be the best.
               </p>
             </div>
           </div>
@@ -157,10 +153,7 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                repellat amet doloribus consequuntur eos similique provident
-                tempora voluptates iure quia fuga dicta voluptatibus culpa
-                mollitia recusandae delectus id suscipit labore?
+               
               </p>
             </div>
           </div>
@@ -184,10 +177,7 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                repellat amet doloribus consequuntur eos similique provident
-                tempora voluptates iure quia fuga dicta voluptatibus culpa
-                mollitia recusandae delectus id suscipit labore?
+
               </p>
             </div>
           </div>
@@ -205,10 +195,7 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                repellat amet doloribus consequuntur eos similique provident
-                tempora voluptates iure quia fuga dicta voluptatibus culpa
-                mollitia recusandae delectus id suscipit labore?
+              
               </p>
             </div>
           </div>
@@ -226,10 +213,7 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                repellat amet doloribus consequuntur eos similique provident
-                tempora voluptates iure quia fuga dicta voluptatibus culpa
-                mollitia recusandae delectus id suscipit labore?
+                We created our platform to ensure clients have the ability to get the best value for their vehicle with their busy days & schedules. No more going dealer to dealer looking to see who offers the best price, getting tired of the whole process, and possibly settling for a number that may not be the best.
               </p>
             </div>
           </div>

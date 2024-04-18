@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col md:flex-row  sm:p-0 relative" :class="changeLayouts ? 'flex-col' : ''">
+    <div class="w-full flex   sm:p-0 relative" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
         <div>
             <template v-if="aution?.remind">
                 <div @click="remindCancel(aution)"
@@ -30,10 +30,10 @@
                 <img class="w-full rounded-s-lg h-full object-cover" :src="bucket + img.url" alt="">
             </swiper-slide>
             <div v-if="!aution?.photos" class=" absolute w-full h-full top-0 ">
-                <img class="w-full rounded-s-lg h-full object-cover" src="../../../assets/img/jpg/image.jpg" alt="">
+                <img class="w-full rounded-s-lg h-full object-cover" src="@/assets/img/jpg/image.jpg" alt="">
             </div>
         </swiper>
-        <div class="w-full flex flex-col md:flex-row justify-between gap-3 " :class="changeLayouts ? 'flex-col' : ''">
+        <div class="w-full flex  justify-between gap-3 " :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
             <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
                 class="flex p-4 md:p-5  flex-col gap-3">
                 <div class="">

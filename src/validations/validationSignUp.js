@@ -66,8 +66,17 @@ export const infoAccount = (form, rol) => {
         if (!form.registrationNumber) {
             error.registrationNumber = 'Required field'
         }
-        if (!form.address) {
-            error.address = 'Required field'
+        if (!form.linea1) {
+            error.linea1 = 'Required field'
+        }
+        if (!form.zipCode) {
+            error.zipCode = 'Required field'
+        }
+        if (!form.province) {
+            error.province = 'Required field'
+        }
+        if (!form.city) {
+            error.city = 'Required field'
         }
         if (!form.phoneNumber) {
             error.phoneNumber = 'Required field'
