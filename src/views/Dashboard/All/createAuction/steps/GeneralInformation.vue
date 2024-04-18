@@ -56,7 +56,7 @@
         <div class="flex flex-col md:grid w-full md:grid-cols-3 gap-5">
             <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">Province</label>
-                <input v-model="form.province"
+                <input v-model="form.province" placeholder="Province"
                     :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
                     class="p-2 rounded-lg border "  type="text">
                 <!--  <select v-model="form.province" :disabled="!form.getState ? true : false"
@@ -74,8 +74,8 @@
                 </div> -->
             </div>
             <div class="w-full flex flex-col gap-2 relative">
-                <label class=" text-sm md:text-base " for="">City</label>
-                <input v-model="form.city"
+                <label class=" text-sm md:text-base "  for="">City</label>
+                <input v-model="form.city" placeholder="City"
                     :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
                     class="p-2 rounded-lg border "  type="text">
                 <!--   <select v-model="form.city" @change="onChangeGetCity($event)"
