@@ -2,7 +2,7 @@
     <footer v-if="path != 'login' && path != 'signup'">
         <div :class="path === 'about' ? 'bg-white  ' : 'bg-blue-dark  '" class="flex flex-col relative">
             <img v-if="path !== 'about'" class="absolute  left-0 w-full h-full top-0"
-                src="../../assets/svg/lines/lineFooter.svg" alt="">
+                :src="bucket + 'public/svg/lines/lineFooter.svg'" alt="">
             <div class="grid relative p-5 lg:p-14 lg:pb-52  lg:grid-cols-2">
                 <div class="flex flex-col gap-7">
                       <RouterLink to="/">
@@ -112,6 +112,7 @@ export default {
     setup() {
         const route = useRoute();
         const path = ref(computed(() => route.name))
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         return {
             iconInstagram,
             iconFacebook,
@@ -119,7 +120,8 @@ export default {
             iconYoutube,
             LogoIcon,
             path,
-            LogoBlack
+            LogoBlack,
+            bucket
         };
     },
 };

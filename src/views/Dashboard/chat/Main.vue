@@ -2,7 +2,7 @@
     <div class="text-blue-800  md:grid hidden h-custom-chat overflow-hidden relative  grid-cols-9 grid-rows-7 ">
         <div v-if="!activateLayout" class="absolute w-[70%] h-full right-0 -z-0  top-0">
             <div class="flex   flex-col top-0 w-full h-full justify-center gap-4 items-center ">
-                <img src="../../../assets/svg/Layer_chat.svg" alt="">
+                <img :src="bucket + 'public/svg/Layer_chat.svg'" alt="">
                 <p class="text-xl font-bold">Welcome to your Inbox</p>
                 <p>Start or continue your conversations with seller here</p>
             </div>
@@ -89,7 +89,7 @@
                                 <img v-if="user.participant.dealer.picture"
                                     :src="bucket + user.participant.dealer.picture"
                                     class="object-cover h-12 w-full rounded-md" alt="" />
-                                <img v-else class="w-full rounded-s-lg h-full object-cover"
+                                <img v-else class="w-full rounded-s-lg h-12 object-cover"
                                     src="@/assets/img/jpg/image.jpg" alt="">
                             </div>
                             <div class="w-full">
@@ -103,7 +103,7 @@
                                 <img v-if="user.auction?.vehicleDetails.exteriorPhotos[0]"
                                     :src="bucket + user.auction?.vehicleDetails?.exteriorPhotos[0]"
                                     class="object-cover h-12 w-full rounded-md" alt="" />
-                                <img v-else class="w-full rounded-s-lg h-full object-cover"
+                                <img v-else class="w-full rounded-s-lg h-12 object-cover"
                                     src="@/assets/img/jpg/image.jpg" alt="">
                             </div>
                             <div class="w-full flex  justify-between items-end  relative">
@@ -733,7 +733,7 @@
                                 <img v-if="user.participant.dealer.picture"
                                     :src="bucket + user.participant.dealer.picture"
                                     class="object-cover h-12 w-full rounded-md" alt="" />
-                                <img v-else class="w-full rounded-s-lg h-full object-cover"
+                                <img v-else class="w-full rounded-s-lg h-12 object-cover"
                                     src="@/assets/img/jpg/image.jpg" alt="">
                             </div>
                             <div class="w-full">
@@ -747,7 +747,7 @@
                                 <img v-if="user.auction?.vehicleDetails.exteriorPhotos[0]"
                                     :src="bucket + user.auction?.vehicleDetails?.exteriorPhotos[0]"
                                     class="object-cover h-12 w-full rounded-md" alt="" />
-                                <img v-else class="w-full rounded-s-lg h-full object-cover"
+                                <img v-else class="w-full rounded-s-lg h-12 object-cover"
                                     src="@/assets/img/jpg/image.jpg" alt="">
                             </div>
                             <div class="w-full flex  justify-between items-end  relative">

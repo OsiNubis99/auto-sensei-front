@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white flex flex-col md:mb-7 gap-5 items-start shadow-steps p-5 w-full">
         <div class="flex gap-6">
-            <img src="../../../../../assets/svg/imgGenerals.svg" alt="">
+            <img :src="bucket + 'public/svg/imgGenerals.svg'" alt="">
             <div class="flex flex-col ">
                 <p class=" font-semibold    md:text-xl  ">General Information</p>
                 <p class=" text-xs md:text-base">Related to your vehicle to help get the right bids !</p>
@@ -57,8 +57,8 @@
             <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">Province</label>
                 <input v-model="form.province" placeholder="Province"
-                    :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
-                    class="p-2 rounded-lg border "  type="text">
+                    :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'" class="p-2 rounded-lg border "
+                    type="text">
                 <!--  <select v-model="form.province" :disabled="!form.getState ? true : false"
                     @change="onChangeGetProvince($event)"
                     :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
@@ -74,10 +74,10 @@
                 </div> -->
             </div>
             <div class="w-full flex flex-col gap-2 relative">
-                <label class=" text-sm md:text-base "  for="">City</label>
+                <label class=" text-sm md:text-base " for="">City</label>
                 <input v-model="form.city" placeholder="City"
-                    :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
-                    class="p-2 rounded-lg border "  type="text">
+                    :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'" class="p-2 rounded-lg border "
+                    type="text">
                 <!--   <select v-model="form.city" @change="onChangeGetCity($event)"
                     :disabled="loadingCountrys || !form.getCities ? true : false"
                     :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
@@ -279,7 +279,7 @@
     </div>
 </template>
 <script>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import CurrencyInput from "../../../../../components/Inputs/CurrencyInput.vue";
 import { usePayments } from "@/stores/payments";
 export default {
@@ -322,6 +322,7 @@ export default {
         const save = ref(props.launch)
         const countrys = usePayments()
         const invalid = ref(props.invalid)
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const getCities = ref([])
         const loading = ref(false)
         const next = () => {
@@ -342,7 +343,8 @@ export default {
             onChangeGetProvince,
             getCities,
             loading,
-            onChangeGetCity
+            onChangeGetCity,
+            bucket
         };
     },
     components: { CurrencyInput }
