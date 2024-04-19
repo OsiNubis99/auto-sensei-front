@@ -18,7 +18,7 @@
 
         <div class="flex flex-col md:flex-row gap-10 pt-20 pb-10 p-5  max-w-6xl ">
             <div class="w-full">
-                <img class="h-full w-full object-cover" src="../assets/img/png/mapa.png" alt="">
+                <img class="h-full w-full object-cover" :src="bucket + 'public/img/png/mapa.png'" alt="">
             </div>
             <div v-show="loading" class=" w-full h-auto flex justify-center items-center">
                 <div>
@@ -150,6 +150,7 @@ export default {
         const telInput = ref();
         const loading = ref(false)
         const contactStore = useContactStore()
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const redirectLogin = (redirect) => {
             route.push({ name: 'signup', params: { rol: redirect } })
         }
@@ -242,7 +243,8 @@ export default {
             form,
             invalid,
             filterinput,
-            loading
+            loading,
+            bucket
         };
     },
 };

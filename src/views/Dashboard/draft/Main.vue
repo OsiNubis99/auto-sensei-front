@@ -239,7 +239,7 @@
             <div class="flex gap-20 items-end ">
                 <div class="flex gap-8 flex-col">
                     <div class="flex w-full justify-start">
-                        <img class="object-cover" src="../../../assets/svg/vehiculoAll.svg" alt="">
+                        <img class="object-cover" :src="bucket + 'public/svg/vehiculoAll.svg'" alt="">
                     </div>
                     <div>
                         <h1 class="text-5xl font-semibold text-blue-dark ">

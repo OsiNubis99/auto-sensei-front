@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white flex flex-col md:mb-7 gap-5 items-start shadow-steps p-5 w-full">
         <div class="flex gap-6">
-            <img src="../../../../../assets/svg/uploadPhotos.svg " alt="">
+            <img :src="bucket + 'public/svg/uploadPhotos.svg'" alt="">
             <div class="flex flex-col ">
                 <p class=" font-semibold text-[13px]   md:text-xl ">Upload Photos</p>
                 <p class=" text-[10px] md:text-base">You can easily upload through your phone</p>
@@ -41,7 +41,7 @@
                     <img v-if="form?.previewDocument" class="w-full h-[160px]  md:h-[190px] object-contain "
                         :src="form?.previewDocument" alt="">
                     <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                        src="../../../../../assets/img/png/exampleDocuemnt.png" alt="">
+                        :src="bucket + 'public/img/png/exampleDocuemnt.png'" alt="">
                 </div>
                 <p v-if="!form?.previewDocument"
                     class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of original
@@ -97,7 +97,7 @@
                     <img class="w-full h-[160px]  md:h-[190px] object-contain " v-if="form?.previewDriver"
                         :src="form?.previewDriver" alt="">
                     <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                        src="../../../../../assets/img/png/exampleLicencie.png" alt="">
+                        :src="bucket + 'public/img/png/exampleLicencie.png'" alt="">
                 </div>
                 <p v-if="!form?.previewDriver"
                     class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drive license
@@ -161,7 +161,7 @@
                         <img class="w-full h-[160px]  md:h-[190px] object-contain " v-if="form?.previewFrontPhoto"
                             :src="form?.previewFrontPhoto" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/mainphoto.png" alt="">
+                            :src="bucket + 'public/img/png/mainphoto.png'" alt="">
                     </div>
                     <p v-if="!form?.previewFrontPhoto"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front
@@ -217,7 +217,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewFront"
                             :src="form?.previewFront" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/front.png" alt="">
+                            :src="bucket + 'public/img/png/front.png'" alt="">
                     </div>
                     <p v-if="!form?.previewFront"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front
@@ -274,7 +274,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewDriverSide"
                             :src="form?.previewDriverSide" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/driverside.png" alt="">
+                            :src="bucket + 'public/img/png/driverside.png'" alt="">
                     </div>
                     <p v-if="!form?.previewDriverSide"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of front
@@ -330,7 +330,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewBack"
                             :src="form?.previewBack" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/back.png" alt="">
+                            :src="bucket + 'public/img/png/back.png'" alt="">
                     </div>
                     <p v-if="!form?.previewBack"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of back photo
@@ -385,7 +385,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewPassengerSide"
                             :src="form?.previewPassengerSide" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/passenger.png" alt="">
+                            :src="bucket + 'public/img/png/passenger.png'" alt="">
                     </div>
                     <p v-if="!form?.previewPassengerSide"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of passenger
@@ -440,7 +440,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewTireAndRim"
                             :src="form?.previewTireAndRim" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/rin.png" alt="">
+                            :src="bucket + 'public/img/png/rin.png'" alt="">
                     </div>
                     <p v-if="!form?.previewTireAndRim"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of tire and
@@ -501,7 +501,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewDriversDisplay"
                             :src="form?.previewDriversDisplay" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/tacomentro.png" alt="">
+                            :src="bucket + 'public/img/png/tacomentro.png'" alt="">
                     </div>
                     <p v-if="!form?.previewDriversDisplay"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers
@@ -556,7 +556,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewDriversSide"
                             :src="form?.previewDriversSide" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/dentro.png" alt="">
+                            :src="bucket + 'public/img/png/dentro.png'" alt="">
                     </div>
                     <p v-if="!form?.previewDriversSide"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers
@@ -611,7 +611,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewCenterConsole"
                             :src="form?.previewCenterConsole" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/tavblero.png" alt="">
+                            :src="bucket + 'public/img/png/tavblero.png'" alt="">
                     </div>
                     <p v-if="!form?.previewCenterConsole"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of center
@@ -666,7 +666,7 @@
                         <img class="w-full h-[190px]   object-contain " v-if="form?.previewRearSeats"
                             :src="form?.previewRearSeats" alt="">
                         <img v-else class="w-full md:h-[190px] h-[90px] object-contain "
-                            src="../../../../../assets/img/png/asientosatras.png" alt="">
+                            :src="bucket + 'public/img/png/asientosatras.png'" alt="">
                     </div>
                     <p v-if="!form?.previewRearSeats"
                         class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Example of drivers
@@ -893,7 +893,7 @@
     </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted ,computed} from "vue";
 import { toast } from "vue3-toastify";
 import ModalLaunchVue from "../../../../../components/Modals/ModalLaunch/ModalLaunchVue.vue";
 import ModalImageCustomVue from "../../../../../components/Modals/ModalImageCustom/ModalImageCustom.vue";
@@ -943,6 +943,7 @@ export default {
         let isPlaying = ref(false)
         const statusModal = ModalLaunch()
         const statusModalImage = ModalImageCustom()
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const statusModalViewImage = ModalViewImage()
 
         const play = () => {
@@ -1097,7 +1098,8 @@ export default {
             modalLaunch,
             statusModalImage,
             viewPhoto,
-            statusModalViewImage
+            statusModalViewImage,
+            bucket
 
         };
     },

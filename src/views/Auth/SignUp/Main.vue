@@ -50,7 +50,7 @@
                     auctions
                     bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
                     application.</p>
-                <img class="h-[50vh] block md:hidden w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg"
+                <img class="h-[50vh] block md:hidden w-full object-cover" :src="bucket + 'public/svg/vehiculosLogin.svg'"
                     alt="" />
             </div>
             <div v-else class="h-full  flex justify-start items-start flex-col gap-5 ">
@@ -62,11 +62,11 @@
                     efficient process. Maximize the value of your car by inviting competitive bids from local
                     dealerships.
                 </p>
-                <img class="h-[50vh] block md:hidden w-full object-cover" src="../../../assets/svg/vehiculosLogin.svg"
+                <img class="h-[50vh] block md:hidden w-full object-cover" :src="bucket + 'public/svg/vehiculosLogin.svg'"
                     alt="" />
             </div>
             <img class="h-auto hidden md:block absolute bottom-0 left-0 w-full object-cover"
-                src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+                :src="bucket + 'public/svg/vehiculosLogin.svg'" alt="" />
         </div>
 
 
@@ -75,7 +75,7 @@
 
 <script>
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import { ref, onMounted } from "vue";
+import { ref, onMounted ,computed} from "vue";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { useRouter, useRoute } from 'vue-router'
 // Import Swiper styles
@@ -103,6 +103,7 @@ export default {
         const route = useRoute();
         const router = useRouter()
         const store = useAuthStore();
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const loading = ref(false)
         let rol = ref()
         let stepsCurrent = ref(0)
@@ -194,6 +195,7 @@ export default {
             loading,
             gobackError,
             backEmailToken,
+            bucket
         };
     },
 };

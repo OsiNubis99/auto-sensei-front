@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="flex gap-2 md:gap-6">
-            <img src="../../../../assets/svg/profile.svg" alt="">
+            <img :src="bucket + 'public/svg/profile.svg'" alt="">
             <div class="flex flex-col ">
                 <p class=" font-semibold text-sm md:text-xl">Profile</p>
                 <p class=" text-xs md:text-base">Your Profile Information</p>
@@ -295,7 +295,7 @@
                         class="w-4/5  object-contain md:object-cover md:h-[220px]"
                         :src="bucket + storeUser.seller?.driverLicense" alt="">
                     <img v-else class="w-4/5  md:h-[220px] object-contain md:object-cover "
-                        src="../../../../assets/img/png/exampleLicencie.png" alt="">
+                        :src="bucket + 'public/img/png/exampleLicencie.png'" alt="">
 
                 </template>
 
