@@ -629,7 +629,7 @@
                 <template v-else>
                     <div v-if="steps.step1" class="w-full p-5 flex flex-col justify-center items-center">
                         <div class="flex justify-center items-center flex-col gap-3">
-                            <img :src="bucket 'public/img/png/icon-signature.png'" alt="">
+                            <img :src="bucket + 'public/img/png/icon-signature.png'" alt="">
                             <p class=" text-center text-lg p-5 font-medium ">Thank you for completing the process! Enjoy
                                 your new vehicle and continue bidding with us!</p>
                         </div>
