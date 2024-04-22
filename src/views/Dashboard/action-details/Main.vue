@@ -304,11 +304,12 @@
                                     <div class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2  md:text-base text-xs">Vehicle Reports</p>
                                         <div class="flex w-full items-center gap-2 col-span-3 justify-between">
-                                            <a href="https://www.carfax.ca/order" target="_blank" rel="noopener noreferrer">
-                                                <img class=" w-12 h-12 md:w-auto md:h-auto" src="@/assets/svg/carfax.svg"
-                                                alt="">
+                                            <a href="https://www.carfax.ca/order" target="_blank"
+                                                rel="noopener noreferrer">
+                                                <img class=" w-12 h-12 md:w-auto md:h-auto"
+                                                    src="@/assets/svg/carfax.svg" alt="">
                                             </a>
-                                          
+
                                             <p class="text-[#7EC600] whitespace-pre text-xs md:text-lg font-medium ">
                                                 View History</p>
 
@@ -549,11 +550,11 @@
                                         <div class="flex items-center gap-2 ">
                                             <p v-if="dataDetails?.bids[0]?.amount"
                                                 class="capitalize text-sm md:text-xl font-medium">
-                                                ${{dataDetails?.bids[0]?.amount}}
+                                                ${{ dataDetails?.bids[0]?.amount }}
                                                 <!--    ${{makeFriendly(dataDetails?.bids[0]?.amount)}} -->
                                             </p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
-                                                dataDetails?.vehicleDetails?.basePrice }}</p>
+            dataDetails?.vehicleDetails?.basePrice }}</p>
                                             <p v-else>$0</p>
                                         </div>
                                     </div>
@@ -575,8 +576,7 @@
                             </div>
                             <div v-if="dataDetails?.bids[0]?.participant?._id == auth.userData?._id && (dataDetails.status == 'completed' || dataDetails.status == 'bids completed')"
                                 class="flex flex-col gap-2 mt-4">
-                                <button :disabled="loadingButton ? true : false"
-                                    @click="confirmVehicle(dataDetails)"
+                                <button :disabled="loadingButton ? true : false" @click="confirmVehicle(dataDetails)"
                                     class="btn w-full bg-primary flex gap-2 items-center text-base-black">
                                     <div v-if="loadingButton" class="w-8 h-8">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#0B1107"
@@ -597,7 +597,7 @@
         </div>
         <div v-if="openPdf"
             class="fixed inset-0 flex items-end md:items-center z-50 justify-center bg-base-black  bg-opacity-50">
-            <div class="max-w-lg overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
+            <div class="max-w-xl w-full overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
                 <div class="p-2 md:p-4  rounded-t-lg  bg-blue-dark flex items-center justify-between">
                     <p class=" text-sm md:text-xl text-white">Contract Auction</p>
                     <svg @click="closetModalPdf()" xmlns="http://www.w3.org/2000/svg"
@@ -629,7 +629,7 @@
                 <template v-else>
                     <div v-if="steps.step1" class="w-full p-5 flex flex-col justify-center items-center">
                         <div class="flex justify-center items-center flex-col gap-3">
-                            <img :src="bucket 'public/img/png/icon-signature.png'" alt="">
+                            <img :src="bucket + 'public/img/png/icon-signature.png'" alt="">
                             <p class=" text-center text-lg p-5 font-medium ">Thank you for completing the process! Enjoy
                                 your new vehicle and continue bidding with us!</p>
                         </div>
@@ -687,7 +687,10 @@ import { ModalAutoBid } from '@/stores/modalAutoBid';
 import ModalBidNow from "@/components/Modals/ModalBidNow/ModalBidNow.vue";
 import ModalAutoBidVue from "@/components/Modals/ModalAutoBid/ModalAutoBid.vue";
 import moment from 'moment';
-import {arrayPhotos} from '../../../utils/packPhotos'
+import { arrayPhotos } from '../../../utils/packPhotos'
+import { toast } from "vue3-toastify";
+import axios from "@/axios";
+import PSPDFKit from 'pspdfkit';
 export default {
 
     components: {
@@ -759,7 +762,7 @@ export default {
                 loadingButton.value = false
             }
         }
-       
+
         const getDataAution = async (id) => {
             loading.value = true
             try {
@@ -809,23 +812,140 @@ export default {
                 getDataAution(route.params.id)
             } */
         }
+        const sutmibPDF = async (pdf) => {
+            console.log('recivied', pdf)
+            loadingPdf.value = true
+            try {
+                const blob = new Blob([pdf], { type: 'application/pdf' }, { name: Date.now() + '.' + pdf.extension });
+                const formData = new FormData();
+                formData.append("file", blob);
+                formData.append("location", 'test/pdf');
+                const options = {
+                    url: "/uploader/create",
+                    method: 'POST',
+                    headers: { 'content-type': 'multipart/form-data' },
+                    data: formData
+                };
+                let result = await axios(options);
+                if (result.data) {
+                    try {
+                        let res = await storeIdAution.vehicleReceived(autionPdf.value._id, result.data)
+                        console.log('res', res)
+                        if (res) {
+                            showPdf.value = 'https://apidev.autosensei.ca/files/' + result.data
+                            steps.value.step1 = false
+                            steps.value.step2 = false
+                            steps.value.step3 = true
+                        }
+                    } catch (error) {
+                        loadingPdf.value = false
+                        toast(error.response.data.message, {
+                            type: "error",
+                        });
+                    } finally {
+                        loadingPdf.value = false
+                        index()
+                    }
+
+
+
+                }
+
+                console.log(result);
+            } catch (e) {
+                loading.value = false
+                console.error("error", e);
+            } finally {
+                loading.value = false
+            }
+        }
         const nextContract = async () => {
             steps.value.step1 = false
             steps.value.step2 = true
             if (steps.value.step2) {
                 loadingPdf.value = true
                 try {
-                    let res = await storeIdAution.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
-                    console.log('res', res)
-                    if (res) {
-                        showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                    /*  let res = await storeIdAution.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
+                     console.log('res', res)
+                     if (res) {
+                         showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                         loadingPdf.value = false
+                         steps.value.step1 = false
+                         steps.value.step2 = false
+                         steps.value.step3 = true
+ 
+                     } */
+                    showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                    const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
+                    PSPDFKit.load({
+                        baseUrl,
+                        licenseKey: 'HO2dV-bDcn32RCF6j2nDeKYNGqP1EOSnmSLLmbDrrdWJGwDq5yWsJs8pr31-EOKWXetRmJoBjUgv4AoEicoPgQw6Htu9foJBCUCWNZ2n7EvLcpMfoNLqokulJv87rHwmB9jnVIBTKGCZ7RKjGpERaDOl-JXfBFqdP6tSA07KKrsGh0k22IcAfwlevAAZNBOe72mr8i6D5tjXisarqg3a4vsSFuWyrmidugVCVPQsARlTZ5phlM3p4WSi032q6k3C7Zkt2UwLkGu6xfMy0u8wTOYLpjE8AMl5p4PC7j2I0WTVtrjYHLVyTJ-H0-bUUh1M_5pDIsK3YwHZNA5o5I0pnL70uk4nRPsvKL5hAxzI5e_PSWj8Oek73s6pf-htNu4PrL8YMfaX2KOo4tv3Q7Xsu6fhHOmkdvRn-UyCqQz8aJam2BZFpzXYndnfTToNV3v2PZ8ixUAzk03lKFvcThJg6wGTv1lo_AQ1zOx96eqaU069ZXuduPThRxd_i0zhEkGDfVKFaZWd03UaD0ZCDPWk5lSl0AuZJWFEKVyLQBLX2SDAf6z4m699tJ4jggOZoiQjD6rceOZUGAMCYAIMi4Z_6spoyIaAM4reyti70sY_K-Ccji1VNQKFlm0ne381Pyy298BJH2xQZnEPAWEtnFp1Xw==',
+                        container: "#pspdfkit",
+                        document: showPdf.value,
+                    }).then(async function (instance) {
                         loadingPdf.value = false
-                        steps.value.step1 = false
-                        steps.value.step2 = false
-                        steps.value.step3 = true
+                        const items = instance.toolbarItems;
+                        instance.setToolbarItems(items.filter((item) =>
+                            item.type !== "export-pdf" &&
+                            item.type !== "search" &&
+                            item.type !== "annotate" &&
+                            item.type !== "multi-annotations-selection" &&
+                            item.type !== "signature" &&
+                            item.type !== "debug" &&
+                            item.type !== "document-crop" &&
+                            item.type !== "document-editor" &&
+                            item.type !== "print" &&
+                            item.type !== "polyline" &&
+                            item.type !== "cloudy-polygon" &&
+                            item.type !== "polygon" &&
+                            item.type !== "ellipse" &&
+                            item.type !== "arrow" &&
+                            item.type !== "link" &&
+                            item.type !== "line" &&
+                            item.type !== "callout" &&
+                            item.type !== "note" &&
+                            item.type !== "rectangle" &&
+                            item.type !== "stamp" &&
+                            item.type !== "image" &&
+                            item.type !== "ink-eraser" &&
+                            item.type !== "text-highlighter" &&
+                            item.type !== "text" &&
+                            item.type !== "highlighter" &&
+                            item.type !== "ink" &&
+                            item.type !== "pan" &&
+                            item.type !== "pager" &&
+                            item.type !== "sidebar-layers" &&
+                            item.type !== "sidebar-thumbnails" &&
+                            item.type !== "sidebar-document-outline" &&
+                            item.type !== "sidebar-bookmarks" &&
+                            item.type !== "sidebar-signatures" &&
+                            item.type !== "sidebar-annotations"
 
-                    }
+                        ));
+                        const widget2 = new PSPDFKit.Annotations.WidgetAnnotation({
+                            id: PSPDFKit.generateInstantId(),
+                            pageIndex: 0,
+                            boundingBox: new PSPDFKit.Geometry.Rect({
+                                left: 116,
+                                top: 785,
+                                width: 100,
+                                height: 20
+                            }),
+                            formFieldName: "my signature form field"
+                        })
+                        const formField = new PSPDFKit.FormFields.SignatureFormField({
+                            name: "my signature form field",
+                            annotationIds: new PSPDFKit.Immutable.List([widget2.id])
+                        });
+                        await instance.create([widget2, formField]);
+                        instance.addEventListener("storedSignatures.create", async (e) => {
+                            const buffer = await instance.exportPDF({ flatten: true });
+                            dataBuffer.value = buffer
+                            sutmibPDF(buffer)
+                        });
+                    })
                 } catch (error) {
+                    console.log('error', error)
                     loadingPdf.value = false
                     toast(error.response.data.message, {
                         type: "error",
@@ -835,39 +955,7 @@ export default {
                     getDataAution(route.params.id)
                 }
 
-                /* const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
-                PSPDFKit.load({
-                    baseUrl,
-                    container: "#pspdfkit",
-                    document: 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing,
-                }).then(async function (instance) {
-                    loadingPdf.value = false
-                    const widget2 = new PSPDFKit.Annotations.WidgetAnnotation({
-                        id: PSPDFKit.generateInstantId(),
-                        pageIndex: 0,
-                        isEditable: true,
-                        locked: true,
-                        lockedContents: true,
-                        isReadOnly: true,
-                        boundingBox: new PSPDFKit.Geometry.Rect({
-                            left: 125,
-                            top: 765,
-                            width: 100,
-                            height: 20
-                        }),
-                        formFieldName: "my signature form field"
-                    })
-                    const formField = new PSPDFKit.FormFields.SignatureFormField({
-                        name: "my signature form field",
-                        annotationIds: new PSPDFKit.Immutable.List([widget2.id])
-                    });
-                    await instance.create([widget2, formField]);
-                    instance.addEventListener("annotations.create", async (e) => {
-                        const buffer = await instance.exportPDF({ flatten: true });
-                        dataBuffer.value = buffer
-                        sutmibPDF(buffer)
-                    });
-                }) */
+
             }
 
         }

@@ -878,17 +878,17 @@
                 class=" btn bg-transparent  border-[#E0E0E0] flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save as Draft
             </button> -->
-            <button @click="next"
+            <button @click="next" id="step3"
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Confirmation
             </button>
         </div>
         <div v-else class="flex justify-center items-center gap-5 ">
-            <button @click="createAutions('draft')"
+            <button @click="createAutions('draft')" id="saveDraft"
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save as Draft
             </button>
-            <button @click="modalLaunch('launch')"
+            <button @click="modalLaunch('launch')" id="launchAuction"
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Launch Auction
             </button>

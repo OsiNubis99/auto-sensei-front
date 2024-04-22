@@ -5,10 +5,11 @@
         <p class="text-primary text-[10px] md:text-base uppercase"> {{ $t("home.pre_title") }}</p>
         <h1 class="text-3xl md:text-6xl xl:text-8xl font-bold text-white"> {{ $t("home.title") }}</h1>
         <p class="text-base-white text-xs md:text-base">{{ $t("home.subt_title") }}</p>
-        <button @click="goToHome()" class="btn w-full md:w-auto bg-primary text-base-black">{{ $t("sell_your_car")
+        <button @click="goToHome()" id="sellCar" class="btn w-full md:w-auto bg-primary text-base-black">{{ $t("sell_your_car")
           }}</button>
       </div>
       <div class="w-full h-full relative">
+        
         <img class="absolute w-full h-full lg:h-[inherit] bottom-0" :src="bucket + 'public/svg/carji.svg'" alt="">
       </div>
     </div>
@@ -79,7 +80,7 @@
     </div>
     <div class="w-full justify-center flex-col gap-5 items-center relative flex ">
       <p class="text-white text-xs md:text-base">Want to know more?</p>
-      <button @click="goToHome()" class="btn bg-primary text-base-black">Get Started</button>
+      <button id="getStarted" @click="goToHome()" class="btn bg-primary text-base-black">Get Started</button>
     </div>
   </div>
   <!--  <div class="relative w-full">
@@ -267,7 +268,7 @@
         supports
         customers in a market of inflation.
       </p>
-      <button @click="goToHome()" class="btn mt-10 bg-base-black text-primary ">Sell Your Car Today</button>
+      <button id="sellToday" @click="goToHome()" class="btn mt-10 bg-base-black text-primary ">Sell Your Car Today</button>
     </div>
     <img class="relative mt-6 md:absolute w-full bottom-0 " :src="bucket + 'public/svg/bannerpeople.svg'" alt="">
   </div>
