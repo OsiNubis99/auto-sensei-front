@@ -61,7 +61,7 @@
                 <div v-else class="flex lg:hidden">
                     <RouterLink v-if="path !== 'login' || path == 'signup'" to="/login/sellers"
                         :class="path == 'contact-us' && scrollPosition < 110 ? 'text-blue-dark  border-blue-dark' : 'text-white  border-[#e5e5e5]'"
-                        class=" text-xs px-4 py-2 rounded-md bg-transparent border ">
+                        class=" text-xs px-4 py-2 rounded-md bg-transparent border " id="mainLogin">
                         Login
                     </RouterLink>
                     <button @click="toggle"
@@ -125,7 +125,7 @@
                             </RouterLink>
                             <RouterLink v-if="path !== 'login'" :to="path == 'home' || path == 'about' || path == 'sold-auctions' ||
             path == 'how-it-works' ||
-            path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`"
+            path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`"  id="regLogin"
                                 :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'"
                                 class="px-5 py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize ">
                                 <span v-if="path == 'signup'">Sign In</span>
@@ -136,7 +136,7 @@
             path == 'sold-auctions' ||
             path == 'how-it-works' ||
             path == 'contact-us'
-            ? `/signup/sellers` : `/signup/${route.params.rol}`"
+            ? `/signup/sellers` : `/signup/${route.params.rol}`" id="regSignup"
                                 class="px-5 bg-primary py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize">
                                 Sign Up
                             </RouterLink>
@@ -155,7 +155,7 @@
                 </RouterLink>
                 <RouterLink v-if="path !== 'login'" :to="path == 'home' || path == 'about' || path == 'sold-auctions' ||
             path == 'how-it-works' ||
-            path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`"
+            path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`" id="regLogin"
                     :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'"
                     class="px-3 py-1 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-sm capitalize ">
                     <span v-if="path == 'signup'">Sign In</span>
@@ -166,7 +166,7 @@
             path == 'sold-auctions' ||
             path == 'how-it-works' ||
             path == 'contact-us'
-            ? `/signup/sellers` : `/signup/${route.params.rol}`"
+            ? `/signup/sellers` : `/signup/${route.params.rol}`" id="regSignup"
                     class="px-3 bg-primary py-1 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-sm capitalize">
                     Sign Up
                 </RouterLink>
@@ -357,11 +357,11 @@
                         <RouterLink @click="open = false" v-if="!store?.userData?._id"
                             :class="[(path == `login` ? '!text-primary' : 'text-white')]" class="font-medium text-sm"
                             to="/login/dealers">Dealer Page</RouterLink>
-                        <RouterLink @click="open = false" to="/login/sellers"
+                        <RouterLink @click="open = false" to="/login/sellers" id="mainLogin"
                             class=" font-bold text-xs text-center  w-full px-4 py-2 rounded-md bg-[#22282F] text-white border border-[#e5e5e521]">
                             Login
                         </RouterLink>
-                        <RouterLink @click="open = false" to="/login/sellers"
+                        <RouterLink @click="open = false" to="/login/sellers" id="mainSignup"
                             class="w-full text-center font-bold text-xs px-4 py-2 rounded-md bg-primary text-blue-dark ">
                             Sign Up
                         </RouterLink>
