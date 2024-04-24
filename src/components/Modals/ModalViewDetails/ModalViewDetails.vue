@@ -461,7 +461,7 @@
 
                         </div>
                         <div v-show="steps.step2">
-                            <div id="pspdfkit" style="width: 100%; height: 70vh;"></div>
+                            <div id="pspdfkit" style="width: 100%; height: 90vh;"></div>
 
                         </div>
 

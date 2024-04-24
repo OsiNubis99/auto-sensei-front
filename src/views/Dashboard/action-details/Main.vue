@@ -100,8 +100,8 @@
             dataDetails?.vehicleDetails?.make }} {{ dataDetails?.vehicleDetails?.model }}</p>
                     <p class="text-xs md:text-sm"> {{ dataDetails?.city }}, {{ dataDetails?.province }}</p>
                 </div>
-                <div class="flex flex-col md:flex-row md:gap-4 ">
-                    <div class=" p-4  md:w-[65%] md:p-0  ">
+                <div class="flex flex-col lg:flex-row lg:gap-4 ">
+                    <div class=" p-4  lg:w-[65%] md:p-0  ">
                         <div class="bg-white border md:p-4  border-[#E0E0E0]">
                             <div class="flex p-2 items-center  gap-3 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
@@ -340,7 +340,7 @@
 
                         </div>
                     </div>
-                    <div class="md:p-2 mx-4 md:w-[35%] border border-[#E0E0E0] bg-white h-fit ">
+                    <div class="md:p-2 mt-4 mx-4 lg:w-[35%] border border-[#E0E0E0] bg-white h-fit ">
                         <div class="flex gap-3 p-2 items-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" class=" w-5 h-5 md:h-6 md:w-6" viewBox="0 0 20 20"
                                 fill="none">
@@ -554,7 +554,7 @@
                                                 <!--    ${{makeFriendly(dataDetails?.bids[0]?.amount)}} -->
                                             </p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
-            dataDetails?.vehicleDetails?.basePrice }}</p>
+                                                dataDetails?.vehicleDetails?.basePrice }}</p>
                                             <p v-else>$0</p>
                                         </div>
                                     </div>
@@ -643,7 +643,7 @@
                         </div>
 
                     </div>
-                    <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 70vh;"></div>
+                    <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div>
                     <div v-if="steps.step3" class="p-4 flex justify-center items-center flex-col gap-3">
                         <p class=" font-semibold capitalize md:text-xl">Final Bid Approved!</p>
                         <p class="capitalize text-xs md:text-base ">Download the Actual Sheet Below and Hand It to the
