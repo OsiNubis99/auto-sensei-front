@@ -16,7 +16,7 @@
             <div class="flex p-4 pb-0 md:p-5  flex-col gap-3">
                 <div>
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-                        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
@@ -81,17 +81,19 @@
                 </div>
                 <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
                     <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
-                    <p class=" text-[12px] md:text-base">Waiting for verification, can take up to <span class="font-bold"> 90
+                    <p class=" text-[12px] md:text-base">Waiting for verification, can take up to <span
+                            class="font-bold"> 90
                             mins</span></p>
                 </div>
             </div>
             <div :class="changeLayouts ? 'w-full' : 'md:w-[40%] flex flex-col justify-between h-full '"
                 class="border-l-2  border-[#E0E0E0]">
                 <div class="flex md:p-5  pl-4 ga justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col '">
-                    <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
-                        <p class="text-xs md:text-base">Starts in:  </p>
-                        <div v-if="auction?.startDate" class="flex gap-2 items-center ">
-                            <vue-countdown :time="timeToStart(auction?.startDate)"
+                    <div v-if="auction?.startDate" class="space-y-1"
+                        :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
+                        <p class="text-xs md:text-base">Starts in: </p>
+                        <div class="flex gap-2 items-center ">
+                            <vue-countdown :time="timeAution"
                                 class="flex text-base-black  md:text-2xl gap-3 items-center"
                                 v-slot="{ days, hours, minutes, seconds }">
                                 <p class="font-medium" v-if="days > 0">{{ days }}D</p>
@@ -111,8 +113,8 @@
         </div>
     </div>
 </template>
-  
-<script >
+
+<script>
 import { ref, onMounted, computed } from "vue";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -143,6 +145,7 @@ export default {
         const changeLayouts = ref(props.changeLayouts);
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const statusModalView = ModalViewDetails()
+        const timeAution = ref(null)
         const statusModal = ModalAcceptAution()
         function timeToStart(startDate) {
             if (!startDate) return 0;
@@ -153,6 +156,13 @@ export default {
             console.log('option', option)
             props.decline(auction, option)
         }
+        onMounted(() => {
+            if (auction.startDate) {
+                timeAution.value = timeToStart(auction.startDate)
+                console.log(' timeAution.value', timeAution.value)
+            }
+
+        })
         return {
             modules: [Navigation, Pagination, Scrollbar, A11y],
             auction,
@@ -161,12 +171,9 @@ export default {
             declineAution,
             timeToStart,
             statusModal,
-            statusModalView
+            statusModalView,
+            timeAution
         };
     },
 };
 </script>
-
-  
-  
-  

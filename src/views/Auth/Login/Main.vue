@@ -95,7 +95,7 @@
                     bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
                     application.</p>
                 <img class="h-[60vh] block lg:hidden  w-full object-cover  "
-                    src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+                    :src="bucket + 'public/svg/vehiculosLogin.svg'" alt="" />
             </div>
             <div v-else class="h-full  flex justify-start lg:p-5 items-start flex-col gap-5 md:px-16 md:py-12">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl md:text-5xl text-blue-dark font-bold ">Elevate Your Car Selling
@@ -107,10 +107,10 @@
                     dealerships.
                 </p>
                 <img class="h-[60vh] block lg:hidden  w-full object-cover  "
-                    src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+                    :src="bucket + 'public/svg/vehiculosLogin.svg'" alt="" />
             </div>
             <img class="h-auto hidden lg:block absolute bottom-0 w-full object-cover"
-                src="../../../assets/svg/vehiculosLogin.svg" alt="" />
+                :src="bucket + 'public/svg/vehiculosLogin.svg'" alt="" />
         </div>
 
     </div>
@@ -134,6 +134,7 @@ export default {
         const store = useAuthStore();
         const messageError = ref('')
         const isLoadingLogin = ref(false)
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const payloadData = ref({
             email: "",
             password: ""
@@ -221,7 +222,8 @@ export default {
             getLogin,
             payloadData,
             isLoadingLogin,
-            messageError
+            messageError,
+            bucket
         };
     },
 };

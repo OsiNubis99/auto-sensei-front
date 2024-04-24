@@ -10,8 +10,8 @@
                 <ScreenNoDataDealer />
             </template>
             <div v-else class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div :class="showFilter ? ' top-0 z-50 visible  w-full h-screen overflow-y-auto overflow-x-hidden shadow-xl animation-fade-modal' : ' invisible md:visible '"
-                    class="fixed  lg:relative  md:w-[29%] md:block">
+                <div :class="showFilter ? ' top-0 z-50 visible  w-full h-screen overflow-y-auto overflow-x-hidden shadow-xl animation-fade-modal' : ' invisible lg:visible '"
+                    class="fixed  lg:relative  lg:w-[29%] md:block">
                     <div class="bg-white p-5 shadow-steps">
                         <div class="flex w-full justify-between items-center">
                             <p class=" lg:text-2xl font-semibold">Filter Auction</p>
@@ -249,7 +249,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full md:w-[70%]">
+                <div class="w-full lg:w-[70%]">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
                             }} Vehicles
@@ -456,7 +456,7 @@
         </div>
 
         <div v-show="!showFilter && data.length > 0" @click="showFilter = true"
-            class="fixed md:hidden flex justify-center items-center bottom-2 w-full z-50">
+            class="fixed lg:hidden flex justify-center items-center bottom-2 w-full z-50">
             <div class="flex items-center py-2 rounded-lg px-3 gap-2 bg-base-black">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
                     <path

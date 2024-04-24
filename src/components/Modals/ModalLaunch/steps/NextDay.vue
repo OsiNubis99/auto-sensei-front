@@ -20,7 +20,7 @@
             launch auction with this option?</p>
     </template>
     <div v-if="steps.step1" class="pt-4" @click="next(1)">
-        <button class="w-full md:h-[41px] h-[35px] text-blue-100 text-xs font-semibold bg-primary rounded">
+        <button id="nextAuction" class="w-full md:h-[41px] h-[35px] text-blue-100 text-xs font-semibold bg-primary rounded">
             Next
         </button>
     </div>
@@ -29,7 +29,7 @@
             class="w-full text-xs md:text-base h-[30px] md:h-[41px] text-blue-100 border-[#E0E0E0] border-[1px]  rounded">
             No
         </button>
-        <button @click="next(2)"
+        <button id="completeAuction" @click="next(2)"
             class="w-full text-xs md:text-base h-[30px] md:h-[41px] text-blue-100 bg-primary rounded">
             Yes
         </button>

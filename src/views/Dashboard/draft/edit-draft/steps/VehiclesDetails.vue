@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white flex flex-col md:mb-7 gap-3 md:gap-5 items-start shadow-steps p-5 w-full">
         <div class="flex gap-6">
-            <img src="../../../../../assets/svg/vehiculoDetails.svg" alt="">
+            <img :src="bucket + 'public/svg/vehiculoDetails.svg'" alt="">
             <div class="flex flex-col ">
                 <p class=" font-semibold    md:text-xl  ">Vehicle Details</p>
                 <p class="md:font-medium text-[#4D4D4D] text-xs md:text-base ">Related to your vehicle to help get the
@@ -225,7 +225,7 @@
     </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { toast } from "vue3-toastify";
 export default {
     props: {
@@ -259,6 +259,7 @@ export default {
         const form = ref(props.form)
         const save = ref(props.launch)
         const invalid = ref(props.invalid);
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const next = () => {
             props.nextVehiclesDetails()
         }
@@ -268,7 +269,8 @@ export default {
             next,
             invalid,
             form,
-            save
+            save,
+            bucket
         };
     },
 };

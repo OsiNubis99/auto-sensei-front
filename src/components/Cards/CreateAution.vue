@@ -8,9 +8,10 @@
             </RouterLink>
             <div>
                 <p class=" font-semibold capitalize ">
-                    <span v-if="data.seller?.firstName"> {{data.seller?.firstName }}</span> <span v-if="data.seller?.lastName"> {{
-        data.seller?.lastName
-    }}</span>
+                    <span v-if="data.seller?.firstName"> {{ data.seller?.firstName }}</span> <span
+                        v-if="data.seller?.lastName"> {{
+                    data.seller?.lastName
+                }}</span>
                 </p>
             </div>
             <svg class=" absolute right-0 top-1 " xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -23,15 +24,15 @@
         <hr class="border-[#cfcfcf] border-1 ">
         <div class="flex pt-5 cursor-pointer justify-between">
             <RouterLink to="/draft" class="font-medium">Draft <span class="text-[#858585]">{{
-                autions?.draft?.length
-            }}</span></RouterLink>
+                    autions?.draft?.length
+                    }}</span></RouterLink>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 20 21" fill="none">
                 <path
                     d="M10.9766 10.5006L6.85156 6.3756L8.0299 5.19727L13.3332 10.5006L8.0299 15.8039L6.85156 14.6256L10.9766 10.5006Z"
                     fill="#858585" />
             </svg>
         </div>
-        <RouterLink to="/all/create"
+        <RouterLink to="/all/create" id="createAuction"
             class="btn w-full bg-base-black mt-7 flex gap-2 justify-center items-center text-primary ">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 17 17" fill="none">
                 <path
@@ -42,8 +43,8 @@
         </RouterLink>
     </div>
 </template>
-  
-<script >
+
+<script>
 import { ref, onMounted, computed } from "vue";
 export default {
     components: {
@@ -71,7 +72,3 @@ export default {
     },
 };
 </script>
-
-  
-  
-  

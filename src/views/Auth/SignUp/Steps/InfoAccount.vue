@@ -41,7 +41,7 @@
                             <div class="flex !mt-2 gap-2 md:gap-6">
                                 <img class="w-[80px] h-[80px] rounded-full object-cover " v-if="form?.preview"
                                     :src="form?.preview" alt="">
-                                <img v-else src="../../../../assets/svg/login/uploadImage.svg" alt="">
+                                <img v-else :src="bucket + 'public/svg/login/uploadImage.svg'" alt="">
                                 <div>
                                     <div class="flex gap-1  items-center" v-if="form?.img?.name">
                                         <p class="text-xs font-medium text-[#666] truncate"> <strong
@@ -229,7 +229,7 @@
                                     class="border rounded-md h-[48px] w-full" id="telephone" />
                             </div>
                             <div>
-                                <button @click="nextStep"
+                                <button @click="nextStep" id="continueAccount"
                                     class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Continue
                                 </button>
@@ -244,7 +244,7 @@
 </template>
 
 <script>
-import { onUpdated, ref, onMounted } from 'vue'
+import { onUpdated, ref, onMounted, computed } from 'vue'
 import { stepsSignUp } from "@/stores/stepsSignUp";
 import { useUserStore } from "@/stores/user";
 import { useStoreFile } from "@/stores/uploader";
@@ -279,6 +279,7 @@ export default {
         const countrys = usePayments()
         const loadingCountrys = ref(false)
         const formCreate = storeData.formData
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const token = ref(null)
         const route = useRoute();
         const typeUser = ref('')
@@ -591,7 +592,8 @@ export default {
             loadingCountrys,
             formData,
             onChangeGetProvince,
-            onChangeGetCity
+            onChangeGetCity,
+            bucket
         };
     },
 };

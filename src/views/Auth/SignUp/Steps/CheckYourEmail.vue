@@ -33,7 +33,7 @@
                     </p>
                 </div>
                 <div class="mt-8 flex justify-center items-center flex-col">
-                    <img src="../../../../assets/svg/login/verifiqueCard.svg" alt="">
+                    <img :src="bucket + 'public/svg/login/verifiqueCard.svg'" alt="">
                     <template v-if="route.query?.error == 'expired'">
                         <div class="flex gap-2 items-center mt-4 mb-4">
                             <button @click="backError" class="btn bg-primary mt-5">Go back</button>
@@ -87,7 +87,7 @@
 </template>
 <script>
 import { stepsSignUp } from "@/stores/stepsSignUp";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from "@/stores/auth";
 import { toast } from "vue3-toastify";
@@ -115,6 +115,7 @@ export default {
         const router = useRouter();
         const route = useRoute();
         const codeEmail = ref(null)
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const errorCode = ref(false)
         const auth = useAuthStore()
         const loading = ref(false)
@@ -199,6 +200,7 @@ export default {
             errorCode,
             loading,
             sendRecover,
+            bucket
         };
     },
 };

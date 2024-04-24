@@ -143,18 +143,17 @@ export default {
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
 
             if (autionUpdate.value.status == 'live') {
-                data.value.push(newQuestion)
-                console.log('data.value antes', data.value.length)
-                const i = data.value.findIndex(x => x._id === newQuestion._id)
-                data.value[i] = newQuestion
-                console.log('data.value antes', data.value.length)
                 let photos = null;
-                photos = arrayPhotos(data.value[i].vehicleDetails)
+                photos = arrayPhotos(newQuestion.vehicleDetails)
                 if (photos.length > 0) {
-                    data.value[i].photos = photos
+                    newQuestion.photos = photos
                 } else {
                     photos = null
                 }
+                let newArray = data.value.map(aution => aution._id !== newQuestion._id ? aution : newQuestion);
+                data.value = []
+                data.value = newArray
+
             }
             if (autionUpdate.value?.status == 'completed') {
                 console.log('ENTRO EN EL WACTH completed')
