@@ -335,7 +335,7 @@
                         </div>
 
                     </div>
-                    <div class="custom-pdf" v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div>
+                   <!--  <div class="custom-pdf" v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div> -->
                     <div v-if="steps.step3" class="p-4 flex justify-center items-center flex-col gap-3">
                         <p class=" font-semibold capitalize md:text-xl">Final Bid Approved!</p>
                         <p class="capitalize text-xs md:text-base ">Download the Actual Sheet Below and Hand It to the
@@ -344,7 +344,7 @@
                             Drop-Off
                             Process.</p>
                         <div class="w-full">
-                            <iframe class="w-full h-[90vh]" :src="showPdf" frameborder="0"></iframe>
+                            <iframe class="w-full h-[60vh]" :src="showPdf" frameborder="0"></iframe>
                         </div>
 
                         <button @click="pdfDonwload" class="btn w-full bg-primary rounded-md">
@@ -571,16 +571,18 @@ export default {
             if (steps.value.step2) {
                 loadingPdf.value = true
                 try {
-                    /*  let res = await storeAutions.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing) */
-                    /* console.log('res', res)
+                     let res = await storeAutions.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
+                    console.log('res', res)
                     if (res) {
-                        loadingPdf.value = false
+                        showPdf.value = 'https://apidev.autosensei.ca/files/' + res.data.contractSeallerSing
+                        
                         steps.value.step1 = false
                         steps.value.step2 = false
                         steps.value.step3 = true
+                        loadingPdf.value = false
 
-                    } */
-                    showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                    }
+                  /*   showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
                     const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
                     PSPDFKit.load({
                         baseUrl,
@@ -643,12 +645,12 @@ export default {
                             annotationIds: new PSPDFKit.Immutable.List([widget2.id])
                         });
                         await instance.create([widget2, formField]);
-                        /*  instance.addEventListener("storedSignatures.create", async (e) => {
+                         instance.addEventListener("storedSignatures.create", async (e) => {
                              const buffer = await instance.exportPDF({ flatten: true });
                              dataBuffer.value = buffer
                              sutmibPDF(buffer)
-                         }); */
-                    })
+                         });
+                    }) */
 
                 } catch (error) {
                     loadingPdf.value = false

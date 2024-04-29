@@ -554,7 +554,7 @@
                                                 <!--    ${{makeFriendly(dataDetails?.bids[0]?.amount)}} -->
                                             </p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
-                                                dataDetails?.vehicleDetails?.basePrice }}</p>
+            dataDetails?.vehicleDetails?.basePrice }}</p>
                                             <p v-else>$0</p>
                                         </div>
                                     </div>
@@ -643,7 +643,7 @@
                         </div>
 
                     </div>
-                    <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div>
+                   <!--  <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div> -->
                     <div v-if="steps.step3" class="p-4 flex justify-center items-center flex-col gap-3">
                         <p class=" font-semibold capitalize md:text-xl">Final Bid Approved!</p>
                         <p class="capitalize text-xs md:text-base ">Download the Actual Sheet Below and Hand It to the
@@ -865,17 +865,17 @@ export default {
             if (steps.value.step2) {
                 loadingPdf.value = true
                 try {
-                    /*  let res = await storeIdAution.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
-                     console.log('res', res)
-                     if (res) {
-                         showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
-                         loadingPdf.value = false
-                         steps.value.step1 = false
-                         steps.value.step2 = false
-                         steps.value.step3 = true
- 
-                     } */
-                    showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                    let res = await storeIdAution.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
+                    console.log('res', res)
+                    if (res) {
+                        showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                        loadingPdf.value = false
+                        steps.value.step1 = false
+                        steps.value.step2 = false
+                        steps.value.step3 = true
+
+                    }
+                   /*  showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
                     const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
                     PSPDFKit.load({
                         baseUrl,
@@ -943,7 +943,7 @@ export default {
                             dataBuffer.value = buffer
                             sutmibPDF(buffer)
                         });
-                    })
+                    }) */
                 } catch (error) {
                     console.log('error', error)
                     loadingPdf.value = false
