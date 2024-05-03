@@ -7,7 +7,7 @@
                 <p class=" text-[10px] md:text-base">You can easily upload through your phone</p>
             </div>
         </div>
-        <div>
+       <!--  <div>
             <p class="font-medium text-[14px] md:text-base">Original Documents</p>
             <p class="text-[10px] md:text-sm text-[#666666]">Such as ownership certificate, financing documents, etc.
             </p>
@@ -120,7 +120,7 @@
                 </div>
                 <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driver')" class="hidden">
             </label>
-        </div>
+        </div> -->
         <div>
             <p class="font-medium text-[14px] md:text-base">Exterior Photos</p>
         </div>

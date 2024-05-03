@@ -142,12 +142,12 @@ export const validateData = (form, step, typeLaunch) => {
         } */
     }
     if (step == 'UploadPhotos') {
-        if (!form.document) {
+       /*  if (!form.document) {
             error.document = 'Required field'
         }
         if (!form.driverDocument) {
             error.driverDocument = 'Required field'
-        }
+        } */
         if (!form.frontPhoto) {
             error.frontPhoto = 'Required field'
         }
@@ -330,12 +330,12 @@ export const validateData = (form, step, typeLaunch) => {
          if (!form.lastReplacement3) {
              error.lastReplacement3 = 'Required field'
          } */
-        if (!form.document) {
+       /*  if (!form.document) {
             error.document = 'Required field'
         }
         if (!form.driverDocument) {
             error.driverDocument = 'Required field'
-        }
+        } */
         if (!form.frontPhoto) {
             error.frontPhoto = 'Required field'
         }

@@ -711,7 +711,7 @@ export default {
             let resAdditionalDocuments = null;
             try {
 
-                if (typeof formData.value.document?.type == 'string') {
+               /*  if (typeof formData.value.document?.type == 'string') {
                     arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
                     resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
                     if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
@@ -720,7 +720,7 @@ export default {
                     arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
                     resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
                     if (resLicence[0]?.data) arrayUpload.value[0].completed = true
-                }
+                } */
 
                 if (typeof formData.value.frontPhoto?.type == 'string' ||
                     typeof formData.value.front?.type == 'string' ||
@@ -970,8 +970,8 @@ export default {
                         brakeReplacement: formData.value.lastReplacement2,
                         rotorCondition: formData.value.rotorCondition,
                         rotorReplacement: formData.value.lastReplacement3,
-                        originalDocument: typeof formData.value.document == "string" ? formData.value.document : resOriginalDocument[0]?.data,
-                        driverLicense: typeof formData.value.driverDocument == "string" ? formData.value.driverDocument : resLicence[0]?.data,
+                      /*   originalDocument: typeof formData.value.document == "string" ? formData.value.document : resOriginalDocument[0]?.data, */
+                       /*  driverLicense: typeof formData.value.driverDocument == "string" ? formData.value.driverDocument : resLicence[0]?.data, */
                         exteriorPhotos: newArrayExterior.length == 0 ? dataAuction.value.vehicleDetails.exteriorPhotos : newArrayExterior,
                         interiorPhotos: newArrayInterior.length == 0 ? dataAuction.value.vehicleDetails.interiorPhotos : newArrayInterior,
                         vehicleDamage: newArrayVehicleDamage.length == 0 ? dataAuction.value.vehicleDetails.vehicleDamage : newArrayVehicleDamage,

@@ -152,8 +152,8 @@
                                     <div class="grid grid-cols-6 gap-6 capitalize ">
                                         <p class=" md:text-base text-xs font-semibold col-span-2">Trim</p>
                                         <p class="md:text-base text-xs whitespace-pre"
-                                            v-if="dataDetails?.vehicleDetails?.vin">{{
-            dataDetails?.vehicleDetails?.vin }}
+                                            v-if="dataDetails?.vehicleDetails?.trim">{{
+            dataDetails?.vehicleDetails?.trim }}
                                         </p>
                                         <p v-else class="col-span-4 capitalize text-xs md:text-base text-[#A3A3A3] ">The
                                             seller didn't provide
@@ -319,19 +319,55 @@
                             </div>
                         </div>
                         <div class="bg-white border p-4 mt-6 space-y-3 border-[#E0E0E0]">
-                            <div class="flex border-b-2 gap-2 border-[#E0E0E0] md:gap-4">
-                                <svg class=" w-5 h-5 md:h-6 md:w-6" xmlns="http://www.w3.org/2000/svg" width="20"
+                            <div class="flex border-b-2 gap-2 pb-2 border-[#E0E0E0] md:gap-4">
+                                <svg class=" w-5 h-5 md:h-6 md:w-6 mt-4" xmlns="http://www.w3.org/2000/svg" width="20"
                                     height="20" viewBox="0 0 20 20" fill="none">
                                     <path
                                         d="M9.1665 9.16663V5.83329H10.8332V9.16663H14.1665V10.8333H10.8332V14.1666H9.1665V10.8333H5.83317V9.16663H9.1665ZM9.99984 18.3333C5.39734 18.3333 1.6665 14.6025 1.6665 9.99996C1.6665 5.39746 5.39734 1.66663 9.99984 1.66663C14.6023 1.66663 18.3332 5.39746 18.3332 9.99996C18.3332 14.6025 14.6023 18.3333 9.99984 18.3333ZM9.99984 16.6666C11.7679 16.6666 13.4636 15.9642 14.7139 14.714C15.9641 13.4638 16.6665 11.7681 16.6665 9.99996C16.6665 8.23185 15.9641 6.53616 14.7139 5.28591C13.4636 4.03567 11.7679 3.33329 9.99984 3.33329C8.23173 3.33329 6.53604 4.03567 5.28579 5.28591C4.03555 6.53616 3.33317 8.23185 3.33317 9.99996C3.33317 11.7681 4.03555 13.4638 5.28579 14.714C6.53604 15.9642 8.23173 16.6666 9.99984 16.6666Z"
                                         fill="#0B1107" />
                                 </svg>
-                                <p class="md:text-base font-bold text-sm">Additional Package</p>
+                                <p class="md:text-base font-bold mt-4 text-sm">Additional Package</p>
                             </div>
                             <div>
                                 <p v-if="dataDetails?.vehicleDetails?.aditionals"
                                     class="text-blue-dark text-xs md:text-base ">
                                     {{ dataDetails?.vehicleDetails?.aditionals }}</p>
+                                <p v-else class="text-[#858585] text-xs md:text-base ">The seller did not include
+                                    additional
+                                    package information</p>
+                            </div>
+
+
+                        </div>
+                        <div class="bg-white border p-4 mt-6 space-y-3 border-[#E0E0E0]">
+                            <div class="flex border-b-2 gap-2 pb-2 border-[#E0E0E0] md:gap-4">
+
+                                <svg class=" w-5 h-5 md:h-6 md:w-6 mt-4" fill="#000000" viewBox="0 0 24 24"
+                                    id="car-allert" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg">
+
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                                    <g id="SVGRepo_iconCarrier">
+
+                                        <path id="primary"
+                                            d="M20.49,11.84l-1.25-.31a1,1,0,0,0-1.24,1V13a1,1,0,0,1-1,1H13a1,1,0,0,1-1-1V8a1,1,0,0,0-1-1H7.62a2,2,0,0,0-1.8,1.11L4.25,11.25l-1.14.57A2,2,0,0,0,2,13.61V17a2,2,0,0,0,2,2H20a2,2,0,0,0,2-2V13.78A2,2,0,0,0,20.49,11.84Z"
+                                            style="fill: #000000;" />
+
+                                        <path id="secondary"
+                                            d="M10,18a3,3,0,1,1-3-3A3,3,0,0,1,10,18Zm7-3a3,3,0,1,0,3,3A3,3,0,0,0,17,15Zm-2-5a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,15,10Zm1-3V4a1,1,0,0,0-2,0V7a1,1,0,0,0,2,0Z"
+                                            style="fill: #000000;" />
+
+                                    </g>
+
+                                </svg>
+                                <p class="md:text-base font-bold mt-4 text-sm">Repairs</p>
+                            </div>
+                            <div>
+                                <p v-if="dataDetails?.vehicleDetails?.repairs"
+                                    class="text-blue-dark text-xs md:text-base ">
+                                    {{ dataDetails?.vehicleDetails?.repairs }}</p>
                                 <p v-else class="text-[#858585] text-xs md:text-base ">The seller did not include
                                     additional
                                     package information</p>
@@ -643,7 +679,7 @@
                         </div>
 
                     </div>
-                   <!--  <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div> -->
+                    <!--  <div v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div> -->
                     <div v-if="steps.step3" class="p-4 flex justify-center items-center flex-col gap-3">
                         <p class=" font-semibold capitalize md:text-xl">Final Bid Approved!</p>
                         <p class="capitalize text-xs md:text-base ">Download the Actual Sheet Below and Hand It to the
@@ -875,75 +911,75 @@ export default {
                         steps.value.step3 = true
 
                     }
-                   /*  showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
-                    const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
-                    PSPDFKit.load({
-                        baseUrl,
-                        licenseKey: 'HO2dV-bDcn32RCF6j2nDeKYNGqP1EOSnmSLLmbDrrdWJGwDq5yWsJs8pr31-EOKWXetRmJoBjUgv4AoEicoPgQw6Htu9foJBCUCWNZ2n7EvLcpMfoNLqokulJv87rHwmB9jnVIBTKGCZ7RKjGpERaDOl-JXfBFqdP6tSA07KKrsGh0k22IcAfwlevAAZNBOe72mr8i6D5tjXisarqg3a4vsSFuWyrmidugVCVPQsARlTZ5phlM3p4WSi032q6k3C7Zkt2UwLkGu6xfMy0u8wTOYLpjE8AMl5p4PC7j2I0WTVtrjYHLVyTJ-H0-bUUh1M_5pDIsK3YwHZNA5o5I0pnL70uk4nRPsvKL5hAxzI5e_PSWj8Oek73s6pf-htNu4PrL8YMfaX2KOo4tv3Q7Xsu6fhHOmkdvRn-UyCqQz8aJam2BZFpzXYndnfTToNV3v2PZ8ixUAzk03lKFvcThJg6wGTv1lo_AQ1zOx96eqaU069ZXuduPThRxd_i0zhEkGDfVKFaZWd03UaD0ZCDPWk5lSl0AuZJWFEKVyLQBLX2SDAf6z4m699tJ4jggOZoiQjD6rceOZUGAMCYAIMi4Z_6spoyIaAM4reyti70sY_K-Ccji1VNQKFlm0ne381Pyy298BJH2xQZnEPAWEtnFp1Xw==',
-                        container: "#pspdfkit",
-                        document: showPdf.value,
-                    }).then(async function (instance) {
-                        loadingPdf.value = false
-                        const items = instance.toolbarItems;
-                        instance.setToolbarItems(items.filter((item) =>
-                            item.type !== "export-pdf" &&
-                            item.type !== "search" &&
-                            item.type !== "annotate" &&
-                            item.type !== "multi-annotations-selection" &&
-                            item.type !== "signature" &&
-                            item.type !== "debug" &&
-                            item.type !== "document-crop" &&
-                            item.type !== "document-editor" &&
-                            item.type !== "print" &&
-                            item.type !== "polyline" &&
-                            item.type !== "cloudy-polygon" &&
-                            item.type !== "polygon" &&
-                            item.type !== "ellipse" &&
-                            item.type !== "arrow" &&
-                            item.type !== "link" &&
-                            item.type !== "line" &&
-                            item.type !== "callout" &&
-                            item.type !== "note" &&
-                            item.type !== "rectangle" &&
-                            item.type !== "stamp" &&
-                            item.type !== "image" &&
-                            item.type !== "ink-eraser" &&
-                            item.type !== "text-highlighter" &&
-                            item.type !== "text" &&
-                            item.type !== "highlighter" &&
-                            item.type !== "ink" &&
-                            item.type !== "pan" &&
-                            item.type !== "pager" &&
-                            item.type !== "sidebar-layers" &&
-                            item.type !== "sidebar-thumbnails" &&
-                            item.type !== "sidebar-document-outline" &&
-                            item.type !== "sidebar-bookmarks" &&
-                            item.type !== "sidebar-signatures" &&
-                            item.type !== "sidebar-annotations"
-
-                        ));
-                        const widget2 = new PSPDFKit.Annotations.WidgetAnnotation({
-                            id: PSPDFKit.generateInstantId(),
-                            pageIndex: 0,
-                            boundingBox: new PSPDFKit.Geometry.Rect({
-                                left: 116,
-                                top: 785,
-                                width: 100,
-                                height: 20
-                            }),
-                            formFieldName: "my signature form field"
-                        })
-                        const formField = new PSPDFKit.FormFields.SignatureFormField({
-                            name: "my signature form field",
-                            annotationIds: new PSPDFKit.Immutable.List([widget2.id])
-                        });
-                        await instance.create([widget2, formField]);
-                        instance.addEventListener("storedSignatures.create", async (e) => {
-                            const buffer = await instance.exportPDF({ flatten: true });
-                            dataBuffer.value = buffer
-                            sutmibPDF(buffer)
-                        });
-                    }) */
+                    /*  showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                     const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
+                     PSPDFKit.load({
+                         baseUrl,
+                         licenseKey: 'HO2dV-bDcn32RCF6j2nDeKYNGqP1EOSnmSLLmbDrrdWJGwDq5yWsJs8pr31-EOKWXetRmJoBjUgv4AoEicoPgQw6Htu9foJBCUCWNZ2n7EvLcpMfoNLqokulJv87rHwmB9jnVIBTKGCZ7RKjGpERaDOl-JXfBFqdP6tSA07KKrsGh0k22IcAfwlevAAZNBOe72mr8i6D5tjXisarqg3a4vsSFuWyrmidugVCVPQsARlTZ5phlM3p4WSi032q6k3C7Zkt2UwLkGu6xfMy0u8wTOYLpjE8AMl5p4PC7j2I0WTVtrjYHLVyTJ-H0-bUUh1M_5pDIsK3YwHZNA5o5I0pnL70uk4nRPsvKL5hAxzI5e_PSWj8Oek73s6pf-htNu4PrL8YMfaX2KOo4tv3Q7Xsu6fhHOmkdvRn-UyCqQz8aJam2BZFpzXYndnfTToNV3v2PZ8ixUAzk03lKFvcThJg6wGTv1lo_AQ1zOx96eqaU069ZXuduPThRxd_i0zhEkGDfVKFaZWd03UaD0ZCDPWk5lSl0AuZJWFEKVyLQBLX2SDAf6z4m699tJ4jggOZoiQjD6rceOZUGAMCYAIMi4Z_6spoyIaAM4reyti70sY_K-Ccji1VNQKFlm0ne381Pyy298BJH2xQZnEPAWEtnFp1Xw==',
+                         container: "#pspdfkit",
+                         document: showPdf.value,
+                     }).then(async function (instance) {
+                         loadingPdf.value = false
+                         const items = instance.toolbarItems;
+                         instance.setToolbarItems(items.filter((item) =>
+                             item.type !== "export-pdf" &&
+                             item.type !== "search" &&
+                             item.type !== "annotate" &&
+                             item.type !== "multi-annotations-selection" &&
+                             item.type !== "signature" &&
+                             item.type !== "debug" &&
+                             item.type !== "document-crop" &&
+                             item.type !== "document-editor" &&
+                             item.type !== "print" &&
+                             item.type !== "polyline" &&
+                             item.type !== "cloudy-polygon" &&
+                             item.type !== "polygon" &&
+                             item.type !== "ellipse" &&
+                             item.type !== "arrow" &&
+                             item.type !== "link" &&
+                             item.type !== "line" &&
+                             item.type !== "callout" &&
+                             item.type !== "note" &&
+                             item.type !== "rectangle" &&
+                             item.type !== "stamp" &&
+                             item.type !== "image" &&
+                             item.type !== "ink-eraser" &&
+                             item.type !== "text-highlighter" &&
+                             item.type !== "text" &&
+                             item.type !== "highlighter" &&
+                             item.type !== "ink" &&
+                             item.type !== "pan" &&
+                             item.type !== "pager" &&
+                             item.type !== "sidebar-layers" &&
+                             item.type !== "sidebar-thumbnails" &&
+                             item.type !== "sidebar-document-outline" &&
+                             item.type !== "sidebar-bookmarks" &&
+                             item.type !== "sidebar-signatures" &&
+                             item.type !== "sidebar-annotations"
+ 
+                         ));
+                         const widget2 = new PSPDFKit.Annotations.WidgetAnnotation({
+                             id: PSPDFKit.generateInstantId(),
+                             pageIndex: 0,
+                             boundingBox: new PSPDFKit.Geometry.Rect({
+                                 left: 116,
+                                 top: 785,
+                                 width: 100,
+                                 height: 20
+                             }),
+                             formFieldName: "my signature form field"
+                         })
+                         const formField = new PSPDFKit.FormFields.SignatureFormField({
+                             name: "my signature form field",
+                             annotationIds: new PSPDFKit.Immutable.List([widget2.id])
+                         });
+                         await instance.create([widget2, formField]);
+                         instance.addEventListener("storedSignatures.create", async (e) => {
+                             const buffer = await instance.exportPDF({ flatten: true });
+                             dataBuffer.value = buffer
+                             sutmibPDF(buffer)
+                         });
+                     }) */
                 } catch (error) {
                     console.log('error', error)
                     loadingPdf.value = false
