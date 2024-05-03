@@ -364,6 +364,7 @@ export default {
                 let res = await storeAutions.index()
                 data.value = storeAutions.draft
                 data.value.map((autions, index) => {
+                    console.log('autions', autions)
                     let counter = 0;
                     let progress = 0;
                     progress = autions.city && counter++
@@ -389,20 +390,15 @@ export default {
                     progress = autions.vehicleDetails?.tireReplacement && counter++
                     progress = autions.vehicleDetails?.transmission && counter++
                     progress = autions.vehicleDetails?.year && counter++
-                    if (autions.vehicleDetails.exteriorPhotos) {
+                    if (autions.vehicleDetails.exteriorPhotos.length > 0) {
                         progress = autions.vehicleDetails.exteriorPhotos.length > 0 && counter + 6
-                        console.log('exteriorPhotos', progress)
                     }
-                    if (autions.vehicleDetails.interiorPhotos) {
+                    if (autions.vehicleDetails.interiorPhotos.length > 0) {
                         progress = autions.vehicleDetails.interiorPhotos.length > 0 && counter + 6
-                        console.log('interiorPhotos', progress)
                     }
-                    console.log('progress res.data', progress)
-
                     let currentValue = progress;
                     let percentage = (currentValue / 32) * 100
                     autions.percentage = percentage ? Number(percentage.toFixed(0)) : 25
-                    console.log('autions', autions)
                     const formatter = new Intl.NumberFormat();
                     autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer)
                     let photos = null;
@@ -413,6 +409,7 @@ export default {
                         photos = null
                     }
                 })
+                console.log('data.value', data.value)
                 loading.value = false
             } catch (error) {
                 loading.value = false
