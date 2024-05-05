@@ -487,12 +487,12 @@ export default {
 
         const previewImage = (event) => {
             var input = event.target;
-            var maxfilesize = 1024 * 1024  // 1 Mb
+            var maxfilesize = ((1024 * 1024) * 5) * 10  // 1 Mb
             var filesize = input.files[0].size
             let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
             if (input.files) {
                 if (filesize > maxfilesize) {
-                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 1 Mb", {
+                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 50 Mb", {
                         type: "error",
                     });
                     form.value.driverPreview = null

@@ -50,7 +50,7 @@
                                             <strong class="text-[15]">Name:</strong> {{ form?.img?.name }}
                                         </p>
                                     </div>
-                                    <p v-else class="text-xs font-medium text-[#666]">JPG, GIF or PNG. Max size of 1Mb
+                                    <p v-else class="text-xs font-medium text-[#666]">JPG, GIF or PNG. Max size of 50Mb
                                     </p>
                                     <label :class="invalid?.img ? 'bg-error' : 'bg-[#F0F0F0]'"
                                         class="flex flex-col items-center mt-4 px-2 py-2  rounded-lg shadow-lg  tracking-wide  cursor-pointer">
@@ -294,12 +294,14 @@ export default {
         const dataForm = ref(props.getDataRegister)
         const previewImage = (event) => {
             var input = event.target;
-            var maxfilesize = 1024 * 1024  // 1 Mb
+            var maxfilesize = ((1024 * 1024) * 5) * 10  // 50 Mb
+            console.log('maxfilesize', maxfilesize)
             var filesize = input.files[0].size
             let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
+            console.log('convertion', convertion)
             if (input.files) {
                 if (filesize > maxfilesize) {
-                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 1 Mb", {
+                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 50 Mb", {
                         type: "error",
                     });
                     form.preview = null
@@ -318,13 +320,13 @@ export default {
         }
         const previewLicense = (event) => {
             var input = event.target;
-            var maxfilesize = (1024 * 1024) * 5  // 5 Mb
+            var maxfilesize = ((1024 * 1024) * 5) * 10  // 50 Mb
             var filesize = input.files[0].size
             let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
             console.log('convertion', convertion)
             if (input.files) {
                 if (filesize > maxfilesize) {
-                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 5 Mb", {
+                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 50 Mb", {
                         type: "error",
                     });
                     form.previewDriverLicense = null
