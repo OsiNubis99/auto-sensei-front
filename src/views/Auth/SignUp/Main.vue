@@ -173,8 +173,8 @@ export default {
             if (route.query.token) {
                 getAuth(route.query)
             } else {
-                stepsCurrent.value = 2;
-                swiper.value?.slideTo(2);
+                stepsCurrent.value = 0;
+                swiper.value?.slideTo(0);
                 router.replace({ query: '' })
             }
 
