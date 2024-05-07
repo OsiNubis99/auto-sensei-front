@@ -12,14 +12,14 @@
             <div class="flex justify-between items-center gap-2">
                 <input type="text" placeholder="search chatting" v-model="search"
                     class="h-[40px] pl-4 border-2 border-[#E0E0E0] rounded-lg w-full" />
-                <div
+                <!--  <div
                     class="w-[50px] h-[40px]  flex items-center justify-center border-[1px] rounded-lg border-[#E0E0E0] ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="15" viewBox="0 0 12 15" fill="none">
                         <path
                             d="M7.5 8.5V13L4.5 14.5V8.5L0 1.75V0.25H12V1.75L7.5 8.5ZM1.803 1.75L6 8.0455L10.197 1.75H1.803Z"
                             fill="#858585" />
                     </svg>
-                </div>
+                </div> -->
             </div>
         </div>
         <div :class="activateLayout ? 'visible pointer-events-auto' : 'invisible pointer-events-none '"
@@ -120,11 +120,12 @@
                                     src="@/assets/img/jpg/image.jpg" alt="">
                             </div>
                             <div class="w-full">
-                                <div class="text-lg font-semibold">{{ user.participant.dealer.name }}</div>
-                                <span class="text-gray-500">{{ user.createdAt }} </span>
+                                <div class="text-lg font-semibold">{{ user.title }}</div>
+                                <p v-if="user?.participant?.address" class="capitalize">{{
+            user?.participant?.address?.country }}, {{
+            user?.participant?.address?.city }}</p>
                             </div>
                         </template>
-
                         <template v-else>
                             <div class="w-[30%] ">
                                 <img v-if="user.auction?.vehicleDetails.exteriorPhotos[0]"
@@ -135,12 +136,10 @@
                             </div>
                             <div class="w-full flex  justify-between items-end  relative">
                                 <div>
-                                    <p class="text-lg font-semibold">
-                                        {{ user.auction?.vehicleDetails?.year }} {{
-            user.auction?.vehicleDetails?.make }} {{ user.auction?.vehicleDetails?.model }}
-                                    </p>
-                                    <p class="capitalize">{{ user.auction?.owner?.seller?.firstName }} {{
-            user.auction?.owner?.seller?.lastName }}
+                                    <div class="text-lg font-semibold">{{ user.title }}</div>
+                                    <p v-if="user?.participant?.address" class="capitalize">{{
+            user?.participant.address?.country }}, {{
+            user?.participant?.address?.city }}
                                     </p>
                                 </div>
                                 <p class="text-gray-500 absolute -bottom-2 right-2  ">11.31</p>
@@ -728,14 +727,14 @@
             <div class="flex justify-between items-center gap-2">
                 <input type="text" placeholder="search chatting" v-model="search"
                     class="h-[40px] pl-4 border-2 border-[#E0E0E0] rounded-lg w-full" />
-                <div
+                <!-- <div
                     class="w-[50px] h-[40px]  flex items-center justify-center border-[1px] rounded-lg border-[#E0E0E0] ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="15" viewBox="0 0 12 15" fill="none">
                         <path
                             d="M7.5 8.5V13L4.5 14.5V8.5L0 1.75V0.25H12V1.75L7.5 8.5ZM1.803 1.75L6 8.0455L10.197 1.75H1.803Z"
                             fill="#858585" />
                     </svg>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="row-span-5  col-span-2 border-r-2 border-t-[1px] border-[#E0E0E0] ">
@@ -1080,10 +1079,13 @@ export default {
                     if ((chats.auction._id + "-" + chats.participant._id) == route.query.id) {
                         chats.activeChat = chats.auction._id + "-" + chats.participant._id
                     }
+                    chats.title = `${chats.auction.vehicleDetails.make} ${chats.auction.vehicleDetails.model}`
+                    console.log('chats', chats)
                     return chats
 
                 })
                 listUser.value = response
+
                 console.log('listUser', listUser)
                 /*  sendChat() */
             });
@@ -1213,7 +1215,7 @@ export default {
             });
         }
         const dataTableSearch = computed(() => {
-            return listUser.value.filter(s => s.auction?.vehicleDetails?.make?.toLocaleLowerCase().includes(search.value?.toLocaleLowerCase()))
+            return listUser.value.filter(s => s.title?.toLocaleLowerCase().includes(search.value?.toLocaleLowerCase()))
         })
         const dataChat = computed(() => {
             return listChat.value.filter(s => s?.message?.toLocaleLowerCase().includes(searchat.value?.toLocaleLowerCase()))
