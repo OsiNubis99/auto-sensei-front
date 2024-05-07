@@ -36,13 +36,13 @@ export const validateData = (form, step, typeLaunch) => {
             if (!form.financingCompany) {
                 error.financingCompany = 'Required field'
             }
-            if (!form.manyPayments) {
-                error.manyPayments = 'Required field'
-            } else if (form.manyPayments == 'Yes') {
-                if (!form.remainingPayments) {
-                    error.remainingPayments = 'Required field'
-                }
-            }
+            /*  if (!form.manyPayments) {
+                 error.manyPayments = 'Required field'
+             } else if (form.manyPayments == 'Yes') {
+                 if (!form.remainingPayments) {
+                     error.remainingPayments = 'Required field'
+                 }
+             } */
         }
 
         if (form.buyoutVehicle == 'Yes') {
@@ -55,12 +55,12 @@ export const validateData = (form, step, typeLaunch) => {
             if (!form.anyVehicle) {
                 error.anyVehicle = 'Required field'
             }
-             if (!form.makePreferences) {
-                 error.makePreferences = 'Required field'
-             }
-             if (!form.modelPreferences) {
-                 error.modelPreferences = 'Required field'
-             }
+            if (!form.makePreferences) {
+                error.makePreferences = 'Required field'
+            }
+            if (!form.modelPreferences) {
+                error.modelPreferences = 'Required field'
+            }
             if (!form.modelFromPreferences) {
                 error.modelFromPreferences = 'Required field'
             }
@@ -142,12 +142,12 @@ export const validateData = (form, step, typeLaunch) => {
         } */
     }
     if (step == 'UploadPhotos') {
-       /*  if (!form.document) {
-            error.document = 'Required field'
-        }
-        if (!form.driverDocument) {
-            error.driverDocument = 'Required field'
-        } */
+        /*  if (!form.document) {
+             error.document = 'Required field'
+         }
+         if (!form.driverDocument) {
+             error.driverDocument = 'Required field'
+         } */
         if (!form.frontPhoto) {
             error.frontPhoto = 'Required field'
         }
@@ -223,13 +223,13 @@ export const validateData = (form, step, typeLaunch) => {
             if (!form.financingCompany) {
                 error.financingCompany = 'Required field'
             }
-            if (!form.manyPayments) {
-                error.manyPayments = 'Required field'
-            } else if (form.manyPayments == 'Yes') {
-                if (!form.remainingPayments) {
-                    error.remainingPayments = 'Required field'
-                }
-            }
+            /*  if (!form.manyPayments) {
+                 error.manyPayments = 'Required field'
+             } else if (form.manyPayments == 'Yes') {
+                 if (!form.remainingPayments) {
+                     error.remainingPayments = 'Required field'
+                 }
+             } */
         }
 
         if (form.buyoutVehicle == 'Yes') {
@@ -330,12 +330,12 @@ export const validateData = (form, step, typeLaunch) => {
          if (!form.lastReplacement3) {
              error.lastReplacement3 = 'Required field'
          } */
-       /*  if (!form.document) {
-            error.document = 'Required field'
-        }
-        if (!form.driverDocument) {
-            error.driverDocument = 'Required field'
-        } */
+        /*  if (!form.document) {
+             error.document = 'Required field'
+         }
+         if (!form.driverDocument) {
+             error.driverDocument = 'Required field'
+         } */
         if (!form.frontPhoto) {
             error.frontPhoto = 'Required field'
         }

@@ -40,18 +40,16 @@
         (stepsDateWeekeng.step1 && formData.launchOptions == 'Choose after hours (weekend)' ||
             formData.launchOptions == null)">
                         <p class="md:font-semibold text-xs md:text-base ">Launch Options</p>
-                        <p class=" text-[#858585] text-[10px] md:text-base">After you launch the auction there is a 90
-                            minute
-                            buffer for our team to
-                            review your posting
+                        <p class=" text-[#858585] text-[10px] md:text-base">After you launch the auction we will review
+                            & approve your auction. Your auction will be listed the next day from 9 am to 5pm.
                         </p>
-                        <div class="w-full flex-col items-start mt-4 flex gap-2">
+                        <!--  <div class="w-full flex-col items-start mt-4 flex gap-2">
                             <label class="label-radio text-[12px] md:text-base !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="none" class="input-radio on"
                                     name="launch-option">
                                 Next Day
                             </label>
-                           <!--  <label class="label-radio text-[12px] md:text-base !justify-start">
+                            <label class="label-radio text-[12px] md:text-base !justify-start">
                                 <input v-model="formData.launchOptions" type="radio" value="Launch now after verified"
                                     class="input-radio on" name="launch-option">
                                 Launch now after verified
@@ -65,12 +63,11 @@
                                 <input v-model="formData.launchOptions" type="radio"
                                     value="Choose after hours (weekend)" class="input-radio on" name="launch-option">
                                 Choose after hours (weekend)
-                            </label> -->
-                        </div>
+                            </label>
+                        </div> -->
                     </template>
-                    <NextDay v-if="formData.launchOptions == 'none'" :steps="stepsVerifiqued"
-                        :form="formData" :save="save" />
-                  <!--   <AfterVerified v-if="formData.launchOptions == 'Launch now after verified'" :steps="stepsVerifiqued"
+                    <NextDay :steps="stepsVerifiqued" :form="formData" :save="save" />
+                    <!--   <AfterVerified v-if="formData.launchOptions == 'Launch now after verified'" :steps="stepsVerifiqued"
                         :form="formData" :save="save" />
                     <DateAndTime v-if="formData.launchOptions == 'Choose the date & time'" :steps="stepsDateTime"
                         :form="formData" :save="save" />
