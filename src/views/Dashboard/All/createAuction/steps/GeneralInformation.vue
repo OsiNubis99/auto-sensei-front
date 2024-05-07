@@ -18,21 +18,6 @@
                 </p>
             </div>
             <div class="flex gap-2 items-center justify-between">
-                <!-- <div class="w-full flex mt-5 flex-col gap-2">
-                    <label class=" text-sm md:text-base " for="">Start Date Vehicle</label>
-                    <VueDatePicker class="custom-picker" :class="invalid?.startDate && 'error-picker'"
-                        v-model="form.startDate">
-                        <template #calendar-header="{ index, day }">
-                            <div :class="index === 5 || index === 6 ? 'red-color' : ''">
-                                {{ day }}
-                            </div>
-                        </template>
-</VueDatePicker>
-<p class="text-xs md:text-sm text-[#858585] ">If you accept a bid, the vehicle must be dropped off within 14 days
-    from
-    the acceptance date.
-</p>
-</div> -->
                 <div class="w-full mt-5 flex flex-col gap-2">
                     <label class=" text-sm md:text-base " for="">Vehicle Drop Off Agreement</label>
                     <VueDatePicker :enable-time-picker="false"
@@ -59,38 +44,12 @@
                 <input v-model="form.province" placeholder="Province"
                     :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'" class="p-2 rounded-lg border "
                     type="text">
-                <!--  <select v-model="form.province" :disabled="!form.getState ? true : false"
-                    @change="onChangeGetProvince($event)"
-                    :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
-                    class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                    <option v-if="!form.getState" selected>Laoding city... </option>
-                    <option v-else selected hidden>Select province</option>
-                    <template v-for="(state, index) in form.getState" :key="index">
-                        <option :value="JSON.stringify(state)">{{ state.iso2 }} | {{ state.name }}</option>
-                    </template>
-                </select>
-                <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding province...
-                </div> -->
             </div>
             <div class="w-full flex flex-col gap-2 relative">
                 <label class=" text-sm md:text-base " for="">City</label>
                 <input v-model="form.city" placeholder="City"
                     :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'" class="p-2 rounded-lg border "
                     type="text">
-                <!--   <select v-model="form.city" @change="onChangeGetCity($event)"
-                    :disabled="loadingCountrys || !form.getCities ? true : false"
-                    :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
-                    class=" border text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-
-                    <option v-if="loadingCountrys" selected>Laoding city... </option>
-                    <option v-else selected hidden>Select city </option>
-                    <template v-for="(cities, index) in form.getCities" :key="index">
-                        <option :value="JSON.stringify(cities)">{{ cities.name }}</option>
-                    </template>
-                </select>
-                <div v-if="loadingCountrys" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
-                    city...</div> -->
             </div>
             <div class="w-full flex flex-col gap-2">
                 <label class=" text-sm md:text-base " for="">How many keys?</label>
@@ -105,7 +64,7 @@
             </div>
 
         </div>
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2 w-full">
 
             <p class="text-sm font-semibold ">Is your vehicle currently?</p>
             <div class="flex gap-4 items-center">
@@ -125,7 +84,7 @@
                 </label>
             </div>
             <div class="mt-4" v-if="form.currently == 'Financed' || form.currently == 'Leased'">
-                <div class="flex flex-col gap-4">
+                <div class="flex w-full flex-col gap-4">
                     <div class="w-full flex flex-col gap-2">
                         <label class=" text-sm md:text-base " for="">Leasing or Financing Company</label>
                         <input v-model="form.financingCompany"
@@ -133,7 +92,7 @@
                             class="p-2 rounded-lg border "
                             placeholder="Enter the bank/institution your vehicle is currently being financed or leased with">
                     </div>
-                    <div class="flex w-fill flex-col md:flex-row justify-between">
+                    <!-- <div class="flex w-fill flex-col md:flex-row justify-between">
                         <div class="flex flex-col w-full gap-4">
                             <p class="text-xs md:text-sm text-[#666666]  ">Do you know how many payments are left? (to
                                 be
@@ -155,14 +114,11 @@
                         </div>
                         <div v-if="form.manyPayments == 'Yes'" class="w-full flex flex-col gap-2">
                             <label class=" text-sm md:text-base " for="">Remaining payments</label>
-                            <!-- <input :class="invalid?.remainingPayments ? 'border-error' : 'border-[#E0E0E0]'"
-                                v-model="form.remainingPayments" class="p-2 rounded-lg border "
-                                placeholder="Enter the number of payments left" type="number"> -->
                             <CurrencyInput :key="counterKey" v-model="form.remainingPayments"
                                 :error='invalid?.remainingPayments' :options="{ currency: 'USD' }"
                                 :placeHolder="`Enter Number of payments left $`" />
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -276,6 +232,7 @@
             class=" btn flex justify-center bg-[#303E18] py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Continue
         </button>
+        <p class="text-xs md:text-sm text-[#666666]">You can edit at the end, when we confirm all your details.</p>
     </div>
 </template>
 <script>

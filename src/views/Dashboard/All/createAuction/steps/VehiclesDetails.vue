@@ -69,7 +69,6 @@
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Odometer</label>
                 <input step="0.01" :class="invalid?.odometer ? 'border-error' : ''" v-model="form.odometer"
-                    :disabled="formDisable.odometer ? true : false"
                     class="p-2 w-full md:mt-3 border border-[#E0E0E0]  rounded-lg" placeholder="Enter odometer"
                     type="number">
             </div>
@@ -95,56 +94,48 @@
         <p class="font-medium text-xs md:text-base">Exterior Color</p>
         <div class=" grid grid-cols-3 gap-[8px]  md:flex md:flex-wrap md:gap-4">
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-black" value="black" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-black" value="black" name="color-redio">
                 Black
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-white" value="white" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-white" value="white" name="color-redio">
                 White
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-silver" value="silver" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-silver" value="silver"
+                    name="color-redio">
                 Silver
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-grey" value="grey" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-grey" value="grey" name="color-redio">
                 Grey
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-greendark" value="greenDark" name="color-redio"> Green Dark
+                <input type="radio" v-model="form.color" class="input-radio on-greendark" value="greenDark"
+                    name="color-redio"> Green Dark
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-brown" value="brown" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-brown" value="brown" name="color-redio">
                 Brown
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-red" value="red" name="color-redio"> Red
+                <input type="radio" v-model="form.color" class="input-radio on-red" value="red" name="color-redio"> Red
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-yellow" value="yellow" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-yellow" value="yellow"
+                    name="color-redio">
                 Yellow
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-green" value="green" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-green" value="green" name="color-redio">
                 Green
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-blue" value="blue" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-blue" value="blue" name="color-redio">
                 Blue
             </label>
             <label class="label-colors" :class="invalid?.color ? 'label-colors-error' : 'border-none'">
-                <input type="radio" :disabled="formDisable.color ? true : false" v-model="form.color"
-                    class="input-radio on-other" value="other" name="color-redio">
+                <input type="radio" v-model="form.color" class="input-radio on-other" value="other" name="color-redio">
                 Other
             </label>
             <div v-if="form.color == 'other'" class="w-full flex items-start flex-col">
@@ -220,7 +211,7 @@
                         :class="invalid?.lastReplacement ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected hidden>Choose Year</option>
-                        <option value="2023">2024</option>
+                        <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>
@@ -249,6 +240,7 @@
                         :class="invalid?.lastReplacement2 ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected hidden>Choose Year</option>
+                        <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>
@@ -287,6 +279,7 @@
             class=" btn flex justify-center bg-[#303E18] py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Continue
         </button>
+        <p class="text-xs md:text-sm text-[#666666]">You can edit at the end, when we confirm all your details.</p>
     </div>
 </template>
 <script>

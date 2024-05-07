@@ -281,7 +281,7 @@
                                             information
                                         </p>
                                     </div>
-                                    <div class="grid grid-cols-6 gap-6">
+                                    <!--  <div class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2  md:text-base text-xs">Remaining Payments
                                         </p>
                                         <p class="md:text-base text-xs whitespace-pre"
@@ -291,7 +291,7 @@
                                             seller didn't provide
                                             information
                                         </p>
-                                    </div>
+                                    </div> -->
                                     <div class="grid grid-cols-6 gap-6">
                                         <p class=" font-semibold col-span-2  md:text-base text-xs">Buyout Amount</p>
                                         <p class="md:text-base text-xs whitespace-pre" v-if="dataDetails?.buyout">
@@ -315,8 +315,111 @@
 
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
+                        </div>
+                        <div class="bg-white border p-4 mt-6 space-y-3 border-[#E0E0E0]">
+                            <div class="flex border-b-2 gap-2 pb-2 border-[#E0E0E0] md:gap-4">
+                                <svg width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M2 3h7v1H2zm7 4H6v1h3zm0 4H3v1h6zm12-8H11v1h10zM11 7v1h5V7zm0 5h8v-1h-8zM1 19h22v3H1zm1 2h20v-1H2zm7-5v-1H5v1zm2 0h10v-1H11z">
+                                        </path>
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                    </g>
+                                </svg>
+                                <p class="md:text-base font-bold mt-1 text-sm">Interedted In:</p>
+                            </div>
+                            <div>
+                                <div v-if="dataDetails?.buyNew?.anyVehicle"
+                                    class="   flex  flex-col md:flex-row justify-between items-start  ">
+                                    <div class="flex gap-4 flex-col p-4 w-full border-r-[1px] border-[#E0E0E0] ">
+                                        <div class="grid grid-cols-6 gap-6 capitalize ">
+                                            <p class=" md:text-base text-xs font-semibold col-span-2">Make</p>
+                                            <p class="md:text-base text-xs whitespace-pre"
+                                                v-if="dataDetails?.buyNew?.make">{{ dataDetails?.buyNew?.make }}
+                                            </p>
+                                            <p v-else
+                                                class="col-span-4 capitalize text-xs md:text-base text-[#A3A3A3] ">The
+                                                seller didn't provide
+                                                information
+                                            </p>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6 capitalize ">
+                                            <p class=" md:text-base text-xs font-semibold col-span-2">Model</p>
+                                            <p class="md:text-base text-xs whitespace-pre"
+                                                v-if="dataDetails?.buyNew?.model">{{ dataDetails?.buyNew?.model }}
+                                            </p>
+                                            <p v-else
+                                                class="col-span-4 capitalize text-xs md:text-base text-[#A3A3A3] ">The
+                                                seller didn't provide
+                                                information
+                                            </p>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6 capitalize ">
+                                            <p class=" md:text-base text-xs font-semibold col-span-2">Mileage From</p>
+                                            <p class="md:text-base text-xs whitespace-pre"
+                                                v-if="dataDetails?.buyNew?.mileageStart">
+                                                {{ dataDetails?.buyNew?.mileageStart }}</p>
+                                            <p v-else
+                                                class="col-span-4 capitalize text-xs md:text-base text-[#A3A3A3] ">The
+                                                seller didn't provide
+                                                information
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4 flex-col p-4 w-full">
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <p class=" font-semibold col-span-2  md:text-base text-xs">Mileage To
+                                            </p>
+                                            <p class="md:text-base text-xs whitespace-pre"
+                                                v-if="dataDetails?.buyNew?.mileageEnd">{{
+            dataDetails?.buyNew?.mileageEnd
+        }}</p>
+                                            <p v-else
+                                                class="col-span-4 capitalize text-xs md:text-base text-[#A3A3A3] ">The
+                                                seller didn't provide
+                                                information
+                                            </p>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <p class=" font-semibold col-span-2  md:text-base text-xs">Year From</p>
+                                            <p class="md:text-base text-xs col-span-4 capitalize"
+                                                v-if="dataDetails?.buyNew?.yearStart">{{
+            dataDetails?.buyNew?.yearStart }}
+                                            </p>
+                                            <p v-else
+                                                class="col-span-4 capitalize text-xs md:text-base text-[#A3A3A3] ">The
+                                                seller didn't provide
+                                                information
+                                            </p>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <p class=" font-semibold col-span-2  md:text-base text-xs">Year To
+                                            </p>
+                                            <p class="md:text-base text-xs col-span-4 capitalize"
+                                                v-if="dataDetails?.buyNew?.yearEnd">
+                                                {{
+            dataDetails?.buyNew?.yearEnd
+        }}</p>
+                                            <p v-else
+                                                class="col-span-4 capitalize text-xs md:text-base text-[#A3A3A3] ">The
+                                                seller didn't provide
+                                                information
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <p v-else class="text-[#858585] text-xs md:text-base ">The seller did not include
+                                    information.</p>
+                            </div>
+
+
                         </div>
                         <div class="bg-white border p-4 mt-6 space-y-3 border-[#E0E0E0]">
                             <div class="flex border-b-2 gap-2 pb-2 border-[#E0E0E0] md:gap-4">
@@ -369,8 +472,7 @@
                                     class="text-blue-dark text-xs md:text-base ">
                                     {{ dataDetails?.vehicleDetails?.repairs }}</p>
                                 <p v-else class="text-[#858585] text-xs md:text-base ">The seller did not include
-                                    additional
-                                    package information</p>
+                                    information.</p>
                             </div>
 
 
@@ -590,7 +692,7 @@
                                                 <!--    ${{makeFriendly(dataDetails?.bids[0]?.amount)}} -->
                                             </p>
                                             <p v-else-if="dataDetails?.vehicleDetails?.basePrice">{{
-            dataDetails?.vehicleDetails?.basePrice }}</p>
+                                                dataDetails?.vehicleDetails?.basePrice }}</p>
                                             <p v-else>$0</p>
                                         </div>
                                     </div>
@@ -751,6 +853,7 @@ export default {
         const openPdf = ref(false)
         const autionPdf = ref(null)
         const showPdf = ref('')
+        const pdf = ref(null)
         const loadingPdf = ref(false)
         const idParams = ref()
         const steps = ref({

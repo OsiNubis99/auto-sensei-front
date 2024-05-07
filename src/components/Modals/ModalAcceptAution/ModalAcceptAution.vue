@@ -122,6 +122,7 @@ export default {
         const statusModal = ModalAcceptAution()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const showPdf = ref('')
+        const pdf = ref(null)
         const dataBuffer = ref(null)
 
         const sutmibPDF = async (pdf) => {
@@ -182,7 +183,7 @@ export default {
                 loading.value = true
                 if (steps.value.step2) {
                     //SIN LIBRERIA
-                    let res = await props.acceptAution(showPdf.value)
+                    let res = await props.acceptAution(pdf.value)
                     console.log('res', res)
                     if (res) {
                         steps.value.step1 = false
@@ -190,7 +191,7 @@ export default {
                         steps.value.step3 = true
                         loading.value = false
                     }
-                     //CON LIBRERIA
+                    //CON LIBRERIA
                     /*  const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
                      loading.value = false
                      if (!loading.value && steps.value.step2) {
@@ -291,12 +292,14 @@ export default {
             loading.value = true
             if (statusModal.dataAutiont.contract) {
                 showPdf.value = 'https://apidev.autosensei.ca/files/' + statusModal.dataAutiont.contract;
+                pdf.value = statusModal.dataAutiont.contract;
                 loading.value = false;
             } else {
                 axios
                     .get(`/auction/contract/${statusModal.dataAutiont._id}`)
                     .then(async (response) => {
                         console.log('resPDF', response)
+                        pdf.value = response.data.contract;
                         showPdf.value = 'https://apidev.autosensei.ca/files/' + response.data.contract;
                         loading.value = false
 

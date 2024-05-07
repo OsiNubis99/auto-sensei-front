@@ -441,8 +441,8 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-              /*   formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*   formData.value.saveCity = JSON.parse(formData.value.city)
+                  formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -535,8 +535,8 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-               /*  formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*  formData.value.saveCity = JSON.parse(formData.value.city)
+                 formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -711,16 +711,16 @@ export default {
             let resAdditionalDocuments = null;
             try {
 
-               /*  if (typeof formData.value.document?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
-                    resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
-                    if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
-                }
-                if (typeof formData.value.driverDocument?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
-                    resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
-                    if (resLicence[0]?.data) arrayUpload.value[0].completed = true
-                } */
+                /*  if (typeof formData.value.document?.type == 'string') {
+                     arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
+                     resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
+                     if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
+                 }
+                 if (typeof formData.value.driverDocument?.type == 'string') {
+                     arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
+                     resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
+                     if (resLicence[0]?.data) arrayUpload.value[0].completed = true
+                 } */
 
                 if (typeof formData.value.frontPhoto?.type == 'string' ||
                     typeof formData.value.front?.type == 'string' ||
@@ -932,8 +932,8 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-              /*   formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*   formData.value.saveCity = JSON.parse(formData.value.city)
+                  formData.value.saveProvince = JSON.parse(formData.value.province) */
                 console.log('formData.value.document ', formData.value.document)
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
@@ -970,8 +970,8 @@ export default {
                         brakeReplacement: formData.value.lastReplacement2,
                         rotorCondition: formData.value.rotorCondition,
                         rotorReplacement: formData.value.lastReplacement3,
-                      /*   originalDocument: typeof formData.value.document == "string" ? formData.value.document : resOriginalDocument[0]?.data, */
-                       /*  driverLicense: typeof formData.value.driverDocument == "string" ? formData.value.driverDocument : resLicence[0]?.data, */
+                        /*   originalDocument: typeof formData.value.document == "string" ? formData.value.document : resOriginalDocument[0]?.data, */
+                        /*  driverLicense: typeof formData.value.driverDocument == "string" ? formData.value.driverDocument : resLicence[0]?.data, */
                         exteriorPhotos: newArrayExterior.length == 0 ? dataAuction.value.vehicleDetails.exteriorPhotos : newArrayExterior,
                         interiorPhotos: newArrayInterior.length == 0 ? dataAuction.value.vehicleDetails.interiorPhotos : newArrayInterior,
                         vehicleDamage: newArrayVehicleDamage.length == 0 ? dataAuction.value.vehicleDetails.vehicleDamage : newArrayVehicleDamage,
@@ -1051,7 +1051,7 @@ export default {
                         console.log('res SAVE DRAFT', res)
                         if (res) {
                             await router.push({ path: '/all' })
-                             
+
                         }
                     } catch (error) {
                         loadingUploadImages.value = false
@@ -1119,6 +1119,19 @@ export default {
                     dataAuction.value = res.data
                     formData.value.numberVinGenerals = res.data.vin ? res.data.vin : undefined;
                     formData.value.date = res.data.dropOffDate;
+                    formData.value.newVehicle = res.data.buyNew.anyVehicle ? 'Yes' : undefined;
+                    formData.value.anyVehicle = res.data.buyNew.anyVehicle ? 'Yes' : undefined;
+                    formData.value.makePreferences = res.data.buyNew.make ? res.data.buyNew.make : undefined;
+                    formData.value.modelPreferences = res.data.buyNew.model ? res.data.buyNew.model : undefined;
+                    formData.value.modelFromPreferences = res.data.buyNew.mileageStart ? res.data.buyNew.mileageStart : undefined;
+                    formData.value.modelToPreferences = res.data.buyNew.mileageEnd ? res.data.buyNew.mileageEnd : undefined;
+                    formData.value.yearFromPreferences = res.data.buyNew.yearStart ? res.data.buyNew.yearStart : undefined;
+                    formData.value.yearToPreferences = res.data.buyNew.yearEnd ? res.data.buyNew.yearEnd : undefined;
+                    formData.value.financingCompany = res.data.vehicleStatus.financingCompany ? res.data.vehicleStatus.financingCompany : undefined;
+                    formData.value.manyPayments = res.data.vehicleStatus.financingCompany ? 'Yes' : undefined;
+                    formData.value.remainingPayments = res.data.vehicleStatus.remainingPayments ? res.data.vehicleStatus.remainingPayments : undefined;
+                    formData.value.buyoutVehicle = res.data.buyout ? 'Yes' : undefined;
+                    formData.value.yourVehicleAmount = res.data.buyout ? res.data.buyout : undefined;
                     formData.value.province = res.data.province;
                     formData.value.city = res.data.city;
                     formData.value.keys = res.data.keysNumber;

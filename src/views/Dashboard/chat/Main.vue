@@ -23,18 +23,43 @@
             </div>
         </div>
         <div :class="activateLayout ? 'visible pointer-events-auto' : 'invisible pointer-events-none '"
-            class="row-span-1 col-span-5 border-b-2 border-r-2 border-[#E0E0E0]   p-5">
+            class="row-span-1 col-span-5 border-b-2 border-r-2 border-[#E0E0E0] pb-0  p-5">
             <div class="flex items-center justify-between gap-4">
                 <div class="flex justify-between w-full items-center">
                     <div v-if="auth?.userData.type == 2">
-                        <p class=" capitalize text-2xl font-medium">{{ storeAution?.vehicleDetails?.year }} {{
+                        <div class="flex gap-2 items-center">
+                            <img v-if="storeAution?.owner?.seller.picture"
+                                class="w-[60px] rounded-full shadow-lg h-[60px] object-cover"
+                                :src="bucket + storeAution?.owner?.seller.picture" alt="">
+                            <img v-else class="w-[60px] rounded-full shadow-lg h-[60px] object-cover "
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
+                            <div class="flex items-start  flex-col">
+                                <p class="capitalize text-2xl font-medium">
+                                    {{ storeAution?.owner?.seller.firstName }} {{ storeAution?.owner?.seller.lastName }}
+                                </p>
+                                <p class="capitalize font-medium">{{ storeAution?.vehicleDetails?.year }} {{
             storeAution?.vehicleDetails?.make }} {{ storeAution?.vehicleDetails?.model }}</p>
-
+                            </div>
+                        </div>
                     </div>
                     <div v-else>
-                        <p class="capitalize text-2xl font-medium">{{ storeAution?.vehicleDetails?.year }} {{
-            storeAution?.vehicleDetails?.make }} {{ storeAution?.vehicleDetails?.model }}</p>
                         <p>{{ storeAution?.owner?.dealer?.address }}</p>
+                        <div class="flex gap-2 items-center">
+                            <img v-if="storeAution?.bids[0]?.participant.dealer.picture"
+                                class="w-[60px] rounded-full shadow-lg h-[60px] object-cover"
+                                :src="bucket + storeAution?.bids[0]?.participant.dealer.picture" alt="">
+                            <img v-else class="w-[60px] rounded-full shadow-lg h-[60px] object-cover "
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
+                            <div class="flex items-start  flex-col">
+                                <p class="capitalize text-2xl font-medium">{{
+            storeAution?.bids[0]?.participant.dealer.firstName }} {{
+            storeAution?.bids[0]?.participant.dealer.lastName }}</p>
+                                <p class="capitalize font-medium">{{ storeAution?.vehicleDetails?.year }} {{
+            storeAution?.vehicleDetails?.make }} {{ storeAution?.vehicleDetails?.model }}</p>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <div class="container-seaxrh">
@@ -49,20 +74,22 @@
 
                     </div>
                 </div>
-                <div class="w-[25%]">
+                <!-- <div class="w-[25%]">
                     <button class="btn text-base-black border border-base-black text-md">Hide Auction</button>
-                </div>
+                </div> -->
             </div>
         </div>
         <div :class="activateLayout ? 'visible pointer-events-auto' : 'invisible pointer-events-none '"
             class="row-span-1 col-span-2  border-b-2 border-[#E0E0E0] p-5">
             <div class="flex justify-between h-full items-center">
                 <p class=" capitalize text-base-black text-xl">Auction</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M11.9997 10.5867L16.9497 5.63672L18.3637 7.05072L13.4137 12.0007L18.3637 16.9507L16.9497 18.3647L11.9997 13.4147L7.04974 18.3647L5.63574 16.9507L10.5857 12.0007L5.63574 7.05072L7.04974 5.63672L11.9997 10.5867Z"
-                        fill="#0B1107" />
-                </svg>
+                <RouterLink :to="auth?.userData.type == 2 ? '/current-bits' : '/all'" class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M11.9997 10.5867L16.9497 5.63672L18.3637 7.05072L13.4137 12.0007L18.3637 16.9507L16.9497 18.3647L11.9997 13.4147L7.04974 18.3647L5.63574 16.9507L10.5857 12.0007L5.63574 7.05072L7.04974 5.63672L11.9997 10.5867Z"
+                            fill="#0B1107" />
+                    </svg>
+                </RouterLink>
             </div>
         </div>
 
@@ -269,7 +296,7 @@
                     class="p-5 pt-0  absolute bottom-0 h-fit w-full bg-white  mb-2 border flex gap-3 flex-col shadow-xl   rounded-lg border-[#E0E0E0]">
                     <div>
                         <div v-if="form?.preview" class="w-[400px] relative mt-5 shadow-xl h-[400px]">
-                            <img :class="porcertanje > 0 ? ' blur-sm transition-all ease-out duration-300 ' : 'transition-all ease-out duration-300 ' "
+                            <img :class="porcertanje > 0 ? ' blur-sm transition-all ease-out duration-300 ' : 'transition-all ease-out duration-300 '"
                                 class="w-full  h-full rounded-lg object-cover " :src="form?.preview" alt="">
                             <div v-if="porcertanje > 0"
                                 class=" absolute left-0 top-0 flex justify-center items-center w-full h-full  ">
@@ -280,7 +307,7 @@
                                             <circle cx="105" cy="105" r="100" ref="circle"></circle>
                                         </svg>
                                         <div class="card-img number">
-                                            <p  v-if="porcertanje == 100">Upload...</p>
+                                            <p v-if="porcertanje == 100">Upload...</p>
                                             <h3 v-else>
                                                 {{ porcertanje }}%
                                             </h3>
