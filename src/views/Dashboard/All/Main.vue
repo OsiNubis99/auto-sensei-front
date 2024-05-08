@@ -4,15 +4,15 @@
     </template>
 
     <template v-else>
-        <HeaderOptionesSeller  />
-        <div v-if="data?.length > 0"
+        <HeaderOptionesSeller />
+        <div v-if="data?.length > 0 || draft.length > 0"
             class="relative max-w-[100rem] bg-[#BDBDBF66] md:bg-white mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class="hidden md:w-[29%] lg:block">
                     <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
                 <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
-                <div class="w-full lg:w-[70%] ">
+                <div class="w-full lg:w-[70%]">
                     <div class="flex items-center justify-between px-2 pt-4 lg:p-0  mb-4">
                         <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
                         <!--  <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" /> -->
@@ -79,7 +79,6 @@
                         <div v-for="(auction, index) in sortedData" :key="index"
                             class="bg-white flex  md:mb-7 gap-5 items-start shadow-steps mb-[20%] w-full "
                             :class="changeLayouts ? 'animate-fade-up  animate-ease-in-out animate-delay-200' : ''">
-
                             <CardAutionAll :key="counter" :auction="auction" :changeLayouts="changeLayouts"
                                 :decline="declineAution" />
                         </div>
@@ -92,6 +91,11 @@
         </div>
         <template v-else>
             <ScreenCreateAution />
+           <!--  <div class="hidden md:w-[29%] lg:block">
+                <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
+            </div>
+            <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+            <ScrrenNoSorbySeller /> -->
         </template>
     </template>
     <div v-if="openDecline"
@@ -153,7 +157,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect ,watch} from "vue";
+import { ref, onMounted, computed, watchEffect, watch } from "vue";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from 'vue-router'
 import { useAuctionStore } from "@/stores/auctions";
@@ -204,6 +208,7 @@ export default {
         const autionModal = ref(null)
         const counter = ref(0)
         const data = ref([])
+        const draft = ref([])
         const sortBy = ref('Auction Status & Date')
         const statusModalView = ModalViewDetails()
         const changeGridTemplate = () => {
@@ -280,6 +285,8 @@ export default {
             try {
                 let res = await storeAutions.index()
                 data.value = res.data.filter((item) => item.status !== "draft")
+                draft.value = res.data.filter((item) => item.status === "draft")
+                console.log('draft.value', draft.value)
                 data.value.map((autions, index) => {
                     autions.title = `${autions.vehicleDetails.year} ${autions.vehicleDetails.make} ${autions.vehicleDetails.model}`
                     const formatter = new Intl.NumberFormat();
@@ -412,7 +419,8 @@ export default {
             counter,
             setSorBy,
             sortedData,
-            sortBy
+            sortBy,
+            draft
 
         };
     },

@@ -5,7 +5,7 @@
 
     <template v-else>
         <HeaderOptionesSeller />
-        <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <div v-if="data?.length > 0 || draft.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
                 <div class="hidden md:w-[29%] lg:block">
                     <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
@@ -196,6 +196,7 @@ export default {
         const statusModal = ModalDetailsLive()
         const sortBy = ref('Start date')
         const counter = ref(0)
+        const draft = ref([])
         const declineAution = (auction) => {
             openDecline.value = true
             autionModal.value = auction
@@ -229,6 +230,7 @@ export default {
             loading.value = true
             try {
                 let res = await storeAutions.index()
+                draft.value = res.data.filter((item) => item.status === "draft")
 
                 if (res) {
                     data.value = storeAutions.upcoming
@@ -321,7 +323,8 @@ export default {
             setSorBy,
             sortedData,
             counter,
-            sortBy
+            sortBy,
+            draft
         };
     },
 };

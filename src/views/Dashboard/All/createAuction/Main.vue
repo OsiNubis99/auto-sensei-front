@@ -435,7 +435,7 @@ export default {
             //(Weekend)
             daySaturday: '19.00 PM',
             dayMonday: 'Select time',
-            repairs:undefined,
+            repairs: undefined,
 
 
 
@@ -465,8 +465,8 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-               /*  formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*  formData.value.saveCity = JSON.parse(formData.value.city)
+                 formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -562,8 +562,8 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-              /*   formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*   formData.value.saveCity = JSON.parse(formData.value.city)
+                  formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -597,7 +597,7 @@ export default {
                         tireReplacement: formData.value.lastReplacement,
                         brakeCondition: formData.value.brakePads,
                         brakeReplacement: formData.value.lastReplacement2,
-                        repairs:formData.value.repairs,
+                        repairs: formData.value.repairs,
                     }
                 }
                 loading.value = true
@@ -770,13 +770,13 @@ export default {
             }
 
             try {
-               /*  arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
-                let resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
-                if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
-
-                arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
-                let resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
-                if (resLicence[0]?.data) arrayUpload.value[0].completed = true */
+                /*  arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
+                 let resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
+                 if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
+ 
+                 arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
+                 let resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
+                 if (resLicence[0]?.data) arrayUpload.value[0].completed = true */
 
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Main Photo (3/4 Front Photo)', preview: formData.value.previewFrontPhoto, completed: false, }]
@@ -897,8 +897,8 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-               /*  formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*  formData.value.saveCity = JSON.parse(formData.value.city)
+                 formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -928,15 +928,15 @@ export default {
                         color: formData.value.color,
                         driveTrain: formData.value.driveTrain,
                         aditionals: formData.value.additionalPackages,
-                        repairs:formData.value.repairs,
+                        repairs: formData.value.repairs,
                         tireCondition: formData.value.tireCondition,
                         tireReplacement: formData.value.lastReplacement,
                         brakeCondition: formData.value.brakePads,
                         brakeReplacement: formData.value.lastReplacement2,
                         rotorCondition: formData.value.rotorCondition,
                         rotorReplacement: formData.value.lastReplacement3,
-                      /*   originalDocument: resOriginalDocument[0]?.data, */
-                      /*   driverLicense: resLicence[0]?.data, */
+                        /*   originalDocument: resOriginalDocument[0]?.data, */
+                        /*   driverLicense: resLicence[0]?.data, */
                         exteriorPhotos: newArrayExterior,
                         interiorPhotos: newArrayInterior,
                         vehicleDamage: newArrayVehicleDamage,

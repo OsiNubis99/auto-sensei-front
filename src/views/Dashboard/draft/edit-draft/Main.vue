@@ -410,7 +410,7 @@ export default {
             //(Weekend)
             daySaturday: '19.00 PM',
             dayMonday: 'Select time',
-
+            repairs: undefined
 
 
         })
@@ -977,6 +977,7 @@ export default {
                         vehicleDamage: newArrayVehicleDamage.length == 0 ? dataAuction.value.vehicleDetails.vehicleDamage : newArrayVehicleDamage,
                         additionalDocuments: newAdditionalDocuments.length == 0 ? dataAuction.value.vehicleDetails.additionalDocuments : newAdditionalDocuments,
                         vehicleVideo: formData.value.vehicleVideo,
+                        repairs: formData.value.repairs,
 
                     },
                 }
@@ -1179,11 +1180,15 @@ export default {
                     formData.value.rearSeats = res.data.vehicleDetails?.interiorPhotos[3];
                     formData.value.previewAdditionalDocuments = res.data.vehicleDetails?.additionalDocuments[0].length > 0 ? bucket.value + res.data.vehicleDetails?.additionalDocuments[0] : undefined;
                     formData.value.previewVehicleDamage = bucket.value + res.data.vehicleDetails?.vehicleDamage[0];
+                    formData.value.repairs = res.data.vehicleDetails?.repairs
+
                 }
             } catch (error) {
                 loading.value = false
             } finally {
+                componentKey.value += 1
                 loading.value = false
+                console.log('HOLAAAAAAAAAAAAAAAAAAA', formData.value)
             }
         }
         onMounted(() => {

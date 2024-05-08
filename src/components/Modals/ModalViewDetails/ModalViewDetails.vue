@@ -509,6 +509,7 @@ export default {
         const modal = ref(false)
         const loading = ref(false)
         const showPdf = ref('')
+        const pdf = ref(null)
         const dataBuffer = ref(null)
         const storeAutions = useAuctionStore()
         const steps = ref({
