@@ -5,7 +5,7 @@
 
     <template v-else>
         <HeaderOptionsDealer />
-        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <div class="relative max-w-[120rem] mx-auto z-50 md:top-[60px] ">
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
@@ -249,7 +249,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full lg:w-[70%] ">
+                <div class="w-full lg:w-[76%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ data.length }}
                             Vehicles</p>

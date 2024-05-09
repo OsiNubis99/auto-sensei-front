@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="relative  max-w-[100rem] mx-auto z-50 md:top-[60px] pb-10 ">
+        <div class="relative  max-w-[120rem] mx-auto z-50 md:top-[60px] pb-10 ">
             <div v-if="route.meta.adminAuth" class=" hidden md:flex gap-2 items-center">
                 <div class="flex items-center gap-2">
                     <p v-if="router.options.history.state.back == '/action-list'" class="text-[#858585]">Auctions List
@@ -331,7 +331,7 @@
                                         <path fill="none" d="M0 0h24v24H0z"></path>
                                     </g>
                                 </svg>
-                                <p class="md:text-base font-bold mt-1 text-sm">Interedted In:</p>
+                                <p class="md:text-base font-bold mt-1 text-sm">Interested in:</p>
                             </div>
                             <div>
                                 <div v-if="dataDetails?.buyNew?.anyVehicle"

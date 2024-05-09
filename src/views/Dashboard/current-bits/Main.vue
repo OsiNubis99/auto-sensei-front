@@ -4,7 +4,7 @@
     </template>
     <template v-else>
         <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
-        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <div class="relative max-w-[120rem] mx-auto z-50 md:top-[60px] ">
 
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
@@ -249,7 +249,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full lg:w-[70%] ">
+                <div class="w-full lg:w-[76%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
                             }}
@@ -465,10 +465,10 @@ export default {
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             if (newQuestion.status == 'live') {
                 console.log('CURRENT BITS ENTRO EN LIVE', newQuestion)
-               /*  const i = filteredItems.value.findIndex(x => x._id === newQuestion._id)
-                filteredItems.value[i] = newQuestion
-                console.log('filteredItems.value[i]', filteredItems.value)
-                let photos = null; */
+                /*  const i = filteredItems.value.findIndex(x => x._id === newQuestion._id)
+                 filteredItems.value[i] = newQuestion
+                 console.log('filteredItems.value[i]', filteredItems.value)
+                 let photos = null; */
                 /*   photos = arrayPhotos(data.value[i].vehicleDetails)
                   if (photos.length > 0) {
                       data.value[i].photos = photos
@@ -476,9 +476,9 @@ export default {
                       photos = null
                   } */
 
-                 let newArray = filteredItems.value.map(aution => aution._id !== newQuestion._id ? aution : newQuestion);
-                 filteredItems.value = []
-                 filteredItems.value = newArray
+                let newArray = filteredItems.value.map(aution => aution._id !== newQuestion._id ? aution : newQuestion);
+                filteredItems.value = []
+                filteredItems.value = newArray
 
             } else {
                 let result = null;
