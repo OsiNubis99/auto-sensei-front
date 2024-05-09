@@ -18,9 +18,9 @@
     </template>
     <template v-else>
         <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
-        <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <div v-if="data?.length > 0" class="relative max-w-[120rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="hidden md:w-[29%] lg:block">
+                <div class="hidden md:w-[24%] lg:block">
                     <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
                 <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
@@ -158,28 +158,28 @@
                                                 <p class="capitalize">{{ auction?.vehicleDetails?.driveTrain }}</p>
                                             </div>
                                         </div>
-                                        <div class=" flex  items-center md:grid md:grid-cols-2  gap-1 "
+                                        <div class=" flex items-center gap-4 "
                                             :class="changeLayouts ? ' p-5 whitespace-nowrap  gap-5 overflow-x-auto overflow-y-hidden ' : ''">
                                             <div v-if="auction?.vehicleDetails?.tireCondition"
-                                                class="bg-[#F0F0F0] flex px-1 md:px-5 py-1 gap-1 md:gap-3  rounded-lg items-center">
+                                                class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
                                                         d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                                         fill="#0B1107" />
                                                 </svg>
-                                                <p class=" text-[10px] capitalize">{{
+                                                <p class="text-md font-semibold capitalize ">{{
         auction?.vehicleDetails?.tireCondition }}</p>
                                             </div>
                                             <div v-if="auction?.vehicleDetails?.brakeCondition"
-                                                class="bg-[#F0F0F0] flex px-1  md:px-5 py-1  gap-1 md:gap-3 rounded-lg items-center">
+                                                class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
                                                         d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                                         fill="#0B1107" />
                                                 </svg>
-                                                <p class=" text-[10px] capitalize">{{
+                                                <p class="text-md font-semibold capitalize ">{{
         auction?.vehicleDetails?.brakeCondition }}</p>
                                             </div>
                                         </div>
@@ -202,7 +202,7 @@
                                                         d="M7.99967 14.6663C4.31767 14.6663 1.33301 11.6817 1.33301 7.99967C1.33301 4.31767 4.31767 1.33301 7.99967 1.33301C11.6817 1.33301 14.6663 4.31767 14.6663 7.99967C14.6663 11.6817 11.6817 14.6663 7.99967 14.6663ZM7.33501 10.6663L12.0483 5.95234L11.1057 5.00967L7.33501 8.78101L5.44901 6.89501L4.50634 7.83767L7.33501 10.6663Z"
                                                         fill="#05A54B" />
                                                 </svg>
-                                                <p class=" text-xs md:text-lg pt-[2px]">{{auction.percentage}} %
+                                                <p class=" text-xs md:text-lg pt-[2px]">{{ auction.percentage }} %
                                                     completed</p>
                                             </div>
                                         </div>

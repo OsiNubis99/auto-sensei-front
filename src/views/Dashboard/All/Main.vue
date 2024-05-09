@@ -6,13 +6,13 @@
     <template v-else>
         <HeaderOptionesSeller />
         <div v-if="data?.length > 0 || draft.length > 0"
-            class="relative max-w-[100rem] bg-[#BDBDBF66] md:bg-white mx-auto z-50 md:top-[60px] ">
+            class="relative max-w-[120rem] bg-[#BDBDBF66] md:bg-white mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="hidden md:w-[29%] lg:block">
+                <div class="hidden md:w-[24%] lg:block">
                     <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
                 <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
-                <div class="w-full lg:w-[70%]">
+                <div class="w-full lg:w-[76%]">
                     <div class="flex items-center justify-between px-2 pt-4 lg:p-0  mb-4">
                         <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
                         <!--  <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" /> -->
@@ -91,7 +91,7 @@
         </div>
         <template v-else>
             <ScreenCreateAution />
-           <!--  <div class="hidden md:w-[29%] lg:block">
+            <!--  <div class="hidden md:w-[24%] lg:block">
                 <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
             </div>
             <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
