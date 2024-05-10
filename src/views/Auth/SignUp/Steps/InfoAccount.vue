@@ -50,7 +50,7 @@
                                             <strong class="text-[15]">Name:</strong> {{ form?.img?.name }}
                                         </p>
                                     </div>
-                                    <p v-else class="text-xs font-medium text-[#666]">JPG, GIF or PNG. Max size of 1Mb
+                                    <p v-else class="text-xs font-medium text-[#666]">JPG, GIF or PNG. Max size of 50Mb
                                     </p>
                                     <label :class="invalid?.img ? 'bg-error' : 'bg-[#F0F0F0]'"
                                         class="flex flex-col items-center mt-4 px-2 py-2  rounded-lg shadow-lg  tracking-wide  cursor-pointer">

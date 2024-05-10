@@ -1,12 +1,12 @@
 <template>
   <div class="w-full pt-10 relative z-10 h-screen bg-blue-dark ">
-    <div class="flex flex-col lg:grid lg:grid-cols-2  gap-20  p-5 md:pt-20 lg:p-28 !pb-0 h-full">
-      <div class="flex flex-col items-start gap-4 md:gap-10">
-        <p class="text-primary text-[10px] md:text-base uppercase"> {{ $t("home.pre_title") }}</p>
-        <h1 class="text-3xl md:text-6xl xl:text-8xl font-bold text-white"> {{ $t("home.title") }}</h1>
-        <p class="text-base-white text-xs md:text-base">{{ $t("home.subt_title") }}</p>
+    <div class="flex flex-col lg:grid lg:grid-cols-2  gap-20  p-5 lg:pt-20 lg:p-28 !pb-0 h-full">
+      <div class="flex flex-col items-start gap-4 lg:gap-10">
+        <p class="text-primary text-[10px] lg:text-base uppercase"> {{ $t("home.pre_title") }}</p>
+        <h1 class="text-xl md:text-2xl lg:text-6xl 2xl:text-8xl font-bold text-white"> {{ $t("home.title") }}</h1>
+        <p class="text-base-white text-xs lg:text-base">{{ $t("home.subt_title") }}</p>
         <button @click="goToHome()" id="sellCar"
-          class="btn w-full   md:w-[250px] md:h-[50px] bg-primary text-base-black">{{ $t("sell_your_car")
+          class="btn w-full   lg:w-[250px] lg:h-[50px] bg-primary text-base-black">{{ $t("sell_your_car")
           }}</button>
         <div class="flex gap-5 items-center">
           <a href="https://www.facebook.com/profile.php?id=61558003370710&mibextid=LQQJ4d" target="_blank"
