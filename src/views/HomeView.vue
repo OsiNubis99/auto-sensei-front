@@ -1,6 +1,6 @@
 <template>
   <div class="w-full pt-10 relative z-10 h-screen bg-blue-dark ">
-    <div class="flex flex-col lg:grid lg:grid-cols-2 gap-8 p-5 md:pt-20 lg:p-28 !pb-0 h-full">
+    <div class="flex flex-col lg:grid lg:grid-cols-2  gap-20  p-5 md:pt-20 lg:p-28 !pb-0 h-full">
       <div class="flex flex-col items-start gap-4 md:gap-10">
         <p class="text-primary text-[10px] md:text-base uppercase"> {{ $t("home.pre_title") }}</p>
         <h1 class="text-3xl md:text-6xl xl:text-8xl font-bold text-white"> {{ $t("home.title") }}</h1>
@@ -374,10 +374,10 @@ export default {
     onMounted(() => {
       console.log('route', route)
       console.log('router', router)
-     /*  let yourScript = document.createElement('script')
-      yourScript.setAttribute('src', '//js.hs-scripts.com/45834146.js')
-      yourScript.setAttribute('id', 'hs-script-loader')
-      document.head.appendChild(yourScript) */
+      /*  let yourScript = document.createElement('script')
+       yourScript.setAttribute('src', '//js.hs-scripts.com/45834146.js')
+       yourScript.setAttribute('id', 'hs-script-loader')
+       document.head.appendChild(yourScript) */
     })
 
     return {

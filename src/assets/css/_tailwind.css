@@ -3,10 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  html,
-  div,
-  p,
-  span {
+  html {
     font-family: "OpenSauce", system-ui, sans-serif;
   }
 }
@@ -22,8 +19,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Namomi" !important;
+  font-family: "Nohemi", system-ui, sans-serif;
 }
+div,
 p,
 button,
 label {
