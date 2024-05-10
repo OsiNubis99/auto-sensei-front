@@ -4,7 +4,7 @@
     </template>
     <template v-else>
         <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
-        <div class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <div class="relative max-w-[120rem] mx-auto z-50 md:top-[60px] ">
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
@@ -322,7 +322,8 @@
                     <div v-if="steps.step1" class="w-full p-5 flex flex-col justify-center items-center">
                         <div class="flex justify-center items-center flex-col gap-3">
                             <img :src="bucket + 'public/img/png/icon-signature.png'" alt="">
-                            <p class=" text-center md:text-lg p-5 font-medium ">Thank you for completing the process! Enjoy
+                            <p class=" text-center md:text-lg p-5 font-medium ">Thank you for completing the process!
+                                Enjoy
                                 your new vehicle and continue bidding with us!</p>
                         </div>
 
@@ -335,7 +336,7 @@
                         </div>
 
                     </div>
-                    <div class="custom-pdf" v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div>
+                    <!--  <div class="custom-pdf" v-show="steps.step2" id="pspdfkit" style="width: 100%; height: 90vh;"></div> -->
                     <div v-if="steps.step3" class="p-4 flex justify-center items-center flex-col gap-3">
                         <p class=" font-semibold capitalize md:text-xl">Final Bid Approved!</p>
                         <p class="capitalize text-xs md:text-base ">Download the Actual Sheet Below and Hand It to the
@@ -344,7 +345,7 @@
                             Drop-Off
                             Process.</p>
                         <div class="w-full">
-                            <iframe class="w-full h-[90vh]" :src="showPdf" frameborder="0"></iframe>
+                            <iframe class="w-full h-[60vh]" :src="showPdf" frameborder="0"></iframe>
                         </div>
 
                         <button @click="pdfDonwload" class="btn w-full bg-primary rounded-md">
@@ -571,84 +572,86 @@ export default {
             if (steps.value.step2) {
                 loadingPdf.value = true
                 try {
-                    /*  let res = await storeAutions.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing) */
-                    /* console.log('res', res)
+                    let res = await storeAutions.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
+                    console.log('res', res)
                     if (res) {
-                        loadingPdf.value = false
+                        showPdf.value = 'https://apidev.autosensei.ca/files/' + res.data.contractSeallerSing
+
                         steps.value.step1 = false
                         steps.value.step2 = false
                         steps.value.step3 = true
-
-                    } */
-                    showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
-                    const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
-                    PSPDFKit.load({
-                        baseUrl,
-                        licenseKey: 'HO2dV-bDcn32RCF6j2nDeKYNGqP1EOSnmSLLmbDrrdWJGwDq5yWsJs8pr31-EOKWXetRmJoBjUgv4AoEicoPgQw6Htu9foJBCUCWNZ2n7EvLcpMfoNLqokulJv87rHwmB9jnVIBTKGCZ7RKjGpERaDOl-JXfBFqdP6tSA07KKrsGh0k22IcAfwlevAAZNBOe72mr8i6D5tjXisarqg3a4vsSFuWyrmidugVCVPQsARlTZ5phlM3p4WSi032q6k3C7Zkt2UwLkGu6xfMy0u8wTOYLpjE8AMl5p4PC7j2I0WTVtrjYHLVyTJ-H0-bUUh1M_5pDIsK3YwHZNA5o5I0pnL70uk4nRPsvKL5hAxzI5e_PSWj8Oek73s6pf-htNu4PrL8YMfaX2KOo4tv3Q7Xsu6fhHOmkdvRn-UyCqQz8aJam2BZFpzXYndnfTToNV3v2PZ8ixUAzk03lKFvcThJg6wGTv1lo_AQ1zOx96eqaU069ZXuduPThRxd_i0zhEkGDfVKFaZWd03UaD0ZCDPWk5lSl0AuZJWFEKVyLQBLX2SDAf6z4m699tJ4jggOZoiQjD6rceOZUGAMCYAIMi4Z_6spoyIaAM4reyti70sY_K-Ccji1VNQKFlm0ne381Pyy298BJH2xQZnEPAWEtnFp1Xw==',
-                        container: "#pspdfkit",
-                        document: showPdf.value,
-                    }).then(async function (instance) {
                         loadingPdf.value = false
-                        const items = instance.toolbarItems;
-                        instance.setToolbarItems(items.filter((item) =>
-                            item.type !== "export-pdf" &&
-                            item.type !== "search" &&
-                            item.type !== "annotate" &&
-                            item.type !== "multi-annotations-selection" &&
-                            item.type !== "signature" &&
-                            item.type !== "debug" &&
-                            item.type !== "document-crop" &&
-                            item.type !== "document-editor" &&
-                            item.type !== "print" &&
-                            item.type !== "polyline" &&
-                            item.type !== "cloudy-polygon" &&
-                            item.type !== "polygon" &&
-                            item.type !== "ellipse" &&
-                            item.type !== "arrow" &&
-                            item.type !== "link" &&
-                            item.type !== "line" &&
-                            item.type !== "callout" &&
-                            item.type !== "note" &&
-                            item.type !== "rectangle" &&
-                            item.type !== "stamp" &&
-                            item.type !== "image" &&
-                            item.type !== "ink-eraser" &&
-                            item.type !== "text-highlighter" &&
-                            item.type !== "text" &&
-                            item.type !== "highlighter" &&
-                            item.type !== "ink" &&
-                            item.type !== "pan" &&
-                            item.type !== "pager" &&
-                            item.type !== "sidebar-layers" &&
-                            item.type !== "sidebar-thumbnails" &&
-                            item.type !== "sidebar-document-outline" &&
-                            item.type !== "sidebar-bookmarks" &&
-                            item.type !== "sidebar-signatures" &&
-                            item.type !== "sidebar-annotations"
 
-                        ));
-                        const widget2 = new PSPDFKit.Annotations.WidgetAnnotation({
-                            id: PSPDFKit.generateInstantId(),
-                            pageIndex: 0,
-                            boundingBox: new PSPDFKit.Geometry.Rect({
-                                left: 116,
-                                top: 785,
-                                width: 100,
-                                height: 20
-                            }),
-                            formFieldName: "my signature form field"
-                        })
-                        const formField = new PSPDFKit.FormFields.SignatureFormField({
-                            name: "my signature form field",
-                            annotationIds: new PSPDFKit.Immutable.List([widget2.id])
-                        });
-                        await instance.create([widget2, formField]);
-                        /*  instance.addEventListener("storedSignatures.create", async (e) => {
-                             const buffer = await instance.exportPDF({ flatten: true });
-                             dataBuffer.value = buffer
-                             sutmibPDF(buffer)
-                         }); */
-                    })
+                    }
+                    /*   showPdf.value = 'https://apidev.autosensei.ca/files/' + autionPdf.value.contractSeallerSing
+                      const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
+                      PSPDFKit.load({
+                          baseUrl,
+                          licenseKey: 'HO2dV-bDcn32RCF6j2nDeKYNGqP1EOSnmSLLmbDrrdWJGwDq5yWsJs8pr31-EOKWXetRmJoBjUgv4AoEicoPgQw6Htu9foJBCUCWNZ2n7EvLcpMfoNLqokulJv87rHwmB9jnVIBTKGCZ7RKjGpERaDOl-JXfBFqdP6tSA07KKrsGh0k22IcAfwlevAAZNBOe72mr8i6D5tjXisarqg3a4vsSFuWyrmidugVCVPQsARlTZ5phlM3p4WSi032q6k3C7Zkt2UwLkGu6xfMy0u8wTOYLpjE8AMl5p4PC7j2I0WTVtrjYHLVyTJ-H0-bUUh1M_5pDIsK3YwHZNA5o5I0pnL70uk4nRPsvKL5hAxzI5e_PSWj8Oek73s6pf-htNu4PrL8YMfaX2KOo4tv3Q7Xsu6fhHOmkdvRn-UyCqQz8aJam2BZFpzXYndnfTToNV3v2PZ8ixUAzk03lKFvcThJg6wGTv1lo_AQ1zOx96eqaU069ZXuduPThRxd_i0zhEkGDfVKFaZWd03UaD0ZCDPWk5lSl0AuZJWFEKVyLQBLX2SDAf6z4m699tJ4jggOZoiQjD6rceOZUGAMCYAIMi4Z_6spoyIaAM4reyti70sY_K-Ccji1VNQKFlm0ne381Pyy298BJH2xQZnEPAWEtnFp1Xw==',
+                          container: "#pspdfkit",
+                          document: showPdf.value,
+                      }).then(async function (instance) {
+                          loadingPdf.value = false
+                          const items = instance.toolbarItems;
+                          instance.setToolbarItems(items.filter((item) =>
+                              item.type !== "export-pdf" &&
+                              item.type !== "search" &&
+                              item.type !== "annotate" &&
+                              item.type !== "multi-annotations-selection" &&
+                              item.type !== "signature" &&
+                              item.type !== "debug" &&
+                              item.type !== "document-crop" &&
+                              item.type !== "document-editor" &&
+                              item.type !== "print" &&
+                              item.type !== "polyline" &&
+                              item.type !== "cloudy-polygon" &&
+                              item.type !== "polygon" &&
+                              item.type !== "ellipse" &&
+                              item.type !== "arrow" &&
+                              item.type !== "link" &&
+                              item.type !== "line" &&
+                              item.type !== "callout" &&
+                              item.type !== "note" &&
+                              item.type !== "rectangle" &&
+                              item.type !== "stamp" &&
+                              item.type !== "image" &&
+                              item.type !== "ink-eraser" &&
+                              item.type !== "text-highlighter" &&
+                              item.type !== "text" &&
+                              item.type !== "highlighter" &&
+                              item.type !== "ink" &&
+                              item.type !== "pan" &&
+                              item.type !== "pager" &&
+                              item.type !== "sidebar-layers" &&
+                              item.type !== "sidebar-thumbnails" &&
+                              item.type !== "sidebar-document-outline" &&
+                              item.type !== "sidebar-bookmarks" &&
+                              item.type !== "sidebar-signatures" &&
+                              item.type !== "sidebar-annotations"
+  
+                          ));
+                          const widget2 = new PSPDFKit.Annotations.WidgetAnnotation({
+                              id: PSPDFKit.generateInstantId(),
+                              pageIndex: 0,
+                              boundingBox: new PSPDFKit.Geometry.Rect({
+                                  left: 116,
+                                  top: 785,
+                                  width: 100,
+                                  height: 20
+                              }),
+                              formFieldName: "my signature form field"
+                          })
+                          const formField = new PSPDFKit.FormFields.SignatureFormField({
+                              name: "my signature form field",
+                              annotationIds: new PSPDFKit.Immutable.List([widget2.id])
+                          });
+                          await instance.create([widget2, formField]);
+                           instance.addEventListener("storedSignatures.create", async (e) => {
+                               const buffer = await instance.exportPDF({ flatten: true });
+                               dataBuffer.value = buffer
+                               sutmibPDF(buffer)
+                           });
+                      }) */
 
                 } catch (error) {
                     loadingPdf.value = false

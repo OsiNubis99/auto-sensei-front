@@ -7,7 +7,7 @@
                 <p class=" text-[10px] md:text-base">You can easily upload through your phone</p>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <p class="font-medium text-[14px] md:text-base">Original Documents</p>
             <p class="text-[10px] md:text-sm text-[#666666]">Such as ownership certificate, financing documents, etc.
             </p>
@@ -64,8 +64,8 @@
                 <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'document')"
                     class="hidden">
             </label>
-        </div>
-        <div>
+        </div> -->
+        <!-- div>
             <p class="font-medium text-[14px] md:text-base">Driver License</p>
         </div>
         <div class=" w-full md:max-w-[320px] relative  flex  flex-col gap-5 group">
@@ -121,7 +121,7 @@
                 <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driver')"
                     class="hidden">
             </label>
-        </div>
+        </div> -->
         <div>
             <p class="font-medium text-[14px] md:text-base">Exterior Photos</p>
         </div>
@@ -873,7 +873,7 @@
                 </label>
             </div>
         </div>
-        <div v-if="!save" class="flex justify-center items-center gap-5 ">
+        <div v-if="!save" class="flex justify-center flex-col items-start gap-2 ">
             <!--  <button
                 class=" btn bg-transparent  border-[#E0E0E0] flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save as Draft
@@ -882,6 +882,7 @@
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Confirmation
             </button>
+            <p class="text-xs md:text-sm text-[#666666]">You can edit at the end, when we confirm all your details.</p>
         </div>
         <div v-else class="flex justify-center items-center gap-5 ">
             <button @click="createAutions('draft')" id="saveDraft"
@@ -899,7 +900,7 @@
     </div>
 </template>
 <script>
-import { ref, onMounted,computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { toast } from "vue3-toastify";
 import ModalLaunchVue from "../../../../../components/Modals/ModalLaunch/ModalLaunchVue.vue";
 import ModalImageCustomVue from "../../../../../components/Modals/ModalImageCustom/ModalImageCustom.vue";

@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Nohemi: ["Nohemi"],
+        OpenSauce: ["OpenSauce"],
       },
     },
     colors: {

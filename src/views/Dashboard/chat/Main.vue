@@ -12,29 +12,54 @@
             <div class="flex justify-between items-center gap-2">
                 <input type="text" placeholder="search chatting" v-model="search"
                     class="h-[40px] pl-4 border-2 border-[#E0E0E0] rounded-lg w-full" />
-                <div
+                <!--  <div
                     class="w-[50px] h-[40px]  flex items-center justify-center border-[1px] rounded-lg border-[#E0E0E0] ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="15" viewBox="0 0 12 15" fill="none">
                         <path
                             d="M7.5 8.5V13L4.5 14.5V8.5L0 1.75V0.25H12V1.75L7.5 8.5ZM1.803 1.75L6 8.0455L10.197 1.75H1.803Z"
                             fill="#858585" />
                     </svg>
-                </div>
+                </div> -->
             </div>
         </div>
         <div :class="activateLayout ? 'visible pointer-events-auto' : 'invisible pointer-events-none '"
-            class="row-span-1 col-span-5 border-b-2 border-r-2 border-[#E0E0E0]   p-5">
+            class="row-span-1 col-span-5 border-b-2 border-r-2 border-[#E0E0E0] pb-0  p-5">
             <div class="flex items-center justify-between gap-4">
                 <div class="flex justify-between w-full items-center">
                     <div v-if="auth?.userData.type == 2">
-                        <p class=" capitalize text-2xl font-medium">{{ storeAution?.vehicleDetails?.year }} {{
+                        <div class="flex gap-2 items-center">
+                            <img v-if="storeAution?.owner?.seller.picture"
+                                class="w-[60px] rounded-full shadow-lg h-[60px] object-cover"
+                                :src="bucket + storeAution?.owner?.seller.picture" alt="">
+                            <img v-else class="w-[60px] rounded-full shadow-lg h-[60px] object-cover "
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
+                            <div class="flex items-start  flex-col">
+                                <p class="capitalize text-2xl font-medium">
+                                    {{ storeAution?.owner?.seller.firstName }} {{ storeAution?.owner?.seller.lastName }}
+                                </p>
+                                <p class="capitalize font-medium">{{ storeAution?.vehicleDetails?.year }} {{
             storeAution?.vehicleDetails?.make }} {{ storeAution?.vehicleDetails?.model }}</p>
-
+                            </div>
+                        </div>
                     </div>
                     <div v-else>
-                        <p class="capitalize text-2xl font-medium">{{ storeAution?.vehicleDetails?.year }} {{
-            storeAution?.vehicleDetails?.make }} {{ storeAution?.vehicleDetails?.model }}</p>
                         <p>{{ storeAution?.owner?.dealer?.address }}</p>
+                        <div class="flex gap-2 items-center">
+                            <img v-if="storeAution?.bids[0]?.participant.dealer.picture"
+                                class="w-[60px] rounded-full shadow-lg h-[60px] object-cover"
+                                :src="bucket + storeAution?.bids[0]?.participant.dealer.picture" alt="">
+                            <img v-else class="w-[60px] rounded-full shadow-lg h-[60px] object-cover "
+                                src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
+                                alt="">
+                            <div class="flex items-start  flex-col">
+                                <p class="capitalize text-2xl font-medium">{{
+            storeAution?.bids[0]?.participant.dealer.firstName }} {{
+            storeAution?.bids[0]?.participant.dealer.lastName }}</p>
+                                <p class="capitalize font-medium">{{ storeAution?.vehicleDetails?.year }} {{
+            storeAution?.vehicleDetails?.make }} {{ storeAution?.vehicleDetails?.model }}</p>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <div class="container-seaxrh">
@@ -49,20 +74,22 @@
 
                     </div>
                 </div>
-                <div class="w-[25%]">
+                <!-- <div class="w-[25%]">
                     <button class="btn text-base-black border border-base-black text-md">Hide Auction</button>
-                </div>
+                </div> -->
             </div>
         </div>
         <div :class="activateLayout ? 'visible pointer-events-auto' : 'invisible pointer-events-none '"
             class="row-span-1 col-span-2  border-b-2 border-[#E0E0E0] p-5">
             <div class="flex justify-between h-full items-center">
                 <p class=" capitalize text-base-black text-xl">Auction</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M11.9997 10.5867L16.9497 5.63672L18.3637 7.05072L13.4137 12.0007L18.3637 16.9507L16.9497 18.3647L11.9997 13.4147L7.04974 18.3647L5.63574 16.9507L10.5857 12.0007L5.63574 7.05072L7.04974 5.63672L11.9997 10.5867Z"
-                        fill="#0B1107" />
-                </svg>
+                <RouterLink :to="auth?.userData.type == 2 ? '/current-bits' : '/all'" class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M11.9997 10.5867L16.9497 5.63672L18.3637 7.05072L13.4137 12.0007L18.3637 16.9507L16.9497 18.3647L11.9997 13.4147L7.04974 18.3647L5.63574 16.9507L10.5857 12.0007L5.63574 7.05072L7.04974 5.63672L11.9997 10.5867Z"
+                            fill="#0B1107" />
+                    </svg>
+                </RouterLink>
             </div>
         </div>
 
@@ -93,11 +120,12 @@
                                     src="@/assets/img/jpg/image.jpg" alt="">
                             </div>
                             <div class="w-full">
-                                <div class="text-lg font-semibold">{{ user.participant.dealer.name }}</div>
-                                <span class="text-gray-500">{{ user.createdAt }} </span>
+                                <div class="text-lg capitalize font-semibold">{{ user.title }}</div>
+                                <p v-if="user?.participant?.address" class="capitalize">{{
+            user?.participant?.address?.country }}, {{
+            user?.participant?.address?.city }}</p>
                             </div>
                         </template>
-
                         <template v-else>
                             <div class="w-[30%] ">
                                 <img v-if="user.auction?.vehicleDetails.exteriorPhotos[0]"
@@ -108,12 +136,10 @@
                             </div>
                             <div class="w-full flex  justify-between items-end  relative">
                                 <div>
-                                    <p class="text-lg font-semibold">
-                                        {{ user.auction?.vehicleDetails?.year }} {{
-            user.auction?.vehicleDetails?.make }} {{ user.auction?.vehicleDetails?.model }}
-                                    </p>
-                                    <p class="capitalize">{{ user.auction?.owner?.seller?.firstName }} {{
-            user.auction?.owner?.seller?.lastName }}
+                                    <div class="text-lg  capitalize font-semibold">{{ user.title }}</div>
+                                    <p v-if="user?.participant?.address" class="capitalize">{{
+            user?.participant.address?.country }}, {{
+            user?.participant?.address?.city }}
                                     </p>
                                 </div>
                                 <p class="text-gray-500 absolute -bottom-2 right-2  ">11.31</p>
@@ -269,7 +295,7 @@
                     class="p-5 pt-0  absolute bottom-0 h-fit w-full bg-white  mb-2 border flex gap-3 flex-col shadow-xl   rounded-lg border-[#E0E0E0]">
                     <div>
                         <div v-if="form?.preview" class="w-[400px] relative mt-5 shadow-xl h-[400px]">
-                            <img :class="porcertanje > 0 ? ' blur-sm transition-all ease-out duration-300 ' : 'transition-all ease-out duration-300 ' "
+                            <img :class="porcertanje > 0 ? ' blur-sm transition-all ease-out duration-300 ' : 'transition-all ease-out duration-300 '"
                                 class="w-full  h-full rounded-lg object-cover " :src="form?.preview" alt="">
                             <div v-if="porcertanje > 0"
                                 class=" absolute left-0 top-0 flex justify-center items-center w-full h-full  ">
@@ -280,7 +306,7 @@
                                             <circle cx="105" cy="105" r="100" ref="circle"></circle>
                                         </svg>
                                         <div class="card-img number">
-                                            <p  v-if="porcertanje == 100">Upload...</p>
+                                            <p v-if="porcertanje == 100">Upload...</p>
                                             <h3 v-else>
                                                 {{ porcertanje }}%
                                             </h3>
@@ -701,14 +727,14 @@
             <div class="flex justify-between items-center gap-2">
                 <input type="text" placeholder="search chatting" v-model="search"
                     class="h-[40px] pl-4 border-2 border-[#E0E0E0] rounded-lg w-full" />
-                <div
+                <!-- <div
                     class="w-[50px] h-[40px]  flex items-center justify-center border-[1px] rounded-lg border-[#E0E0E0] ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="15" viewBox="0 0 12 15" fill="none">
                         <path
                             d="M7.5 8.5V13L4.5 14.5V8.5L0 1.75V0.25H12V1.75L7.5 8.5ZM1.803 1.75L6 8.0455L10.197 1.75H1.803Z"
                             fill="#858585" />
                     </svg>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="row-span-5  col-span-2 border-r-2 border-t-[1px] border-[#E0E0E0] ">
@@ -1053,10 +1079,20 @@ export default {
                     if ((chats.auction._id + "-" + chats.participant._id) == route.query.id) {
                         chats.activeChat = chats.auction._id + "-" + chats.participant._id
                     }
+                    console.log('chats', chats)
+                    let name = null;
+                    if (auth?.userData.type == 2) {
+                        name = `${chats.auction.owner.seller.firstName} ${chats.auction.owner.seller.lastName} `
+                    } else {
+                        name = `${chats.participant.dealer.firstName} ${chats.participant.dealer.lastName} `
+                    }
+                    chats.title = `${name} - ${chats.auction.vehicleDetails.make} ${chats.auction.vehicleDetails.model}`
+                    console.log('chats', chats)
                     return chats
 
                 })
                 listUser.value = response
+
                 console.log('listUser', listUser)
                 /*  sendChat() */
             });
@@ -1186,7 +1222,7 @@ export default {
             });
         }
         const dataTableSearch = computed(() => {
-            return listUser.value.filter(s => s.auction?.vehicleDetails?.make?.toLocaleLowerCase().includes(search.value?.toLocaleLowerCase()))
+            return listUser.value.filter(s => s.title?.toLocaleLowerCase().includes(search.value?.toLocaleLowerCase()))
         })
         const dataChat = computed(() => {
             return listChat.value.filter(s => s?.message?.toLocaleLowerCase().includes(searchat.value?.toLocaleLowerCase()))

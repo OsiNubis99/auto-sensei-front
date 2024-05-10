@@ -20,8 +20,9 @@
             launch auction with this option?</p>
     </template>
     <div v-if="steps.step1" class="pt-4" @click="next(1)">
-        <button id="nextAuction" class="w-full md:h-[41px] h-[35px] text-blue-100 text-xs font-semibold bg-primary rounded">
-            Next
+        <button id="nextAuction"
+            class="w-full md:h-[41px] h-[35px] text-blue-100 text-xs font-semibold bg-primary rounded">
+            Launch Auction for Tomorrow
         </button>
     </div>
     <div v-if="steps.step2" class="pt-4 flex gap-4">
@@ -80,6 +81,7 @@ export default {
                     steps.value.step2 = true
                     break;
                 case 2:
+                    formData.value.launchOptions = 'none'
                     props.save()
                     break;
                 default:

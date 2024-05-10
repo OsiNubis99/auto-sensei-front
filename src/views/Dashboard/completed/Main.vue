@@ -4,16 +4,16 @@
     </template>
 
     <template v-else>
-        <HeaderOptionesSeller  />
-        <div v-if="data?.length > 0" class="relative max-w-[100rem] mx-auto z-50 md:top-[60px] ">
+        <HeaderOptionesSeller />
+        <div v-if="data?.length > 0 || draft.length > 0" class="relative max-w-[120rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 gap-4 mt-2">
-                <div class="hidden md:w-[29%] lg:block">
+                <div class="hidden md:w-[24%] lg:block">
                     <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
                 <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
-                <div class="w-full lg:w-[70%] ">
+                <div class="w-full lg:w-[76%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
-                        <p class=" text-xs font-semibold md:text-base " v-if="data.length > 0">{{ sortedData.length }}
+                        <p class=" text-xs font-semibold md:text-base ">{{ sortedData.length }}
                             Vehicles
                         </p>
                         <!-- <SorBy :key="counter" :changeLayouts="changeLayouts" :changeGridTemplate="changeGridTemplate" /> -->
@@ -405,6 +405,7 @@ export default {
         const openDecline = ref(false)
         const autionModal = ref(null)
         const counter = ref(0)
+        const draft = ref([])
         const statusModalView = ModalViewDetails()
         const sortBy = ref('All Status')
 
@@ -442,6 +443,7 @@ export default {
             loading.value = true
             try {
                 let res = await storeAutions.index()
+                draft.value = res.data.filter((item) => item.status === "draft")
                 if (res) {
                     data.value = storeAutions.completed
                     console.log('data.value', data.value)
@@ -562,7 +564,8 @@ export default {
             sortedData,
             setSorBy,
             counter,
-            sortBy
+            sortBy,
+            draft
 
         };
     },

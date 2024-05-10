@@ -7,7 +7,7 @@
                 <p class=" text-[10px] md:text-base">You can easily upload through your phone</p>
             </div>
         </div>
-        <div>
+        <!--  <div>
             <p class="font-medium text-[14px] md:text-base">Original Documents</p>
             <p class="text-[10px] md:text-sm text-[#666666]">Such as ownership certificate, financing documents, etc.
             </p>
@@ -120,7 +120,7 @@
                 </div>
                 <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driver')" class="hidden">
             </label>
-        </div>
+        </div> -->
         <div>
             <p class="font-medium text-[14px] md:text-base">Exterior Photos</p>
         </div>
@@ -153,8 +153,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'frontPhoto')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'frontPhoto')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -181,8 +181,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'frontPhoto')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'frontPhoto')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -209,8 +209,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'front')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'front')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -265,8 +265,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driverSide')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'driverSide')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -294,8 +294,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driverSide')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'driverSide')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -322,8 +322,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'back')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'back')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -349,7 +349,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'back')" class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'back')"
+                        class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -404,8 +405,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'passengerSide')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'passengerSide')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -432,8 +433,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'tireAndRim')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'tireAndRim')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -459,8 +460,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'tireAndRim')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'tireAndRim')" class="hidden">
                 </label>
             </div>
 
@@ -520,8 +521,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driversDisplay')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'driversDisplay')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -548,8 +549,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driversSide')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'driversSide')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -575,8 +576,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'driversSide')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'driversSide')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -630,8 +631,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'centerConsole')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'centerConsole')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -658,8 +659,8 @@
                                         fill="#0B1107" />
                                 </svg>
                             </div>
-                            <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'rearSeats')"
-                                class="hidden">
+                            <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                                @change="(event) => previewImage(event, 'rearSeats')" class="hidden">
                         </label>
                     </div>
                     <div>
@@ -685,8 +686,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'rearSeats')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'rearSeats')" class="hidden">
                 </label>
             </div>
 
@@ -750,8 +751,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'vehicleDamage')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'vehicleDamage')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -811,8 +812,8 @@
                         <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
                             Select Image</p>
                     </div>
-                    <input type="file" accept=".jpg, .jpeg,.png,.webp" @change="(event) => previewImage(event, 'additionalDocuments')"
-                        class="hidden">
+                    <input type="file" accept=".jpg, .jpeg,.png,.webp"
+                        @change="(event) => previewImage(event, 'additionalDocuments')" class="hidden">
                 </label>
             </div>
             <div class="flex max-w-xs flex-col gap-2">
@@ -880,7 +881,7 @@
                         fill="#FF333E" />
                 </svg>
                 <p class="mt-1">Delete</p>
-                
+
             </button>
             <button @click="modalLaunch()"
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -893,7 +894,7 @@
     </div>
 </template>
 <script>
-import { ref, onMounted ,computed} from "vue";
+import { ref, onMounted, computed } from "vue";
 import { toast } from "vue3-toastify";
 import ModalLaunchVue from "../../../../../components/Modals/ModalLaunch/ModalLaunchVue.vue";
 import ModalImageCustomVue from "../../../../../components/Modals/ModalImageCustom/ModalImageCustom.vue";

@@ -125,7 +125,7 @@
                             </RouterLink>
                             <RouterLink v-if="path !== 'login'" :to="path == 'home' || path == 'about' || path == 'sold-auctions' ||
             path == 'how-it-works' ||
-            path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`"  id="regLogin"
+            path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`" id="regLogin"
                                 :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'"
                                 class="px-5 py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize ">
                                 <span v-if="path == 'signup'">Sign In</span>

@@ -1,18 +1,39 @@
 <template>
   <div class="w-full pt-10 relative z-10 h-screen bg-blue-dark ">
-    <div class="flex flex-col lg:grid lg:grid-cols-2 gap-8 p-5 md:pt-20 lg:p-28 !pb-0 h-full">
-      <div class="flex flex-col items-start gap-4 md:gap-10">
-        <p class="text-primary text-[10px] md:text-base uppercase"> {{ $t("home.pre_title") }}</p>
-        <h1 class="text-3xl md:text-6xl xl:text-8xl font-bold text-white"> {{ $t("home.title") }}</h1>
-        <p class="text-base-white text-xs md:text-base">{{ $t("home.subt_title") }}</p>
-        <button @click="goToHome()" id="sellCar" class="btn w-full md:w-auto bg-primary text-base-black">{{ $t("sell_your_car")
+    <div class="flex flex-col lg:grid lg:grid-cols-2  gap-20  p-5 lg:pt-20 lg:p-28 !pb-0 h-full">
+      <div class="flex flex-col items-start gap-4 lg:gap-10">
+        <p class="text-primary text-[10px] lg:text-base uppercase"> {{ $t("home.pre_title") }}</p>
+        <h1 class="title-home font-bold text-white"> {{ $t("home.title") }}</h1>
+        <p class="text-base-white text-xs lg:text-base">{{ $t("home.subt_title") }}</p>
+        <button @click="goToHome()" id="sellCar"
+          class="btn w-full   lg:w-[250px] lg:h-[50px] bg-primary text-base-black">{{ $t("sell_your_car")
           }}</button>
+        <div class="flex gap-5 items-center">
+          <a href="https://www.facebook.com/profile.php?id=61558003370710&mibextid=LQQJ4d" target="_blank"
+            rel="noopener noreferrer">
+            <iconFacebook :color="'#fff'" />
+          </a>
+          <a href="https://www.instagram.com/autosenseiauction/?igsh=MXA3MnNvc25pa2d0YQ%3D%3D&utm_source=qr"
+            target="_blank" rel="noopener noreferrer">
+            <iconInstagram :color="'#fff'" />
+          </a>
+          <a href="https://x.com/autosensei_inc?t=pAr1rD9pRasGjX_9S4_mGg&s=09" target="_blank"
+            rel="noopener noreferrer">
+            <iconTwitter :color="'#fff'" />
+          </a>
+          <!--   <a target="_blank" rel="noopener noreferrer">
+            <iconYoutube :color="'#fff'" />
+          </a> -->
+          <a href="https://www.linkedin.com/company/autosensei/" target="_blank" rel="noopener noreferrer">
+            <iconLinkedin :color="'#fff'" />
+          </a>
+        </div>
       </div>
       <div class="w-full h-full relative">
-        
         <img class="absolute w-full h-full lg:h-[inherit] bottom-0" :src="bucket + 'public/svg/carji.svg'" alt="">
       </div>
     </div>
+
     <img class="absolute -z-10 bottom-0 w-full" :src="bucket + 'public/svg/vehiculo.svg'" alt="">
     <img class="absolute hidden md:block -z-10 top-0 right-0" :src="bucket + 'public/svg/lines/lineHome.svg'" alt="">
   </div>
@@ -268,7 +289,8 @@
         supports
         customers in a market of inflation.
       </p>
-      <button id="sellToday" @click="goToHome()" class="btn mt-10 bg-base-black text-primary ">Sell Your Car Today</button>
+      <button id="sellToday" @click="goToHome()" class="btn mt-10 bg-base-black text-primary ">Sell Your Car
+        Today</button>
     </div>
     <img class="relative mt-6 md:absolute w-full bottom-0 " :src="bucket + 'public/svg/bannerpeople.svg'" alt="">
   </div>
@@ -287,7 +309,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
+import iconInstagram from '@/components/icons/redes/iconInstagram.vue'
+import iconFacebook from '@/components/icons/redes/iconFacebook.vue'
+import iconTwitter from '@/components/icons/redes/iconTwitter.vue'
+import iconYoutube from '@/components/icons/redes/iconYoutube.vue'
+import iconLinkedin from '@/components/icons/redes/iconLinkedin.vue'
 
 import { WhyAutoSensei } from "../Json/Home";
 import Heanding from "../components/Headings/Heanding.vue";
@@ -298,7 +324,12 @@ export default {
     IconCardFree,
     IconPlay,
     iconCheckbox,
-    Heanding
+    Heanding,
+    iconInstagram,
+    iconFacebook,
+    iconTwitter,
+    iconYoutube,
+    iconLinkedin,
   },
   setup() {
     let videoPlayer = ref()
@@ -343,6 +374,10 @@ export default {
     onMounted(() => {
       console.log('route', route)
       console.log('router', router)
+      /*  let yourScript = document.createElement('script')
+       yourScript.setAttribute('src', '//js.hs-scripts.com/45834146.js')
+       yourScript.setAttribute('id', 'hs-script-loader')
+       document.head.appendChild(yourScript) */
     })
 
     return {

@@ -162,6 +162,15 @@
                 type="text">
             <p class=" text-xs md:text-sm mt-3  text-[#858585] ">Such as Sports Package, Remote Starter, etc.</p>
         </div>
+        <div class="w-full">
+            <label class="font-medium text-xs md:text-base " for="">Any repairs required for the vehicle ? Any damages
+                that need to be mentioned? Please disclose any information that will affect the value of your vehicle
+                either positively or negatively.</label>
+            <textarea v-model="form.repairs" :class="invalid?.repairs ? 'border-error' : 'border-[#E0E0E0]'"
+                class="p-2 w-full mt-3 lg:h-[200px] border  rounded-lg" placeholder="Add information" name="textarea"
+                rows="10" cols="20"></textarea>
+            <!--   <p class=" text-xs md:text-sm mt-3  text-[#858585] ">Any damages that need to be mentioned? Please disclose any information that will affect the value of your vehicle either positively or negatively.</p> -->
+        </div>
         <div class=" flex flex-col md:grid w-full gap-2 md:gap-4 md:grid-cols-2">
             <div class="w-full">
                 <div class="w-full flex flex-col md:gap-2">
@@ -183,7 +192,7 @@
                         :class="invalid?.lastReplacement ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected hidden>Choose Year</option>
-                        <option value="2023">2024</option>
+                        <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>
@@ -212,6 +221,7 @@
                         :class="invalid?.lastReplacement2 ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected hidden>Choose Year</option>
+                        <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>

@@ -105,7 +105,7 @@ export default {
                     }
 
                     if (newQuestion.status === 'live' && newQuestion.bids.length === 0) {
-                        console.log('entro en agregar')
+                        console.log('entro en agregar en el HEADER')
                         live.value.push(newQuestion)
                     }
                 }

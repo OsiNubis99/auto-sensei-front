@@ -426,6 +426,7 @@ export default {
             //Campos de la modal
             modalLaunchAuction: false,
             launchOptions: undefined,
+
             //AfterVerifield
             //Date & Time
             auctionDate: new Date(),
@@ -434,6 +435,7 @@ export default {
             //(Weekend)
             daySaturday: '19.00 PM',
             dayMonday: 'Select time',
+            repairs: undefined,
 
 
 
@@ -463,8 +465,8 @@ export default {
                 return
             }
             if (Object.entries(invalid.value).length === 0) {
-               /*  formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*  formData.value.saveCity = JSON.parse(formData.value.city)
+                 formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -560,8 +562,8 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-              /*   formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*   formData.value.saveCity = JSON.parse(formData.value.city)
+                  formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -595,6 +597,7 @@ export default {
                         tireReplacement: formData.value.lastReplacement,
                         brakeCondition: formData.value.brakePads,
                         brakeReplacement: formData.value.lastReplacement2,
+                        repairs: formData.value.repairs,
                     }
                 }
                 loading.value = true
@@ -767,82 +770,82 @@ export default {
             }
 
             try {
-                arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
-                let resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
-                if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
-
-                arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
-                let resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
-                if (resLicence[0]?.data) arrayUpload.value[0].completed = true
+                /*  arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
+                 let resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
+                 if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
+ 
+                 arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
+                 let resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
+                 if (resLicence[0]?.data) arrayUpload.value[0].completed = true */
 
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Main Photo (3/4 Front Photo)', preview: formData.value.previewFrontPhoto, completed: false, }]
                 let resFronPhoto = await Promise.all([storeFile.uploaderFile({ file: formData.value.frontPhoto, location: `${id_create.value}/front-photo` })])
                 if (resFronPhoto[0]?.data) {
-                    arrayUpload.value[1].completed = true
+                    arrayUpload.value[0].completed = true
                     newArrayExterior = [...newArrayExterior, resFronPhoto[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Front Photo', preview: formData.value.previewFront, completed: false, }]
                 let resFron = await Promise.all([storeFile.uploaderFile({ file: formData.value.front, location: `${id_create.value}/front` })])
                 if (resFron[0]?.data) {
-                    arrayUpload.value[2].completed = true
+                    arrayUpload.value[1].completed = true
                     newArrayExterior = [...newArrayExterior, resFron[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Driver Side Exterior', preview: formData.value.previewDriverSide, completed: false, }]
                 let resDriverSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverSide, location: `${id_create.value}/driver-side-(exterior)` })])
                 if (resDriverSide[0]?.data) {
-                    arrayUpload.value[3].completed = true
+                    arrayUpload.value[2].completed = true
                     newArrayExterior = [...newArrayExterior, resDriverSide[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Back', preview: formData.value.previewBack, completed: false, }]
                 let resBack = await Promise.all([storeFile.uploaderFile({ file: formData.value.back, location: `${id_create.value}/'back'` })])
                 if (resBack[0]?.data) {
-                    arrayUpload.value[4].completed = true
+                    arrayUpload.value[3].completed = true
                     newArrayExterior = [...newArrayExterior, resBack[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Passenger Side', preview: formData.value.previewPassengerSide, completed: false, }]
                 let resPassengerSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.passengerSide, location: `${id_create.value}/passenger-side` })])
                 if (resPassengerSide[0]?.data) {
-                    arrayUpload.value[5].completed = true
+                    arrayUpload.value[4].completed = true
                     newArrayExterior = [...newArrayExterior, resPassengerSide[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Tire And Rim', preview: formData.value.previewTireAndRim, completed: false, }]
                 let resTireAndRim = await Promise.all([storeFile.uploaderFile({ file: formData.value.tireAndRim, location: `${id_create.value}/tire-and-rim` })])
                 if (resTireAndRim[0]?.data) {
-                    arrayUpload.value[6].completed = true
+                    arrayUpload.value[5].completed = true
                     newArrayExterior = [...newArrayExterior, resTireAndRim[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Display (Odometer)', preview: formData.value.previewDriversDisplay, completed: false, }]
                 let resDriversDisplay = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversDisplay, location: `${id_create.value}/drivers-display-(odometer)` })])
                 if (resDriversDisplay[0]?.data) {
-                    arrayUpload.value[7].completed = true
+                    arrayUpload.value[6].completed = true
                     newArrayInterior = [...newArrayInterior, resDriversDisplay[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Side (Interior)', preview: formData.value.previewDriversSide, completed: false, }]
                 let resDriverSideInterior = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversSide, location: `${id_create.value}/drivers-side-(interior)` })])
                 if (resDriverSideInterior[0]?.data) {
-                    arrayUpload.value[8].completed = true
+                    arrayUpload.value[7].completed = true
                     newArrayInterior = [...newArrayInterior, resDriverSideInterior[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Center Console', preview: formData.value.previewCenterConsole, completed: false, }]
                 let resCenterConsole = await Promise.all([storeFile.uploaderFile({ file: formData.value.centerConsole, location: `${id_create.value}/center-console` })])
                 if (resCenterConsole[0]?.data) {
-                    arrayUpload.value[9].completed = true
+                    arrayUpload.value[8].completed = true
                     newArrayInterior = [...newArrayInterior, resCenterConsole[0]?.data]
                 }
 
                 arrayUpload.value = [...arrayUpload.value, { name: 'Rear Seats', preview: formData.value.previewRearSeats, completed: false, }]
                 let resRearSeats = await Promise.all([storeFile.uploaderFile({ file: formData.value.rearSeats, location: `${id_create.value}/rear-seats` })])
                 if (resRearSeats[0]?.data) {
-                    arrayUpload.value[10].completed = true
+                    arrayUpload.value[9].completed = true
                     newArrayInterior = [...newArrayInterior, resRearSeats[0]?.data]
                 }
 
@@ -850,7 +853,7 @@ export default {
                     arrayUpload.value = [...arrayUpload.value, { name: 'Vehicle Damage', preview: formData.value.previewVehicleDamage, completed: false, }]
                     let resVehicleDamage = await Promise.all([storeFile.uploaderFile({ file: formData.value.vehicleDamage, location: `${id_create.value}/vehicle-damage` })])
                     if (resVehicleDamage[0]?.data) {
-                        arrayUpload.value[11].completed = true
+                        arrayUpload.value[10].completed = true
                         newArrayVehicleDamage = [...newArrayVehicleDamage, resVehicleDamage[0]?.data]
                     }
                 }
@@ -858,7 +861,7 @@ export default {
                     arrayUpload.value = [...arrayUpload.value, { name: 'Additional Documents', preview: formData.value.previewAdditionalDocuments, completed: false, }]
                     let resAdditionalDocuments = await Promise.all([storeFile.uploaderFile({ file: formData.value.additionalDocuments, location: `${id_create.value}/additional-documents` })])
                     if (resAdditionalDocuments[0]?.data) {
-                        arrayUpload.value[12].completed = true
+                        arrayUpload.value[11].completed = true
                         newAdditionalDocuments = [...newAdditionalDocuments, resAdditionalDocuments[0]?.data]
                     }
                 }
@@ -894,8 +897,8 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-               /*  formData.value.saveCity = JSON.parse(formData.value.city)
-                formData.value.saveProvince = JSON.parse(formData.value.province) */
+                /*  formData.value.saveCity = JSON.parse(formData.value.city)
+                 formData.value.saveProvince = JSON.parse(formData.value.province) */
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -925,14 +928,15 @@ export default {
                         color: formData.value.color,
                         driveTrain: formData.value.driveTrain,
                         aditionals: formData.value.additionalPackages,
+                        repairs: formData.value.repairs,
                         tireCondition: formData.value.tireCondition,
                         tireReplacement: formData.value.lastReplacement,
                         brakeCondition: formData.value.brakePads,
                         brakeReplacement: formData.value.lastReplacement2,
                         rotorCondition: formData.value.rotorCondition,
                         rotorReplacement: formData.value.lastReplacement3,
-                        originalDocument: resOriginalDocument[0]?.data,
-                        driverLicense: resLicence[0]?.data,
+                        /*   originalDocument: resOriginalDocument[0]?.data, */
+                        /*   driverLicense: resLicence[0]?.data, */
                         exteriorPhotos: newArrayExterior,
                         interiorPhotos: newArrayInterior,
                         vehicleDamage: newArrayVehicleDamage,
