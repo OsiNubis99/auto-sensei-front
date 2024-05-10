@@ -37,5 +37,5 @@
  | https://tailwindcss.com/docs/theme
  |
  */
-@import "./fonts/Nohemi.css";
-
+@import "./fonts/Naomi/Nohemi.css";
+@import "./fonts/OpenSauce/OpenSauce.css";
