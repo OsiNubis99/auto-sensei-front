@@ -88,7 +88,8 @@
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                 fill="#0B1107" />
                         </svg>
-                        <p class=" text-md font-semibold capitalize ">{{ auction?.vehicleDetails?.tireCondition }}</p>
+                        <p class=" text-[10px] lg: text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
+        auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -97,7 +98,8 @@
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                 fill="#0B1107" />
                         </svg>
-                        <p class=" text-md font-semibold capitalize ">{{ auction?.vehicleDetails?.brakeCondition }}</p>
+                        <p class="  text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
+        auction?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
 
@@ -165,7 +167,7 @@
 
                 </div>
                 <div v-if="auction?.status == 'drop off'"
-                    class=" md:flex gap-1  p-2 md:gap-4 md:p-5  justify-between w-full">
+                    class=" flex gap-1  p-2 md:gap-4 md:p-5  justify-between w-full">
                     <button @click="statusReview.openModal({ isActive: true, data: auction })"
                         class="btn w-full bg-white border border-[#E0E0E0]  ">Input Review</button>
                     <RouterLink

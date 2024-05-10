@@ -90,7 +90,9 @@
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                 fill="#0B1107" />
                         </svg>
-                        <p class="text-md font-semibold capitalize ">{{ aution?.vehicleDetails?.tireCondition }}</p>
+                        <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
+        aution?.vehicleDetails?.tireCondition
+    }}</p>
                     </div>
                     <div v-if="aution?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -99,7 +101,8 @@
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                 fill="#0B1107" />
                         </svg>
-                        <p class="text-md font-semibold capitalize ">{{ aution?.vehicleDetails?.brakeCondition }}</p>
+                        <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
+        aution?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
             </RouterLink>
