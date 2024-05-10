@@ -90,7 +90,10 @@ label.label-radio {
 .h-custom-chat {
   height: calc(100vh - 66px);
 }
-
+.title-home {
+  font-size: clamp(2rem, 6vw, 6rem);
+  line-height: initial;
+}
 .h-custom-chat-panel {
   height: calc(100vh - 290px);
   padding-right: 20px;
@@ -1821,7 +1824,12 @@ input.check-toggle-round-flat:checked + label:after {
       )
       50% 0px / 62.29% 62.29%;
 }
-
+@media only screen and (max-width: 1800px) {
+  .title-home {
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: initial;
+  }
+}
 @media only screen and (max-width: 365px) {
   .card {
     margin-top: 100px;

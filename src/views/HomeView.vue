@@ -3,7 +3,7 @@
     <div class="flex flex-col lg:grid lg:grid-cols-2  gap-20  p-5 lg:pt-20 lg:p-28 !pb-0 h-full">
       <div class="flex flex-col items-start gap-4 lg:gap-10">
         <p class="text-primary text-[10px] lg:text-base uppercase"> {{ $t("home.pre_title") }}</p>
-        <h1 class="text-xl md:text-2xl lg:text-6xl 2xl:text-8xl font-bold text-white"> {{ $t("home.title") }}</h1>
+        <h1 class="title-home font-bold text-white"> {{ $t("home.title") }}</h1>
         <p class="text-base-white text-xs lg:text-base">{{ $t("home.subt_title") }}</p>
         <button @click="goToHome()" id="sellCar"
           class="btn w-full   lg:w-[250px] lg:h-[50px] bg-primary text-base-black">{{ $t("sell_your_car")
@@ -30,10 +30,10 @@
         </div>
       </div>
       <div class="w-full h-full relative">
-
         <img class="absolute w-full h-full lg:h-[inherit] bottom-0" :src="bucket + 'public/svg/carji.svg'" alt="">
       </div>
     </div>
+
     <img class="absolute -z-10 bottom-0 w-full" :src="bucket + 'public/svg/vehiculo.svg'" alt="">
     <img class="absolute hidden md:block -z-10 top-0 right-0" :src="bucket + 'public/svg/lines/lineHome.svg'" alt="">
   </div>

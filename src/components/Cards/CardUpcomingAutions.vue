@@ -96,7 +96,7 @@
                         :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                         <p class="text-xs md:text-base">Starts in: </p>
                         <div class="flex gap-2 items-center ">
-                            <vue-countdown :time="timeAution"
+                            <vue-countdown :time="timeToStart(auction.startDate)"
                                 class="flex text-base-black  md:text-2xl gap-3 items-center"
                                 v-slot="{ days, hours, minutes, seconds }">
                                 <p class="font-medium" v-if="days > 0">{{ days }}D</p>

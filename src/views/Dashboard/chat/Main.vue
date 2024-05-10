@@ -120,7 +120,7 @@
                                     src="@/assets/img/jpg/image.jpg" alt="">
                             </div>
                             <div class="w-full">
-                                <div class="text-lg font-semibold">{{ user.title }}</div>
+                                <div class="text-lg capitalize font-semibold">{{ user.title }}</div>
                                 <p v-if="user?.participant?.address" class="capitalize">{{
             user?.participant?.address?.country }}, {{
             user?.participant?.address?.city }}</p>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="w-full flex  justify-between items-end  relative">
                                 <div>
-                                    <div class="text-lg font-semibold">{{ user.title }}</div>
+                                    <div class="text-lg  capitalize font-semibold">{{ user.title }}</div>
                                     <p v-if="user?.participant?.address" class="capitalize">{{
             user?.participant.address?.country }}, {{
             user?.participant?.address?.city }}
@@ -1079,7 +1079,14 @@ export default {
                     if ((chats.auction._id + "-" + chats.participant._id) == route.query.id) {
                         chats.activeChat = chats.auction._id + "-" + chats.participant._id
                     }
-                    chats.title = `${chats.auction.vehicleDetails.make} ${chats.auction.vehicleDetails.model}`
+                    console.log('chats', chats)
+                    let name = null;
+                    if (auth?.userData.type == 2) {
+                        name = `${chats.auction.owner.seller.firstName} ${chats.auction.owner.seller.lastName} `
+                    } else {
+                        name = `${chats.participant.dealer.firstName} ${chats.participant.dealer.lastName} `
+                    }
+                    chats.title = `${name} - ${chats.auction.vehicleDetails.make} ${chats.auction.vehicleDetails.model}`
                     console.log('chats', chats)
                     return chats
 
