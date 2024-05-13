@@ -8,7 +8,7 @@
             <template v-if="data.length == 0">
                 <ScreenNoDataDealer />
             </template>
-            <div v-else class="flex justify-between md:mt-5 gap-4 mt-2">
+            <div v-else class="flex justify-between md:mt-5 md:px-5 gap-4 mt-2">
                 <div :class="showFilter ? ' top-0 z-50 visible  w-full h-screen overflow-y-auto overflow-x-hidden shadow-xl animation-fade-modal' : ' invisible lg:visible '"
                     class="fixed  lg:relative  lg:w-[29%] lg:block">
                     <div class="bg-white p-5 shadow-steps">
