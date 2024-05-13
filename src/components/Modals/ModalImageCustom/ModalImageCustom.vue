@@ -49,7 +49,8 @@
                     </div>
                     <div class="flex w-full justify-end p-2 md:p-4 gap-3">
                         <label class="label-upload btn bg-white border border-[#E0E0E0]">
-                            <input type="file" hidden ref="file" @change="uploadImage($event)" accept=".jpg, .jpeg,.png,.webp" />
+                            <input type="file" hidden ref="file" @change="uploadImage($event)"
+                                accept=".jpg, .jpeg,.png,.webp" />
                             <div class="btn-up">Replace</div>
                         </label>
                         <button @click="saveEditPhoto" class="btn bg-primary ">Upload</button>
@@ -67,6 +68,7 @@ import "vue-advanced-cropper/dist/style.css";
 import Navigation from "./Navegation.vue";
 import { ModalImageCustom } from '@/stores/modalImageCustom';
 import axios from "@/axios";
+import { toast } from "vue3-toastify";
 export default {
     props: {
         form: {
@@ -97,20 +99,28 @@ export default {
         }
         const uploadImage = async (event) => {
             var input = event.target;
-            if (input.files && input.files[0]) {
-                try {
-                    const result = await toBase64(input.files[0]);
-                    if (result) {
-                        imgPreview.value = result
+            let typeFile = input.files[0].type.split("/")
+            if (typeFile[1] == 'jpg' || typeFile[1] == 'jpeg' || typeFile[1] == 'png' || typeFile[1] == 'webp') {
+                if (input.files && input.files[0]) {
+                    try {
+                        const result = await toBase64(input.files[0]);
+                        if (result) {
+                            imgPreview.value = result
+                            loading.value = false
+                        }
+                        return result
+                    } catch (error) {
                         loading.value = false
+                        console.error(error);
+                        return;
                     }
-                    return result
-                } catch (error) {
-                    loading.value = false
-                    console.error(error);
-                    return;
                 }
+            } else {
+                toast("File not supported,allowed files (jpg,jpeg,png,webp)", {
+                    type: "error",
+                });
             }
+
         }
         const onChange = (result) => {
             const cropper = croppers.value;

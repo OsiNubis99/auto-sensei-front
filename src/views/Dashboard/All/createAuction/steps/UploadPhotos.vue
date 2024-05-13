@@ -965,118 +965,126 @@ export default {
         const previewImage = (event, string) => {
             var input = event.target;
             let typeFile = input.files[0].type.split("/")
-            let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
-            if (input.files) {
-                if (convertion > 100 && typeFile[0] == 'video') {
-                    toast("The video exceeds 100mb", {
-                        type: "error",
-                    });
-                } else {
-                    var reader = new FileReader();
-                    reader.onload = (e) => {
-                        if (typeFile[0] !== 'video') {
-                            statusModalImage.openModal({ active: true, img: input.files[0], type: string })
+            if (typeFile[1] == 'jpg' || typeFile[1] == 'jpeg' || typeFile[1] == 'png' || typeFile[1] == 'webp') {
+                console.log('typeFile', typeFile[1])
+                let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
+                console.log('input', input)
+                if (input.files) {
+                    if (convertion > 100 && typeFile[0] == 'video') {
+                        toast("The video exceeds 100mb", {
+                            type: "error",
+                        });
+                    } else {
+                        var reader = new FileReader();
+                        reader.onload = (e) => {
+                            if (typeFile[0] !== 'video') {
+                                statusModalImage.openModal({ active: true, img: input.files[0], type: string })
+                            }
+                            switch (string) {
+                                case 'document':
+                                    form.value.previewDocument = e.target.result;
+                                    form.value.document = input.files[0];
+                                    form.value.document.mb = convertion
+
+                                    break;
+                                case 'driver':
+                                    form.value.previewDriver = e.target.result;
+                                    form.value.driverDocument = input.files[0];
+                                    form.value.driverDocument.mb = convertion
+
+                                    break;
+                                case 'frontPhoto':
+                                    form.value.previewFrontPhoto = e.target.result;
+                                    form.value.frontPhoto = input.files[0];
+                                    form.value.frontPhoto.mb = convertion
+
+                                    break;
+                                case 'front':
+                                    form.value.previewFront = e.target.result;
+                                    form.value.front = input.files[0];
+                                    form.value.front.mb = convertion
+
+                                    break;
+                                case 'driverSide':
+                                    form.value.previewDriverSide = e.target.result;
+                                    form.value.driverSide = input.files[0];
+                                    form.value.driverSide.mb = convertion
+
+                                    break;
+                                case 'back':
+                                    form.value.previewBack = e.target.result;
+                                    form.value.back = input.files[0];
+                                    form.value.back.mb = convertion
+
+                                    break;
+                                case 'passengerSide':
+                                    form.value.previewPassengerSide = e.target.result;
+                                    form.value.passengerSide = input.files[0];
+                                    form.value.passengerSide.mb = convertion
+
+                                    break;
+                                case 'tireAndRim':
+                                    form.value.previewTireAndRim = e.target.result;
+                                    form.value.tireAndRim = input.files[0];
+                                    form.value.tireAndRim.mb = convertion
+
+                                    break;
+                                case 'driversDisplay':
+                                    form.value.previewDriversDisplay = e.target.result;
+                                    form.value.driversDisplay = input.files[0];
+                                    form.value.driversDisplay.mb = convertion
+
+                                    break;
+                                case 'driversSide':
+                                    form.value.previewDriversSide = e.target.result;
+                                    form.value.driversSide = input.files[0];
+                                    form.value.driversSide.mb = convertion
+
+                                    break;
+                                case 'centerConsole':
+                                    form.value.previewCenterConsole = e.target.result;
+                                    form.value.centerConsole = input.files[0];
+                                    form.value.centerConsole.mb = convertion
+
+                                    break;
+                                case 'rearSeats':
+                                    form.value.previewRearSeats = e.target.result;
+                                    form.value.rearSeats = input.files[0];
+                                    form.value.rearSeats.mb = convertion
+
+                                    break;
+                                case 'vehicleDamage':
+                                    form.value.previewVehicleDamage = e.target.result;
+                                    form.value.vehicleDamage = input.files[0];
+                                    form.value.vehicleDamage.mb = convertion
+
+                                    break;
+                                case 'additionalDocuments':
+                                    form.value.previewAdditionalDocuments = e.target.result;
+                                    form.value.additionalDocuments = input.files[0];
+                                    form.value.additionalDocuments.mb = convertion
+
+                                    break;
+                                case 'vehicleVideo':
+                                    form.value.previewVehicleVideo = e.target.result;
+                                    form.value.vehicleVideo = input.files[0];
+                                    form.value.vehicleVideo.mb = convertion
+
+                                    break;
+                                default:
+                                    break;
+                            }
+
                         }
-
-                        switch (string) {
-                            case 'document':
-                                form.value.previewDocument = e.target.result;
-                                form.value.document = input.files[0];
-                                form.value.document.mb = convertion
-
-                                break;
-                            case 'driver':
-                                form.value.previewDriver = e.target.result;
-                                form.value.driverDocument = input.files[0];
-                                form.value.driverDocument.mb = convertion
-
-                                break;
-                            case 'frontPhoto':
-                                form.value.previewFrontPhoto = e.target.result;
-                                form.value.frontPhoto = input.files[0];
-                                form.value.frontPhoto.mb = convertion
-
-                                break;
-                            case 'front':
-                                form.value.previewFront = e.target.result;
-                                form.value.front = input.files[0];
-                                form.value.front.mb = convertion
-
-                                break;
-                            case 'driverSide':
-                                form.value.previewDriverSide = e.target.result;
-                                form.value.driverSide = input.files[0];
-                                form.value.driverSide.mb = convertion
-
-                                break;
-                            case 'back':
-                                form.value.previewBack = e.target.result;
-                                form.value.back = input.files[0];
-                                form.value.back.mb = convertion
-
-                                break;
-                            case 'passengerSide':
-                                form.value.previewPassengerSide = e.target.result;
-                                form.value.passengerSide = input.files[0];
-                                form.value.passengerSide.mb = convertion
-
-                                break;
-                            case 'tireAndRim':
-                                form.value.previewTireAndRim = e.target.result;
-                                form.value.tireAndRim = input.files[0];
-                                form.value.tireAndRim.mb = convertion
-
-                                break;
-                            case 'driversDisplay':
-                                form.value.previewDriversDisplay = e.target.result;
-                                form.value.driversDisplay = input.files[0];
-                                form.value.driversDisplay.mb = convertion
-
-                                break;
-                            case 'driversSide':
-                                form.value.previewDriversSide = e.target.result;
-                                form.value.driversSide = input.files[0];
-                                form.value.driversSide.mb = convertion
-
-                                break;
-                            case 'centerConsole':
-                                form.value.previewCenterConsole = e.target.result;
-                                form.value.centerConsole = input.files[0];
-                                form.value.centerConsole.mb = convertion
-
-                                break;
-                            case 'rearSeats':
-                                form.value.previewRearSeats = e.target.result;
-                                form.value.rearSeats = input.files[0];
-                                form.value.rearSeats.mb = convertion
-
-                                break;
-                            case 'vehicleDamage':
-                                form.value.previewVehicleDamage = e.target.result;
-                                form.value.vehicleDamage = input.files[0];
-                                form.value.vehicleDamage.mb = convertion
-
-                                break;
-                            case 'additionalDocuments':
-                                form.value.previewAdditionalDocuments = e.target.result;
-                                form.value.additionalDocuments = input.files[0];
-                                form.value.additionalDocuments.mb = convertion
-
-                                break;
-                            case 'vehicleVideo':
-                                form.value.previewVehicleVideo = e.target.result;
-                                form.value.vehicleVideo = input.files[0];
-                                form.value.vehicleVideo.mb = convertion
-
-                                break;
-                            default:
-                                break;
-                        }
-
                     }
+                    reader.readAsDataURL(input.files[0]);
                 }
-                reader.readAsDataURL(input.files[0]);
+            } else {
+                toast("File not supported,allowed files (jpg,jpeg,png,webp)", {
+                    type: "error",
+                });
             }
+
         }
         const next = () => {
             props.nextUploadPhotos()
