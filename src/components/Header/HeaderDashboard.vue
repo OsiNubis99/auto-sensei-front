@@ -29,8 +29,8 @@
 
                             <RouterLink to="/inicio"
                                 :class="path == 'inicio' ? 'bg-[#303E18] text-primary' : ' text-white'"
-                                class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
-                                <p>Dashboard</p>
+                                class="relative  max-w-fit py-2  px-4 !font-bold  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
+                                <p>My Account</p>
                             </RouterLink>
                             <RouterLink :to="{ name: 'action-list', query: { state: 'drafts' } }"
                                 :class="path == 'action-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
