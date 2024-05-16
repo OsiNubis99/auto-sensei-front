@@ -1,9 +1,9 @@
 <template>
     <footer v-if="path != 'login' && path != 'signup'">
-        <div :class="path === 'about' ? 'bg-white  ' : 'bg-blue-dark  '" class="flex flex-col relative">
-            <img v-if="path !== 'about'" class="absolute  left-0 w-full h-full top-0"
-                :src="bucket + 'public/svg/lines/lineFooter.svg'" alt="">
-            <div class="grid relative p-5 lg:p-14 lg:pb-52  lg:grid-cols-2">
+        <div :class="path === 'about' ? 'bg-white  ' : 'bg-[#1D2228]  '" class="flex flex-col relative">
+            <!--  <img v-if="path !== 'about'" class="absolute  left-0 w-full h-full top-0"
+                :src="bucket + 'public/svg/lines/lineFooter.svg'" alt=""> -->
+            <div class="grid relative p-5 lg:p-14 lg:pb-20  lg:grid-cols-2">
                 <div class="flex flex-col gap-7">
                     <RouterLink to="/">
                         <LogoIcon v-if="path !== 'about'" />
@@ -20,19 +20,7 @@
                         AutoSensei revolutionizes car selling, providing a fast, <br>
                         stress-free process and top value via local dealership bids.
                     </p>
-                    <div class="flex gap-5 items-center">
-                        <!--  <RouterLink to="">
-                            <iconFacebook :color="path === 'about' ? '#000' : '#fff'" />
-                        </RouterLink>
-                        <RouterLink to="">
-                            <iconInstagram :color="path === 'about' ? '#000' : '#fff'" />
-                        </RouterLink>
-                        <RouterLink to="">
-                            <iconTwitter :color="path === 'about' ? '#000' : '#fff'" />
-                        </RouterLink>
-                        <RouterLink to="">
-                            <iconYoutube :color="path === 'about' ? '#000' : '#fff'" />
-                        </RouterLink> -->
+                    <!--  <div class="flex gap-5 items-center">
                         <a href="https://www.facebook.com/profile.php?id=61558003370710&mibextid=LQQJ4d" target="_blank"
                             rel="noopener noreferrer">
                             <iconFacebook :color="path === 'about' ? '#000' : '#fff'" />
@@ -45,19 +33,19 @@
                             rel="noopener noreferrer">
                             <iconTwitter :color="path === 'about' ? '#000' : '#fff'" />
                         </a>
-                        <!--   <a target="_blank" rel="noopener noreferrer">
+                          <a target="_blank" rel="noopener noreferrer">
             <iconYoutube :color="path === 'about' ? '#000' : '#fff'" />
-          </a> -->
+          </a>
                         <a href="https://www.linkedin.com/company/autosensei/" target="_blank"
                             rel="noopener noreferrer">
                             <iconLinkedin :color="path === 'about' ? '#000' : '#fff'" />
                         </a>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="grid pt-10 grid-cols-2  md:p-0 lg:grid-cols-3">
+                <div class="grid pt-10  grid-cols-1  md:p-0 md:grid-cols-3">
                     <div class="flex flex-col">
-                        <p :class="path == 'about' ? 'text-black' : 'text-white'" class="text-md my-2 font-bold">Car
-                            Auctions</p>
+                        <p :class="path == 'about' ? 'text-black' : 'text-[#ffffff66]'"
+                            class="text-md my-2 uppercase font-bold ">AUCTIONS</p>
                         <!--  <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'" class="text-base my-2">
                             Sold
                             Auctions</RouterLink> -->
@@ -66,7 +54,8 @@
                             Dealer Page</RouterLink>
                     </div>
                     <div class="flex flex-col">
-                        <p :class="path == 'about' ? 'text-black' : 'text-white'" class="text-md my-2 font-bold">Company
+                        <p :class="path == 'about' ? 'text-black' : 'text-[#ffffff66]'" class="text-md my-2 font-bold">
+                            Company
                         </p>
                         <RouterLink to="/about" :class="path == 'about' ? 'text-black' : 'text-white'"
                             class="text-base my-2">
@@ -82,37 +71,78 @@
                             Customer Reviews</RouterLink> -->
                     </div>
                     <div class="flex flex-col">
-                        <p :class="path == 'about' ? 'text-black' : 'text-white'" class="text-md my-2 font-bold">Account
+                        <p :class="path == 'about' ? 'text-black' : 'text-[#ffffff66]'" class="text-md my-2 font-bold">
+                            SOCIAL
                         </p>
-                        <RouterLink to="/signup/sellers" :class="path == 'about' ? 'text-black' : 'text-white'" class="text-base my-2">
+                        <div class="flex gap-3 items-center py-2">
+                            <a href="https://www.facebook.com/profile.php?id=61558003370710&mibextid=LQQJ4d"
+                                target="_blank" rel="noopener noreferrer">
+                                <iconFacebook :color="path === 'about' ? '#000' : '#fff'" />
+                            </a>
+                            <p class="text-white font-bold ">Facebook</p>
+                        </div>
+                        <div class="flex gap-3 items-center py-2">
+                            <a href="https://www.instagram.com/autosenseiauction/?igsh=MXA3MnNvc25pa2d0YQ%3D%3D&utm_source=qr"
+                                target="_blank" rel="noopener noreferrer">
+                                <iconInstagram :color="path === 'about' ? '#000' : '#fff'" />
+                            </a>
+                            <p class="text-white font-bold ">Instagram</p>
+                        </div>
+                        <div class="flex gap-3 items-center py-2">
+                            <a href="https://x.com/autosensei_inc?t=pAr1rD9pRasGjX_9S4_mGg&s=09" target="_blank"
+                                rel="noopener noreferrer">
+                                <iconTwitter :color="path === 'about' ? '#000' : '#fff'" />
+                            </a>
+                            <p class="text-white font-bold ">Twitter</p>
+                        </div>
+                        <div class="flex gap-3 items-center py-2">
+                            <a href="https://www.linkedin.com/company/autosensei/" target="_blank"
+                                rel="noopener noreferrer">
+                                <iconLinkedin :color="path === 'about' ? '#000' : '#fff'" />
+                            </a>
+                            <p class="text-white font-bold ">Linkedin</p>
+                        </div>
+
+
+                        <!--   <a target="_blank" rel="noopener noreferrer">
+            <iconYoutube :color="path === 'about' ? '#000' : '#fff'" />
+          </a> -->
+                        <!--  <RouterLink to="/signup/sellers" :class="path == 'about' ? 'text-black' : 'text-white'"
+                            class="text-base my-2">
                             Sign
                             Up</RouterLink>
-                        <RouterLink to="/login/sellers" :class="path == 'about' ? 'text-black' : 'text-white'" class="text-base my-2">
+                        <RouterLink to="/login/sellers" :class="path == 'about' ? 'text-black' : 'text-white'"
+                            class="text-base my-2">
                             Login</RouterLink>
-                        <RouterLink to="/recover-password" :class="path == 'about' ? 'text-black' : 'text-white'" class="text-base my-2">
-                            Password Recovery</RouterLink>
+                        <RouterLink to="/recover-password" :class="path == 'about' ? 'text-black' : 'text-white'"
+                            class="text-base my-2">
+                            Password Recovery</RouterLink> -->
                     </div>
                 </div>
             </div>
 
-            <div :class="path == 'about' ? 'border-black' : 'border-white'"
-                class="flex w-full border-t-[1px]  flex-col-reverse   gap-5 items-start md:flex-row p-5 md:py-6 md:px-14  justify-between relative md:items-center">
-                <div :class="path == 'about' ? 'text-black' : 'text-white'" class="text-sm font-normal">© 2023
+            <div :class="path == 'about' ? 'border-black' : 'border-[#393E45]'"
+                class="flex w-full border-t-[1px]  flex-col-reverse overflow-hidden   gap-5 items-start md:flex-row p-5 md:py-6 md:px-14  justify-between relative md:items-center">
+                <h5 :class="path == 'about' ? 'text-black' : 'text-white'" class="text-sm font-normal">© 2023
                     AutoSensei.
-                    All Rights Reserved.</div>
-                <div class="flex flex-col md:flex-row gap-5">
+                    All Rights Reserved.</h5>
+                <div class="custom-footer-border flex flex-col md:flex-row lg:gap-20">
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
                         class="text-sm font-normal ">
-                        Terms of Service</RouterLink>
+                        <h5>Terms of Service</h5>
+                    </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
                         class="text-sm font-normal ">
-                        Privacy Policy</RouterLink>
+                        <h5> Privacy Policy</h5>
+                    </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
                         class="text-sm font-normal ">
-                        Cookie Policy</RouterLink>
+                        <h5>Cookie Policy</h5>
+                    </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
                         class="text-sm font-normal ">
-                        Sitemap</RouterLink>
+                        <h5>Sitemap</h5>
+                    </RouterLink>
 
                 </div>
             </div>

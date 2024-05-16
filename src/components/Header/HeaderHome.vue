@@ -112,8 +112,8 @@
 
                         <RouterLink v-if="store?.rol" :to="store?.userData?.type == 0 && '/inicio' ||
             store?.userData?.type == 1 && '/all' ||
-            store?.userData?.type == 2 && '/upcoming'" class="btn bg-primary shadow-lg text-base-black">
-                            Dashboard
+            store?.userData?.type == 2 && '/upcoming'" class="btn bg-primary !font-bold shadow-lg text-base-black">
+                            My Account
                         </RouterLink>
                         <template v-else>
                             <RouterLink

@@ -442,8 +442,8 @@ export default {
         })
         const op = ref({
             step1: true,
-            step2: false,
-            step3: false,
+            step2: true,
+            step3: true,
         })
         const checkStep = ref({
             step1: false,

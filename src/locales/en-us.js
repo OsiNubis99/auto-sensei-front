@@ -1,9 +1,9 @@
 export default {
   home: {
     pre_title: 'Join Us Today and Let the Bidding Begin!',
-    title: "Transform Your Car Selling Experience",
-    subt_title: 'Auction your car to dealers right from your home, for the best price.',
-    how_it_works: 'How It Works?',
+    title: "The Smarter Way to Sell Your Car",
+    subt_title: 'Sell your car in 24 hours to dealers right from your home, for the best price.',
+    how_it_works: 'Sell Your Car Fast, for Top Dollar',
     revolutionize: 'Revolutionize Your Car Selling Experience with AutoSensei',
     revolutionizeDescripcion: 'AutoSensei is a groundbreaking platform that redefines the way you sell your car, offering a swift and hassle-free experience to sell your vehicle, all while ensuring you receive the optimal value for your vehicle through competitive bids from local dealerships.',
     effortlessly: `Effortlessly Begin Your Car Sale with AutoSensei's Guide`,
