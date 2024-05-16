@@ -127,7 +127,7 @@
             </div> -->
         </div>
         <div class="flex w-full justify-center items-center py-3 pb-20">
-            <button id="getStarted-how-it-works" class="btn-free bg-primary">
+            <button id="getStarted-how-it-works" @click="goToHome" class="btn-free bg-primary">
                 <p class="font-bold ">Get Started Today</p>
                 <p class="btn-free_card">Free</p>
                 <svg mlns=" http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
@@ -296,7 +296,7 @@ import iconArrow from '../components/icons/iconArrow.vue'
 import Heanding from '../components/Headings/Heanding.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { computed, ref } from 'vue';
-
+import { useAuthStore } from "@/stores/auth";
 export default {
     components: {
         iconArrow,
@@ -305,14 +305,42 @@ export default {
     setup() {
         const route = useRouter();
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+        const authStore = useAuthStore()
+        const router = useRouter();
         const redirectLogin = (redirect) => {
             route.push({ name: 'signup', params: { rol: redirect } })
+        }
+        const goToHome = async () => {
+            console.log('authStore.userData', authStore.userData)
+            if (authStore.userData._id) {
+                switch (authStore.userData.type) {
+                    case 0:
+                        await router.push({ path: '/inicio' })
+
+                        break;
+                    case 1:
+                        await router.push({ path: '/all' })
+
+                        break;
+                    case 2:
+                        await router.push({ path: '/upcoming' })
+
+                        break;
+
+                    default:
+                        break;
+                }
+            } else {
+                await router.push({ path: '/login/sellers' })
+
+            }
         }
         return {
             iconArrow,
             Heanding,
             redirectLogin,
-            bucket
+            bucket,
+            goToHome
         };
     },
 };

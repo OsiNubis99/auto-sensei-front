@@ -146,7 +146,7 @@
     </div>
     <div class="flex w-full justify-center flex-col gap-3 items-center">
       <p class="font-semibold">Want to know more?</p>
-      <button class="btn-free bg-primary">
+      <button @click="goToHome()" class="btn-free bg-primary">
         <p class="font-bold ">Get Started Today</p>
         <p class="btn-free_card">Free</p>
         <svg mlns=" http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
@@ -176,8 +176,8 @@
         <p class=" text-xs md:text-sm text-center text-[#464B50] font-normal"> {{ item.pre_title }}</p>
       </div>
     </div>
-    <div class="w-full justify-center flex-col gap-5 items-center relative flex ">
-      <p class="text-white text-xs md:text-base">Want to know more?</p>
+    <div class="w-full justify-center flex-col gap-5 items-center relative mt-5 flex ">
+      <p class=" font-semibold text-xs md:text-base">Join thousands of satisfied car sellers today!</p>
       <!--    <button id="getStarted" @click="goToHome()" class="btn bg-primary text-base-black">Get Started</button> -->
       <button id="getStarted" @click="goToHome()" class="btn-free bg-primary">
         <p class="font-bold ">Get Started Today</p>
