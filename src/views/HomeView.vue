@@ -1,7 +1,8 @@
 <template>
-  <div class="w-full py-10 relative z-10 h-[150vh] sm:h-fit xl:h-screen overflow-hidden bg-blue-dark ">
+  <div
+    class="w-full pt-10 xl:pb-0 relative z-10 h-custom-screen  sm:h-[65vh] xl:h-screen overflow-hidden bg-blue-dark ">
     <div
-      class="flex flex-col md:flex-row lg:grid lg:grid-cols-2  gap-3 md:gap-20  p-5  pt-[100px]  md:pt-[150px]  2xl:pt-[200px] md:px-12  !pb-0 h-full">
+      class="flex flex-col md:flex-row lg:grid lg:grid-cols-2  gap-3 md:gap-12  p-5  pt-[100px]  md:pt-[150px]  2xl:pt-[200px] md:px-12  !pb-0 h-full">
       <div class="flex flex-col items-start gap-4 ">
         <p class="text-primary text-[10px] lg:text-base uppercase"> {{ $t("home.pre_title") }}</p>
         <h1 class="title-home font-bold text-white"> {{ $t("home.title") }}</h1>
@@ -37,12 +38,14 @@
           <p> <strong> Over 5,000 cars sold </strong> through AutoSensei</p>
         </div>
       </div>
-      <div class="w-full sm:invisible visible xl:visible -bottom-[70px]  md:-bottom-[100px]  h-full relative">
-        <img class="absolute w-full h-full lg:h-[inherit]" :src="bucket + 'public/svg/carji.svg'" alt="">
-      </div>
+      <img class="img-girls" :src="bucket + 'public/svg/carji.svg'" alt="">
+      <!--   <div
+        class="w-full contend-image-home sm:invisible visible xl:visible -bottom-[70px]  md:-bottom-[100px]  h-full relative">
+       
+      </div> -->
     </div>
-    <img class="absolute xl:invisible invisible sm:visible sm:right-[5%] right-0 bottom-0  h-[50%] "
-      :src="bucket + 'public/svg/carji.svg'" alt="">
+    <!--  <img class="absolute xl:invisible invisible sm:visible sm:right-[5%] right-0 bottom-0  h-[50%] "
+      :src="bucket + 'public/svg/carji.svg'" alt=""> -->
     <img class="absolute -z-10 sm:hidden bottom-0 w-full" src="../assets/svg/vehiculp-movil.svg" alt="">
     <img class="absolute hidden sm:block -z-10 bottom-0 w-full" :src="bucket + 'public/svg/vehiculo.svg'" alt="">
     <svg class=" line-svg-home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 481 603" fill="none">
