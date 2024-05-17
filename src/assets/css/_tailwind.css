@@ -2283,7 +2283,7 @@ input.check-toggle-round-flat:checked + label:after {
     transform: translateY(0);
   }
   .bg-custom-title > p {
-    font-size: 12px;
+    font-size: 10px;
   }
   .btn-free {
     padding: 5px 10px;

@@ -10,7 +10,7 @@
         <div class="font-sans antialiased  " id="app">
 
             <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark hidden md:grid  md:grid-cols-2' : 'fixed z-[700] flex-col'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
-        (scrollPosition > 100 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md bg-white')]"
+        (scrollPosition > 15 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md bg-white')]"
                 class="flex   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal   ">
                 <div v-if="path !== 'login' && path !== 'signup' && openBarInfo"
                     class="flex w-full items-center relative justify-center gap-2 bg-[#000] text-center p-2 sm:py-4 sm:px-6">

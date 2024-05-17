@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full py-10 relative z-10 h-[120vh] sm:h-fit xl:h-screen overflow-hidden bg-blue-dark ">
+  <div class="w-full py-10 relative z-10 h-[150vh] sm:h-fit xl:h-screen overflow-hidden bg-blue-dark ">
     <div
       class="flex flex-col md:flex-row lg:grid lg:grid-cols-2  gap-3 md:gap-20  p-5  pt-[100px]  md:pt-[150px]  2xl:pt-[200px] md:px-12  !pb-0 h-full">
       <div class="flex flex-col items-start gap-4 ">
