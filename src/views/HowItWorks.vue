@@ -1,9 +1,10 @@
 <template>
-    <div class="w-full pt-10 relative z-10  bg-blue-dark ">
-        <div class="flex flex-col lg:grid lg:grid-cols-2   gap-20  p-5 lg:pt-20 lg:p-28  h-full">
-            <div class="flex flex-col items-start gap-4 2xl:gap-10">
+    <div class="w-full pt-10 relative z-10 h-screen sm:h-fit bg-blue-dark ">
+        <div
+            class="flex flex-col lg:grid lg:grid-cols-2 relative   gap-20  p-5 pt-[150px] lg:pt-20 lg:py-28 lg:px-14  h-full">
+            <div class="flex flex-col items-start justify-end gap-3 sm:gap-4 2xl:gap-10">
                 <p class="text-primary text-[10px] lg:text-base uppercase">HOW IT WORKS</p>
-                <h1 class=" text-3xl lg:text-6xl lg:leading-[58px]  font-bold text-white">Sell Your Car Quickly and
+                <h1 class=" custom-h1-howitwork  text-white">Sell Your Car Quickly and
                     Easily
                     with
                     AutoSensei
@@ -11,14 +12,17 @@
                 <p class="text-base-white text-xs lg:text-base">Post your car in <span class="text-[#C4ADFF]"> less than
                         10 minutes</span> </p>
             </div>
-            <div class="w-full h-full relative">
-                <img class="absolute w-full h-full lg:h-[inherit] bottom-0" src="../assets/svg/groups-cars.svg" alt="">
+            <div class="w-full h-auto relative">
+                <img class=" w-full h-auto lg:h-[inherit] bottom-0" src="../assets/svg/groups-cars.svg" alt="">
+            </div>
+            <div
+                class="bg-[#6D53B0] w-full p-2 sm:py-4 left-0 absolute bottom-0  text-white font-semibold text-center ">
+                <p class=" text-xs sm:text-lg font-semibold  leading-8  ">Just three simple step</p>
             </div>
         </div>
+
     </div>
-    <div class="bg-[#6D53B0] py-4 text-white font-semibold text-center ">
-        <h5>Just three simple step</h5>
-    </div>
+
     <div class="container mx-auto w-full h-full">
         <div class="relative wrap overflow-hidden md:p-10 pl-10 p-4 h-full">
             <div class="mb-8 flex justify-between flex-col  md:flex-row items-center w-full right-timeline relative">
@@ -140,7 +144,7 @@
 
     </div>
     <div class="py-12 bg-[#F3F4F5] 2xl:px-20">
-        <h2 class="text-2xl md:text-4xl text-center  p-5 leading-[40px] md:leading-[50px]"> <strong> What people are
+        <h2 class="text-2xl md:text-4xl text-center  sm:p-5 leading-[40px] md:leading-[50px]"> <strong> What people are
                 saying
             </strong> <br> about AutoSensei
         </h2>
@@ -187,17 +191,17 @@
                     <div class="flex w-full justify-between items-center">
                         <div class="flex  gap-2 items-center">
                             <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                                <img class="w-full h-full  rounded-full object-contain"
-                                    src="https://s3-alpha-sig.figma.com/img/1cc2/91f3/3b208f411ffbdc466ab33436d3882ea6?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AHnfTx1~wclkqrHcaf23kiLp2H8CTNJj3rzpVyg8G2ye9kmxvK96ye3hAnJ9aEPG1TW-6hs8dyUwS6KVjXsxbI~UamZFkLxrxjdJ16N7PVo9t3aWySg7KBP0zxm75EM0bH4DCd6o2VnE1okBoq5FlHF~h-T3wWjbBkJXE-qOiEjUbj~xrQj5vsjLOQ0evmWVdGopkSyq2MwOPd3QtFbXKEx9OO17PIkqRVKgeDrUJPxfY3C1RnU5D-WCeZVoQ1E-cmqMQ4oc8ZfAdMIvQqg5qaeH-s76Kzd2BfqPd4KQaOX2FNVc2CLY1DehRQ0CnrmDLSBrRROsBEoV1TxIYcgxkA__"
+                                <img class="w-full h-full  rounded-full object-cover"
+                                    src="https://s3-alpha-sig.figma.com/img/27a7/10d3/ba7c44ae966f7be41665a9dc4c73b40e?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XlL9xtIAFjRnQIu-ZiUVz~9Ckheae-bVEsN58boNtlxkaweBhtdXo1yCDVi4augyFmd6~IiTYqgihjgHbyXLHXU2kZG-weG1C9He041Lrev-6y55vakIfeSGx-K1HQLG2CGyK6b~JQAq8fk4MNpqizIxXCeQSZfcVvo9q9IZMmn7TODKzRWaANKv699WPWtEerdDPxr9EmBl9NnczLBeJVMMh0beqt9wzdfF3qJdHrYSt2UjWvuqLSyV96yVkpk2nF1uYKphXzaE0giCaP4w-UGMqwawaJGUxTZ17zUHugRoyAbpPDblZSqSPs8O5uearbrvAz5u6RCdgaGz8uV8sA__"
                                     alt="">
                             </div>
                             <div>
-                                <p class=" font-semibold ">Mike Thompson</p>
-                                <p>2016 Toyota Corolla</p>
+                                <p class=" font-semibold ">Sarah Johnson</p>
+                                <p>2017 Honda CR-V</p>
                             </div>
                         </div>
                         <div>
-                            <img class="w-[50px] h-[50px]  rounded-full object-contain"
+                            <img class="w-[50px] h-[50px]  rounded-full object-cover"
                                 src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
                                 alt="">
                         </div>
@@ -228,8 +232,8 @@
                     <div class="flex w-full justify-between items-center">
                         <div class="flex  gap-2 items-center">
                             <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                                <img class="w-full h-full rounded-full object-contain"
-                                    src="https://s3-alpha-sig.figma.com/img/c5d6/ba76/401966ca16f35b2f0d7bcca86ece8051?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TSNpvI6hG6YF1-xed~2t8IRJAXkr2sQu9DWObsTGTHfkFqXPPtPavTsybzIdHt66c0SDbalHsrmG6k~50FXcyODdPkiG3bzbngNipjpyklqQtjLDVL4F1ikqVLjjaFgLhL~Fsb92f2guXO8tVyFNuonnfIm23xZE6TFdRR7YDSGm1EgbzXDHrTY0KS4-kA7R1QPZRZ6Vneq5wzz5-K1FBH4MNRFGwRa7el2QY7bXg2A68hHRe5ILDbcWPYcDgUKdcvJfghAPpBLZXl9GdvNTcKnhVnAVN2MOJBauUz6X6k21XVKOUpXCImM5EzvycmK8UE617~pnxEotC3M-5aDHKg__"
+                                <img class="w-full h-full rounded-full object-cover"
+                                    src="https://s3-alpha-sig.figma.com/img/1cc2/91f3/3b208f411ffbdc466ab33436d3882ea6?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AHnfTx1~wclkqrHcaf23kiLp2H8CTNJj3rzpVyg8G2ye9kmxvK96ye3hAnJ9aEPG1TW-6hs8dyUwS6KVjXsxbI~UamZFkLxrxjdJ16N7PVo9t3aWySg7KBP0zxm75EM0bH4DCd6o2VnE1okBoq5FlHF~h-T3wWjbBkJXE-qOiEjUbj~xrQj5vsjLOQ0evmWVdGopkSyq2MwOPd3QtFbXKEx9OO17PIkqRVKgeDrUJPxfY3C1RnU5D-WCeZVoQ1E-cmqMQ4oc8ZfAdMIvQqg5qaeH-s76Kzd2BfqPd4KQaOX2FNVc2CLY1DehRQ0CnrmDLSBrRROsBEoV1TxIYcgxkA__"
                                     alt="">
                             </div>
                             <div>
@@ -238,7 +242,7 @@
                             </div>
                         </div>
                         <div>
-                            <img class="w-[50px] h-[50px]  rounded-full object-contain"
+                            <img class="w-[50px] h-[50px]  rounded-full object-cover"
                                 src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
                                 alt="">
                         </div>
@@ -269,16 +273,17 @@
                     <div class="flex w-full justify-between items-center">
                         <div class="flex  gap-2 items-center">
                             <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                                <img class=" w-full h-full    object-contain"
-                                    src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_1280.png" alt="">
+                                <img class=" w-full h-full    object-cover"
+                                    src="https://s3-alpha-sig.figma.com/img/c5d6/ba76/401966ca16f35b2f0d7bcca86ece8051?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TSNpvI6hG6YF1-xed~2t8IRJAXkr2sQu9DWObsTGTHfkFqXPPtPavTsybzIdHt66c0SDbalHsrmG6k~50FXcyODdPkiG3bzbngNipjpyklqQtjLDVL4F1ikqVLjjaFgLhL~Fsb92f2guXO8tVyFNuonnfIm23xZE6TFdRR7YDSGm1EgbzXDHrTY0KS4-kA7R1QPZRZ6Vneq5wzz5-K1FBH4MNRFGwRa7el2QY7bXg2A68hHRe5ILDbcWPYcDgUKdcvJfghAPpBLZXl9GdvNTcKnhVnAVN2MOJBauUz6X6k21XVKOUpXCImM5EzvycmK8UE617~pnxEotC3M-5aDHKg__"
+                                    alt="">
                             </div>
                             <div>
-                                <p class=" font-semibold ">Mike Thompson</p>
-                                <p>2016 Toyota Corolla</p>
+                                <p class=" font-semibold ">James Brown</p>
+                                <p>2017 Nissan Rogue</p>
                             </div>
                         </div>
                         <div>
-                            <img class="w-[50px] h-[50px]  rounded-full object-contain"
+                            <img class="w-[50px] h-[50px]  rounded-full object-cover"
                                 src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
                                 alt="">
                         </div>

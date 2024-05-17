@@ -7,39 +7,74 @@
                 <p class=" text-xs md:text-sm text-white font-medium">Back to Home</p>
             </div>
         </div>
-        <div class="font-sans antialiased" id="app">
-            <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark hidden md:grid  md:grid-cols-2' : 'fixed'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
+        <div class="font-sans antialiased  " id="app">
+
+            <nav :class="[(path == 'login' || path == 'signup' ? 'relative bg-blue-dark hidden md:grid  md:grid-cols-2' : 'fixed z-[700] flex-col'), (path == 'recover-password' || path == 'recover-password-auth' ? 'bg-blue-dark ' : ''),
         (scrollPosition > 100 ? '!bg-blue-dark  z-[500] ease-linear duration-300 transition-all' : 'ease-linear duration-300 transition-all'), (path == 'contact-us' && 'shadow-md bg-white')]"
-                class="flex py-2 px-1 md:p-4   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal md:px-20  lg:px-12 md:py-6">
-                <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
-                    <LogoBlack class=" w-[70%] md:w-[80%]" v-if="path == 'contact-us' && scrollPosition < 110" />
-                    <LogoIcon v-else
-                        :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]' : 'w-[90%] md:w-fit'" />
-                    <p v-if="path == 'login' || path == 'signup'"
-                        class="text-primary pl-2  flex items-center md:text-2xl font-normal">
-                        <span v-if="route.params.rol == 'sellers'">For Sellers</span>
-                        <span v-if="route.params.rol == 'dealers'">For Dealer</span>
-                    </p>
+                class="flex   top-0 z-50 items-center w-full justify-between md:flex-wrap bg-teal   ">
+                <div v-if="path !== 'login' && path !== 'signup' && openBarInfo"
+                    class="flex w-full items-center relative justify-center gap-2 bg-[#000] text-center p-2 sm:py-4 sm:px-6">
+                    <div class="flex flex-col gap-3 sm:gap-2 items-start justify-start sm:flex-row ">
+                        <p class="text-white text-left w-[75%] sm:w-auto text-[12px] sm:text-base sm:font-medium ">
+                            Auction your car
+                            to local
+                            dealers －
+                            upload
+                            your
+                            vehicle in just 5
+                            minutes.
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <p class="text-primary text-[12px] sm:text-base font-semibold">Start Now</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                fill="none">
+                                <path
+                                    d="M10.7817 7.33336L7.20566 3.75736L8.14833 2.8147L13.3337 8.00003L8.14833 13.1854L7.20566 12.2427L10.7817 8.6667H2.66699V7.33336H10.7817Z"
+                                    fill="#C1F861" />
+                            </svg>
+                        </div>
+
+                    </div>
+
+
+                    <svg @click="closetBar()" class="absolute cursor-pointer top-2 sm:top-4 right-2 sm:right-5"
+                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path
+                            d="M9.99962 8.82178L14.1246 4.69678L15.303 5.87511L11.178 10.0001L15.303 14.1251L14.1246 15.3034L9.99962 11.1784L5.87462 15.3034L4.69629 14.1251L8.82129 10.0001L4.69629 5.87511L5.87462 4.69678L9.99962 8.82178Z"
+                            fill="#A3A3A3" />
+                    </svg>
                 </div>
-                <div v-if="storeUser?.userData?._id" class="block  lg:hidden">
-                    <div class="flex justify-center gap-2 items-center">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none">
-                                <path
-                                    d="M18.031 16.617L22.314 20.899L20.899 22.314L16.617 18.031C15.0237 19.3082 13.042 20.0029 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20.0029 13.042 19.3082 15.0237 18.031 16.617ZM16.025 15.875C17.2941 14.5699 18.0029 12.8204 18 11C18 7.132 14.867 4 11 4C7.132 4 4 7.132 4 11C4 14.867 7.132 18 11 18C12.8204 18.0029 14.5699 17.2941 15.875 16.025L16.025 15.875Z"
-                                    fill="white" />
-                            </svg>
-                        </div>
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none">
-                                <path
-                                    d="M6.455 19L2 22.5V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V18C22 18.2652 21.8946 18.5196 21.7071 18.7071C21.5196 18.8946 21.2652 19 21 19H6.455ZM5.763 17H20V5H4V18.385L5.763 17ZM11 10H13V12H11V10ZM7 10H9V12H7V10ZM15 10H17V12H15V10Z"
-                                    fill="white" />
-                            </svg>
-                        </div>
-                        <!--  <div class="relative">
+                <div
+                    class="flex col-span-2 items-center w-full justify-between py-4 px-4 md:p-4  md:px-20 lg:px-12 md:py-6">
+                    <div class="flex items-center cursor-pointer flex-no-shrink text-white mr-6">
+                        <LogoBlack class=" w-[70%] md:w-[80%]" v-if="path == 'contact-us' && scrollPosition < 110" />
+                        <LogoIcon v-else
+                            :class="path == 'login' || path == 'signup' ? 'w-[50%] md:w-[30%]' : 'w-[90%] md:w-fit'" />
+                        <p v-if="path == 'login' || path == 'signup'"
+                            class="text-primary pl-2  flex items-center md:text-2xl font-normal">
+                            <span v-if="route.params.rol == 'sellers'">For Sellers</span>
+                            <span v-if="route.params.rol == 'dealers'">For Dealer</span>
+                        </p>
+                    </div>
+                    <div v-if="storeUser?.userData?._id" class="block  lg:hidden">
+                        <div class="flex justify-center gap-2 items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M18.031 16.617L22.314 20.899L20.899 22.314L16.617 18.031C15.0237 19.3082 13.042 20.0029 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20.0029 13.042 19.3082 15.0237 18.031 16.617ZM16.025 15.875C17.2941 14.5699 18.0029 12.8204 18 11C18 7.132 14.867 4 11 4C7.132 4 4 7.132 4 11C4 14.867 7.132 18 11 18C12.8204 18.0029 14.5699 17.2941 15.875 16.025L16.025 15.875Z"
+                                        fill="white" />
+                                </svg>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M6.455 19L2 22.5V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V18C22 18.2652 21.8946 18.5196 21.7071 18.7071C21.5196 18.8946 21.2652 19 21 19H6.455ZM5.763 17H20V5H4V18.385L5.763 17ZM11 10H13V12H11V10ZM7 10H9V12H7V10ZM15 10H17V12H15V10Z"
+                                        fill="white" />
+                                </svg>
+                            </div>
+                            <!--  <div class="relative">
                             <div class="bg-primary absolute right-0 rounded-full h-2 w-2 bord"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -48,58 +83,59 @@
                                     fill="white" />
                             </svg>
                         </div> -->
+                            <button @click="toggle"
+                                class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
+                                <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <title>Menu</title>
+                                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div v-else class="flex lg:hidden">
+                        <!--   <RouterLink v-if="path !== 'login' || path == 'signup'" to="/login/sellers"
+                            :class="path == 'contact-us' && scrollPosition < 110 ? 'text-blue-dark  border-blue-dark' : 'text-white  border-[#e5e5e5]'"
+                            class=" text-xs px-4 py-2 rounded-md bg-transparent border " id="mainLogin">
+                            Login
+                        </RouterLink> -->
                         <button @click="toggle"
-                            class="flex items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
+                            :class="path == 'contact-us' && scrollPosition < 110 ? 'text-[#000] ' : 'text-white'"
+                            class="flex items-center px-3 py-2   rounded text-teal-lighter  hover:text-white hover:border-white">
                             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <title>Menu</title>
                                 <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                             </svg>
                         </button>
                     </div>
-
-                </div>
-                <div v-else class="flex lg:hidden">
-                    <RouterLink v-if="path !== 'login' || path == 'signup'" to="/login/sellers"
-                        :class="path == 'contact-us' && scrollPosition < 110 ? 'text-blue-dark  border-blue-dark' : 'text-white  border-[#e5e5e5]'"
-                        class=" text-xs px-4 py-2 rounded-md bg-transparent border " id="mainLogin">
-                        Login
-                    </RouterLink>
-                    <button @click="toggle"
-                        :class="path == 'contact-us' && scrollPosition < 110 ? 'text-[#000] ' : 'text-white'"
-                        class="flex items-center px-3 py-2   rounded text-teal-lighter  hover:text-white hover:border-white">
-                        <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <title>Menu</title>
-                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                        </svg>
-                    </button>
-                </div>
-                <div :class="(path == 'login' || path == 'signup' ? 'justify-end' : '')"
-                    class="w-full flex-grow hidden  lg:flex sm:items-center sm:w-auto">
-                    <div :class="[(path === 'login' || path === 'signup' ? 'hidden' : 'flex'), (open && 'flex-col p-5')]"
-                        class="text-sm gap-6 sm:flex-grow text-white">
-                        <p v-if="open" @click="open = false"
-                            class="text-2xl absolute right-4 top-2 font-extrabold text-white">X</p>
-                        <RouterLink
-                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'home' && '!text-primary')]"
-                            class="font-medium text-sm" to="/">Home</RouterLink>
-                        <!--  <RouterLink
+                    <div :class="(path == 'login' || path == 'signup' ? 'justify-end' : '')"
+                        class="w-full flex-grow hidden  lg:flex sm:items-center sm:w-auto">
+                        <div :class="[(path === 'login' || path === 'signup' ? 'hidden' : 'flex'), (open && 'flex-col p-5')]"
+                            class="text-sm gap-6 sm:flex-grow text-white">
+                            <p v-if="open" @click="open = false"
+                                class="text-2xl absolute right-4 top-2 font-extrabold text-white">X</p>
+                            <RouterLink
+                                :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'home' && '!text-primary')]"
+                                class="font-medium text-sm" to="/">Home</RouterLink>
+                            <!--  <RouterLink
                             :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'sold-auctions' && '!text-primary')]"
                             class="font-medium text-sm" to="/sold-auctions">Sold Auctions</RouterLink> -->
-                        <RouterLink
-                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'how-it-works' && '!text-primary')]"
-                            class="font-medium text-sm" to="/how-it-works">How It Works?</RouterLink>
-                        <RouterLink
-                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'about' && '!text-primary')]"
-                            class="font-medium text-sm" to="/about">About</RouterLink>
-                        <RouterLink
-                            :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'contact-us' && '!text-primary')]"
-                            class="font-medium text-sm" to="/contact-us">Contact Us</RouterLink>
-                        <RouterLink v-if="!store?.userData?._id"
-                            :class="[((path == 'contact-us' && scrollPosition < 1) && 'text-base-black')]"
-                            class="font-medium text-sm" to="/login/dealers">Dealer Page</RouterLink>
-                    </div>
-                    <div class="flex mt-4 justify-center gap-4 items-center md:pr-7">
-                        <!-- <div class="switch">
+                            <RouterLink
+                                :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'how-it-works' && '!text-primary')]"
+                                class="font-medium text-sm" to="/how-it-works">How It Works?</RouterLink>
+                            <RouterLink
+                                :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'about' && '!text-primary')]"
+                                class="font-medium text-sm" to="/about">About</RouterLink>
+                            <RouterLink
+                                :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'contact-us' && '!text-primary')]"
+                                class="font-medium text-sm" to="/contact-us">Contact Us</RouterLink>
+                            <RouterLink v-if="!store?.userData?._id"
+                                :class="[((path == 'contact-us' && scrollPosition < 1) && 'text-base-black')]"
+                                class="font-medium text-sm" to="/login/dealers">Dealer Page</RouterLink>
+                        </div>
+                        <div class="flex mt-4 justify-center gap-4 items-center md:pr-7">
+                            <!-- <div class="switch">
                             <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox"
                                 @change="(event) => {
                                     handleChangeLang(event.target.checked);
@@ -110,40 +146,42 @@
                             <span class="off">ES</span>
                         </div> -->
 
-                        <RouterLink v-if="store?.rol" :to="store?.userData?.type == 0 && '/inicio' ||
+                            <RouterLink v-if="store?.rol" :to="store?.userData?.type == 0 && '/inicio' ||
             store?.userData?.type == 1 && '/all' ||
             store?.userData?.type == 2 && '/upcoming'" class="btn bg-primary !font-bold shadow-lg text-base-black">
-                            My Account
-                        </RouterLink>
-                        <template v-else>
-                            <RouterLink
-                                :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
-                                <p class="text-white text-sm font-medium">
-                                    <span v-if="path == 'login'">Don’t have an account?</span>
-                                    <span v-if="path == 'signup'"> Already have an account?</span>
-                                </p>
+                                My Account
                             </RouterLink>
-                            <RouterLink v-if="path !== 'login'" :to="path == 'home' || path == 'about' || path == 'sold-auctions' ||
+                            <template v-else>
+                                <RouterLink
+                                    :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
+                                    <p class="text-white text-sm font-medium">
+                                        <span v-if="path == 'login'">Don’t have an account?</span>
+                                        <span v-if="path == 'signup'"> Already have an account?</span>
+                                    </p>
+                                </RouterLink>
+                                <RouterLink v-if="path !== 'login'" :to="path == 'home' || path == 'about' || path == 'sold-auctions' ||
             path == 'how-it-works' ||
             path == 'contact-us' ? `/login/sellers` : `/login/${route.params.rol}`" id="regLogin"
-                                :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'"
-                                class="px-5 py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize ">
-                                <span v-if="path == 'signup'">Sign In</span>
-                                <span v-else>Login</span>
-                            </RouterLink>
-                            <RouterLink v-if="path !== 'signup'" :to="path == 'home' ||
+                                    :class="path == 'signup' ? 'bg-primary text-black' : 'bg-blue-dark text-white'"
+                                    class="px-5 py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize ">
+                                    <span v-if="path == 'signup'">Sign In</span>
+                                    <span v-else>Login</span>
+                                </RouterLink>
+                                <RouterLink v-if="path !== 'signup'" :to="path == 'home' ||
             path == 'about' ||
             path == 'sold-auctions' ||
             path == 'how-it-works' ||
             path == 'contact-us'
             ? `/signup/sellers` : `/signup/${route.params.rol}`" id="regSignup"
-                                class="px-5 bg-primary py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize">
-                                Sign Up
-                            </RouterLink>
-                        </template>
+                                    class="px-5 bg-primary py-2 md:pt-[9px] md:px-[22px] md:pb-[11px] flex justify-center items-center rounded-[8px] font-[600] text-base capitalize">
+                                    Sign Up
+                                </RouterLink>
+                            </template>
 
+                        </div>
                     </div>
                 </div>
+
             </nav>
             <div v-if="path == 'login' || path == 'signup'"
                 class="bg-blue-dark flex justify-between md:hidden items-center px-3 py-2 ">
@@ -400,6 +438,7 @@ export default {
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const form = storeData.formData
         const open = ref(false)
+        const openBarInfo = ref(true)
         /*  watch(open, async (newQuestion, oldQuestion) => {
              if (newQuestion) {
                  document.documentElement.style.overflow = "hidden";
@@ -431,6 +470,9 @@ export default {
             await router.push({ name: 'home' })
             open.value = false
 
+        }
+        const closetBar = () => {
+            openBarInfo.value = false
         }
         const back = async () => {
             storeData.formData.name = ''
@@ -473,7 +515,9 @@ export default {
             storeUser,
             bucket,
             goAccount,
-            logout
+            logout,
+            closetBar,
+            openBarInfo
         };
     },
 };
