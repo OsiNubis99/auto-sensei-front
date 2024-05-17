@@ -7,6 +7,7 @@ module.exports = {
       fontFamily: {
         Nohemi: ["Nohemi"],
         OpenSauce: ["OpenSauce"],
+        Inter: ["Inter"],
       },
     },
     colors: {

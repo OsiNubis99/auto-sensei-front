@@ -311,7 +311,7 @@
         <template v-if="store?.userData?._id">
             <div v-show="open" class="fixed bg-[#0b1107b5] left-0 animation-menu-modal top-0 h-screen w-full z-[580]">
             </div>
-            <nav v-show="open" class="fixed animation-menu-modal top-0 lg:hidden z-[600] bg-[#141f0d] w-full  p-5">
+            <nav v-show="open" class="fixed animation-menu-modal top-0 lg:hidden z-[1000] bg-[#141f0d] w-full  p-5">
                 <div class=" flex gap-3 justify-between items-center">
                     <div class=" flex gap-3 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="21" viewBox="0 0 25 21" fill="none">

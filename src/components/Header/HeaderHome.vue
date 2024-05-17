@@ -4,7 +4,7 @@
             class="md:h-10 p-2 md:p-6 flex justify-start  items-center bg-base-black">
             <div class="flex items-center gap-2 md:gap-5 cursor-pointer" @click="back">
                 <IconArrow class="rotate-90" />
-                <p class=" text-xs md:text-sm text-white font-medium">Back to Home</p>
+                <p class=" text-xs md:text-sm text-white font-medium font-OpenSauce-footer">Back to Home</p>
             </div>
         </div>
         <div class="font-sans antialiased  " id="app">
@@ -15,7 +15,8 @@
                 <div v-if="path !== 'login' && path !== 'signup' && openBarInfo"
                     class="flex w-full items-center relative justify-center gap-2 bg-[#000] text-center p-2 sm:py-4 sm:px-6">
                     <div class="flex flex-col gap-3 sm:gap-2 items-start justify-start sm:flex-row ">
-                        <p class="text-white text-left w-[75%] sm:w-auto text-[12px] sm:text-base sm:font-medium ">
+                        <p
+                            class="text-white text-left w-[75%] sm:w-auto text-[12px] sm:text-base sm:font-medium font-OpenSauce-footer ">
                             Auction your car
                             to local
                             dealers －
@@ -24,7 +25,7 @@
                             vehicle in just 5
                             minutes.
                         </p>
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center cursor-pointer gap-2" @click="goToHome">
                             <p class="text-primary text-[12px] sm:text-base font-semibold">Start Now</p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none">
@@ -117,22 +118,25 @@
                                 class="text-2xl absolute right-4 top-2 font-extrabold text-white">X</p>
                             <RouterLink
                                 :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'home' && '!text-primary')]"
-                                class="font-medium text-sm" to="/">Home</RouterLink>
+                                class="font-medium font-OpenSauce-footer text-sm" to="/">Home</RouterLink>
                             <!--  <RouterLink
                             :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'sold-auctions' && '!text-primary')]"
-                            class="font-medium text-sm" to="/sold-auctions">Sold Auctions</RouterLink> -->
+                            class="font-medium font-OpenSauce-footer text-sm" to="/sold-auctions">Sold Auctions</RouterLink> -->
                             <RouterLink
                                 :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'how-it-works' && '!text-primary')]"
-                                class="font-medium text-sm" to="/how-it-works">How It Works?</RouterLink>
+                                class="font-medium font-OpenSauce-footer text-sm" to="/how-it-works">How It Works?
+                            </RouterLink>
                             <RouterLink
                                 :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'about' && '!text-primary')]"
-                                class="font-medium text-sm" to="/about">About</RouterLink>
+                                class="font-medium font-OpenSauce-footer text-sm" to="/about">About</RouterLink>
                             <RouterLink
                                 :class="[((path == 'contact-us' && scrollPosition < 110) && 'text-base-black'), (path == 'contact-us' && '!text-primary')]"
-                                class="font-medium text-sm" to="/contact-us">Contact Us</RouterLink>
+                                class="font-medium font-OpenSauce-footer text-sm" to="/contact-us">Contact Us
+                            </RouterLink>
                             <RouterLink v-if="!store?.userData?._id"
                                 :class="[((path == 'contact-us' && scrollPosition < 1) && 'text-base-black')]"
-                                class="font-medium text-sm" to="/login/dealers">Dealer Page</RouterLink>
+                                class="font-medium font-OpenSauce-footer text-sm" to="/login/dealers">Dealer Page
+                            </RouterLink>
                         </div>
                         <div class="flex mt-4 justify-center gap-4 items-center md:pr-7">
                             <!-- <div class="switch">
@@ -154,7 +158,7 @@
                             <template v-else>
                                 <RouterLink
                                     :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
-                                    <p class="text-white text-sm font-medium">
+                                    <p class="text-white text-sm font-medium font-OpenSauce-footer">
                                         <span v-if="path == 'login'">Don’t have an account?</span>
                                         <span v-if="path == 'signup'"> Already have an account?</span>
                                     </p>
@@ -186,7 +190,7 @@
             <div v-if="path == 'login' || path == 'signup'"
                 class="bg-blue-dark flex justify-between md:hidden items-center px-3 py-2 ">
                 <RouterLink :to="[path == 'login' ? `/signup/${route.params.rol}` : `/login/${route.params.rol}`]">
-                    <p class="text-white text-sm font-medium">
+                    <p class="text-white text-sm font-medium font-OpenSauce-footer">
                         <span v-if="path == 'login'">Don’t have an account?</span>
                         <span v-if="path == 'signup'"> Already have an account?</span>
                     </p>
@@ -212,9 +216,9 @@
 
             <template v-if="storeUser?.userData?._id">
                 <div v-show="open"
-                    class="fixed bg-[#0b1107b5] left-0 animation-menu-modal top-0 h-screen w-full z-[580]">
+                    class="fixed bg-[#0b1107b5] left-0 animation-menu-modal top-0 h-screen w-full z-[500]">
                 </div>
-                <nav v-show="open" class="fixed animation-menu-modal top-0 md:hidden z-[600] bg-[#141f0d] w-full  p-5">
+                <nav v-show="open" class="fixed animation-menu-modal top-0 md:hidden z-[1000] bg-[#141f0d] w-full  p-5">
                     <div class=" flex gap-3 justify-between items-center">
                         <div class=" flex gap-3 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="21" viewBox="0 0 25 21"
@@ -353,7 +357,7 @@
 
             <template v-else>
                 <nav v-show="open"
-                    class="fixed animation-menu-modal top-0 lg:hidden z-[600] bg-[#141f0d] w-full h-full p-5">
+                    class="fixed animation-menu-modal top-0 lg:hidden z-[1000] bg-[#141f0d] w-full h-full p-5">
                     <div class=" flex gap-3 justify-between items-center">
                         <div class=" flex gap-3 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="21" viewBox="0 0 25 21"
@@ -379,22 +383,24 @@
                     </div>
                     <div class="flex flex-col items-center justify-center gap-4 mt-4">
                         <RouterLink @click="open = false" :class="[(path == 'home' ? '!text-primary' : 'text-white')]"
-                            class="font-medium text-xs" to="/">Home
+                            class="font-medium font-OpenSauce-footer text-xs" to="/">Home
                         </RouterLink>
                         <!--   <RouterLink @click="open = false"
                             :class="[(path == 'sold-auctions' ? '!text-primary' : 'text-white')]"
-                            class="font-medium text-xs" to="/sold-auctions">Sold Auctions</RouterLink> -->
+                            class="font-medium font-OpenSauce-footer text-xs" to="/sold-auctions">Sold Auctions</RouterLink> -->
                         <RouterLink @click="open = false"
                             :class="[(path == 'how-it-works' ? '!text-primary' : 'text-white')]"
-                            class="font-medium text-xs" to="/how-it-works">How It Works?</RouterLink>
+                            class="font-medium font-OpenSauce-footer text-xs" to="/how-it-works">How It Works?
+                        </RouterLink>
                         <RouterLink @click="open = false" :class="[(path == 'about' ? '!text-primary' : 'text-white')]"
-                            class="font-medium text-xs" to="/about">About</RouterLink>
+                            class="font-medium font-OpenSauce-footer text-xs" to="/about">About</RouterLink>
                         <RouterLink @click="open = false"
                             :class="[(path == 'contact-us' ? '!text-primary' : 'text-white')]"
-                            class="font-medium text-xs" to="/contact-us">Contact Us</RouterLink>
+                            class="font-medium font-OpenSauce-footer text-xs" to="/contact-us">Contact Us</RouterLink>
                         <RouterLink @click="open = false" v-if="!store?.userData?._id"
-                            :class="[(path == `login` ? '!text-primary' : 'text-white')]" class="font-medium text-sm"
-                            to="/login/dealers">Dealer Page</RouterLink>
+                            :class="[(path == `login` ? '!text-primary' : 'text-white')]"
+                            class="font-medium font-OpenSauce-footer text-sm" to="/login/dealers">Dealer Page
+                        </RouterLink>
                         <RouterLink @click="open = false" to="/login/sellers" id="mainLogin"
                             class=" font-bold text-xs text-center  w-full px-4 py-2 rounded-md bg-[#22282F] text-white border border-[#e5e5e521]">
                             Login
@@ -451,6 +457,30 @@ export default {
                 i18n.global.locale = "en";
             } else {
                 i18n.global.locale = "es";
+            }
+        }
+        const goToHome = async () => {
+            if (storeUser.userData._id) {
+                switch (storeUser.userData.type) {
+                    case 0:
+                        await router.push({ path: '/inicio' })
+
+                        break;
+                    case 1:
+                        await router.push({ path: '/all' })
+
+                        break;
+                    case 2:
+                        await router.push({ path: '/upcoming' })
+
+                        break;
+
+                    default:
+                        break;
+                }
+            } else {
+                await router.push({ path: '/login/sellers' })
+
             }
         }
         const goAccount = async () => {
@@ -517,7 +547,8 @@ export default {
             goAccount,
             logout,
             closetBar,
-            openBarInfo
+            openBarInfo,
+            goToHome
         };
     },
 };
