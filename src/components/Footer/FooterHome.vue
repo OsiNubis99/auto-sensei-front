@@ -123,25 +123,25 @@
 
             <div :class="path == 'about' ? 'border-black' : 'border-[#393E45]'"
                 class="flex w-full border-t-[1px]  flex-col-reverse overflow-hidden   gap-5 items-start md:flex-row p-5 md:py-6 md:px-14  justify-between relative md:items-center">
-                <h5 :class="path == 'about' ? 'text-black' : 'text-white'" class="text-sm font-normal">© 2023
+                <p :class="path == 'about' ? 'text-black' : 'text-white'" class="text-sm font-normal">© 2023
                     AutoSensei.
-                    All Rights Reserved.</h5>
+                    All Rights Reserved.</p>
                 <div class="custom-footer-border flex flex-col md:flex-row lg:gap-20">
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class="text-sm font-normal ">
-                        <h5>Terms of Service</h5>
+                        class=" text-sm   font-medium leading-5 font-['OpenSauce'] ">
+                        <p>Terms of Service</p>
                     </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class="text-sm font-normal ">
-                        <h5> Privacy Policy</h5>
+                        class=" text-sm   font-medium leading-5 font-['OpenSauce'] ">
+                        <p> Privacy Policy</p>
                     </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class="text-sm font-normal ">
-                        <h5>Cookie Policy</h5>
+                        class=" text-sm   font-medium leading-5 font-['OpenSauce'] ">
+                        <p>Cookie Policy</p>
                     </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class="text-sm font-normal ">
-                        <h5>Sitemap</h5>
+                        class=" text-sm   font-medium leading-5 font-['OpenSauce'] ">
+                        <p>Sitemap</p>
                     </RouterLink>
 
                 </div>
