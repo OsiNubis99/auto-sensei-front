@@ -131,7 +131,7 @@
             </div> -->
         </div>
         <div class="flex w-full justify-center items-center py-3 pb-20">
-            <button id="getStarted-how-it-works" class="btn-free bg-primary">
+            <button id="getStarted-how-it-works" @click="goToHome" class="btn-free bg-primary">
                 <p class="font-bold ">Get Started Today</p>
                 <p class="btn-free_card">Free</p>
                 <svg mlns=" http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
@@ -148,7 +148,7 @@
                 saying
             </strong> <br> about AutoSensei
         </h2>
-        <div class="w-full justify-center  flex items-center">
+        <!--   <div class="w-full justify-center  flex items-center">
             <div class="flex flex-col lg:flex-row items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <g clip-path="url(#clip0_593_25955)">
@@ -165,7 +165,7 @@
                 <p> <strong>Excellent 4.9 stars,</strong> 100+ reviews on</p>
                 <img class="w-[80px]" src="@/assets/svg/google-socila.svg" alt="">
             </div>
-        </div>
+        </div> -->
         <div class="flex flex-col lg:flex-row  p-2 justify-center mt-10 items-center gap-5">
             <div class="bg-white p-5 max-w-xl   shadow-lg flex rounded-2xl flex-col gap-4 justify-start">
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
@@ -183,7 +183,7 @@
                 </p>
                 <div>
                     <div class="py-4">
-                        <star-rating :starSize="20" :rating="4" :read-only="true" :increment="0.01"
+                        <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
                             :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
                             :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
                         </star-rating>
@@ -200,11 +200,11 @@
                                 <p>2017 Honda CR-V</p>
                             </div>
                         </div>
-                        <div>
+                        <!-- <div>
                             <img class="w-[50px] h-[50px]  rounded-full object-cover"
                                 src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
                                 alt="">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -224,7 +224,7 @@
                 </p>
                 <div>
                     <div class="py-4">
-                        <star-rating :starSize="20" :rating="2" :read-only="true" :increment="0.01"
+                        <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
                             :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
                             :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
                         </star-rating>
@@ -241,11 +241,11 @@
                                 <p>2016 Toyota Corolla</p>
                             </div>
                         </div>
-                        <div>
+                        <!--  <div>
                             <img class="w-[50px] h-[50px]  rounded-full object-cover"
                                 src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
                                 alt="">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -282,11 +282,11 @@
                                 <p>2017 Nissan Rogue</p>
                             </div>
                         </div>
-                        <div>
+                        <!-- <div>
                             <img class="w-[50px] h-[50px]  rounded-full object-cover"
                                 src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
                                 alt="">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -301,7 +301,7 @@ import iconArrow from '../components/icons/iconArrow.vue'
 import Heanding from '../components/Headings/Heanding.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { computed, ref } from 'vue';
-
+import { useAuthStore } from "@/stores/auth";
 export default {
     components: {
         iconArrow,
@@ -310,14 +310,42 @@ export default {
     setup() {
         const route = useRouter();
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+        const authStore = useAuthStore()
+        const router = useRouter();
         const redirectLogin = (redirect) => {
             route.push({ name: 'signup', params: { rol: redirect } })
+        }
+        const goToHome = async () => {
+            console.log('authStore.userData', authStore.userData)
+            if (authStore.userData._id) {
+                switch (authStore.userData.type) {
+                    case 0:
+                        await router.push({ path: '/inicio' })
+
+                        break;
+                    case 1:
+                        await router.push({ path: '/all' })
+
+                        break;
+                    case 2:
+                        await router.push({ path: '/upcoming' })
+
+                        break;
+
+                    default:
+                        break;
+                }
+            } else {
+                await router.push({ path: '/login/sellers' })
+
+            }
         }
         return {
             iconArrow,
             Heanding,
             redirectLogin,
-            bucket
+            bucket,
+            goToHome
         };
     },
 };

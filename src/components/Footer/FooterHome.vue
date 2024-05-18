@@ -1,51 +1,23 @@
 <template>
     <footer v-if="path != 'login' && path != 'signup'">
         <div :class="path === 'about' ? 'bg-white  ' : 'bg-[#1D2228]  '" class="flex flex-col relative">
-            <!--  <img v-if="path !== 'about'" class="absolute  left-0 w-full h-full top-0"
-                :src="bucket + 'public/svg/lines/lineFooter.svg'" alt=""> -->
+
             <div class="grid relative p-5 lg:p-14 lg:pb-20  lg:grid-cols-2">
                 <div class="flex flex-col gap-7">
                     <RouterLink to="/">
                         <LogoIcon v-if="path !== 'about'" />
                         <LogoBlack v-else />
                     </RouterLink>
-                    <!--   <p class="text-sm font-normal text-white"> Join AutoSensei and Make a Difference in Children's Lives!</p>
-                    <p class="text-sm font-normal text-white">
-                        At AutoSensei, we believe in making a positive impact in the world, especially in the lives of those <br>
-                        who need it most. That's why we are proud to announce that a portion of our income is dedicated to <br>
-                        supporting the SickKids nonprofit organization. By using our platform, you are indirectly <br>
-                        contributing towards providing better healthcare and support for sick children in our community. <br>
-                    </p> -->
-                    <p :class="path == 'about' ? 'text-black' : 'text-white'" class="text-sm font-normal">
+                    <p :class="path == 'about' ? 'text-black' : 'text-white'"
+                        class=" text-base font-normal font-OpenSauce-footer">
                         AutoSensei revolutionizes car selling, providing a fast, <br>
                         stress-free process and top value via local dealership bids.
                     </p>
-                    <!--  <div class="flex gap-5 items-center">
-                        <a href="https://www.facebook.com/profile.php?id=61558003370710&mibextid=LQQJ4d" target="_blank"
-                            rel="noopener noreferrer">
-                            <iconFacebook :color="path === 'about' ? '#000' : '#fff'" />
-                        </a>
-                        <a href="https://www.instagram.com/autosenseiauction/?igsh=MXA3MnNvc25pa2d0YQ%3D%3D&utm_source=qr"
-                            target="_blank" rel="noopener noreferrer">
-                            <iconInstagram :color="path === 'about' ? '#000' : '#fff'" />
-                        </a>
-                        <a href="https://x.com/autosensei_inc?t=pAr1rD9pRasGjX_9S4_mGg&s=09" target="_blank"
-                            rel="noopener noreferrer">
-                            <iconTwitter :color="path === 'about' ? '#000' : '#fff'" />
-                        </a>
-                          <a target="_blank" rel="noopener noreferrer">
-            <iconYoutube :color="path === 'about' ? '#000' : '#fff'" />
-          </a>
-                        <a href="https://www.linkedin.com/company/autosensei/" target="_blank"
-                            rel="noopener noreferrer">
-                            <iconLinkedin :color="path === 'about' ? '#000' : '#fff'" />
-                        </a>
-                    </div> -->
                 </div>
                 <div class="grid pt-10  grid-cols-1  md:p-0 md:grid-cols-3">
                     <div class="flex flex-col">
                         <p :class="path == 'about' ? 'text-black' : 'text-[#ffffff66]'"
-                            class="text-md my-2 uppercase font-bold ">AUCTIONS</p>
+                            class="text-md my-2 uppercase font-medium font-OpenSauce-footer">AUCTIONS</p>
                         <!--  <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'" class="text-base my-2">
                             Sold
                             Auctions</RouterLink> -->
@@ -58,20 +30,21 @@
                             Company
                         </p>
                         <RouterLink to="/about" :class="path == 'about' ? 'text-black' : 'text-white'"
-                            class="text-base my-2">
+                            class="text-base my-2 font-medium font-OpenSauce-footer">
                             About Us</RouterLink>
                         <RouterLink to="/how-it-works" :class="path == 'about' ? 'text-black' : 'text-white'"
-                            class="text-base my-2">
+                            class="text-base my-2 font-medium font-OpenSauce-footer">
                             How
                             It Works?</RouterLink>
                         <RouterLink to="/contact-us" :class="path == 'about' ? 'text-black' : 'text-white'"
-                            class="text-base my-2">
+                            class="text-base my-2 font-medium font-OpenSauce-footer">
                             Contact Us</RouterLink>
                         <!--  <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'" class="text-base my-2">
                             Customer Reviews</RouterLink> -->
                     </div>
                     <div class="flex flex-col">
-                        <p :class="path == 'about' ? 'text-black' : 'text-[#ffffff66]'" class="text-md my-2 font-bold">
+                        <p :class="path == 'about' ? 'text-black' : 'text-[#ffffff66]'"
+                            class="text-md my-2 font-medium font-OpenSauce-footer">
                             SOCIAL
                         </p>
                         <div class="flex gap-3 items-center py-2">
@@ -79,44 +52,29 @@
                                 target="_blank" rel="noopener noreferrer">
                                 <iconFacebook :color="path === 'about' ? '#000' : '#fff'" />
                             </a>
-                            <p class="text-white font-bold ">Facebook</p>
+                            <p class="text-white  font-medium font-OpenSauce-footer  ">Facebook</p>
                         </div>
                         <div class="flex gap-3 items-center py-2">
                             <a href="https://www.instagram.com/autosenseiauction/?igsh=MXA3MnNvc25pa2d0YQ%3D%3D&utm_source=qr"
                                 target="_blank" rel="noopener noreferrer">
                                 <iconInstagram :color="path === 'about' ? '#000' : '#fff'" />
                             </a>
-                            <p class="text-white font-bold ">Instagram</p>
+                            <p class="text-white  font-medium font-OpenSauce-footer  ">Instagram</p>
                         </div>
                         <div class="flex gap-3 items-center py-2">
                             <a href="https://x.com/autosensei_inc?t=pAr1rD9pRasGjX_9S4_mGg&s=09" target="_blank"
                                 rel="noopener noreferrer">
                                 <iconTwitter :color="path === 'about' ? '#000' : '#fff'" />
                             </a>
-                            <p class="text-white font-bold ">Twitter</p>
+                            <p class="text-white  font-medium font-OpenSauce-footer  ">Twitter</p>
                         </div>
                         <div class="flex gap-3 items-center py-2">
                             <a href="https://www.linkedin.com/company/autosensei/" target="_blank"
                                 rel="noopener noreferrer">
                                 <iconLinkedin :color="path === 'about' ? '#000' : '#fff'" />
                             </a>
-                            <p class="text-white font-bold ">Linkedin</p>
+                            <p class="text-white  font-medium font-OpenSauce-footer  ">Linkedin</p>
                         </div>
-
-
-                        <!--   <a target="_blank" rel="noopener noreferrer">
-            <iconYoutube :color="path === 'about' ? '#000' : '#fff'" />
-          </a> -->
-                        <!--  <RouterLink to="/signup/sellers" :class="path == 'about' ? 'text-black' : 'text-white'"
-                            class="text-base my-2">
-                            Sign
-                            Up</RouterLink>
-                        <RouterLink to="/login/sellers" :class="path == 'about' ? 'text-black' : 'text-white'"
-                            class="text-base my-2">
-                            Login</RouterLink>
-                        <RouterLink to="/recover-password" :class="path == 'about' ? 'text-black' : 'text-white'"
-                            class="text-base my-2">
-                            Password Recovery</RouterLink> -->
                     </div>
                 </div>
             </div>
@@ -128,19 +86,19 @@
                     All Rights Reserved.</p>
                 <div class="custom-footer-border flex flex-col md:flex-row lg:gap-20">
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class=" text-sm   font-medium leading-5 font-['OpenSauce'] ">
+                        class="font-OpenSauce-footer">
                         <p>Terms of Service</p>
                     </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class=" text-sm   font-medium leading-5 font-['OpenSauce'] ">
+                        class="font-OpenSauce-footer">
                         <p> Privacy Policy</p>
                     </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class=" text-sm   font-medium leading-5 font-['OpenSauce'] ">
+                        class="font-OpenSauce-footer">
                         <p>Cookie Policy</p>
                     </RouterLink>
                     <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class=" text-sm   font-medium leading-5 font-['OpenSauce'] ">
+                        class="font-OpenSauce-footer">
                         <p>Sitemap</p>
                     </RouterLink>
 
