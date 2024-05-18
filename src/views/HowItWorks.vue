@@ -148,7 +148,7 @@
                 saying
             </strong> <br> about AutoSensei
         </h2>
-        <div class="w-full justify-center  flex items-center">
+        <!--   <div class="w-full justify-center  flex items-center">
             <div class="flex flex-col lg:flex-row items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <g clip-path="url(#clip0_593_25955)">
@@ -165,7 +165,7 @@
                 <p> <strong>Excellent 4.9 stars,</strong> 100+ reviews on</p>
                 <img class="w-[80px]" src="@/assets/svg/google-socila.svg" alt="">
             </div>
-        </div>
+        </div> -->
         <div class="flex flex-col lg:flex-row  p-2 justify-center mt-10 items-center gap-5">
             <div class="bg-white p-5 max-w-xl   shadow-lg flex rounded-2xl flex-col gap-4 justify-start">
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
@@ -200,11 +200,11 @@
                                 <p>2017 Honda CR-V</p>
                             </div>
                         </div>
-                        <div>
+                        <!-- <div>
                             <img class="w-[50px] h-[50px]  rounded-full object-cover"
                                 src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
                                 alt="">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
