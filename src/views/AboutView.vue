@@ -1,14 +1,15 @@
 <template>
   <div class="w-full pt-20 relative z-10 h-full md:h-screen  bg-blue-dark ">
-    <div class="w-full h-full flex flex-col justify-center items-center">
-      <h1 class="text-3xl md:text-6xl lg:text-8xl font-bold mb-7 text-center text-white">AutoSensei is Revolutionizing
+    <div class="w-full h-full flex flex-col pt-[100px] sm:pt-0 justify-center items-center">
+      <h1 class=" mb-7 text-center text-white">AutoSensei is Revolutionizing
         <br>
         The Car-Selling Experience
       </h1>
       <p class=" text-xs text-center md:text-base text-base-white p-5">Our mission is to streamline and simplify the
         process of selling your car.</p>
     </div>
-    <img class="absolute object-cover left-0 w-full h-full -z-10 top-0" :src="bucket + 'public/svg/lines/lineAbout.svg'" alt="">
+    <img class="absolute object-cover left-0 w-full h-full -z-10 top-0" :src="bucket + 'public/svg/lines/lineAbout.svg'"
+      alt="">
   </div>
   <div class="md:py-14 py-4">
     <div class="grid lg:grid-cols-2 gap-6 md:gap-20 px-5  lg:px-20 lg:pb-0 h-full">
@@ -153,7 +154,7 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-               
+
               </p>
             </div>
           </div>
@@ -195,7 +196,7 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-              
+
               </p>
             </div>
           </div>
@@ -213,7 +214,9 @@
             </div>
             <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
               <p class="p-2  text-sm md:text-base text-white text-justify">
-                We created our platform to ensure clients have the ability to get the best value for their vehicle with their busy days & schedules. No more going dealer to dealer looking to see who offers the best price, getting tired of the whole process, and possibly settling for a number that may not be the best.
+                We created our platform to ensure clients have the ability to get the best value for their vehicle with
+                their busy days & schedules. No more going dealer to dealer looking to see who offers the best price,
+                getting tired of the whole process, and possibly settling for a number that may not be the best.
               </p>
             </div>
           </div>

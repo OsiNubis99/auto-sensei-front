@@ -973,6 +973,7 @@ export default {
         const termins = ref(false)
         const storeIdAution = useAuctionStore()
         const storeAution = ref(null)
+        const storeAution222 = ref(null)
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const dataAution = ref(null)
         const activateLayout = ref(false)

@@ -7,7 +7,7 @@
         <HeaderOptionesSeller />
         <div v-if="data?.length > 0 || draft.length > 0"
             class="relative max-w-[120rem] bg-[#BDBDBF66] md:bg-white mx-auto z-50 md:top-[60px] ">
-            <div class="flex justify-between md:mt-5 gap-4 mt-2">
+            <div class="flex justify-between md:mt-5 md:px-5 gap-4 mt-2">
                 <div class="hidden md:w-[24%] lg:block">
                     <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
                 </div>
