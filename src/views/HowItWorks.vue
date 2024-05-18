@@ -183,7 +183,7 @@
                 </p>
                 <div>
                     <div class="py-4">
-                        <star-rating :starSize="20" :rating="4" :read-only="true" :increment="0.01"
+                        <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
                             :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
                             :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
                         </star-rating>
@@ -224,7 +224,7 @@
                 </p>
                 <div>
                     <div class="py-4">
-                        <star-rating :starSize="20" :rating="2" :read-only="true" :increment="0.01"
+                        <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
                             :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
                             :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
                         </star-rating>
