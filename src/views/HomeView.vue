@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="w-full pt-10 xl:pb-0 relative z-10 h-custom-screen  sm:h-[65vh] xl:h-screen overflow-hidden bg-blue-dark ">
+  <div class="w-full py-10 lg:h-screen relative z-10 h-fit overflow-hidden ">
     <div
       class="flex flex-col md:flex-row lg:grid lg:grid-cols-2  gap-3 md:gap-12  p-5  pt-[100px]  md:pt-[150px]  2xl:pt-[200px] md:px-12  !pb-0 h-full">
       <div class="flex flex-col items-start gap-4 ">
@@ -38,21 +37,23 @@
           <p> <strong> Over 5,000 cars sold </strong> through AutoSensei</p>
         </div>
       </div>
-      <img class="img-girls" :src="bucket + 'public/svg/carji.svg'" alt="">
+      <!--  <img class="img-girls" :src="bucket + 'public/svg/carji.svg'" alt=""> -->
       <!--   <div
         class="w-full contend-image-home sm:invisible visible xl:visible -bottom-[70px]  md:-bottom-[100px]  h-full relative">
        
       </div> -->
     </div>
+    <div class="bg-banner"> </div>
+    <img class="bg-banner-img" src="../assets/img/jpg/banner.jpeg" alt="">
     <!--  <img class="absolute xl:invisible invisible sm:visible sm:right-[5%] right-0 bottom-0  h-[50%] "
       :src="bucket + 'public/svg/carji.svg'" alt=""> -->
-    <img class="absolute -z-10 sm:hidden bottom-0 w-full" src="../assets/svg/vehiculp-movil.svg" alt="">
-    <img class="absolute hidden sm:block -z-10 bottom-0 w-full" :src="bucket + 'public/svg/vehiculo.svg'" alt="">
-    <svg class=" line-svg-home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 481 603" fill="none">
+    <!--  <img class="absolute -z-10 sm:hidden bottom-0 w-full" src="../assets/svg/vehiculp-movil.svg" alt="">
+    <img class="absolute hidden sm:block -z-10 bottom-0 w-full" :src="bucket + 'public/svg/vehiculo.svg'" alt=""> -->
+    <!-- <svg class=" line-svg-home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 481 603" fill="none">
       <path
         d="M290.219 -142.774L15.4131 181.446C12.6915 184.657 17.0402 189.372 20.4385 186.888C127.109 108.922 315.63 -6.55714 387.378 33.846C485.061 88.8527 120.398 236.351 184.223 313.731C235.284 375.636 482.391 184.879 599.562 81.763C516.555 199.327 364.866 444.851 422.163 486.44C493.784 538.426 692.86 181.276 743.339 213.849C783.722 239.908 642.994 476.803 567.582 591.993L898.12 326.197"
         stroke="#2C3238" stroke-width="28" />
-    </svg>
+    </svg> -->
   </div>
   <div class="py-14 relative z-20 overflow-hidden ">
     <div class=" max-w-2xl  m-auto ">
@@ -156,7 +157,8 @@
         sold their <br> car </strong> with AutoSensei</h2>
     <div class="p-5  grid grid-cols-1 md:grid-cols-2 2xl:flex gap-6 items-baseline justify-center">
       <div class="flex items-center max-w-sm  justify-center flex-col ">
-        <div class="bg-[#6D53B0] w-full  rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
+        <div @click="opneModalVideo(1, 'Mei Zhang - Ford Focus ST 2017')"
+          class="bg-[#6D53B0] w-full  transition ease-in-out   hover:-translate-y-1 hover:scale-110 duration-500  cursor-pointer rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
           <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
             viewBox="0 0 340 192" fill="none">
             <path
@@ -180,7 +182,8 @@
 
       </div>
       <div class="flex items-center max-w-sm  justify-center flex-col ">
-        <div class="bg-[#6D53B0] w-full rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
+        <div @click="opneModalVideo(2, 'Tasha Williams - 2018 Ford Fusion')"
+          class="bg-[#6D53B0] w-full cursor-pointer transition ease-in-out   hover:-translate-y-1 hover:scale-110 duration-500 rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
           <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
             viewBox="0 0 340 192" fill="none">
             <path
@@ -202,7 +205,8 @@
 
       </div>
       <div class="flex items-center max-w-sm  justify-center flex-col ">
-        <div class="bg-[#6D53B0] w-full rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
+        <div @click="opneModalVideo(3, 'Alex Martinez - 2014 Chevrolet Traverse')"
+          class="bg-[#6D53B0] w-full cursor-pointer transition ease-in-out   hover:-translate-y-1 hover:scale-110 duration-500 rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
           <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
             viewBox="0 0 340 192" fill="none">
             <path
@@ -419,6 +423,28 @@
 
     <img class="relative mt-6 md:absolute w-full bottom-0 " src="@/assets/svg/bannerpeople.svg" alt="">
   </div>
+
+  <div v-if="modalVideo"
+    class="fixed inset-0 flex items-end md:items-center z-50 md:justify-center bg-base-black  bg-opacity-50">
+    <div class="max-w-md w-full overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
+      <div class=" p-2 md:p-4 rounded-t-lg  gap-3 bg-[#22282F] flex items-center justify-between">
+        <p class=" text-sm md:text-xl text-white"> {{ nameVideo }} </p>
+        <svg @click="closeModalVideo" xmlns="http://www.w3.org/2000/svg"
+          class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div class="relative w-full h-[60vh]">
+        <IconPlay v-if="!isPlaying" @click="play"
+          class="absolute w-[50px] md:w-auto z-50 cursor-pointer top-[42%] left-[43%]" />
+        <video @click="isPlaying ? paused : play" ref="videoPlayer" poster :controls="isPlaying ? true : false"
+          class="w-full object-cover h-full">
+          <source :src="videoMedia" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -458,11 +484,44 @@ export default {
   },
   setup() {
     let videoPlayer = ref()
-    let isPlaying = ref(false)
+    const isPlaying = ref(false)
     const route = useRoute();
     const router = useRouter();
     const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
     const authStore = useAuthStore()
+    const modalVideo = ref(false)
+    const videoMedia = ref(null)
+    const nameVideo = ref(null)
+
+    const opneModalVideo = (option, name) => {
+      switch (option) {
+        case 1:
+          nameVideo.value = name
+          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD3+(Render+V2).mp4'
+
+          break;
+        case 2:
+          nameVideo.value = name
+          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD2+(Render+V2).mp4'
+
+          break;
+        case 3:
+          nameVideo.value = name
+          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD1+(Render+V2).mp4'
+
+          break;
+        default:
+          break;
+
+      }
+      console.log('videoMedia.value', videoMedia.value)
+      modalVideo.value = true
+    }
+    const closeModalVideo = () => {
+      modalVideo.value = false
+      videoMedia.value = null
+      isPlaying.value = false
+    }
     const goToHome = async () => {
       console.log('authStore.userData', authStore.userData)
       if (authStore.userData._id) {
@@ -524,7 +583,12 @@ export default {
       Heanding,
       authStore,
       goToHome,
-      bucket
+      bucket,
+      opneModalVideo,
+      videoMedia,
+      modalVideo,
+      closeModalVideo,
+      nameVideo,
     };
   },
 };
