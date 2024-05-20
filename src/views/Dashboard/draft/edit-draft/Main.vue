@@ -1192,7 +1192,7 @@ export default {
             }
         }
         onMounted(() => {
-            getCountry()
+            /*  getCountry() */
             if (route.query?.id) {
                 id_create.value = route.query?.id
                 progress.value = route.query?.progress
