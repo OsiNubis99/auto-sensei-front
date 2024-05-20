@@ -882,7 +882,10 @@
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Confirmation
             </button>
-            <p class="text-xs md:text-sm text-[#666666]">You can edit at the end, when we confirm all your details.</p>
+            <p class="text-xs md:text-sm text-[#666666]">If you leave the create auction process, this listing will be
+                saved
+                in your
+                drafts for your convenience to continue later.</p>
         </div>
         <div v-else class="flex justify-center items-center gap-5 ">
             <button @click="createAutions('draft')" id="saveDraft"
@@ -1080,7 +1083,7 @@ export default {
                     reader.readAsDataURL(input.files[0]);
                 }
             } else {
-                toast("File not supported,allowed files (jpg,jpeg,png,webp)", {
+                toast("File not supported,allowed files (jpg, jpeg, png, webp)", {
                     type: "error",
                 });
             }
