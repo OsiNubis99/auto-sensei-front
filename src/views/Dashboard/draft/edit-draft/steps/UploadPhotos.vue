@@ -955,7 +955,10 @@ export default {
             videoPlayer.value.pause();
             isPlaying.value = false
         }
-
+        function isMobile() {
+            const minWidth = 768; // Minimum width for desktop devices
+            return window.innerWidth < minWidth || screen.width < minWidth;
+        }
         const previewImage = (event, string) => {
             var input = event.target;
             let typeFile = input.files[0].type.split("/")
@@ -969,7 +972,11 @@ export default {
                     var reader = new FileReader();
                     reader.onload = (e) => {
                         if (typeFile[0] !== 'video') {
-                            statusModalImage.openModal({ active: true, img: input.files[0], type: string })
+                            if (isMobile()) {
+                                console.log("Mobile device detected");
+                            } else {
+                                statusModalImage.openModal({ active: true, img: input.files[0], type: string })
+                            }
                         }
 
                         switch (string) {
