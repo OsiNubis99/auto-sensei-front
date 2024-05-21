@@ -37,7 +37,7 @@
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
                 </div>
-                <div class="hidden md:grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                <div class="hidden md:grid 2xl:grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
                     <div v-if="auction?.vehicleDetails?.vin" class="flex gap-2 items-center w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path
@@ -56,7 +56,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="hidden md:grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                <div class="hidden md:grid 2xl:grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
                     <div v-if="auction?.vehicleDetails?.color" class="flex gap-2 items-center w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path
@@ -176,6 +176,7 @@ import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalReview } from "@/stores/modalReview";
 import { ModalViewDetails } from "@/stores/modalViewDetails";
 import { useAuthStore } from "@/stores/auth";
+import { ModalVerifyPhone } from '@/stores/modalVerifyPhone';
 import { toast } from "vue3-toastify";
 export default {
     components: {
@@ -206,6 +207,7 @@ export default {
         const statusReview = ModalReview()
         const statusModalView = ModalViewDetails()
         const statusModal = ModalAcceptAution()
+        const statusModalPhone = ModalVerifyPhone()
         const auth = useAuthStore()
         const declineAution = (auction, option) => {
             console.log('auction', auction)
@@ -216,12 +218,19 @@ export default {
             props.cancelAution()
         }
         const acceptAution = () => {
-            props.acceptAution()
+
+            /* props.acceptAution() */
         }
         const openModal = () => {
-            console.log('auth.userData.anddress', auth.userData.address)
+            console.log('auth.userData.anddress',)
             if (auth.userData.address) {
-                statusModal.openModal({ isActive: true, data: auction })
+                if (auth.userData.seller.phoneValidated) {
+                    statusModal.openModal({ isActive: true, data: auction })
+                } else {
+                    statusModalPhone.openModal({ isActive: true })
+
+                }
+
             } else {
                 toast('You need to add your address in order to create an auction. Please update your profile', { autoClose: 4000, type: "error" });
             }

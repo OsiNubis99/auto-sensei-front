@@ -166,6 +166,7 @@
             <label class="font-medium text-xs md:text-base " for="">Any repairs required for the vehicle ? Any damages
                 that need to be mentioned? Please disclose any information that will affect the value of your vehicle
                 either positively or negatively.</label>
+
             <textarea v-model="form.repairs" :class="invalid?.repairs ? 'border-error' : 'border-[#E0E0E0]'"
                 class="p-2 w-full mt-3 lg:h-[200px] border  rounded-lg" placeholder="Add information" name="textarea"
                 rows="10" cols="20"></textarea>
@@ -273,6 +274,9 @@ export default {
         const next = () => {
             props.nextVehiclesDetails()
         }
+        onMounted(() => {
+            console.log('form', form.value)
+        })
 
         return {
             date,

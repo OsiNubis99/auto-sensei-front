@@ -254,7 +254,9 @@ import { useRouter, useRoute } from 'vue-router'
 import "intl-tel-input/build/css/intlTelInput.css";
 import "intl-tel-input/build/js/intlTelInput.js";
 import intlTelInput from "intl-tel-input";
+import { useAuthStore } from "@/stores/auth";
 import { usePayments } from "@/stores/payments";
+import axios from "@/axios";
 export default {
     props: {
         next: {
@@ -273,6 +275,7 @@ export default {
     setup(props) {
         let rol = ref()
         const invalid = ref()
+        const store = useAuthStore()
         const storeData = stepsSignUp()
         const form = storeData.formAccount
         const formData = storeData.formData
@@ -388,16 +391,18 @@ export default {
                         driverLicense: form.driverLicense ? form.driverLicense : null,
                     }
                     storeData.getSendData = dataSenCode
-                    let resCode = await storeUser.getValidation(data)
-                    console.log('resCode', resCode)
-                    if (resCode.data.status == 'ok') {
+                    console.log('dataSenCode', dataSenCode)
+                    if (dataSenCode.rol == 'sellers') {
+                        console.log('entro ene l sellers')
                         isLoading.value = true
                         if (form.img || form.driverLicense) {
+                            console.log('entro en la iamgenes')
                             let resFile = form.img && await storeFile.uploaderFile({ file: form.img, location: 'profile' })
                             let resLicence = form.driverLicense && await storeFile.uploaderFile({ file: form.driverLicense, location: 'license' })
                             console.log('resLicence', resLicence)
                             if (resFile.data || resLicence.data) {
                                 try {
+                                    console.log('respuesta de la subida de imagenes')
                                     let typeSeller = {
                                         seller: {
                                             picture: resFile?.data ? resFile?.data : null,
@@ -405,45 +410,46 @@ export default {
                                             lastName: form.lastName,
                                             driverLicense: resLicence?.data ? resLicence?.data : null,
                                         },
+                                        phone: codePhone.value,
                                     }
-                                    let typeDealer = {
-                                        dealer: {
-                                            picture: resFile?.data ? resFile?.data : null,
-                                            name: form.dealerName ? form.dealerName : null,
-                                            omvic: form.registrationNumber ? form.registrationNumber : null,
-                                        },
-                                        address: {
-                                            city: address.city,
-                                            country: 'Canada',
-                                            line1: address.linea1,
-                                            line2: address.linea2,
-                                            postal_code: address.zipCode,
-                                            state: address.province
-                                        },
-                                    }
-                                    typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
-
                                     let data = {
                                         token: token.value,
-                                        payloadData: typeUser.value
+                                        payloadData: typeSeller
                                     }
 
                                     try {
                                         let res = await storeUser.userData(data)
                                         if (res) {
-                                            props.next()
-                                            isLoading.value = false
+                                            axios.defaults.headers['Authorization'] = `Bearer ${token.value}`;
+                                            let resToken = await store.authProfile()
+                                            console.log('resToken', resToken)
+                                            if (resToken.statusText = "OK") {
+                                                let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
+                                                console.log('resDtaLate', resDtaLate)
+                                                if (resToken.data.type !== 2) localStorage.setItem('token', token.value)
+                                                if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
+                                                if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
+                                                switch (resToken.data.type) {
+                                                    case 1:
+                                                        await router.push({ path: '/all' })
+                                                        break;
+                                                    default:
+                                                        localStorage.clear()
+                                                        await router.push({ name: 'home' })
+                                                        break;
+                                                }
+                                                isLoading.value = false
+                                            }
                                         }
                                     } catch (error) {
+                                        console.log('error', error)
                                         isLoading.value = false
                                         toast(error?.response?.data?.message[0] || 'error', {
                                             type: "error",
                                         });
                                     }
-
-
-
                                 } catch (error) {
+                                    console.log('error', error)
                                     toast(error?.response?.data?.message || 'error', {
                                         type: "error",
                                     });
@@ -461,34 +467,39 @@ export default {
                                     seller: {
                                         firstName: form.firtName,
                                         lastName: form.lastName,
-                                    }
-                                }
-                                let typeDealer = {
-                                    dealer: {
-                                        name: form.dealerName ? form.dealerName : null,
-                                        omvic: form.registrationNumber ? form.registrationNumber : null,
                                     },
-                                    address: {
-                                        city: address.city,
-                                        country: 'Canada',
-                                        line1: address.linea1,
-                                        line2: address.linea2,
-                                        postal_code: address.zipCode,
-                                        state: address.province
-                                    },
+                                    phone: codePhone.value,
                                 }
-                                typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
                                 let data = {
                                     token: token.value,
-                                    payloadData: typeUser.value
+                                    payloadData: typeSeller
                                 }
                                 try {
                                     let res = await storeUser.userData(data)
                                     if (res) {
-                                        props.next()
-                                        isLoading.value = false
+                                        axios.defaults.headers['Authorization'] = `Bearer ${token.value}`;
+                                        let resToken = await store.authProfile()
+                                        console.log('resToken', resToken)
+                                        if (resToken.statusText = "OK") {
+                                            let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
+                                            console.log('resDtaLate', resDtaLate)
+                                            if (resToken.data.type !== 2) localStorage.setItem('token', token.value)
+                                            if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
+                                            if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
+                                            switch (resToken.data.type) {
+                                                case 1:
+                                                    await router.push({ path: '/all' })
+                                                    break;
+                                                default:
+                                                    localStorage.clear()
+                                                    await router.push({ name: 'home' })
+                                                    break;
+                                            }
+                                            isLoading.value = false
+                                        }
                                     }
                                 } catch (error) {
+                                    console.log('error', error)
                                     isLoading.value = false
                                     toast(error?.response?.data?.message[0] || 'error al cargar', {
                                         type: "error",
@@ -496,6 +507,7 @@ export default {
                                 }
 
                             } catch (error) {
+                                console.log('error', error)
                                 if (error?.response?.data?.message == "Unauthorized") {
                                     toast(error?.response?.data?.message || 'error al cargar', {
                                         type: "error",
@@ -507,7 +519,129 @@ export default {
                             }
                         }
                         isLoading.value = false
+                    } else {
+                        console.log('entro ene l dealer')
+                        let resCode = await storeUser.getValidation(data)
+                        if (resCode.data.status == 'ok') {
+                            isLoading.value = true
+                            if (form.img || form.driverLicense) {
+                                let resFile = form.img && await storeFile.uploaderFile({ file: form.img, location: 'profile' })
+                                let resLicence = form.driverLicense && await storeFile.uploaderFile({ file: form.driverLicense, location: 'license' })
+                                console.log('resLicence', resLicence)
+                                if (resFile.data || resLicence.data) {
+                                    try {
+                                        let typeSeller = {
+                                            seller: {
+                                                picture: resFile?.data ? resFile?.data : null,
+                                                firstName: form.firtName,
+                                                lastName: form.lastName,
+                                                driverLicense: resLicence?.data ? resLicence?.data : null,
+                                            },
+                                        }
+                                        let typeDealer = {
+                                            dealer: {
+                                                picture: resFile?.data ? resFile?.data : null,
+                                                name: form.dealerName ? form.dealerName : null,
+                                                omvic: form.registrationNumber ? form.registrationNumber : null,
+                                            },
+                                            address: {
+                                                city: address.city,
+                                                country: 'Canada',
+                                                line1: address.linea1,
+                                                line2: address.linea2,
+                                                postal_code: address.zipCode,
+                                                state: address.province
+                                            },
+                                        }
+                                        typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
+
+                                        let data = {
+                                            token: token.value,
+                                            payloadData: typeUser.value
+                                        }
+
+                                        try {
+                                            let res = await storeUser.userData(data)
+                                            if (res) {
+                                                props.next()
+                                                isLoading.value = false
+                                            }
+                                        } catch (error) {
+                                            isLoading.value = false
+                                            toast(error?.response?.data?.message[0] || 'error', {
+                                                type: "error",
+                                            });
+                                        }
+
+
+
+                                    } catch (error) {
+                                        toast(error?.response?.data?.message || 'error', {
+                                            type: "error",
+                                        });
+                                        isLoading.value = false
+                                    }
+                                } else {
+                                    isLoading.value = false
+                                    toast('error', {
+                                        type: "error",
+                                    });
+                                }
+                            } else {
+                                try {
+                                    let typeSeller = {
+                                        seller: {
+                                            firstName: form.firtName,
+                                            lastName: form.lastName,
+                                        }
+                                    }
+                                    let typeDealer = {
+                                        dealer: {
+                                            name: form.dealerName ? form.dealerName : null,
+                                            omvic: form.registrationNumber ? form.registrationNumber : null,
+                                        },
+                                        address: {
+                                            city: address.city,
+                                            country: 'Canada',
+                                            line1: address.linea1,
+                                            line2: address.linea2,
+                                            postal_code: address.zipCode,
+                                            state: address.province
+                                        },
+                                    }
+                                    typeUser.value = rol.value == 'sellers' ? typeSeller : typeDealer
+                                    let data = {
+                                        token: token.value,
+                                        payloadData: typeUser.value
+                                    }
+                                    try {
+                                        let res = await storeUser.userData(data)
+                                        if (res) {
+                                            props.next()
+                                            isLoading.value = false
+                                        }
+                                    } catch (error) {
+                                        isLoading.value = false
+                                        toast(error?.response?.data?.message[0] || 'error al cargar', {
+                                            type: "error",
+                                        });
+                                    }
+
+                                } catch (error) {
+                                    if (error?.response?.data?.message == "Unauthorized") {
+                                        toast(error?.response?.data?.message || 'error al cargar', {
+                                            type: "error",
+                                            autoClose: 2000,
+                                        });
+                                        props.backEmailToken()
+                                    }
+                                    isLoading.value = false
+                                }
+                            }
+                            isLoading.value = false
+                        }
                     }
+
 
                 } catch (error) {
                     console.log('error', error)

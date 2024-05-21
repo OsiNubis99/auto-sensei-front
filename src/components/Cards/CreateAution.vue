@@ -22,7 +22,7 @@
             </svg>
         </div>
         <hr class="border-[#cfcfcf] border-1 ">
-        <div class="flex pt-5 cursor-pointer justify-between">
+        <div v-show="path !== 'draft'" class="flex pt-5 cursor-pointer justify-between">
             <RouterLink to="/draft" class="font-medium">Draft <span class="text-[#858585]">{{
                     autions?.draft?.length
                     }}</span></RouterLink>
@@ -46,6 +46,7 @@
 
 <script>
 import { ref, onMounted, computed } from "vue";
+import { useRoute, useRouter } from 'vue-router'
 export default {
     components: {
     },
@@ -61,13 +62,16 @@ export default {
         const data = ref(props.data);
         const autions = ref(props.autions);
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-        onMounted(() => {
-
-        })
+        const route = useRoute();
+        const router = useRouter();
+        const path = ref(computed(() => route.name))
         return {
             data,
             autions,
-            bucket
+            bucket,
+            route,
+            router,
+            path
         };
     },
 };
