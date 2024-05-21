@@ -1,1 +1,0 @@
-import{R as a}from"./index-4c88d019.js";const o=a("ModalReview",{state:()=>({isActive:!1,dataAutiont:null}),actions:{openModal({isActive:t,data:i}){this.isActive=t,this.dataAutiont=i},closeModal(t){this.isActive=t,this.dataAutiont=null}}});export{o as M};

@@ -21,7 +21,7 @@
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
                 </div>
-                <div class="hidden md:grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                <div class="hidden md:grid 2xl:grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
                     <div v-if="auction?.vehicleDetails?.vin" class="flex gap-2 items-center w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path
@@ -40,7 +40,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="hidden md:grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                <div class="hidden md:grid 2xl:grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
                     <div v-if="auction?.vehicleDetails?.color" class="flex gap-2 items-center w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path
@@ -82,9 +82,9 @@
                     </div>
                 </div>
                 <div v-show="auction?.status == 'unapproved'"
-                    class="flex gap-2 absolute bottom-3 left-0 w-auto items-center">
+                    class="flex gap-2 2xl:absolute bottom-3 left-0 w-auto items-center">
                     <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
-                    <p class=" text-[12px] md:text-base">Waiting for verification, can take up to <span
+                    <p class=" text-[12px] 2xl:text-base">Waiting for verification, can take up to <span
                             class="font-bold"> 90
                             mins</span></p>
                 </div>

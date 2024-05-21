@@ -154,6 +154,7 @@
     <ModalAcceptAutionVue v-if="statusModal?.isActive" :acceptAution="acceptAution" />
     <ModalReviewVue v-if="statusModalR?.isActive" :index="index" />
     <ModalViewDetailsVue v-if="statusModalView?.isActive" />
+    <ModalVerifyPhoneVue v-if="statusModalPhone.isActive" />
 </template>
 
 <script>
@@ -177,6 +178,8 @@ import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vu
 import SorBy from '../../../components/Filters/SorBy.vue'
 import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue'
 import { arrayPhotos } from '../../../utils/packPhotos'
+import { ModalVerifyPhone } from '@/stores/modalVerifyPhone';
+import ModalVerifyPhoneVue from "@/components/Modals/ModalVerifyPhone/ModalVerifyPhone.vue";
 export default {
 
     components: {
@@ -190,7 +193,8 @@ export default {
         HeaderOptionesSeller,
         ScreenCreateAution,
         SorBy,
-        ScrrenNoSorbySeller
+        ScrrenNoSorbySeller,
+        ModalVerifyPhoneVue
     },
     setup() {
         const route = useRoute();
@@ -211,6 +215,7 @@ export default {
         const draft = ref([])
         const sortBy = ref('Auction Status & Date')
         const statusModalView = ModalViewDetails()
+        const statusModalPhone = ModalVerifyPhone()
         const changeGridTemplate = () => {
             changeLayouts.value = !changeLayouts.value
             counter.value++
@@ -420,7 +425,8 @@ export default {
             setSorBy,
             sortedData,
             sortBy,
-            draft
+            draft,
+            statusModalPhone
 
         };
     },

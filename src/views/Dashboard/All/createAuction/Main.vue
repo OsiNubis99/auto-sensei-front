@@ -280,9 +280,9 @@
                                 :checkStep="checkStep" :launch="launch" :invalid="invalid"
                                 :loadingCountrys="loadingCountrys" :onChangeGetProvince="onChangeGetProvince"
                                 :onChangeGetCity="onChangeGetCity" />
-                            <VehiclesDetails v-if="op.step2" :key="componentKey"
+                            <VehiclesDetails v-if="op.step2" :key="componentKey" :saveData="saveData"
                                 :nextVehiclesDetails="nextVehiclesDetails" :form="formData" :op="op"
-                                :checkStep="checkStep" :launch="launch" :invalid="invalid" />
+                                :checkStep="checkStep" :launch="launch" :invalid="invalid" :idCreate="id_create" />
                             <UploadPhotos v-if="op.step3" :key="componentKey" :nextUploadPhotos="nextUploadPhotos"
                                 :form="formData" :op="op" :checkStep="checkStep" :launch="launch" :saveData="saveData"
                                 :invalid="invalid" />
@@ -1082,7 +1082,8 @@ export default {
             loadingUploadImages,
             onChangeGetProvince,
             onChangeGetCity,
-            loadingCountrys
+            loadingCountrys,
+            id_create
         };
     },
 };

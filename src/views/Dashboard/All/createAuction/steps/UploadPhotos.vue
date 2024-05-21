@@ -873,19 +873,16 @@
                 </label>
             </div>
         </div>
-        <div v-if="!save" class="flex justify-center flex-col items-start gap-2 ">
-            <!--  <button
+        <div v-if="!save" class="flex justify-center items-center gap-2  ">
+            <button @click="createAutions('draft')"
                 class=" btn bg-transparent  border-[#E0E0E0] flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save as Draft
-            </button> -->
+            </button>
             <button @click="next" id="step3"
                 class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Confirmation
             </button>
-            <p class="text-xs md:text-sm text-[#666666]">If you leave the create auction process, this listing will be
-                saved
-                in your
-                drafts for your convenience to continue later.</p>
+
         </div>
         <div v-else class="flex justify-center items-center gap-5 ">
             <button @click="createAutions('draft')" id="saveDraft"
@@ -897,6 +894,10 @@
                 Launch Auction
             </button>
         </div>
+        <p class="text-xs md:text-sm text-[#666666]">If you leave the create auction process, this listing will be
+            saved
+            in your
+            drafts for your convenience to continue later.</p>
         <ModalLaunchVue :form="form" :modalLaunch="createAutions" />
         <ModalImageCustomVue v-if="statusModalImage?.isActive" :form="form" />
         <ModalViewImageVue v-if="statusModalViewImage?.isActive" :form="form" />
