@@ -10,7 +10,8 @@
                         </path>
                     </svg>
                 </div>
-                <div v-if="codePhone" class=" absolute md:-left-[100%]  -left-[127%]   mt-3 md:pl-2">
+                <div v-if="codePhone && rol !== 'sellers'"
+                    class=" absolute md:-left-[100%]  -left-[127%]   mt-3 md:pl-2">
                     <p class="text-xs md:text-base font-medium text-base-gray whitespace-pre">Sending code to your
                         phone...</p>
                 </div>
