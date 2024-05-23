@@ -32,11 +32,12 @@ export const validationsDealerBidding = (form, step, amount, from, showPayment, 
     }
     if (step.step2) {
         console.log('showPayment', showPayment)
+        console.log('payment', payment)
         if (!showPayment) {
             if (!form.termsConditions) {
                 error.termsConditions = 'Required field'
             }
-            if (!payment?.card?.last4) {
+            if (!payment) {
                 error.creditCard = 'Required field'
             }
         } else {

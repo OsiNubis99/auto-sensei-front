@@ -366,8 +366,9 @@ export default {
             }
             console.log('PEPEE ', formData.value.placeyourbid)
             invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, showPayment.value, itemCard.value, authStore.userData);
-
+            console.log('invalid.value', invalid.value)
             sizeObjet.value = Object.entries(invalid.value).length
+            console.log('sizeObjet', sizeObjet)
             /*  counterKey.value += 1 */
         }
         const steps = ref({
@@ -560,6 +561,7 @@ export default {
         watch(formData.value, async (newQuestion, oldQuestion) => {
 
             invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, showPayment.value, itemCard.value, authStore.userData);
+            console.log('invalid.value', invalid.value)
             sizeObjet.value = Object.entries(invalid.value).length
             if (newQuestion.placeyourbid > statusModal?.data?.vehicleDetails?.basePrice) {
                 counterKey.value += 1
