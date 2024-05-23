@@ -42,7 +42,7 @@
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
                 </div>
-                <div class="hidden md:grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                <div class="hidden md:grid 2xl:grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
                     <div v-if="auction?.vehicleDetails?.vin" class="flex gap-2 items-center w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path
@@ -61,7 +61,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="hidden md:grid grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
+                <div class="hidden md:grid 2xl:grid-cols-2 gap-1" :class="changeLayouts ? 'flex-col' : ''">
                     <div v-if="auction?.vehicleDetails?.color" class="flex gap-2 items-center w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path
@@ -88,7 +88,7 @@
                                 d="M6.99935 12.8327C3.7776 12.8327 1.16602 10.2211 1.16602 6.99935C1.16602 3.7776 3.7776 1.16602 6.99935 1.16602C10.2211 1.16602 12.8327 3.7776 12.8327 6.99935C12.8327 10.2211 10.2211 12.8327 6.99935 12.8327ZM6.41777 9.33268L10.5419 5.20793L9.7171 4.3831L6.41777 7.68302L4.76752 6.03277L3.94268 6.8576L6.41777 9.33268Z"
                                 fill="#0B1107" />
                         </svg>
-                        <p class=" text-[10px] lg: text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
+                        <p class="text-[10px] lg:text-xs lg:text-md font-semibold capitalize">{{
         auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
@@ -104,7 +104,8 @@
                 </div>
 
                 <RouterLink v-if="auction?.status == 'bids completed'" to="#"
-                    class="flex gap-2 absolute bottom-3 w-auto items-center " :class="changeLayouts ? 'flex-col' : ''">
+                    class="flex gap-2 2xl:absolute bottom-3 w-auto items-center "
+                    :class="changeLayouts ? 'flex-col' : ''">
                     <div class="bg-[#f0f0f080] hidden md:flex gap-3 py-1 px-2  rounded-md items-center">
                         <svg class=" w-4 md:w-[15px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="none">
@@ -117,11 +118,12 @@
                 </RouterLink>
                 <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center w-full">
                     <img class="h-10 w-10" src="@/assets/svg/Spin.svg" alt="">
-                    <p>Waiting for verification, can take up to <span> 90 mins</span></p>
+                    <p class="text-[12px] 2xl:text-base">Waiting for verification, can take up to <span> 90 mins</span>
+                    </p>
                 </div>
             </div>
             <div :class="changeLayouts ? 'w-full' : 'md:w-[40%] flex flex-col h-full justify-between'"
-                class="border-l-2  border-[#E0E0E0]">
+                class=" border-l-2 border-[#E0E0E0]">
                 <div v-if="auction?.status !== 'live' && (auction?.status !== 'upcoming' && auction?.status !== 'unapproved')"
                     class="flex md:p-5  pl-4 gag justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col '">
                     <div v-if="auction?.status == 'reviewed' || auction?.status == 'drop off'" class="space-y-1"
@@ -135,7 +137,8 @@
                         <div class="flex gap-1">
                             <p class=" font-medium text-lg md:text-2xl text-base-black ">
                                 ${{ auction?.bids[0]?.amount }} </p>
-                            <p class="text-[#666666] mt-1 text-sm md:text-base "> /{{ auction?.bids.length }} Bids</p>
+                            <p class="text-[#666666] mt-1 text-sm md:text-base "> /{{ auction?.bids.length }} Bids
+                            </p>
                         </div>
                     </div>
                     <div v-if="auction?.status == 'bids completed'"
@@ -283,6 +286,7 @@ import { ModalAcceptAution } from "@/stores/modalAcceptAution";
 import { ModalViewDetails } from "@/stores/modalViewDetails";
 import { ModalReview } from "@/stores/modalReview";
 import { useAuthStore } from "@/stores/auth";
+import { ModalVerifyPhone } from '@/stores/modalVerifyPhone';
 import { toast } from "vue3-toastify";
 export default {
     components: {
@@ -313,6 +317,7 @@ export default {
         const statusModalView = ModalViewDetails()
         const statusModal = ModalAcceptAution()
         const statusReview = ModalReview()
+        const statusModalPhone = ModalVerifyPhone()
         const auth = useAuthStore()
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
@@ -337,7 +342,12 @@ export default {
         }
         const openModal = () => {
             if (auth.userData.address) {
-                statusModal.openModal({ isActive: true, data: auction })
+                if (auth.userData.seller.phoneValidated) {
+                    statusModal.openModal({ isActive: true, data: auction })
+                } else {
+                    statusModalPhone.openModal({ isActive: true })
+
+                }
             } else {
                 toast('You need to add your address in order to create an auction. Please update your profile', { autoClose: 4000, type: "error" });
             }

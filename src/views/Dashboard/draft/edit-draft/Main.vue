@@ -1116,7 +1116,25 @@ export default {
                 let res = await store.getAutionById({ uuid: id })
                 console.log('RESPUESTA AUTION BY ID', res)
 
+
                 if (res.data) {
+                    if (res.data.vehicleDetails.color) {
+                        if (res.data.vehicleDetails.color !== 'black' &&
+                            res.data.vehicleDetails.color !== 'white' &&
+                            res.data.vehicleDetails.color !== 'silver' &&
+                            res.data.vehicleDetails.color !== 'grey' &&
+                            res.data.vehicleDetails.color !== 'greenDark' &&
+                            res.data.vehicleDetails.color !== 'brown' &&
+                            res.data.vehicleDetails.color !== 'red' &&
+                            res.data.vehicleDetails.color !== 'yellow' &&
+                            res.data.vehicleDetails.color !== 'green' &&
+                            res.data.vehicleDetails.color !== 'blue') {
+                            formData.value.color = 'other'
+                            formData.value.customColor = res.data.vehicleDetails.color
+                        } else {
+                            formData.value.color = res.data.vehicleDetails.color
+                        }
+                    }
                     dataAuction.value = res.data
                     formData.value.numberVinGenerals = res.data.vin ? res.data.vin : undefined;
                     formData.value.date = res.data.dropOffDate;
@@ -1147,7 +1165,6 @@ export default {
                     formData.value.transmission = res.data.vehicleDetails?.transmission;
                     formData.value.odometer = res.data.vehicleDetails?.odometer;
                     formData.value.doors = res.data.vehicleDetails?.doors;
-                    formData.value.color = res.data.vehicleDetails?.color;
                     formData.value.driveTrain = res.data.vehicleDetails?.driveTrain;
                     formData.value.additionalPackages = res.data.vehicleDetails?.aditionals;
                     formData.value.tireCondition = res.data.vehicleDetails?.tireCondition;
@@ -1158,32 +1175,32 @@ export default {
                     formData.value.document = res.data?.vehicleDetails?.originalDocument ? res.data.vehicleDetails?.originalDocument : undefined;
                     formData.value.previewDriver = res.data.vehicleDetails?.driverLicense ? bucket.value + res.data.vehicleDetails?.driverLicense : undefined;
                     formData.value.driverDocument = res.data.vehicleDetails?.driverLicense ? res.data.vehicleDetails?.driverLicense : undefined;
-                    formData.value.previewFrontPhoto = res.data.vehicleDetails?.exteriorPhotos[0].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[0] : undefined;
-                    formData.value.frontPhoto = res.data.vehicleDetails?.exteriorPhotos[0].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[0] : undefined;
-                    formData.value.previewFront = res.data.vehicleDetails?.exteriorPhotos[1].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[1] : undefined;
-                    formData.value.front = res.data.vehicleDetails?.exteriorPhotos[1].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[1] : undefined;
-                    formData.value.previewDriverSide = res.data.vehicleDetails?.exteriorPhotos[2].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[2] : undefined;
-                    formData.value.driverSide = res.data.vehicleDetails?.exteriorPhotos[2].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[2] : undefined;
-                    formData.value.previewBack = res.data.vehicleDetails?.exteriorPhotos[3].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[3] : undefined;
-                    formData.value.back = res.data.vehicleDetails?.exteriorPhotos[3].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[3] : undefined;
-                    formData.value.previewPassengerSide = res.data.vehicleDetails?.exteriorPhotos[4].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[4] : undefined;
-                    formData.value.passengerSide = res.data.vehicleDetails?.exteriorPhotos[4].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[4] : undefined;
-                    formData.value.previewTireAndRim = res.data.vehicleDetails?.exteriorPhotos[5].length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[5] : undefined;
-                    formData.value.tireAndRim = res.data.vehicleDetails?.exteriorPhotos[5].length > 0 ? res.data.vehicleDetails?.exteriorPhotos[5] : undefined;
-                    formData.value.previewDriversDisplay = bucket.value + res.data.vehicleDetails?.interiorPhotos[0];
-                    formData.value.driversDisplay = res.data.vehicleDetails?.interiorPhotos[0];
-                    formData.value.previewDriversSide = bucket.value + res.data.vehicleDetails?.interiorPhotos[1];
-                    formData.value.driversSide = res.data.vehicleDetails?.interiorPhotos[1];
-                    formData.value.previewCenterConsole = bucket.value + res.data.vehicleDetails?.interiorPhotos[2];
-                    formData.value.centerConsole = res.data.vehicleDetails?.interiorPhotos[2];
-                    formData.value.previewRearSeats = bucket.value + res.data.vehicleDetails?.interiorPhotos[3];
-                    formData.value.rearSeats = res.data.vehicleDetails?.interiorPhotos[3];
-                    formData.value.previewAdditionalDocuments = res.data.vehicleDetails?.additionalDocuments[0].length > 0 ? bucket.value + res.data.vehicleDetails?.additionalDocuments[0] : undefined;
-                    formData.value.previewVehicleDamage = bucket.value + res.data.vehicleDetails?.vehicleDamage[0];
-                    formData.value.repairs = res.data.vehicleDetails?.repairs
-
+                    formData.value.previewFrontPhoto = res.data.vehicleDetails?.exteriorPhotos[0]?.length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[0] : undefined;
+                    formData.value.frontPhoto = res.data.vehicleDetails?.exteriorPhotos[0]?.length > 0 ? res.data.vehicleDetails?.exteriorPhotos[0] : undefined;
+                    formData.value.previewFront = res.data.vehicleDetails?.exteriorPhotos[1]?.length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[1] : undefined;
+                    formData.value.front = res.data.vehicleDetails?.exteriorPhotos[1]?.length > 0 ? res.data.vehicleDetails?.exteriorPhotos[1] : undefined;
+                    formData.value.previewDriverSide = res.data.vehicleDetails?.exteriorPhotos[2]?.length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[2] : undefined;
+                    formData.value.driverSide = res.data.vehicleDetails?.exteriorPhotos[2]?.length > 0 ? res.data.vehicleDetails?.exteriorPhotos[2] : undefined;
+                    formData.value.previewBack = res.data.vehicleDetails?.exteriorPhotos[3]?.length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[3] : undefined;
+                    formData.value.back = res.data.vehicleDetails?.exteriorPhotos[3]?.length > 0 ? res.data.vehicleDetails?.exteriorPhotos[3] : undefined;
+                    formData.value.previewPassengerSide = res.data.vehicleDetails?.exteriorPhotos[4]?.length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[4] : undefined;
+                    formData.value.passengerSide = res.data.vehicleDetails?.exteriorPhotos[4]?.length > 0 ? res.data.vehicleDetails?.exteriorPhotos[4] : undefined;
+                    formData.value.previewTireAndRim = res.data.vehicleDetails?.exteriorPhotos[5]?.length > 0 ? bucket.value + res.data.vehicleDetails?.exteriorPhotos[5] : undefined;
+                    formData.value.tireAndRim = res.data.vehicleDetails?.exteriorPhotos[5]?.length > 0 ? res.data.vehicleDetails?.exteriorPhotos[5] : undefined;
+                    formData.value.previewDriversDisplay = res.data.vehicleDetails?.interiorPhotos[0]?.length > 0 ? bucket.value + res.data.vehicleDetails?.interiorPhotos[0] : undefined;
+                    formData.value.driversDisplay = res.data.vehicleDetails?.interiorPhotos[0]?.length > 0 ? bucket.value + res.data.vehicleDetails?.interiorPhotos[0] : undefined;
+                    formData.value.previewDriversSide = res.data.vehicleDetails?.interiorPhotos[1] ? bucket.value + res.data.vehicleDetails?.interiorPhotos[1] : undefined;
+                    formData.value.driversSide = res.data.vehicleDetails?.interiorPhotos[1] ? bucket.value + res.data.vehicleDetails?.interiorPhotos[1] : undefined;
+                    formData.value.previewCenterConsole = res.data.vehicleDetails?.interiorPhotos[2] ? bucket.value + res.data.vehicleDetails?.interiorPhotos[2] : undefined;
+                    formData.value.centerConsole = res.data.vehicleDetails?.interiorPhotos[2] ? bucket.value + res.data.vehicleDetails?.interiorPhotos[2] : undefined;
+                    formData.value.previewRearSeats = res.data.vehicleDetails?.interiorPhotos[3] ? bucket.value + res.data.vehicleDetails?.interiorPhotos[3] : undefined;
+                    formData.value.rearSeats = res.data.vehicleDetails?.interiorPhotos[3] ? bucket.value + res.data.vehicleDetails?.interiorPhotos[3] : undefined;
+                    formData.value.previewAdditionalDocuments = res.data.vehicleDetails?.additionalDocuments[0]?.length > 0 ? bucket.value + res.data.vehicleDetails?.additionalDocuments[0] : undefined;
+                    formData.value.previewVehicleDamage = res.data.vehicleDetails?.vehicleDamage[0] ? bucket.value + res.data.vehicleDetails?.vehicleDamage[0] : undefined;
+                    formData.value.repairs = res.data.vehicleDetails.repairs
                 }
             } catch (error) {
+                console.log('error', error)
                 loading.value = false
             } finally {
                 componentKey.value += 1
