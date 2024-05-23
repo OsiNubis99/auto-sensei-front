@@ -184,7 +184,9 @@ input.input-shat:focus {
   display: block;
   margin-bottom: 15px;
 }
-
+svg.svg-card-custom {
+  filter: drop-shadow(1px 2px 1px #9c9c9c);
+}
 .form-group input {
   padding: 0;
   height: initial;
