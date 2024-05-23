@@ -122,7 +122,7 @@
                     class="hidden">
             </label>
         </div> -->
-        <!--  <div>
+        <div>
             <p class="font-medium text-[14px] md:text-base">Exterior Photos</p>
         </div>
         <div class="grid md:grid-cols-3 gap-5 w-full">
@@ -838,149 +838,41 @@
                         </template>
 
 
-<video v-if="form?.previewVehicleVideo" ref="videoPlayer" muted loop class="w-full h-[190px] object-contain"
-    :src="form?.previewVehicleVideo" @click="paused" />
-<svg v-else class="w-[100px] h-[100px]" :fill="invalid?.vehicleVideo ? '#ff000075' : '#6d6d6d42'"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-    <path
-        d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-</svg>
-</div>
-<div v-if="form?.vehicleVideo?.name" class="flex w-full items-start flex-col justify-start gap-1">
-    <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
-        form?.vehicleVideo?.mb }}Mb - </p>
-    <p class="text-xs font-medium w-[200px] text-[#666] truncate"><strong>Name:</strong>
-        {{ form?.vehicleVideo?.name }}</p>
-</div>
-<p v-else class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Use MP4, MOV
-    video up to 100mb</p>
-</div>
-<label class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
-    <div class="flex gap-2 items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16" fill="none">
-            <path
-                d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
-                fill="#1F94F0" />
-        </svg>
-        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
-            Select Video</p>
-    </div>
-    <input type="file" accept="video/mp4, video/mov" @change="(event) => previewImage(event, 'vehicleVideo')"
-        class="hidden">
-</label>
-</div>
-</div> -->
-
-        <template v-if="!loadingUploadImages">
-
-            <div v-if="images.length > 0"
-                class="grid grid-cols-4 m-auto w-full max-h-[60vh]   gap-6   overflow-y-auto overflow-x-hidden">
-                <div class="flex w-full flex-col items-center " v-for="(image, index) in images">
-                    <div class="animate-fade-up  animate-ease-in-out "
-                        :class="`animate-delay-${index}00 animate-duration-${(index) + 1}000`">
-                        <div
-                            class="relative flex justify-end group cursor-pointer transition-all ease-out duration-300">
-                            <svg class=" absolute  z-50 w-6 mx-1 my-1 group-hover:-translate-y-4 group-hover-fill-[#fff] transition-all ease-out duration-300  "
-                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path
-                                        d="M9 4.45962C9.91153 4.16968 10.9104 4 12 4C16.1819 4 19.028 6.49956 20.7251 8.70433C21.575 9.80853 22 10.3606 22 12C22 13.6394 21.575 14.1915 20.7251 15.2957C19.028 17.5004 16.1819 20 12 20C7.81811 20 4.97196 17.5004 3.27489 15.2957C2.42496 14.1915 2 13.6394 2 12C2 10.3606 2.42496 9.80853 3.27489 8.70433C3.75612 8.07914 4.32973 7.43025 5 6.82137"
-                                        stroke="#fff" stroke-width="1.5" stroke-linecap="round"></path>
-                                    <path
-                                        d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
-                                        stroke="#fff" stroke-width="1.5"></path>
-                                </g>
-                            </svg>
-                            <img class="object-cover w-[150px] h-[150px] rounded-lg  group-hover:backdrop-blur  group-hover:-translate-y-4 transition-all ease-out duration-300 shadow-xl "
-                                :src="image.preview" />
-                        </div>
-
-                        <div class="flex gap-1 flex-col">
-                            <p class="text-xs font-medium truncate w-[120px]">Name: {{ image.file.name.split('.')[0] }}
-                            </p>
-                            <p class="text-xs font-medium truncate">Type: <span
-                                    class="uppercase bg-[#6d53b0] text-white shadow-lg font-semibold ml-2 px-2 py-1 text-[8px] rounded-md ">{{
-                image?.file?.type?.split('/')[1] }}
-                                </span> </p>
-                            <p class="text-xs font-medium mb-2 truncate">Size: <span
-                                    class="uppercase bg-[#6d53b0] text-white shadow-lg font-semibold ml-3 px-2 py-1 text-[10px] rounded-md ">{{
-                image?.size }} Mb
-                                </span> </p>
-                        </div>
-                        <button
-                            class=" bg-white flex group hover:bg-[#FF333E] hover:text-white transition-all ease-in duration-300 items-center gap-2 border-error py-1 px-4 font-normal text-sm border-2  rounded-lg w-fit"
-                            @click="removeImage(index)">
-                            <p>Remove image</p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
-                                fill="none">
-                                <path
-                                    class="fill-[#FF333E] group-hover:fill-[#fff] transition-all ease-in duration-500 "
-                                    d="M10.332 1.66732H13.6654V3.00065H12.332V13.0007C12.332 13.1775 12.2618 13.347 12.1368 13.4721C12.0117 13.5971 11.8422 13.6673 11.6654 13.6673H2.33203C2.15522 13.6673 1.98565 13.5971 1.86063 13.4721C1.7356 13.347 1.66536 13.1775 1.66536 13.0007V3.00065H0.332031V1.66732H3.66536V0.333984H10.332V1.66732ZM4.9987 5.00065V10.334H6.33203V5.00065H4.9987ZM7.66536 5.00065V10.334H8.9987V5.00065H7.66536Z" />
-                            </svg>
-                        </button>
+                        <video v-if="form?.previewVehicleVideo" ref="videoPlayer" muted loop
+                            class="w-full h-[190px] object-contain" :src="form?.previewVehicleVideo" @click="paused" />
+                        <svg v-else class="w-[100px] h-[100px]"
+                            :fill="invalid?.vehicleVideo ? '#ff000075' : '#6d6d6d42'" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20">
+                            <path
+                                d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                        </svg>
                     </div>
-
-
-                </div>
-
-            </div>
-        </template>
-
-        <div v-else class="bg-white h-fit flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
-            <div class="w-full flex flex-col md:grid md:grid-cols-2 gap-4">
-                <div v-if="arrayUpload?.length > 0" v-for="(nameUpload, index) in arrayUpload" :key="index">
-                    <div class="flex justify-between border-b border-[#e5e5e5] pb-3 items-start gap-4 w-full">
-                        <div v-if="nameUpload.preview" class="w-16">
-                            <img class="w-15 object-cover h-15 rounded-lg shadow-lg" :src="nameUpload.preview" alt="">
-                        </div>
-                        <div v-if="!nameUpload.completed" class="w-full flex flex-col md:gap-2">
-                            <p class="capitalize text-sm md:text-base">{{ nameUpload.name }}</p>
-                            <div class="bg-[#E5E5E5] whitespace-pre shadow-sm w-full rounded-full  h-4">
-                                <div :style="{ width: porcertanje + '%' }"
-                                    class=" h-4 bg-primary flex justify-center items-center rounded-full shadow-progreess ">
-                                    <p class="text-[10px] ">{{ porcertanje }} %</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-else-if="index == arrayUpload.length - 1" class="w-full flex flex-col md:gap-2">
-                            <p class="capitalize text-sm md:text-base">{{ nameUpload.name }}</p>
-                            <div class="bg-[#E5E5E5] rounded-full  shadow-xl h-4">
-                                <div class=" w-full h-4 bg-primary flex justify-center items-center rounded-full">
-                                    <p class="text-[10px]">Completed</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-else class="w-full flex flex-col md:gap-2">
-                            <p class="capitalize text-sm md:text-base">{{ nameUpload.name }}</p>
-                            <div class="bg-[#E5E5E5] rounded-full  shadow-xl h-4">
-                                <div class=" w-full h-4 bg-primary flex justify-center items-center rounded-full">
-                                    <p class="text-[10px]">Completed</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div v-if="form?.vehicleVideo?.name" class="flex w-full items-start flex-col justify-start gap-1">
+                        <p class="text-xs font-medium w-[200px] text-[#666] truncate"> <strong>Size:</strong> {{
+                form?.vehicleVideo?.mb }}Mb - </p>
+                        <p class="text-xs font-medium w-[200px] text-[#666] truncate"><strong>Name:</strong>
+                            {{ form?.vehicleVideo?.name }}</p>
                     </div>
+                    <p v-else class="text-[11px] text-center  md:text-[14px] font-medium text-[#858585]">Use MP4, MOV
+                        video up to 100mb</p>
                 </div>
-            </div>
-            <div class="flex justify-center w-full items-center">
-                <img class="h-16 w-16" src="@/assets/svg/Spin.svg" alt="">
-                <p class=" text-base-gray mt-1 text-xs md:text-base font-medium">Uploading...
-                </p>
+                <label
+                    class="flex flex-col border border-[#C2C2C2] border-dashed items-center  p-3  tracking-wide  cursor-pointer">
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-3 h-3 md:w-5 md:h-5" viewBox="0 0 17 16"
+                            fill="none">
+                            <path
+                                d="M3.16634 12.6667H13.833V8H15.1663V13.3333C15.1663 13.5101 15.0961 13.6797 14.9711 13.8047C14.8461 13.9298 14.6765 14 14.4997 14H2.49967C2.32286 14 2.15329 13.9298 2.02827 13.8047C1.90325 13.6797 1.83301 13.5101 1.83301 13.3333V8H3.16634V12.6667ZM9.16634 6V10.6667H7.83301V6H4.49967L8.49967 2L12.4997 6H9.16634Z"
+                                fill="#1F94F0" />
+                        </svg>
+                        <p class=" text-[10px] md:text-[16px] font-medium leading-normal text-[#1F94F0]">Drag & Drop or
+                            Select Video</p>
+                    </div>
+                    <input type="file" accept="video/mp4, video/mov"
+                        @change="(event) => previewImage(event, 'vehicleVideo')" class="hidden">
+                </label>
             </div>
         </div>
-        <div class="flex w-full  items-center justify-start bg-grey-lighter">
-            <label
-                class="w-64 flex flex-col items-center px-4 py-6 bg-white text-base-black rounded-lg shadow-lg tracking-wide transition-all duration-300 ease-out uppercase border border-base-black cursor-pointer hover:bg-primary hover:text-white">
-                <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path
-                        d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                </svg>
-                <span class="mt-2 text-base font-Nohemi leading-normal">Select a file</span>
-                <input class="hidden" type="file" multiple accept=".jpg, .jpeg,.png,.webp" @change="onFileChange">
-            </label>
-        </div>
-
         <div v-if="!save" class="flex justify-center items-center gap-2  ">
             <button @click="createAutions('draft')"
                 class=" btn bg-transparent  border-[#E0E0E0] flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -1058,7 +950,6 @@ export default {
         const form = ref(props.form)
         const save = ref(props.launch)
         const invalid = ref(props.invalid)
-        const images = ref([])
         let videoPlayer = ref()
         let isPlaying = ref(false)
         const statusModal = ModalLaunch()
@@ -1219,61 +1110,6 @@ export default {
         const viewPhoto = (photo) => {
             statusModalViewImage.openModal({ active: true, img: photo })
         }
-        function removeImage(index) {
-            images.value.splice(index, 1)
-            console.log('imagenes', images.value)
-        }
-        function createImage(files) {
-            for (var index = 0; index < files.length; index++) {
-                let convertion = (files[index].size / (1024 * 1024)).toFixed(2);
-                const imageUrl = {
-                    preview: null,
-                    file: files[index],
-                    size: convertion
-                }
-                var reader = new FileReader();
-                reader.onload = function (event) {
-                    imageUrl.preview = event.target.result;
-                    images.value.push(imageUrl);
-                }
-                reader.readAsDataURL(files[index]);
-            }
-        }
-        const onFileChange = (e) => {
-            var files = e.target.files || e.dataTransfer.files;
-            if (!files.length)
-                return;
-            console.log('files.length', files.length)
-            if (images.value.length >= 30 || files.length >= 30) {
-                console.log('ENTROOOOOOOOOOOOOOO', images.value)
-                alert('Maximo de archivo 30')
-                return
-            }
-            createImage(files);
-        }
-        const uploadImages = async () => {
-            loadingUploadImages.value = true
-            if (images.value.length === 0) {
-                alert('Debes subir imagenes')
-                return
-            }
-            let newArrayImages = []
-            for (let index = 0; index < images.value.length; index++) {
-                const element = images.value[index];
-                arrayUpload.value = [...arrayUpload.value, { name: `file-${index}`, preview: element.preview, completed: false, }]
-                let resImages = await Promise.all([storeFile.uploaderFile({ file: element.file, location: `662298889e18250b6f075b81/example` })])
-                newArrayImages.push(resImages[0].data)
-                if (resImages[0]?.data) {
-                    arrayUpload.value.map((file) => {
-                        console.log('file', file)
-                        if (file.name == `file-${index}`) {
-                            file.completed = true
-                        }
-                    })
-                }
-            }
-            console.log('AFUERA DEL FOR', newArrayImages)
-        }
         return {
             date,
             form,
@@ -1290,11 +1126,7 @@ export default {
             statusModalImage,
             viewPhoto,
             statusModalViewImage,
-            bucket,
-            images,
-            removeImage,
-            onFileChange,
-            uploadImages
+            bucket
 
         };
     },
