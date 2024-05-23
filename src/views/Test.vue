@@ -1,5 +1,3 @@
-// src/App.vue
-
 <template>
   <!--  <div>
         <div id="pspdfkit" style="width: 100%; height: 100vh;"></div>
