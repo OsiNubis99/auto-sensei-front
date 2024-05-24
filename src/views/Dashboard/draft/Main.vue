@@ -214,7 +214,7 @@
                                             <RouterLink
                                                 :to="{ name: 'edit-draft', query: { id: auction._id,progress: auction.percentage} }"
                                                 class="btn bg-primary w-full ">Continue to edit</RouterLink>
-                                            <button
+                                            <button @click="deleteAution(auction)"
                                                 class=" bg-transparent border p-2 md:p-3 rounded-md md:rounded-xl border-[#E0E0E0] ">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     viewBox="0 0 15 15" fill="none">
@@ -382,6 +382,29 @@ export default {
             }
 
         }
+        const deleteAution = async (aution) => {
+            loading.value = true
+            try {
+                let res = await storeAutions.delete(aution._id)
+                console.log('res', res)
+                if (res.data) {
+                    index()
+                    toast('Has been successfully removed',
+                        {
+                            type: "success",
+                            position: "top-center",
+                            theme: "colored",
+                        });
+                }
+
+            } catch (error) {
+                loading.value = false
+                toast(error?.response?.data?.message || "An error has occurred", {
+                    type: "error",
+                });
+            }
+
+        }
         onMounted(() => {
             index()
         })
@@ -406,7 +429,8 @@ export default {
             timeToEnd,
             timeToStart,
             acceptAution,
-            index
+            index,
+            deleteAution
 
         };
     },
