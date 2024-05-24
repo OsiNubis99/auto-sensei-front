@@ -258,7 +258,7 @@
                     </RouterLink>
                 </div>
                 <div>
-                    <h1 class="font-bold ">Benefits of selling your car on AutoSensei:</h1>
+                    <h4 class="!font-bold ">Benefits of selling your car on AutoSensei:</h4>
                     <div class="flex flex-col gap-8 pt-6">
                         <div class="flex items-center gap-3">
                             <div class="border p-1 rounded-full flex justify-center items-center border-[#05A54B]">
