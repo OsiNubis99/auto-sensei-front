@@ -298,12 +298,13 @@ export default {
         const dataForm = ref(props.getDataRegister)
         const previewImage = (event) => {
             var input = event.target;
-            var maxfilesize = 1024 * 1024  // 1 Mb
+            var maxfilesize = ((1024 * 1024) * 5).toFixed(2) // 1 Mb
             var filesize = input.files[0].size
             let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
+            console.log('convertion', convertion)
             if (input.files) {
-                if (filesize > maxfilesize) {
-                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 1 Mb", {
+                if (convertion > 50) {
+                    toast("File too large: " + convertion + "Mb" + ". Maximum size: 50 Mb", {
                         type: "error",
                     });
                     form.preview = null
@@ -327,7 +328,7 @@ export default {
             let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
             console.log('convertion', convertion)
             if (input.files) {
-                if (filesize > maxfilesize) {
+                if (convertion > 50) {
                     toast("File too large: " + convertion + "Mb" + ". Maximum size: 5 Mb", {
                         type: "error",
                     });

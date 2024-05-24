@@ -21,8 +21,10 @@
                     <p class="text-[#858585] text-xs md:text-base">Summary</p>
                 </div>
                 <div class="flex gap-3 items-start ">
-                    <div class=" w-[90px] h-[70px] md:w-[120px] md:h-[90px]">
-                        <img class="w-full h-full rounded-lg object-cover" :src="formData?.previewFront" alt="">
+                    <div v-if="formData?.images?.length > 0" class=" w-[90px] h-[70px] md:w-[120px] md:h-[90px]">
+                        <img class="w-full h-full rounded-lg object-cover"
+                            :src="formData?.images[0].bucket ? bucket + formData?.images[0]?.preview : formData?.images[0]?.preview"
+                            alt="">
                     </div>
                     <div>
                         <p class="font-semibold text-xs md:text-base ">{{ formData?.year }} {{ formData?.make }} {{
@@ -80,7 +82,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import DateAndTime from "./steps/DateAndTime.vue";
 import HoursWeekeng from "./steps/HoursWeekeng.vue";
 import AfterVerified from "./steps/AfterVerified.vue";
@@ -115,6 +117,7 @@ export default {
         const isOpen = ref(props.isActive)
         const formData = ref(props.form)
         const statusModal = ModalLaunch()
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const stepsVerifiqued = ref({
             step1: true,
             step2: false,
@@ -158,7 +161,6 @@ export default {
         const save = () => {
             props.modalLaunch()
         }
-
         return {
             isOpen,
             formData,
@@ -167,7 +169,8 @@ export default {
             stepsDateTime,
             stepsDateWeekeng,
             statusModal,
-            newtDayDate
+            newtDayDate,
+            bucket
         };
     },
 };
