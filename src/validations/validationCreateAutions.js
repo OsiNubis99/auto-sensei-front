@@ -142,42 +142,46 @@ export const validateData = (form, step, typeLaunch) => {
         } */
     }
     if (step == 'UploadPhotos') {
+        console.log('form', form.images)
+        if (form.images.length === 0) {
+            error.images = 'You must upload the files to continue'
+        }
         /*  if (!form.document) {
              error.document = 'Required field'
          }
          if (!form.driverDocument) {
              error.driverDocument = 'Required field'
          } */
-        if (!form.frontPhoto) {
-            error.frontPhoto = 'Required field'
-        }
-        if (!form.front) {
-            error.front = 'Required field'
-        }
-        if (!form.driverSide) {
-            error.driverSide = 'Required field'
-        }
-        if (!form.back) {
-            error.back = 'Required field'
-        }
-        if (!form.passengerSide) {
-            error.passengerSide = 'Required field'
-        }
-        if (!form.tireAndRim) {
-            error.tireAndRim = 'Required field'
-        }
-        if (!form.driversDisplay) {
-            error.driversDisplay = 'Required field'
-        }
-        if (!form.driversSide) {
-            error.driversSide = 'Required field'
-        }
-        if (!form.centerConsole) {
-            error.centerConsole = 'Required field'
-        }
-        if (!form.rearSeats) {
-            error.rearSeats = 'Required field'
-        }
+        /*  if (!form.frontPhoto) {
+             error.frontPhoto = 'Required field'
+         }
+         if (!form.front) {
+             error.front = 'Required field'
+         }
+         if (!form.driverSide) {
+             error.driverSide = 'Required field'
+         }
+         if (!form.back) {
+             error.back = 'Required field'
+         }
+         if (!form.passengerSide) {
+             error.passengerSide = 'Required field'
+         }
+         if (!form.tireAndRim) {
+             error.tireAndRim = 'Required field'
+         }
+         if (!form.driversDisplay) {
+             error.driversDisplay = 'Required field'
+         }
+         if (!form.driversSide) {
+             error.driversSide = 'Required field'
+         }
+         if (!form.centerConsole) {
+             error.centerConsole = 'Required field'
+         }
+         if (!form.rearSeats) {
+             error.rearSeats = 'Required field'
+         } */
         /*  if (!form.vehicleDamage) {
              error.vehicleDamage = 'Required field'
          }
@@ -324,6 +328,9 @@ export const validateData = (form, step, typeLaunch) => {
         if (!form.lastReplacement2) {
             error.lastReplacement2 = 'Required field'
         }
+        if (form.images.length === 0) {
+            error.images = 'You must upload the files to continue'
+        }
         /*  if (!form.rotorCondition) {
              error.rotorCondition = 'Required field'
          }
@@ -336,36 +343,36 @@ export const validateData = (form, step, typeLaunch) => {
          if (!form.driverDocument) {
              error.driverDocument = 'Required field'
          } */
-        if (!form.frontPhoto) {
-            error.frontPhoto = 'Required field'
-        }
-        if (!form.front) {
-            error.front = 'Required field'
-        }
-        if (!form.driverSide) {
-            error.driverSide = 'Required field'
-        }
-        if (!form.back) {
-            error.back = 'Required field'
-        }
-        if (!form.passengerSide) {
-            error.passengerSide = 'Required field'
-        }
-        if (!form.tireAndRim) {
-            error.tireAndRim = 'Required field'
-        }
-        if (!form.driversDisplay) {
-            error.driversDisplay = 'Required field'
-        }
-        if (!form.driversSide) {
-            error.driversSide = 'Required field'
-        }
-        if (!form.centerConsole) {
-            error.centerConsole = 'Required field'
-        }
-        if (!form.rearSeats) {
-            error.rearSeats = 'Required field'
-        }
+        /*  if (!form.frontPhoto) {
+             error.frontPhoto = 'Required field'
+         }
+         if (!form.front) {
+             error.front = 'Required field'
+         }
+         if (!form.driverSide) {
+             error.driverSide = 'Required field'
+         }
+         if (!form.back) {
+             error.back = 'Required field'
+         }
+         if (!form.passengerSide) {
+             error.passengerSide = 'Required field'
+         }
+         if (!form.tireAndRim) {
+             error.tireAndRim = 'Required field'
+         }
+         if (!form.driversDisplay) {
+             error.driversDisplay = 'Required field'
+         }
+         if (!form.driversSide) {
+             error.driversSide = 'Required field'
+         }
+         if (!form.centerConsole) {
+             error.centerConsole = 'Required field'
+         }
+         if (!form.rearSeats) {
+             error.rearSeats = 'Required field'
+         } */
         /*  if (!form.vehicleDamage) {
              error.vehicleDamage = 'Required field'
          }

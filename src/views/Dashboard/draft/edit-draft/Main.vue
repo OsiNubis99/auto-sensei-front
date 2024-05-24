@@ -199,7 +199,102 @@
                                     </div>
                                 </div>
                             </div>
-                            <template v-if="loadingUploadImages">
+                            <div v-else
+                                class="bg-white h-fit flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
+                                <template v-if="arrayUpload?.length > 0">
+                                    <div class="flex gap-6">
+                                        <!--  <img :src="bucket + 'public/svg/uploadPhotos.svg'" alt=""> -->
+                                        <div class="flex flex-col ">
+                                            <p class="text-[13px] font-Nohemi md:text-xl "> Uploading
+                                                <strong>{{
+                    arrayUpload?.length }}</strong> of <strong>{{ formData.images.length
+                                                    }}
+                                                </strong>
+                                            </p>
+                                            <p class=" text-[10px] font-Nohemi md:text-base">This may take a few
+                                                minutes.</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="grid  grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 px-3 scroll-custom w-full m-auto py-6 gap-6 h-fit overflow-hidden ">
+                                        <div class="flex w-full flex-col items-center "
+                                            v-for="(image, index) in arrayUpload">
+                                            <div class="animate-fade-up  w-full animate-ease-in-out "
+                                                :class="`animate-delay-${index}00 animate-duration-${(index) + 1}000`">
+                                                <div
+                                                    class="relative w-full flex justify-end group  transition-all ease-out duration-300">
+                                                    <div class="relative  w-full ">
+                                                        <p :class="image?.format == 'video' ? 'bg-[#1f94f0] text-white ' : 'bg-primary text-base-black '"
+                                                            class="absolute z-50 font-bold py-1 px-3 top-2 uppercase left-2 text-[8px] rounded-lg ">
+                                                            {{ image?.format }}
+                                                        </p>
+                                                        <video v-if="image?.format == 'video'" poster
+                                                            :src="image.preview"
+                                                            class="object-cover shadow-image-upload w-full h-[150px] rounded-lg mb-4   "></video>
+                                                        <img v-else
+                                                            class="object-cover shadow-image-upload w-full h-[150px] rounded-lg mb-4   "
+                                                            :src="image.preview" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="flex gap-1 flex-col">
+                                                    <p class="text-xs font-medium truncate w-[120px]">Name:
+                                                        {{ image.name }}
+                                                    </p>
+                                                    <p class="text-xs font-medium truncate">Type:
+                                                        <span
+                                                            class="uppercase bg-[#6d53b0] text-white shadow-lg font-semibold ml-2 px-2 py-1 text-[8px] rounded-md ">
+                                                            {{ image?.type }}
+                                                        </span>
+                                                    </p>
+                                                    <p class="text-xs font-medium mb-2 truncate">Size:
+                                                        <span
+                                                            class="uppercase bg-[#6d53b0] text-white shadow-lg font-semibold ml-3 px-2 py-1 text-[10px] rounded-md ">
+                                                            {{ image?.size }} Mb
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div v-if="!image.completed" class="w-full flex flex-col md:gap-2">
+
+                                                    <div
+                                                        class="bg-[#E5E5E5] whitespace-pre shadow-sm w-full rounded-full  h-4">
+                                                        <div :style="{ width: porcertanje + '%' }"
+                                                            class=" h-4 bg-primary flex justify-center items-center rounded-full shadow-progreess ">
+                                                            <p class="text-[10px] ">{{ porcertanje }} %</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-else-if="index == arrayUpload.length - 1"
+                                                    class="w-full flex flex-col md:gap-2">
+
+                                                    <div class="bg-[#E5E5E5] rounded-full  shadow-xl h-4">
+                                                        <div
+                                                            class=" w-full h-4 bg-primary flex justify-center items-center rounded-full">
+                                                            <p class="text-[10px]">Completed</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-else class="w-full flex flex-col md:gap-2">
+
+                                                    <div class="bg-[#E5E5E5] rounded-full  shadow-xl h-4">
+                                                        <div
+                                                            class=" w-full h-4 bg-primary flex justify-center items-center rounded-full">
+                                                            <p class="text-[10px]">Completed</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center w-full items-center">
+                                        <img class="h-16 w-16" src="@/assets/svg/Spin.svg" alt="">
+                                        <p class=" text-base-gray mt-1 text-xs md:text-base font-medium">Uploading...
+                                        </p>
+                                    </div>
+                                </template>
+
+                            </div>
+                            <!--  <template v-if="loadingUploadImages">
                                 <div
                                     class="bg-white h-fit flex flex-col mb-7 gap-5 items-start shadow-steps p-5 w-full">
                                     <div class="w-full flex flex-col md:grid md:grid-cols-2 gap-4">
@@ -249,8 +344,9 @@
                                         </p>
                                     </div>
                                 </div>
-                            </template>
+                            </template> -->
                         </template>
+
 
                         <template v-else>
                             <GeneralInformation :key="componentKey" :nextGeneralInformation="nextGeneralInformation"
@@ -410,7 +506,9 @@ export default {
             //(Weekend)
             daySaturday: '19.00 PM',
             dayMonday: 'Select time',
-            repairs: undefined
+            repairs: undefined,
+
+            images: []
 
 
         })
@@ -670,326 +768,127 @@ export default {
             return date
         }
         const postFile = async (string) => {
-            let newArrayExterior = []
-            let newArrayInterior = []
-            let newArrayVehicleDamage = []
-            let newAdditionalDocuments = []
-            let vehicleDamage = []
-            let additionalDocuments = []
-            if (formData.value.vehicleDamage) {
-                vehicleDamage = [
-                    {
-                        file: formData.value.vehicleDamage,
-                        name: 'vehicle-damage'
-                    }
+            console.log('formData.value.images', formData.value.images)
+            let newArrayImages = []
+            for (let index = 0; index < formData.value.images.length; index++) {
+                const element = formData.value.images[index];
+                if (element.bucket) {
+                    newArrayImages.push(element.preview)
+                } else {
 
-                ]
-            }
-
-            if (formData.value.additionalDocuments) {
-                additionalDocuments = [
-                    {
-                        file: formData.value.additionalDocuments,
-                        name: 'additional-documents'
-                    }
-
-                ]
-            }
-            let resOriginalDocument = null;
-            let resLicence = null;
-            let resFronPhoto = null;
-            let resFron = null;
-            let resDriverSide = null;
-            let resBack = null;
-            let resPassengerSide = null;
-            let resTireAndRim = null;
-            let resDriversDisplay = null;
-            let resDriverSideInterior = null;
-            let resCenterConsole = null;
-            let resRearSeats = null;
-            let resVehicleDamage = null;
-            let resAdditionalDocuments = null;
-            try {
-
-                /*  if (typeof formData.value.document?.type == 'string') {
-                     arrayUpload.value = [...arrayUpload.value, { name: 'Original documents', preview: formData.value.previewDocument, completed: false, }]
-                     resOriginalDocument = await Promise.all([storeFile.uploaderFile({ file: formData.value.document, location: `${id_create.value}/original-documents` })])
-                     if (resOriginalDocument[0]?.data) arrayUpload.value[0].completed = true
-                 }
-                 if (typeof formData.value.driverDocument?.type == 'string') {
-                     arrayUpload.value = [...arrayUpload.value, { name: 'Driver License', preview: formData.value.previewDriver, completed: false, }]
-                     resLicence = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverDocument, location: `${id_create.value}/driver-license` })])
-                     if (resLicence[0]?.data) arrayUpload.value[0].completed = true
-                 } */
-
-                if (typeof formData.value.frontPhoto?.type == 'string' ||
-                    typeof formData.value.front?.type == 'string' ||
-                    typeof formData.value.driverSide?.type == 'string' ||
-                    typeof formData.value.back?.type == 'string' ||
-                    typeof formData.value.passengerSide?.type == 'string' ||
-                    typeof formData.value.tireAndRim?.type == 'string'
-                ) {
-                    if (dataAuction.value?.vehicleDetails?.exteriorPhotos) {
-                        newArrayExterior = [...dataAuction.value?.vehicleDetails?.exteriorPhotos]
-                    }
-
-                }
-                if (typeof formData.value.driversDisplay?.type == 'string' ||
-                    typeof formData.value.driversSide?.type == 'string' ||
-                    typeof formData.value.centerConsole?.type == 'string' ||
-                    typeof formData.value.rearSeats?.type == 'string'
-                ) {
-                    if (dataAuction.value?.vehicleDetails?.interiorPhotos) {
-                        newArrayInterior = [...dataAuction.value?.vehicleDetails?.interiorPhotos]
-                    }
-
-                }
-
-
-                if (typeof formData.value.frontPhoto?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Main Photo (3/4 Front Photo)', preview: formData.value.previewFrontPhoto, completed: false, }]
-                    resFronPhoto = await Promise.all([storeFile.uploaderFile({ file: formData.value.frontPhoto, location: `${id_create.value}/front-photo` })])
-                    if (resFronPhoto[0]?.data) {
+                    console.log('element', element)
+                    arrayUpload.value = [...arrayUpload.value, {
+                        name: `file-${index}`,
+                        preview: element.preview,
+                        completed: false,
+                        type: element?.type,
+                        size: element.size,
+                        format: element.format
+                    }]
+                    let resImages = await Promise.all([storeFile.uploaderFile({ file: element.file, location: `${id_create.value}/${element?.name}-${element?.type}-${element?.size}-${element?.format}` })])
+                    newArrayImages.push(resImages[0].data)
+                    if (resImages[0]?.data) {
                         arrayUpload.value.map((file) => {
                             console.log('file', file)
-                            if (file.name == 'Main Photo (3/4 Front Photo)') {
+                            if (file.name == `file-${index}`) {
                                 file.completed = true
                             }
                         })
-
-                        newArrayExterior[0] = resFronPhoto[0]?.data
                     }
                 }
-                if (typeof formData.value.front?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Front Photo', preview: formData.value.previewFront, completed: false, }]
-                    resFron = await Promise.all([storeFile.uploaderFile({ file: formData.value.front, location: `${id_create.value}/front` })])
-                    if (resFron[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Front Photo') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayExterior[1] = resFron[0]?.data
-                    }
-                }
-                if (typeof formData.value.driverSide?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Driver Side Exterior', preview: formData.value.previewDriverSide, completed: false, }]
-                    resDriverSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.driverSide, location: `${id_create.value}/driver-side-(exterior)` })])
-                    if (resDriverSide[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Driver Side Exterior') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayExterior[2] = resDriverSide[0]?.data
-                    }
-                }
-                if (typeof formData.value.back?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Back', preview: formData.value.previewBack, completed: false, }]
-                    resBack = await Promise.all([storeFile.uploaderFile({ file: formData.value.back, location: `${id_create.value}/'back'` })])
-                    if (resBack[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Back') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayExterior[3] = resBack[0]?.data
-                    }
-                }
-                if (typeof formData.value.passengerSide?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Passenger Side', preview: formData.value.previewPassengerSide, completed: false, }]
-                    resPassengerSide = await Promise.all([storeFile.uploaderFile({ file: formData.value.passengerSide, location: `${id_create.value}/passenger-side` })])
-                    if (resPassengerSide[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Passenger Side') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayExterior[4] = resPassengerSide[0]?.data
-                    }
-                }
-                if (typeof formData.value.tireAndRim?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Tire And Rim', preview: formData.value.previewTireAndRim, completed: false, }]
-                    resTireAndRim = await Promise.all([storeFile.uploaderFile({ file: formData.value.tireAndRim, location: `${id_create.value}/tire-and-rim` })])
-                    if (resTireAndRim[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Tire And Rim') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayExterior[5] = resPassengerSide[0]?.data
-                    }
-                }
-                if (typeof formData.value.driversDisplay?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Display (Odometer)', preview: formData.value.previewDriversDisplay, completed: false, }]
-                    resDriversDisplay = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversDisplay, location: `${id_create.value}/drivers-display-(odometer)` })])
-                    if (resDriversDisplay[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Drivers Display (Odometer)') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayInterior[0] = resDriversDisplay[0]?.data
-                    }
-                }
-                if (typeof formData.value.driversSide?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Drivers Side (Interior)', preview: formData.value.previewDriversSide, completed: false, }]
-                    resDriverSideInterior = await Promise.all([storeFile.uploaderFile({ file: formData.value.driversSide, location: `${id_create.value}/drivers-side-(interior)` })])
-                    if (resDriverSideInterior[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Drivers Side (Interior)') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayInterior[1] = resDriverSideInterior[0]?.data
-                    }
-                }
-                if (typeof formData.value.centerConsole?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Center Console', preview: formData.value.previewCenterConsole, completed: false, }]
-                    resCenterConsole = await Promise.all([storeFile.uploaderFile({ file: formData.value.centerConsole, location: `${id_create.value}/center-console` })])
-                    if (resCenterConsole[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Center Console') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayInterior[2] = resCenterConsole[0]?.data
-                    }
-
-                }
-                if (typeof formData.value.rearSeats?.type == 'string') {
-                    arrayUpload.value = [...arrayUpload.value, { name: 'Rear Seats', preview: formData.value.previewRearSeats, completed: false, }]
-                    resRearSeats = await Promise.all([storeFile.uploaderFile({ file: formData.value.rearSeats, location: `${id_create.value}/rear-seats` })])
-                    if (resRearSeats[0]?.data) {
-                        arrayUpload.value.map((file) => {
-                            if (file.name == 'Rear Seats') {
-                                file.completed = true
-                            }
-                        })
-                        newArrayInterior[3] = resRearSeats[0]?.data
-                    }
-                }
-                if (typeof formData.value.vehicleDamage?.type == 'string') {
-                    if (formData.value.vehicleDamage) {
-                        arrayUpload.value = [...arrayUpload.value, { name: 'Vehicle Damage', preview: formData.value.previewVehicleDamage, completed: false, }]
-                        resVehicleDamage = await Promise.all([storeFile.uploaderFile({ file: formData.value.vehicleDamage, location: `${id_create.value}/vehicle-damage` })])
-                        if (resVehicleDamage[0]?.data) {
-                            arrayUpload.value.map((file) => {
-                                if (file.name == 'Vehicle Damage') {
-                                    file.completed = true
-                                }
-                            })
-                            newArrayVehicleDamage[0] = resVehicleDamage[0]?.data
-                        }
-                    }
-                }
-                if (typeof formData.value.additionalDocuments?.type == 'string') {
-                    if (formData.value.additionalDocuments) {
-                        arrayUpload.value = [...arrayUpload.value, { name: 'Additional Documents', preview: formData.value.previewAdditionalDocuments, completed: false, }]
-                        resAdditionalDocuments = await Promise.all([storeFile.uploaderFile({ file: formData.value.additionalDocuments, location: `${id_create.value}/additional-documents` })])
-                        if (resAdditionalDocuments[0]?.data) {
-                            arrayUpload.value.map((file) => {
-                                if (file.name == 'Additional Documents') {
-                                    file.completed = true
-                                }
-                            })
-                            newAdditionalDocuments[0] = resAdditionalDocuments[0]?.data
-                        }
-                    }
-                }
-
-
-
-                let resWeekend = getDateAndMinutes(+formData.value.dayMonday)
-                let hour = moment(`${formData.value.auctionTime}:${formData.value.auctionDuration}`, "H:mm").format('HH:mm:ss')
-                let date = moment(formData.value.auctionDate).format('YYYY-MM-DD');
-                let duration = null
-                let startDate = null
-                switch (formData.value?.launchOptions) {
-                    case 'Launch now after verified':
-                        duration = formData.value.auctionDuration
-                        startDate = null
-                        break;
-                    case 'Choose the date & time':
-                        duration = formData.value.auctionDuration
-                        startDate = date + "T" + hour
-                        break;
-                    case 'Choose after hours (weekend)':
-                        duration = resWeekend.duration
-                        startDate = resWeekend.startDate
-                        break;
-                    case 'none':
-                        console.log('entroaqui ')
-                        let resStart = dateTomorrow(9)
-                        duration = 480
-                        startDate = resStart
-                        break;
-                    default:
-                        break;
-                }
-                if (formData.value.color !== 'other') {
-                    formData.value.customColor = undefined
-                } else {
-                    formData.value.color = formData.value.customColor
-                }
-                /*   formData.value.saveCity = JSON.parse(formData.value.city)
-                  formData.value.saveProvince = JSON.parse(formData.value.province) */
-                console.log('formData.value.document ', formData.value.document)
-                let dataPost = {
-                    vin: formData.value.numberVinGenerals,
-                    dropOffDate: formData.value.date,
-                    city: formData.value.city,
-                    province: formData.value.province,
-                    keysNumber: formData.value.keys,
-                    vehicleStatus: {
-                        status: formData.value.currently,
-                        financingCompany: formData.value.financingCompany,
-                        remainingPayments: formData.value.remainingPayments,
-                    },
-                    buyout: formData.value.yourVehicleAmount,
-                    buyNew: {
-                        anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
-                        make: formData.value.makePreferences,
-                        model: formData.value.modelPreferences,
-                        mileageStart: formData.value.modelFromPreferences,
-                        mileageEnd: formData.value.modelToPreferences,
-                        yearStart: formData.value.yearFromPreferences,
-                        yearEnd: formData.value.yearToPreferences
-                    },
-                    startDate: string == 'draft' ? null : startDate,
-                    duration: string == 'draft' ? null : Number(duration),
-                    vehicleDetails: {
-                        odometer: formData.value.odometer,
-                        doors: formData.value.doors,
-                        color: formData.value.color,
-                        driveTrain: formData.value.driveTrain,
-                        aditionals: formData.value.additionalPackages,
-                        tireCondition: formData.value.tireCondition,
-                        tireReplacement: formData.value.lastReplacement,
-                        brakeCondition: formData.value.brakePads,
-                        brakeReplacement: formData.value.lastReplacement2,
-                        rotorCondition: formData.value.rotorCondition,
-                        rotorReplacement: formData.value.lastReplacement3,
-                        /*   originalDocument: typeof formData.value.document == "string" ? formData.value.document : resOriginalDocument[0]?.data, */
-                        /*  driverLicense: typeof formData.value.driverDocument == "string" ? formData.value.driverDocument : resLicence[0]?.data, */
-                        exteriorPhotos: newArrayExterior.length == 0 ? dataAuction.value.vehicleDetails.exteriorPhotos : newArrayExterior,
-                        interiorPhotos: newArrayInterior.length == 0 ? dataAuction.value.vehicleDetails.interiorPhotos : newArrayInterior,
-                        vehicleDamage: newArrayVehicleDamage.length == 0 ? dataAuction.value.vehicleDetails.vehicleDamage : newArrayVehicleDamage,
-                        additionalDocuments: newAdditionalDocuments.length == 0 ? dataAuction.value.vehicleDetails.additionalDocuments : newAdditionalDocuments,
-                        vehicleVideo: formData.value.vehicleVideo,
-                        repairs: formData.value.repairs,
-
-                    },
-                }
-                return dataPost
-            } catch (error) {
-                console.log('error', error)
-                loadingUploadImages.value = false
-                toast(error?.response?.data?.message || 'Your auction listing is incomplete, please answer all the questions and fill all out all the forms.', {
-                    type: "error",
-                });
 
             }
+            console.log('newArrayImages', newArrayImages)
+            if (newArrayImages.length > 0) {
+                try {
+                    let resWeekend = getDateAndMinutes(+formData.value.dayMonday)
+                    let hour = moment(`${formData.value.auctionTime}:${formData.value.auctionDuration}`, "H:mm").format('HH:mm:ss')
+                    let date = moment(formData.value.auctionDate).format('YYYY-MM-DD');
+                    let duration = null
+                    let startDate = null
+                    switch (formData.value?.launchOptions) {
+                        case 'Launch now after verified':
+                            duration = formData.value.auctionDuration
+                            startDate = null
+                            break;
+                        case 'Choose the date & time':
+                            duration = formData.value.auctionDuration
+                            startDate = date + "T" + hour
+                            break;
+                        case 'Choose after hours (weekend)':
+                            duration = resWeekend.duration
+                            startDate = resWeekend.startDate
+                            break;
+                        case 'none':
+                            console.log('entroaqui ')
+                            let resStart = dateTomorrow(9)
+                            duration = 480
+                            startDate = resStart
+                            break;
+                        default:
+                            break;
+                    }
+                    if (formData.value.color !== 'other') {
+                        formData.value.customColor = undefined
+                    } else {
+                        formData.value.color = formData.value.customColor
+                    }
+                    console.log('formData.value.document ', formData.value.document)
+                    let dataPost = {
+                        vin: formData.value.numberVinGenerals,
+                        dropOffDate: formData.value.date,
+                        city: formData.value.city,
+                        province: formData.value.province,
+                        keysNumber: formData.value.keys,
+                        vehicleStatus: {
+                            status: formData.value.currently,
+                            financingCompany: formData.value.financingCompany,
+                            remainingPayments: formData.value.remainingPayments,
+                        },
+                        buyout: formData.value.yourVehicleAmount,
+                        buyNew: {
+                            anyVehicle: formData.value.anyVehicle == 'Yes' ? true : false,
+                            make: formData.value.makePreferences,
+                            model: formData.value.modelPreferences,
+                            mileageStart: formData.value.modelFromPreferences,
+                            mileageEnd: formData.value.modelToPreferences,
+                            yearStart: formData.value.yearFromPreferences,
+                            yearEnd: formData.value.yearToPreferences
+                        },
+                        startDate: string == 'draft' ? null : startDate,
+                        duration: string == 'draft' ? null : Number(duration),
+                        vehicleDetails: {
+                            odometer: formData.value.odometer,
+                            doors: formData.value.doors,
+                            color: formData.value.color,
+                            driveTrain: formData.value.driveTrain,
+                            aditionals: formData.value.additionalPackages,
+                            tireCondition: formData.value.tireCondition,
+                            tireReplacement: formData.value.lastReplacement,
+                            brakeCondition: formData.value.brakePads,
+                            brakeReplacement: formData.value.lastReplacement2,
+                            rotorCondition: formData.value.rotorCondition,
+                            rotorReplacement: formData.value.lastReplacement3,
+                            exteriorPhotos: newArrayImages,
+                            interiorPhotos: [],
+                            vehicleDamage: [],
+                            additionalDocuments: [],
+                            vehicleVideo: formData.value.vehicleVideo,
+                            repairs: formData.value.repairs,
+
+                        },
+                    }
+                    return dataPost
+                } catch (error) {
+                    console.log('error', error)
+                    loadingUploadImages.value = false
+                    toast(error?.response?.data?.message || 'Your auction listing is incomplete, please answer all the questions and fill all out all the forms.', {
+                        type: "error",
+                    });
+
+                }
+            }
+
 
 
         }
@@ -1112,6 +1011,7 @@ export default {
         }
         const getAutionById = async (id) => {
             loading.value = true
+            let newArrayPhoto = []
             try {
                 let res = await store.getAutionById({ uuid: id })
                 console.log('RESPUESTA AUTION BY ID', res)
@@ -1134,6 +1034,25 @@ export default {
                         } else {
                             formData.value.color = res.data.vehicleDetails.color
                         }
+                    }
+
+                    if (res.data.vehicleDetails.exteriorPhotos.length > 0) {
+
+                        for (let index = 0; index < res.data.vehicleDetails.exteriorPhotos.length; index++) {
+                            const element = res.data.vehicleDetails.exteriorPhotos[index];
+                            let resSplit = element.split('/')[2].split('-')
+                            let image = {
+                                preview: element,
+                                size: resSplit[2],
+                                format: resSplit[3],
+                                type: resSplit[1],
+                                name: resSplit[0],
+                                bucket: true
+                            }
+                            newArrayPhoto.push(image)
+
+                        }
+
                     }
                     dataAuction.value = res.data
                     formData.value.numberVinGenerals = res.data.vin ? res.data.vin : undefined;
@@ -1198,6 +1117,8 @@ export default {
                     formData.value.previewAdditionalDocuments = res.data.vehicleDetails?.additionalDocuments[0]?.length > 0 ? bucket.value + res.data.vehicleDetails?.additionalDocuments[0] : undefined;
                     formData.value.previewVehicleDamage = res.data.vehicleDetails?.vehicleDamage[0] ? bucket.value + res.data.vehicleDetails?.vehicleDamage[0] : undefined;
                     formData.value.repairs = res.data.vehicleDetails.repairs
+                    formData.value.images = newArrayPhoto
+                    console.log('formData.value.images', formData.value.images)
                 }
             } catch (error) {
                 console.log('error', error)
