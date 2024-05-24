@@ -878,11 +878,11 @@
         </div>
         <template v-if="!loadingUploadImages">
             <div v-if="form?.images?.length > 0"
-                class="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 px-3 scroll-custom w-full m-auto pt-6 gap-6 h-fit   max-h-[65vh] overflow-y-auto overflow-x-hidden">
+                class="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 lg:px-3 scroll-custom w-full m-auto pt-6 gap-6 h-fit   lg:max-h-[65vh] lg:overflow-y-auto overflow-x-hidden">
                 <div class="flex w-full flex-col items-center " v-for="(image, index) in form.images">
                     <div class="animate-fade-up  w-full animate-ease-in-out "
                         :class="`animate-delay-${index}00 animate-duration-${(index) + 1}000`">
-                        <div
+                        <div @click="viewPhoto(image)"
                             class="relative w-full flex justify-end group cursor-pointer transition-all ease-out duration-300">
                             <svg class=" absolute  z-50 w-6 mx-1 my-1 group-hover:-translate-y-4 group-hover-fill-[#fff] transition-all ease-out duration-300  "
                                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1192,6 +1192,7 @@ export default {
             props.saveData(string)
         }
         const viewPhoto = (photo) => {
+            console.log('photo', photo)
             statusModalViewImage.openModal({ active: true, img: photo })
         }
 

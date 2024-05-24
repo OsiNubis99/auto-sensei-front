@@ -1,20 +1,19 @@
-
-
 <template>
     <div v-show="statusModalView.isActive"
-        class="fixed z-[100] inset-0 flex items-center justify-center bg-base-black  bg-opacity-50">
-        <div class="max-w-xl w-full h-[70vh] overflow-hidden  bg-white rounded-lg shadow-xl">
-            <div class="h-[79%] ">
-                <div class="p-4 rounded-t-lg  bg-base-black flex items-center justify-between">
-                    <p class="text-xl text-white">View Photo</p>
+        class="fixed inset-0 flex items-end md:items-center md:justify-center bg-base-black  bg-opacity-50">
+        <div class="max-w-xl w-full h-[70vh] overflow-hidden  bg-white rounded-lg shadow-xl animation-fade-modal">
+            <div class="h-full">
+                <div class="md:p-4 p-2 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
+                    <p class=" text-md md:text-xl text-white">View Photo</p>
                     <svg @click="statusModalView.closeModal(false)" xmlns="http://www.w3.org/2000/svg"
-                        class="w-8 h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                        class=" w-5 md:w-8 md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <div class="w-full h-full">
-                    <img :src="img" class="w-full h-full object-contain " alt="">
+                <div class="w-full p-2 h-full">
+                    <img :src="img.bucket ? bucket + img.preview : img.preview" class="w-full h-[90%] object-cover "
+                        alt="">
                 </div>
                 <!-- <div class="flex w-full justify-end border-t-2 border-[#E0E0E0] p-4 gap-3">
                     <label class="label-upload btn bg-white border border-[#E0E0E0]">
@@ -27,9 +26,9 @@
         </div>
     </div>
 </template>
-    
+
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { ModalViewImage } from '@/stores/modalViewImage';
 export default {
     props: {
@@ -45,6 +44,7 @@ export default {
         const statusModalView = ModalViewImage()
         const formData = ref(props.form)
         const zoom = ref(0)
+        const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const croppers = ref(null)
         const img = ref(statusModalView.img)
         const uploadImage = (event) => {
@@ -60,20 +60,25 @@ export default {
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        onMounted(() => {
+            console.log('statusModalView.img', statusModalView.img)
+        })
         return {
             uploadImage,
 
             loading,
             img,
-            statusModalView
+            statusModalView,
+            bucket
         };
     },
     components: {
     }
 };
 </script>
-  
-  
+
+
 <style lang="scss">
 .twitter-cropper {
     height: 521px;
