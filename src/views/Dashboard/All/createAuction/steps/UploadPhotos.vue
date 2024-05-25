@@ -873,7 +873,21 @@
         <div class="flex gap-6">
             <div class="flex flex-col ">
                 <p class=" font-semibold text-[13px]   md:text-xl ">Files: {{ form.images.length }}</p>
-                <p class=" text-[10px] md:text-base">You can only upload a maximum of 30 files.</p>
+                <p class=" text-[10px] md:text-base">Upload up to 30 photos of your vehicle. Please be transparent with
+                    photos
+                    outlining damages, imperfections, & condition of the vehicle. Taking pictures of the tires tread,
+                    rims &
+                    brakes are recommended as well. These photos will be subject to approval, pictures may be removed or
+                    reorganized in order to make your auction more appealing.</p>
+                <p>Suggested Photo Recommendations. Pictures of:
+                    <br>
+                    <strong>- Odometer (mileage) </strong> <br>
+                    <strong>- ⁠Tire & Rim Condition (Front and Rear) </strong> <br>
+                    <strong>- ⁠Rotors (Front and Rear) </strong> <br>
+                    <strong>- ⁠All angles of vehicle </strong> <br>
+                    <strong>- ⁠Interior (Front and Rear) </strong> <br>
+                    <strong>- ⁠Any Damages </strong>
+                </p>
             </div>
         </div>
         <template v-if="!loadingUploadImages">

@@ -20,7 +20,8 @@
         <div class="mx-auto bg-[#F0F0F0] h-screen">
             <div class="flex justify-between p-5">
                 <div class="flex gap-7">
-                    <RouterLink :to="{ name: 'action-list', query: { state: 'drafts' } }" @click="changeSeccion('drafts')"
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'drafts' } }"
+                        @click="changeSeccion('drafts')"
                         :class="stateTable == 'drafts' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
                         class="btn font-semibold ">
                         Drafts ({{ counterData.draft }})
@@ -78,7 +79,8 @@
                 <div class="overflow-x-auto shadow-md sm:rounded-lg">
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden ">
-                            <table class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
+                            <table
+                                class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
                                 <template v-if="paginated.length > 0">
                                     <thead class="bg-gray-100 dark:bg-gray-700">
                                         <tr>
@@ -156,13 +158,16 @@
                                                     </div>
                                                 </div>
 
-                                                <div 
+                                                <div
                                                     class="w-[50%]  justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
-                                                    <p
+                                                    <p v-if="stateTable !== 'completed'"
                                                         class="py-3 px-6 pl-0 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
                                                         Confirmation
-                                                    </p> 
-
+                                                    </p>
+                                                    <p v-else
+                                                        class="py-3 px-6 pl-0 text-xs font-medium tracking-wider text-left text-[#000] capitalize ">
+                                                        Status Aution
+                                                    </p>
                                                 </div>
                                             </th>
                                         </tr>
@@ -184,19 +189,22 @@
                                                     <img v-if="aution?.owner?.seller?.picture"
                                                         class="w-full shadow-md   rounded-full h-full object-cover"
                                                         :src="bucket + aution?.owner?.seller?.picture" alt="">
-                                                    <img v-else class="w-full shadow-md  rounded-full h-full object-cover"
+                                                    <img v-else
+                                                        class="w-full shadow-md  rounded-full h-full object-cover"
                                                         src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                                         alt="">
                                                 </div>
                                                 <div class="flex justify-center flex-col">
-                                                    <p class="p-0 !m-0 capitalize"> {{ aution?.vehicleDetails?.model }}</p>
+                                                    <p class="p-0 !m-0 capitalize"> {{ aution?.vehicleDetails?.model }}
+                                                    </p>
                                                     <p class="p-0 uppercase font-normal  text-[#4D4D4D] !m-0">{{
-                                                        aution?.vehicleDetails?.vin }}</p>
+        aution?.vehicleDetails?.vin }}</p>
                                                 </div>
                                             </td>
                                             <td class="py-4 px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
                                                 <p class="!m-0 font-extrabold capitalize">
-                                                    {{ aution?.owner?.seller?.firstName }} {{ aution?.owner?.seller?.lastName }}
+                                                    {{ aution?.owner?.seller?.firstName }} {{
+        aution?.owner?.seller?.lastName }}
                                                 </p>
                                                 <p class="!m-0"> {{ aution.city }}, {{ aution.province }}</p>
                                             </td>
@@ -211,7 +219,7 @@
                                                     class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#05A54B14] gap-2">
                                                     <p class="text-[#05A54B] capitalize">PaidOff</p>
                                                 </div>
-                                                
+
                                                 <div v-else-if="aution?.vehicleStatus?.status == 'Financed'"
                                                     class="relative w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#6D53B014] gap-2">
                                                     <p class="text-[#6D53B0] capitalize">Financed</p>
@@ -229,7 +237,7 @@
                                                 <td
                                                     class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                                     <RouterLink
-                                                        :to="{ name: 'action-details-admin', params: { id: aution?._id }  }"
+                                                        :to="{ name: 'action-details-admin', params: { id: aution?._id } }"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 16 16" fill="none">
@@ -252,17 +260,27 @@
                                                 </td>
                                                 <td
                                                     class="w-[50%] justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
-                                                    <button
-                                                        v-if="aution.status !== 'upcoming' && aution.status !== 'live' && aution.status !== 'completed' && aution.status !== 'draft'"
-                                                        @click="confirmAutions(aution)"
-                                                        class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
-                                                        Aprove
-                                                    </button>
-                                                    <button v-if="aution.status !== 'canceled' && aution.status !== 'draft' "
-                                                        @click="rejetAutions(aution)"
-                                                        class="flex gap-1 items-center border p-2 bg-error text-white rounded-md border-[#E0E0E0]">
-                                                        Reject
-                                                    </button>
+                                                    <template
+                                                        v-if="aution.status !== 'completed' && aution.status !== 'reviewed' && aution.status !== 'drop off' && aution.status !== 'bids completed'">
+                                                        <button
+                                                            v-if="aution.status !== 'upcoming' && aution.status !== 'live' && aution.status !== 'completed' && aution.status !== 'draft'"
+                                                            @click="confirmAutions(aution)"
+                                                            class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                            Aprove
+                                                        </button>
+                                                        <button
+                                                            v-if="aution.status !== 'canceled' && aution.status !== 'draft'"
+                                                            @click="rejetAutions(aution)"
+                                                            class="flex gap-1 items-center border p-2 bg-error text-white rounded-md border-[#E0E0E0]">
+                                                            Reject
+                                                        </button>
+                                                    </template>
+
+                                                    <div v-else
+                                                        class="px-4 py-2   rounded-lg bg-white shadow-lg flex justify-center items-center">
+                                                        <p class="capitalize "> {{ aution.status }}</p>
+
+                                                    </div>
                                                 </td>
                                             </div>
 
@@ -309,7 +327,8 @@
                                     </svg>
                                 </div>
                                 <div v-for="(page, index) in numberPage" :key="index">
-                                    <div @click="next(page)" :class="page == current ? 'bg-base-black text-primary ' : 'bg-[#F0F0F0]  text-gray-900 '"
+                                    <div @click="next(page)"
+                                        :class="page == current ? 'bg-base-black text-primary ' : 'bg-[#F0F0F0]  text-gray-900 '"
                                         class="relative cursor-pointer rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 px-4 py-2  text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                         {{ page }}
                                     </div>
@@ -385,6 +404,7 @@ export default {
                         case 'completed':
                             stateTable.value = 'completed'
                             dataTable.value = store.completed
+                            console.log('dataTable.value', dataTable.value)
                             break;
                         case 'canceled':
                             stateTable.value = 'canceled'
@@ -541,9 +561,3 @@ export default {
     },
 };
 </script>
-
-
-
-
-
-  
