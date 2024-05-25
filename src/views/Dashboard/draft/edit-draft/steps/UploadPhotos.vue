@@ -878,7 +878,7 @@
                     rims &
                     brakes are recommended as well. These photos will be subject to approval, pictures may be removed or
                     reorganized in order to make your auction more appealing.</p>
-                <p>Suggested Photo Recommendations. Pictures of:
+                <p class=" text-[10px] md:text-base">Suggested Photo Recommendations. Pictures of:
                     <br>
                     <strong>- Odometer (mileage) </strong> <br>
                     <strong>- ⁠Tire & Rim Condition (Front and Rear) </strong> <br>
