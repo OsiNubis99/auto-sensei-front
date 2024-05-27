@@ -50,8 +50,8 @@
                     auctions
                     bidding on vehicles that dealers don’t want to sell themselves. Get the best vehicles with a simple
                     application.</p>
-                <img class="h-[50vh] block md:hidden w-full object-cover" :src="bucket + 'public/svg/vehiculosLogin.svg'"
-                    alt="" />
+                <img class="h-[50vh] block md:hidden w-full object-cover"
+                    :src="bucket + 'public/svg/vehiculosLogin.svg'" alt="" />
             </div>
             <div v-else class="h-full  flex justify-start items-start flex-col gap-5 ">
                 <h1 class="p-5 pb-0 !md:p-0  text-4xl  md:text-5xl text-blue-dark font-bold ">Elevate Your Car Selling
@@ -62,8 +62,8 @@
                     efficient process. Maximize the value of your car by inviting competitive bids from local
                     dealerships.
                 </p>
-                <img class="h-[50vh] block md:hidden w-full object-cover" :src="bucket + 'public/svg/vehiculosLogin.svg'"
-                    alt="" />
+                <img class="h-[50vh] block md:hidden w-full object-cover"
+                    :src="bucket + 'public/svg/vehiculosLogin.svg'" alt="" />
             </div>
             <img class="h-auto hidden md:block absolute bottom-0 left-0 w-full object-cover"
                 :src="bucket + 'public/svg/vehiculosLogin.svg'" alt="" />
@@ -75,7 +75,7 @@
 
 <script>
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import { ref, onMounted ,computed} from "vue";
+import { ref, onMounted, computed } from "vue";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { useRouter, useRoute } from 'vue-router'
 // Import Swiper styles

@@ -191,6 +191,30 @@ export default {
       }
       createImage(files);
     }
+
+    const uploadImages = async () => {
+      loadingUploadImages.value = true
+      if (images.value.length === 0) {
+        alert('Debes subir imagenes')
+        return
+      }
+      let newArrayImages = []
+      for (let index = 0; index < images.value.length; index++) {
+        const element = images.value[index];
+        arrayUpload.value = [...arrayUpload.value, { name: `file-${index}`, preview: element.preview, completed: false, }]
+        let resImages = await Promise.all([storeFile.uploaderFile({ file: element.file, location: `662298889e18250b6f075b81/example` })])
+        newArrayImages.push(resImages[0].data)
+        if (resImages[0]?.data) {
+          arrayUpload.value.map((file) => {
+            console.log('file', file)
+            if (file.name == `file-${index}`) {
+              file.completed = true
+            }
+          })
+        }
+      }
+      console.log('AFUERA DEL FOR', newArrayImages)
+    }
     const createAution = async () => {
       let dataPost = {
         vin: 'W1KZF8DB9MA200007',
@@ -219,30 +243,6 @@ export default {
 
       }
     }
-    const uploadImages = async () => {
-      loadingUploadImages.value = true
-      if (images.value.length === 0) {
-        alert('Debes subir imagenes')
-        return
-      }
-      let newArrayImages = []
-      for (let index = 0; index < images.value.length; index++) {
-        const element = images.value[index];
-        arrayUpload.value = [...arrayUpload.value, { name: `file-${index}`, preview: element.preview, completed: false, }]
-        let resImages = await Promise.all([storeFile.uploaderFile({ file: element.file, location: `662298889e18250b6f075b81/example` })])
-        newArrayImages.push(resImages[0].data)
-        if (resImages[0]?.data) {
-          arrayUpload.value.map((file) => {
-            console.log('file', file)
-            if (file.name == `file-${index}`) {
-              file.completed = true
-            }
-          })
-        }
-      }
-      console.log('AFUERA DEL FOR', newArrayImages)
-    }
-
     const update = async () => {
       loading.value = true
       let data = {
