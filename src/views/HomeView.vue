@@ -167,8 +167,7 @@
           </svg>
           <img
             class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full border-2  md:border-8 border-base-black "
-            src="https://s3-alpha-sig.figma.com/img/8333/30e2/b6bafd4e39c0f8b6912444cbce7aa094?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mcR4TxSbwT2DpX3YG4l8HhyR-4sJ3BfzhBeXqVtVxfggoBD8wSAbMM0qbQLcya~-kDKwExPGIBs0aG2kh6dXojiSOhhYlL2a1PoTv8I-XTFMpNoGyRtl9v8YQWtAEurkP8PZznRuxhVOSJGz95Qj-O-uhUhUGWJF6HdHXH3V6iTEC2YVASX~uVSkgoPHsirT0ZKykssRhH0Ze5VyQfBN2PyFASERJwp1FTkaBBpm9Ghd10SljHOMgA4QCo5XpYBNq-C36Fqr1NyUspQu~~mhxq1q9ZpnFaGykrAJKXN8GqvDVfWPWul9Ns6~wMxDczfwHUwwY~aqHqW2m0BVudNxfg__"
-            alt="">
+            src="../assets/img/png/meizhang.png" alt="">
         </div>
         <div class="mt-4 p-2 text-center">
           <p class="font-bold text-xl ">Mei Zhang</p>
@@ -192,8 +191,7 @@
           </svg>
           <img
             class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full  border-2 md:border-8 border-base-black "
-            src="https://s3-alpha-sig.figma.com/img/81c5/12c8/d61e630e5ec0fd2aefb1303d3a637a7f?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ElOh5Oka8RrrSBDberKy4I~ikr7ARqmV0mQ4ZhEvLRgG8N8UOS-n6pxW8FjsZd3Qt9c4UXKX1bUcGgVwzNeQE~MTnTOZ0kkzKYuMX75OJkDALwR1jSJt-ZzUhujnqQhlDUZl14UmpGgP7Cv8JBrb-aNgrr~vxsLgFrOX5UBxuuRV9QSKQ7BfCbx~Kx1-RWtvk6WAKD89ZTwBz7TI0qYruRkgxiGpUFcsgNKb5TBllDtbTBxbRO3Tbf9CDtPIawUQ6Mu9y71p7-s7yBqy6nOhoEDoYs0s9rtX88NSUtj5abGby2GnxJ8mjrBx7ZzglB04nXf7fDNdD69O7pggLd7z6A__"
-            alt="">
+            src="../assets/img/png/tashawillians.png" alt="">
         </div>
         <div class="mt-4 p-2 text-center">
           <p class="font-bold text-xl ">Tasha Williams</p>
@@ -215,8 +213,7 @@
           </svg>
           <img
             class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full  border-2 md:border-8 border-base-black "
-            src="https://s3-alpha-sig.figma.com/img/2640/82ed/d7b22b790fdc35a3b692925ec9eb096a?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=g3d5Xq~U6w-TjPvsOirDk2m--Ih-SteE0YfywsCxopKGLCUo7RP9m6OQMFdX7ACBKHrSvTNc1pc6FBqkM1EzqgCmpi5ASVlfwNW0TvIRmqQnfZt78oh8zwHWyyHBoWc36xbxkztf484MVlEj5ZL5X2qx-tiyHaoVlc7kkVPVGmGv~jAShEOUhAdFkWricits-34avSNQpIqy~JkSap2wwKSlB-~wV1k~-vGkx1TRYE1BJiGWjwiSL74fD-0NCpaekqEorOKHPDDt-cvGYXguNMB5-bjQI2Kh5wg5cXuaD355B4wNbKjfCNQbTZ8V2xnIvQx8PYo9po6hgrRVuVu-vQ__"
-            alt="">
+            src="../assets/img/png/alexmartinez.png" alt="">
         </div>
         <div class="mt-4 p-2 text-center">
           <p class="font-bold text-xl ">Alex Martinez</p>
