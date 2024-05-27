@@ -108,9 +108,8 @@
                         <span v-if="statusModal.from == 'autoBid'">You’ll be charged a $300 transaction fee if your bid
                             is
                             successfully won.</span>
-                        <span v-if="statusModal.from == 'bidNow'">You'll be charged a $300 + Harmonized Sales Tax (HST)
-                            transaction fee if your bid is
-                            successful won.</span>
+                        <span v-if="statusModal.from == 'bidNow'">You will only be charged our $300 fee plus HST if the
+                            seller accepts your bid. No charges will be made otherwise</span>
                     </p>
                     <template v-if="authStore.userData?.paymentMethods?.length > 0 && !showPayment">
                         <div class="custom-payment">
