@@ -178,7 +178,7 @@ export default {
             statusModal.data.vehicleDetails.basePrice += 100
 
 
-            
+
             invalid.value = validationsAutoBids(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from);
             sizeObjet.value = Object.entries(invalid.value).length
         }
