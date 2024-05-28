@@ -1,6 +1,6 @@
 <template>
-  <!--  <div>
-        <div id="pspdfkit" style="width: 100%; height: 100vh;"></div>
+  <div>
+    <div id="pspdfkit" style="width: 100%; height: 100vh;"></div>
     <div v-lazy-container="{ selector: 'img' }">
       <img class="w-[200px] h-[200px]" :data-loading="loadimage"
         data-src="https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/svg/about/Frame3.svg">
@@ -24,8 +24,8 @@
       <span v-if="loading">Update...</span>
       <span v-else>Update Data Aution</span>
     </Button>
-  </div> -->
-  <div class="h-screen m-auto flex flex-col items-center justify-center">
+  </div>
+  <!--  <div class="h-screen m-auto flex flex-col items-center justify-center">
     <div class="mt-32">
       <h2>Upload File</h2>
       <input type="file" multiple accept=".jpg, .jpeg,.png,.webp" @change="onFileChange">
@@ -126,6 +126,38 @@
     </div>
     <button v-show="images.length > 0" @click="uploadImages" class="btn bg-primary   rounded-lg w-fit">Upload</button>
 
+  </div> -->
+  <div v-if="!loading" id="demo">
+    <div @click="ordenarPhotos">Sorby Images</div>
+    <div v-for="category in categories" :key="category.id" @drop="onDrop($event, category.id)" class="droppable"
+      @dragover.prevent @dragenter.prevent>
+      <h4>{{ category.title }}</h4>
+      <div v-if="category.id == 0" class="w-full">
+        <div v-if="categories[0].children.length === 0" :key="index">
+          <div class="w-full h-[400px] flex justify-center items-center  bg-white rounded-lg shadow-lg">
+            <div :class="showAnimation > -1 ? 'contend-drag' : ''" @dragover.prevent
+              class="  border-dashed border-2  flex-col gap-4 p-5 h-[70%] w-1/2 flex justify-center items-center  bg-[#6d53b01c] border-[#6d53b0b6]">
+              <div class="effecto-camera">
+                <img class="!w-[80px] !h-[80px]" src="../assets/img/png/photo-camera.png" alt="">
+                <img class="!w-[80px] !h-[80px]" src="../assets/img/png/photo-camera.png" alt="">
+                <img class="!w-[80px] !h-[80px]" src="../assets/img/png/photo-camera.png" alt="">
+              </div>
+
+              <p class=" font-semibold text-lg  text-[#6d53b0] capitalize ">Drag with mouse to sort images</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="category.children.length > 0" class="child">
+        <div v-for="(item, index) in category.children.filter((x) => x.categoryId === category.id)" :key="item.id"
+          :class="`animate-delay-${index}00 animate-duration-${(index) + 1}000`" @dragend="dragEnd"
+          @dragstart="onDragStart($event, item, index)" class="draggable animate-ease-in-out animate-fade-up "
+          draggable="true">
+          <img :src="bucket + item.img" alt="">
+        </div>
+      </div>
+    </div>
+    <!--   {{ categories }} -->
   </div>
 </template>
 
@@ -139,6 +171,7 @@ import loadimage from '../assets/img/jpg/loading.gif'
 import errorimage from '../assets/img/jpg/error.png'
 import { useAuctionStore } from "@/stores/auctions";
 import { useStoreFile } from "@/stores/uploader";
+import { toast } from "vue3-toastify";
 export default {
   components: {
     loadimage,
@@ -156,7 +189,52 @@ export default {
     const storeFile = useStoreFile()
     const porcertanje = ref(0)
     const powerValue = ref(computed(() => { return storeFile.progressUpload }))
+    const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
+    const arrayEmpty = ref([])
+    const showAnimation = ref(-1)
+    const categories = ref([
+      {
+        id: 0,
+        title: "Fotos Ordenadas",
+        children: [],
+      },
+      {
+        id: 1,
+        title: "Fotos aleatoria",
+        children: [],
+      },
+    ])
+    const onDrop = (e, categoryId) => {
+      const itemId = parseInt(e.dataTransfer.getData("itemId"));
+      const id = categoryId === 0 ? 1 : 0
+      const child = categories.value[id].children.find(c => c.id === itemId)
+      child.categoryId = categoryId;
+      removeFromList(id, itemId)
+      addToList(categoryId, child)
+    }
+    const addToList = (categoryId, child) => {
+      categories.value[categoryId].children = [...categories.value[categoryId].children, child];
+      /*  const updatedHero = hero.filter(item => item.id !== 1);
+       console.log('arrayEmpty.value', arrayEmpty.value) */
+    }
+    const dragEnd = (ev) => {
+      showAnimation.value = -1
+    }
+    const addClass = (e) => {
+      console.log('e', e)
+      showAnimation.value = e.target.textContent
 
+    }
+    const removeFromList = (id, itemId) => {
+      categories.value[id].children = categories.value[id].children.filter(c => c.id !== itemId);
+    }
+    const onDragStart = (e, item, index) => {
+      console.log('hola')
+      e.dataTransfer.dropEffect = "move";
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("itemId", item.id.toString());
+      showAnimation.value = index
+    }
     const arrayUpload = ref([])
     const loadingUploadImages = ref(false)
     function removeImage(index) {
@@ -298,10 +376,61 @@ export default {
         id_aution.value = null;
       }
     }
+    const getDataAution = async (id) => {
+      loading.value = true
+      try {
+        let res = await store.getAutionById({ uuid: "665098ad611c4dcd82bb7493" })
+        if (res) {
+          let newArray = [];
+          newArray = res.data.vehicleDetails.exteriorPhotos.map((img, index) => {
+            let newObjet = {
+              id: index,
+              img,
+              categoryId: 1
+            }
+            return newObjet
+          })
+          if (newArray.length > 0) {
+
+            for (let index = 0; index < newArray.length; index++) {
+              const element = newArray[index];
+              arrayEmpty.value.push({
+                item: element.id
+              })
+
+            }
+            categories.value[1].children = newArray
+            loading.value = false
+            console.log('PEPITOOOOOOOO', categories.value[1].children)
+          }
+        }
+      } catch (error) {
+        loading.value = false
+        console.log('error', error)
+      }
+
+    }
+    const ordenarPhotos = () => {
+      console.log('categories.value[1].children.length', categories.value[1].children.length)
+      if (categories.value[1].children.length !== 0) {
+        toast("The video exceeds 100mb", {
+          type: "error",
+        });
+      }
+
+      console.log('categories', categories.value)
+
+    }
     watch(powerValue, async (newQuestion, oldQuestion) => {
       porcertanje.value = newQuestion
     })
-    onMounted(async () => { })
+    watch(showAnimation.value, async (newQuestion, oldQuestion) => {
+      console.log('newQuestion', newQuestion)
+    })
+    onMounted(async () => {
+      getDataAution()
+
+    })
     return {
       loadimage,
       errorimage,
@@ -316,24 +445,129 @@ export default {
       uploadImages,
       loadingUploadImages,
       arrayUpload,
-      porcertanje
+      porcertanje,
+      onDrop,
+      addToList,
+      removeFromList,
+      onDragStart,
+      categories,
+      bucket,
+      getDataAution,
+      arrayEmpty,
+      ordenarPhotos,
+      addClass,
+      showAnimation,
+      dragEnd
     };
   },
 };
 </script>
 
-<style>
+<style scoped>
 .app {
   text-align: center;
 }
 
+#demo {
+  margin-top: 200px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.droppable {
+  width: 90%;
+  padding: 15px;
+  border-radius: 5px;
+  /*  background: #2c3e50; */
+  margin-bottom: 10px;
+}
+
+.droppable h4 {
+  color: white;
+}
+
+.contend-drag .effecto-camera img:nth-child(1) {
+  transform: translateY(-20px);
+
+}
+
+.contend-drag .effecto-camera img:nth-child(2) {
+  position: absolute;
+  opacity: 0.4;
+  right: -50px;
+  top: 0px;
+  transform: rotate(11deg);
+  z-index: 10;
+  filter: grayscale(1);
+
+}
+
+.contend-drag .effecto-camera img:nth-child(3) {
+  position: absolute;
+  opacity: 0.4;
+  left: -50px;
+  top: 0px;
+  transform: rotate(350deg);
+  z-index: 10;
+  filter: grayscale(1);
+
+}
+
+.effecto-camera {
+  position: relative
+}
+
+.effecto-camera img:nth-child(1) {
+  position: relative;
+  z-index: 10;
+  transition: 0.5s all ease-in;
+}
+
+.effecto-camera img:nth-child(2) {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 10px;
+  transform: rotate(11deg);
+  z-index: 10;
+  transition: all 0.5s ease-out;
+  transform: translateY(-20px);
+}
+
+.effecto-camera img:nth-child(3) {
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  top: 10px;
+  transform: rotate(350deg);
+  z-index: 10;
+  transition: all 0.5s ease-out;
+  transform: translateY(-20px);
+}
+
+.draggable h5 {
+  margin: 0;
+}
+
+.child {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+  gap: 10px;
+  max-height: 40vh;
+  overflow: auto;
+}
+
 img {
-  width: 150px;
+  width: 100%;
   height: 150px;
   border-radius: 10px;
   margin: auto;
   display: block;
-  margin-bottom: 10px;
+  object-fit: cover;
 }
 
 /* 

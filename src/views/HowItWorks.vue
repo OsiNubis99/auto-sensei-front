@@ -167,123 +167,127 @@
             </div>
         </div> -->
         <div class="flex flex-col lg:flex-row  p-2 justify-center mt-10 items-center gap-5">
-            <div class="bg-white p-5 max-w-xl   shadow-lg flex rounded-2xl flex-col gap-4 justify-start">
-                <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
-                    <path
-                        d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
-                        fill="#6D53B0" />
-                </svg>
-                <p>I was worried about selling my 2018 Mazda CX-5, but <span class="text-[#6D53B0]"> AutoSensei made it
-                        incredibly
-                        simple. </span> Their comprehensive
-                    listing service attracted many potential dealers, and the platform's security measures ensured a
-                    safe and
-                    smooth
-                    sale.
-                </p>
-                <div>
-                    <div class="py-4">
-                        <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
-                            :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
-                            :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
-                        </star-rating>
-                    </div>
-                    <div class="flex w-full justify-between items-center">
-                        <div class="flex  gap-2 items-center">
-                            <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                                <img class="w-full h-full  rounded-full object-cover"
-                                    src="../assets/img/png/SarahJohnson.png" alt="">
-                            </div>
-                            <div>
-                                <p class=" font-semibold ">Sarah Johnson</p>
-                                <p>2017 Honda CR-V</p>
-                            </div>
+            <div
+                class="grid grid-cols-1 place-content-center place-items-center md:grid-cols-2 lg:grid-cols-3  p-2  mt-10  gap-5">
+                <div
+                    class="bg-white p-5 max-w-xl w-full h-full  shadow-lg flex rounded-2xl flex-col gap-2  justify-between ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
+                        <path
+                            d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
+                            fill="#6D53B0" />
+                    </svg>
+                    <p>I was worried about selling my 2018 Mazda CX-5, but <span class="text-[#6D53B0]"> AutoSensei made
+                            it
+                            incredibly
+                            simple. </span> Their comprehensive
+                        listing service attracted many potential dealers, and the platform's security measures ensured a
+                        safe and
+                        smooth
+                        sale.
+                    </p>
+                    <div>
+                        <div class="py-4">
+                            <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
+                                :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
+                                :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
+                            </star-rating>
                         </div>
-                        <!-- <div>
-                            <img class="w-[50px] h-[50px]  rounded-full object-cover"
-                                src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
-                                alt="">
-                        </div> -->
+                        <div class="flex w-full justify-between items-center">
+                            <div class="flex  gap-2 items-center">
+                                <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
+                                    <img class="w-full h-full  rounded-full object-cover"
+                                        src="../assets/img/png/SarahJohnson.png" alt="">
+                                </div>
+                                <div>
+                                    <p class=" font-semibold ">Sarah Johnson</p>
+                                    <p>2017 Honda CR-V</p>
+                                </div>
+                            </div>
+                            <!--  <div>
+              <img class="w-[50px] h-[50px]  rounded-full object-cover"
+                src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
+                alt="">
+            </div> -->
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="bg-white p-5 max-w-xl  shadow-lg flex rounded-2xl flex-col gap-4 justify-start">
-                <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
-                    <path
-                        d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
-                        fill="#6D53B0" />
-                </svg>
-                <p>I was worried about selling my 2018 Mazda CX-5, but <span class="text-[#6D53B0]"> AutoSensei made it
-                        incredibly
-                        simple. </span> Their comprehensive
-                    listing service attracted many potential dealers, and the platform's security measures ensured a
-                    safe and
-                    smooth
-                    sale.
-                </p>
-                <div>
-                    <div class="py-4">
-                        <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
-                            :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
-                            :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
-                        </star-rating>
-                    </div>
-                    <div class="flex w-full justify-between items-center">
-                        <div class="flex  gap-2 items-center">
-                            <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                                <img class="w-full h-full rounded-full object-cover"
-                                    src="../assets/img/png/MikeThompson.png" alt="">
-                            </div>
-                            <div>
-                                <p class=" font-semibold ">Mike Thompson</p>
-                                <p>2016 Toyota Corolla</p>
-                            </div>
+                <div
+                    class="bg-white p-5 max-w-xl w-full h-full shadow-lg flex rounded-2xl flex-col gap-2  justify-between ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
+                        <path
+                            d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
+                            fill="#6D53B0" />
+                    </svg>
+                    <p>AutoSensei.ca helped me get the best value for my 2017 Honda CR-V. The platform's auction got me
+                        a fair deal.
+                        <span class="text-[#6D53B0]"> AutoSensei made it
+                            incredibly
+                            simple. </span>
+                    </p>
+                    <div>
+                        <div class="py-4">
+                            <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
+                                :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
+                                :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
+                            </star-rating>
                         </div>
-                        <!--  <div>
-                            <img class="w-[50px] h-[50px]  rounded-full object-cover"
-                                src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
-                                alt="">
-                        </div> -->
+                        <div class="flex w-full justify-between items-center">
+                            <div class="flex  gap-2 items-center">
+                                <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
+                                    <img class="w-full h-full rounded-full object-cover"
+                                        src="../assets/img/png/MikeThompson.png" alt="">
+                                </div>
+                                <div>
+                                    <p class=" font-semibold ">Mike Thompson</p>
+                                    <p>2016 Toyota Corolla</p>
+                                </div>
+                            </div>
+                            <!--  <div>
+              <img class="w-[50px] h-[50px]  rounded-full object-cover"
+                src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
+                alt="">
+            </div> -->
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="bg-white p-5 max-w-xl  shadow-lg flex rounded-2xl flex-col gap-4 justify-start">
-                <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
-                    <path
-                        d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
-                        fill="#6D53B0" />
-                </svg>
-                <p>I was worried about selling my 2018 Mazda CX-5, but <span class="text-[#6D53B0]"> AutoSensei made it
-                        incredibly
-                        simple. </span> Their comprehensive
-                    listing service attracted many potential dealers, and the platform's security measures ensured a
-                    safe and
-                    smooth
-                    sale.
-                </p>
-                <div>
-                    <div class="py-4">
-                        <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
-                            :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
-                            :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
-                        </star-rating>
-                    </div>
-                    <div class="flex w-full justify-between items-center">
-                        <div class="flex  gap-2 items-center">
-                            <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                                <img class=" w-full h-full  object-top  object-cover"
-                                    src="../assets/img/png/JamesBrown.png" alt="">
-                            </div>
-                            <div>
-                                <p class=" font-semibold ">James Brown</p>
-                                <p>2017 Nissan Rogue</p>
-                            </div>
+                <div
+                    class="bg-white p-5 max-w-xl w-full h-full shadow-lg flex rounded-2xl flex-col gap-2  justify-between ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
+                        <path
+                            d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
+                            fill="#6D53B0" />
+                    </svg>
+                    <p>AutoSensei auction was a game-changer in selling my 2017 Nissan Rogue. The detailed listing
+                        options and
+                        extensive reach helped me find the right buyer quickly.<span class="text-[#6D53B0]"> AutoSensei
+                            made it
+                            incredibly
+                            simple. </span>
+                    </p>
+                    <div>
+                        <div class="py-4">
+                            <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
+                                :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
+                                :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
+                            </star-rating>
                         </div>
-                        <!-- <div>
-                            <img class="w-[50px] h-[50px]  rounded-full object-cover"
-                                src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
-                                alt="">
-                        </div> -->
+                        <div class="flex w-full justify-between items-center">
+                            <div class="flex  gap-2 items-center">
+                                <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
+                                    <img class=" w-full h-full  object-top  object-cover"
+                                        src="../assets/img/png/JamesBrown.png" alt="">
+                                </div>
+                                <div>
+                                    <p class=" font-semibold ">James Brown</p>
+                                    <p>2017 Nissan Rogue</p>
+                                </div>
+                            </div>
+                            <!--   <div>
+              <img class="w-[50px] h-[50px]  rounded-full object-cover"
+                src="https://s3-alpha-sig.figma.com/img/1abf/395b/180c2cd1a0003ed5cc7d419a4e27ffcf?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FhytE0VSmxwsVP0o2N0-nSjUH3AU4pGWFpElvS90kq~-RbccSQziqbAtEkcI6cnUFe1~qO3LjzPEqKaUBriTqs6LuloD6nlgkgDM6rTW7dmynC4U5DS758LczaeJJn-f7oO~dBwGjDEnGNMVWfOP65BxHIz5gtPN6POJ2xyN2Dfiz3xXIQXINDcbTpxSouETbv6PNKE6V8HFNezb1MHO5ASK~9sce6iLbvkR7GRkqO8Tu6m5guvX1e7FJEnZ~bpNbxjU-M11yau3ZIoylWbLFf4DwKxAUQuYVDopRMNycpnN6GtVosoSdXgBnqys~IvKaIp9awAaj62ciJFboLQlVQ__"
+                alt="">
+            </div> -->
+                        </div>
                     </div>
                 </div>
             </div>

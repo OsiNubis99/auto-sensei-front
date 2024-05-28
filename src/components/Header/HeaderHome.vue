@@ -327,7 +327,7 @@
                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                     alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                    {{ store.userData.seller.firstName }} {{ store.userData.seller.lastName }}
+                                    {{ store.userData?.seller?.firstName }} {{ store.userData?.seller?.lastName }}
                                 </p>
                             </div>
                             <div @click="goAccount" v-else class="flex items-center gap-2">
@@ -337,7 +337,7 @@
                                     src="https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA="
                                     alt="">
                                 <p class="text-white text-sm font-semibold truncate  w-[150px]">
-                                    {{ store.userData?.dealer?.firstName }} {{ store.userData.dealer.lastName }}
+                                    {{ store.userData?.dealer?.firstName }} {{ store.userData?.dealer?.lastName }}
                                 </p>
                             </div>
                             <div @click="logout" class="flex gap-2">

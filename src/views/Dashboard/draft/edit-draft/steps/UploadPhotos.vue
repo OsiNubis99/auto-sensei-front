@@ -1189,6 +1189,7 @@ export default {
             props.saveData(string)
         }
         const viewPhoto = (photo) => {
+            console.log('photo', photo)
             statusModalViewImage.openModal({ active: true, img: photo })
         }
 

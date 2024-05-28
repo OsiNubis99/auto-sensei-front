@@ -14,7 +14,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import StarRating from 'vue-star-rating'
 import VueLazyload from '@jambonn/vue-lazyload'
-import loadimage from './assets/img/jpg/image.jpg'
+import loadimage from './assets/img/jpg/loading.gif'
 import errorimage from './assets/img/jpg/error.png'
 const app = createApp(App)
 
@@ -34,7 +34,7 @@ app.use(VueLazyload, {
     preLoad: 1.3,
     loading: loadimage,
     attempt: 1,
-    listenEvents: [ 'scroll' ]
+    listenEvents: ['scroll']
 })
 utils(app);
 
