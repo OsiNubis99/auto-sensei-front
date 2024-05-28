@@ -71,6 +71,15 @@ const routes = [
       },
 
       {
+        path: "/order-by-photos/:id",
+        name: "order-by-photos",
+        component: () => import('../views/Dashboard/order-by-photos/Main.vue'),
+        props: true,
+        meta: {
+          hideNavbar: true,
+        }
+      },
+      {
         path: "/action-details-admin/:id",
         name: "action-details-admin",
         component: () => import('../views/Dashboard/action-details/Main.vue'),

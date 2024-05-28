@@ -234,8 +234,8 @@
                                                 </div>
                                             </td>
                                             <div class="flex h-full py-4 px-6 justify-center gap-4 ">
-                                                <td
-                                                    class="w-[50%] justify-end text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
+                                                <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'w-full 2xl:grid-cols-4' : ' w-[50%] lg:grid-cols-3'"
+                                                    class="w-full flex  2xl:grid place-items-center  text-sm  gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                                     <RouterLink
                                                         :to="{ name: 'action-details-admin', params: { id: aution?._id } }"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
@@ -247,6 +247,7 @@
                                                         </svg>
                                                         Detail
                                                     </RouterLink>
+
                                                     <button @click="deleteUserAuction(aution)"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -257,9 +258,45 @@
                                                         </svg>
                                                         <p class="text-error">Remove</p>
                                                     </button>
+                                                    <RouterLink
+                                                        :class="aution?.vehicleDetails?.exteriorPhotos?.length > 0 ? 'visible' : ' invisible '"
+                                                        :to="{ name: 'order-by-photos', params: { id: aution?._id } }"
+                                                        class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                        <svg width="15px" height="15px" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke="#CCCCCC"
+                                                                stroke-width="0.99"></g>
+                                                            <g id="SVGRepo_iconCarrier">
+                                                                <path
+                                                                    d="M4.5 3.5L4.85355 3.14645C4.65829 2.95118 4.34171 2.95118 4.14645 3.14645L4.5 3.5ZM1.5 1H13.5V0H1.5V1ZM14 1.5V13.5H15V1.5H14ZM13.5 14H1.5V15H13.5V14ZM1 13.5V1.5H0V13.5H1ZM1.5 14C1.22386 14 1 13.7761 1 13.5H0C0 14.3284 0.671573 15 1.5 15V14ZM14 13.5C14 13.7761 13.7761 14 13.5 14V15C14.3284 15 15 14.3284 15 13.5H14ZM13.5 1C13.7761 1 14 1.22386 14 1.5H15C15 0.671573 14.3284 0 13.5 0V1ZM1.5 0C0.671573 0 0 0.671574 0 1.5H1C1 1.22386 1.22386 1 1.5 1V0ZM0.5 11H14.5V10H0.5V11ZM0.853553 7.85355L4.85355 3.85355L4.14645 3.14645L0.146447 7.14645L0.853553 7.85355ZM4.14645 3.85355L11.1464 10.8536L11.8536 10.1464L4.85355 3.14645L4.14645 3.85355ZM10.5 5C10.2239 5 10 4.77614 10 4.5H9C9 5.32843 9.67157 6 10.5 6V5ZM11 4.5C11 4.77614 10.7761 5 10.5 5V6C11.3284 6 12 5.32843 12 4.5H11ZM10.5 4C10.7761 4 11 4.22386 11 4.5H12C12 3.67157 11.3284 3 10.5 3V4ZM10.5 3C9.67157 3 9 3.67157 9 4.5H10C10 4.22386 10.2239 4 10.5 4V3Z"
+                                                                    fill="#000000"></path>
+                                                            </g>
+                                                        </svg>
+                                                        Photos
+                                                    </RouterLink>
+                                                    <button @click="openModalBits(aution)"
+                                                        v-if="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live'"
+                                                        class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                stroke-linejoin="round"></g>
+                                                            <g id="SVGRepo_iconCarrier">
+                                                                <path
+                                                                    d="M7 3V21M7 3L11 7M7 3L3 7M14 3H21M14 9H19M14 15H17M14 21H15"
+                                                                    stroke="#000000" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                </path>
+                                                            </g>
+                                                        </svg>
+                                                        <p>Bits</p>
+                                                    </button>
                                                 </td>
-                                                <td
-                                                    class="w-[50%] justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
+                                                <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'w-[20%]' : ' w-[50%]'"
+                                                    class=" justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
                                                     <template
                                                         v-if="aution.status !== 'completed' && aution.status !== 'reviewed' && aution.status !== 'drop off' && aution.status !== 'bids completed'">
                                                         <button
@@ -276,8 +313,14 @@
                                                         </button>
                                                     </template>
 
-                                                    <div v-else
-                                                        class="px-4 py-2   rounded-lg bg-white shadow-lg flex justify-center items-center">
+                                                    <div v-else :class="[
+        aution.status == 'completed' && 'bg-[#05a54b] text-white',
+        aution.status == 'drop Off' && 'bg-[#0b1107] text-white',
+        aution.status == 'reviewed' && 'bg-[#0b1107] text-white',
+        aution.status == 'bids completed' && 'bg-[#fbdb17]',
+        aution.status == 'live' && 'bg-[#1f94f0] text-white'
+    ]
+        " class="px-4 py-2   rounded-lg  shadow-lg flex justify-center items-center">
                                                         <p class="capitalize "> {{ aution.status }}</p>
 
                                                     </div>
@@ -349,6 +392,7 @@
                 </div>
             </div>
         </div>
+        <ModalDetailsBitsVue v-if="statusModalView.isActive" />
     </template>
 </template>
 <script>
@@ -356,7 +400,12 @@ import { ref, watch, computed, onMounted } from "vue";
 import { useAuctionStore } from "@/stores/auctions";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from 'vue-router'
+import ModalDetailsBitsVue from "../../../components/Modals/ModalDetailsBits/ModalDetailsBits.vue";
+import { ModalDetailsBits } from '@/stores/modalDetailsBits';
 export default {
+    components: {
+        ModalDetailsBitsVue
+    },
     setup() {
         const router = useRouter()
         const route = useRoute();
@@ -370,6 +419,7 @@ export default {
         const current = ref(1)
         const pageSize = ref(10)
         const numberPage = ref(0)
+        const statusModalView = ModalDetailsBits()
         const counterData = ref({
             draft: 0,
             unapproved: 0,
@@ -427,9 +477,9 @@ export default {
                 loading.value = false
             }
         }
-        onMounted(() => {
-            index()
-        })
+        const openModalBits = (aution) => {
+            statusModalView.openModal({ active: true, data: aution })
+        }
         const order = (string) => {
 
 
@@ -538,7 +588,9 @@ export default {
                 current.value++;
             }
         }
-
+        onMounted(() => {
+            index()
+        })
         return {
             store,
             deleteUserAuction,
@@ -556,7 +608,10 @@ export default {
             next,
             order,
             current,
-            numberPage
+            numberPage,
+            statusModalView,
+            openModalBits
+
         };
     },
 };

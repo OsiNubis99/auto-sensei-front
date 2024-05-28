@@ -247,7 +247,7 @@
                                                 <img v-if="dealerBit.participant.dealer.picture"
                                                     class="w-full shadow-lg rounded-lg h-full object-cover"
                                                     :src="bucket + dealerBit.participant.dealer.picture" alt="">
-                                                <img class=" shadow-xl w-full rounded-lg object-cover " v-else
+                                                <img class=" shadow-xl w-full h-full rounded-lg object-cover " v-else
                                                     src="@/assets/img/jpg/image.jpg" alt="">
                                             </div>
                                             <div class="flex gap-1 p-2 flex-col items-start">
@@ -279,7 +279,9 @@
                                                     <p class=" truncate w-[150px] md:w-fit font-semibold">{{
             dealerBit.participant.dealer.name }}</p>
                                                     <p class="text-[10px] md:text-lg whitespace-pre">
-                                                        {{ moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h: mm: ssa') }}</p>
+                                                        {{
+        moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h:mm: ssa')
+    }}</p>
                                                 </template>
 
                                             </div>
