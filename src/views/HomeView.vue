@@ -524,7 +524,7 @@ export default {
             break;
         }
       } else {
-        await router.push({ path: '/login/sellers' })
+        await router.push({ path: '/signup/sellers' })
 
       }
     }
