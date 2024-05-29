@@ -278,7 +278,7 @@
               </div>
               <div>
                 <p class=" font-semibold ">Sarah Johnson</p>
-                <p>2017 Honda CR-V</p>
+                <p>2018 Mazda CX-5</p>
               </div>
             </div>
             <!--  <div>
@@ -314,7 +314,7 @@
               </div>
               <div>
                 <p class=" font-semibold ">Mike Thompson</p>
-                <p>2016 Toyota Corolla</p>
+                <p>2017 Honda CR-V</p>
               </div>
             </div>
             <!--  <div>
