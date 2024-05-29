@@ -2503,6 +2503,13 @@ input.check-toggle-round-flat:checked + label:after {
   h4 {
     font-size: 18px !important;
   }
+  .paragraph {
+    font-size: initial !important;
+    margin: 10px !important;
+  }
+  .paragraph-title {
+    font-size: initial !important;
+  }
   .line-svg-home {
     position: absolute;
     z-index: -10;
@@ -2542,7 +2549,7 @@ input.check-toggle-round-flat:checked + label:after {
   .card {
     margin-top: 100px;
     margin-bottom: 100px;
-    height: 6300px;
+    /*  height: 6300px; */
     width: 290px;
     border-radius: 30px;
     background-color: #333541;
