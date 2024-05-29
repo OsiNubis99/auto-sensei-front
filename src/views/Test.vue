@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <div id="pspdfkit" style="width: 100%; height: 100vh;"></div>
     <div v-lazy-container="{ selector: 'img' }">
       <img class="w-[200px] h-[200px]" :data-loading="loadimage"
@@ -24,7 +24,7 @@
       <span v-if="loading">Update...</span>
       <span v-else>Update Data Aution</span>
     </Button>
-  </div>
+  </div> -->
   <!--  <div class="h-screen m-auto flex flex-col items-center justify-center">
     <div class="mt-32">
       <h2>Upload File</h2>
@@ -127,7 +127,7 @@
     <button v-show="images.length > 0" @click="uploadImages" class="btn bg-primary   rounded-lg w-fit">Upload</button>
 
   </div> -->
-  <div v-if="!loading" id="demo">
+  <!--  <div v-if="!loading" id="demo">
     <div @click="ordenarPhotos">Sorby Images</div>
     <div v-for="category in categories" :key="category.id" @drop="onDrop($event, category.id)" class="droppable"
       @dragover.prevent @dragenter.prevent>
@@ -157,7 +157,28 @@
         </div>
       </div>
     </div>
-    <!--   {{ categories }} -->
+  </div> -->
+  <div class="w-full h-screen mt-64">
+
+    <h1>{{ countDownTimer(5) }}</h1>
+
+
+    <div class=" absolute bg-[#fbffee34] px-2 py-4 rounded-xl shadow-md w-[20%] top-40 right-4 flex flex-col gap-4 ">
+      <div v-for="(item, index) in notificaciones" :key="item.id"
+        :class="itemRemove?.id === item?.id ? '  opacity-0 bg-error  ' : ''"
+        class=" bg-white rounded-lg flex p-2 gap-4 flex-col items-start justify-center transition-all ease-in duration-500  shadow-lg ">
+        <p> {{ item.message }} </p>
+        <p>{{ countDownTimer(item.duration) }}</p>
+        <svg @click="deleteNotification(item)" xmlns="http://www.w3.org/2000/svg"
+          class=" w-6 h-6  absolute right-4  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#000">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+
+
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -192,6 +213,10 @@ export default {
     const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
     const arrayEmpty = ref([])
     const showAnimation = ref(-1)
+    const countDown = ref(null)
+    const addItem = ref(5)
+    const itemRemove = ref(null)
+    const notificaciones = ref([])
     const categories = ref([
       {
         id: 0,
@@ -269,7 +294,63 @@ export default {
       }
       createImage(files);
     }
+    const counterDelete = (duration) => {
 
+    }
+    const deleteNotification = (item) => {
+      itemRemove.value = item
+
+      for (let index = 0; index < notificaciones.value.length; index++) {
+        const element = notificaciones.value[index];
+        setTimeout(() => {
+          notificaciones.value = notificaciones.value.filter(noti => noti.id !== item.id)
+        }, 1000);
+        console.log('element', element)
+
+      }
+
+      /*   let res = notificaciones.value.filter(noti => noti.id !== item.id)
+  
+        notificaciones.value = res */
+    }
+    const additemArray = () => {
+      if (addItem.value > 0) {
+        setTimeout(() => {
+          addItem.value -= 1
+          notificaciones.value.push(
+            {
+              id: addItem.value,
+              message: 'Nueva Hola',
+              duration: 5
+            }
+          )
+          additemArray()
+        }, 1000)
+      }
+    }
+    function time() {
+
+    }
+    function timer(duration) {
+      let n = duration;
+      let res = setInterval(() => {
+        if (n === 0) {
+          clearInterval(res)
+        }
+        n--;
+      }, 1000)
+      console.log('res', res)
+    }
+    const countDownTimer = (item) => {
+      var n = null
+      countDown.value = item
+      if (countDown.value > 0) {
+        setTimeout(() => {
+          countDown.value -= 1
+        }, 1000)
+        return countDown.value
+      }
+    }
     const uploadImages = async () => {
       loadingUploadImages.value = true
       if (images.value.length === 0) {
@@ -421,14 +502,23 @@ export default {
       console.log('categories', categories.value)
 
     }
+    watch(notificaciones.value, async (newQuestion, oldQuestion) => {
+      console.log('SOKET NOTIFICACIONES',)
+      countDownTimer(newQuestion.slice(-1).pop())
+    })
     watch(powerValue, async (newQuestion, oldQuestion) => {
       porcertanje.value = newQuestion
     })
     watch(showAnimation.value, async (newQuestion, oldQuestion) => {
+      if (newQuestion) {
+
+        countDownTimer(newQuestion)
+      }
       console.log('newQuestion', newQuestion)
     })
     onMounted(async () => {
       getDataAution()
+      additemArray()
 
     })
     return {
@@ -457,7 +547,14 @@ export default {
       ordenarPhotos,
       addClass,
       showAnimation,
-      dragEnd
+      dragEnd,
+      countDown,
+      notificaciones,
+      deleteNotification,
+      itemRemove,
+      counterDelete,
+      countDownTimer,
+      timer
     };
   },
 };
