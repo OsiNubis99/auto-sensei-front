@@ -871,7 +871,7 @@
 </div> -->
         <div class="flex gap-6">
             <div class="flex flex-col ">
-                <p class=" font-semibold text-[13px]   md:text-xl ">Files: {{ form.images.length }}</p>
+
                 <p class=" text-[10px] md:text-base">Upload up to 30 photos of your vehicle. Please be transparent with
                     photos
                     outlining damages, imperfections, & condition of the vehicle. Taking pictures of the tires tread,
@@ -889,7 +889,15 @@
                 </p>
             </div>
         </div>
+        <div class="flex flex-col justify-start  items-start ">
+            <p class=" font-semibold text-[13px]   md:text-lg ">Please review the detailed vehicle image guide again.
+            </p>
+            <button
+                class=" btn bg-transparent  border-[#E0E0E0] flex justify-center !py-1 mt-2 px-4 border rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 "
+                @click="openModalGuide">Guide</button>
+        </div>
         <template v-if="!loadingUploadImages">
+            <p class=" font-semibold text-[13px]   md:text-xl ">Files: {{ form.images.length }}</p>
             <div v-if="form?.images?.length > 0"
                 class="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 lg:px-3 scroll-custom w-full m-auto pt-6 gap-6 h-fit   lg:max-h-[65vh] lg:overflow-y-auto overflow-x-hidden">
                 <div class="flex w-full flex-col items-center " v-for="(image, index) in form.images">
@@ -990,6 +998,7 @@
         <ModalLaunchVue :form="form" :modalLaunch="createAutions" />
         <ModalImageCustomVue v-if="statusModalImage?.isActive" :form="form" />
         <ModalViewImageVue v-if="statusModalViewImage?.isActive" :form="form" />
+        <ModalGuidePhotosVue v-if="statusModalGuide?.isActive" />
     </div>
 </template>
 <script>
@@ -998,9 +1007,11 @@ import { toast } from "vue3-toastify";
 import ModalLaunchVue from "../../../../../components/Modals/ModalLaunch/ModalLaunchVue.vue";
 import ModalImageCustomVue from "../../../../../components/Modals/ModalImageCustom/ModalImageCustom.vue";
 import ModalViewImageVue from "../../../../../components/Modals/ModalViewImage/ModalViewImage.vue";
+import ModalGuidePhotosVue from "@/components/Modals/ModalGuidePhotos/ModalGuidePhotos.vue";
 import { ModalLaunch } from '@/stores/modalLaunch';
 import { ModalImageCustom } from '@/stores/modalImageCustom';
 import { ModalViewImage } from '@/stores/modalViewImage';
+import { ModalGuidePhotos } from '@/stores/modalGuidePhotos';
 export default {
     props: {
         op: {
@@ -1031,7 +1042,8 @@ export default {
     components: {
         ModalLaunchVue,
         ModalImageCustomVue,
-        ModalViewImageVue
+        ModalViewImageVue,
+        ModalGuidePhotosVue
     },
     setup(props) {
 
@@ -1043,6 +1055,7 @@ export default {
         let isPlaying = ref(false)
         const statusModal = ModalLaunch()
         const statusModalImage = ModalImageCustom()
+        const statusModalGuide = ModalGuidePhotos()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const statusModalViewImage = ModalViewImage()
         const loadingUploadImages = ref(false)
@@ -1188,6 +1201,10 @@ export default {
         const createAutions = (string) => {
             props.saveData(string)
         }
+        const openModalGuide = () => {
+
+            statusModalGuide.openModal({ isActive: true })
+        }
         const viewPhoto = (photo) => {
             console.log('photo', photo)
             statusModalViewImage.openModal({ active: true, img: photo })
@@ -1248,6 +1265,9 @@ export default {
 
             }
         })
+        onMounted(() => {
+            openModalGuide()
+        })
         return {
             date,
             form,
@@ -1268,7 +1288,9 @@ export default {
             removeImage,
             createImage,
             onFileChange,
-            loadingUploadImages
+            loadingUploadImages,
+            openModalGuide,
+            statusModalGuide
 
         };
     },

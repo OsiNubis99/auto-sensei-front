@@ -55,8 +55,14 @@
                         class="btn  font-semibold shadow-md capitalize  ">
                         Cancelled ({{ counterData.canceled }})
                     </RouterLink>
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'rejected' } }"
+                        @click="changeSeccion('rejected')"
+                        :class="stateTable == 'rejected' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
+                        class="btn  font-semibold shadow-md capitalize  ">
+                        Rejected ({{ counterData.rejected }})
+                    </RouterLink>
                 </div>
-                <div class="flex  items-center gap-3">
+                <!--   <div class="flex  items-center gap-3">
                     <button class="flex gap-2 rounded-md py-1 px-2 bg-white items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 16 17" fill="none">
                             <path
@@ -73,7 +79,7 @@
                         </svg>
                         <p class="!m-0">Sort</p>
                     </button>
-                </div>
+                </div> -->
             </div>
             <div class="flex p-5 flex-col">
                 <div class="overflow-x-auto shadow-md sm:rounded-lg">
@@ -258,6 +264,7 @@
                                                         </svg>
                                                         <p class="text-error">Remove</p>
                                                     </button>
+
                                                     <RouterLink
                                                         :class="aution?.vehicleDetails?.exteriorPhotos?.length > 0 ? 'visible' : ' invisible '"
                                                         :to="{ name: 'order-by-photos', params: { id: aution?._id } }"
@@ -276,6 +283,8 @@
                                                         </svg>
                                                         Photos
                                                     </RouterLink>
+
+
                                                     <button @click="openModalBits(aution)"
                                                         v-if="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live'"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
@@ -295,10 +304,10 @@
                                                         <p>Bits</p>
                                                     </button>
                                                 </td>
-                                                <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'w-[20%]' : ' w-[50%]'"
+                                                <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'w-[50%]' : ' w-[50%]'"
                                                     class=" justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
                                                     <template
-                                                        v-if="aution.status !== 'completed' && aution.status !== 'reviewed' && aution.status !== 'drop off' && aution.status !== 'bids completed'">
+                                                        v-if="aution.status !== 'completed' && aution.status !== 'reviewed' && aution.status !== 'drop off' && aution.status !== 'bids completed' && aution.status !== 'rejected'">
                                                         <button
                                                             v-if="aution.status !== 'upcoming' && aution.status !== 'live' && aution.status !== 'completed' && aution.status !== 'draft'"
                                                             @click="confirmAutions(aution)"
@@ -311,6 +320,7 @@
                                                             class="flex gap-1 items-center border p-2 bg-error text-white rounded-md border-[#E0E0E0]">
                                                             Reject
                                                         </button>
+
                                                     </template>
 
                                                     <div v-else :class="[
@@ -324,6 +334,11 @@
                                                         <p class="capitalize "> {{ aution.status }}</p>
 
                                                     </div>
+                                                    <button @click="luachAution()"
+                                                        v-if="aution.status == 'rejected' || aution.status == 'bids completed' || aution.status == 'upcoming'"
+                                                        class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                        Launch
+                                                    </button>
                                                 </td>
                                             </div>
 
@@ -427,6 +442,7 @@ export default {
             live: 0,
             completed: 0,
             canceled: 0,
+
         })
         const stateTable = ref('')
         const index = async () => {
@@ -445,7 +461,7 @@ export default {
                             break;
                         case 'upcoming':
                             stateTable.value = 'upcoming'
-                            dataTable.value = store.upcoming
+                            dataTable.value = store.upcomingAmin
                             break;
                         case 'live':
                             stateTable.value = 'live'
@@ -460,15 +476,20 @@ export default {
                             stateTable.value = 'canceled'
                             dataTable.value = store.canceled
                             break;
+                        case 'rejected':
+                            stateTable.value = 'rejected'
+                            dataTable.value = store.rejected
+                            break;
                         default:
                             break;
                     }
                     counterData.value.draft = store.draft.length
                     counterData.value.unapproved = store.unapproved.length
-                    counterData.value.upcoming = store.upcoming.length
+                    counterData.value.upcoming = store.upcomingAmin.length
                     counterData.value.live = store.live.length
                     counterData.value.completed = store.completed.length
                     counterData.value.canceled = store.canceled.length
+                    counterData.value.rejected = store.rejected.length
                     numberPage.value = Math.ceil(dataTable.value.length / 10)
                     loading.value = false
                 }
@@ -588,6 +609,13 @@ export default {
                 current.value++;
             }
         }
+        const luachAution = () => {
+            try {
+
+            } catch (error) {
+
+            }
+        }
         onMounted(() => {
             index()
         })
@@ -610,7 +638,8 @@ export default {
             current,
             numberPage,
             statusModalView,
-            openModalBits
+            openModalBits,
+            luachAution
 
         };
     },
