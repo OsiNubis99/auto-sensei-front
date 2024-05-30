@@ -16,7 +16,7 @@
                     <div class="h-full md:pb-24 md:p-4 overflow-x-hidden flex gap-3 flex-col px-2 overflow-y-auto ">
                         <template v-for="(dealerBit, index) in statusModalView.aution?.bids" :key="index">
                             <div
-                                :class="index == 0 && statusModalView.aution?.status == 'bids completed' ? 'border-[2px] p-2 border-[#05A54B] rounded-lg' : 'border-[#F0F0F0]  border-b'">
+                                :class="index == 0 && (statusModalView.aution?.status == 'bids completed' || statusModalView.aution?.status == 'completed' || statusModalView.aution?.status == 'drop off' || statusModalView.aution?.status == 'reviewed') ? 'border-[2px] p-2 border-[#05A54B] rounded-lg' : 'border-[#F0F0F0]  border-b'">
                                 <div class="flex md:pr-4  md:py-3 pb-0 justify-between ">
                                     <div class="flex ">
                                         <div class=" w-[50px] h-[40px]  md:h-[60px] md:w-[60px]">
@@ -27,7 +27,8 @@
                                                 src="@/assets/img/jpg/image.jpg" alt="">
                                         </div>
                                         <div class="flex  p-2 flex-col items-start">
-                                            <template v-if="statusModalView.aution?.status == 'bids completed'">
+                                            <template
+                                                v-if="(statusModalView.aution?.status == 'bids completed' || statusModalView.aution?.status == 'completed' || statusModalView.aution?.status == 'drop off' || statusModalView.aution?.status == 'reviewed') && index == 0">
                                                 <div class="flex gap-2 items-center">
                                                     <p v-if="dealerBit?.participant?.dealer?.name"
                                                         class=" text-xs md:text-base md:font-semibold capitalize w-[70px] md:w-auto truncate ">
@@ -71,13 +72,13 @@
                                         </div>
                                     </div>
                                     <p class="font-semibold text-sm mt-7 md:mt-0 md:text-[1.5rem]">${{
-        dealerBit.amount }}</p>
+                                        dealerBit.amount }}</p>
                                 </div>
-                                <RouterLink v-if="index == 0 && statusModalView.aution?.status == 'bids completed'"
+                                <!--  <RouterLink v-if="index == 0 && statusModalView.aution?.status == 'bids completed'"
                                     :to="{ name: 'inbox-seller', query: { id: statusModalView.aution?._id + '-' + statusModalView.aution?.bids[0].participant._id } }"
                                     class="w-full btn border hover:bg-primary transition-all ease-in duration-300  hover:text-white py-2 rounded-lg md:mt-4 border-[#F0F0F0] ">
                                     Contact
-                                    Buyer</RouterLink>
+                                    Buyer</RouterLink> -->
                             </div>
 
                         </template>

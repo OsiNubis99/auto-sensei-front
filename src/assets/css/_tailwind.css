@@ -666,6 +666,7 @@ input.check-toggle-round-flat:checked + label:after {
 
 .contend-drag .effecto-camera img:nth-child(1) {
   transform: translateY(-20px);
+  filter: contrast(1.5) brightness(1);
 }
 
 .contend-drag .effecto-camera img:nth-child(2) {
@@ -675,7 +676,7 @@ input.check-toggle-round-flat:checked + label:after {
   top: 0px;
   transform: rotate(11deg);
   z-index: 10;
-  filter: grayscale(1);
+  filter: blur(2px) grayscale(1);
 }
 
 .contend-drag .effecto-camera img:nth-child(3) {
@@ -685,7 +686,7 @@ input.check-toggle-round-flat:checked + label:after {
   top: 0px;
   transform: rotate(350deg);
   z-index: 10;
-  filter: grayscale(1);
+  filter: blur(2px) grayscale(1);
 }
 
 .effecto-camera {

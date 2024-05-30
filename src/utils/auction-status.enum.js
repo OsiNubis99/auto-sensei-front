@@ -9,5 +9,6 @@ export const enumState = {
     dropOff: 'drop off',
     reviewed: 'reviewed',
     bidsCompleted: 'bids completed',
+    rejected: 'rejected'
 
 }
