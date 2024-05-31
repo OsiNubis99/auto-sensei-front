@@ -85,11 +85,11 @@
                     AutoSensei.
                     All Rights Reserved.</p>
                 <div class="custom-footer-border flex flex-col md:flex-row lg:gap-20">
-                    <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
+                    <RouterLink to="/terms-conditions" :class="path == 'about' ? 'text-black' : 'text-white'"
                         class="font-OpenSauce-footer">
                         <p>Terms of Service</p>
                     </RouterLink>
-                    <RouterLink to="" :class="path == 'about' ? 'text-black' : 'text-white'"
+                    <RouterLink to="/terms-conditions" :class="path == 'about' ? 'text-black' : 'text-white'"
                         class="font-OpenSauce-footer">
                         <p> Privacy Policy</p>
                     </RouterLink>

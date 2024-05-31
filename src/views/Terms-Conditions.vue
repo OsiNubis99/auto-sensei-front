@@ -6,7 +6,7 @@
                 <img class=" m-auto w-20 h-20" src="@/assets/img/png/termsicon.png" alt="">
                 <div class="flex px-10 pt-10 pb-10 justify-center items-center gap-4">
                     <div class="w-[90%] border border-[#e5e5e5]"></div>
-                    <h1 class=" w-full primary-heading">Terms & Conditions</h1>
+                    <h2 class=" w-full !text-white primary-">Terms & Conditions</h2>
                     <div class="w-[90%] border border-[#e5e5e5]"></div>
                 </div>
 

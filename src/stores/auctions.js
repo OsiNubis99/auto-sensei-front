@@ -15,6 +15,8 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         canceled: [],
         currentBids: [],
         autionById: [],
+        upcomingAmin: [],
+        rejected: [],
         stats: null
     }),
     actions: {
@@ -32,7 +34,9 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                             return date
                         })
                         this.draft = response.data.filter((item) => item.status == enumState.draft)
+                        this.rejected = response.data.filter((item) => item.status == enumState.rejected)
                         this.unapproved = response.data.filter((item) => item.status == enumState.unapproved)
+                        this.upcomingAmin = response.data.filter((item) => item.status == enumState.upcoming)
                         this.upcoming = response.data.filter((item) => item.status == enumState.upcoming || item.status == enumState.unapproved)
                         this.live = response.data.filter((item) => item.status == enumState.live)
                         this.completed = response.data.filter((item) =>
@@ -265,6 +269,18 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     })
                     .then((response) => {
                         console.log('response', response)
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
+        launchAuction({ uuid }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/auction/force-launch/${uuid}`)
+                    .then((response) => {
                         resolve(response);
                     })
                     .catch((error) => {

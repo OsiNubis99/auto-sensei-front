@@ -666,6 +666,7 @@ input.check-toggle-round-flat:checked + label:after {
 
 .contend-drag .effecto-camera img:nth-child(1) {
   transform: translateY(-20px);
+  filter: contrast(1.5) brightness(1);
 }
 
 .contend-drag .effecto-camera img:nth-child(2) {
@@ -675,7 +676,7 @@ input.check-toggle-round-flat:checked + label:after {
   top: 0px;
   transform: rotate(11deg);
   z-index: 10;
-  filter: grayscale(1);
+  filter: blur(2px) grayscale(1);
 }
 
 .contend-drag .effecto-camera img:nth-child(3) {
@@ -685,7 +686,7 @@ input.check-toggle-round-flat:checked + label:after {
   top: 0px;
   transform: rotate(350deg);
   z-index: 10;
-  filter: grayscale(1);
+  filter: blur(2px) grayscale(1);
 }
 
 .effecto-camera {
@@ -723,7 +724,18 @@ input.check-toggle-round-flat:checked + label:after {
 .draggable h5 {
   margin: 0;
 }
-
+.animation-fixez {
+  padding: 25px 0px;
+  animation: infinte-subida 1s ease-in-out alternate-reverse infinite;
+}
+@keyframes infinte-subida {
+  0% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
 .child {
   overflow: auto;
   padding: 20px;
@@ -2503,6 +2515,13 @@ input.check-toggle-round-flat:checked + label:after {
   h4 {
     font-size: 18px !important;
   }
+  .paragraph {
+    font-size: initial !important;
+    margin: 10px !important;
+  }
+  .paragraph-title {
+    font-size: initial !important;
+  }
   .line-svg-home {
     position: absolute;
     z-index: -10;
@@ -2542,7 +2561,7 @@ input.check-toggle-round-flat:checked + label:after {
   .card {
     margin-top: 100px;
     margin-bottom: 100px;
-    height: 6300px;
+    /*  height: 6300px; */
     width: 290px;
     border-radius: 30px;
     background-color: #333541;

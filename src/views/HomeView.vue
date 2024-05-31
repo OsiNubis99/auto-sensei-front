@@ -155,19 +155,24 @@
     <h2 class="text-2xl md:text-4xl text-center  p-5 leading-[40px] md:leading-[50px]"> <strong> People who
         have
         sold their <br> car </strong> with AutoSensei</h2>
-    <div class="p-5  grid grid-cols-1 md:grid-cols-2 2xl:flex gap-6 items-baseline justify-center">
-      <div class="flex items-center max-w-sm  justify-center flex-col ">
+    <div class="p-5  grid grid-cols-1 md:grid-cols-3 2xl:flex gap-6 items-baseline justify-center">
+      <div class="flex items-center md:max-w-sm  justify-center flex-col ">
         <div @click="opneModalVideo(1, 'Mei Zhang - Ford Focus ST 2017')"
-          class="bg-[#6D53B0] w-full  transition ease-in-out   hover:-translate-y-1 hover:scale-110 duration-500  cursor-pointer rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
+          class="bg-[#6D53B0] w-full  transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500  cursor-pointer rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
           <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
             viewBox="0 0 340 192" fill="none">
             <path
               d="M119.964 -121.692L-5.1401 25.9068C-8.4269 29.7846 -2.83739 35.8206 1.35258 32.9423C56.8308 -5.16843 136.849 -50.0551 169.479 -31.6807C219.261 -3.6475 33.4169 71.5223 65.9444 110.958C91.9665 142.507 217.901 45.2908 277.615 -7.26062C235.312 52.6536 158.006 177.781 187.206 198.976C223.707 225.47 325.163 43.4544 350.889 60.055"
               stroke="#1A1A1A" stroke-width="44" />
           </svg>
+
+
           <img
             class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full border-2  md:border-8 border-base-black "
             src="../assets/img/png/meizhang.png" alt="">
+
+          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px]  right-5 top-0  z-50 cursor-pointer " />
+
         </div>
         <div class="mt-4 p-2 text-center">
           <p class="font-bold text-xl ">Mei Zhang</p>
@@ -180,7 +185,7 @@
         </div>
 
       </div>
-      <div class="flex items-center max-w-sm  justify-center flex-col ">
+      <div class="flex items-center md:max-w-sm  justify-center flex-col ">
         <div @click="opneModalVideo(2, 'Tasha Williams - 2018 Ford Fusion')"
           class="bg-[#6D53B0] w-full cursor-pointer transition ease-in-out   hover:-translate-y-1 hover:scale-110 duration-500 rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
           <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
@@ -192,6 +197,7 @@
           <img
             class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full  border-2 md:border-8 border-base-black "
             src="../assets/img/png/tashawillians.png" alt="">
+          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px]  right-5 top-0  z-50 cursor-pointer " />
         </div>
         <div class="mt-4 p-2 text-center">
           <p class="font-bold text-xl ">Tasha Williams</p>
@@ -202,7 +208,7 @@
         </div>
 
       </div>
-      <div class="flex items-center max-w-sm  justify-center flex-col ">
+      <div class="flex items-center md:max-w-sm  justify-center flex-col ">
         <div @click="opneModalVideo(3, 'Alex Martinez - 2014 Chevrolet Traverse')"
           class="bg-[#6D53B0] w-full cursor-pointer transition ease-in-out   hover:-translate-y-1 hover:scale-110 duration-500 rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
           <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
@@ -214,6 +220,7 @@
           <img
             class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full  border-2 md:border-8 border-base-black "
             src="../assets/img/png/alexmartinez.png" alt="">
+          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px]  right-5 top-0  z-50 cursor-pointer " />
         </div>
         <div class="mt-4 p-2 text-center">
           <p class="font-bold text-xl ">Alex Martinez</p>
