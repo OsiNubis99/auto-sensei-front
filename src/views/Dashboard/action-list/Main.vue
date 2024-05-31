@@ -334,7 +334,7 @@
                                                         <p class="capitalize "> {{ aution.status }}</p>
 
                                                     </div>
-                                                    <button @click="luachAution()"
+                                                    <button @click="openModalLaunch(aution)"
                                                         v-if="aution.status == 'rejected' || aution.status == 'bids completed' || aution.status == 'upcoming'"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         Launch
@@ -407,7 +407,81 @@
                 </div>
             </div>
         </div>
+
         <ModalDetailsBitsVue v-if="statusModalView.isActive" />
+        <div v-show="activeAution"
+            class="fixed inset-0 flex items-end md:items-center md:justify-center bg-base-black  bg-opacity-50">
+            <div class="max-w-xl w-full  overflow-hidden  bg-white rounded-lg shadow-xl animation-fade-modal">
+                <div class="h-full">
+                    <div class="md:p-4 p-2 rounded-t-lg  bg-[#22282F] flex items-center justify-between">
+                        <p class=" text-md md:text-xl text-white">Launch Auction</p>
+                        <svg @click="activeAution = false" xmlns="http://www.w3.org/2000/svg"
+                            class=" w-5 md:w-8 md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div v-if="loadingAuction" class=" flex flex-col h-full py-28 mb-7 gap-5 items-start  p-5 w-full">
+                        <div class="  w-full h-full flex justify-center items-center">
+                            <div class="text-indigo-700">
+                                <div class="h-[80px] w-[80px] ">
+                                    <div class="animate-bounce">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861"
+                                            stroke="#fff" stroke-width="0" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else class="w-full flex flex-col justify-center items-center  p-2 h-full">
+                        <p class="text-center font-Nohemi text-2xl ">Are you sure you want to activate this car?</p>
+                        <svg style="filter: drop-shadow(2px 4px 6px #0000002b);" class="w-[150px] animation-fixez"
+                            version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" overflow="visible"
+                            xml:space="preserve" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <g>
+                                    <rect y="0" fill="none" width="24" height="24"></rect>
+                                    <g transform="translate(1.000000, 1.000000)">
+                                        <polygon id="Fill-1" fill-rule="evenodd" fill="#C1F861"
+                                            points="8.8,20.8 13.2,20.8 13.2,19.2 8.8,19.2 "></polygon>
+                                        <polygon id="Fill-2" fill-rule="evenodd" fill="#C1F861"
+                                            points="11,20.8 13.2,20.8 13.2,19.2 11,19.2 "></polygon>
+                                        <polygon id="Fill-3" fill-rule="evenodd" fill="#C1F861"
+                                            points="18.7,22.2 21.6,14.1 17.7,11.9 15.3,19.3 16.7,22.2 "></polygon>
+                                        <polygon id="Fill-4" fill-rule="evenodd" fill="#C1F861"
+                                            points="17.7,11.9 15.3,19.3 16.7,22.2 "></polygon>
+                                        <polygon id="Fill-5" fill-rule="evenodd" fill="#C1F861"
+                                            points="3.3,22.2 0.4,14.1 4.3,11.9 6.7,19.3 5.3,22.2 "></polygon>
+                                        <polygon id="Fill-6" fill-rule="evenodd" fill="#C1F861"
+                                            points="4.3,11.9 6.7,19.3 5.3,22.2 "></polygon>
+                                        <path id="Fill-7" fill-rule="evenodd" fill="#C1F861"
+                                            d="M11,10.5c-1.4,0-2.5-1.1-2.5-2.5S9.6,5.5,11,5.5s2.5,1.1,2.5,2.5 S12.4,10.5,11,10.5L11,10.5z M11-0.2L5.8,5v5.5l2.3,8h5.8l2.3-8V5L11-0.2z">
+                                        </path>
+                                        <path id="Fill-9" fill-rule="evenodd" fill="#C1F861"
+                                            d="M11-0.2v5.8c1.4,0,2.5,1.1,2.5,2.5s-1.1,2.5-2.5,2.5v8h2.9l2.3-8V5 L11-0.2z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        <div class="flex w-full justify-center gap-10 mt-3 items-center">
+                            <button class="btn bg-primary rounded-lg" @click="luachAution()">Launch</button>
+                            <button class="btn  !border-[1px] !border-base-gray rounded-lg"
+                                @click="closetModalLaunch">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </template>
 </template>
 <script>
@@ -427,6 +501,7 @@ export default {
         const store = useAuctionStore()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const loading = ref(false)
+        const loadingAuction = ref(false)
         const orderName = ref(false)
         const orderCreate = ref(false)
         const orderActions = ref(false)
@@ -435,6 +510,7 @@ export default {
         const pageSize = ref(10)
         const numberPage = ref(0)
         const statusModalView = ModalDetailsBits()
+        const autionLaunch = ref(null)
         const counterData = ref({
             draft: 0,
             unapproved: 0,
@@ -445,6 +521,7 @@ export default {
 
         })
         const stateTable = ref('')
+        const activeAution = ref(false)
         const index = async () => {
             loading.value = true
             try {
@@ -609,10 +686,32 @@ export default {
                 current.value++;
             }
         }
-        const luachAution = () => {
+        const openModalLaunch = (data) => {
+            console.log('data', data)
+            autionLaunch.value = data
+            activeAution.value = true
+        }
+        const closetModalLaunch = () => {
+            autionLaunch.value = null
+            activeAution.value = false
+        }
+        const luachAution = async () => {
+            console.log('autionLaunch.value', autionLaunch.value)
             try {
-
+                loadingAuction.value = true
+                let res = await store.launchAuction({ uuid: autionLaunch.value._id })
+                console.log('res', res)
+                if (res) {
+                    loadingAuction.value = false
+                    activeAution.value = false
+                    index()
+                }
             } catch (error) {
+                console.log('error', error)
+                toast(error?.response?.data?.message[0] || error?.response?.data?.message || 'Error', {
+                    type: "error",
+                });
+                loadingAuction.value = false
 
             }
         }
@@ -639,7 +738,11 @@ export default {
             numberPage,
             statusModalView,
             openModalBits,
-            luachAution
+            luachAution,
+            openModalLaunch,
+            activeAution,
+            closetModalLaunch,
+            loadingAuction
 
         };
     },
