@@ -1,0 +1,1 @@
+import{P as a}from"./index-a9dcb4bf.js";const s=a("modalViewDetails",{state:()=>({isActive:!1,dataAutiont:null}),actions:{openModal({isActive:t,data:i}){this.isActive=t,this.dataAutiont=i},closeModal(t){this.isActive=t}}});export{s as M};

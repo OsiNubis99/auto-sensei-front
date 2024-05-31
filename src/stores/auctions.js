@@ -276,6 +276,18 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                     });
             });
         },
+        launchAuction({ uuid }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/auction/force-launch/${uuid}`)
+                    .then((response) => {
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
 
     },
 });
