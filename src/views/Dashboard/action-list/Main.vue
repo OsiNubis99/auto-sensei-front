@@ -2,7 +2,7 @@
     <div v-if="loading" class=" flex flex-col h-screen mb-7 gap-5 items-start  p-5 w-full">
         <div class="  w-full h-full flex justify-center items-center">
             <div class="text-indigo-700">
-                <div class="h-[80px] w-[80px] ">
+                <div class="h-12 w-12 md:h-[80px] md:w-[80px] ">
                     <div class="animate-bounce">
                         <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                             stroke-width="0" viewBox="0 0 16 16">
@@ -11,55 +11,61 @@
                             </path>
                         </svg>
                     </div>
-                    <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                    <p class=" text-base-gray text-xs md:text-base font-medium md:pl-2 ">Loading...</p>
                 </div>
             </div>
         </div>
     </div>
     <template v-else>
         <div class="mx-auto bg-[#F0F0F0] h-screen">
-            <div class="flex justify-between p-5">
-                <div class="flex gap-7">
+            <div class="flex justify-between p-2 md:p-5">
+                <div class="flex overflow-auto pb-4 gap-3 md:gap-7">
                     <RouterLink :to="{ name: 'action-list', query: { state: 'drafts' } }"
                         @click="changeSeccion('drafts')"
                         :class="stateTable == 'drafts' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
-                        class="btn font-semibold ">
+                        class="btn font-semibold  whitespace-pre ">
                         Drafts ({{ counterData.draft }})
                     </RouterLink>
                     <RouterLink :to="{ name: 'action-list', query: { state: 'unapproved' } }"
                         @click="changeSeccion('unapproved')"
                         :class="stateTable == 'unapproved' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
-                        class="btn  font-semibold shadow-md capitalize  ">
+                        class="btn  font-semibold  whitespace-pre shadow-md capitalize  ">
                         Unapproved ({{ counterData.unapproved }})
                     </RouterLink>
                     <RouterLink :to="{ name: 'action-list', query: { state: 'upcoming' } }"
                         @click="changeSeccion('upcoming')"
                         :class="stateTable == 'upcoming' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
-                        class="btn  font-semibold shadow-md capitalize  ">
+                        class="btn  font-semibold  whitespace-pre shadow-md capitalize  ">
                         Upcoming ({{ counterData.upcoming }})
                     </RouterLink>
                     <RouterLink :to="{ name: 'action-list', query: { state: 'live' } }" @click="changeSeccion('live')"
                         :class="stateTable == 'live' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
-                        class="btn  font-semibold shadow-md capitalize  ">
+                        class="btn  font-semibold  whitespace-pre shadow-md capitalize  ">
                         Live ({{ counterData.live }})
                     </RouterLink>
                     <RouterLink :to="{ name: 'action-list', query: { state: 'completed' } }"
                         @click="changeSeccion('completed')"
                         :class="stateTable == 'completed' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
-                        class="btn  font-semibold shadow-md capitalize  ">
+                        class="btn  font-semibold  whitespace-pre shadow-md capitalize  ">
                         Completed ({{ counterData.completed }})
                     </RouterLink>
                     <RouterLink :to="{ name: 'action-list', query: { state: 'canceled' } }"
                         @click="changeSeccion('canceled')"
                         :class="stateTable == 'canceled' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
-                        class="btn  font-semibold shadow-md capitalize  ">
+                        class="btn  font-semibold  whitespace-pre shadow-md capitalize  ">
                         Cancelled ({{ counterData.canceled }})
                     </RouterLink>
                     <RouterLink :to="{ name: 'action-list', query: { state: 'rejected' } }"
                         @click="changeSeccion('rejected')"
                         :class="stateTable == 'rejected' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
-                        class="btn  font-semibold shadow-md capitalize  ">
+                        class="btn  font-semibold  whitespace-pre shadow-md capitalize  ">
                         Rejected ({{ counterData.rejected }})
+                    </RouterLink>
+                    <RouterLink :to="{ name: 'action-list', query: { state: 'declined' } }"
+                        @click="changeSeccion('declined')"
+                        :class="stateTable == 'declined' ? 'bg-blue-dark text-primary' : 'bg-white text-blue-dark'"
+                        class="btn  font-semibold  whitespace-pre shadow-md capitalize  ">
+                        Declined ({{ counterData.declined }})
                     </RouterLink>
                 </div>
                 <!--   <div class="flex  items-center gap-3">
@@ -81,22 +87,15 @@
                     </button>
                 </div> -->
             </div>
-            <div class="flex p-5 flex-col">
+            <div class="flex p-2 md:p-5 flex-col">
                 <div class="overflow-x-auto shadow-md sm:rounded-lg">
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden ">
                             <table
                                 class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
                                 <template v-if="paginated.length > 0">
-                                    <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <thead class="bg-gray-100 hidden md:contents dark:bg-gray-700">
                                         <tr>
-                                            <th scope="col" class="p-4">
-                                                <div class="flex items-center">
-                                                    <input id="checkbox-all" type="checkbox"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                    <label for="checkbox-all" class="sr-only">checkbox</label>
-                                                </div>
-                                            </th>
                                             <th scope="col"
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] uppercase ">
                                                 <div class="flex items-center gap-1">
@@ -178,19 +177,12 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-[#E0E0E0] ">
+                                    <tbody class="bg-white flex flex-col md:contents divide-y divide-[#E0E0E0] ">
                                         <tr v-for="(  aution, index  ) in paginated" :key="aution?.id"
                                             :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''"
-                                            class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                            <td class="p-4 w-4">
-                                                <div class="flex items-center">
-                                                    <input id="checkbox-table-1" type="checkbox"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                    <label for="checkbox-table-1" class="sr-only">checkbox</label>
-                                                </div>
-                                            </td>
+                                            class="hover:bg-gray-100 grid md:table-row relative  dark:hover:bg-gray-700">
                                             <td
-                                                class="py-4 px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
+                                                class=" py-1 pt-4 md:pt-0 px-2 md:py-4 md:px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                                 <div class="w-10 h-10">
                                                     <img v-if="aution?.owner?.seller?.picture"
                                                         class="w-full shadow-md   rounded-full h-full object-cover"
@@ -207,69 +199,80 @@
         aution?.vehicleDetails?.vin }}</p>
                                                 </div>
                                             </td>
-                                            <td class="py-4 px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
+                                            <td
+                                                class=" py-1 px-2 md:py-4 md:px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
                                                 <p class="!m-0 font-extrabold capitalize">
                                                     {{ aution?.owner?.seller?.firstName }} {{
         aution?.owner?.seller?.lastName }}
                                                 </p>
-                                                <p class="!m-0"> {{ aution.city }}, {{ aution.province }}</p>
+                                                <p class="!m-0 truncate w-[200px] md:w-auto "> {{ aution.city }}, {{
+        aution.province }}
+                                                </p>
                                             </td>
-                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                            <td
+                                                class="flex gap-2 py-1 px-2 md:py-4 md:px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
 
                                                 <p class="p-0 !m-0"> {{ aution?.createDay }}</p>
                                                 <p class="p-0 !m-0">{{ aution?.createHour }}</p>
 
                                             </td>
-                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                            <td
+                                                class=" py-1 px-2 md:py-4 md:px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
                                                 <div v-if="aution?.vehicleStatus?.status == 'Paid OFF'"
                                                     class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#05A54B14] gap-2">
-                                                    <p class="text-[#05A54B] capitalize">PaidOff</p>
+                                                    <p class="text-[#05A54B]   text-xs md:text-[13px]  capitalize">
+                                                        PaidOff</p>
                                                 </div>
 
                                                 <div v-else-if="aution?.vehicleStatus?.status == 'Financed'"
                                                     class="relative w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#6D53B014] gap-2">
-                                                    <p class="text-[#6D53B0] capitalize">Financed</p>
+                                                    <p class="text-[#6D53B0]   text-xs md:text-[13px]  capitalize">
+                                                        Financed</p>
                                                 </div>
                                                 <div v-else-if="aution?.vehicleStatus?.status == 'Leased'"
                                                     class="relative  w-fit flex py-1 px-2 rounded-md justify-center items-center bg-[#1F94F014] gap-2">
-                                                    <p class="text-[#1F94F0] capitalize">Leased</p>
+                                                    <p class="text-[#1F94F0]   text-xs md:text-[13px]  capitalize">
+                                                        Leased</p>
                                                 </div>
                                                 <div v-else
                                                     class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#7b7b7b14] gap-2">
-                                                    <p class="text-[#FF333E] capitalize">there is no state</p>
+                                                    <p class="text-[#FF333E]   text-xs md:text-[13px]  capitalize">there
+                                                        is no state</p>
                                                 </div>
                                             </td>
-                                            <div class="flex h-full py-4 px-6 justify-center gap-4 ">
-                                                <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'w-full 2xl:grid-cols-4' : ' w-[50%] lg:grid-cols-3'"
-                                                    class="w-full flex  2xl:grid place-items-center  text-sm  gap-4 font-medium text-gray-900 whitespace-nowrap ">
+                                            <div
+                                                class="flex flex-wrap md:flex-nowrap h-full py-1 px-2 pb-3 md:py-4 md:px-6 md:justify-center gap-2 md:gap-4 ">
+                                                <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'md:w-full 2xl:grid-cols-4' : ' w-[50%]  lg:grid-cols-3'"
+                                                    class="w-full flex  2xl:grid place-items-center  text-sm  gap-4 font-medium text-gray-900 flex-wrap md:whitespace-nowrap ">
                                                     <RouterLink
                                                         :to="{ name: 'action-details-admin', params: { id: aution?._id } }"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[16px] "
                                                             viewBox="0 0 16 16" fill="none">
                                                             <path
                                                                 d="M8.00002 2C11.5947 2 14.5854 4.58667 15.2127 8C14.586 11.4133 11.5947 14 8.00002 14C4.40535 14 1.41469 11.4133 0.787354 8C1.41402 4.58667 4.40535 2 8.00002 2ZM8.00002 12.6667C9.35967 12.6664 10.6789 12.2045 11.7419 11.3568C12.8049 10.509 13.5486 9.32552 13.8514 8C13.5475 6.67554 12.8033 5.49334 11.7404 4.64668C10.6776 3.80003 9.35889 3.33902 8.00002 3.33902C6.64115 3.33902 5.32248 3.80003 4.2596 4.64668C3.19673 5.49334 2.45253 6.67554 2.14869 8C2.45142 9.32552 3.19514 10.509 4.25812 11.3568C5.3211 12.2045 6.64037 12.6664 8.00002 12.6667ZM8.00002 11C7.20437 11 6.44131 10.6839 5.8787 10.1213C5.31609 9.55871 5.00002 8.79565 5.00002 8C5.00002 7.20435 5.31609 6.44129 5.8787 5.87868C6.44131 5.31607 7.20437 5 8.00002 5C8.79567 5 9.55873 5.31607 10.1213 5.87868C10.6839 6.44129 11 7.20435 11 8C11 8.79565 10.6839 9.55871 10.1213 10.1213C9.55873 10.6839 8.79567 11 8.00002 11ZM8.00002 9.66667C8.44205 9.66667 8.86597 9.49107 9.17853 9.17851C9.49109 8.86595 9.66669 8.44203 9.66669 8C9.66669 7.55797 9.49109 7.13405 9.17853 6.82149C8.86597 6.50893 8.44205 6.33333 8.00002 6.33333C7.55799 6.33333 7.13407 6.50893 6.82151 6.82149C6.50895 7.13405 6.33335 7.55797 6.33335 8C6.33335 8.44203 6.50895 8.86595 6.82151 9.17851C7.13407 9.49107 7.55799 9.66667 8.00002 9.66667Z"
                                                                 fill="#0B1107" />
                                                         </svg>
-                                                        Detail
+
+                                                        <p class="text-xs md:text-[13px] ">Detail</p>
                                                     </RouterLink>
 
                                                     <button @click="deleteUserAuction(aution)"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[16px] "
                                                             viewBox="0 0 16 16" fill="none">
                                                             <path
                                                                 d="M2.66659 5.3335H13.3333V14.0002C13.3333 14.177 13.263 14.3465 13.138 14.4716C13.013 14.5966 12.8434 14.6668 12.6666 14.6668H3.33325C3.15644 14.6668 2.98687 14.5966 2.86185 14.4716C2.73682 14.3465 2.66659 14.177 2.66659 14.0002V5.3335ZM3.99992 6.66683V13.3335H11.9999V6.66683H3.99992ZM5.99992 8.00016H7.33325V12.0002H5.99992V8.00016ZM8.66659 8.00016H9.99992V12.0002H8.66659V8.00016ZM4.66659 3.3335V2.00016C4.66659 1.82335 4.73682 1.65378 4.86185 1.52876C4.98687 1.40373 5.15644 1.3335 5.33325 1.3335H10.6666C10.8434 1.3335 11.013 1.40373 11.138 1.52876C11.263 1.65378 11.3333 1.82335 11.3333 2.00016V3.3335H14.6666V4.66683H1.33325V3.3335H4.66659ZM5.99992 2.66683V3.3335H9.99992V2.66683H5.99992Z"
                                                                 fill="#FF333E" />
                                                         </svg>
-                                                        <p class="text-error">Remove</p>
+                                                        <p class="text-error text-xs md:text-[13px] ">Remove</p>
                                                     </button>
 
                                                     <RouterLink
                                                         :class="aution?.vehicleDetails?.exteriorPhotos?.length > 0 ? 'visible' : ' invisible '"
                                                         :to="{ name: 'order-by-photos', params: { id: aution?._id } }"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
-                                                        <svg width="15px" height="15px" viewBox="0 0 15 15" fill="none"
+                                                        <svg class="w-3 md:w-[16px] " viewBox="0 0 15 15" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
@@ -281,14 +284,15 @@
                                                                     fill="#000000"></path>
                                                             </g>
                                                         </svg>
-                                                        Photos
+                                                        <p class="text-xs md:text-[13px] ">Photos</p>
+
                                                     </RouterLink>
 
 
                                                     <button @click="openModalBits(aution)"
                                                         v-if="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live'"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
-                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                        <svg class="w-3 md:w-[16px] " viewBox="0 0 24 24" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
@@ -301,24 +305,27 @@
                                                                 </path>
                                                             </g>
                                                         </svg>
-                                                        <p>Bits</p>
+                                                        <p class="text-xs md:text-[13px] ">Bids ({{ aution?.bids?.length
+                                                            }})</p>
                                                     </button>
                                                 </td>
                                                 <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'w-[50%]' : ' w-[50%]'"
                                                     class=" justify-start text-sm flex gap-3 font-medium text-gray-900 whitespace-nowrap ">
                                                     <template
-                                                        v-if="aution.status !== 'completed' && aution.status !== 'reviewed' && aution.status !== 'drop off' && aution.status !== 'bids completed' && aution.status !== 'rejected'">
+                                                        v-if="aution.status !== 'completed' && aution.status !== 'reviewed' && aution.status !== 'drop off' && aution.status !== 'bids completed' && aution.status !== 'rejected' && aution.status !== 'declined'">
                                                         <button
                                                             v-if="aution.status !== 'upcoming' && aution.status !== 'live' && aution.status !== 'completed' && aution.status !== 'draft'"
                                                             @click="confirmAutions(aution)"
                                                             class="flex gap-1 bg-primary items-center border p-2 rounded-md border-[#E0E0E0]">
-                                                            Aprove
+                                                            <p class="text-xs md:text-[13px] ">Aprove</p>
+
                                                         </button>
                                                         <button
                                                             v-if="aution.status !== 'canceled' && aution.status !== 'draft'"
                                                             @click="rejetAutions(aution)"
                                                             class="flex gap-1 items-center border p-2 bg-error text-white rounded-md border-[#E0E0E0]">
-                                                            Reject
+                                                            <p class="text-xs md:text-[13px] ">Reject</p>
+
                                                         </button>
 
                                                     </template>
@@ -328,16 +335,23 @@
         aution.status == 'drop Off' && 'bg-[#0b1107] text-white',
         aution.status == 'reviewed' && 'bg-[#0b1107] text-white',
         aution.status == 'bids completed' && 'bg-[#fbdb17]',
-        aution.status == 'live' && 'bg-[#1f94f0] text-white'
+        aution.status == 'live' && 'bg-[#1f94f0] text-white',
+        aution.status == 'declined' && 'bg-error text-white',
+        aution.status == 'rejected' && 'bg-error text-white'
     ]
-        " class="px-4 py-2   rounded-lg  shadow-lg flex justify-center items-center">
-                                                        <p class="capitalize "> {{ aution.status }}</p>
+        " class="md:px-4 md:py-2 px-2 py-1 absolute top-2 right-2 md:sticky shadow-md  rounded-lg  md:shadow-lg flex justify-center items-center">
+                                                        <p
+                                                            class="capitalize  text-[9px] tracking-wider	 md:text-[13px] ">
+                                                            {{
+        aution.status
+    }}</p>
 
                                                     </div>
                                                     <button @click="openModalLaunch(aution)"
-                                                        v-if="aution.status == 'rejected' || aution.status == 'bids completed' || aution.status == 'upcoming'"
+                                                        v-if="aution.status == 'rejected' || aution.status == 'bids completed' || aution.status == 'upcoming' || aution.status == 'declined'"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
-                                                        Launch
+                                                        <p class="text-xs md:text-[13px] ">Launch</p>
+
                                                     </button>
                                                 </td>
                                             </div>
@@ -352,53 +366,77 @@
                         </div>
                     </div>
                 </div>
-                <div v-show="numberPage > 1"
+                <div v-show="numberPage.length > 1"
                     class="flex mt-7 items-center justify-between  rounded-lg bg-white px-4 py-3 sm:px-6">
-                    <div class="flex flex-1 justify-between sm:hidden">
-                        <a href="#"
-                            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
-                        <a href="#"
-                            class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+                    <div class="flex items-center flex-1 justify-between sm:hidden">
+                        <div :class="current > 1 && current <= numberPage.length ? '  bg-white  border border-gray-300 ' : 'pointer-events-none bg-[#bfbfbfa1] text-white '"
+                            @click="prev()"
+                            class="relative inline-flex items-center py-1 px-3 rounded-md  transition-all ease-out duration-700  md:px-4 md:py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <p class="text-xs">Previous</p>
+                        </div>
+                        <div class="flex">
+                            <div v-for="page in numberPage.slice(current - 1, current + 3)" :key="index">
+                                <div @click="next(page)"
+                                    :class="page == current ? 'bg-base-black text-primary  ' : 'bg-[#F0F0F0] hover:bg-base-black  hover:text-primary '"
+                                    class="relative py-1 px-2 cursor-pointer rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 md:px-4 md:py-2  transition-all ease-out duration-300   text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    <template v-if="page !== 0">
+                                        {{ page }}
+
+                                    </template>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div @click="next()"
+                            :class="current < numberPage.length ? '  bg-white  border border-gray-300 ' : 'pointer-events-none bg-[#bfbfbfa1] text-white '"
+                            class="relative ml-3 inline-flex items-center py-1 px-3 rounded-md border border-gray-300 bg-white md:px-4 md:py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <p class="text-xs">Next</p>
+
+                        </div>
                     </div>
                     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                         <div>
                             <p class="text-sm text-gray-700">
                                 Showing
-                                <span class="font-medium">1</span>
+                                <span class="font-medium"> {{ (current - 1) * pageSize + 1 }}</span>
                                 to
-                                <span class="font-medium">10</span>
+                                <span class="font-medium">{{ current * pageSize }}</span>
                                 of
-                                <span class="font-medium">{{ dataTable.length }}</span>
+                                <span class="font-medium">{{ current * pageSize }}</span>
                                 results
                             </p>
                         </div>
                         <div class="flex gap-3">
                             <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                                <div v-show="current > 1 && current <= numberPage" @click="prev()"
-                                    class="relative mr-2 inline-flex items-center rounded-lg px-2 py-2 text-gray-400 bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <div v-show="current > 1 && current <= numberPage.length" @click="prev()"
+                                    class="relative mr-2 inline-flex items-center cursor-pointer group hover:bg-base-black transition-all ease-out duration-300  rounded-lg px-2 py-2 text-gray-400 bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
                                     <span class="sr-only">Previous</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
-                                        fill="none">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="group-hover:fill-primary  fill-base-black" width="17" height="17"
+                                        viewBox="0 0 17 17" fill="none">
                                         <path
-                                            d="M5.71875 7.83312H13.8334V9.16645H5.71875L9.29475 12.7425L8.35208 13.6851L3.16675 8.49979L8.35208 3.31445L9.29475 4.25712L5.71875 7.83312Z"
-                                            fill="#0B1107" />
+                                            d="M5.71875 7.83312H13.8334V9.16645H5.71875L9.29475 12.7425L8.35208 13.6851L3.16675 8.49979L8.35208 3.31445L9.29475 4.25712L5.71875 7.83312Z" />
                                     </svg>
                                 </div>
-                                <div v-for="(page, index) in numberPage" :key="index">
+                                <div v-for="page in numberPage.slice(current - 1, current + 9)" :key="index">
                                     <div @click="next(page)"
-                                        :class="page == current ? 'bg-base-black text-primary ' : 'bg-[#F0F0F0]  text-gray-900 '"
-                                        class="relative cursor-pointer rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 px-4 py-2  text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                        {{ page }}
+                                        :class="page == current ? 'bg-base-black text-primary  ' : 'bg-[#F0F0F0] hover:bg-base-black  hover:text-primary '"
+                                        class="relative cursor-pointer rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 px-4 py-2  transition-all ease-out duration-300   text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        <template v-if="page !== 0">
+                                            {{ page }}
+
+                                        </template>
                                     </div>
                                 </div>
-                                <div v-show="current < numberPage" @click="next()"
-                                    class="relative inline-flex items-center rounded-lg px-2 py-2 text-gray-400  bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <div v-show="current < numberPage.length" @click="next()"
+                                    class="relative inline-flex items-center group cursor-pointer hover:bg-base-black transition-all ease-out duration-300 rounded-lg px-2 py-2 text-gray-400  bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
                                     <span class="sr-only">Next</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
-                                        fill="none">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="group-hover:fill-primary  fill-base-black" width="17" height="17"
+                                        viewBox="0 0 17 17" fill="none">
                                         <path
-                                            d="M11.2814 7.83312L7.70541 4.25712L8.64808 3.31445L13.8334 8.49979L8.64808 13.6851L7.70541 12.7425L11.2814 9.16645H3.16675V7.83312H11.2814Z"
-                                            fill="#0B1107" />
+                                            d="M11.2814 7.83312L7.70541 4.25712L8.64808 3.31445L13.8334 8.49979L8.64808 13.6851L7.70541 12.7425L11.2814 9.16645H3.16675V7.83312H11.2814Z" />
                                     </svg>
                                 </div>
                             </nav>
@@ -439,11 +477,11 @@
                         </div>
                     </div>
                     <div v-else class="w-full flex flex-col justify-center items-center  p-2 h-full">
-                        <p class="text-center font-Nohemi text-2xl ">Are you sure you want to activate this car?</p>
-                        <svg style="filter: drop-shadow(2px 4px 6px #0000002b);" class="w-[150px] animation-fixez"
-                            version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" overflow="visible"
-                            xml:space="preserve" fill="#000000">
+                        <p class="text-center font-Nohemi md:text-2xl ">Are you sure you want to activate this car?</p>
+                        <svg style="filter: drop-shadow(2px 4px 6px #0000002b);"
+                            class=" w-12 md:w-[150px] animation-fixez" version="1.1" baseProfile="tiny" id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 24 24" overflow="visible" xml:space="preserve" fill="#000000">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                             <g id="SVGRepo_iconCarrier">
@@ -508,7 +546,7 @@ export default {
         const dataTable = ref([])
         const current = ref(1)
         const pageSize = ref(10)
-        const numberPage = ref(0)
+        const numberPage = ref([])
         const statusModalView = ModalDetailsBits()
         const autionLaunch = ref(null)
         const counterData = ref({
@@ -557,6 +595,10 @@ export default {
                             stateTable.value = 'rejected'
                             dataTable.value = store.rejected
                             break;
+                        case 'declined':
+                            stateTable.value = 'declined'
+                            dataTable.value = store.declined
+                            break;
                         default:
                             break;
                     }
@@ -567,7 +609,11 @@ export default {
                     counterData.value.completed = store.completed.length
                     counterData.value.canceled = store.canceled.length
                     counterData.value.rejected = store.rejected.length
-                    numberPage.value = Math.ceil(dataTable.value.length / 10)
+                    counterData.value.declined = store.declined.length
+
+                    let counterPage = Math.ceil(dataTable.value.length / 10)
+                    numberPage.value = Array.apply(null, Array(counterPage))
+                        .map(function (y, i) { return i; });
                     loading.value = false
                 }
             } catch (error) {
@@ -742,7 +788,8 @@ export default {
             openModalLaunch,
             activeAution,
             closetModalLaunch,
-            loadingAuction
+            loadingAuction,
+            pageSize
 
         };
     },

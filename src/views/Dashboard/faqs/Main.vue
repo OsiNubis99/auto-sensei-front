@@ -1,10 +1,10 @@
 <template>
-    <div class="px-4 sm:px-6 lg:px-8 h-custom bg-[#F3F5F7] py-8 w-full max-w-9xl mx-auto">
-        <h1 class="text-4xl font-semibold mb-9 ">FAQ</h1>
-        <div class="grid grid-cols-2 gap-12">
+    <div class="md:px-4 relative sm:px-6 lg:px-8 overflow-hidden bg-[#F3F5F7] md:py-8 w-full max-w-9xl mx-auto">
+        <h1 class="text-4xl hidden md:block font-semibold mb-9 ">FAQ</h1>
+        <div class="grid  md:grid-cols-2 gap-12">
             <div v-if="isLoading" class="w-full h-[30%] absolute left-0 flex justify-center items-center">
                 <div class="text-indigo-700">
-                    <div class="h-[80px] w-[80px] ">
+                    <div class="h-[40px] w-[40px]  md:h-[80px] md:w-[80px] ">
                         <div class="animate-bounce">
                             <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                                 stroke-width="0" viewBox="0 0 16 16">
@@ -17,69 +17,98 @@
                     </div>
                 </div>
             </div>
-            <div v-else>
-                <div class="space-y-6">
+            <div v-else class="space-y-6 hidden md:block ">
+                <div class="mt-1">
+                    <label htmlFor="name" class="block text-sm font-medium text-gray-700">
+                        Question
+                    </label>
                     <div class="mt-1">
-                        <label htmlFor="name" class="block text-sm font-medium text-gray-700">
+                        <input name="question" type="text" v-model="payloadData.question" placeholder="Question"
+                            class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                    </div>
+                </div>
+                <div class="mt-1">
+                    <label htmlFor="name" class="block text-sm font-medium text-gray-700">
+                        Answer
+                    </label>
+                    <div class="mt-1">
+                        <input name="question" type="text" v-model="payloadData.answer" placeholder="Answer"
+                            class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                    </div>
+                </div>
+                <button v-if="!faqUpdate" class="btn mt-10 text-base-black bg-primary"
+                    @click="sendQuestion">Send</button>
+                <button v-else class="btn mt-10 text-base-black bg-primary" @click="updateQuestion">Update</button>
+            </div>
+            <div v-if="!isLoading"
+                class="px-4 inline-block md:hidden z-40 bg-white shadow-lg py-3 fixed md:sticky top-12">
+                <p class="text-md font-semibold ">FAQ</p>
+                <div class="flex gap-3">
+                    <div>
+                        <label htmlFor="name" class="block text-xs font-medium text-gray-700">
                             Question
                         </label>
-                        <div class="mt-1">
+                        <div>
                             <input name="question" type="text" v-model="payloadData.question" placeholder="Question"
                                 class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                         </div>
                     </div>
-                    <div class="mt-1">
-                        <label htmlFor="name" class="block text-sm font-medium text-gray-700">
+                    <div>
+                        <label htmlFor="name" class="block text-xs font-medium text-gray-700">
                             Answer
                         </label>
-                        <div class="mt-1">
+                        <div>
                             <input name="question" type="text" v-model="payloadData.answer" placeholder="Answer"
                                 class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                         </div>
                     </div>
-                    <button v-if="!faqUpdate" class="btn mt-10 text-base-black bg-primary"
-                        @click="sendQuestion">Send</button>
-                    <button v-else class="btn mt-10 text-base-black bg-primary" @click="updateQuestion">Update</button>
                 </div>
+
+                <button v-if="!faqUpdate" class="btn w-full mt-3 text-base-black bg-primary"
+                    @click="sendQuestion">Send</button>
+                <button v-else class="btn w-full mt-3 text-base-black bg-primary"
+                    @click="updateQuestion">Update</button>
             </div>
-            <div v-if="!isLoading" class="grid grid-cols-2 items-left gap-4  overflow-y-auto overflow-x-hidden max-h-[80vh] ">
+            <div v-if="!isLoading"
+                class="grid px-4 pt-10 mt-32 md:mt-0 md:grid-cols-2 items-left  custom-screen-faq  md:gap-4  overflow-y-auto overflow-x-hidden  ">
                 <div v-if="store.data.length > 0" v-for="(faq, index) in store.data" :key="index">
                     <div :class="`animate-fade-up  animate-ease-in-out  animate-delay-${2 - index}00`"
                         class="group outline-none h-fit accordion-section  border-[1px] rounded-xl bg-[#191F26] border-[#4D5865]"
                         tabindex="1">
                         <div
-                            class="group bg-gray-900 flex justify-between  px-4 py-3 items-center text-white transition ease duration-500 cursor-pointer pr-4 relative">
+                            class="group bg-gray-900 flex justify-between py-1 px-2  md:px-4 md:py-3 items-center text-white transition ease duration-500 cursor-pointer pr-4 relative">
                             <div
-                                class="group-focus:text-primary text-sm md:text-lg font-medium transition ease duration-500">
+                                class="group-focus:text-primary text-xs md:text-lg font-medium transition ease duration-500">
                                 {{ faq.question }}
                             </div>
                             <div class="flex justify-center items-center">
 
                                 <div
-                                    class="h-8 w-8 items-center inline-flex justify-center transform transition ease duration-500 group-focus:text-white group-focus:-rotate-180  mb-auto ml-auto  mr-2">
+                                    class=" w-4  md:h-8 md:w-8 items-center inline-flex justify-center transform transition ease duration-500 group-focus:text-white group-focus:-rotate-180  mb-auto ml-auto  mr-2">
                                     <iconArrow />
                                 </div>
-                                <div class="mr-4">
+                                <div class="mr-4 w-3">
                                     <iconDelete @click="deleteQuestion(faq)" />
                                 </div>
-                                <div>
+                                <div class="w-2">
                                     <iconPincel @click="updatective(faq)" />
                                 </div>
                             </div>
                         </div>
-                        <div class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-                            <p class="p-2  text-white text-justify">
+                        <div
+                            class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
+                            <p class="p-2  text-white text-xs text-justify">
                                 {{ faq.answer }}
                             </p>
                         </div>
                     </div>
                     <div
                         :class="`animate-fade-up mt-2 p-4 pt-0 flex justify-between items-center animate-ease-in-out  animate-delay-${2 - index}00`">
-                        <p class="text-[14px] font-semibold ">Create: <span class="font-normal  text-[12px]"> {{
-                            faq.createdAt }}</span>
+                        <p class="text-[12px] font-semibold ">Create: <span class="font-normal  text-[10px]"> {{
+                faq.createdAt }}</span>
                         </p>
-                        <p class="text-[14px] font-semibold ">Update: <span class="font-normal text-[12px] ">{{
-                            faq.createdAt }} </span>
+                        <p class="text-[12px] font-semibold ">Update: <span class="font-normal text-[10px] ">{{
+                faq.createdAt }} </span>
                         </p>
                     </div>
 
@@ -143,10 +172,10 @@ export default {
                     payloadData.value.question = ''
                     isLoading.value = false
                 }
-                 
+
             } catch (error) {
                 isLoading.value = false
-                 
+
 
             }
 
@@ -164,10 +193,10 @@ export default {
                         type: "success",
                     });
                 }
-                 
+
             } catch (error) {
                 isLoading.value = false
-                 
+
 
             }
 
@@ -197,11 +226,11 @@ export default {
                         type: "success",
                     });
                 }
-                 
+
             } catch (error) {
                 isLoading.value = false
                 faqUpdate.value = false
-                 
+
 
             }
 
@@ -227,5 +256,3 @@ export default {
 };
 </script>
 '
-
-  

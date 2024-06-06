@@ -1,15 +1,14 @@
 <template>
     <footer v-if="path != 'login' && path != 'signup'">
-        <div :class="path === 'about' ? 'bg-white  ' : 'bg-[#1D2228]  '" class="flex flex-col relative">
+        <div class="flex flex-col bg-[#1D2228]  relative">
 
             <div class="grid relative p-5 lg:p-14 lg:pb-20  lg:grid-cols-2">
                 <div class="flex flex-col gap-7">
                     <RouterLink to="/">
-                        <LogoIcon v-if="path !== 'about'" />
-                        <LogoBlack v-else />
+                        <LogoIcon />
+                        <!--   <LogoBlack v-else /> -->
                     </RouterLink>
-                    <p :class="path == 'about' ? 'text-black' : 'text-white'"
-                        class=" text-base font-normal font-OpenSauce-footer">
+                    <p class=" text-base font-normal font-OpenSauce-footer text-white">
                         AutoSensei revolutionizes car selling, providing a fast, <br>
                         stress-free process and top value via local dealership bids.
                     </p>
