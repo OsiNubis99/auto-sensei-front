@@ -74,7 +74,7 @@
                 <h1 class="text-3xl md:text-6xl  font-bold  text-center text-base-black">Frequently asked question</h1>
                 <p class="text-base-black text-sm pt-2 md:text-base ">Let’s us know how we can help</p>
             </div>
-            <div class="md:w-[50%] w-full h-96">
+            <div class="md:w-[50%] w-full ">
                 <div v-for="(faq, index) in store.data" :key="index">
                     <div class="group outline-none h-fit accordion-section mb-5 border-b-[1px] border-[#C2C2C2]"
                         tabindex="1">
