@@ -1,11 +1,9 @@
 <template>
     <header class="relative">
         <div v-show="store?.userData?.type == 0">
-            <nav class="lg:flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
-                <div class=" flex items-center">
+            <nav class=" lg:flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
+                <div class=" md:flex hidden  items-center">
                     <div class="flex gap-5 ">
-                        <IconSearch />
-                        <!-- <IconNotifications /> -->
                         <div class="relative ">
                             <IconUser @click="toggleAccount" class="cursor-pointer" />
                             <ul :class="openAccount ? 'block' : 'hidden'"
@@ -20,39 +18,59 @@
                     <div name="menu" @click="toggle()" class="text-[30px] cursor-pointer md:hidden">menu</div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <RouterLink :to="{ name: 'home' }" class="flex items-center gap-2">
-                        <LogoIcon class="w-[90%] md:w-full" />
-                    </RouterLink>
-                    <div
-                        class="navLinks duration-500 absolute md:static md:w-auto w-full md:h-auto h-[85vh]  flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
+                    <div class="flex w-full md:w-fit justify-between md:justify-normal items-center gap-2">
+                        <RouterLink :to="{ name: 'home' }" class=" ">
+                            <LogoIcon class="md:w-[90%] w-full" />
+
+                        </RouterLink>
+                        <button v-if="!opeNav" @click="openNavSlider"
+                            class="flex md:hidden items-center px-3 py-2 text-white  rounded text-teal-lighter  hover:text-white hover:border-white">
+                            <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <title>Menu</title>
+                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                            </svg>
+                        </button>
+                        <button v-else @click="closetNavSlider">
+                            <svg xmlns="http://www.w3.org/2000/svg" class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer"
+                                fill="none" viewBox="0 0 24 24" stroke="#fff">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div :class="opeNav ? 'bg-base-black left-0 absolute h-screen z-[100] ' : 'hidden md:block '"
+                        class="navLinks duration-500 transition-all ease-out md:static md:w-auto w-full md:h-auto   flex md:items-center gap-[1.5vw] top-[100%]  px-5 md:py-0 py-5 ">
                         <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-8">
 
-                            <RouterLink to="/inicio"
+                            <RouterLink to="/inicio" @click="closetNavSlider"
                                 :class="path == 'inicio' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4 !font-bold  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>My Account</p>
                             </RouterLink>
                             <RouterLink :to="{ name: 'action-list', query: { state: 'drafts' } }"
+                                @click="closetNavSlider"
                                 :class="path == 'action-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Auctions List</p>
                             </RouterLink>
-                            <RouterLink to="/dealer-list"
+                            <RouterLink to="/dealer-list" @click="closetNavSlider"
                                 :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Dealer List</p>
                             </RouterLink>
-                            <RouterLink to="/seller-list"
+                            <RouterLink to="/seller-list" @click="closetNavSlider"
                                 :class="path == 'seller-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Seller List</p>
                             </RouterLink>
-                            <RouterLink to="/settings"
+                            <RouterLink to="/settings" @click="closetNavSlider"
                                 :class="path == 'config-setting' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Settings</p>
                             </RouterLink>
                             <RouterLink to="/faqs" :class="path == 'faqs' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                                @click="closetNavSlider"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Faq</p>
                             </RouterLink>
@@ -60,6 +78,7 @@
                     </div>
                 </div>
             </nav>
+
         </div>
         <div v-if="store.userData.type == 1">
             <nav class="flex bg-base-black relative shadow-lg px-3 py-2 justify-between flex-row-reverse">
@@ -538,6 +557,7 @@ export default {
         const scrollPosition = ref(0)
         const data = ref({ soundurl: 'https://soundbible.com/mp3/Air%20Plane%20Ding-SoundBible.com-496729130.mp3' })
         const idInterval = ref(null)
+        const opeNav = ref(false)
         watch(notiAutions, async (newQuestion, oldQuestion) => {
             console.log('SOKET NOTIFICACIONES', newQuestion)
             var audio = new Audio(data.value.soundurl);
@@ -610,6 +630,12 @@ export default {
             open.value = false
 
         }
+        const openNavSlider = () => {
+            opeNav.value = true
+        }
+        const closetNavSlider = () => {
+            opeNav.value = false
+        }
         onMounted(() => {
             console.log('router', router)
             console.log('route', route)
@@ -635,7 +661,10 @@ export default {
             notiAutions,
             scrollPosition,
             show,
-            widthTime
+            widthTime,
+            opeNav,
+            openNavSlider,
+            closetNavSlider
 
         };
     },

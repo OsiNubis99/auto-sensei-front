@@ -17,6 +17,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
         autionById: [],
         upcomingAmin: [],
         rejected: [],
+        declined: [],
         stats: null
     }),
     actions: {
@@ -35,6 +36,7 @@ export const useAuctionStore = defineStore("useAuctiontore", {
                         })
                         this.draft = response.data.filter((item) => item.status == enumState.draft)
                         this.rejected = response.data.filter((item) => item.status == enumState.rejected)
+                        this.declined = response.data.filter((item) => item.status == enumState.declined)
                         this.unapproved = response.data.filter((item) => item.status == enumState.unapproved)
                         this.upcomingAmin = response.data.filter((item) => item.status == enumState.upcoming)
                         this.upcoming = response.data.filter((item) => item.status == enumState.upcoming || item.status == enumState.unapproved)

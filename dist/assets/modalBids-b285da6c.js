@@ -1,1 +1,0 @@
-import{P as t}from"./index-a9dcb4bf.js";const s=t("modalBids",{state:()=>({isActive:!1,data:null,finally:null,from:null,details:!1}),actions:{openModal(l){this.isActive=l.active,this.data=l.data,this.from=l.from,this.details=l.details},closeModal(l){this.isActive=l,this.data=null,this.finally=null,this.from=null,this.details=null}}});export{s as M};
