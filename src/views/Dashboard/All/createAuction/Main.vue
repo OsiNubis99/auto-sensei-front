@@ -229,7 +229,7 @@
                                         <div class="flex flex-col ">
                                             <p class="text-[13px] font-Nohemi md:text-xl "> Uploading
                                                 <strong>{{
-        arrayUpload?.length }}</strong> of <strong>{{ formData.images.length
+                                                    arrayUpload?.length }}</strong> of <strong>{{ formData.images.length
                                                     }}
                                                 </strong>
                                             </p>
@@ -622,6 +622,8 @@ export default {
 
         }
         const nextVehiclesDetails = async () => {
+
+            console.log('formData.value', formData.value)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'vehiclesDetails');
             if (Object.entries(invalid.value).length > 0) {
@@ -660,8 +662,7 @@ export default {
                 } else {
                     formData.value.color = formData.value.customColor
                 }
-                /*   formData.value.saveCity = JSON.parse(formData.value.city)
-                  formData.value.saveProvince = JSON.parse(formData.value.province) */
+
                 let dataPost = {
                     vin: formData.value.numberVinGenerals,
                     dropOffDate: formData.value.date,
@@ -696,8 +697,19 @@ export default {
                         brakeCondition: formData.value.brakePads,
                         brakeReplacement: formData.value.lastReplacement2,
                         repairs: formData.value.repairs,
+                        year: formData.value.year,
+                        make: formData.value.make,
+                        model: formData.value.model,
+                        cylinder: formData.value.cylinder,
+                        transmission: formData.value.transmission,
+                        trim: formData.value.trim,
+                        bodyType: formData.value.bodyType,
+
+
+
                     }
                 }
+                console.log('PASOOOOO 2', dataPost)
                 loading.value = true
                 try {
                     let res = await store.update({ uuid: id_create.value, payload: dataPost })

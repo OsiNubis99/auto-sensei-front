@@ -88,6 +88,15 @@ const routes = [
           hideNavbar: true,
         }
       },
+      {
+        path: "/action-edit-admin/:id",
+        name: "action-edit-admin",
+        component: () => import('../views/Dashboard/edit-aution-admin/Main.vue'),
+        props: true,
+        meta: {
+          hideNavbar: true,
+        }
+      },
     ],
   },
   {

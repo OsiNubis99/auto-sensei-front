@@ -196,17 +196,17 @@
                                                     <p class="p-0 !m-0 capitalize"> {{ aution?.vehicleDetails?.model }}
                                                     </p>
                                                     <p class="p-0 uppercase font-normal  text-[#4D4D4D] !m-0">{{
-        aution?.vehicleDetails?.vin }}</p>
+                                                        aution?.vehicleDetails?.vin }}</p>
                                                 </div>
                                             </td>
                                             <td
                                                 class=" py-1 px-2 md:py-4 md:px-6 text-sm font-medium text-[#000] whitespace-nowrap ">
-                                                <p class="!m-0 font-extrabold capitalize">
+                                                <p class="!m-0 truncate w-[200px]  font-extrabold capitalize">
                                                     {{ aution?.owner?.seller?.firstName }} {{
-        aution?.owner?.seller?.lastName }}
+                                                        aution?.owner?.seller?.lastName }}
                                                 </p>
-                                                <p class="!m-0 truncate w-[200px] md:w-auto "> {{ aution.city }}, {{
-        aution.province }}
+                                                <p class="!m-0 truncate w-[200px]  "> {{ aution.city }}, {{
+                                                    aution.province }}
                                                 </p>
                                             </td>
                                             <td
@@ -242,7 +242,7 @@
                                             </td>
                                             <div
                                                 class="flex flex-wrap md:flex-nowrap h-full py-1 px-2 pb-3 md:py-4 md:px-6 md:justify-center gap-2 md:gap-4 ">
-                                                <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'md:w-full 2xl:grid-cols-4' : ' w-[50%]  lg:grid-cols-3'"
+                                                <td :class="aution.status == 'completed' || aution.status == 'reviewed' || aution.status == 'drop off' || aution.status == 'bids completed' || aution.status == 'live' ? 'md:w-full 2xl:grid-cols-5' : ' w-[50%]  lg:grid-cols-4'"
                                                     class="w-full flex  2xl:grid place-items-center  text-sm  gap-4 font-medium text-gray-900 flex-wrap md:whitespace-nowrap ">
                                                     <RouterLink
                                                         :to="{ name: 'action-details-admin', params: { id: aution?._id } }"
@@ -256,7 +256,18 @@
 
                                                         <p class="text-xs md:text-[13px] ">Detail</p>
                                                     </RouterLink>
+                                                    <RouterLink
+                                                        :to="{ name: 'action-edit-admin', params: { id: aution?._id } }"
+                                                        class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[16px] "
+                                                            viewBox="0 0 16 16" fill="none">
+                                                            <path
+                                                                d="M8.00002 2C11.5947 2 14.5854 4.58667 15.2127 8C14.586 11.4133 11.5947 14 8.00002 14C4.40535 14 1.41469 11.4133 0.787354 8C1.41402 4.58667 4.40535 2 8.00002 2ZM8.00002 12.6667C9.35967 12.6664 10.6789 12.2045 11.7419 11.3568C12.8049 10.509 13.5486 9.32552 13.8514 8C13.5475 6.67554 12.8033 5.49334 11.7404 4.64668C10.6776 3.80003 9.35889 3.33902 8.00002 3.33902C6.64115 3.33902 5.32248 3.80003 4.2596 4.64668C3.19673 5.49334 2.45253 6.67554 2.14869 8C2.45142 9.32552 3.19514 10.509 4.25812 11.3568C5.3211 12.2045 6.64037 12.6664 8.00002 12.6667ZM8.00002 11C7.20437 11 6.44131 10.6839 5.8787 10.1213C5.31609 9.55871 5.00002 8.79565 5.00002 8C5.00002 7.20435 5.31609 6.44129 5.8787 5.87868C6.44131 5.31607 7.20437 5 8.00002 5C8.79567 5 9.55873 5.31607 10.1213 5.87868C10.6839 6.44129 11 7.20435 11 8C11 8.79565 10.6839 9.55871 10.1213 10.1213C9.55873 10.6839 8.79567 11 8.00002 11ZM8.00002 9.66667C8.44205 9.66667 8.86597 9.49107 9.17853 9.17851C9.49109 8.86595 9.66669 8.44203 9.66669 8C9.66669 7.55797 9.49109 7.13405 9.17853 6.82149C8.86597 6.50893 8.44205 6.33333 8.00002 6.33333C7.55799 6.33333 7.13407 6.50893 6.82151 6.82149C6.50895 7.13405 6.33335 7.55797 6.33335 8C6.33335 8.44203 6.50895 8.86595 6.82151 9.17851C7.13407 9.49107 7.55799 9.66667 8.00002 9.66667Z"
+                                                                fill="#0B1107" />
+                                                        </svg>
 
+                                                        <p class="text-xs md:text-[13px] ">Edit</p>
+                                                    </RouterLink>
                                                     <button @click="deleteUserAuction(aution)"
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[16px] "
@@ -331,20 +342,21 @@
                                                     </template>
 
                                                     <div v-else :class="[
-        aution.status == 'completed' && 'bg-[#05a54b] text-white',
-        aution.status == 'drop Off' && 'bg-[#0b1107] text-white',
-        aution.status == 'reviewed' && 'bg-[#0b1107] text-white',
-        aution.status == 'bids completed' && 'bg-[#fbdb17]',
-        aution.status == 'live' && 'bg-[#1f94f0] text-white',
-        aution.status == 'declined' && 'bg-error text-white',
-        aution.status == 'rejected' && 'bg-error text-white'
-    ]
-        " class="md:px-4 md:py-2 px-2 py-1 absolute top-2 right-2 md:sticky shadow-md  rounded-lg  md:shadow-lg flex justify-center items-center">
+                                                        aution.status == 'completed' && 'bg-[#05a54b] text-white',
+                                                        aution.status == 'drop Off' && 'bg-[#0b1107] text-white',
+                                                        aution.status == 'reviewed' && 'bg-[#0b1107] text-white',
+                                                        aution.status == 'bids completed' && 'bg-[#fbdb17]',
+                                                        aution.status == 'live' && 'bg-[#1f94f0] text-white',
+                                                        aution.status == 'declined' && 'bg-error text-white',
+                                                        aution.status == 'rejected' && 'bg-error text-white'
+                                                    ]
+                                                        "
+                                                        class="md:px-4 md:py-2 px-2 py-1 absolute top-2 right-2 md:sticky shadow-md  rounded-lg  md:shadow-lg flex justify-center items-center">
                                                         <p
                                                             class="capitalize  text-[9px] tracking-wider	 md:text-[13px] ">
                                                             {{
-        aution.status
-    }}</p>
+                                                                aution.status
+                                                            }}</p>
 
                                                     </div>
                                                     <button @click="openModalLaunch(aution)"
@@ -612,8 +624,10 @@ export default {
                     counterData.value.declined = store.declined.length
 
                     let counterPage = Math.ceil(dataTable.value.length / 10)
-                    numberPage.value = Array.apply(null, Array(counterPage))
+                    console.log('counterPage', counterPage)
+                    numberPage.value = Array.apply(null, Array(counterPage + 1))
                         .map(function (y, i) { return i; });
+                    console.log('numberPage', numberPage.value)
                     loading.value = false
                 }
             } catch (error) {
