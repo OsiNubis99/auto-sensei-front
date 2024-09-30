@@ -622,12 +622,9 @@ export default {
 
         }
         const nextVehiclesDetails = async () => {
-
-            console.log('formData.value', formData.value)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'vehiclesDetails');
             if (Object.entries(invalid.value).length > 0) {
-
                 toast(
                     invalid?.value?.numberVin ||
                     invalid?.value?.year ||
