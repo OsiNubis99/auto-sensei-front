@@ -1,9 +1,9 @@
 <template>
-    <div class="mx-auto bg-[#F0F0F0] relative">
+    <div class="mx-auto bg-[#F0F0F0] z-[100] relative">
         <div v-if="loading"
             class=" w-full h-screen fixed z-[1000] bg-[#00000078]  flex justify-center overflow-hidden items-center">
             <div class="text-indigo-700">
-                <div class=" h-[80px] w-[80px] ">
+                <div class="h-12 w-12 md:h-[80px] md:w-[80px] ">
                     <div class="animate-bounce">
                         <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                             stroke-width="0" viewBox="0 0 16 16">

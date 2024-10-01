@@ -530,6 +530,39 @@ input.check-toggle-round-flat + label:after {
   transition: margin 0.2s;
 }
 
+.back-block {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  filter: blur(20px);
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 100px;
+}
+.back-block > div {
+  width: 150px;
+  height: 150px;
+  background-color: #c1f8617a;
+  border-radius: 100%;
+  opacity: 0.3;
+  animation: burbujas 1s ease-in infinite alternate-reverse;
+}
+@keyframes burbujas {
+  0% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.back-block > div:nth-child(1) {
+  width: 100px;
+  height: 100px;
+}
+.custom-screen-faq {
+  height: calc(100vh - 189px);
+}
 input.check-toggle-round-flat:checked + label {
 }
 
@@ -2552,6 +2585,12 @@ input.check-toggle-round-flat:checked + label:after {
     bottom: 0;
     width: 100%;
     right: initial;
+  }
+  .child-1 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .draggable-img {
+    height: 115px;
   }
 }
 @media (max-width: 380px) {

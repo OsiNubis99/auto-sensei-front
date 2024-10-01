@@ -1,7 +1,7 @@
 <template>
     <div class="mx-auto bg-[#F0F0F0] h-screen">
         <div class="flex justify-between p-5">
-            <div class="w-[20%]  ">
+            <div class=" w-full md:w-[20%]  ">
                 <label for="voice-search" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -13,28 +13,9 @@
                         </svg>
                     </div>
                     <input v-model="search" type="text"
-                        class="bg-gray-50  outline-none  text-gray-900 text-sm rounded-lg focus:ring-none focus:border-none block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-base-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50  outline-none placeholder:pl-8 md:placeholder:pl-0  text-gray-900 text-sm rounded-lg focus:ring-none focus:border-none block w-full !pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-base-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Search about dealer here">
                 </div>
-            </div>
-            <div class="flex  items-center gap-3">
-                <button class="flex gap-2 rounded-md py-1 px-2 bg-white items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 16 17" fill="none">
-                        <path
-                            d="M6.66667 12.5H9.33333V11.1667H6.66667V12.5ZM2 4.5V5.83333H14V4.5H2ZM4 9.16667H12V7.83333H4V9.16667Z"
-                            fill="#09121F" />
-
-                    </svg>
-                    <p class="!m-0">Filter</p>
-                </button>
-                <button class="flex gap-2 rounded-md py-1 px-2 bg-white items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                        <path
-                            d="M12.6667 2.5L15.3333 5.83333H13.3333V13.8333H12V5.83333H10L12.6667 2.5ZM9.33333 12.5V13.8333H2V12.5H9.33333ZM9.33333 7.83333V9.16667H2V7.83333H9.33333ZM8 3.16667V4.5H2V3.16667H8Z"
-                            fill="#09121F" />
-                    </svg>
-                    <p class="!m-0">Sort</p>
-                </button>
             </div>
         </div>
         <template v-if="store.userSellers?.data?.length == 0">
@@ -48,7 +29,7 @@
         <template v-else>
             <div v-if="isLoading" class=" left-0 top-0 absolute w-full h-full flex justify-center items-center">
                 <div class="absolute top-1/2 left-1/2 -mt-4 -ml-2 h-8 w-4 text-indigo-700">
-                    <div class="absolute -left-[30px] z-10  h-[80px] w-[80px] ">
+                    <div class="absolute -left-[30px] z-10 h-12 w-12 md:h-[80px] md:w-[80px] ">
                         <div class="animate-bounce">
                             <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="#c1f861" stroke="#fff"
                                 stroke-width="0" viewBox="0 0 16 16">
@@ -57,26 +38,20 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class=" text-base-gray font-medium pl-2 ">Loading...</p>
+                        <p class=" text-base-gray text-xs md:text-base font-medium md:pl-2 ">Loading...</p>
                     </div>
                 </div>
             </div>
-            <div v-else class="flex p-5 flex-col">
+            <div v-else class="flex p-2 md:p-5 flex-col">
                 <div class="overflow-x-auto shadow-md sm:rounded-lg">
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden ">
                             <table
                                 class="min-w-full bg-white divide-y divide-[#E0E0E0] table-fixed dark:divide-gray-700">
                                 <template v-if="dataTableSearch?.length > 0">
-                                    <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <thead class="bg-gray-100 hidden md:contents dark:bg-gray-700">
                                         <tr>
-                                            <th scope="col" class="p-4">
-                                                <div class="flex items-center">
-                                                    <input id="checkbox-all" type="checkbox"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                    <label for="checkbox-all" class="sr-only">checkbox</label>
-                                                </div>
-                                            </th>
+
                                             <th scope="col"
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                                 <div class="flex items-center gap-1">
@@ -132,10 +107,10 @@
 
                                             </th>
                                             <div class="flex justify-center">
-                                                <th scope="col"
+                                                <!--   <th scope="col"
                                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                                     History
-                                                </th>
+                                                </th> -->
                                                 <th scope="col"
                                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-[#000] capitalize  ">
                                                     Actions
@@ -143,19 +118,13 @@
                                             </div>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-[#E0E0E0] ">
+                                    <tbody class="bg-white flex flex-col md:contents divide-y divide-[#E0E0E0] ">
                                         <tr v-for="(user, index) in dataTableSearch" :key="user?.id"
-                                            class="hover:bg-gray-100 dark:hover:bg-gray-700"
+                                            class="hover:bg-gray-100 grid md:table-row relative  dark:hover:bg-gray-700"
                                             :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''">
-                                            <td class="p-4 w-4">
-                                                <div class="flex items-center">
-                                                    <input id="checkbox-table-1" type="checkbox"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                    <label for="checkbox-table-1" class="sr-only">checkbox</label>
-                                                </div>
-                                            </td>
+
                                             <td
-                                                class="py-4 px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
+                                                class="py-1 pt-4 md:pt-0 px-2 md:py-4 md:px-6 text-sm flex gap-4 font-medium text-gray-900 whitespace-nowrap ">
                                                 <div class="w-10 h-10">
                                                     <img v-if="user?.seller?.picture"
                                                         class="w-full shadow-md   rounded-full h-full object-cover"
@@ -178,41 +147,49 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="py-4 px-6  text-sm font-medium text-[#000] whitespace-nowrap ">
+                                            <td
+                                                class="py-1 px-2 md:py-4 md:px-6 text-sm absolute top-2 right-2 md:sticky font-medium text-[#000] whitespace-nowrap">
                                                 <div v-if="user.status == 'active'"
                                                     class="relative w-fit  flex py-1 px-2 rounded-md justify-center items-center bg-[#05A54B14] gap-2">
                                                     <div class="w-2 h-2 rounded-full bg-[#05A54B]"></div>
-                                                    <div class="text-[#05A54B]">Active</div>
+                                                    <div class="text-[#05A54B] capitalize text-[8px] md:text-[13px]  ">
+                                                        Active</div>
                                                 </div>
                                                 <div v-else
                                                     class=" w-fit relative flex py-1 px-2 rounded-md justify-center items-center bg-[#FF333E14] gap-2">
                                                     <div class="w-2 h-2 rounded-full bg-[#FF333E]"></div>
-                                                    <div class="text-[#FF333E]">Inactive</div>
+                                                    <div class="text-[#FF333E] text-[8px] md:text-[13px]  capitalize ">
+                                                        Inactive</div>
                                                 </div>
                                             </td>
-                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                            <td
+                                                class="py-1 px-2 md:py-4 md:px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
                                                 <p class="!m-0">$524,824</p>
                                                 <p class="!m-0"> 102 Vehicles</p>
 
                                             </td>
-                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                            <td
+                                                class="py-1 px-2 md:py-4 md:px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
                                                 <p class="!m-0 font-medium ">100%</p>
                                                 <p class="!m-0">From 94 seller</p>
                                             </td>
-                                            <div class="flex h-full py-4 px-6 justify-center gap-4 ">
-                                                <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
-                                                    <button @click="statusModal.openModal({ isActive: true,data: user})"
-                                                        class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
+                                            <div
+                                                class="flex h-full py-1 px-2 md:py-4 md:px-6 justify-end md:justify-center gap-4 ">
+                                                <td
+                                                    class=" md:justify-end text-sm flex gap-1 md:gap-4 font-medium text-gray-900 whitespace-nowrap ">
+                                                    <button
+                                                        @click="statusModal.openModal({ isActive: true, data: user })"
+                                                        class="flex gap-1 items-center border py-1 px-3  md:p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             viewBox="0 0 16 16" fill="none">
                                                             <path
                                                                 d="M8.00002 2C11.5947 2 14.5854 4.58667 15.2127 8C14.586 11.4133 11.5947 14 8.00002 14C4.40535 14 1.41469 11.4133 0.787354 8C1.41402 4.58667 4.40535 2 8.00002 2ZM8.00002 12.6667C9.35967 12.6664 10.6789 12.2045 11.7419 11.3568C12.8049 10.509 13.5486 9.32552 13.8514 8C13.5475 6.67554 12.8033 5.49334 11.7404 4.64668C10.6776 3.80003 9.35889 3.33902 8.00002 3.33902C6.64115 3.33902 5.32248 3.80003 4.2596 4.64668C3.19673 5.49334 2.45253 6.67554 2.14869 8C2.45142 9.32552 3.19514 10.509 4.25812 11.3568C5.3211 12.2045 6.64037 12.6664 8.00002 12.6667ZM8.00002 11C7.20437 11 6.44131 10.6839 5.8787 10.1213C5.31609 9.55871 5.00002 8.79565 5.00002 8C5.00002 7.20435 5.31609 6.44129 5.8787 5.87868C6.44131 5.31607 7.20437 5 8.00002 5C8.79567 5 9.55873 5.31607 10.1213 5.87868C10.6839 6.44129 11 7.20435 11 8C11 8.79565 10.6839 9.55871 10.1213 10.1213C9.55873 10.6839 8.79567 11 8.00002 11ZM8.00002 9.66667C8.44205 9.66667 8.86597 9.49107 9.17853 9.17851C9.49109 8.86595 9.66669 8.44203 9.66669 8C9.66669 7.55797 9.49109 7.13405 9.17853 6.82149C8.86597 6.50893 8.44205 6.33333 8.00002 6.33333C7.55799 6.33333 7.13407 6.50893 6.82151 6.82149C6.50895 7.13405 6.33335 7.55797 6.33335 8C6.33335 8.44203 6.50895 8.86595 6.82151 9.17851C7.13407 9.49107 7.55799 9.66667 8.00002 9.66667Z"
                                                                 fill="#0B1107" />
                                                         </svg>
-                                                        View
+                                                        <p class="text-[10px] md:text-[13px] ">View</p>
                                                     </button>
                                                 </td>
-                                                <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                <!-- <td class=" text-sm font-medium text-gray-900 whitespace-nowrap ">
                                                     <button
                                                         class="flex gap-1 items-center border p-2 rounded-md border-[#E0E0E0]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -223,7 +200,7 @@
                                                         </svg>
                                                         Menu
                                                     </button>
-                                                </td>
+                                                </td> -->
                                             </div>
                                         </tr>
                                     </tbody>
@@ -234,53 +211,77 @@
                     </div>
 
                 </div>
-                <div v-show="numberPage > 1"
+                <div v-show="numberPage.length > 1"
                     class="flex mt-7 items-center justify-between  rounded-lg bg-white px-4 py-3 sm:px-6">
-                    <div class="flex flex-1 justify-between sm:hidden">
-                        <a href="#"
-                            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
-                        <a href="#"
-                            class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+                    <div class="flex items-center flex-1 justify-between sm:hidden">
+                        <div :class="current > 1 && current <= numberPage.length ? '  bg-white  border border-gray-300 ' : 'pointer-events-none bg-[#bfbfbfa1] text-white '"
+                            @click="prev()"
+                            class="relative inline-flex items-center py-1 px-3 rounded-md  transition-all ease-out duration-700  md:px-4 md:py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <p class="text-xs">Previous</p>
+                        </div>
+                        <div class="flex">
+                            <div v-for="page in numberPage.slice(current - 1, current + 3)" :key="index">
+                                <div @click="next(page)"
+                                    :class="page == current ? 'bg-base-black text-primary  ' : 'bg-[#F0F0F0] hover:bg-base-black  hover:text-primary '"
+                                    class="relative py-1 px-2 cursor-pointer rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 md:px-4 md:py-2  transition-all ease-out duration-300   text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    <template v-if="page !== 0">
+                                        {{ page }}
+
+                                    </template>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div @click="next()"
+                            :class="current < numberPage.length ? '  bg-white  border border-gray-300 ' : 'pointer-events-none bg-[#bfbfbfa1] text-white '"
+                            class="relative ml-3 inline-flex items-center py-1 px-3 rounded-md border border-gray-300 bg-white md:px-4 md:py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <p class="text-xs">Next</p>
+
+                        </div>
                     </div>
                     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                         <div>
                             <p class="text-sm text-gray-700">
                                 Showing
-                                <span class="font-medium">1</span>
+                                <span class="font-medium"> {{ (current - 1) * pageSize + 1 }}</span>
                                 to
-                                <span class="font-medium">10</span>
+                                <span class="font-medium">{{ current * pageSize }}</span>
                                 of
-                                <span class="font-medium">{{ store.userSellers?.data?.length }}</span>
+                                <span class="font-medium"> {{ store.userDealers?.data?.length }} </span>
                                 results
                             </p>
                         </div>
                         <div class="flex gap-3">
                             <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                                <div v-show="current > 1 && current <= numberPage" @click="prev()"
-                                    class="relative mr-2 inline-flex items-center rounded-lg px-2 py-2 text-gray-400 bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <div v-show="current > 1 && current <= numberPage.length" @click="prev()"
+                                    class="relative mr-2 inline-flex items-center cursor-pointer group hover:bg-base-black transition-all ease-out duration-300  rounded-lg px-2 py-2 text-gray-400 bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
                                     <span class="sr-only">Previous</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
-                                        fill="none">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="group-hover:fill-primary  fill-base-black" width="17" height="17"
+                                        viewBox="0 0 17 17" fill="none">
                                         <path
-                                            d="M5.71875 7.83312H13.8334V9.16645H5.71875L9.29475 12.7425L8.35208 13.6851L3.16675 8.49979L8.35208 3.31445L9.29475 4.25712L5.71875 7.83312Z"
-                                            fill="#0B1107" />
+                                            d="M5.71875 7.83312H13.8334V9.16645H5.71875L9.29475 12.7425L8.35208 13.6851L3.16675 8.49979L8.35208 3.31445L9.29475 4.25712L5.71875 7.83312Z" />
                                     </svg>
                                 </div>
-                                <div v-for="(page, index) in numberPage" :key="index">
+                                <div v-for="page in numberPage.slice(current - 1, current + 9)" :key="index">
                                     <div @click="next(page)"
-                                        :class="page == current ? 'bg-base-black text-primary ' : 'bg-[#F0F0F0]  text-gray-900 '"
-                                        class="relative cursor-pointer rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 px-4 py-2  text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                        {{ page }}
+                                        :class="page == current ? 'bg-base-black text-primary  ' : 'bg-[#F0F0F0] hover:bg-base-black  hover:text-primary '"
+                                        class="relative cursor-pointer rounded-lg mr-1 z-10 inline-flex items-center bg-indigo-600 px-4 py-2  transition-all ease-out duration-300   text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        <template v-if="page !== 0">
+                                            {{ page }}
+
+                                        </template>
                                     </div>
                                 </div>
-                                <div v-show="current < numberPage" @click="next()"
-                                    class="relative inline-flex items-center rounded-lg px-2 py-2 text-gray-400  bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <div v-show="current < numberPage.length" @click="next()"
+                                    class="relative inline-flex items-center group cursor-pointer hover:bg-base-black transition-all ease-out duration-300 rounded-lg px-2 py-2 text-gray-400  bg-transparent border border-[#E0E0E0] hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
                                     <span class="sr-only">Next</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
-                                        fill="none">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="group-hover:fill-primary  fill-base-black" width="17" height="17"
+                                        viewBox="0 0 17 17" fill="none">
                                         <path
-                                            d="M11.2814 7.83312L7.70541 4.25712L8.64808 3.31445L13.8334 8.49979L8.64808 13.6851L7.70541 12.7425L11.2814 9.16645H3.16675V7.83312H11.2814Z"
-                                            fill="#0B1107" />
+                                            d="M11.2814 7.83312L7.70541 4.25712L8.64808 3.31445L13.8334 8.49979L8.64808 13.6851L7.70541 12.7425L11.2814 9.16645H3.16675V7.83312H11.2814Z" />
                                     </svg>
                                 </div>
                             </nav>
@@ -312,12 +313,14 @@ export default {
         const current = ref(1)
         const pageSize = ref(10)
         const statusModal = ModalUserDetails()
-        const numberPage = ref(0)
+        const numberPage = ref([])
         const getUserSeller = async () => {
             isLoading.value = true
             try {
                 await store.getUserSellers()
-                numberPage.value = Math.ceil(store.userSellers?.data.length / 10)
+                let counterPage = Math.ceil(store.userSellers?.data.length / 10)
+                numberPage.value = Array.apply(null, Array(counterPage))
+                    .map(function (y, i) { return i; });
             } catch (error) {
 
                 isLoading.value = false
@@ -385,7 +388,8 @@ export default {
             current,
             numberPage,
             orderStatus,
-            statusModal
+            statusModal,
+            pageSize
         };
     },
 };

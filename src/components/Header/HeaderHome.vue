@@ -301,7 +301,7 @@
 
                         </div>
                     </div>
-                    <div v-else class="flex flex-col gap-4 mt-4">
+                    <div v-if="store.userData.type == 1" class="flex flex-col gap-4 mt-4">
                         <ul class="flex flex-col gap-3">
                             <RouterLink @click="open = false" to="/all"
                                 :class="path == 'all' || path == 'upcoming-auctions' || path == 'live' || path == 'completed' ? ' text-primary' : ' text-white'"
@@ -340,6 +340,27 @@
                                     {{ store.userData?.dealer?.firstName }} {{ store.userData?.dealer?.lastName }}
                                 </p>
                             </div>
+                            <div @click="logout" class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M5 22C4.73478 22 4.48043 21.8946 4.29289 21.7071C4.10536 21.5196 4 21.2652 4 21V3C4 2.73478 4.10536 2.48043 4.29289 2.29289C4.48043 2.10536 4.73478 2 5 2H19C19.2652 2 19.5196 2.10536 19.7071 2.29289C19.8946 2.48043 20 2.73478 20 3V6H18V4H6V20H18V18H20V21C20 21.2652 19.8946 21.5196 19.7071 21.7071C19.5196 21.8946 19.2652 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"
+                                        fill="white" />
+                                </svg>
+                                <p class="text-white font-semibold">Logout</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div v-if="store.userData.type == 0" class="flex flex-col gap-4 mt-4">
+                        <ul class="flex flex-col gap-3">
+                            <RouterLink @click="open = false" to="/inicio"
+                                :class="path == 'all' || path == 'upcoming-auctions' || path == 'live' || path == 'completed' ? ' text-primary' : ' text-white'"
+                                class="relative  max-w-fit  rounded-[8px]  hover:text-primary ease-linear duration-500  ">
+                                <p>My Account</p>
+                            </RouterLink>
+                        </ul>
+                        <div class="px-2 flex flex-col pt-4 gap-5 border-t border-[#333333]">
                             <div @click="logout" class="flex gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">

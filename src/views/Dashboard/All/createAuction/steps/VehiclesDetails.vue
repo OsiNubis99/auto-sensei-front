@@ -36,23 +36,21 @@
             </div>
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Vehicle Identification Number (VIN)</label>
-                <input class="p-2 w-full mt-3 uppercase  border rounded-lg" disabled v-model="form.numberVin"
+                <input class="p-2 w-full mt-3 uppercase  border rounded-lg" v-model="form.numberVin"
                     :class="invalid?.numberVin ? 'border-error' : 'border-[#E0E0E0]'" placeholder="1HGCM82633A123456"
                     type="text">
             </div>
             <div class="flex w-full justify-between items-center gap-5">
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Year</label>
-                    <input v-model="form.year" :disabled="formDisable.year ? true : false"
-                        :class="invalid?.year ? 'border-error' : 'border-[#E0E0E0]'"
+                    <input v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-[#E0E0E0]'"
                         class="p-2 w-full md:mt-3 border  rounded-lg" placeholder="2013" type="text">
                 </div>
                 <div class="w-full">
                     <div class="w-full flex flex-col md:gap-2">
                         <label class="font-medium text-xs md:text-base " for="">Make </label>
                         <input :class="invalid?.make ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.make"
-                            :disabled="formDisable.make ? true : false" class="p-2 w-full border  md:mt-3  rounded-lg"
-                            placeholder="Forester" type="text">
+                            class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Forester" type="text">
                     </div>
                 </div>
 
@@ -61,28 +59,24 @@
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Model</label>
                     <input :class="invalid?.model ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.model"
-                        :disabled="formDisable.model ? true : false" class="p-2 w-full border  md:mt-3  rounded-lg"
-                        placeholder="Forester" type="text">
+                        class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Forester" type="text">
                 </div>
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Trim</label>
                     <input :class="invalid?.trim ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.trim"
-                        :disabled="formDisable.trim ? true : false" class="p-2 w-full border  md:mt-3  rounded-lg"
-                        placeholder="Premium Plus" type="text">
+                        class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Premium Plus" type="text">
                 </div>
             </div>
             <div class="flex w-full justify-between items-center gap-5">
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Body Type</label>
                     <input :class="invalid?.bodyType ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.bodyType"
-                        :disabled="formDisable.bodyType ? true : false" class="p-2 w-full  md:mt-3  border rounded-lg"
-                        placeholder="SUV" type="text">
+                        class="p-2 w-full  md:mt-3  border rounded-lg" placeholder="SUV" type="text">
                 </div>
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Cylinder</label>
                     <input :class="invalid?.cylinder ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.cylinder"
-                        :disabled="formDisable.cylinder ? true : false" class="p-2 w-full  md:mt-3  border rounded-lg"
-                        placeholder="4" type="text">
+                        class="p-2 w-full  md:mt-3  border rounded-lg" placeholder="4" type="text">
                 </div>
             </div>
             <div class="flex w-full justify-between items-center flex-col md:flex-row gap-5">
@@ -90,7 +84,6 @@
                     <label class="font-medium text-xs md:text-base " for="">Transmission</label>
                     <input v-model="form.transmission"
                         :class="invalid?.transmission ? 'border-error' : 'border-[#E0E0E0]'"
-                        :disabled="formDisable.transmission ? true : false"
                         class="p-2 w-full  md:mt-3 border  rounded-lg" placeholder="SUV" type="text">
                 </div>
                 <div class="w-full">
@@ -102,7 +95,7 @@
                 <div class="w-full">
                     <div class="w-full flex flex-col md:gap-2">
                         <label class="font-medium text-xs md:text-base " for="">Doors</label>
-                        <select :disabled="formDisable.doors ? true : false"
+                        <select
                             :class="[invalid?.doors ? 'border-error' : 'border-[#E0E0E0]', formDisable.doors ? 'bg-[#fafafa]' : '']"
                             v-model="form.doors" placeholder="Number of Doors"
                             class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
@@ -185,24 +178,24 @@
                 <p class="font-medium text-xs md:text-base">Drive Train</p>
                 <div class="flex flex-col md:grid md:grid-cols-2 place-items-baseline  place-content-center gap-4">
                     <label class="label-radio">
-                        <input :disabled="formDisable.driveTrain ? true : false" type="radio"
-                            :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                            class="input-radio on" value="FWD" name="drive-train"> FWD (Front-Wheel Drive)
+                        <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''"
+                            v-model="form.driveTrain" class="input-radio on" value="FWD" name="drive-train"> FWD
+                        (Front-Wheel Drive)
                     </label>
                     <label class="label-radio">
-                        <input :disabled="formDisable.driveTrain ? true : false" type="radio"
-                            :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                            class="input-radio on" value="AWD" name="drive-train"> AWD (All-Wheel Drive)
+                        <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''"
+                            v-model="form.driveTrain" class="input-radio on" value="AWD" name="drive-train"> AWD
+                        (All-Wheel Drive)
                     </label>
                     <label class="label-radio">
-                        <input :disabled="formDisable.driveTrain ? true : false" type="radio"
-                            :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                            class="input-radio on" value="RWD" name="drive-train"> RWD (Rear-Wheel Drive)
+                        <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''"
+                            v-model="form.driveTrain" class="input-radio on" value="RWD" name="drive-train"> RWD
+                        (Rear-Wheel Drive)
                     </label>
                     <label class="label-radio">
-                        <input :disabled="formDisable.driveTrain ? true : false" type="radio"
-                            :class="invalid?.driveTrain ? 'error-driveTrain' : ''" v-model="form.driveTrain"
-                            class="input-radio on" value="4WD" name="drive-train"> 4WD (Four-Wheel Drive)
+                        <input type="radio" :class="invalid?.driveTrain ? 'error-driveTrain' : ''"
+                            v-model="form.driveTrain" class="input-radio on" value="4WD" name="drive-train"> 4WD
+                        (Four-Wheel Drive)
                     </label>
                 </div>
 

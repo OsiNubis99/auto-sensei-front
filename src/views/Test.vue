@@ -25,7 +25,7 @@
       <span v-else>Update Data Aution</span>
     </Button>
   </div> -->
-  <!--  <div class="h-screen m-auto flex flex-col items-center justify-center">
+   <div class="h-screen m-auto flex flex-col items-center justify-center">
     <div class="mt-32">
       <h2>Upload File</h2>
       <input type="file" multiple accept=".jpg, .jpeg,.png,.webp" @change="onFileChange">
@@ -126,7 +126,7 @@
     </div>
     <button v-show="images.length > 0" @click="uploadImages" class="btn bg-primary   rounded-lg w-fit">Upload</button>
 
-  </div> -->
+  </div>
   <!--  <div v-if="!loading" id="demo">
     <div @click="ordenarPhotos">Sorby Images</div>
     <div v-for="category in categories" :key="category.id" @drop="onDrop($event, category.id)" class="droppable"

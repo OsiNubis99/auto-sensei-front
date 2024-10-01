@@ -24,7 +24,7 @@
                         <img v-else class=" w-full h-full" src="@/assets/svg/profile.svg" alt="">
                     </div>
                 </div>
-                <div class="p-5 flex flex-col gap-4">
+                <div class=" p-2 md:p-5 flex flex-col gap-4">
                     <div
                         class="flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up  animate-ease-in-out animate-delay-200">
                         <div class="flex gap-2 items-center">
@@ -132,29 +132,36 @@
                                 class=" grid grid-cols-2 gap-2 p-2 rounded-lg  animate-fade-up  animate-ease-in-out animate-delay-200">
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Country:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.country }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.country }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Province:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.state }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.state }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>City:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.city }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.city }}</p>
                                 </div>
-                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
+                                <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Line 1:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.line1 }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.line1 }}</p>
                                 </div>
-                                <div v-if="statusModal?.datauser?.address?.line2" class="bg-white flex gap-2 pl-2 shadow-md">
+                                <div v-if="statusModal?.datauser?.address?.line2"
+                                    class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Line 2:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.line2 }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.line2 }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Postal Code:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.postal_code }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.postal_code }}</p>
                                 </div>
-                               
+
                             </div>
                         </div>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide
@@ -254,7 +261,7 @@
                         <img v-else class=" w-full h-full" src="@/assets/svg/profile.svg" alt="">
                     </div>
                 </div>
-                <div class="p-5 flex flex-col gap-4">
+                <div class=" p-2 md:p-5 flex flex-col gap-4">
                     <div
                         class="flex gap-1 p-2 bg-white shadow-lg rounded-lg items-center animate-fade-up  animate-ease-in-out animate-delay-200">
                         <div class="flex gap-2 items-center">
@@ -306,29 +313,36 @@
                                 class=" grid grid-cols-2 gap-2 p-2 rounded-lg  animate-fade-up  animate-ease-in-out animate-delay-200">
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Country:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.country }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.country }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Province:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.state }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.state }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>City:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.city }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.city }}</p>
                                 </div>
-                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
+                                <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Line 1:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.line1 }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.line1 }}</p>
                                 </div>
-                                <div v-if="statusModal?.datauser?.address?.line2" class="bg-white flex gap-2 pl-2 shadow-md">
+                                <div v-if="statusModal?.datauser?.address?.line2"
+                                    class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Line 2:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.line2 }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.line2 }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Postal Code:</p>
-                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{ statusModal?.datauser?.address?.postal_code }}</p>
+                                    <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
+        statusModal?.datauser?.address?.postal_code }}</p>
                                 </div>
-                               
+
                             </div>
                         </div>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide
@@ -395,7 +409,7 @@
                             <p class="font-medium text-xs  md:text-base ">OMVIC:</p>
                         </div>
                         <p class="text-xs md:text-base text-[#797979] " v-if="statusModal?.datauser?.dealer?.omvic">{{
-        statusModal?.datauser?.dealer?.omvic }}</p>
+                            statusModal?.datauser?.dealer?.omvic }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide
                             information.</p>
                     </div>
@@ -420,7 +434,7 @@
                         </div>
 
                         <p class="text-xs md:text-base text-[#797979] " v-if="statusModal?.datauser?.email">{{
-        statusModal?.datauser?.email }}</p>
+                            statusModal?.datauser?.email }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide
                             information.</p>
                     </div>
