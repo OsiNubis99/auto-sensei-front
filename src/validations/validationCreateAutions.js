@@ -81,27 +81,27 @@ export const validateData = (form, step, typeLaunch) => {
         if (!form.numberVin) {
             error.numberVin = 'Required field'
         }
-        if (!form.year) {
-            error.year = 'Required field'
-        }
-        if (!form.make) {
-            error.make = 'Required field'
-        }
-        if (!form.model) {
-            error.model = 'Required field'
-        }
-        if (!form.trim) {
-            error.trim = 'Required field'
-        }
-        if (!form.bodyType) {
-            error.bodyType = 'Required field'
-        }
-        if (!form.cylinder) {
-            error.cylinder = 'Required field'
-        }
-        if (!form.transmission) {
-            error.transmission = 'Required field'
-        }
+        /*   if (!form.year) {
+              error.year = 'Required field'
+          }
+          if (!form.make) {
+              error.make = 'Required field'
+          }
+          if (!form.model) {
+              error.model = 'Required field'
+          }
+          if (!form.trim) {
+              error.trim = 'Required field'
+          }
+          if (!form.bodyType) {
+              error.bodyType = 'Required field'
+          }
+          if (!form.cylinder) {
+              error.cylinder = 'Required field'
+          } */
+        /*  if (!form.transmission) {
+             error.transmission = 'Required field'
+         } */
         if (!form.odometer) {
             error.odometer = 'Required field'
         }
@@ -384,36 +384,30 @@ export const validateData = (form, step, typeLaunch) => {
             }
 
         }
-
-
-
-
-
-
-        if (!form.numberVin) {
-            error.numberVin = 'Required field'
-        }
-        if (!form.year) {
-            error.year = 'Required field'
-        }
-        if (!form.make) {
-            error.make = 'Required field'
-        }
-        if (!form.model) {
-            error.model = 'Required field'
-        }
-        if (!form.trim) {
-            error.trim = 'Required field'
-        }
-        if (!form.bodyType) {
-            error.bodyType = 'Required field'
-        }
-        if (!form.cylinder) {
-            error.cylinder = 'Required field'
-        }
-        if (!form.transmission) {
-            error.transmission = 'Required field'
-        }
+        /*  if (!form.numberVin) {
+             error.numberVin = 'Required field'
+         } */
+        /*  if (!form.year) {
+             error.year = 'Required field'
+         }
+         if (!form.make) {
+             error.make = 'Required field'
+         }
+         if (!form.model) {
+             error.model = 'Required field'
+         }
+         if (!form.trim) {
+             error.trim = 'Required field'
+         }
+         if (!form.bodyType) {
+             error.bodyType = 'Required field'
+         }
+         if (!form.cylinder) {
+             error.cylinder = 'Required field'
+         }
+         if (!form.transmission) {
+             error.transmission = 'Required field'
+         } */
         if (!form.odometer) {
             error.odometer = 'Required field'
         }
