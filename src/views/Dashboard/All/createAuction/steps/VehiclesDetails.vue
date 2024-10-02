@@ -40,7 +40,7 @@
                     :class="invalid?.numberVin ? 'border-error' : 'border-[#E0E0E0]'" placeholder="1HGCM82633A123456"
                     type="text">
             </div>
-            <!--   <div class="flex w-full justify-between items-center gap-5">
+            <div class=" hidden w-full justify-between items-center gap-5">
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Year</label>
                     <input v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-[#E0E0E0]'"
@@ -55,7 +55,7 @@
                 </div>
 
             </div>
-            <div class="flex w-full justify-between items-center flex-row gap-5">
+            <div class=" hidden w-full justify-between items-center flex-row gap-5">
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Model</label>
                     <input :class="invalid?.model ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.model"
@@ -67,7 +67,7 @@
                         class="p-2 w-full border  md:mt-3  rounded-lg" placeholder="Premium Plus" type="text">
                 </div>
             </div>
-            <div class="flex w-full justify-between items-center gap-5">
+            <div class=" hidden w-full justify-between items-center gap-5">
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Body Type</label>
                     <input :class="invalid?.bodyType ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.bodyType"
@@ -78,14 +78,14 @@
                     <input :class="invalid?.cylinder ? 'border-error' : 'border-[#E0E0E0]'" v-model="form.cylinder"
                         class="p-2 w-full  md:mt-3  border rounded-lg" placeholder="4" type="text">
                 </div>
-            </div> -->
-            <div class="flex w-full justify-between items-center flex-col md:flex-row gap-5">
-                <!--  <div class="w-full">
+            </div>
+            <div class="  w-full justify-between items-center flex-col md:flex-row gap-5">
+                <div class="w-full hidden">
                     <label class="font-medium text-xs md:text-base " for="">Transmission</label>
                     <input v-model="form.transmission"
                         :class="invalid?.transmission ? 'border-error' : 'border-[#E0E0E0]'"
                         class="p-2 w-full  md:mt-3 border  rounded-lg" placeholder="SUV" type="text">
-                </div> -->
+                </div>
                 <div class="w-full">
                     <label class="font-medium text-xs md:text-base " for="">Odometer</label>
                     <input step="0.01" :class="invalid?.odometer ? 'border-error' : ''" v-model="form.odometer"

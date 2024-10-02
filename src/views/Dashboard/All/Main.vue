@@ -120,14 +120,14 @@
                     <div>
                         <p class="font-semibold capitalize md:text-base text-sm ">{{ autionModal?.vehicleDetails?.year
                             }} {{
-        autionModal?.vehicleDetails?.make }} {{
-        autionModal?.vehicleDetails?.model }}</p>
+                                autionModal?.vehicleDetails?.make }} {{
+                                autionModal?.vehicleDetails?.model }}</p>
                         <p class="capitalize text-sm md:text-base ">Final Bid</p>
                         <div class="flex gap-1">
                             <p v-if="autionModal?.bids[0]?.amount"
                                 class="font-medium text-sm text-base-black md:text-2xl">
                                 ${{
-        autionModal?.bids[0].amount }} </p>
+                                    autionModal?.bids[0].amount }} </p>
                             <p v-else-if="autionModal?.vehicleDetails?.basePrice" class="font-medium text-base-black 
  text-xs md:text-2xl ">${{ auction?.vehicleDetails?.basePrice }}
                             </p>
@@ -141,7 +141,7 @@
             <div class="md:py-10 p-2 md:px-4 pb-2">
                 <p class="text-xs md:text-base">Are you sure you want to cancel the auction for the <span
                         class="font-medium">{{
-        autionModal?.vehicleDetails?.model }}</span>?</p>
+                            autionModal?.vehicleDetails?.model }}</span>?</p>
                 <div class="w-full flex gap-2 mt-4 items-center">
                     <button @click="openDecline = false"
                         class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
@@ -293,7 +293,12 @@ export default {
                 draft.value = res.data.filter((item) => item.status === "draft")
                 console.log('draft.value', draft.value)
                 data.value.map((autions, index) => {
-                    autions.title = `${autions.vehicleDetails.year} ${autions.vehicleDetails.make} ${autions.vehicleDetails.model}`
+                    if (autions.vehicleDetails.year && autions.vehicleDetails.make && autions.vehicleDetails.model) {
+                        autions.title = `${autions.vehicleDetails.year} ${autions.vehicleDetails.make} ${autions.vehicleDetails.model}`
+                    } else {
+                        autions.title = ''
+                    }
+
                     const formatter = new Intl.NumberFormat();
                     autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer)
                     let photos = null;
@@ -310,6 +315,7 @@ export default {
 
             }
         }
+
         const declineAution = (auction, option) => {
             openDecline.value = true
             autionModal.value = auction

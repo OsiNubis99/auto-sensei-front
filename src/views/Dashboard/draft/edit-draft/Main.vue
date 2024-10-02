@@ -207,7 +207,7 @@
                                         <div class="flex flex-col ">
                                             <p class="text-[13px] font-Nohemi md:text-xl "> Uploading
                                                 <strong>{{
-                    arrayUpload?.length }}</strong> of <strong>{{ formData.images.length
+                                                    arrayUpload?.length }}</strong> of <strong>{{ formData.images.length
                                                     }}
                                                 </strong>
                                             </p>
@@ -433,13 +433,13 @@ export default {
             buyoutVehicle: undefined,
             newVehicle: undefined,
             numberVin: undefined,
-            year: undefined,
-            make: undefined,
-            model: undefined,
-            trim: undefined,
-            bodyType: undefined,
-            cylinder: undefined,
-            transmission: undefined,
+            year: '',
+            make: '',
+            model: '',
+            trim: '',
+            bodyType: '',
+            cylinder: '',
+            transmission: '',
             odometer: undefined,
             doors: undefined,
             color: undefined,

@@ -89,7 +89,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class="text-[10px] lg:text-xs lg:text-md font-semibold capitalize">{{
-        auction?.vehicleDetails?.tireCondition }}</p>
+                            auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -99,7 +99,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class="  text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.brakeCondition }}</p>
+                            auction?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
 
@@ -211,7 +211,7 @@
                         <p class=" text-lg font-medium md:text-2xl text-base-black">
                             <span v-if="auction?.bids[0]?.amount">${{ auction?.bids[0]?.amount }}</span>
                             <span v-else-if="auction?.vehicleDetails?.basePrice"> ${{
-        auction?.vehicleDetails?.basePrice }} </span>
+                                auction?.vehicleDetails?.basePrice }} </span>
                             <span v-else>$0</span>
                             <span class="text-[#666666] text-sm md:!text-lg mt-2">/{{ auction.bids.length }}
                                 Bids
