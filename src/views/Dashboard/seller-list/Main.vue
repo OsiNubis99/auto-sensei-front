@@ -372,7 +372,6 @@ export default {
         }
         onMounted(() => {
             getUserSeller()
-            console.log('userSellers', store.userSellers)
         })
         return {
             isLoading,

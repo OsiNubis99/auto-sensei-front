@@ -10,11 +10,20 @@
             </div>
         </swiper>
         <div class="w-full flex  justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row'">
-            <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
+            <RouterLink
+                :to="{ name: auth?.userData?.type == 1 ? 'action-details-seller' : 'action-details-dealer', params: { id: aution?._id } }"
                 class="flex p-5  flex-col gap-3">
                 <div class="">
-                    <div class="font-bold md:text-xl">{{ aution?.vehicleDetails?.year }} {{
-        aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
+                    <div class="font-bold md:text-xl">
+                        <template
+                            v-if="aution?.vehicleDetails?.year && aution?.vehicleDetails?.make && aution?.vehicleDetails?.model">
+                            {{ aution?.vehicleDetails?.year }} {{ aution?.vehicleDetails?.make }} {{
+                                aution?.vehicleDetails?.model }}
+                        </template>
+                        <template v-else>
+                            Vehículo Genérico
+                        </template>
+                    </div>
                     <p class="text-xs md:text-base">
                         {{ aution?.city }}, {{ aution?.province }}
                     </p>
@@ -66,8 +75,8 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        aution?.vehicleDetails?.tireCondition
-    }}</p>
+                            aution?.vehicleDetails?.tireCondition
+                        }}</p>
                     </div>
                     <div v-if="aution?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -77,12 +86,13 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        aution?.vehicleDetails?.brakeCondition }}</p>
+                            aution?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
                 <div v-if="aution?.bids[0].participant._id == auth?.userData?._id" class="md:flex hidden gap-4 mt-5 "
                     :class="changeLayouts ? 'flex-col' : ''">
-                    <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution._id + '-' + auth?.userData?._id } }"
+                    <RouterLink
+                        :to="{ name: auth?.userData?.type == 1 ? 'inbox-seller' : 'inbox-dealer', query: { id: aution._id + '-' + auth?.userData?._id } }"
                         class=" w-fit flex gap-3 cursor-pointer rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path
@@ -90,7 +100,7 @@
                                 fill="#0A0A0A" />
                         </svg>
                         <p class="capitalize  ">{{ aution.owner.seller.firstName }} {{
-        aution.owner.seller.lastName }}</p>
+                            aution.owner.seller.lastName }}</p>
                     </RouterLink>
                 </div>
             </RouterLink>
@@ -143,7 +153,7 @@
                         <div class="flex  items-start gap-1 justify-center flex-col">
                             <p class="text-xs">Expected drop off date</p>
                             <p class="text-md font-medium">{{
-        moment(aution.dropOffDate).format('MMMM DD, YYYY') }}</p>
+                                moment(aution.dropOffDate).format('MMMM DD, YYYY') }}</p>
                         </div>
                     </div>
                 </div>
@@ -250,6 +260,9 @@ export default {
         const confirmVehicleAution = (aution) => {
             props.confirmVehicle(aution)
         }
+        onMounted(() => {
+            console.log('auth card ', auth.userData)
+        });
         return {
             modules: [Navigation, Pagination, Scrollbar, A11y],
             aution,

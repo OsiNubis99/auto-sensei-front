@@ -210,9 +210,7 @@ export default {
     setup(props) {
         const statusModalView = ModalGuidePhotos()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-        onMounted(() => {
-            console.log('statusModalView.img', statusModalView.img)
-        })
+
         return {
             statusModalView,
             bucket

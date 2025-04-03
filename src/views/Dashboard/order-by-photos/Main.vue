@@ -115,7 +115,6 @@ export default {
             showAnimation.value = -1
         }
         const addClass = (e) => {
-            console.log('e', e)
             showAnimation.value = e.target.textContent
 
         }
@@ -123,7 +122,6 @@ export default {
             categories.value[id].children = categories.value[id].children.filter(c => c.id !== itemId);
         }
         const onDragStart = (e, item, index) => {
-            console.log('hola')
             e.dataTransfer.dropEffect = "move";
             e.dataTransfer.effectAllowed = "move";
             e.dataTransfer.setData("itemId", item.id.toString());
@@ -150,7 +148,6 @@ export default {
                 }
             } catch (error) {
                 loading.value = false
-                console.log('error', error)
             }
 
         }
@@ -192,7 +189,6 @@ export default {
 
         }
         const viewPhoto = (photo) => {
-            console.log('photo', photo)
             statusModalViewImage.openModal({
                 active: true,
                 img: {

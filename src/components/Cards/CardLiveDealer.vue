@@ -10,11 +10,12 @@
             </div>
         </swiper>
         <div class="w-full flex flex-col md:flex-row justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : ''">
-            <RouterLink :to="{ name: 'action-details-dealer', params: { id: auction?._id } }"
+            <RouterLink
+                :to="{ name: auth?.userData?.type == 1 ? 'action-details-seller' : 'action-details-dealer', params: { id: auction?._id } }"
                 class="flex pb-2 p-5  flex-col relative gap-3">
                 <div class="">
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ auction.city }}, {{ auction.province }}
                     </p>
@@ -66,7 +67,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.tireCondition }}</p>
+                            auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -76,11 +77,12 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.brakeCondition }}</p>
+                            auction?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
                 <div class="gap-4 hidden md:flex " :class="changeLayouts ? 'flex-col' : ''">
-                    <RouterLink :to="{ name: 'inbox-dealer', query: { id: auction._id + '-' + auth.userData._id } }"
+                    <RouterLink
+                        :to="{ name: auth?.userData?.type == 1 ? 'inbox-seller' : 'inbox-dealer', query: { id: auction._id + '-' + auth.userData._id } }"
                         class=" w-fit flex gap-3 absolute bottom-3 left-3 cursor-pointer rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path

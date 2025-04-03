@@ -34,8 +34,8 @@
                     </div>
                     <div class="md:h-full flex justify-between flex-col">
                         <p class=" font-semibold text-sm :text-base ">{{ statusModal.data?.vehicleDetails?.year }} {{
-        statusModal.data?.vehicleDetails?.make }} {{
-        statusModal.data?.vehicleDetails?.model }}</p>
+                            statusModal.data?.vehicleDetails?.make }} {{
+                                statusModal.data?.vehicleDetails?.model }}</p>
                         <div>
                             <p class="capitalize text-sm md:text-base mt-4">Current Bid</p>
                             <p v-if="statusModal.data?.bids[0]?.amount"
@@ -357,13 +357,10 @@ export default {
             if (amountCurrent.value) {
                 let newAmout = formData.value.placeyourbid
                 formData.value.placeyourbid = parseInt(newAmout) + parseInt(100)
-                console.log('formData.value.placeyourbid', formData.value.placeyourbid)
             } else {
-                console.log('paso 2', formData.value.placeyourbid = (amountCurrent.value += 100))
                 amountCurrent.value = statusModal.data.vehicleDetails.basePrice
                 formData.value.placeyourbid = (amountCurrent.value += 100)
             }
-            console.log('PEPEE ', formData.value.placeyourbid)
             invalid.value = validationsDealerBidding(formData.value, steps.value, statusModal.data.vehicleDetails.basePrice, statusModal.from, showPayment.value, itemCard.value, authStore.userData);
 
             sizeObjet.value = Object.entries(invalid.value).length
@@ -533,7 +530,6 @@ export default {
             amountCurrent.value = null
         }
         const getCard = (card) => {
-            console.log('card', card)
             formData.value.termsConditions = undefined
             itemCard.value = card
             openDropdown.value = false
@@ -565,7 +561,6 @@ export default {
             }
         })
         onMounted(() => {
-            console.log('statusModal.data', statusModal)
             if (!authStore.userData.paymentMethods.length > 0) {
                 showPayment.value = true
             }

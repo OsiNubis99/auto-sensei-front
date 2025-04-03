@@ -19,16 +19,4 @@ export const useTranslationsStore = defineStore("translations", {
       this.idioma = idioma;
     },
   },
-  // actions: {
-  //   changeLang(value) {
-  //     console.log("chaged translation");
-  //     console.log(en);
-  //     if (value) {
-  //       this.trads = en;
-  //     } else {
-  //       this.trads = es;
-  //     }
-  //     console.log("this.trads", this.trads);
-  //   },
-  // },
 });

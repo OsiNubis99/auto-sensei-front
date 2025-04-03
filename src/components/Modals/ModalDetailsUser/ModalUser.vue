@@ -133,33 +133,33 @@
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Country:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.country }}</p>
+                                        statusModal?.datauser?.address?.country }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Province:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.state }}</p>
+                                        statusModal?.datauser?.address?.state }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>City:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.city }}</p>
+                                        statusModal?.datauser?.address?.city }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Line 1:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.line1 }}</p>
+                                        statusModal?.datauser?.address?.line1 }}</p>
                                 </div>
                                 <div v-if="statusModal?.datauser?.address?.line2"
                                     class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Line 2:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.line2 }}</p>
+                                        statusModal?.datauser?.address?.line2 }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Postal Code:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.postal_code }}</p>
+                                        statusModal?.datauser?.address?.postal_code }}</p>
                                 </div>
 
                             </div>
@@ -188,7 +188,7 @@
                         </div>
 
                         <p class="text-xs md:text-base text-[#797979] " v-if="statusModal?.datauser?.email">{{
-        statusModal?.datauser?.email }}</p>
+                            statusModal?.datauser?.email }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide
                             information.</p>
                     </div>
@@ -257,7 +257,7 @@
                         class="bg-white w-[100px] h-[100px] md:w-[200px] flex justify-center items-center overflow-hidden md:h-[200px] rounded-full border-[4px] border-primary animate-fade-up  animate-ease-in-out animate-delay-200 ">
                         <img v-if="statusModal?.datauser?.dealer?.picture"
                             class=" w-full h-full  object-contain  shadow-md"
-                            :src="bucket + statusModal?.datauser?.dealer.picture" alt="">
+                            :src="bucket + statusModal?.datauser?.dealer?.picture" alt="">
                         <img v-else class=" w-full h-full" src="@/assets/svg/profile.svg" alt="">
                     </div>
                 </div>
@@ -314,33 +314,33 @@
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Country:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.country }}</p>
+                                        statusModal?.datauser?.address?.country }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Province:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.state }}</p>
+                                        statusModal?.datauser?.address?.state }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>City:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.city }}</p>
+                                        statusModal?.datauser?.address?.city }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Line 1:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.line1 }}</p>
+                                        statusModal?.datauser?.address?.line1 }}</p>
                                 </div>
                                 <div v-if="statusModal?.datauser?.address?.line2"
                                     class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Line 2:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.line2 }}</p>
+                                        statusModal?.datauser?.address?.line2 }}</p>
                                 </div>
                                 <div class="bg-white flex gap-2 pl-2 shadow-md">
                                     <p>Postal Code:</p>
                                     <p class="text-xs md:text-base text-[#797979] whitespace-pre">{{
-        statusModal?.datauser?.address?.postal_code }}</p>
+                                        statusModal?.datauser?.address?.postal_code }}</p>
                                 </div>
 
                             </div>
@@ -365,7 +365,7 @@
                             <p class="font-medium text-xs  md:text-base ">Dealer Name:</p>
                         </div>
                         <p v-if="statusModal?.datauser?.dealer?.name" class="text-xs md:text-base text-[#797979] ">{{
-        statusModal?.datauser?.dealer?.name }}</p>
+                            statusModal?.datauser?.dealer?.name }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide
                             information.</p>
                     </div>
@@ -389,7 +389,7 @@
                         </div>
 
                         <p v-if="statusModal?.datauser?.dealer?.phone" class="text-xs md:text-base text-[#797979] ">{{
-        statusModal?.datauser?.dealer?.phone }}</p>
+                            statusModal?.datauser?.dealer?.phone }}</p>
                         <p v-else class="text-xs md:text-base text-[#797979] whitespace-pre ">The user did not provide
                             information.</p>
                     </div>
@@ -513,7 +513,6 @@ export default {
         const statusModal = ModalUserDetails()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const cancel = () => {
-            console.log('hola')
             statusModal?.closeModal(false)
         }
 

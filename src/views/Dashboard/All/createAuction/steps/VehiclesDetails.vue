@@ -390,8 +390,6 @@ export default {
             props.nextVehiclesDetails()
         }
         const saveDraft = async (string) => {
-            console.log('idCreate', idCreate.value)
-            console.log('form', form.value)
             let dataPost = {
                 vin: !form.value.numberVinGenerals ? undefined : form.value.numberVinGenerals,
                 dropOffDate: !form.value.date ? undefined : form.value.date,
@@ -429,7 +427,6 @@ export default {
                 },
             }
             loading.value = true
-            console.log('dataPost', dataPost)
             if (dataPost) {
                 try {
                     let res = await store.update({ uuid: idCreate.value, payload: dataPost })
@@ -438,7 +435,6 @@ export default {
                         await router.push({ path: '/draft' })
                     }
                 } catch (error) {
-                    console.log('error', error)
                     loading.value = false
                     toast(error?.response?.data?.message || 'An error has occurred try again', { type: "error" });
 
@@ -447,7 +443,6 @@ export default {
 
         }
         onMounted(() => {
-            console.log('form', form.value)
             form.value.year ? formDisable.value.year = true : formDisable.value.year = false;
             form.value.make ? formDisable.value.make = true : formDisable.value.make = false;
             form.value.model ? formDisable.value.model = true : formDisable.value.model = false;

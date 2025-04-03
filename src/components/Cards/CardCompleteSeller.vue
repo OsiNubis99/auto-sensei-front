@@ -32,7 +32,7 @@
                 class="flex p-5  flex-col gap-3">
                 <div>
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
@@ -84,7 +84,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.tireCondition }}</p>
+                            auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -94,7 +94,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.brakeCondition }}</p>
+                            auction?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
                 <RouterLink v-if="auction.status == 'bids completed'"
@@ -210,8 +210,6 @@ export default {
         const statusModalPhone = ModalVerifyPhone()
         const auth = useAuthStore()
         const declineAution = (auction, option) => {
-            console.log('auction', auction)
-            console.log('option', option)
             props.decline(auction, option)
         }
         const cancelAution = () => {
@@ -222,7 +220,6 @@ export default {
             /* props.acceptAution() */
         }
         const openModal = () => {
-            console.log('auth.userData.anddress',)
             if (auth.userData.address) {
                 if (auth.userData.seller.phoneValidated) {
                     statusModal.openModal({ isActive: true, data: auction })

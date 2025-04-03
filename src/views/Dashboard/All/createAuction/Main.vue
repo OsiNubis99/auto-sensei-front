@@ -587,12 +587,10 @@ export default {
                         yearEnd: formData.value.yearToPreferences
                     }
                 }
-                console.log('dataPost', dataPost)
                 loading.value = true
                 try {
 
                     let res = await store.create(dataPost)
-                    console.log('nextGeneralInformation', res)
                     if (res) {
                         id_create.value = res.data._id;
                         formData.value.numberVin = res.data.vin;
@@ -706,7 +704,6 @@ export default {
 
                     }
                 }
-                console.log('PASOOOOO 2', dataPost)
                 loading.value = true
                 try {
                     let res = await store.update({ uuid: id_create.value, payload: dataPost })
@@ -735,10 +732,8 @@ export default {
         }
         const nextUploadPhotos = async () => {
 
-            console.log('IMAGENES', formData.value.images)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'UploadPhotos');
-            console.log('invalid.value', invalid.value)
             if (Object.entries(invalid.value).length > 0) {
                 toast(
                     invalid?.value?.images ||
@@ -814,7 +809,6 @@ export default {
                 let newArrayImages = []
                 for (let index = 0; index < formData.value.images.length; index++) {
                     const element = formData.value.images[index];
-                    console.log('element', element)
                     arrayUpload.value = [...arrayUpload.value, {
                         name: `file-${index}`,
                         preview: element.preview,
@@ -827,7 +821,6 @@ export default {
                     newArrayImages.push(resImages[0].data)
                     if (resImages[0]?.data) {
                         arrayUpload.value.map((file) => {
-                            console.log('file', file)
                             if (file.name == `file-${index}`) {
 
                                 file.completed = true
@@ -837,7 +830,6 @@ export default {
                     }
                 }
                 if (newArrayImages.length > 0) {
-                    console.log('newArrayImages', newArrayImages)
                     try {
                         let resWeekend = getDateAndMinutes(+formData.value.dayMonday)
                         let hour = moment(`${formData.value.auctionTime}:${formData.value.auctionDuration}`, "H:mm").format('HH:mm:ss')
@@ -858,7 +850,6 @@ export default {
                                 startDate = resWeekend.startDate
                                 break;
                             case 'none':
-                                console.log('entroaqui ')
                                 let resStart = dateTomorrow(9)
                                 duration = 480
                                 startDate = resStart
@@ -917,7 +908,6 @@ export default {
                         }
                         return dataPost
                     } catch (error) {
-                        console.log('error', error)
                         loadingUploadImages.value = false
                         toast(error?.response?.data?.message || 'Your auction listing is incomplete, please answer all the questions and fill all out all the forms.', {
                             type: "error",
@@ -926,7 +916,6 @@ export default {
                     }
                 }
             } catch (error) {
-                console.log('error', error)
                 loadingUploadImages.value = false
                 toast(error?.response?.data?.message || 'Your auction listing is incomplete, please answer all the questions and fill all out all the forms.', {
                     type: "error",
@@ -993,7 +982,6 @@ export default {
                         let res = await store.update({ uuid: id_create.value, payload: resFiles })
                         if (res) {
                             let resDtaLate = await dataLayer.push({ 'event': 'LaunchAuction', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
-                            console.log('resDtaLate Create', resDtaLate)
                             await router.push({ path: '/all' })
 
                         }
@@ -1008,7 +996,6 @@ export default {
         const getCountry = async () => {
             try {
                 const res = await countrys.getCountry()
-                console.log('resresresresresres', res)
                 formData.value.getState = res.data
             } catch (error) {
 
@@ -1021,7 +1008,6 @@ export default {
             try {
                 const res = await countrys.getCountryCities(value.iso2)
                 formData.value.getCities = res.data
-                console.log('getCountryCities', res)
             } catch (error) {
                 loadingCountrys.value = false
             } finally {
@@ -1032,12 +1018,10 @@ export default {
         const onChangeGetCity = async (event) => {
             let value = JSON.parse(event.target.value)
             /* formData.value.city = value.name */
-            console.log('value', value)
         }
         onMounted(() => {
             getCountry()
             let twoDaysLater = new Date(new Date().getTime() + 2 * 86400 * 1000);
-            console.log('twoDaysLater', twoDaysLater)
         })
 
         return {

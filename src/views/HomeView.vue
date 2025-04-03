@@ -9,8 +9,8 @@
         <div class="flex flex-col sm:mt-10 2xl:flex-row gap-6 2xl:gap-4  justify-start items-center">
           <button @click="goToHome()" id="sellCar"
             class="btn w-full   lg:w-[350px] lg:h-[55px] !font-bold bg-primary text-base-black">{{
-          $t("sell_your_car")
-        }}</button>
+              $t("sell_your_car")
+            }}</button>
           <div
             class=" px-4 flex justify-center items-center 2xl:pr-6 2xl:w-fit w-full rounded-full 2xl:h-[55px] bg-[#292F38] text-base-black">
             <div class="flex gap-3 items-center justify-start ">
@@ -130,7 +130,7 @@
       </p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 p-4 gap-10 md:gap-20 relative lg:px-20 h-full">
-      <div v-for="(  item, index  ) in   WhyAutoSensei  " :key="index" class="flex flex-col items-center gap-5">
+      <div v-for="(item, index) in WhyAutoSensei" :key="index" class="flex flex-col items-center gap-5">
         <component :is="item.icon"></component>
         <h5 class=" text-2xl text-center font-semibold text-base-black"> {{ item.title }} </h5>
         <p class=" text-xs md:text-sm text-center text-[#464B50] font-normal"> {{ item.pre_title }}</p>
@@ -509,16 +509,15 @@ export default {
           break;
 
       }
-      console.log('videoMedia.value', videoMedia.value)
       modalVideo.value = true
     }
+
     const closeModalVideo = () => {
       modalVideo.value = false
       videoMedia.value = null
       isPlaying.value = false
     }
     const goToHome = async () => {
-      console.log('authStore.userData', authStore.userData)
       if (authStore.userData._id) {
         switch (authStore.userData.type) {
           case 0:
@@ -550,14 +549,7 @@ export default {
       videoPlayer.value.pause();
       isPlaying.value = false
     }
-    onMounted(() => {
-      console.log('route', route)
-      console.log('router', router)
-      /*  let yourScript = document.createElement('script')
-       yourScript.setAttribute('src', '//js.hs-scripts.com/45834146.js')
-       yourScript.setAttribute('id', 'hs-script-loader')
-       document.head.appendChild(yourScript) */
-    })
+
 
     return {
       pagination: {

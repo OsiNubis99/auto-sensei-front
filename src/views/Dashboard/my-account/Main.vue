@@ -174,7 +174,7 @@
                                             <p class="font-medium">Total Auction</p>
                                         </div>
                                         <p v-if="statusAction.stats?.total_auciton" class="text-[#858585]  ">{{
-            statusAction.stats?.total_auciton }} Vehicles</p>
+                                            statusAction.stats?.total_auciton }} Vehicles</p>
                                         <p v-else class="text-[#858585]  ">0 Vehicles</p>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@
                                         <p class="font-medium">Total Won</p>
                                     </div>
                                     <p v-if="statusAction.stats?.total_won" class="text-[#858585] ">{{
-            statusAction.stats?.total_won }} Vehicles</p>
+                                        statusAction.stats?.total_won }} Vehicles</p>
                                     <p v-else class="text-[#858585] ">0 Vehicles</p>
                                 </div>
                                 <hr class="border-[#cfcfcf] border-1 hidden md:block ">
@@ -224,7 +224,7 @@
                                         <p class="font-medium">Total Purchase</p>
                                     </div>
                                     <p v-if="statusAction.stats?.total_purchase" class="text-[#858585] ">${{
-            statusAction.stats?.total_purchase }}</p>
+                                        statusAction.stats?.total_purchase }}</p>
                                     <p v-else class="text-[#858585] ">$0</p>
                                 </div>
                                 <div class=" w-full md:hidden flex flex-col justify-between">
@@ -324,10 +324,12 @@
                                                 d="M12.1665 17.1673V18.8339H2.1665V17.1673H12.1665ZM12.6548 1.07227L19.1365 7.55393L17.9582 8.73393L17.0748 8.43893L15.0107 10.5006L19.7248 15.2148L18.5465 16.3931L13.8332 11.6789L11.8298 13.6823L12.0657 14.6256L10.8865 15.8039L4.40484 9.32227L5.584 8.14393L6.52567 8.37893L11.7707 3.13477L11.4765 2.25143L12.6548 1.07227Z"
                                                 fill="white" />
                                         </svg>
-                                        <p class="text-white text-xs md:text-base">Top {{statusAction.stats?.top?.length }} Highest Bid</p>
+                                        <p class="text-white text-xs md:text-base">Top {{
+                                            statusAction.stats?.top?.length
+                                        }} Highest Bid</p>
                                     </div>
                                     <div class="flex justify-between gap-3  p-4 items-center"
-                                        v-for="(item, index) in  statusAction.stats?.top" :key="index">
+                                        v-for="(item, index) in statusAction.stats?.top" :key="index">
                                         <div class="w-10 h-10">
                                             <img class="w-full h-full rounded-full shadow-lg object-cover"
                                                 :src="bucket + item?.vehicleDetails?.exteriorPhotos[0]" alt="">
@@ -338,7 +340,7 @@
                                             <p class="text-[#4D4D4D] text-xs  md:text-md">Beat 20 bidders</p>
                                         </div>
                                         <div>
-                                            <p class="font-medium text-xs md:text-2xl">${{item?.bids[0]?.amount}}</p>
+                                            <p class="font-medium text-xs md:text-2xl">${{ item?.bids[0]?.amount }}</p>
                                         </div>
 
                                     </div>
@@ -354,7 +356,7 @@
                         <ReviewedSeller v-if="storeUser.userData.type == 1" :key="counter" :dataUser="dataUser"
                             :needReview="needReview" :reviewed="reviewed" :getProfile="getProfile" />
 
-                        <PaymentDealer v-if="storeUser.userData.type == 2" />
+                        <PaymentDealer />
                         <ReviewdDealer v-if="storeUser.userData.type == 2" :key="counter" :dataUser="dataUser"
                             :needReview="needReview" :storeProfile="storeProfile" :reviewed="reviewed"
                             :getProfile="getProfile" />
@@ -410,12 +412,10 @@ export default {
             storeUser.authProfile({ token: token }).then(async (res) => {
                 if (res.data) {
                     await statusAction.getStats()
-                    console.log('STATSASSSSSSSSSSSSSSSSSSSS', statusAction.stats)
                     dataUser.value = res.data
                     loading.value = false
                     counter.value += 1
                     let resValorationes = await statusAction.index()
-                    console.log('resValorationes.data', resValorationes.data)
                     resValorationes.data.map((res, index) => {
                         if (res.status == 'reviewed') {
                             reviewed.value.push(res)
@@ -483,7 +483,6 @@ export default {
                             }
                             let resUpdate = await storeProfile.updateUser(storeUser.userData?.type == 1 ? updateSeller : updateDelaer)
                             if (resUpdate) {
-                                console.log('resUpdate', resUpdate)
                                 getProfile()
                                 form.value.preview = null
                                 form.value.img = null
@@ -504,14 +503,6 @@ export default {
                 }
             }
         }
-        /*   const getCountry = async () => {
-                try {
-                    const res = await payment.getCountry()
-                    console.log('resresresresresres', res)
-                } catch (error) {
-    
-                }
-          } */
 
         onMounted(() => {
             getProfile()

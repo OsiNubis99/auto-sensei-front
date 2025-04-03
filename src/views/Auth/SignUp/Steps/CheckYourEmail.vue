@@ -155,7 +155,6 @@ export default {
             }
         }
         const verifiedCode = async () => {
-            console.log('form', form)
             if (!codeEmail.value) {
                 errorCode.value = true
                 toast('Campo Obligarotio', {
@@ -172,7 +171,6 @@ export default {
                     localStorage.setItem('updateUser', res.data.access_token)
                     props.next()
                 }
-                console.log('res', res)
             } catch (error) {
                 loading.value = false
                 toast(error.response?.data?.message || 'error', {
@@ -184,7 +182,6 @@ export default {
 
         }
         onMounted(() => {
-            console.log('se moneto el paso 3', route.query?.error)
 
         })
         return {

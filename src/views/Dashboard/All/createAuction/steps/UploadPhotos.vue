@@ -941,11 +941,11 @@
                             </p>
                             <p class="text-xs font-medium truncate">Type: <span
                                     class="uppercase bg-[#6d53b0] text-white shadow-lg font-semibold ml-2 px-2 py-1 text-[8px] rounded-md ">{{
-                image?.type }}
+                                        image?.type }}
                                 </span> </p>
                             <p class="text-xs font-medium mb-2 truncate">Size: <span
                                     class="uppercase bg-[#6d53b0] text-white shadow-lg font-semibold ml-3 px-2 py-1 text-[10px] rounded-md ">{{
-                image?.size }} Mb
+                                        image?.size }} Mb
                                 </span> </p>
                         </div>
                         <button
@@ -1087,9 +1087,7 @@ export default {
             var input = event.target;
             let typeFile = input.files[0].type.split("/")
             if (typeFile[1] == 'jpg' || typeFile[1] == 'jpeg' || typeFile[1] == 'png' || typeFile[1] == 'webp') {
-                console.log('typeFile', typeFile[1])
                 let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
-                console.log('input', input)
                 if (input.files) {
                     if (convertion > 100 && typeFile[0] == 'video') {
                         toast("The video exceeds 100mb", {
@@ -1100,7 +1098,6 @@ export default {
                         reader.onload = (e) => {
                             if (typeFile[0] !== 'video') {
                                 if (isMobile()) {
-                                    console.log("Mobile device detected");
                                 } else {
                                     statusModalImage.openModal({ active: true, img: input.files[0], type: string })
                                 }
@@ -1222,7 +1219,6 @@ export default {
             props.saveData(string)
         }
         const viewPhoto = (photo) => {
-            console.log('photo', photo)
             statusModalViewImage.openModal({ active: true, img: photo })
         }
         const openModalGuide = () => {
@@ -1231,7 +1227,6 @@ export default {
         }
         function removeImage(index) {
             form.value.images.splice(index, 1)
-            console.log('imagenes', form.value.images)
         }
         function createImage(files) {
             for (var index = 0; index < files.length; index++) {
@@ -1253,7 +1248,6 @@ export default {
                         return
                     } else {
                         toastStatus.value = false
-                        console.log('HAY MENOS DE 30', form.value.images.length)
                         form.value.images.push(imageUrl);
                     }
 
@@ -1262,7 +1256,6 @@ export default {
             }
         }
         const onFileChange = (e) => {
-            console.log('e.target.files', e.target.files)
             var files = e.target.files || e.dataTransfer.files;
             if (!files.length)
                 return;

@@ -595,7 +595,6 @@ export default {
             try {
                 let res = await storeIdAution.getAutionById({ uuid: id })
                 if (res) {
-                    console.log('dataDetails.value', res.data)
                     dataDetails.value = res.data
                     form.value.numberVinGenerals = res.data?.vehicleDetails?.vin;
                     form.value.year = res.data.vehicleDetails?.year;
@@ -645,7 +644,6 @@ export default {
         const nextGeneralInformation = async () => {
 
             invalid.value = validateData(form.value, 'edit-admin');
-            console.log('invalid', invalid)
             if (Object.entries(invalid.value).length > 0) {
                 toast(
                     invalid?.value?.numberVinGenerals ||
@@ -721,7 +719,6 @@ export default {
                         yearEnd: form.value.yearToPreferences
                     }
                 }
-                console.log('dataPost', dataPost)
                 loading.value = true
                 if (dataPost) {
                     try {
@@ -731,7 +728,6 @@ export default {
                             /*  await router.push({ path: '/draft' }) */
                         }
                     } catch (error) {
-                        console.log('error', error)
                         loading.value = false
                         toast(error?.response?.data?.message || 'An error has occurred try again', { type: "error" });
 
@@ -742,7 +738,6 @@ export default {
         }
         onMounted(() => {
             if (route.params.id) {
-                console.log('route.params.id', route.params.id)
                 id_aution.value = route.params.id
                 getDataAution(route.params.id)
             }

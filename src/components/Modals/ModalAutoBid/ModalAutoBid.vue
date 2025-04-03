@@ -45,7 +45,7 @@
                                     <p class=" text-xs font-medium md:text-base">Maximum Bid Amount</p>
                                 </div>
                                 <p class="font-medium text-xs md:text-base">${{ statusModal.data?.bids[0]?.biddingLimit
-                                    }}</p>
+                                }}</p>
                             </div>
                             <div class="flex gap-2 items-center justify-between">
                                 <div class="flex gap-2 items-center">
@@ -59,7 +59,7 @@
                                     <p class=" text-xs font-medium md:text-base">Credit Card Name</p>
                                 </div>
                                 <p class="font-medium text-xs md:text-base">{{
-        statusModal.data?.bids[0]?.paymentMethod?.billingDetails?.name }}</p>
+                                    statusModal.data?.bids[0]?.paymentMethod?.billingDetails?.name }}</p>
                             </div>
                             <div class="flex gap-2 items-center justify-between">
                                 <div class="flex gap-2 items-center">
@@ -72,7 +72,7 @@
                                     <p class=" text-xs whitespace-pre font-medium md:text-base">Credit Card Number</p>
                                 </div>
                                 <p class="font-medium text-xs whitespace-pre md:text-base">**** **** **** {{
-        statusModal.data?.bids[0]?.paymentMethod?.card?.last4 }}</p>
+                                    statusModal.data?.bids[0]?.paymentMethod?.card?.last4 }}</p>
                             </div>
                         </div>
 
@@ -298,7 +298,6 @@ export default {
         })
         onMounted(() => {
             if (statusModal.data.bids[0]) {
-                console.log('statusModal.data', statusModal.data)
                 statusModal.data.vehicleDetails.basePrice = statusModal.data.bids[0].amount
                 const formatter = new Intl.NumberFormat('en-US', {
                     style: 'currency',

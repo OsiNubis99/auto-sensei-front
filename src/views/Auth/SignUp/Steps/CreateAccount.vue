@@ -65,7 +65,7 @@
                                     class="appearance-none block w-full px-3 py-2 border  rounded-md shadow-sm placeholder-[#858585] focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                         </div>
-                      
+
                         <div class="space-y-1 animate-fade-up  animate-ease-in-out animate-delay-600">
                             <label htmlFor="password" class="block text-sm font-medium text-gray-700">
                                 Password
@@ -170,9 +170,8 @@ export default {
         const storeAuth = useAuthStore()
         const loading = ref(false)
         const form = storeData.formData
-    
+
         const nextStep = async () => {
-            console.log('form.', form)
             invalid.value = createAccount(form, rol.value);
             if (Object.entries(invalid.value).length > 0) {
                 toast(invalid?.value?.email || invalid.value.password || invalid.value.confirmPassword || invalid.value.termsconditions, {
@@ -203,7 +202,6 @@ export default {
 
                     let resRol = rol.value == 'dealers' ? typeDealer : typeSeller
                     let res = await storeAuth.register(resRol)
-                    console.log('res', res)
                     if (res.data.status == 400) {
                         toast(res?.data?.message || 'error al cargar', {
                             type: "error",
@@ -221,7 +219,7 @@ export default {
                 }
             }
         }
-     
+
         onUpdated(() => {
             rol.value = props.rol
         })

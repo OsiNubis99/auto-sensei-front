@@ -260,7 +260,6 @@ export const validateData = (form, step, typeLaunch) => {
         }
     }
     if (step == 'UploadPhotos') {
-        console.log('form', form.images)
         if (form.images.length === 0) {
             error.images = 'You must upload the files to continue'
         }

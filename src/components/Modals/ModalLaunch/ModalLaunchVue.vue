@@ -28,19 +28,19 @@
                     </div>
                     <div>
                         <p class="font-semibold text-xs md:text-base ">{{ formData?.year }} {{ formData?.make }} {{
-        formData?.model }}</p>
+                            formData?.model }}</p>
                         <p class="text-[10px] md:text-base">{{ formData?.saveCity?.name }}, {{
-        formData?.saveProvince?.name }}</p>
+                            formData?.saveProvince?.name }}</p>
                     </div>
                 </div>
             </div>
             <div class="mt-2 border-[#E0E0E0] border-t-[1px] ">
                 <div class=" p-2  md:p-4">
                     <template v-if="(stepsVerifiqued.step1 && formData.launchOptions == 'none') ||
-        (stepsVerifiqued.step1 && formData.launchOptions == 'Launch now after verified') ||
-        (stepsDateTime.step1 && formData.launchOptions == 'Choose the date & time') ||
-        (stepsDateWeekeng.step1 && formData.launchOptions == 'Choose after hours (weekend)' ||
-            formData.launchOptions == null)">
+                        (stepsVerifiqued.step1 && formData.launchOptions == 'Launch now after verified') ||
+                        (stepsDateTime.step1 && formData.launchOptions == 'Choose the date & time') ||
+                        (stepsDateWeekeng.step1 && formData.launchOptions == 'Choose after hours (weekend)' ||
+                            formData.launchOptions == null)">
                         <p class="md:font-semibold text-xs md:text-base ">Launch Options</p>
                         <p class=" text-[#858585] text-[10px] md:text-base">After you launch the auction we will review
                             & approve your auction. Your auction will be listed the next day from 9 am to 5pm.
@@ -153,7 +153,6 @@ export default {
         })
 
         const newtDayDate = () => {
-            console.log('formData', formData.value)
             let resDay = dateTomorrow(9)
 
 

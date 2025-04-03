@@ -21,7 +21,8 @@
                 <div class="w-full mt-5 flex flex-col gap-2">
                     <label class=" text-sm md:text-base " for="">Vehicle Drop Off Agreement</label>
                     <VueDatePicker :enable-time-picker="false"
-                        :min-date="new Date(new Date().getTime() + 2 * 86400 * 1000)" class="custom-picker"
+                        :min-date="new Date(new Date().getTime() + 2 * 86400 * 1000)"
+                        :max-date="new Date(new Date().getTime() + 14 * 86400 * 1000)" class="custom-picker"
                         :class="invalid?.date && 'error-picker'" v-model="form.date">
                         <template #calendar-header="{ index, day }">
                             <div :class="index === 5 || index === 6 ? 'red-color' : ''">

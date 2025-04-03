@@ -170,16 +170,16 @@
                                         class="label-colors !p-2 !h-[40px] !capitalize whitespace-pre w-full">
                                         <input @change="applyFilter($event, 'color')" :value="color" type="radio"
                                             class="input-radio" :class="[
-        color == 'silver' && 'on-silver',
-        color == 'white' && 'on-white',
-        color == 'grey' && 'on-grey',
-        color == 'greenDark' && 'on-greenDark',
-        color == 'red' && 'on-red',
-        color == 'yellow' && 'on-yellow',
-        color == 'blue' && 'on-blue',
-        color == 'white' && 'on-white',
-        color == 'white' && 'on-white',
-    ]" name="color-redio">
+                                                color == 'silver' && 'on-silver',
+                                                color == 'white' && 'on-white',
+                                                color == 'grey' && 'on-grey',
+                                                color == 'greenDark' && 'on-greenDark',
+                                                color == 'red' && 'on-red',
+                                                color == 'yellow' && 'on-yellow',
+                                                color == 'blue' && 'on-blue',
+                                                color == 'white' && 'on-white',
+                                                color == 'white' && 'on-white',
+                                            ]" name="color-redio">
                                         {{ color }}
                                     </label>
                                 </div>
@@ -452,7 +452,6 @@ export default {
         })
         const dataBuffer = ref(null)
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
-            console.log('autionUpdate COMPLETED DEALER', autionUpdate)
             const i = data.value.findIndex(x => x._id === newQuestion._id)
             data.value[i] = newQuestion
             if (autionUpdate.value.status == 'completed' || autionUpdate.value.status == 'drop off') {
@@ -485,7 +484,6 @@ export default {
                 let newArray = []
                 await storeAutions.index()
                 let res = await storeAutions.indexCurrentBids()
-                console.log('storeAutions?.completed', storeAutions?.completed)
                 data.value = storeAutions?.completed
                 data.value.map((autions, index) => {
                     let photos = null;
@@ -506,7 +504,6 @@ export default {
             }
         }
         const sutmibPDF = async (pdf) => {
-            console.log('recivied', pdf)
             loadingPdf.value = true
             try {
                 const blob = new Blob([pdf], { type: 'application/pdf' }, { name: Date.now() + '.' + pdf.extension });
@@ -521,11 +518,9 @@ export default {
                 };
                 let result = await axios(options);
                 if (result.data) {
-                    console.log('result', result)
-                    console.log('autionPdf.value._id, result.data', autionPdf.value._id, result.data)
+
                     try {
                         let res = await storeAutions.vehicleReceived(autionPdf.value._id, result.data)
-                        console.log('res', res)
                         if (res) {
                             showPdf.value = 'https://apidev.autosensei.ca/files/' + result.data
                             steps.value.step1 = false
@@ -546,7 +541,6 @@ export default {
 
                 }
 
-                console.log(result);
             } catch (e) {
                 loading.value = false
                 console.error("error", e);
@@ -573,7 +567,6 @@ export default {
                 loadingPdf.value = true
                 try {
                     let res = await storeAutions.vehicleReceived(autionPdf.value._id, autionPdf.value.contractSeallerSing)
-                    console.log('res', res)
                     if (res) {
                         showPdf.value = 'https://apidev.autosensei.ca/files/' + res.data.contractSeallerSing
 
@@ -667,7 +660,7 @@ export default {
 
         }
         const confirmVehicle = async (aution) => {
-            console.log('aution', aution)
+            console.log('maldito', aution)
             autionPdf.value = aution
             openPdf.value = true
         }
@@ -693,8 +686,6 @@ export default {
             return removeDuplicate(filteredItems.value.map(item => item.vehicleDetails[key])).sort()
         }
         const applyPairFilters = (event, type, filter) => {
-            console.log(filter);
-            console.log(filteredItems.value);
             filteredItems.value = filteredItems.value.filter((item) => {
                 if (type === 'start') {
                     return item.vehicleDetails[filter] >= event.target.value
@@ -705,13 +696,10 @@ export default {
 
             })
 
-            console.log('filter', filter, ':', event.target.value)
             counter.value++
         }
         const applyFilter = (event, filter) => {
-            console.log(filter);
             filteredItems.value = filteredItems.value.filter((item) => {
-                console.log(item);
                 return item.vehicleDetails[filter] == event.target.value
             })
             counter.value++

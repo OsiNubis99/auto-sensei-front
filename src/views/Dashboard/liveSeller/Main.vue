@@ -4,7 +4,7 @@
   </template>
 
   <template v-else>
-    <HeaderOptionesSeller />
+    <HeaderOptionsDealer :storeAutions="storeAutions" :data="data" />
     <div v-if="data?.length > 0 || draft.length > 0" class="relative max-w-[120rem] mx-auto z-50 md:top-[60px]">
       <div class="flex justify-between md:mt-5 md:px-5 gap-4 mt-2">
         <div class="hidden md:w-[24%] lg:block">
@@ -96,6 +96,7 @@
 <script>
 import { ref, onMounted, computed, watch, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useAuctionStore } from "@/stores/auctions";
 import { useAuthStore } from "@/stores/auth";
 import { ModalViewDetails } from "@/stores/modalViewDetails";
 import HeaderOptionesSeller from "../../../components/Header/HeaderOptionesSeller.vue";
@@ -109,7 +110,7 @@ import ScrrenNoSorbySeller from "../../../components/Screen/ScrrenNoSorbySeller.
 import { arrayPhotos } from "../../../utils/packPhotos";
 import ModalBidNow from "../../../components/Modals/ModalBidNow/ModalBidNow.vue";
 import { ModalBids } from '@/stores/modalBids';
-import { useAuctionSellerStore } from "../../../stores/aution-seller";
+import HeaderOptionsDealer from "../../../components/Header/HeaderOptionsDealer.vue";
 export default {
   components: {
     ModalViewDetailsVue,
@@ -120,7 +121,8 @@ export default {
     Basic,
     ScreenCreateAution,
     ScrrenNoSorbySeller,
-    ModalBidNow
+    ModalBidNow,
+    HeaderOptionsDealer
   },
   setup() {
     const route = useRoute();
@@ -128,7 +130,7 @@ export default {
     const isOpen = ref(false);
     const loading = ref(false);
     const changeLayouts = ref(false);
-    const storeAutions = useAuctionSellerStore();
+    const storeAutions = useAuctionStore();
     const storeUser = useAuthStore();
     const path = ref(computed(() => route.name));
     const statusModal = ModalViewDetails();
@@ -191,7 +193,7 @@ export default {
     const index = async () => {
       loading.value = true;
       try {
-        let res = await storeAutions.indexSeller();
+        let res = await storeAutions.index();
         draft.value = res.data.filter((item) => item.status === "draft");
         if (res) {
           data.value = storeAutions.live;

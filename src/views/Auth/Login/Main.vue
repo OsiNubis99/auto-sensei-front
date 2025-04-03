@@ -140,7 +140,6 @@ export default {
             password: ""
         });
         const getLogin = async () => {
-            console.log('hola')
             if (payloadData.value.email == "" || payloadData.value.password == "") {
                 toast("Campos Requerido", {
                     type: "error",
@@ -155,13 +154,10 @@ export default {
             isLoadingLogin.value = true;
             try {
                 let res = await store.login(payloadData.value);
-                console.log('res login', res)
                 if (res.data.access_token) {
                     let resProfile = await store.authProfile()
-                    console.log('resProfile', resProfile)
                     if (resProfile.statusText = "OK") {
                         localStorage.setItem('rol', resProfile.data.type)
-                        console.log('rol.value', rol.value)
 
                         switch (resProfile.data.type) {
                             case 0:
@@ -175,7 +171,7 @@ export default {
                                 } else {
                                     localStorage.clear()
                                     isLoadingLogin.value = false;
-                                    toast("You must be a seller to login.", {
+                                    toast("You must be a dealer to login.", {
                                         type: "error",
                                     });
                                 }
@@ -189,7 +185,7 @@ export default {
                                 } else {
                                     localStorage.clear()
                                     isLoadingLogin.value = false;
-                                    toast("You must be a dealers to login.", {
+                                    toast("You must be a seller to login.", {
                                         type: "error",
                                     });
                                 }
@@ -205,17 +201,13 @@ export default {
                     }
                 }
             } catch (error) {
-                console.log('hola error', error)
                 messageError.value = error?.response?.data?.message
                 isLoadingLogin.value = false;
             }
         };
         onMounted(() => {
-            console.log('router', router)
-            console.log('route', route)
             rol.value = route.params.rol
 
-            console.log('rol.value', rol.value)
         })
         return {
             rol,

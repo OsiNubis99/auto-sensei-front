@@ -172,16 +172,16 @@
                                         class="label-colors !p-2 !h-[40px] !capitalize whitespace-pre w-full">
                                         <input @change="applyFilter($event, 'color')" :value="color" type="radio"
                                             class="input-radio" :class="[
-        color == 'silver' && 'on-silver',
-        color == 'white' && 'on-white',
-        color == 'grey' && 'on-grey',
-        color == 'greenDark' && 'on-greenDark',
-        color == 'red' && 'on-red',
-        color == 'yellow' && 'on-yellow',
-        color == 'blue' && 'on-blue',
-        color == 'white' && 'on-white',
-        color == 'white' && 'on-white',
-    ]" name="color-redio">
+                                                color == 'silver' && 'on-silver',
+                                                color == 'white' && 'on-white',
+                                                color == 'grey' && 'on-grey',
+                                                color == 'greenDark' && 'on-greenDark',
+                                                color == 'red' && 'on-red',
+                                                color == 'yellow' && 'on-yellow',
+                                                color == 'blue' && 'on-blue',
+                                                color == 'white' && 'on-white',
+                                                color == 'white' && 'on-white',
+                                            ]" name="color-redio">
                                         {{ color }}
                                     </label>
                                     <!--  <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
@@ -491,7 +491,6 @@ export default {
             }
 
             if (newQuestion.status === "live" && newQuestion.bids.length === 0) {
-                console.log('entro en agregar en el BODY')
                 data.value = [...data.value, ...newQuestion];
             }
             if (newQuestion.status === "live" && newQuestion.bids.length > 0) {
@@ -558,8 +557,6 @@ export default {
             return removeDuplicate(filteredItems.value.map(item => item.vehicleDetails[key])).sort()
         }
         const applyPairFilters = (event, type, filter) => {
-            console.log(filter);
-            console.log(filteredItems.value);
             filteredItems.value = filteredItems.value.filter((item) => {
                 if (type === 'start') {
                     return item.vehicleDetails[filter] >= event.target.value
@@ -570,13 +567,10 @@ export default {
 
             })
 
-            console.log('filter', filter, ':', event.target.value)
             counter.value++
         }
         const applyFilter = (event, filter) => {
-            console.log(filter);
             filteredItems.value = filteredItems.value.filter((item) => {
-                console.log(item);
                 return item.vehicleDetails[filter] == event.target.value
             })
             counter.value++

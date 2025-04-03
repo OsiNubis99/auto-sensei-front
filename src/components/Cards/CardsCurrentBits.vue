@@ -10,11 +10,20 @@
             </div>
         </swiper>
         <div class="w-full flex justify-between md:gap-3" :class="changeLayouts ? 'flex-col' : 'flex-col md:flex-row '">
-            <RouterLink :to="{ name: 'action-details-dealer', params: { id: aution?._id } }"
+            <RouterLink
+                :to="{ name: authStore.userData.type == 1 ? 'action-details-seller' : 'action-details-dealer', params: { id: aution?._id } }"
                 class="flex md:p-5  p-2 flex-col gap-3">
                 <div class="">
-                    <div class="font-bold md:text-xl">{{ aution?.vehicleDetails?.year }} {{
-        aution?.vehicleDetails?.make }} {{ aution?.vehicleDetails?.model }}</div>
+                    <div class="font-semibold md:text-xl">
+                        <template
+                            v-if="aution?.vehicleDetails?.year && aution?.vehicleDetails?.make && aution?.vehicleDetails?.model">
+                            {{ aution?.vehicleDetails?.year }} {{ aution?.vehicleDetails?.make }} {{
+                                aution?.vehicleDetails?.model }}
+                        </template>
+                        <template v-else>
+                            Vehículo Genérico
+                        </template>
+                    </div>
                     <p class="text-xs md:text-base">
                         {{ aution?.city }}, {{ aution?.province }}
                     </p>
@@ -66,8 +75,8 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        aution?.vehicleDetails?.tireCondition
-    }}</p>
+                            aution?.vehicleDetails?.tireCondition
+                            }}</p>
                     </div>
                     <div v-if="aution?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -77,11 +86,12 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        aution?.vehicleDetails?.brakeCondition }}</p>
+                            aution?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
                 <div v-if="aution?.status === 'live'" class="flex gap-4 " :class="changeLayouts ? 'flex-col' : ''">
-                    <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
+                    <RouterLink
+                        :to="{ name: authStore.userData.type == 1 ? 'inbox-seller' : 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
                         class=" w-fit md:flex gap-3 hidden cursor-pointer rounded-lg items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path
@@ -177,7 +187,8 @@
                     class="p-4">
                     <p class="text-[#858585] text-left mb-2">Waiting for Seller's Approval. <br>
                         Contact if needed</p>
-                    <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
+                    <RouterLink
+                        :to="{ name: authStore.userData.type == 1 ? 'inbox-seller' : 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
                         class="btn w-full bg-primary flex gap-2 items-center text-base-black">
                         Contact Seller
                     </RouterLink>
@@ -267,7 +278,7 @@
                             </button>
                         </div>
                         <RouterLink
-                            :to="{ name: 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
+                            :to="{ name: authStore.userData.type == 1 ? 'inbox-seller' : 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
                             class="border rounded-lg flex justify-center items-center p-2 border-[#C2C2C2]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                                 fill="none">
@@ -283,7 +294,8 @@
                     class="p-4">
                     <p class="text-[#858585] text-xs text-left mb-2">Waiting for Seller's Approval.
                         Contact if needed</p>
-                    <RouterLink :to="{ name: 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
+                    <RouterLink
+                        :to="{ name: authStore.userData.type == 1 ? 'inbox-seller' : 'inbox-dealer', query: { id: aution?._id + '-' + auth?.userData._id } }"
                         class="btn !py-2 w-full bg-primary flex gap-2 items-center text-base-black">
                         <p class="text-sm font-medium"> Contact Seller</p>
 
@@ -304,6 +316,7 @@ import 'swiper/css/scrollbar';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalBids } from '@/stores/modalBids';
 import { ModalAutoBid } from '@/stores/modalAutoBid';
+import { useAuthStore } from "@/stores/auth";
 export default {
     components: {
         Swiper,
@@ -322,6 +335,7 @@ export default {
     },
     setup(props) {
         const aution = ref(props.aution);
+        const authStore = useAuthStore()
         const changeLayouts = ref(props.changeLayouts);
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const statusModal = ModalBids()
@@ -341,7 +355,8 @@ export default {
             statusModal,
             auth,
             timeToEnd,
-            statusModalAuto
+            statusModalAuto,
+            authStore
         };
     },
 };

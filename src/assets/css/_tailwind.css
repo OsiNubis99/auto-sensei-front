@@ -224,8 +224,7 @@ svg.svg-card-custom {
   -webkit-appearance: none;
   background-color: transparent;
   border: 2px solid #0b1107;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
-    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
   padding: 8px;
   display: inline-block;
   position: relative;
@@ -325,8 +324,7 @@ label.label-colors-error {
 
 .mySwiper {
   border-radius: 10px;
-  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06),
-    0px 1px 3px 0px rgba(16, 24, 40, 0.1);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
 }
 
 .mySwiperHome .swiper-pagination-fraction,
@@ -385,8 +383,7 @@ label.label-colors-error {
 
 .swiper.mySwiperHome {
   border-radius: 15px;
-  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06),
-    0px 1px 3px 0px rgba(16, 24, 40, 0.1);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
 }
 
 .stepsSwiper .swiper-pagination {
@@ -414,12 +411,7 @@ label.label-colors-error {
   top: 0;
   left: 0;
   z-index: -1;
-  background: linear-gradient(
-    250deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.45) 43.75%,
-    #000 82.63%
-  );
+  background: linear-gradient(250deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 43.75%, #000 82.63%);
 }
 .bg-banner-img {
   width: 100%;
@@ -587,23 +579,7 @@ input.check-toggle-round-flat:checked + label:after {
   width: 136px;
   height: 43px;
   border-radius: 999px;
-  background: linear-gradient(
-      140deg,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.07) 43%,
-      transparent 44%,
-      transparent 100%
-    ),
-    linear-gradient(
-      105deg,
-      transparent 0%,
-      transparent 40%,
-      rgba(0, 0, 0, 0.06) 41%,
-      rgba(0, 0, 0, 0.07) 76%,
-      transparent 77%,
-      transparent 100%
-    ),
-    linear-gradient(to right, #d89ca4, #e27b7e);
+  background: linear-gradient(140deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 43%, transparent 44%, transparent 100%), linear-gradient(105deg, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.06) 41%, rgba(0, 0, 0, 0.07) 76%, transparent 77%, transparent 100%), linear-gradient(to right, #d89ca4, #e27b7e);
 }
 
 .error-container > span.four:before,
@@ -619,21 +595,7 @@ input.check-toggle-round-flat:checked + label:after {
   height: 156px;
   left: 60px;
   bottom: -43px;
-  background: linear-gradient(
-      128deg,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.07) 40%,
-      transparent 41%,
-      transparent 100%
-    ),
-    linear-gradient(
-      116deg,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.07) 50%,
-      transparent 51%,
-      transparent 100%
-    ),
-    linear-gradient(to top, #99749d, #b895ab, #cc9aa6, #d7969e, #e0787f);
+  background: linear-gradient(128deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 40%, transparent 41%, transparent 100%), linear-gradient(116deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 50%, transparent 51%, transparent 100%), linear-gradient(to top, #99749d, #b895ab, #cc9aa6, #d7969e, #e0787f);
 }
 
 .error-container > span.four:after {
@@ -642,14 +604,7 @@ input.check-toggle-round-flat:checked + label:after {
   transform: rotate(-49.5deg);
   left: -18px;
   bottom: 36px;
-  background: linear-gradient(
-    to right,
-    #99749d,
-    #b895ab,
-    #cc9aa6,
-    #d7969e,
-    #e0787f
-  );
+  background: linear-gradient(to right, #99749d, #b895ab, #cc9aa6, #d7969e, #e0787f);
 }
 
 .error-container > span.zero {
@@ -657,23 +612,7 @@ input.check-toggle-round-flat:checked + label:after {
   width: 156px;
   height: 156px;
   border-radius: 999px;
-  background: linear-gradient(
-      -45deg,
-      transparent 0%,
-      rgba(0, 0, 0, 0.06) 50%,
-      transparent 51%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to top right,
-      #99749d,
-      #99749d,
-      #b895ab,
-      #cc9aa6,
-      #d7969e,
-      #ed8687,
-      #ed8687
-    );
+  background: linear-gradient(-45deg, transparent 0%, rgba(0, 0, 0, 0.06) 50%, transparent 51%, transparent 100%), linear-gradient(to top right, #99749d, #99749d, #b895ab, #cc9aa6, #d7969e, #ed8687, #ed8687);
   overflow: hidden;
   animation: bgshadow 5s infinite;
 }
@@ -827,23 +766,7 @@ input.check-toggle-round-flat:checked + label:after {
   background-color: transparent;
   left: 0px;
   bottom: 0px;
-  background: linear-gradient(
-      95deg,
-      transparent 0%,
-      transparent 8%,
-      rgba(0, 0, 0, 0.07) 9%,
-      transparent 50%,
-      transparent 100%
-    ),
-    linear-gradient(
-      85deg,
-      transparent 0%,
-      transparent 19%,
-      rgba(0, 0, 0, 0.05) 20%,
-      rgba(0, 0, 0, 0.07) 91%,
-      transparent 92%,
-      transparent 100%
-    );
+  background: linear-gradient(95deg, transparent 0%, transparent 8%, rgba(0, 0, 0, 0.07) 9%, transparent 50%, transparent 100%), linear-gradient(85deg, transparent 0%, transparent 19%, rgba(0, 0, 0, 0.05) 20%, rgba(0, 0, 0, 0.07) 91%, transparent 92%, transparent 100%);
 }
 
 .error-container > span.zero:after {
@@ -877,8 +800,7 @@ input.check-toggle-round-flat:checked + label:after {
 
 .shadow-steps {
   border-radius: 8px;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15),
-    0px 0px 5px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15), 0px 0px 5px 0px rgba(0, 0, 0, 0.05);
 }
 
 .hr-custim-1,
@@ -1027,8 +949,7 @@ input.check-toggle-round-flat:checked + label:after {
   padding-left: 15px;
   gap: 20px;
   flex-direction: column;
-  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.05),
-    0 5px 15px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.05), 0 5px 15px 0 rgba(0, 0, 0, 0.05);
 }
 
 .chat-content {
@@ -1070,12 +991,7 @@ input.check-toggle-round-flat:checked + label:after {
   width: 100%;
   height: 100%;
   transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.6),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
   animation: loading 1.5s infinite;
 }
 
@@ -1130,13 +1046,7 @@ input.check-toggle-round-flat:checked + label:after {
 }
 
 .progress {
-  background: linear-gradient(
-    to right,
-    #82cfd0 0%,
-    #82cfd0 40%,
-    #fff 40%,
-    #fff 100%
-  );
+  background: linear-gradient(to right, #82cfd0 0%, #82cfd0 40%, #fff 40%, #fff 100%);
   border: solid 2px #82cfd0;
   border-radius: 8px;
   height: 7px;
@@ -1783,8 +1693,7 @@ input.check-toggle-round-flat:checked + label:after {
   width: 100%;
   height: calc(100% - 1.25rem);
   background: linear-gradient(to bottom right, #c1f861, #c1f861);
-  box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset,
-    0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+  box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
   transform: scale(2);
   border-radius: 50%;
   animation: animateContainer 0.75s ease-out forwards 0.75s;
@@ -1829,38 +1738,32 @@ input.check-toggle-round-flat:checked + label:after {
   0% {
     opacity: 0;
     transform: scale(0);
-    box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset,
-      0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+    box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
   }
 
   25% {
     opacity: 1;
     transform: scale(0.9);
-    box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset,
-      0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+    box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
   }
 
   43.75% {
     transform: scale(1.15);
-    box-shadow: 0px 0px 0px 43.334px rgba(255, 255, 255, 0.25) inset,
-      0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+    box-shadow: 0px 0px 0px 43.334px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
   }
 
   62.5% {
     transform: scale(1);
-    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset,
-      0px 0px 0px 21.667px rgba(255, 255, 255, 0.25) inset;
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 21.667px rgba(255, 255, 255, 0.25) inset;
   }
 
   81.25% {
-    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset,
-      0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset;
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset;
   }
 
   100% {
     opacity: 1;
-    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset,
-      0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset;
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset;
   }
 }
 
@@ -2095,69 +1998,13 @@ input.check-toggle-round-flat:checked + label:after {
 }
 
 .paralax-success {
-  background: linear-gradient(
-        24deg,
-        rgba(94, 176, 3, 0.24) 3%,
-        rgba(39, 253, 133, 0.5) 3%
-      )
-      50% 0px / 20% 20% fixed,
-    linear-gradient(41deg, rgba(238, 39, 104, 0.44) 40%, transparent 40%) 50%
-      0px / 77.06% 77.06%,
-    linear-gradient(
-        71deg,
-        rgba(6, 156, 183, 0.5) 57%,
-        rgba(181, 14, 105, 0.5) 57%
-      )
-      50% 0px / 20% 100% fixed,
-    linear-gradient(133deg, rgba(58, 25, 230, 0.5) 15%, transparent 15%) 50% 0px /
-      88.05% 88.05%,
-    linear-gradient(
-        332deg,
-        rgba(91, 91, 212, 0.21) 68%,
-        rgba(61, 131, 219, 0.5) 68%
-      )
-      50% 0px / 90.45% 90.45%,
-    linear-gradient(148deg, rgba(10, 107, 166, 0.5) 0%, transparent 0%) 50% 0px /
-      20% 20%,
-    linear-gradient(
-        86deg,
-        rgba(222, 244, 51, 0.31) 80%,
-        rgba(80, 162, 185, 0.36) 80%
-      )
-      50% 0px / 20% 100%;
+  background: linear-gradient(24deg, rgba(94, 176, 3, 0.24) 3%, rgba(39, 253, 133, 0.5) 3%) 50% 0px / 20% 20% fixed, linear-gradient(41deg, rgba(238, 39, 104, 0.44) 40%, transparent 40%) 50% 0px / 77.06% 77.06%, linear-gradient(71deg, rgba(6, 156, 183, 0.5) 57%, rgba(181, 14, 105, 0.5) 57%) 50% 0px / 20% 100% fixed, linear-gradient(133deg, rgba(58, 25, 230, 0.5) 15%, transparent 15%) 50% 0px / 88.05% 88.05%,
+    linear-gradient(332deg, rgba(91, 91, 212, 0.21) 68%, rgba(61, 131, 219, 0.5) 68%) 50% 0px / 90.45% 90.45%, linear-gradient(148deg, rgba(10, 107, 166, 0.5) 0%, transparent 0%) 50% 0px / 20% 20%, linear-gradient(86deg, rgba(222, 244, 51, 0.31) 80%, rgba(80, 162, 185, 0.36) 80%) 50% 0px / 20% 100%;
 }
 
 .paralax-error {
-  background: linear-gradient(
-        248deg,
-        rgba(232, 110, 159, 0.43) 87%,
-        rgba(33, 133, 56, 0.17) 87%
-      )
-      50% 0px / 44.52% 44.52%,
-    linear-gradient(57deg, rgba(231, 253, 158, 0.5) 20%, transparent 20%) 50%
-      0px / 36.69% 100%,
-    linear-gradient(
-        327deg,
-        rgba(84, 36, 53, 0.5) 54%,
-        rgba(231, 67, 90, 0.5) 54%
-      )
-      50% 0px / 91.81% 91.81%,
-    linear-gradient(108deg, rgba(236, 110, 73, 0.5) 16%, transparent 16%) 50%
-      0px / 32.73% 32.73%,
-    linear-gradient(
-        115deg,
-        rgba(158, 95, 135, 0.5) 30%,
-        rgba(140, 114, 229, 0.44) 30%
-      )
-      50% 0px / 49.83% 100% fixed,
-    linear-gradient(200deg, rgba(145, 140, 79, 0.25) 38%, transparent 38%) 50%
-      0px / 57.06% 57.06% fixed,
-    linear-gradient(
-        56deg,
-        rgba(38, 18, 23, 0.3) 91%,
-        rgba(185, 227, 221, 0.5) 91%
-      )
-      50% 0px / 62.29% 62.29%;
+  background: linear-gradient(248deg, rgba(232, 110, 159, 0.43) 87%, rgba(33, 133, 56, 0.17) 87%) 50% 0px / 44.52% 44.52%, linear-gradient(57deg, rgba(231, 253, 158, 0.5) 20%, transparent 20%) 50% 0px / 36.69% 100%, linear-gradient(327deg, rgba(84, 36, 53, 0.5) 54%, rgba(231, 67, 90, 0.5) 54%) 50% 0px / 91.81% 91.81%, linear-gradient(108deg, rgba(236, 110, 73, 0.5) 16%, transparent 16%) 50% 0px / 32.73% 32.73%,
+    linear-gradient(115deg, rgba(158, 95, 135, 0.5) 30%, rgba(140, 114, 229, 0.44) 30%) 50% 0px / 49.83% 100% fixed, linear-gradient(200deg, rgba(145, 140, 79, 0.25) 38%, transparent 38%) 50% 0px / 57.06% 57.06% fixed, linear-gradient(56deg, rgba(38, 18, 23, 0.3) 91%, rgba(185, 227, 221, 0.5) 91%) 50% 0px / 62.29% 62.29%;
 }
 
 .line-svg-home {
@@ -2265,10 +2112,7 @@ input.check-toggle-round-flat:checked + label:after {
   }
 
   .custom-line-swiper .swiper-pagination-bullet {
-    width: var(
-      --swiper-pagination-bullet-width,
-      var(--swiper-pagination-bullet-size, 100%)
-    ) !important;
+    width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 100%)) !important;
   }
 
   .PSPDFKit-upyueavav3kv33ygfhr93t7hn {
@@ -2308,20 +2152,13 @@ input.check-toggle-round-flat:checked + label:after {
   }
 
   .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
-  .swiper-pagination-horizontal.swiper-pagination-bullets
-    .swiper-pagination-bullet {
+  .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
     margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 2px) !important;
   }
 
   .swiper-pagination-bullet {
-    width: var(
-      --swiper-pagination-bullet-width,
-      var(--swiper-pagination-bullet-size, 6px)
-    ) !important;
-    height: var(
-      --swiper-pagination-bullet-height,
-      var(--swiper-pagination-bullet-size, 6px)
-    ) !important;
+    width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 6px)) !important;
+    height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 6px)) !important;
   }
 
   .btn {

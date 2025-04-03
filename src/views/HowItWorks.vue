@@ -317,7 +317,6 @@ export default {
             route.push({ name: 'signup', params: { rol: redirect } })
         }
         const goToHome = async () => {
-            console.log('authStore.userData', authStore.userData)
             if (authStore.userData._id) {
                 switch (authStore.userData.type) {
                     case 0:

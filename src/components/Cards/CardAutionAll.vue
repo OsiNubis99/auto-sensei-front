@@ -303,7 +303,7 @@ export default {
         decline: {
             type: Function
         },
-        cancelAution: {
+        cancelAution: { 
             type: Function
         },
         acceptAution: {
@@ -330,8 +330,6 @@ export default {
             return new Date(startDate) - Date.now();
         }
         const declineAution = (auction, option) => {
-            console.log('auction', auction)
-            console.log('option', option)
             props.decline(auction, option)
         }
         const cancelAution = () => {
@@ -341,12 +339,12 @@ export default {
             props.acceptAution()
         }
         const openModal = () => {
+            console.log('maldito')
             if (auth.userData.address) {
                 if (auth.userData.seller.phoneValidated) {
                     statusModal.openModal({ isActive: true, data: auction })
                 } else {
                     statusModalPhone.openModal({ isActive: true })
-
                 }
             } else {
                 toast('You need to add your address in order to create an auction. Please update your profile', { autoClose: 4000, type: "error" });

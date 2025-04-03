@@ -274,10 +274,6 @@ export default {
         const next = () => {
             props.nextVehiclesDetails()
         }
-        onMounted(() => {
-            console.log('form', form.value)
-        })
-
         return {
             date,
             next,

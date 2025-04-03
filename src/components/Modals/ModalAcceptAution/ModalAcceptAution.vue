@@ -47,14 +47,14 @@
                             </div>
                             <div class="flex justify-between flex-col h-full">
                                 <p class=" font-semibold capitalize md:text-base text-sm  ">{{
-        statusModal.dataAutiont?.vehicleDetails?.year }} {{
-        statusModal.dataAutiont?.vehicleDetails?.make }} {{
-        statusModal.dataAutiont?.vehicleDetails?.model }}</p>
+                                    statusModal.dataAutiont?.vehicleDetails?.year }} {{
+                                        statusModal.dataAutiont?.vehicleDetails?.make }} {{
+                                        statusModal.dataAutiont?.vehicleDetails?.model }}</p>
                                 <p class="capitalize text-sm md:text-base ">Final Bid</p>
                                 <p class="font-medium text-sm text-base-black md:text-2xl">${{
-        statusModal.dataAutiont?.bids[0]?.amount }}/<span
+                                    statusModal.dataAutiont?.bids[0]?.amount }}/<span
                                         class="text-[#666666] mt-1 text-xs md:text-base ">{{
-        statusModal.dataAutiont?.bids?.length }} Bids</span> </p>
+                                            statusModal.dataAutiont?.bids?.length }} Bids</span> </p>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,6 @@ export default {
         const dataBuffer = ref(null)
 
         const sutmibPDF = async (pdf) => {
-            console.log('recivied', pdf)
             loading.value = true
             try {
                 const blob = new Blob([pdf], { type: 'application/pdf' }, { name: Date.now() + '.' + pdf.extension });
@@ -142,7 +141,6 @@ export default {
                 let result = await axios(options);
                 if (result.data) {
                     let res = await props.acceptAution(result.data)
-                    console.log('res', res)
                     if (res) {
                         showPdf.value = 'https://apidev.autosensei.ca/files/' + result.data
                         steps.value.step1 = false
@@ -150,7 +148,6 @@ export default {
                         steps.value.step3 = true
                     }
                 }
-                console.log(result);
             } catch (e) {
                 loading.value = false
                 console.error("error", e);
@@ -176,7 +173,6 @@ export default {
 
         }
         const next = async (step) => {
-            console.log('statusModal.dataAutiont', statusModal.dataAutiont)
             if (step == 1) {
                 steps.value.step1 = false
                 steps.value.step2 = true
@@ -184,7 +180,6 @@ export default {
                 if (steps.value.step2) {
                     //SIN LIBRERIA
                     let res = await props.acceptAution(pdf.value)
-                    console.log('res', res)
                     if (res) {
                         steps.value.step1 = false
                         steps.value.step2 = false
@@ -195,7 +190,6 @@ export default {
                     /*  const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
                      loading.value = false
                      if (!loading.value && steps.value.step2) {
-                         console.log('showPdf.value', showPdf.value)
                          PSPDFKit.load({
                              baseUrl,
                              licenseKey: 'HO2dV-bDcn32RCF6j2nDeKYNGqP1EOSnmSLLmbDrrdWJGwDq5yWsJs8pr31-EOKWXetRmJoBjUgv4AoEicoPgQw6Htu9foJBCUCWNZ2n7EvLcpMfoNLqokulJv87rHwmB9jnVIBTKGCZ7RKjGpERaDOl-JXfBFqdP6tSA07KKrsGh0k22IcAfwlevAAZNBOe72mr8i6D5tjXisarqg3a4vsSFuWyrmidugVCVPQsARlTZ5phlM3p4WSi032q6k3C7Zkt2UwLkGu6xfMy0u8wTOYLpjE8AMl5p4PC7j2I0WTVtrjYHLVyTJ-H0-bUUh1M_5pDIsK3YwHZNA5o5I0pnL70uk4nRPsvKL5hAxzI5e_PSWj8Oek73s6pf-htNu4PrL8YMfaX2KOo4tv3Q7Xsu6fhHOmkdvRn-UyCqQz8aJam2BZFpzXYndnfTToNV3v2PZ8ixUAzk03lKFvcThJg6wGTv1lo_AQ1zOx96eqaU069ZXuduPThRxd_i0zhEkGDfVKFaZWd03UaD0ZCDPWk5lSl0AuZJWFEKVyLQBLX2SDAf6z4m699tJ4jggOZoiQjD6rceOZUGAMCYAIMi4Z_6spoyIaAM4reyti70sY_K-Ccji1VNQKFlm0ne381Pyy298BJH2xQZnEPAWEtnFp1Xw==',
@@ -203,7 +197,6 @@ export default {
                              document: showPdf.value,
                          }).then(async function (instance) {
                              const items = instance.toolbarItems;
-                             console.log('items', items)
                              instance.setToolbarItems(items.filter((item) =>
                                  item.type !== "export-pdf" &&
                                  item.type !== "search" &&
@@ -261,7 +254,6 @@ export default {
                              await instance.create([widget, formField]);
  
                              instance.addEventListener("storedSignatures.create", async (annotation) => {
-                                 console.log('create', annotation);
                                  const buffer = await instance.exportPDF({ flatten: true });
                                  dataBuffer.value = buffer
                                  sutmibPDF(buffer)
@@ -289,6 +281,7 @@ export default {
 
         }
         onMounted(() => {
+            console.log("statusModal.dataAutiont", statusModal.dataAutiont);
             loading.value = true
             if (statusModal.dataAutiont.contract) {
                 showPdf.value = 'https://apidev.autosensei.ca/files/' + statusModal.dataAutiont.contract;
@@ -298,7 +291,6 @@ export default {
                 axios
                     .get(`/auction/contract/${statusModal.dataAutiont._id}`)
                     .then(async (response) => {
-                        console.log('resPDF', response)
                         pdf.value = response.data.contract;
                         showPdf.value = 'https://apidev.autosensei.ca/files/' + response.data.contract;
                         loading.value = false

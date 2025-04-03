@@ -24,7 +24,7 @@
       <span v-if="loading">Update...</span>
       <span v-else>Update Data Aution</span>
     </Button>
-  </div> -->
+  </div>
    <div class="h-screen m-auto flex flex-col items-center justify-center">
     <div class="mt-32">
       <h2>Upload File</h2>
@@ -127,7 +127,7 @@
     <button v-show="images.length > 0" @click="uploadImages" class="btn bg-primary   rounded-lg w-fit">Upload</button>
 
   </div>
-  <!--  <div v-if="!loading" id="demo">
+   <div v-if="!loading" id="demo">
     <div @click="ordenarPhotos">Sorby Images</div>
     <div v-for="category in categories" :key="category.id" @drop="onDrop($event, category.id)" class="droppable"
       @dragover.prevent @dragenter.prevent>
@@ -159,37 +159,42 @@
     </div>
   </div> -->
   <div class="w-full h-screen mt-64">
-
     <h1>{{ countDownTimer(5) }}</h1>
 
-
-    <div class=" absolute bg-[#fbffee34] px-2 py-4 rounded-xl shadow-md w-[20%] top-40 right-4 flex flex-col gap-4 ">
+    <div class="absolute bg-[#fbffee34] px-2 py-4 rounded-xl shadow-md w-[20%] top-40 right-4 flex flex-col gap-4">
       <div v-for="(item, index) in notificaciones" :key="item.id"
         :class="itemRemove?.id === item?.id ? '  opacity-0 bg-error  ' : ''"
-        class=" bg-white rounded-lg flex p-2 gap-4 flex-col items-start justify-center transition-all ease-in duration-500  shadow-lg ">
-        <p> {{ item.message }} </p>
+        class="bg-white rounded-lg flex p-2 gap-4 flex-col items-start justify-center transition-all ease-in duration-500 shadow-lg">
+        <p>{{ item.message }}</p>
         <p>{{ countDownTimer(item.duration) }}</p>
         <svg @click="deleteNotification(item)" xmlns="http://www.w3.org/2000/svg"
-          class=" w-6 h-6  absolute right-4  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#000">
+          class="w-6 h-6 absolute right-4 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#000">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-
-
       </div>
     </div>
-
+    <div>
+      <div v-if="step.step" @click="createAution" class="btn bg-primary rounded-md">
+        <span v-if="loading">Creando...</span>
+        <span v-else>Create</span>
+      </div>
+      <div @click="update" v-if="step.step2" class="btn bg-primary rounded-md">
+        <span v-if="loading">Update...</span>
+        <span v-else>Update Data Aution</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import PSPDFKit from 'pspdfkit';
-import '../../assets/pspdfkit';
-import document from '../assets/dummy.pdf'
-import { onMounted, ref, computed, watch } from 'vue';
+import PSPDFKit from "pspdfkit";
+import "../../assets/pspdfkit";
+import document from "../assets/dummy.pdf";
+import { onMounted, ref, computed, watch } from "vue";
 import axios from "@/axios";
-import loadimage from '../assets/img/jpg/loading.gif'
-import errorimage from '../assets/img/jpg/error.png'
+import loadimage from "../assets/img/jpg/loading.gif";
+import errorimage from "../assets/img/jpg/error.png";
 import { useAuctionStore } from "@/stores/auctions";
 import { useStoreFile } from "@/stores/uploader";
 import { toast } from "vue3-toastify";
@@ -199,24 +204,28 @@ export default {
     errorimage,
   },
   setup() {
-    const store = useAuctionStore()
-    const loading = ref(false)
+    const store = useAuctionStore();
+    const loading = ref(false);
     const step = ref({
       step: true,
-      step2: false
-    })
-    const id_aution = ref(null)
-    const images = ref([])
-    const storeFile = useStoreFile()
-    const porcertanje = ref(0)
-    const powerValue = ref(computed(() => { return storeFile.progressUpload }))
-    const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-    const arrayEmpty = ref([])
-    const showAnimation = ref(-1)
-    const countDown = ref(null)
-    const addItem = ref(5)
-    const itemRemove = ref(null)
-    const notificaciones = ref([])
+      step2: false,
+    });
+    const id_aution = ref(null);
+    const images = ref([]);
+    const storeFile = useStoreFile();
+    const porcertanje = ref(0);
+    const powerValue = ref(
+      computed(() => {
+        return storeFile.progressUpload;
+      })
+    );
+    const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS));
+    const arrayEmpty = ref([]);
+    const showAnimation = ref(-1);
+    const countDown = ref(null);
+    const addItem = ref(5);
+    const itemRemove = ref(null);
+    const notificaciones = ref([]);
     const categories = ref([
       {
         id: 0,
@@ -228,43 +237,47 @@ export default {
         title: "Fotos aleatoria",
         children: [],
       },
-    ])
+    ]);
     const onDrop = (e, categoryId) => {
       const itemId = parseInt(e.dataTransfer.getData("itemId"));
-      const id = categoryId === 0 ? 1 : 0
-      const child = categories.value[id].children.find(c => c.id === itemId)
+      const id = categoryId === 0 ? 1 : 0;
+      const child = categories.value[id].children.find((c) => c.id === itemId);
       child.categoryId = categoryId;
-      removeFromList(id, itemId)
-      addToList(categoryId, child)
-    }
+      removeFromList(id, itemId);
+      addToList(categoryId, child);
+    };
     const addToList = (categoryId, child) => {
-      categories.value[categoryId].children = [...categories.value[categoryId].children, child];
+      categories.value[categoryId].children = [
+        ...categories.value[categoryId].children,
+        child,
+      ];
       /*  const updatedHero = hero.filter(item => item.id !== 1);
        console.log('arrayEmpty.value', arrayEmpty.value) */
-    }
+    };
     const dragEnd = (ev) => {
-      showAnimation.value = -1
-    }
+      showAnimation.value = -1;
+    };
     const addClass = (e) => {
-      console.log('e', e)
-      showAnimation.value = e.target.textContent
-
-    }
+      console.log("e", e);
+      showAnimation.value = e.target.textContent;
+    };
     const removeFromList = (id, itemId) => {
-      categories.value[id].children = categories.value[id].children.filter(c => c.id !== itemId);
-    }
+      categories.value[id].children = categories.value[id].children.filter(
+        (c) => c.id !== itemId
+      );
+    };
     const onDragStart = (e, item, index) => {
-      console.log('hola')
+      console.log("hola");
       e.dataTransfer.dropEffect = "move";
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.setData("itemId", item.id.toString());
-      showAnimation.value = index
-    }
-    const arrayUpload = ref([])
-    const loadingUploadImages = ref(false)
+      showAnimation.value = index;
+    };
+    const arrayUpload = ref([]);
+    const loadingUploadImages = ref(false);
     function removeImage(index) {
-      images.value.splice(index, 1)
-      console.log('imagenes', images.value)
+      images.value.splice(index, 1);
+      console.log("imagenes", images.value);
     }
     function createImage(files) {
       for (var index = 0; index < files.length; index++) {
@@ -272,241 +285,247 @@ export default {
         const imageUrl = {
           preview: null,
           file: files[index],
-          size: convertion
-        }
+          size: convertion,
+        };
         var reader = new FileReader();
         reader.onload = function (event) {
           imageUrl.preview = event.target.result;
           images.value.push(imageUrl);
-        }
+        };
         reader.readAsDataURL(files[index]);
       }
     }
     const onFileChange = (e) => {
       var files = e.target.files || e.dataTransfer.files;
-      if (!files.length)
-        return;
-      console.log('files.length', files.length)
+      if (!files.length) return;
+      console.log("files.length", files.length);
       if (images.value.length >= 30 || files.length >= 30) {
-        console.log('ENTROOOOOOOOOOOOOOO', images.value)
-        alert('Maximo de archivo 30')
-        return
+        console.log("ENTROOOOOOOOOOOOOOO", images.value);
+        alert("Maximo de archivo 30");
+        return;
       }
       createImage(files);
-    }
-    const counterDelete = (duration) => {
-
-    }
+    };
+    const counterDelete = (duration) => { };
     const deleteNotification = (item) => {
-      itemRemove.value = item
+      itemRemove.value = item;
 
       for (let index = 0; index < notificaciones.value.length; index++) {
         const element = notificaciones.value[index];
         setTimeout(() => {
-          notificaciones.value = notificaciones.value.filter(noti => noti.id !== item.id)
+          notificaciones.value = notificaciones.value.filter(
+            (noti) => noti.id !== item.id
+          );
         }, 1000);
-        console.log('element', element)
-
+        console.log("element", element);
       }
 
       /*   let res = notificaciones.value.filter(noti => noti.id !== item.id)
   
         notificaciones.value = res */
-    }
+    };
     const additemArray = () => {
       if (addItem.value > 0) {
         setTimeout(() => {
-          addItem.value -= 1
-          notificaciones.value.push(
-            {
-              id: addItem.value,
-              message: 'Nueva Hola',
-              duration: 5
-            }
-          )
-          additemArray()
-        }, 1000)
+          addItem.value -= 1;
+          notificaciones.value.push({
+            id: addItem.value,
+            message: "Nueva Hola",
+            duration: 5,
+          });
+          additemArray();
+        }, 1000);
       }
-    }
-    function time() {
-
-    }
+    };
+    function time() { }
     function timer(duration) {
       let n = duration;
       let res = setInterval(() => {
         if (n === 0) {
-          clearInterval(res)
+          clearInterval(res);
         }
         n--;
-      }, 1000)
-      console.log('res', res)
+      }, 1000);
+      console.log("res", res);
     }
     const countDownTimer = (item) => {
-      var n = null
-      countDown.value = item
+      var n = null;
+      countDown.value = item;
       if (countDown.value > 0) {
         setTimeout(() => {
-          countDown.value -= 1
-        }, 1000)
-        return countDown.value
+          countDown.value -= 1;
+        }, 1000);
+        return countDown.value;
       }
-    }
+    };
     const uploadImages = async () => {
-      loadingUploadImages.value = true
+      loadingUploadImages.value = true;
       if (images.value.length === 0) {
-        alert('Debes subir imagenes')
-        return
+        alert("Debes subir imagenes");
+        return;
       }
-      let newArrayImages = []
+      let newArrayImages = [];
       for (let index = 0; index < images.value.length; index++) {
         const element = images.value[index];
-        arrayUpload.value = [...arrayUpload.value, { name: `file-${index}`, preview: element.preview, completed: false, }]
-        let resImages = await Promise.all([storeFile.uploaderFile({ file: element.file, location: `662298889e18250b6f075b81/example` })])
-        newArrayImages.push(resImages[0].data)
+        arrayUpload.value = [
+          ...arrayUpload.value,
+          { name: `file-${index}`, preview: element.preview, completed: false },
+        ];
+        let resImages = await Promise.all([
+          storeFile.uploaderFile({
+            file: element.file,
+            location: `662298889e18250b6f075b81/example`,
+          }),
+        ]);
+        newArrayImages.push(resImages[0].data);
         if (resImages[0]?.data) {
           arrayUpload.value.map((file) => {
-            console.log('file', file)
+            console.log("file", file);
             if (file.name == `file-${index}`) {
-              file.completed = true
+              file.completed = true;
             }
-          })
+          });
         }
       }
-      console.log('AFUERA DEL FOR', newArrayImages)
-    }
+      console.log("AFUERA DEL FOR", newArrayImages);
+    };
     const createAution = async () => {
       let dataPost = {
-        vin: 'W1KZF8DB9MA200007',
-        dropOffDate: '2024-04-25T14:51:00.000Z',
-        city: 'Alberta',
-        province: 'Lethbridge',
-        keysNumber: '2 keys',
+        vin: "W1KZF8DB9MA200007",
+        dropOffDate: "2026-04-25T15:03:00.000Z",
+        city: "Alberta",
+        province: "Lethbridge",
+        keysNumber: "2 keys",
         vehicleStatus: {
-          status: 'Paid OFF',
+          status: "Paid OFF",
         },
         buyout: undefined,
         buyNew: {
           anyVehicle: false,
-        }
-      }
+        },
+      };
       try {
-        let res = await store.create(dataPost)
+        let res = await store.create(dataPost);
         if (res.data) {
-          console.log('res.data', res.data)
-          id_aution.value = res.data._id
-          step.value.step = false
-          step.value.step2 = true
+          console.log("res.data", res.data);
+          id_aution.value = res.data._id;
+          step.value.step = false;
+          step.value.step2 = true;
         }
       } catch (error) {
-        console.log('error', error)
-
+        console.log("error", error);
       }
-    }
+    };
     const update = async () => {
-      loading.value = true
+      loading.value = true;
       let data = {
-        "vin": "W1KZF8DB9MA200007",
-        "dropOffDate": "2024-04-25T15:03:00.000Z",
-        "city": "Alberta",
-        "province": "Lethbridge",
-        "keysNumber": "1 keys",
-        "vehicleStatus": {
-          "status": "Paid OFF"
+        vin: "W1KZF8DB9MA200007",
+        dropOffDate: "2026-04-25T15:03:00.000Z",
+        city: "Alberta",
+        province: "Lethbridge",
+        keysNumber: "1 keys",
+        vehicleStatus: {
+          status: "Paid OFF",
         },
-        "buyNew": {
-          "anyVehicle": false
+        buyNew: {
+          anyVehicle: false,
         },
-        "startDate": null,
-        "duration": 45,
-        "vehicleDetails": {
-          "odometer": 5000,
-          "doors": "4 Doors",
-          "color": "silver",
-          "driveTrain": "RWD",
-          "aditionals": "Additionals Packages",
-          "tireCondition": "Good",
-          "tireReplacement": "2023",
-          "brakeCondition": "Brand New",
-          "brakeReplacement": "2022",
-          "originalDocument": "development/6627ce68d107592cc473718c/original-documents/1713884903372.png",
-          "driverLicense": "development/6627ce68d107592cc473718c/driver-license/1713884903632.png",
-          "exteriorPhotos": [
+        startDate: null,
+        duration: 45,
+        vehicleDetails: {
+          odometer: 5000,
+          doors: "4 Doors",
+          color: "silver",
+          driveTrain: "RWD",
+          aditionals: "Additionals Packages",
+          tireCondition: "Good",
+          tireReplacement: "2023",
+          brakeCondition: "Brand New",
+          brakeReplacement: "2022",
+          originalDocument:
+            "development/6627ce68d107592cc473718c/original-documents/1713884903372.png",
+          driverLicense:
+            "development/6627ce68d107592cc473718c/driver-license/1713884903632.png",
+          exteriorPhotos: [
             "development/6627ce68d107592cc473718c/front-photo/1713884903902.png",
             "development/6627ce68d107592cc473718c/front/1713884904142.png",
             "development/6627ce68d107592cc473718c/driver-side-(exterior)/1713884904412.png",
             "development/6627ce68d107592cc473718c/'back'/1713884904772.png",
             "development/6627ce68d107592cc473718c/passenger-side/1713884905202.png",
-            "development/6627ce68d107592cc473718c/tire-and-rim/1713884905472.png"
+            "development/6627ce68d107592cc473718c/tire-and-rim/1713884905472.png",
           ],
-          "interiorPhotos": [
+          interiorPhotos: [
             "development/6627ce68d107592cc473718c/drivers-display-(odometer)/1713884905732.png",
             "development/6627ce68d107592cc473718c/drivers-side-(interior)/1713884905972.png",
             "development/6627ce68d107592cc473718c/center-console/1713884906222.png",
-            "development/6627ce68d107592cc473718c/rear-seats/1713884906455.png"
+            "development/6627ce68d107592cc473718c/rear-seats/1713884906455.png",
           ],
-          "vehicleDamage": [],
-          "additionalDocuments": []
-        }
-      }
-      let res = await store.update({ uuid: id_aution.value, payload: data })
+          vehicleDamage: [],
+          additionalDocuments: [],
+        },
+      };
+      let res = await store.update({ uuid: id_aution.value, payload: data });
       if (res.data) {
-        console.log('res.data', res.data)
-        loading.value = false
+        console.log("res.data", res.data);
+        loading.value = false;
         step.value.step = true;
         step.value.step2 = false;
         id_aution.value = null;
       }
-    }
+    };
     const getDataAution = async (id) => {
-      loading.value = true
+      loading.value = true;
       try {
-        let res = await store.getAutionById({ uuid: "665098ad611c4dcd82bb7493" })
+        let res = await store.getAutionById({
+          uuid: "665098ad611c4dcd82bb7493",
+        });
         if (res) {
           let newArray = [];
-          newArray = res.data.vehicleDetails.exteriorPhotos.map((img, index) => {
-            let newObjet = {
-              id: index,
-              img,
-              categoryId: 1
+          newArray = res.data.vehicleDetails.exteriorPhotos.map(
+            (img, index) => {
+              let newObjet = {
+                id: index,
+                img,
+                categoryId: 1,
+              };
+              return newObjet;
             }
-            return newObjet
-          })
+          );
           if (newArray.length > 0) {
-
             for (let index = 0; index < newArray.length; index++) {
               const element = newArray[index];
               arrayEmpty.value.push({
-                item: element.id
-              })
-
+                item: element.id,
+              });
             }
-            categories.value[1].children = newArray
-            loading.value = false
-            console.log('PEPITOOOOOOOO', categories.value[1].children)
+            categories.value[1].children = newArray;
+            loading.value = false;
+            console.log("PEPITOOOOOOOO", categories.value[1].children);
           }
         }
       } catch (error) {
-        loading.value = false
-        console.log('error', error)
+        loading.value = false;
+        console.log("error", error);
       }
-
-    }
+    };
     const ordenarPhotos = () => {
-      console.log('categories.value[1].children.length', categories.value[1].children.length)
+      console.log(
+        "categories.value[1].children.length",
+        categories.value[1].children.length
+      );
       if (categories.value[1].children.length !== 0) {
         toast("The video exceeds 100mb", {
           type: "error",
         });
       }
 
-      console.log('categories', categories.value)
-
-    }
-    watch(notificaciones.value, async (newQuestion, oldQuestion) => {
+      console.log("categories", categories.value);
+    };
+    /*    watch(notificaciones.value, async (newQuestion, oldQuestion) => {
       console.log('SOKET NOTIFICACIONES',)
       countDownTimer(newQuestion.slice(-1).pop())
-    })
-    watch(powerValue, async (newQuestion, oldQuestion) => {
+    }) */
+    /*   watch(powerValue, async (newQuestion, oldQuestion) => {
       porcertanje.value = newQuestion
     })
     watch(showAnimation.value, async (newQuestion, oldQuestion) => {
@@ -515,12 +534,11 @@ export default {
         countDownTimer(newQuestion)
       }
       console.log('newQuestion', newQuestion)
-    })
+    }) */
     onMounted(async () => {
-      getDataAution()
-      additemArray()
-
-    })
+      /*  getDataAution(); */
+      /*  additemArray() */
+    });
     return {
       loadimage,
       errorimage,
@@ -554,7 +572,7 @@ export default {
       itemRemove,
       counterDelete,
       countDownTimer,
-      timer
+      timer,
     };
   },
 };
@@ -589,7 +607,6 @@ export default {
 
 .contend-drag .effecto-camera img:nth-child(1) {
   transform: translateY(-20px);
-
 }
 
 .contend-drag .effecto-camera img:nth-child(2) {
@@ -600,7 +617,6 @@ export default {
   transform: rotate(11deg);
   z-index: 10;
   filter: grayscale(1);
-
 }
 
 .contend-drag .effecto-camera img:nth-child(3) {
@@ -611,11 +627,10 @@ export default {
   transform: rotate(350deg);
   z-index: 10;
   filter: grayscale(1);
-
 }
 
 .effecto-camera {
-  position: relative
+  position: relative;
 }
 
 .effecto-camera img:nth-child(1) {

@@ -185,11 +185,11 @@
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
                                 <p>Sell a Car</p>
                             </RouterLink>
-                            <!--   <RouterLink to="#"
-                                :class="path == 'auto-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
+                            <RouterLink to="/liveSeller"
+                                :class="path == 'liveSeller' || path == 'upcoming-auctions-seller' || path == 'completed-seller' || path == 'current-bits-seller' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
-                                <p>Sold Auction</p>
-                            </RouterLink> -->
+                                <p>My Autions</p>
+                            </RouterLink>
                             <!--  <RouterLink to="/faqs-seller"
                                 :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
@@ -559,7 +559,6 @@ export default {
         const idInterval = ref(null)
         const opeNav = ref(false)
         watch(notiAutions, async (newQuestion, oldQuestion) => {
-            console.log('SOKET NOTIFICACIONES', newQuestion)
             var audio = new Audio(data.value.soundurl);
             if (newQuestion) {
                 if (audio.play()) {
@@ -598,7 +597,6 @@ export default {
                 setTimeout(() => {
                     timeNotification.value -= 1
 
-                    console.log('timeNotification', timeNotification)
                     countDownTimer()
                 }, 1000)
             } else {
@@ -637,8 +635,6 @@ export default {
             opeNav.value = false
         }
         onMounted(() => {
-            console.log('router', router)
-            console.log('route', route)
             window.addEventListener('scroll', updateScroll);
         })
         return {

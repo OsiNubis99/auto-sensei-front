@@ -159,7 +159,6 @@ export default {
                 return
             }
             loading.value = true
-            console.log('formdata', formdata)
             try {
                 let dataRegister = {
                     phone: formdata.phone,
@@ -172,14 +171,11 @@ export default {
 
                 try {
                     let res = await storeUser.userData(data)
-                    console.log('res USERRR', res.data)
                     if (res) {
                         axios.defaults.headers['Authorization'] = `Bearer ${formdata.token}`;
                         let resToken = await store.authProfile()
-                        console.log('resToken', resToken)
                         if (resToken.statusText = "OK") {
                             let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
-                            console.log('resDtaLate', resDtaLate)
                             if (resToken.data.type !== 2) localStorage.setItem('token', formdata.token)
                             if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
                             if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
@@ -228,7 +224,6 @@ export default {
                         }
                     }
                 } catch (error) {
-                    console.log('entro aqi', error)
                     loading.value = false
                     let errorMessage = error?.response?.data?.message[0]
                     if (typeof error?.response?.data?.message === 'string') {
@@ -239,7 +234,6 @@ export default {
                     });
                 }
             } catch (error) {
-                console.log('entro aqi', error)
                 toast(error?.response?.data?.message || 'error al cargar', {
                     type: "error",
                 });
@@ -250,7 +244,6 @@ export default {
             props.back()
         }
         const backStep = async () => {
-            console.log('formdata?.phone', formdata?.phone)
             if (formdata.phone) {
                 loading.value = true
                 let data = {
@@ -259,7 +252,6 @@ export default {
                 try {
                     let resCode = await storeUser.getValidation(data)
                     if (resCode) {
-                        console.log('resCode', resCode)
                         toast('Code succesfully resent', {
                             type: "success",
                         });

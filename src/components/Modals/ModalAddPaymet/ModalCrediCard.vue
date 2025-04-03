@@ -92,10 +92,8 @@ export default {
             cvv: null
         })
         const addpayment = async () => {
-            console.log('hola', form.value)
             try {
                 let res = await controllerPayment.addCard()
-                console.log('res', res)
                 if (res.data) {
                     window.location.href = res.data.url
                 }
@@ -128,7 +126,6 @@ export default {
               loading.value = true
               try {
                   let res = await controllerPayment.addPayment(data)
-                  console.log('res', res)
               } catch (error) {
                   loading.value = false
               } finally {
