@@ -188,7 +188,7 @@
                             <RouterLink to="/liveSeller"
                                 :class="path == 'liveSeller' || path == 'upcoming-auctions-seller' || path == 'completed-seller' || path == 'current-bits-seller' ? 'bg-[#303E18] text-primary' : ' text-white'"
                                 class="relative  max-w-fit py-2  px-4  rounded-[8px] hover:bg-[#303E18]  hover:text-primary ease-linear duration-500  ">
-                                <p>My Autions</p>
+                                <p>Auction</p>
                             </RouterLink>
                             <!--  <RouterLink to="/faqs-seller"
                                 :class="path == 'dealer-list' ? 'bg-[#303E18] text-primary' : ' text-white'"
