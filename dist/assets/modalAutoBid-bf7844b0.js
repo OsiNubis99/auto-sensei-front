@@ -1,0 +1,1 @@
+import{P as a}from"./index-cb261f5f.js";const o=a("modalAutoBid",{state:()=>({isActive:!1,data:null}),actions:{openModal(t){this.isActive=t.active,this.data=t.data},closeModal(t){this.isActive=t,this.data=null}}});export{o as M};
