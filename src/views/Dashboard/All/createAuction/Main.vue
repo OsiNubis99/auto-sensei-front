@@ -1,5 +1,5 @@
 <template>
-    <div :class="op.step1 ? 'md:h-screen' : 'h-fit'" class="bg-[#BDBDBF66] md:bg=[#F9F9F9] ">
+    <div :class="op.step1 ? 'md:h-screen' : 'h-fit'" class="bg-[#BDBDBF66]  md:bg=[#F9F9F9] ">
         <div>
             <div class="absolute hidden md:block w-full h-[200px] overflow-hidden bg-[#0B1107]">
                 <svg class="w-full " xmlns="http://www.w3.org/2000/svg" width="1768" height="260" viewBox="0 0 1768 260"
@@ -558,7 +558,7 @@ export default {
                     invalid?.value?.province ||
                     invalid?.value?.city ||
                     invalid?.value?.keys ||
-                    invalid?.value?.currently
+                    invalid?.value?.currently || 'Required field'
                     , { type: "error" });
                 return
             }
@@ -748,7 +748,7 @@ export default {
                     invalid?.value?.driversDisplay ||
                     invalid?.value?.driversSide ||
                     invalid?.value?.centerConsole ||
-                    invalid?.value?.rearSeats, {
+                    invalid?.value?.rearSeats || 'Required field', {
                     type: "error",
                 });
                 return
@@ -968,7 +968,7 @@ export default {
                     invalid?.value?.driversDisplay ||
                     invalid?.value?.driversSide ||
                     invalid?.value?.centerConsole ||
-                    invalid?.value?.rearSeats, {
+                    invalid?.value?.rearSeats || 'Required field', {
                     type: "error",
                 });
                 return

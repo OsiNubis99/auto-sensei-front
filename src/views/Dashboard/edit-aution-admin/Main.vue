@@ -477,6 +477,7 @@
                                 :class="invalid?.lastReplacement ? 'border-error' : 'border-[#E0E0E0]'"
                                 class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                                 <option selected hidden>Choose Year</option>
+                                <option value="2025">2025</option>
                                 <option value="2024">2024</option>
                                 <option value="2023">2023</option>
                                 <option value="2022">2022</option>
@@ -507,6 +508,7 @@
                                 :class="invalid?.lastReplacement2 ? 'border-error' : 'border-[#E0E0E0]'"
                                 class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                                 <option selected hidden>Choose Year</option>
+                                <option value="2025">2025</option>
                                 <option value="2024">2024</option>
                                 <option value="2023">2023</option>
                                 <option value="2022">2022</option>

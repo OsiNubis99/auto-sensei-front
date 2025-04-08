@@ -233,7 +233,9 @@
             class=" btn flex justify-center bg-[#303E18] py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Continue
         </button>
-        <p class="text-xs md:text-sm text-[#666666]">If you leave the create auction process, this listing will be saved
+        <p v-if="!save" class="text-xs md:text-sm text-[#666666]">If you leave the create auction process, this listing
+            will be
+            saved
             in your
             drafts for your convenience to continue later.</p>
     </div>

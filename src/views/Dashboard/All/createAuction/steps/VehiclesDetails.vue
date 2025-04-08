@@ -242,6 +242,7 @@
                             :class="invalid?.lastReplacement ? 'border-error' : 'border-[#E0E0E0]'"
                             class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                             <option selected hidden>Choose Year</option>
+                            <option value="2025">2025</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
                             <option value="2022">2022</option>
@@ -272,6 +273,7 @@
                             :class="invalid?.lastReplacement2 ? 'border-error' : 'border-[#E0E0E0]'"
                             class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                             <option selected hidden>Choose Year</option>
+                            <option value="2025">2025</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
                             <option value="2022">2022</option>
@@ -282,43 +284,20 @@
                         </select>
                     </div>
                 </div>
-                <!-- <div class="w-full">
-                <div class="w-full flex flex-col md:gap-2">
-                    <label class="font-medium text-xs md:text-base " for="">Rotor Condition</label>
-                    <select v-model="form.rotorCondition"
-                        :class="invalid?.rotorCondition ? 'border-error' : 'border-[#E0E0E0]'"
-                        class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>Choose Condition</option>
-                        <option value="US">United States</option>
-
-                    </select>
-                </div>
             </div>
-            <div class="w-full">
-                <div class="w-full flex flex-col md:gap-2">
-                    <label class="font-medium text-xs md:text-base " for="">Last Replacement</label>
-                    <select v-model="form.lastReplacement3"
-                        :class="invalid?.lastReplacement3 ? 'border-error' : 'border-[#E0E0E0]'"
-                        class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
-                        <option selected>Choose Year</option>
-                        <option value="US">United States</option>
-
-                    </select>
-                </div>
-            </div> -->
-            </div>
-            <div class="flex justify-center items-center gap-5 ">
+            <div v-if="!save" class="flex justify-center items-center gap-5 ">
                 <button @click="saveDraft()" id="saveDraft"
                     class=" btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-blackbg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Save as Draft
                 </button>
-                <button v-if="!save" @click="next" id="step2"
+                <button @click="next" id="step2"
                     class=" btn flex justify-center bg-[#303E18] py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Continue
                 </button>
             </div>
 
-            <p class="text-xs md:text-sm text-[#666666]">If you leave the create auction process, this listing will
+            <p v-if="!save" class="text-xs md:text-sm text-[#666666]">If you leave the create auction process, this
+                listing will
                 be saved
                 in your
                 drafts for your convenience to continue later.</p>

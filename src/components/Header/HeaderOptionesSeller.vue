@@ -102,7 +102,7 @@ export default {
             let res = await storeAutionsSeller.indexSeller()
             if (res) {
                 all.value = res.data.filter((item) => item.status !== enumState.draft);
-                upcoming.value = res.data.filter((item) => item.status === "upcoming");
+                upcoming.value = res.data.filter((item) => item.status === "upcoming" || item.status === enumState.unapproved);
                 live.value = res.data.filter((item) => item.status === "live");
                 completed.value = res.data.filter((item) => item.status == enumState.completed || item.status == enumState.reviewed || item.status == enumState.bidsCompleted || item.status == enumState.dropOff);
                 loading.value = false

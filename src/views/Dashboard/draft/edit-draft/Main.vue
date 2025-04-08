@@ -532,7 +532,7 @@ export default {
                     invalid?.value?.province ||
                     invalid?.value?.city ||
                     invalid?.value?.keys ||
-                    invalid?.value?.currently
+                    invalid?.value?.currently || 'Required field'
                     , { type: "error" });
                 return
             }
@@ -616,7 +616,7 @@ export default {
                     invalid?.value?.brakePads ||
                     invalid?.value?.lastReplacement2 ||
                     invalid?.value?.rotorCondition ||
-                    invalid?.value?.lastReplacement3
+                    invalid?.value?.lastReplacement3 || 'Required field'
                     , {
                         type: "error",
 
@@ -707,7 +707,7 @@ export default {
                     invalid?.value?.driversDisplay ||
                     invalid?.value?.driversSide ||
                     invalid?.value?.centerConsole ||
-                    invalid?.value?.rearSeats, {
+                    invalid?.value?.rearSeats || 'Required field', {
                     type: "error",
                 });
                 return
@@ -923,7 +923,7 @@ export default {
                     invalid?.value?.driversDisplay ||
                     invalid?.value?.driversSide ||
                     invalid?.value?.centerConsole ||
-                    invalid?.value?.rearSeats, {
+                    invalid?.value?.rearSeats || 'Required field', {
                     type: "error",
                 });
                 return
