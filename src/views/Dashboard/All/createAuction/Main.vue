@@ -838,7 +838,7 @@ export default {
         }
       } catch (error) {
         console.log(error);
-        alert(error);
+        alert(JSON.stringify(error));
         loadingUploadImages.value = false;
         toast(error?.response?.data?.message || 'Your auction listing is incomplete, please answer all the questions and fill all out all the forms.', {
           type: 'error',
