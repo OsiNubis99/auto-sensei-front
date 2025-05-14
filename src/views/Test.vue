@@ -11,7 +11,7 @@
       <pre>{{ JSON.stringify(uploadResults, null, 2) }}</pre>
     </div>
     <div v-if="error" class="mt-4 text-red-500">
-      {{ error }}
+      {{ JSON.stringify(error, null, 2) || error }}
     </div>
   </div>
 </template>
