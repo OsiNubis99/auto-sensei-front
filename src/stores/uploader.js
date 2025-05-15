@@ -39,8 +39,11 @@ export const useStoreFile = defineStore('useStoreFile', {
             resolve(response);
           })
           .catch(error => {
-            alert(JSON.stringify(error));
-            console.log('error uploader', error);
+            alert(JSON.stringify(error.message || 'Error desconocido'));
+            alert(JSON.stringify(error.response?.status || 'sin respuesta'));
+            alert(JSON.stringify(error.response?.data || {}));
+            // Manejo de errores mejorado
+            console.log('error uploader', error.message);
             // Mejorar el manejo de errores para evitar undefined
             const errorData = {
               message: error.message || 'Error desconocido',
