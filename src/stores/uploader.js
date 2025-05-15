@@ -8,7 +8,6 @@ export const useStoreFile = defineStore('useStoreFile', {
   }),
   actions: {
     uploaderFile(params) {
-      alert('subiendo archivo');
       let data = new FormData();
       data.append('file', params.file);
       data.append('location', params.location);
@@ -24,33 +23,25 @@ export const useStoreFile = defineStore('useStoreFile', {
             },
             transformRequest: [
               function (data, headers) {
+                // Haz lo que quieras para transformar data
                 return data;
               },
             ],
+
+            // `transformResponse` permite que se realicen cambios en los datos de respuesta antes
+            //  que pasen a then/catch
             transformResponse: [
               function (data) {
+                // Haz lo que quieras para transformar data
                 return data;
               },
             ],
           })
           .then(response => {
-            alert('archivo subido');
-            console.log('response uploader', response);
             resolve(response);
           })
           .catch(error => {
-            alert(JSON.stringify(error.message || 'Error desconocido'));
-            alert(JSON.stringify(error.response?.status || 'sin respuesta'));
-            alert(JSON.stringify(error.response?.data || {}));
-            // Manejo de errores mejorado
-            console.log('error uploader', error.message);
-            // Mejorar el manejo de errores para evitar undefined
-            const errorData = {
-              message: error.message || 'Error desconocido',
-              status: error.response?.status || 'sin respuesta',
-              details: error.response?.data || {},
-            };
-            reject(errorData);
+            reject(error);
           });
       });
     },
