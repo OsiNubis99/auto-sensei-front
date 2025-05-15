@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 h-[50vh] bg-red-100 flex flex-col items-center justify-center">
+  <div class="p-4 h-[100vh] bg-red-100 flex flex-col items-center justify-center">
     <input type="file" class="hidden" ref="fileInput" multiple accept="image/*" @change="onFileChange" />
     <button @click="fileInput.click()" class="px-4 py-2 mt-36 bg-[#000] text-white rounded">Seleccionar archivos</button>
     <div v-if="selectedFiles.length" class="mt-4">

@@ -39,7 +39,7 @@ export const useStoreFile = defineStore('useStoreFile', {
             resolve(response);
           })
           .catch(error => {
-            alert('error al subir archivo');
+            alert(JSON.stringify(error));
             console.log('error uploader', error);
             // Mejorar el manejo de errores para evitar undefined
             const errorData = {
