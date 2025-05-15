@@ -8,6 +8,7 @@ export const useStoreFile = defineStore('useStoreFile', {
   }),
   actions: {
     uploaderFile(params) {
+      alert('subiendo archivo');
       let data = new FormData();
       data.append('file', params.file);
       data.append('location', params.location);
@@ -33,10 +34,12 @@ export const useStoreFile = defineStore('useStoreFile', {
             ],
           })
           .then(response => {
+            alert('archivo subido');
             console.log('response uploader', response);
             resolve(response);
           })
           .catch(error => {
+            alert('error al subir archivo');
             console.log('error uploader', error);
             // Mejorar el manejo de errores para evitar undefined
             const errorData = {
