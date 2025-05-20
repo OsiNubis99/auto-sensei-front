@@ -516,11 +516,12 @@ export default {
     };
     const goToHome = async op => {
       console.log('op', op);
-      if (op == 3) {
-        await router.push({ path: '/liveSeller' });
-        return;
-      }
+
       if (authStore.userData._id) {
+        if (op == 3) {
+          await router.push({ path: '/liveSeller' });
+          return;
+        }
         switch (authStore.userData.type) {
           case 0:
             await router.push({ path: '/inicio' });
