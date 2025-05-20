@@ -523,8 +523,6 @@ export default {
             step3: false,
         })
         const nextGeneralInformation = async () => {
-            console.log('formData.value', formData.value.province)
-            console.log('formData.city', formData.value.city)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'generalInformation');
             if (Object.entries(invalid.value).length > 0) {
@@ -534,7 +532,7 @@ export default {
                     invalid?.value?.province ||
                     invalid?.value?.city ||
                     invalid?.value?.keys ||
-                    invalid?.value?.currently
+                    invalid?.value?.currently || 'Required field'
                     , { type: "error" });
                 return
             }
@@ -563,12 +561,10 @@ export default {
                         yearEnd: formData.value.yearToPreferences
                     }
                 }
-                console.log('dataPost', dataPost)
                 loading.value = true
                 try {
 
                     let res = await store.create(dataPost)
-                    console.log('res', res)
                     if (res) {
                         id_create.value = res.data._id
                         formData.value.numberVin = res.data.vehicleDetails.vin
@@ -620,7 +616,7 @@ export default {
                     invalid?.value?.brakePads ||
                     invalid?.value?.lastReplacement2 ||
                     invalid?.value?.rotorCondition ||
-                    invalid?.value?.lastReplacement3
+                    invalid?.value?.lastReplacement3 || 'Required field'
                     , {
                         type: "error",
 
@@ -711,7 +707,7 @@ export default {
                     invalid?.value?.driversDisplay ||
                     invalid?.value?.driversSide ||
                     invalid?.value?.centerConsole ||
-                    invalid?.value?.rearSeats, {
+                    invalid?.value?.rearSeats || 'Required field', {
                     type: "error",
                 });
                 return
@@ -768,7 +764,6 @@ export default {
             return date
         }
         const postFile = async (string) => {
-            console.log('formData.value.images', formData.value.images)
             let newArrayImages = []
             for (let index = 0; index < formData.value.images.length; index++) {
                 const element = formData.value.images[index];
@@ -776,7 +771,6 @@ export default {
                     newArrayImages.push(element.preview)
                 } else {
 
-                    console.log('element', element)
                     arrayUpload.value = [...arrayUpload.value, {
                         name: `file-${index}`,
                         preview: element.preview,
@@ -789,7 +783,6 @@ export default {
                     newArrayImages.push(resImages[0].data)
                     if (resImages[0]?.data) {
                         arrayUpload.value.map((file) => {
-                            console.log('file', file)
                             if (file.name == `file-${index}`) {
                                 file.completed = true
                             }
@@ -798,7 +791,6 @@ export default {
                 }
 
             }
-            console.log('newArrayImages', newArrayImages)
             if (newArrayImages.length > 0) {
                 try {
                     let resWeekend = getDateAndMinutes(+formData.value.dayMonday)
@@ -820,7 +812,6 @@ export default {
                             startDate = resWeekend.startDate
                             break;
                         case 'none':
-                            console.log('entroaqui ')
                             let resStart = dateTomorrow(9)
                             duration = 480
                             startDate = resStart
@@ -833,7 +824,6 @@ export default {
                     } else {
                         formData.value.color = formData.value.customColor
                     }
-                    console.log('formData.value.document ', formData.value.document)
                     let dataPost = {
                         vin: formData.value.numberVinGenerals,
                         dropOffDate: formData.value.date,
@@ -880,7 +870,6 @@ export default {
                     }
                     return dataPost
                 } catch (error) {
-                    console.log('error', error)
                     loadingUploadImages.value = false
                     toast(error?.response?.data?.message || 'Your auction listing is incomplete, please answer all the questions and fill all out all the forms.', {
                         type: "error",
@@ -893,10 +882,8 @@ export default {
 
         }
         const saveData = async (string) => {
-            console.log('BY IDDDDDDDDD', formData.value)
             componentKey.value += 1
             invalid.value = validateData(formData.value, 'confirmation');
-            console.log('invalid.value', invalid.value)
             if (Object.entries(invalid.value).length > 0) {
                 toast(
                     invalid?.value?.numberVinGenerals ||
@@ -936,7 +923,7 @@ export default {
                     invalid?.value?.driversDisplay ||
                     invalid?.value?.driversSide ||
                     invalid?.value?.centerConsole ||
-                    invalid?.value?.rearSeats, {
+                    invalid?.value?.rearSeats || 'Required field', {
                     type: "error",
                 });
                 return
@@ -948,7 +935,6 @@ export default {
                 if (resFiles) {
                     try {
                         let res = await store.update({ uuid: id_create.value, payload: resFiles })
-                        console.log('res SAVE DRAFT', res)
                         if (res) {
                             await router.push({ path: '/all' })
 
@@ -974,12 +960,10 @@ export default {
 
 
             } catch (error) {
-                console.log('error', error)
 
             }
         }
         const onChangeGetProvince = async (event) => {
-            console.log('event', event)
             formData.value.getCities = undefined
             let props = null;
             if (event?.target?.value) {
@@ -994,7 +978,6 @@ export default {
                 formData.value.getCities = res.data
                 if (formData.value.city) {
                     let resCity = res.data.filter((c) => c.name == formData.value.city)
-                    console.log('resCity', resCity)
                     formData.value.city = JSON.stringify(resCity[0])
                 }
             } catch (error) {
@@ -1007,14 +990,12 @@ export default {
         const onChangeGetCity = async (event) => {
             let value = JSON.parse(event.target.value)
             /* formData.value.city = value.name */
-            console.log('value', value)
         }
         const getAutionById = async (id) => {
             loading.value = true
             let newArrayPhoto = []
             try {
                 let res = await store.getAutionById({ uuid: id })
-                console.log('RESPUESTA AUTION BY ID', res)
 
 
                 if (res.data) {
@@ -1118,15 +1099,12 @@ export default {
                     formData.value.previewVehicleDamage = res.data.vehicleDetails?.vehicleDamage[0] ? bucket.value + res.data.vehicleDetails?.vehicleDamage[0] : undefined;
                     formData.value.repairs = res.data.vehicleDetails.repairs
                     formData.value.images = newArrayPhoto
-                    console.log('formData.value.images', formData.value.images)
                 }
             } catch (error) {
-                console.log('error', error)
                 loading.value = false
             } finally {
                 componentKey.value += 1
                 loading.value = false
-                console.log('HOLAAAAAAAAAAAAAAAAAAA', formData.value)
             }
         }
         onMounted(() => {

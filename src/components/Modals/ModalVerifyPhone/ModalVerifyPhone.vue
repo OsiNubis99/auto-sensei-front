@@ -323,7 +323,6 @@ export default {
                 try {
                     let resCode = await storeUser.getValidation(data)
                     if (resCode) {
-                        console.log('resCode', resCode)
                         if (string == 'resend') {
                             toast('Code succesfully resent', {
                                 type: "success",
@@ -359,22 +358,16 @@ export default {
             try {
                 let resUpdate = await storeUser.updateUser(update)
                 if (resUpdate) {
-                    console.log('resUpdate', resUpdate)
                     steps.value.step1 = false
                     steps.value.step2 = true
                     loading.value = false
                 }
             } catch (error) {
-                console.log('error', error)
                 toast(error?.response?.data?.message || 'error', {
                     type: "error",
                 });
                 loading.value = false
             }
-
-
-            console.log('form.value.code', form.value.code)
-
         }
         onMounted(() => {
             if (auth.userData.seller.phone) {

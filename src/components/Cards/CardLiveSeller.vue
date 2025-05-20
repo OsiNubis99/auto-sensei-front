@@ -17,7 +17,7 @@
                 class="flex p-4 md:p-5 cursor-pointer flex-col gap-3">
                 <div>
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                     <p class="text-xs md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
@@ -69,7 +69,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.tireCondition }}</p>
+                            auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -79,7 +79,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.brakeCondition }}</p>
+                            auction?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
                 <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
@@ -91,13 +91,14 @@
             </div>
             <div :class="changeLayouts ? 'w-full' : 'md:w-[40%] flex flex-col justify-between h-full '"
                 class="border-l-2  border-[#E0E0E0]">
-                <div class="flex md:p-5  pl-4 ga justify-between " :class="changeLayouts ? 'flex-row' : 'flex-col '">
+                <div class="flex md:p-5 h-full pl-4 ga justify-between "
+                    :class="changeLayouts ? 'flex-row' : 'flex-col '">
                     <div class="space-y-1" :class="changeLayouts ? 'flex flex-col justify-between items-start' : ''">
                         <p class="text-sm md:text-base">Current bid</p>
                         <p class=" text-lg font-medium md:text-2xl text-base-black">
                             <span v-if="auction?.bids[0]?.amount">${{ auction?.bids[0]?.amount }}</span>
                             <span v-else-if="auction?.vehicleDetails?.basePrice"> ${{
-        auction?.vehicleDetails?.basePrice }} </span>
+                                auction?.vehicleDetails?.basePrice }} </span>
                             <span v-else>$0</span>
                             <span class="text-[#666666] text-sm md:!text-lg mt-2">/{{ auction.bids.length }}
                                 Bids
@@ -121,6 +122,59 @@
                             </vue-countdown>
                         </p>
                     </div>
+                    <template v-if="storeUser.userData.email !== auction.owner.email && path == 'liveSeller'">
+                        <div class="h-full flex flex-col justify-end">
+                            <div @click="statusModalBids.openModal({ active: true, data: auction, from: 'autoBid' })"
+                                class=" hidden md:flex gap-4 px-2 justify-between  w-full">
+                                <button class="btn w-full bg-base-black flex gap-2 items-center text-primary ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                        fill="none">
+                                        <path
+                                            d="M9.16699 7.16666H13.8337L7.83366 15.8333V9.83332H3.16699L9.16699 1.16666V7.16666Z"
+                                            fill="#C1F861" />
+                                    </svg>
+                                    Auto Bid
+                                </button>
+                            </div>
+                            <div @click="statusModalBids.openModal({ active: true, data: auction, from: 'bidNow' })"
+                                class=" hidden md:flex gap-4 p-2 justify-between w-full">
+                                <button class="btn w-full bg-primary flex gap-2 items-center text-base-black">
+                                    Bid Now
+                                </button>
+                            </div>
+                            <div class="flex md:hidden  px-2 items-center">
+                                <div @click="statusModalBids.openModal({ active: true, data: auction, from: 'autoBid' })"
+                                    class="flex gap-4 px-2 justify-between w-full">
+                                    <button
+                                        class="btn !py-2 w-full bg-base-black flex gap-2 items-center text-primary ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                            viewBox="0 0 17 17" fill="none">
+                                            <path
+                                                d="M9.16699 7.16666H13.8337L7.83366 15.8333V9.83332H3.16699L9.16699 1.16666V7.16666Z"
+                                                fill="#C1F861" />
+                                        </svg>
+                                        <p class="text-xs"> Auto Bid</p>
+                                    </button>
+                                </div>
+                                <div @click="statusModalBids.openModal({ active: true, data: auction, from: 'bidNow' })"
+                                    class="flex gap-4 p-2 justify-between w-full">
+                                    <button class="btn !py-2 w-full bg-primary flex gap-2 items-center text-base-black">
+                                        <p class="text-xs">Bid Now</p>
+                                    </button>
+                                </div>
+                                <div class="border rounded-lg flex justify-center items-center p-2 border-[#C2C2C2]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
+                                        fill="none">
+                                        <path
+                                            d="M5.37852 15.8333L1.66602 18.75V3.33333C1.66602 3.11232 1.75381 2.90036 1.91009 2.74408C2.06637 2.5878 2.27834 2.5 2.49935 2.5H17.4993C17.7204 2.5 17.9323 2.5878 18.0886 2.74408C18.2449 2.90036 18.3327 3.11232 18.3327 3.33333V15C18.3327 15.221 18.2449 15.433 18.0886 15.5893C17.9323 15.7455 17.7204 15.8333 17.4993 15.8333H5.37852ZM5.83268 8.33333V10H7.49935V8.33333H5.83268ZM9.16602 8.33333V10H10.8327V8.33333H9.16602ZM12.4993 8.33333V10H14.166V8.33333H12.4993Z"
+                                            fill="#0A0A0A" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                    </template>
+
                 </div>
             </div>
         </div>
@@ -136,6 +190,9 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ModalViewDetails } from "@/stores/modalViewDetails";
+import { ModalBids } from '@/stores/modalBids';
+import { useAuthStore } from "@/stores/auth";
+import { useRoute } from "vue-router";
 export default {
     components: {
         Swiper,
@@ -154,6 +211,10 @@ export default {
         const changeLayouts = ref(props.changeLayouts);
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
         const statusModal = ModalViewDetails()
+        const statusModalBids = ModalBids()
+        const storeUser = useAuthStore();
+        const route = useRoute();
+        const path = ref(computed(() => route.name))
         function timeToEnd(startDate, duration) {
             if (!startDate || !duration) return 0;
             return (
@@ -167,6 +228,9 @@ export default {
             changeLayouts,
             timeToEnd,
             statusModal,
+            statusModalBids,
+            storeUser,
+            path
         };
     },
 };

@@ -31,7 +31,7 @@
                     <img class="w-[60px] h-[60px] object-cover rounded-full  border border-[#4D4D4D] "
                         :src="bucket + statusModal?.dataAutiont?.owner?.seller?.picture" alt="">
                     <p class=" capitalize ">{{ statusModal?.dataAutiont?.owner?.seller?.firstName }} {{
-        statusModal?.dataAutiont?.owner?.seller?.lastName }}</p>
+                        statusModal?.dataAutiont?.owner?.seller?.lastName }}</p>
                     <div class="md:hidden">
                         <star-rating :show-rating="false" :active-color="['#FF333E', '#FF9A02', '#FBDB17']"
                             :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']" :padding="3"
@@ -123,11 +123,8 @@ export default {
                 valoration: form.value?.raiting?.toString(),
                 comment: form.value.comment
             }
-            console.log('payload', payload)
             try {
                 let res = await storeAutions.autionsReview(({ uuid: statusModal.dataAutiont._id, payload }))
-
-
             } catch (error) {
                 toast(error?.response?.data?.message || 'error', {
                     type: "error",
@@ -136,13 +133,13 @@ export default {
                 form.value.raiting = null
                 statusModal.closeModal(false)
                 loading.value = false
-              /*   props.index() */
+                /*   props.index() */
             } finally {
                 loading.value = false
                 form.value.comment = null
                 form.value.raiting = null
                 statusModal.closeModal(false)
-              /*   props.index() */
+                /*   props.index() */
 
             }
 

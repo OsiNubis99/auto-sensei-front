@@ -14,7 +14,7 @@
                 :class="invalid?.numberVin ? 'border-error' : 'border-none'" placeholder="1HGCM82633A123456"
                 type="text">
         </div>
-        <div class="flex w-full justify-between items-center gap-5">
+        <!--  <div class="flex w-full justify-between items-center gap-5">
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Year</label>
                 <input v-model="form.year" :class="invalid?.year ? 'border-error' : 'border-none'"
@@ -52,13 +52,13 @@
                 <input :class="invalid?.cylinder ? 'border-error' : 'border-none'" v-model="form.cylinder"
                     class="p-2 w-full  md:mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="4" type="text">
             </div>
-        </div>
+        </div> -->
         <div class="flex w-full justify-between items-center flex-col md:flex-row gap-5">
-            <div class="w-full">
+            <!--  <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Transmission</label>
                 <input v-model="form.transmission" :class="invalid?.transmission ? 'border-error' : 'border-none'"
                     class="p-2 w-full  md:mt-3 bg-[#F0F0F0] border rounded-lg" placeholder="SUV" type="text">
-            </div>
+            </div> -->
             <div class="w-full">
                 <label class="font-medium text-xs md:text-base " for="">Odometer</label>
                 <input step="0.01" :class="invalid?.odometer ? 'border-error' : ''" v-model="form.odometer"
@@ -193,6 +193,7 @@
                         :class="invalid?.lastReplacement ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected hidden>Choose Year</option>
+                        <option value="2025">2025</option>
                         <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
@@ -222,6 +223,7 @@
                         :class="invalid?.lastReplacement2 ? 'border-error' : 'border-[#E0E0E0]'"
                         class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                         <option selected hidden>Choose Year</option>
+                        <option value="2025">2025</option>
                         <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
@@ -274,10 +276,6 @@ export default {
         const next = () => {
             props.nextVehiclesDetails()
         }
-        onMounted(() => {
-            console.log('form', form.value)
-        })
-
         return {
             date,
             next,

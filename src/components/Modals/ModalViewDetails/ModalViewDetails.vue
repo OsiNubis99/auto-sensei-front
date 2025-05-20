@@ -16,8 +16,8 @@
                     <div class="hidden md:block">
                         <p class="text-2xl font-semibold capitalize">{{ statusModal.dataAutiont?.vehicleDetails?.year }}
                             {{
-        statusModal.dataAutiont?.vehicleDetails?.make }} {{
-        statusModal.dataAutiont?.vehicleDetails?.model }}</p>
+                                statusModal.dataAutiont?.vehicleDetails?.make }} {{
+                                statusModal.dataAutiont?.vehicleDetails?.model }}</p>
                         <div class="flex gap-1 items-center">
                             <p>{{ statusModal.dataAutiont?.city }}, {{ statusModal.dataAutiont?.province }}</p>
                             <p>|</p>
@@ -70,7 +70,7 @@
                                                 fill="#858585" />
                                         </svg>
                                         <p class="text-[10px] md:text-base  uppercase ">{{ statusModal.dataAutiont?.vin
-                                            }}</p>
+                                        }}</p>
                                     </div>
                                     <div class="flex gap-2 items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -80,7 +80,7 @@
                                                 fill="#858585" />
                                         </svg>
                                         <p class="text-[10px] md:text-base  capitalize ">{{
-        statusModal.dataAutiont?.vehicleDetails.odometer }}
+                                            statusModal.dataAutiont?.vehicleDetails.odometer }}
                                             Kilometers</p>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                                                 fill="#858585" />
                                         </svg>
                                         <p class="text-[10px] md:text-base capitalize">{{
-        statusModal.dataAutiont?.vehicleDetails.color }}</p>
+                                            statusModal.dataAutiont?.vehicleDetails.color }}</p>
                                     </div>
                                     <div class="flex gap-2 items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -103,7 +103,7 @@
                                                 fill="#858585" />
                                         </svg>
                                         <p class="text-[10px] md:text-base capitalize">{{
-        statusModal.dataAutiont?.vehicleDetails.driveTrain }}</p>
+                                            statusModal.dataAutiont?.vehicleDetails.driveTrain }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                             fill="#0B1107" />
                                     </svg>
                                     <p class=" text-[10px] md:text-base capitalize">{{
-        statusModal.dataAutiont?.vehicleDetails.tireCondition }}</p>
+                                        statusModal.dataAutiont?.vehicleDetails.tireCondition }}</p>
                                 </div>
                                 <div class="bg-[#F0F0F0] flex px-2 md:px-5 py-1 gap-1 md:gap-3 rounded-lg items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
@@ -126,7 +126,7 @@
                                             fill="#0B1107" />
                                     </svg>
                                     <p class=" text-[10px] md:text-base capitalize">{{
-        statusModal.dataAutiont?.vehicleDetails.brakeCondition }}</p>
+                                        statusModal.dataAutiont?.vehicleDetails.brakeCondition }}</p>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                                     <p v-if="statusModal.dataAutiont?.status == 'bids completed'"
                                         class="text-sm md:text-lg font-medium capitalize ">Completed</p>
                                     <p v-else class="text-sm md:text-lg font-medium capitalize ">{{
-        statusModal.dataAutiont?.status }}
+                                        statusModal.dataAutiont?.status }}
                                     </p>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                                 <p class=" text-xs md:text-sm">Total Bid</p>
                                 <div class="flex gap-2 items-center ">
                                     <p class=" text-sm md:text-lg font-medium capitalize ">{{
-        statusModal.dataAutiont?.bids.length }}
+                                        statusModal.dataAutiont?.bids.length }}
                                         Bids</p>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                                 <p class=" text-xs md:text-sm">Final Bids</p>
                                 <div class="flex gap-2 items-center ">
                                     <p class="  text-sm md:text-lg font-medium capitalize ">${{
-        statusModal.dataAutiont?.bids[0]?.amount }}</p>
+                                        statusModal.dataAutiont?.bids[0]?.amount }}</p>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +174,7 @@
                                 :src="bucket + statusModal.dataAutiont?.bids[0]?.participant?.dealer?.picture" alt="">
                             <div>
                                 <p class="text-sm font-semibold md:text-base">{{
-        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.name }}</p>
+                                    statusModal.dataAutiont?.bids[0]?.participant?.dealer?.name }}</p>
                                 <p class="text-[10px]  text-[#858585]  md:text-base">Oct 20, 2023 at 2:41 AM</p>
                             </div>
                         </div>
@@ -189,12 +189,12 @@
                                     class="flex flex-col md:flex-row md:py-4 border-b border-[#F0F0F0] justify-between items-start md:items-center">
                                     <p class=" md:font-semibold text-xs md:text-base ">Full Name</p>
                                     <p class="text-[#858585] md:font-semibold text-xs md:text-base">{{
-        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.name }}</p>
+                                        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.name }}</p>
                                 </div>
                                 <div class="flex flex-col md:flex-row py-4 justify-between items-start md:items-center">
                                     <p class=" md:font-semibold text-xs md:text-base ">Email Address</p>
                                     <p class="text-[#858585] md:font-semibold text-xs md:text-base ">{{
-        statusModal.dataAutiont?.bids[0]?.participant?.email }}</p>
+                                        statusModal.dataAutiont?.bids[0]?.participant?.email }}</p>
                                 </div>
                             </div>
                         </div>
@@ -213,24 +213,24 @@
                                 <div class="flex flex-col md:flex-row py-4 justify-between items-start md:items-center">
                                     <p class=" md:font-semibold text-xs md:text-base  ">OMVIC Registration Number</p>
                                     <p class="text-[#858585] md:font-semibold text-xs md:text-base">{{
-        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.omvic }}</p>
+                                        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.omvic }}</p>
                                 </div>
                                 <div class="flex flex-col md:flex-row py-4 justify-between items-start md:items-center">
                                     <p class=" md:font-semibold text-xs md:text-base  ">Address</p>
                                     <p class="text-[#858585] md:font-semibold text-xs md:text-base">{{
-        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.address }}</p>
+                                        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.address }}</p>
                                 </div>
                                 <div class="flex flex-col md:flex-row py-4 justify-between items-start md:items-center">
                                     <p class=" md:font-semibold text-xs md:text-base  ">Phone Number</p>
                                     <p class="text-[#858585] md:font-semibold text-xs md:text-base">{{
-        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.phone }}</p>
+                                        statusModal.dataAutiont?.bids[0]?.participant?.dealer?.phone }}</p>
                                 </div>
                             </div>
                         </div>
                         <div v-if="statusModal.dataAutiont?.status == 'completed'"
                             class=" block md:hidden fixed bottom-2 p-2  w-full">
                             <RouterLink
-                                :to="{ name: 'inbox-seller', query: { id: statusModal.dataAutiont?._id + '-' + statusModal.dataAutiont?.bids[0].participant._id } }"
+                                :to="{ name: 'inbox-seller', query: { id: statusModal.dataAutiont?._id + '-' + statusModal.dataAutiont?.bids[0]?.participant?._id } }"
                                 class="btn w-full bg-primary text-base-black">Contact Buyer</RouterLink>
                         </div>
                     </div>
@@ -244,21 +244,37 @@
                                     <div class="flex md:pr-4  md:py-3 pb-0 justify-between ">
                                         <div class="flex ">
                                             <div class=" w-12  h-12 md:h-[60px] md:w-[60px]">
-                                                <img v-if="dealerBit.participant.dealer.picture"
-                                                    class="w-full shadow-lg rounded-lg h-full object-cover"
-                                                    :src="bucket + dealerBit.participant.dealer.picture" alt="">
-                                                <img class=" shadow-xl w-full h-full rounded-lg object-cover " v-else
-                                                    src="@/assets/img/jpg/image.jpg" alt="">
+                                                <template v-if="dealerBit.participant?.type == 2">
+                                                    <img v-if="dealerBit.participant?.dealer?.picture"
+                                                        class="w-full shadow-lg rounded-lg h-full object-cover"
+                                                        :src="bucket + dealerBit.participant?.dealer?.picture" alt="">
+                                                    <img v-else
+                                                        class=" shadow-xl w-full h-full rounded-lg object-cover "
+                                                        src="@/assets/img/jpg/image.jpg" alt="">
+                                                </template>
+                                                <template v-if="dealerBit.participant?.type == 1">
+                                                    <img v-if="dealerBit.participant?.seller?.picture"
+                                                        class="w-full shadow-lg rounded-lg h-full object-cover"
+                                                        :src="bucket + dealerBit.participant?.seller?.picture" alt="">
+                                                    <img v-else
+                                                        class=" shadow-xl w-full h-full rounded-lg object-cover "
+                                                        src="@/assets/img/jpg/image.jpg" alt="">
+                                                </template>
                                             </div>
                                             <div class="flex gap-1 p-2 flex-col items-start">
                                                 <template
                                                     v-if="index == 0 && statusModal.dataAutiont?.status == 'bids completed'"
                                                     clas capitalize s="">
                                                     <div class="flex gap-2 items-center">
-                                                        <p
+                                                        <p v-if="dealerBit.participant?.type == 2"
                                                             class=" text-xs md:text-base md:font-semibold capitalize w-[70px] md:w-auto truncate ">
                                                             {{
-        dealerBit.participant.dealer.name }}</p>
+                                                                dealerBit.participant?.dealer?.name }}</p>
+                                                        <p v-if="dealerBit.participant?.type == 1"
+                                                            class=" text-xs md:text-base md:font-semibold capitalize w-[70px] md:w-auto truncate ">
+                                                            {{
+                                                                dealerBit.participant?.seller?.firstName }} {{
+                                                                dealerBit.participant?.seller?.lastName }} </p>
                                                         <svg class=" w-4 h-4 md:w-6 md:h-6"
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                                                             fill="none">
@@ -272,25 +288,30 @@
                                                     </div>
 
                                                     <p class="text-[10px] md:text-lg whitespace-pre">{{
-        moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h: mm: ss a')
-    }}</p>
+                                                        moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h: mm: ss a')
+                                                        }}</p>
                                                 </template>
                                                 <template v-else>
-                                                    <p class=" truncate w-[150px] md:w-fit font-semibold">{{
-            dealerBit.participant.dealer.name }}</p>
+                                                    <p v-if="dealerBit.participant?.type == 2"
+                                                        class=" truncate w-[150px] md:w-fit font-semibold">{{
+                                                            dealerBit.participant?.dealer?.name }}</p>
+                                                    <p v-if="dealerBit.participant?.type == 1"
+                                                        class=" truncate w-[150px] md:w-fit font-semibold"> {{
+                                                            dealerBit.participant?.seller?.firstName }} {{
+                                                            dealerBit.participant?.seller?.lastName }}</p>
                                                     <p class="text-[10px] md:text-lg whitespace-pre">
                                                         {{
-        moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h:mm: ssa')
-    }}</p>
+                                                            moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h:mm: ssa')
+                                                        }}</p>
                                                 </template>
 
                                             </div>
                                         </div>
                                         <p class="font-semibold text-sm mt-7 md:mt-0 md:text-[1.5rem]">${{
-            dealerBit.amount }}</p>
+                                            dealerBit.amount }}</p>
                                     </div>
                                     <RouterLink v-if="index == 0 && statusModal.dataAutiont?.status == 'bids completed'"
-                                        :to="{ name: 'inbox-seller', query: { id: statusModal.dataAutiont?._id + '-' + statusModal.dataAutiont?.bids[0].participant._id } }"
+                                        :to="{ name: 'inbox-seller', query: { id: statusModal.dataAutiont?._id + '-' + statusModal.dataAutiont?.bids[0].participant?._id } }"
                                         class="w-full btn border hover:bg-primary transition-all ease-in duration-300  hover:text-white py-2 rounded-lg md:mt-4 border-[#F0F0F0] ">
                                         Contact
                                         Buyer</RouterLink>
@@ -437,13 +458,13 @@
                                     <div class="flex justify-between flex-col h-full">
                                         <p class=" font-semibold capitalize md:text-base text-sm  ">{{
                                             statusModal.dataAutiont?.vehicleDetails?.year }} {{
-                                            statusModal.dataAutiont?.vehicleDetails?.make }} {{
-                                            statusModal.dataAutiont?.vehicleDetails?.model }}</p>
+                                                statusModal.dataAutiont?.vehicleDetails?.make }} {{
+                                                statusModal.dataAutiont?.vehicleDetails?.model }}</p>
                                         <p class="capitalize text-sm md:text-base ">Final Bid</p>
                                         <p class="font-medium text-sm text-base-black md:text-2xl">${{
                                             statusModal.dataAutiont?.bids[0]?.amount }}/<span
                                                 class="text-[#666666] mt-1 text-xs md:text-base ">{{
-                                                statusModal.dataAutiont?.bids?.length }} Bids</span> </p>
+                                                    statusModal.dataAutiont?.bids?.length }} Bids</span> </p>
                                     </div>
                                 </div>
                             </div>
@@ -520,7 +541,6 @@ export default {
             step3: false
         })
         const sutmibPDF = async (pdf) => {
-            console.log('recivied', pdf)
             loading.value = true
             try {
                 const blob = new Blob([pdf], { type: 'application/pdf' }, { name: Date.now() + '.' + pdf.extension });
@@ -536,7 +556,6 @@ export default {
                 let result = await axios(options);
                 if (result.data) {
                     let res = await props.acceptAution(result.data)
-                    console.log('res', res)
                     if (res) {
                         showPdf.value = 'https://apidev.autosensei.ca/files/' + result.data
                         steps.value.step1 = false
@@ -544,7 +563,6 @@ export default {
                         steps.value.step3 = true
                     }
                 }
-                console.log(result);
             } catch (e) {
                 loading.value = false
                 console.error("error", e);
@@ -565,7 +583,6 @@ export default {
 
         }
         const next = async (step) => {
-            console.log('statusModal.dataAutiont', statusModal.dataAutiont)
             if (step == 1) {
                 steps.value.step1 = false
                 steps.value.step2 = true
@@ -586,7 +603,6 @@ export default {
                         axios
                             .get(`/auction/contract/${statusModal.dataAutiont._id}`)
                             .then(async (response) => {
-                                console.log('resPDF', response)
                                 showPdf.value = 'https://apidev.autosensei.ca/files/' + response.data.contract
                                 let res = await storeAutions.acceptAutions(statusModal.dataAutiont._id, statusModal.dataAutiont.contract)
                                 if (res) {
@@ -692,7 +708,6 @@ export default {
         }
         onMounted(() => {
             if (statusModal.dataAutiont) {
-                console.log('statusModal.dataAutiont', statusModal.dataAutiont)
                 statusModal.dataAutiont.dropOffDate = moment(statusModal.dataAutiont.dropOffDate).format("DD MMMM YYYY");
             }
         })

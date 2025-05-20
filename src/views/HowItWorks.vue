@@ -134,7 +134,7 @@
             <button id="getStarted-how-it-works" @click="goToHome" class="btn-free bg-primary">
                 <p class="font-bold ">Get Started Today</p>
                 <p class="btn-free_card">Free</p>
-                <svg mlns=" http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                     <path
                         d="M13.6715 12.0007L8.72168 7.05093L10.1359 5.63672L16.4999 12.0007L10.1359 18.3646L8.72168 16.9504L13.6715 12.0007Z"
                         fill="black" />
@@ -317,7 +317,6 @@ export default {
             route.push({ name: 'signup', params: { rol: redirect } })
         }
         const goToHome = async () => {
-            console.log('authStore.userData', authStore.userData)
             if (authStore.userData._id) {
                 switch (authStore.userData.type) {
                     case 0:

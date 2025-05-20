@@ -229,6 +229,38 @@
                                     @input="filterinput" v-model="form.phoneNumber"
                                     class="border rounded-md h-[48px] w-full" id="telephone" />
                             </div>
+                            <div
+                                class="flex  w-full justify-start dark:bg-gray-950 animate-fade-up  animate-ease-in-out animate-delay-800">
+                                <div class="flex justify-between items-start gap-2">
+                                    <label class="relative flex cursor-pointer items-center mb-1 rounded-md">
+
+                                        <input type="checkbox" v-model="form.termsconditions"
+                                            :class="form.termsconditions ? 'bg-base-black' : 'bg-white'"
+                                            class="peer cursor-pointer appearance-none relative h-4 w-4  dark:bg-gray-100/25 border border-gray-900 dark:border-gray-100 transition-all checked:border-blue-500 checked:bg-blue-500 rounded-md" />
+                                        <div
+                                            class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20"
+                                                fill="currentColor" stroke="currentColor" stroke-width="1">
+                                                <path fill-rule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+
+                                    </label>
+                                    <div class="flex flex-col -mt-1  relative ">
+
+                                        <p class="!text-sm  font-medium text-gray-700">I hearby sign up to receive text
+                                            alerts from Autosensei. I
+                                            understand that standard message & data rates apply. You may
+                                            reply STOP to cancel
+                                        </p>
+                                        <p class="text-xs text-error absolute whitespace-pre  -bottom-[100%] font-medium text-gray-700"
+                                            v-if="invalid?.termsconditions">{{ invalid?.termsconditions }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
                             <div>
                                 <button @click="nextStep" id="continueAccount"
                                     class="w-full btn flex justify-center bg-primary py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-base-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -301,7 +333,6 @@ export default {
             var maxfilesize = ((1024 * 1024) * 5).toFixed(2) // 1 Mb
             var filesize = input.files[0].size
             let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
-            console.log('convertion', convertion)
             if (input.files) {
                 if (convertion > 50) {
                     toast("File too large: " + convertion + "Mb" + ". Maximum size: 50 Mb", {
@@ -326,7 +357,6 @@ export default {
             var maxfilesize = ((1024 * 1024) * 5) * 10  // 50 Mb
             var filesize = input.files[0].size
             let convertion = (input.files[0].size / (1024 * 1024)).toFixed(2);
-            console.log('convertion', convertion)
             if (input.files) {
                 if (convertion > 50) {
                     toast("File too large: " + convertion + "Mb" + ". Maximum size: 5 Mb", {
@@ -356,7 +386,6 @@ export default {
             form.phoneNumber = value
         }
         const nextStep = async () => {
-            console.log('formattedNumber.value', formattedNumber.value)
             invalid.value = infoAccount(form, rol.value);
             if (Object.entries(invalid.value).length === 0) {
                 if (!formattedNumber.value) {
@@ -393,18 +422,13 @@ export default {
                         driverLicense: form.driverLicense ? form.driverLicense : null,
                     }
                     storeData.getSendData = dataSenCode
-                    console.log('dataSenCode', dataSenCode)
                     if (dataSenCode.rol == 'sellers') {
-                        console.log('entro ene l sellers')
                         isLoading.value = true
                         if (form.img || form.driverLicense) {
-                            console.log('entro en la iamgenes')
                             let resFile = form.img && await storeFile.uploaderFile({ file: form.img, location: 'profile' })
                             let resLicence = form.driverLicense && await storeFile.uploaderFile({ file: form.driverLicense, location: 'license' })
-                            console.log('resLicence', resLicence)
                             if (resFile.data || resLicence.data) {
                                 try {
-                                    console.log('respuesta de la subida de imagenes')
                                     let typeSeller = {
                                         seller: {
                                             picture: resFile?.data ? resFile?.data : null,
@@ -424,10 +448,8 @@ export default {
                                         if (res) {
                                             axios.defaults.headers['Authorization'] = `Bearer ${token.value}`;
                                             let resToken = await store.authProfile()
-                                            console.log('resToken', resToken)
                                             if (resToken.statusText = "OK") {
                                                 let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
-                                                console.log('resDtaLate', resDtaLate)
                                                 if (resToken.data.type !== 2) localStorage.setItem('token', token.value)
                                                 if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
                                                 if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
@@ -444,14 +466,12 @@ export default {
                                             }
                                         }
                                     } catch (error) {
-                                        console.log('error', error)
                                         isLoading.value = false
                                         toast(error?.response?.data?.message[0] || 'error', {
                                             type: "error",
                                         });
                                     }
                                 } catch (error) {
-                                    console.log('error', error)
                                     toast(error?.response?.data?.message || 'error', {
                                         type: "error",
                                     });
@@ -481,10 +501,8 @@ export default {
                                     if (res) {
                                         axios.defaults.headers['Authorization'] = `Bearer ${token.value}`;
                                         let resToken = await store.authProfile()
-                                        console.log('resToken', resToken)
                                         if (resToken.statusText = "OK") {
                                             let resDtaLate = await dataLayer.push({ 'event': 'registrationComplete', 'formType': res.data /* Or other relevant information 'userId': 'USER_ID' If you track user IDs and it's compliant with our privacy policy*/ });
-                                            console.log('resDtaLate', resDtaLate)
                                             if (resToken.data.type !== 2) localStorage.setItem('token', token.value)
                                             if (resToken.data.type !== 2) localStorage.removeItem('updateUser')
                                             if (resToken.data.type !== 2) localStorage.setItem('rol', resToken.data.type)
@@ -501,7 +519,6 @@ export default {
                                         }
                                     }
                                 } catch (error) {
-                                    console.log('error', error)
                                     isLoading.value = false
                                     toast(error?.response?.data?.message[0] || 'error al cargar', {
                                         type: "error",
@@ -509,7 +526,6 @@ export default {
                                 }
 
                             } catch (error) {
-                                console.log('error', error)
                                 if (error?.response?.data?.message == "Unauthorized") {
                                     toast(error?.response?.data?.message || 'error al cargar', {
                                         type: "error",
@@ -522,14 +538,12 @@ export default {
                         }
                         isLoading.value = false
                     } else {
-                        console.log('entro ene l dealer')
                         let resCode = await storeUser.getValidation(data)
                         if (resCode.data.status == 'ok') {
                             isLoading.value = true
                             if (form.img || form.driverLicense) {
                                 let resFile = form.img && await storeFile.uploaderFile({ file: form.img, location: 'profile' })
                                 let resLicence = form.driverLicense && await storeFile.uploaderFile({ file: form.driverLicense, location: 'license' })
-                                console.log('resLicence', resLicence)
                                 if (resFile.data || resLicence.data) {
                                     try {
                                         let typeSeller = {
@@ -646,13 +660,11 @@ export default {
 
 
                 } catch (error) {
-                    console.log('error', error)
                     toast(error.response.data.message, {
                         type: "error",
                         autoClose: 2000,
                     });
                     isLoading.value = false
-                    console.log('errro', error)
 
                 }
             }
@@ -661,7 +673,6 @@ export default {
             try {
                 const res = await countrys.getCountry()
                 form.getState = res.data
-                console.log('resresresresresres', res)
             } catch (error) {
 
             }
@@ -674,7 +685,6 @@ export default {
             try {
                 const res = await countrys.getCountryCities(value.iso2)
                 form.getCities = res.data
-                console.log('getCountryCities', res)
             } catch (error) {
                 loadingCountrys.value = false
             } finally {
@@ -685,13 +695,11 @@ export default {
         const onChangeGetCity = async (event) => {
             let value = JSON.parse(event.target.value)
             /* formData.city = value.name */
-            console.log('value', value)
         }
         onUpdated(() => {
             rol.value = route.params.rol
         })
         onMounted(() => {
-            console.log('entro al paso 3')
             form.phoneNumber = undefined;
             telInput.value = undefined;
             formattedNumber.value = undefined;
@@ -710,7 +718,6 @@ export default {
                 // Otros opciones de inicialización si es necesario
             });
             input.addEventListener("countrychange", function (e) {
-                console.log(telInput);
             });
 
         })

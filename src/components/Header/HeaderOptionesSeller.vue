@@ -57,6 +57,8 @@ import { ref, onMounted, computed, watch, watchEffect } from "vue";
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from "@/stores/auth";
 import { useAuctionStore } from "@/stores/auctions";
+import { useAuctionSellerStore } from "../../stores/aution-seller";
+import { enumState } from "../../utils/auction-status.enum";
 export default {
     setup(props) {
         const route = useRoute();
@@ -69,6 +71,7 @@ export default {
         const live = ref([])
         const completed = ref([])
         const autionUpdate = ref(computed(() => useAuth.aution))
+        const storeAutionsSeller = useAuctionSellerStore();
         const loading = ref(false)
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             if (newQuestion) {
@@ -94,13 +97,14 @@ export default {
 
         })
         onMounted(async () => {
+
             loading.value = true
-            let res = await useAutions.index()
+            let res = await storeAutionsSeller.indexSeller()
             if (res) {
-                all.value = res.data.filter((item) => item.status !== "draft")
-                upcoming.value = useAutions.upcoming;
-                live.value = useAutions.live;
-                completed.value = useAutions.completed;
+                all.value = res.data.filter((item) => item.status !== enumState.draft);
+                upcoming.value = res.data.filter((item) => item.status === "upcoming" || item.status === enumState.unapproved);
+                live.value = res.data.filter((item) => item.status === "live");
+                completed.value = res.data.filter((item) => item.status == enumState.completed || item.status == enumState.reviewed || item.status == enumState.bidsCompleted || item.status == enumState.dropOff);
                 loading.value = false
             }
 

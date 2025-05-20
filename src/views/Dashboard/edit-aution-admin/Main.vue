@@ -477,6 +477,7 @@
                                 :class="invalid?.lastReplacement ? 'border-error' : 'border-[#E0E0E0]'"
                                 class=" border  text-[#858585] md:p-3  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                                 <option selected hidden>Choose Year</option>
+                                <option value="2025">2025</option>
                                 <option value="2024">2024</option>
                                 <option value="2023">2023</option>
                                 <option value="2022">2022</option>
@@ -507,6 +508,7 @@
                                 :class="invalid?.lastReplacement2 ? 'border-error' : 'border-[#E0E0E0]'"
                                 class=" border  text-[#858585] md:p-3 border-[#E0E0E0] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
                                 <option selected hidden>Choose Year</option>
+                                <option value="2025">2025</option>
                                 <option value="2024">2024</option>
                                 <option value="2023">2023</option>
                                 <option value="2022">2022</option>
@@ -595,7 +597,6 @@ export default {
             try {
                 let res = await storeIdAution.getAutionById({ uuid: id })
                 if (res) {
-                    console.log('dataDetails.value', res.data)
                     dataDetails.value = res.data
                     form.value.numberVinGenerals = res.data?.vehicleDetails?.vin;
                     form.value.year = res.data.vehicleDetails?.year;
@@ -645,7 +646,6 @@ export default {
         const nextGeneralInformation = async () => {
 
             invalid.value = validateData(form.value, 'edit-admin');
-            console.log('invalid', invalid)
             if (Object.entries(invalid.value).length > 0) {
                 toast(
                     invalid?.value?.numberVinGenerals ||
@@ -721,7 +721,6 @@ export default {
                         yearEnd: form.value.yearToPreferences
                     }
                 }
-                console.log('dataPost', dataPost)
                 loading.value = true
                 if (dataPost) {
                     try {
@@ -731,7 +730,6 @@ export default {
                             /*  await router.push({ path: '/draft' }) */
                         }
                     } catch (error) {
-                        console.log('error', error)
                         loading.value = false
                         toast(error?.response?.data?.message || 'An error has occurred try again', { type: "error" });
 
@@ -742,7 +740,6 @@ export default {
         }
         onMounted(() => {
             if (route.params.id) {
-                console.log('route.params.id', route.params.id)
                 id_aution.value = route.params.id
                 getDataAution(route.params.id)
             }

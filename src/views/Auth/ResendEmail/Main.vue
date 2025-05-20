@@ -3,7 +3,8 @@
         <div class="flex flex-col items-center justify-center  p-4 space-y-4 antialiased text-gray-900 bg-gray-100">
             <div class="w-full md:px-8 max-w-lg space-y-6 bg-white rounded-md py-16">
                 <template v-if="message">
-                    <div class="relative flex  flex-col items-center justify-center overflow-hidden py-6 sm:py-12 bg-white">
+                    <div
+                        class="relative flex  flex-col items-center justify-center overflow-hidden py-6 sm:py-12 bg-white">
                         <div class="max-w-xl px-5 text-center">
                             <h2 class="mb-2 text-[42px] font-bold text-zinc-800">Check your inbox</h2>
                             <p class="mb-2 text-lg text-zinc-500">
@@ -110,7 +111,6 @@ export default {
                     email: formEmail.value
                 }
                 let res = await storeAuth.resendEmail(data)
-                console.log('res', res)
                 if (res.status == 200) {
                     loading.value = false
                     message.value = 'Se ha enviado un correo de cambiar password'

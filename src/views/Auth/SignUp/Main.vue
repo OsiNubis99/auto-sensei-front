@@ -123,9 +123,7 @@ export default {
             try {
 
                 let res = await store.authProfile(token)
-                console.log('KENNNYYYY', res)
                 if (res.status == 200) {
-                    console.log('entro bien')
                     stepsCurrent.value = 1
                     swiper.value?.slideTo(1)
                     toast("Your email has been verified successfully", {
@@ -142,7 +140,6 @@ export default {
 
                 }
             } catch (error) {
-                console.log('entro ene l error', error)
                 if (error?.response?.data?.message == "Unauthorized") {
                     toast('Your email verification token has expired', {
                         type: "error",
@@ -168,7 +165,6 @@ export default {
         }
         onMounted(() => {
             swiper.value.allowTouchMove = false
-            console.log(' swiper.value', swiper.value)
             rol.value = route.params.rol
             if (route.query.token) {
                 getAuth(route.query)

@@ -1,5 +1,5 @@
-import axios from 'axios'
-import router from '@/router'
+import axios from "axios";
+import router from "@/router";
 
 const authStore = localStorage.getItem("token");
 let token = null;
@@ -15,28 +15,23 @@ const axiosIns = axios.create({
 
   //   timeout: 1000,
   headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer ' + token
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization: "Bearer " + token,
   },
-})
-console.log('axiosIns', axiosIns)
-console.log('import.meta.env.VITE_BASE_URL_API', import.meta.env.VITE_BASE_URL_API)
+});
 // Add a response, si no hay token, redirige a login o si se recibe un 401
 axiosIns.interceptors.response.use(
-  response => {
-    return response
+  (response) => {
+    return response;
   },
-  error => {
-     
-    if (error.response.status === 401 && error.response.data.message === 'Unauthenticated.' || error.message == 'Network Error') {
-      console.log('error 401')
-      localStorage.removeItem('authStore')
-      window.location.href = '/login'
+  (error) => {
+    if ((error.response.status === 401 && error.response.data.message === "Unauthenticated.") || error.message == "Network Error") {
+      localStorage.removeItem("authStore");
+      window.location.href = "/login";
     }
-    return Promise.reject(error)
-  },
-)
+    return Promise.reject(error);
+  }
+);
 
-
-export default axiosIns
+export default axiosIns;

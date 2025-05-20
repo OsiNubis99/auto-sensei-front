@@ -42,13 +42,9 @@ export default {
     setup(props) {
         const loading = ref(false)
         const statusModalView = ModalViewImage()
-        const formData = ref(props.form)
-        const zoom = ref(0)
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-        const croppers = ref(null)
         const img = ref(statusModalView.img)
         const uploadImage = (event) => {
-            console.log('statusModalView', statusModalView.typeImg)
             var input = event.target;
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -61,9 +57,6 @@ export default {
             }
         }
 
-        onMounted(() => {
-            console.log('statusModalView.img', statusModalView.img)
-        })
         return {
             uploadImage,
 

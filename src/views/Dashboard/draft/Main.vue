@@ -17,13 +17,13 @@
         </div>
     </template>
     <template v-else>
-        <HeaderOptionesSeller :storeAutions="storeAutions" :data="data" />
+        <HeaderOptionesSeller :storeAutions="storeAutionsSeller" :data="data" />
         <div v-if="data?.length > 0" class="relative max-w-[120rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 md:px-5 gap-4 mt-2">
                 <div class="hidden md:w-[24%] lg:block">
-                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
+                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutionsSeller" />
                 </div>
-                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutionsSeller" />
                 <div class="w-full lg:w-[70%]">
                     <div class="flex items-center justify-between px-2 pt-4 md:p-0  mb-4">
                         <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
@@ -109,7 +109,7 @@
                                         class="flex p-2 md:p-5  flex-col gap-3">
                                         <div>
                                             <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}
+                                                auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}
                                             </div>
                                             <p class="text-xs md:text-base">
                                                 {{ auction?.city }}, {{ auction?.province }}
@@ -171,7 +171,7 @@
                                                 <p
                                                     class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">
                                                     {{
-        auction?.vehicleDetails?.tireCondition }}</p>
+                                                        auction?.vehicleDetails?.tireCondition }}</p>
                                             </div>
                                             <div v-if="auction?.vehicleDetails?.brakeCondition"
                                                 class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -184,7 +184,7 @@
                                                 <p
                                                     class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">
                                                     {{
-        auction?.vehicleDetails?.brakeCondition }}</p>
+                                                        auction?.vehicleDetails?.brakeCondition }}</p>
                                             </div>
                                         </div>
                                         <div v-show="auction?.status == 'unapproved'" class="flex gap-2 items-center">
@@ -212,7 +212,7 @@
                                         </div>
                                         <div class="flex w-full justify-between mt-2 gap-2 md:gap-4 items-center">
                                             <RouterLink
-                                                :to="{ name: 'edit-draft', query: { id: auction._id,progress: auction.percentage} }"
+                                                :to="{ name: 'edit-draft', query: { id: auction._id, progress: auction.percentage } }"
                                                 class="btn bg-primary w-full ">Continue to edit</RouterLink>
                                             <button @click="deleteAution(auction)"
                                                 class=" bg-transparent border p-2 md:p-3 rounded-md md:rounded-xl border-[#E0E0E0] ">
@@ -265,6 +265,7 @@ import CreateAution from "../../../components/Cards/CreateAution.vue";
 import CardAutionMobile from "../../../components/Cards/CardAutionMobile.vue";
 import { arrayPhotos } from '../../../utils/packPhotos'
 import ScreenCreateAution from "../../../components/Screen/ScreenCreateAution.vue";
+import { useAuctionSellerStore } from "../../../stores/aution-seller";
 export default {
 
     components: {
@@ -282,6 +283,7 @@ export default {
         const loading = ref(false)
         const changeLayouts = ref(false)
         const storeAutions = useAuctionStore()
+        const storeAutionsSeller = useAuctionSellerStore();
         const storeUser = useAuthStore()
         const statusModal = ModalAcceptAution()
         const path = ref(computed(() => route.name))
@@ -298,10 +300,9 @@ export default {
         const index = async () => {
             loading.value = true
             try {
-                let res = await storeAutions.index()
-                data.value = storeAutions.draft
+                let res = await storeAutionsSeller.indexSeller()
+                data.value = storeAutionsSeller.draft
                 data.value.map((autions, index) => {
-                    console.log('autions', autions)
                     let counter = 0;
                     let progress = 0;
                     progress = autions.city && counter++
@@ -346,7 +347,6 @@ export default {
                         photos = null
                     }
                 })
-                console.log('data.value', data.value)
                 loading.value = false
             } catch (error) {
                 loading.value = false
@@ -386,7 +386,6 @@ export default {
             loading.value = true
             try {
                 let res = await storeAutions.delete(aution._id)
-                console.log('res', res)
                 if (res.data) {
                     index()
                     toast('Has been successfully removed',
@@ -430,7 +429,8 @@ export default {
             timeToStart,
             acceptAution,
             index,
-            deleteAution
+            deleteAution,
+            storeAutionsSeller
 
         };
     },

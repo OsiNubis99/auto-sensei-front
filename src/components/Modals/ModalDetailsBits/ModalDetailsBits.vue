@@ -52,8 +52,8 @@
                                                 </div>
 
                                                 <p class="text-[10px] md:text-lg whitespace-pre">{{
-        moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h: mm: ss a')
-    }}</p>
+                                                    moment(dealerBit?.updatedAt).format('MMMM DD YYYY, h: mm: ss a')
+                                                    }}</p>
                                             </template>
                                             <template v-else>
                                                 <p v-if="dealerBit?.participant?.dealer?.name"
@@ -99,9 +99,7 @@ export default {
     setup(props) {
         const statusModalView = ModalDetailsBits()
         const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-        onMounted(() => {
-            console.log('statusModalView', statusModalView.aution)
-        })
+
         return {
             statusModalView,
             moment,

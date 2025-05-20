@@ -9,9 +9,9 @@
             class="relative max-w-[120rem] bg-[#BDBDBF66] md:bg-white mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 md:px-5 gap-4 mt-2">
                 <div class="hidden md:w-[24%] lg:block">
-                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
+                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutionsSeller" />
                 </div>
-                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutionsSeller" />
                 <div class="w-full lg:w-[76%]">
                     <div class="flex items-center justify-between px-2 pt-4 lg:p-0  mb-4">
                         <p class=" font-semibold ">{{ data?.length }} Vehicles</p>
@@ -180,6 +180,7 @@ import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.
 import { arrayPhotos } from '../../../utils/packPhotos'
 import { ModalVerifyPhone } from '@/stores/modalVerifyPhone';
 import ModalVerifyPhoneVue from "@/components/Modals/ModalVerifyPhone/ModalVerifyPhone.vue";
+import { useAuctionSellerStore } from "../../../stores/aution-seller";
 export default {
 
     components: {
@@ -203,6 +204,7 @@ export default {
         const loading = ref(false)
         const changeLayouts = ref(false)
         const storeAutions = useAuctionStore()
+        const storeAutionsSeller = useAuctionSellerStore();
         const storeUser = useAuthStore()
         const statusModal = ModalAcceptAution()
         const path = ref(computed(() => route.name))
@@ -282,16 +284,13 @@ export default {
                 default:
                     break;
             }
-
-
         }
         const index = async () => {
             loading.value = true
             try {
-                let res = await storeAutions.index()
+                let res = await storeAutionsSeller.indexSeller()
                 data.value = res.data.filter((item) => item.status !== "draft")
                 draft.value = res.data.filter((item) => item.status === "draft")
-                console.log('draft.value', draft.value)
                 data.value.map((autions, index) => {
                     if (autions.vehicleDetails.year && autions.vehicleDetails.make && autions.vehicleDetails.model) {
                         autions.title = `${autions.vehicleDetails.year} ${autions.vehicleDetails.make} ${autions.vehicleDetails.model}`
@@ -333,7 +332,6 @@ export default {
             return new Date(startDate) - Date.now();
         }
         const acceptAution = (url) => {
-            console.log('REVISAR SI LLEGA', url)
             loading.value = true
             try {
                 let res = storeAutions.acceptAutions(statusModal.dataAutiont._id, url)
@@ -383,7 +381,6 @@ export default {
                     return sortedItems.flat()
                 case 'Auction Title':
                     return data.value.filter(p => true).sort((a, b) => {
-                        console.log(a.title, b.title, a.title === b.title, a.title > b.title, a.title < b.title)
                         if (a.title === b.title) return 0
                         if (a.title > b.title) return 1
                         if (a.title < b.title) return -1
@@ -432,7 +429,8 @@ export default {
             sortedData,
             sortBy,
             draft,
-            statusModalPhone
+            statusModalPhone,
+            storeAutionsSeller
 
         };
     },

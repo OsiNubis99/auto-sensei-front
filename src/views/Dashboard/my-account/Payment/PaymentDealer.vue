@@ -129,22 +129,17 @@ export default {
             loading.value = true
             try {
                 let res = await controllerPayment.addCard()
-                console.log('res', res)
                 if (res.data) {
                     window.location.href = res.data.url
                 }
 
             } catch (error) {
                 loading.value = false
-                console.log('error', error)
 
             } finally {
                 loading.value = false
             }
         }
-        onMounted(() => {
-            console.log('PEROOOTAAAAAAAA', storeAuth.userData)
-        })
         return {
             storeModal,
             opeModal,

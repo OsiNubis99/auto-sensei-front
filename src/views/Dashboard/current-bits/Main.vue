@@ -172,16 +172,16 @@
                                         class="label-colors !p-2 !h-[40px] !capitalize whitespace-pre w-full">
                                         <input @change="applyFilter($event, 'color')" :value="color" type="radio"
                                             class="input-radio" :class="[
-        color == 'silver' && 'on-silver',
-        color == 'white' && 'on-white',
-        color == 'grey' && 'on-grey',
-        color == 'greenDark' && 'on-greenDark',
-        color == 'red' && 'on-red',
-        color == 'yellow' && 'on-yellow',
-        color == 'blue' && 'on-blue',
-        color == 'white' && 'on-white',
-        color == 'white' && 'on-white',
-    ]" name="color-redio">
+                                                color == 'silver' && 'on-silver',
+                                                color == 'white' && 'on-white',
+                                                color == 'grey' && 'on-grey',
+                                                color == 'greenDark' && 'on-greenDark',
+                                                color == 'red' && 'on-red',
+                                                color == 'yellow' && 'on-yellow',
+                                                color == 'blue' && 'on-blue',
+                                                color == 'white' && 'on-white',
+                                                color == 'white' && 'on-white',
+                                            ]" name="color-redio">
                                         {{ color }}
                                     </label>
                                     <!--  <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
@@ -252,7 +252,7 @@
                 <div class="w-full lg:w-[76%] ">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
-                            }}
+                        }}
                             Vehicles
                         </p>
                         <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
@@ -427,7 +427,6 @@ export default {
                 await storeAutions.index()
                 let res = await storeAutions.indexCurrentBids()
                 data.value = storeAutions?.currentBids
-                console.log('data.value', data.value)
                 data.value.map((autions, index) => {
                     /*  const formatter = new Intl.NumberFormat();
                      autions.vehicleDetails.odometer = formatter?.format(autions.vehicleDetails.odometer) */
@@ -464,10 +463,8 @@ export default {
         })
         watch(autionUpdate, async (newQuestion, oldQuestion) => {
             if (newQuestion.status == 'live') {
-                console.log('CURRENT BITS ENTRO EN LIVE', newQuestion)
                 /*  const i = filteredItems.value.findIndex(x => x._id === newQuestion._id)
                  filteredItems.value[i] = newQuestion
-                 console.log('filteredItems.value[i]', filteredItems.value)
                  let photos = null; */
                 /*   photos = arrayPhotos(data.value[i].vehicleDetails)
                   if (photos.length > 0) {
@@ -501,8 +498,6 @@ export default {
             return removeDuplicate(filteredItems.value.map(item => item.vehicleDetails[key])).sort()
         }
         const applyPairFilters = (event, type, filter) => {
-            console.log(filter);
-            console.log(filteredItems.value);
             filteredItems.value = filteredItems.value.filter((item) => {
                 if (type === 'start') {
                     return item.vehicleDetails[filter] >= event.target.value
@@ -513,13 +508,10 @@ export default {
 
             })
 
-            console.log('filter', filter, ':', event.target.value)
             counter.value++
         }
         const applyFilter = (event, filter) => {
-            console.log(filter);
             filteredItems.value = filteredItems.value.filter((item) => {
-                console.log(item);
                 return item.vehicleDetails[filter] == event.target.value
             })
             counter.value++
@@ -552,7 +544,6 @@ export default {
         const sortedData = computed(() => {
             switch (sortBy.value) {
                 case 'Current Bid':
-                    console.log('current-bid')
                     let sortStatus = {}
                     filteredItems.value.forEach(auction => {
                         if (!sortStatus[auction.status]) sortStatus[auction.status] = []
@@ -565,10 +556,8 @@ export default {
                     }
                     return sortedItems.reverse().flat()
                 case 'Odometer':
-                    console.log('odometer')
                     return filteredItems.value.sort((a, b) => parseFloat(b.vehicleDetails.odometer) - parseFloat(a.vehicleDetails.odometer));
                 case 'year':
-                    console.log('Year')
                     return filteredItems.value.sort((a, b) => parseFloat(b.vehicleDetails.year) - parseFloat(a.vehicleDetails.year));
                 default:
 

@@ -172,16 +172,16 @@
                                         class="label-colors !p-2 !h-[40px] !capitalize whitespace-pre w-full">
                                         <input @change="applyFilter($event, 'color')" :value="color" type="radio"
                                             class="input-radio" :class="[
-        color == 'silver' && 'on-silver',
-        color == 'white' && 'on-white',
-        color == 'grey' && 'on-grey',
-        color == 'greenDark' && 'on-greenDark',
-        color == 'red' && 'on-red',
-        color == 'yellow' && 'on-yellow',
-        color == 'blue' && 'on-blue',
-        color == 'white' && 'on-white',
-        color == 'white' && 'on-white',
-    ]" name="color-redio">
+                                                color == 'silver' && 'on-silver',
+                                                color == 'white' && 'on-white',
+                                                color == 'grey' && 'on-grey',
+                                                color == 'greenDark' && 'on-greenDark',
+                                                color == 'red' && 'on-red',
+                                                color == 'yellow' && 'on-yellow',
+                                                color == 'blue' && 'on-blue',
+                                                color == 'white' && 'on-white',
+                                                color == 'white' && 'on-white',
+                                            ]" name="color-redio">
                                         {{ color }}
                                     </label>
                                     <!--  <label class="label-colors !p-2 !h-[40px] whitespace-pre w-full">
@@ -252,7 +252,7 @@
                 <div class="w-full lg:w-[70%]">
                     <div class="flex items-center px-3 justify-between mb-4">
                         <p class="text-xs font-semibold md:text-base " v-if="sortedData.length > 0">{{ sortedData.length
-                            }} Vehicles
+                        }} Vehicles
                         </p>
                         <p class="text-xs font-semibold md:text-base " v-else>0 Vehicles
                         </p>
@@ -554,8 +554,6 @@ export default {
             counter.value++
         }
         const applyPairFilters = (event, type, filter) => {
-            console.log(filter);
-            console.log(filteredItems.value);
             filteredItems.value = filteredItems.value.filter((item) => {
                 if (type === 'start') {
                     return item.vehicleDetails[filter] >= event.target.value
@@ -566,13 +564,13 @@ export default {
 
             })
 
-            console.log('filter', filter, ':', event.target.value)
+
             counter.value++
         }
         const applyFilter = (event, filter) => {
-            console.log(filter);
+
             filteredItems.value = filteredItems.value.filter((item) => {
-                console.log(item);
+
                 return item.vehicleDetails[filter] == event.target.value
             })
             counter.value++

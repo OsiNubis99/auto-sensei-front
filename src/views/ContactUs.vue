@@ -186,7 +186,6 @@ export default {
             loading.value = true
             const formattedNumber = telInput.value.selectedCountryData.dialCode;
             form.value.phone = `+${formattedNumber + form.phoneNumber}`;
-            console.log('form.value', form.value)
             try {
                 let data = {
                     name: form.value.name,
@@ -196,7 +195,6 @@ export default {
                 }
                 let res = await contactStore.sendContact(data);
                 if (res) {
-                    console.log('res', res)
                     toast('Your information has been sent', {
                         type: "success",
                         position: "top-center",
@@ -217,11 +215,10 @@ export default {
                     // Otros opciones de inicialización si es necesario
                 });
                 input.addEventListener("countrychange", function (e) {
-                    console.log(telInput);
+                    /*  console.log(telInput); */
                 });
                 loading.value = false
             }
-            console.log('form', form.value)
         }
         onMounted(() => {
             index();
@@ -231,7 +228,7 @@ export default {
                 // Otros opciones de inicialización si es necesario
             });
             input.addEventListener("countrychange", function (e) {
-                console.log(telInput);
+                /*  console.log(telInput); */
             });
         });
         return {

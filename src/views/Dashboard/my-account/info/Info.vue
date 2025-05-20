@@ -172,8 +172,8 @@
                     <div class="flex items-center justify-between">
                         <div class="flex gap-1 text-xs md:text-base capitalize text-[#9ca3af] items-center">
                             {{ storeUser?.address?.country }}, {{ storeUser?.address?.state }} {{
-            storeUser?.address?.city
-        }}
+                                storeUser?.address?.city
+                            }}
                         </div>
                         <button @click="onOption('address')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
@@ -224,8 +224,8 @@
                         <div class="w-full flex flex-col gap-2 relative">
                             <label class=" text-sm md:text-base " for="">Province</label>
                             <input v-model="form.province"
-                    :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
-                    class="p-2 rounded-lg border "  type="text">
+                                :class="invalid?.province ? 'border-error' : 'border-[#E0E0E0]'"
+                                class="p-2 rounded-lg border " type="text">
                             <!-- <select v-model="form.province" @change="onChangeGetProvince($event)"
                                 class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -236,17 +236,16 @@
                                         {{
             state.name }}</option>
                                 </template>
-                            </select>
-                            <div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
-                                province...
-                            </div> -->
+</select>
+<div v-if="!form.getState" class="absolute text-sm text-[#858585] bottom-2 left-4 ">Laoding
+    province...
+</div> -->
                         </div>
                         <div class="w-full flex flex-col gap-2 relative">
                             <label class=" text-sm md:text-base " for="">City</label>
-                            <input v-model="form.city"
-                    :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
-                    class="p-2 rounded-lg border "  type="text">
-                           <!--  <select v-model="form.city" @change="onChangeGetCity($event)"
+                            <input v-model="form.city" :class="invalid?.city ? 'border-error' : 'border-[#E0E0E0]'"
+                                class="p-2 rounded-lg border " type="text">
+                            <!--  <select v-model="form.city" @change="onChangeGetCity($event)"
                                 :disabled="loadingCountrys || !form.getCities ? true : false"
                                 class=" border text-[#858585] md:p-3  text-gray-900 text-xs md:text-sm  rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full ">
 
@@ -270,7 +269,7 @@
                         </button>
                     </div>
                 </div>
-               
+
             </div>
 
         </div>
@@ -626,15 +625,15 @@ export default {
                 case 'address':
                     /*  loading.value = true */
                     if (storeUser.type == 1) {
-                        if (!form.value.province || !form.value.city || !form.value.line1  || !form.value.zipCode) {
+                        if (!form.value.province || !form.value.city || !form.value.line1 || !form.value.zipCode) {
                             toast('Required address fields', {
                                 type: "error",
                             });
                             return
                         }
                     }
-                  /*   let city = JSON.parse(form.value.city)?.name;
-                    let province = JSON.parse(form.value.province)?.name; */
+                    /*   let city = JSON.parse(form.value.city)?.name;
+                      let province = JSON.parse(form.value.province)?.name; */
                     try {
                         let resUpdate = await storeProfile.updateUser({
                             address: {
@@ -647,17 +646,14 @@ export default {
                             }
                         })
                         if (resUpdate) {
-                            console.log('resUpdate adreeedasss', resUpdate)
                             props.getProfile()
                         }
                     } catch (error) {
-                        console.log('error', error)
                         toast(error?.response?.data?.message || 'error', {
                             type: "error",
                         });
                         loading.value = false
                     }
-                    console.log('form.value', form.value)
                     break;
                 default:
                     break;
@@ -690,7 +686,6 @@ export default {
                 form.value.getCities = res.data
                 if (form.value.city) {
                     let resCity = res.data.filter((c) => c.name == form.value.city)
-                    console.log('resCity', resCity)
                     form.value.city = JSON.stringify(resCity[0])
                 }
             } catch (error) {
@@ -703,7 +698,6 @@ export default {
         const onChangeGetCity = async (event) => {
             let value = JSON.parse(event.target.value)
             /* form.value.city = value.name */
-            console.log('value', value)
         }
         onMounted(() => {
             getCountry()

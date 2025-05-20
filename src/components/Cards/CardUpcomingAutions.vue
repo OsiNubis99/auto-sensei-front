@@ -16,7 +16,7 @@
             <div class="flex p-4 pb-0 md:p-5 relative flex-col gap-3">
                 <div>
                     <div class="font-bold md:text-xl">{{ auction?.vehicleDetails?.year }} {{
-        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
+                        auction?.vehicleDetails?.make }} {{ auction?.vehicleDetails?.model }}</div>
                     <p class="text-xs capitalize font-semibold md:text-base">
                         {{ auction?.city }}, {{ auction?.province }}
                     </p>
@@ -68,7 +68,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.tireCondition }}</p>
+                            auction?.vehicleDetails?.tireCondition }}</p>
                     </div>
                     <div v-if="auction?.vehicleDetails?.brakeCondition"
                         class="bg-[#F0F0F0] flex px-1  w-fit md:px-2 py-1 gap-1 md:gap-3  rounded-lg items-center">
@@ -78,7 +78,7 @@
                                 fill="#0B1107" />
                         </svg>
                         <p class=" text-[10px] lg:text-xs lg:text-md font-semibold capitalize  ">{{
-        auction?.vehicleDetails?.brakeCondition }}</p>
+                            auction?.vehicleDetails?.brakeCondition }}</p>
                     </div>
                 </div>
                 <div v-show="auction?.status == 'unapproved'"
@@ -155,14 +155,11 @@ export default {
             return new Date(startDate) - Date.now();
         }
         const declineAution = (auction, option) => {
-            console.log('auction', auction)
-            console.log('option', option)
             props.decline(auction, option)
         }
         onMounted(() => {
             if (auction.startDate) {
                 timeAution.value = timeToStart(auction.startDate)
-                console.log(' timeAution.value', timeAution.value)
             }
 
         })

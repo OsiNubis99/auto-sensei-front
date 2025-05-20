@@ -938,11 +938,11 @@
                             </p>
                             <p class="text-xs font-medium truncate">Type: <span
                                     class="uppercase bg-[#6d53b0] text-white shadow-lg font-semibold ml-2 px-2 py-1 text-[8px] rounded-md ">{{
-                image?.type }}
+                                        image?.type }}
                                 </span> </p>
                             <p class="text-xs font-medium mb-2 truncate">Size: <span
                                     class="uppercase bg-[#6d53b0] text-white shadow-lg font-semibold ml-3 px-2 py-1 text-[10px] rounded-md ">{{
-                image?.size }} Mb
+                                        image?.size }} Mb
                                 </span> </p>
                         </div>
                         <button
@@ -1086,7 +1086,6 @@ export default {
                     reader.onload = (e) => {
                         if (typeFile[0] !== 'video') {
                             if (isMobile()) {
-                                console.log("Mobile device detected");
                             } else {
                                 statusModalImage.openModal({ active: true, img: input.files[0], type: string })
                             }
@@ -1206,13 +1205,11 @@ export default {
             statusModalGuide.openModal({ isActive: true })
         }
         const viewPhoto = (photo) => {
-            console.log('photo', photo)
             statusModalViewImage.openModal({ active: true, img: photo })
         }
 
         function removeImage(index) {
             form.value.images.splice(index, 1)
-            console.log('imagenes', form.value.images)
         }
         function createImage(files) {
             for (var index = 0; index < files.length; index++) {
@@ -1235,7 +1232,6 @@ export default {
                         return
                     } else {
                         toastStatus.value = false
-                        console.log('HAY MENOS DE 30', form.value.images.length)
                         form.value.images.push(imageUrl);
                     }
 
@@ -1244,7 +1240,6 @@ export default {
             }
         }
         const onFileChange = (e) => {
-            console.log('e.target.files', e.target.files)
             var files = e.target.files || e.dataTransfer.files;
             if (!files.length)
                 return;

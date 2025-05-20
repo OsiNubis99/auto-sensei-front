@@ -178,7 +178,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white flex flex-col md:contents divide-y divide-[#E0E0E0] ">
-                                        <tr v-for="(  aution, index  ) in paginated" :key="aution?.id"
+                                        <tr v-for="(aution, index) in paginated" :key="aution?.id"
                                             :class="index % 2 !== 0 ? 'bg-[#e0e0e026]' : ''"
                                             class="hover:bg-gray-100 grid md:table-row relative  dark:hover:bg-gray-700">
                                             <td
@@ -597,7 +597,6 @@ export default {
                         case 'completed':
                             stateTable.value = 'completed'
                             dataTable.value = store.completed
-                            console.log('dataTable.value', dataTable.value)
                             break;
                         case 'canceled':
                             stateTable.value = 'canceled'
@@ -624,10 +623,8 @@ export default {
                     counterData.value.declined = store.declined.length
 
                     let counterPage = Math.ceil(dataTable.value.length / 10)
-                    console.log('counterPage', counterPage)
                     numberPage.value = Array.apply(null, Array(counterPage + 1))
                         .map(function (y, i) { return i; });
-                    console.log('numberPage', numberPage.value)
                     loading.value = false
                 }
             } catch (error) {
@@ -668,7 +665,6 @@ export default {
 
         }
         const deleteUserAuction = async (item) => {
-            console.log('deleteUserAuction', item)
             try {
                 await store.delete(item._id)
                 index()
@@ -678,7 +674,6 @@ export default {
             }
         }
         const confirmAutions = async (aution) => {
-            console.log('confirmAutions', aution)
             try {
                 await store.activeAutions(aution._id)
                 index()
@@ -689,7 +684,6 @@ export default {
             }
         }
         const rejetAutions = async (aution) => {
-            console.log('rejetAutions', aution)
             try {
                 await store.inactivateAutions(aution._id)
                 index()
@@ -747,7 +741,6 @@ export default {
             }
         }
         const openModalLaunch = (data) => {
-            console.log('data', data)
             autionLaunch.value = data
             activeAution.value = true
         }
@@ -756,18 +749,15 @@ export default {
             activeAution.value = false
         }
         const luachAution = async () => {
-            console.log('autionLaunch.value', autionLaunch.value)
             try {
                 loadingAuction.value = true
                 let res = await store.launchAuction({ uuid: autionLaunch.value._id })
-                console.log('res', res)
                 if (res) {
                     loadingAuction.value = false
                     activeAution.value = false
                     index()
                 }
             } catch (error) {
-                console.log('error', error)
                 toast(error?.response?.data?.message[0] || error?.response?.data?.message || 'Error', {
                     type: "error",
                 });

@@ -419,11 +419,9 @@ export default {
             }
         }
         const confirmDealer = async (user) => {
-            console.log('user', user)
 
             try {
                 let res = await store.activeUser(user._id)
-                console.log('HOLAAAAAAA', res)
                 if (res.status) {
                     getUserDealer()
                 }
@@ -472,7 +470,6 @@ export default {
             }
         }
         onMounted(() => {
-            console.log('store.userDealers', store.userDealers)
             getUserDealer()
         })
         return {

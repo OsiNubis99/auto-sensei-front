@@ -8,9 +8,9 @@
         <div v-if="data?.length > 0 || draft.length > 0" class="relative max-w-[120rem] mx-auto z-50 md:top-[60px] ">
             <div class="flex justify-between md:mt-5 md:px-5 gap-4 mt-2">
                 <div class="hidden md:w-[24%] lg:block">
-                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutions" />
+                    <CreateAution class="hidden lg:block" :data="storeUser.userData" :autions="storeAutionsSeller" />
                 </div>
-                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutions" />
+                <CardAutionMobile class="block lg:hidden" :data="storeUser.userData" :autions="storeAutionsSeller" />
                 <div class="w-full lg:w-[76%] ">
                     <div class="flex items-center justify-between px-2 pt-4 md:p-0  mb-4">
                         <p class=" font-semibold ">{{ sortedData?.length }} Vehicles</p>
@@ -110,16 +110,16 @@
                         </div>
                         <div>
                             <p class="font-semibold capitalize md:text-base text-sm ">{{
-        autionModal?.vehicleDetails?.year
-    }} {{
-            autionModal?.vehicleDetails?.make }} {{
-        autionModal?.vehicleDetails?.model }}</p>
+                                autionModal?.vehicleDetails?.year
+                            }} {{
+                                    autionModal?.vehicleDetails?.make }} {{
+                                    autionModal?.vehicleDetails?.model }}</p>
                             <p class="capitalize text-sm md:text-base ">Final Bid</p>
                             <div class="flex gap-1">
                                 <p v-if="autionModal?.bids[0]?.amount"
                                     class="font-medium text-sm text-base-black md:text-2xl">
                                     ${{
-        autionModal?.bids[0].amount }} </p>
+                                        autionModal?.bids[0].amount }} </p>
                                 <p v-else-if="autionModal?.vehicleDetails?.basePrice" class="font-medium text-base-black 
  text-xs md:text-2xl ">${{ auction?.vehicleDetails?.basePrice
                                     }}
@@ -135,7 +135,7 @@
                 <div class="md:py-10 p-2 md:px-4 pb-2">
                     <p class="text-xs md:text-base">Are you sure you want to cancel the auction for the <span
                             class="font-medium">{{
-                            autionModal?.vehicleDetails?.model }}</span>?</p>
+                                autionModal?.vehicleDetails?.model }}</span>?</p>
                     <div class="w-full flex gap-2 mt-4 items-center">
                         <button @click="openDecline = false"
                             class="btn w-full border-[#E0E0E0] border rounded-lg ">No</button>
@@ -167,6 +167,7 @@ import Basic from '../../../components/Loading/Basic.vue';
 import ScreenCreateAution from '../../../components/Screen/ScreenCreateAution.vue';
 import ScrrenNoSorbySeller from '../../../components/Screen/ScrrenNoSorbySeller.vue';
 import { arrayPhotos } from '../../../utils/packPhotos';
+import { useAuctionSellerStore } from "../../../stores/aution-seller";
 export default {
 
     components: {
@@ -188,6 +189,7 @@ export default {
         const loading = ref(false)
         const changeLayouts = ref(false)
         const storeAutions = useAuctionStore()
+        const storeAutionsSeller = useAuctionSellerStore();
         const storeUser = useAuthStore()
         const openDecline = ref(false)
         const autionModal = ref(null)
@@ -229,11 +231,11 @@ export default {
         const index = async () => {
             loading.value = true
             try {
-                let res = await storeAutions.index()
+                let res = await storeAutionsSeller.indexSeller()
                 draft.value = res.data.filter((item) => item.status === "draft")
 
                 if (res) {
-                    data.value = storeAutions.upcoming
+                    data.value = storeAutionsSeller.upcoming
                     data.value.map((autions, index) => {
                         let photos = null;
                         photos = arrayPhotos(autions.vehicleDetails)
@@ -313,6 +315,7 @@ export default {
             data,
             storeUser,
             storeAutions,
+            storeAutionsSeller,
             path,
             openDecline,
             declineAution,
