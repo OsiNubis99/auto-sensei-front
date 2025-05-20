@@ -1,29 +1,28 @@
 <template>
-  <div class="w-full py-10 lg:h-screen relative z-10 h-fit overflow-hidden ">
-    <div
-      class="flex flex-col md:flex-row lg:grid lg:grid-cols-2  gap-3 md:gap-12  p-5  pt-[100px]  md:pt-[150px]  2xl:pt-[200px] md:px-12  !pb-0 h-full">
-      <div class="flex flex-col items-start gap-4 ">
-        <p class="text-primary text-[10px] lg:text-base uppercase"> {{ $t("home.pre_title") }}</p>
-        <h1 class="title-home font-bold text-white"> {{ $t("home.title") }}</h1>
-        <p class="text-base-white text-xs lg:text-base">{{ $t("home.subt_title") }}</p>
-        <div class="flex flex-col sm:mt-10 2xl:flex-row gap-6 2xl:gap-4  justify-start items-center">
-          <button @click="goToHome()" id="sellCar"
-            class="btn w-full   lg:w-[350px] lg:h-[55px] !font-bold bg-primary text-base-black">{{
-              $t("sell_your_car")
-            }}</button>
-          <div
-            class=" px-4 flex justify-center items-center 2xl:pr-6 2xl:w-fit w-full rounded-full 2xl:h-[55px] bg-[#292F38] text-base-black">
-            <div class="flex gap-3 items-center justify-start ">
+  <div class="w-full py-10 lg:h-screen relative z-10 h-fit overflow-hidden">
+    <div class="flex flex-col md:flex-row lg:grid lg:grid-cols-2 gap-3 md:gap-12 p-5 pt-[100px] md:pt-[150px] 2xl:pt-[200px] md:px-12 !pb-0 h-full">
+      <div class="flex flex-col items-start gap-4">
+        <p class="text-primary text-[10px] lg:text-base uppercase">{{ $t('home.pre_title') }}</p>
+        <h1 class="title-home font-bold text-white">{{ $t('home.title') }}</h1>
+        <p class="text-base-white text-xs lg:text-base">{{ $t('home.subt_title') }}</p>
+        <div class="flex w-full flex-col md:flex-row gap-4">
+          <button @click="goToHome()" id="sellCar" class="btn w-full lg:w-[350px] lg:h-[55px] !font-bold bg-primary text-base-black">Sell Your Car</button>
+          <button @click="goToHome(3)" id="sellCar" class="btn w-full lg:w-[350px] lg:h-[55px] !font-bold bg-primary text-base-black">Bid on a Car</button>
+        </div>
+        <div class="flex flex-col sm:mt-10 2xl:flex-row gap-6 2xl:gap-4 justify-start items-center">
+          <div class="px-4 flex justify-center items-center 2xl:pr-6 2xl:w-fit w-full rounded-full 2xl:h-[55px] bg-[#292F38] text-base-black">
+            <div class="flex gap-3 items-center justify-start">
               <div class="bg-[#2F363F] p-2 w-[36px] h-[36px] flex justify-center items-center rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 20 19" fill="none">
                   <path
                     d="M10.0005 0.59082L13.4581 5.64964L19.3376 7.37518L15.5944 12.227L15.7711 18.3519L10.0005 16.2917L4.22905 18.3519L4.40578 12.227L0.662598 7.37518L6.54287 5.64964L10.0005 0.59082ZM8.36414 9.99991H6.72778C6.72777 10.8537 7.06143 11.6737 7.65756 12.285C8.2537 12.8962 9.06511 13.2503 9.91866 13.2717C10.7722 13.293 11.6003 12.98 12.2263 12.3993C12.8522 11.8186 13.2265 11.0163 13.2691 10.1635L13.2732 9.99991H11.6369C11.6388 10.4245 11.4755 10.8333 11.1817 11.1398C10.8878 11.4463 10.4862 11.6265 10.0619 11.6424C9.63759 11.6584 9.22369 11.5087 8.90765 11.2251C8.59161 10.9416 8.39818 10.5462 8.36823 10.1226L8.36414 9.99991Z"
-                    fill="#FBBC05" />
+                    fill="#FBBC05"
+                  />
                 </svg>
               </div>
-              <div class="flex flex-col justify-start ">
+              <div class="flex flex-col justify-start">
                 <p class="text-[#FBBC05] text-xs md:text-base text-left">Rated 4.8/5</p>
-                <p class="text-[#ABB1B8] text-xs md:text-base  text-left">over 3000 satisfied customers</p>
+                <p class="text-[#ABB1B8] text-xs md:text-base text-left">over 3000 satisfied customers</p>
               </div>
             </div>
           </div>
@@ -32,9 +31,13 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
             <path
               d="M5 11.5L6.5 7H17.5L19 11.5M17.5 16.5C17.1022 16.5 16.7206 16.342 16.4393 16.0607C16.158 15.7794 16 15.3978 16 15C16 14.6022 16.158 14.2206 16.4393 13.9393C16.7206 13.658 17.1022 13.5 17.5 13.5C17.8978 13.5 18.2794 13.658 18.5607 13.9393C18.842 14.2206 19 14.6022 19 15C19 15.3978 18.842 15.7794 18.5607 16.0607C18.2794 16.342 17.8978 16.5 17.5 16.5ZM6.5 16.5C6.10218 16.5 5.72064 16.342 5.43934 16.0607C5.15804 15.7794 5 15.3978 5 15C5 14.6022 5.15804 14.2206 5.43934 13.9393C5.72064 13.658 6.10218 13.5 6.5 13.5C6.89782 13.5 7.27936 13.658 7.56066 13.9393C7.84196 14.2206 8 14.6022 8 15C8 15.3978 7.84196 15.7794 7.56066 16.0607C7.27936 16.342 6.89782 16.5 6.5 16.5ZM18.92 6.5C18.72 5.92 18.16 5.5 17.5 5.5H6.5C5.84 5.5 5.28 5.92 5.08 6.5L3 12.5V20.5C3 20.7652 3.10536 21.0196 3.29289 21.2071C3.48043 21.3946 3.73478 21.5 4 21.5H5C5.26522 21.5 5.51957 21.3946 5.70711 21.2071C5.89464 21.0196 6 20.7652 6 20.5V19.5H18V20.5C18 20.7652 18.1054 21.0196 18.2929 21.2071C18.4804 21.3946 18.7348 21.5 19 21.5H20C20.2652 21.5 20.5196 21.3946 20.7071 21.2071C20.8946 21.0196 21 20.7652 21 20.5V12.5L18.92 6.5Z"
-              fill="white" />
+              fill="white"
+            />
           </svg>
-          <p> <strong> Over 5,000 cars sold </strong> through AutoSensei</p>
+          <p>
+            <strong>Over 5,000 cars sold</strong>
+            through AutoSensei
+          </p>
         </div>
       </div>
       <!--  <img class="img-girls" :src="bucket + 'public/svg/carji.svg'" alt=""> -->
@@ -43,8 +46,8 @@
        
       </div> -->
     </div>
-    <div class="bg-banner"> </div>
-    <img class="bg-banner-img" src="../assets/img/jpg/banner.jpeg" alt="">
+    <div class="bg-banner"></div>
+    <img class="bg-banner-img" src="../assets/img/jpg/banner.jpeg" alt="" />
     <!--  <img class="absolute xl:invisible invisible sm:visible sm:right-[5%] right-0 bottom-0  h-[50%] "
       :src="bucket + 'public/svg/carji.svg'" alt=""> -->
     <!--  <img class="absolute -z-10 sm:hidden bottom-0 w-full" src="../assets/svg/vehiculp-movil.svg" alt="">
@@ -55,39 +58,41 @@
         stroke="#2C3238" stroke-width="28" />
     </svg> -->
   </div>
-  <div class="py-14 relative z-20 overflow-hidden ">
-    <div class=" max-w-2xl  m-auto ">
+  <div class="py-14 relative z-20 overflow-hidden">
+    <div class="max-w-2xl m-auto">
       <h2>Sell Your Car Fast, for Top Dollar</h2>
-      <p class=" text-xs px-5 md:text-lg text-center text-[#666666]">Say goodbye to low-ball offers and time-wasting
-        hagglers.
-        With AutoSensei, you're in control of getting the best value for your car, fast.</p>
+      <p class="text-xs px-5 md:text-lg text-center text-[#666666]">
+        Say goodbye to low-ball offers and time-wasting hagglers. With AutoSensei, you're in control of getting the best value for your car, fast.
+      </p>
     </div>
 
-    <div
-      class="grid xl:grid-cols-2 gap-10 md:gap-20 sm:p-5 md:pt-20  xl:mb-14 md:max-w-[90%] xl:max-w-[80%] m-auto lg:pb-0 h-full">
+    <div class="grid xl:grid-cols-2 gap-10 md:gap-20 sm:p-5 md:pt-20 xl:mb-14 md:max-w-[90%] xl:max-w-[80%] m-auto lg:pb-0 h-full">
       <div class="flex gap-14 order-2 p-5 md:order-1 flex-col">
         <div class="flex gap-3 flex-col">
           <h4 class="rotate-title">Step 1</h4>
           <h3>List Your Car in Minutes For Free</h3>
-          <p>Sign up for an account with us and provide your car's details with photos. No cost, no hassle. Our
-            user-friendly platform guides you through each step, so you can create an appealing profile that attracts
-            serious buyers, without any cost or complications.</p>
+          <p>
+            Sign up for an account with us and provide your car's details with photos. No cost, no hassle. Our user-friendly platform guides you through each step, so you can create an appealing
+            profile that attracts serious buyers, without any cost or complications.
+          </p>
         </div>
         <div class="flex gap-3 flex-col">
           <h4 class="rotate-title">Step 2</h4>
           <h3>Dealers Bid, You Decide</h3>
-          <p>Once your car's profile is complete, it goes to auction, where a network of verified dealers are ready to
-            compete for your vehicle. You're in the driver's seat as bids roll in - the power to get the best price is
-            in your hands. And with AutoSensei's auction system, you set the timeline, so you can sell at your pace,
-            whether that's lightning-fast or on a more relaxed schedule.</p>
+          <p>
+            Once your car's profile is complete, it goes to auction, where a network of verified dealers are ready to compete for your vehicle. You're in the driver's seat as bids roll in - the power
+            to get the best price is in your hands. And with AutoSensei's auction system, you set the timeline, so you can sell at your pace, whether that's lightning-fast or on a more relaxed
+            schedule.
+          </p>
         </div>
         <div class="flex gap-3 flex-col">
           <h4 class="rotate-title">Step 3</h4>
           <h3>Close the Deal & Get Paid, Fast & Easy</h3>
-          <p>After selecting the winning bid, AutoSensei makes closing the deal a breeze. Choose a convenient time and
-            location for the car handover. We'll handle all the paperwork, so you don't have to worry about the details.
-            Once the buyer has your car, you'll receive your payment within 48 hours. It's that simple – no hidden fees,
-            no last-minute haggling. Move on to your next chapter with cash in hand.</p>
+          <p>
+            After selecting the winning bid, AutoSensei makes closing the deal a breeze. Choose a convenient time and location for the car handover. We'll handle all the paperwork, so you don't have
+            to worry about the details. Once the buyer has your car, you'll receive your payment within 48 hours. It's that simple – no hidden fees, no last-minute haggling. Move on to your next
+            chapter with cash in hand.
+          </p>
         </div>
       </div>
       <div class="relative order-1 mt-14 sm:mt-0 md:order-2 sm:h-[80vh]">
@@ -95,25 +100,23 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 783" fill="none">
             <path
               d="M331.227 761.637L36.0208 413.348C28.265 404.197 41.4545 389.954 51.3416 396.746C182.253 486.676 371.073 592.595 448.069 549.237C565.54 483.087 127.004 305.709 203.759 212.653C265.163 138.208 562.329 367.607 703.237 491.613C603.415 350.233 420.996 54.9708 489.9 4.9565C576.03 -57.5614 815.436 371.941 876.14 332.768"
-              stroke="#1A1A1A" stroke-width="66" />
+              stroke="#1A1A1A"
+              stroke-width="66"
+            />
           </svg>
         </div>
-        <div class="h-[70vh] w-[100%] sm:w-[inherit] sm:h-[inherit] ">
-          <img class="w-full object-cover  h-full" src="../assets/img/png/celular.png" alt="">
+        <div class="h-[70vh] w-[100%] sm:w-[inherit] sm:h-[inherit]">
+          <img class="w-full object-cover h-full" src="../assets/img/png/celular.png" alt="" />
         </div>
-
       </div>
-
     </div>
     <div class="flex w-full justify-center flex-col gap-3 items-center">
       <p class="font-semibold">Want to know more?</p>
       <button @click="goToHome()" class="btn-free bg-primary">
-        <p class="font-bold ">Get Started Today</p>
+        <p class="font-bold">Get Started Today</p>
         <p class="btn-free_card">Free</p>
         <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
-          <path
-            d="M13.6715 12.0007L8.72168 7.05093L10.1359 5.63672L16.4999 12.0007L10.1359 18.3646L8.72168 16.9504L13.6715 12.0007Z"
-            fill="black" />
+          <path d="M13.6715 12.0007L8.72168 7.05093L10.1359 5.63672L16.4999 12.0007L10.1359 18.3646L8.72168 16.9504L13.6715 12.0007Z" fill="black" />
         </svg>
       </button>
     </div>
@@ -122,121 +125,110 @@
     <!--   <img class="absolute w-full top-0 left-0 object-cover h-full" :src="bucket + 'public/svg/lines/lineHomeWhy.svg'"
       alt=""> -->
     <div class="relative text-center mb-14">
-      <h2> Why AutoSensei?</h2>
-      <p class=" text-xs md:text-lg font-normal text-[#464B50] text-center">Auction your car to dealers right from your
-        home, for
-        the
-        best price.
-      </p>
+      <h2>Why AutoSensei?</h2>
+      <p class="text-xs md:text-lg font-normal text-[#464B50] text-center">Auction your car to dealers right from your home, for the best price.</p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 p-4 gap-10 md:gap-20 relative lg:px-20 h-full">
       <div v-for="(item, index) in WhyAutoSensei" :key="index" class="flex flex-col items-center gap-5">
         <component :is="item.icon"></component>
-        <h5 class=" text-2xl text-center font-semibold text-base-black"> {{ item.title }} </h5>
-        <p class=" text-xs md:text-sm text-center text-[#464B50] font-normal"> {{ item.pre_title }}</p>
+        <h5 class="text-2xl text-center font-semibold text-base-black">{{ item.title }}</h5>
+        <p class="text-xs md:text-sm text-center text-[#464B50] font-normal">{{ item.pre_title }}</p>
       </div>
     </div>
-    <div class="w-full justify-center flex-col gap-5 items-center relative mt-5 flex ">
-      <p class=" font-semibold text-xs md:text-base">Join thousands of satisfied car sellers today!</p>
+    <div class="w-full justify-center flex-col gap-5 items-center relative mt-5 flex">
+      <p class="font-semibold text-xs md:text-base">Join thousands of satisfied car sellers today!</p>
       <!--    <button id="getStarted" @click="goToHome()" class="btn bg-primary text-base-black">Get Started</button> -->
       <button id="getStarted" @click="goToHome()" class="btn-free bg-primary">
-        <p class="font-bold ">Get Started Today</p>
+        <p class="font-bold">Get Started Today</p>
         <p class="btn-free_card">Free</p>
-        <svg class=" absolute right-3 " xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
-          fill="none">
-          <path
-            d="M13.6715 12.0007L8.72168 7.05093L10.1359 5.63672L16.4999 12.0007L10.1359 18.3646L8.72168 16.9504L13.6715 12.0007Z"
-            fill="black" />
+        <svg class="absolute right-3" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+          <path d="M13.6715 12.0007L8.72168 7.05093L10.1359 5.63672L16.4999 12.0007L10.1359 18.3646L8.72168 16.9504L13.6715 12.0007Z" fill="black" />
         </svg>
       </button>
     </div>
   </div>
   <div class="py-12">
-    <h2 class="text-2xl md:text-4xl text-center  p-5 leading-[40px] md:leading-[50px]"> <strong> People who
-        have
-        sold their <br> car </strong> with AutoSensei</h2>
-    <div class="p-5  grid grid-cols-1 md:grid-cols-3 2xl:flex gap-6 items-baseline justify-center">
-      <div class="flex items-center md:max-w-sm  justify-center flex-col ">
-        <div @click="opneModalVideo(1, 'Mei Zhang - Ford Focus ST 2017')"
-          class="bg-[#6D53B0] w-full  transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500  cursor-pointer rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
-          <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
-            viewBox="0 0 340 192" fill="none">
+    <h2 class="text-2xl md:text-4xl text-center p-5 leading-[40px] md:leading-[50px]">
+      <strong>
+        People who have sold their
+        <br />
+        car
+      </strong>
+      with AutoSensei
+    </h2>
+    <div class="p-5 grid grid-cols-1 md:grid-cols-3 2xl:flex gap-6 items-baseline justify-center">
+      <div class="flex items-center md:max-w-sm justify-center flex-col">
+        <div
+          @click="opneModalVideo(1, 'Mei Zhang - Ford Focus ST 2017')"
+          class="bg-[#6D53B0] w-full transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 cursor-pointer rounded-xl py-6 overflow-hidden relative flex justify-center items-center"
+        >
+          <svg class="absolute left-0 w-full top-0" xmlns="http://www.w3.org/2000/svg" width="340" height="192" viewBox="0 0 340 192" fill="none">
             <path
               d="M119.964 -121.692L-5.1401 25.9068C-8.4269 29.7846 -2.83739 35.8206 1.35258 32.9423C56.8308 -5.16843 136.849 -50.0551 169.479 -31.6807C219.261 -3.6475 33.4169 71.5223 65.9444 110.958C91.9665 142.507 217.901 45.2908 277.615 -7.26062C235.312 52.6536 158.006 177.781 187.206 198.976C223.707 225.47 325.163 43.4544 350.889 60.055"
-              stroke="#1A1A1A" stroke-width="44" />
+              stroke="#1A1A1A"
+              stroke-width="44"
+            />
           </svg>
 
+          <img class="w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full border-2 md:border-8 border-base-black" src="../assets/img/png/meizhang.png" alt="" />
 
-          <img
-            class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full border-2  md:border-8 border-base-black "
-            src="../assets/img/png/meizhang.png" alt="">
-
-          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px]  right-5 top-0  z-50 cursor-pointer " />
-
+          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px] right-5 top-0 z-50 cursor-pointer" />
         </div>
         <div class="mt-4 p-2 text-center">
-          <p class="font-bold text-xl ">Mei Zhang</p>
+          <p class="font-bold text-xl">Mei Zhang</p>
           <p>Ford Focus ST 2017</p>
-          <p class="mt-4">“Selling my Ford Focus was incredibly smooth. Their detailed guides and easy-to-use platform
-            made the
-            entire
-            process quick and hassle-free.”
-          </p>
+          <p class="mt-4">“Selling my Ford Focus was incredibly smooth. Their detailed guides and easy-to-use platform made the entire process quick and hassle-free.”</p>
         </div>
-
       </div>
-      <div class="flex items-center md:max-w-sm  justify-center flex-col ">
-        <div @click="opneModalVideo(2, 'Tasha Williams - 2018 Ford Fusion')"
-          class="bg-[#6D53B0] w-full cursor-pointer transition ease-in-out   hover:-translate-y-1 hover:scale-110 duration-500 rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
-          <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
-            viewBox="0 0 340 192" fill="none">
+      <div class="flex items-center md:max-w-sm justify-center flex-col">
+        <div
+          @click="opneModalVideo(2, 'Tasha Williams - 2018 Ford Fusion')"
+          class="bg-[#6D53B0] w-full cursor-pointer transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 rounded-xl py-6 overflow-hidden relative flex justify-center items-center"
+        >
+          <svg class="absolute left-0 w-full top-0" xmlns="http://www.w3.org/2000/svg" width="340" height="192" viewBox="0 0 340 192" fill="none">
             <path
               d="M119.964 -121.692L-5.1401 25.9068C-8.4269 29.7846 -2.83739 35.8206 1.35258 32.9423C56.8308 -5.16843 136.849 -50.0551 169.479 -31.6807C219.261 -3.6475 33.4169 71.5223 65.9444 110.958C91.9665 142.507 217.901 45.2908 277.615 -7.26062C235.312 52.6536 158.006 177.781 187.206 198.976C223.707 225.47 325.163 43.4544 350.889 60.055"
-              stroke="#1A1A1A" stroke-width="44" />
+              stroke="#1A1A1A"
+              stroke-width="44"
+            />
           </svg>
-          <img
-            class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full  border-2 md:border-8 border-base-black "
-            src="../assets/img/png/tashawillians.png" alt="">
-          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px]  right-5 top-0  z-50 cursor-pointer " />
+          <img class="w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full border-2 md:border-8 border-base-black" src="../assets/img/png/tashawillians.png" alt="" />
+          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px] right-5 top-0 z-50 cursor-pointer" />
         </div>
         <div class="mt-4 p-2 text-center">
-          <p class="font-bold text-xl ">Tasha Williams</p>
+          <p class="font-bold text-xl">Tasha Williams</p>
           <p>2018 Ford Fusion</p>
-          <p class="mt-4">“AutoSensei made selling my 2018 Ford Fusion a breeze. Their comprehensive support and
-            user-friendly platform ensured a seamless experience from start to finish.”
-          </p>
+          <p class="mt-4">“AutoSensei made selling my 2018 Ford Fusion a breeze. Their comprehensive support and user-friendly platform ensured a seamless experience from start to finish.”</p>
         </div>
-
       </div>
-      <div class="flex items-center md:max-w-sm  justify-center flex-col ">
-        <div @click="opneModalVideo(3, 'Alex Martinez - 2014 Chevrolet Traverse')"
-          class="bg-[#6D53B0] w-full cursor-pointer transition ease-in-out   hover:-translate-y-1 hover:scale-110 duration-500 rounded-xl py-6 overflow-hidden relative flex justify-center items-center">
-          <svg class=" absolute left-0 w-full top-0  " xmlns="http://www.w3.org/2000/svg" width="340" height="192"
-            viewBox="0 0 340 192" fill="none">
+      <div class="flex items-center md:max-w-sm justify-center flex-col">
+        <div
+          @click="opneModalVideo(3, 'Alex Martinez - 2014 Chevrolet Traverse')"
+          class="bg-[#6D53B0] w-full cursor-pointer transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 rounded-xl py-6 overflow-hidden relative flex justify-center items-center"
+        >
+          <svg class="absolute left-0 w-full top-0" xmlns="http://www.w3.org/2000/svg" width="340" height="192" viewBox="0 0 340 192" fill="none">
             <path
               d="M119.964 -121.692L-5.1401 25.9068C-8.4269 29.7846 -2.83739 35.8206 1.35258 32.9423C56.8308 -5.16843 136.849 -50.0551 169.479 -31.6807C219.261 -3.6475 33.4169 71.5223 65.9444 110.958C91.9665 142.507 217.901 45.2908 277.615 -7.26062C235.312 52.6536 158.006 177.781 187.206 198.976C223.707 225.47 325.163 43.4544 350.889 60.055"
-              stroke="#1A1A1A" stroke-width="44" />
+              stroke="#1A1A1A"
+              stroke-width="44"
+            />
           </svg>
-          <img
-            class=" w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full  border-2 md:border-8 border-base-black "
-            src="../assets/img/png/alexmartinez.png" alt="">
-          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px]  right-5 top-0  z-50 cursor-pointer " />
+          <img class="w-[80px] h-[80px] 2xl:w-[141px] 2xl:h-[141px] relative object-cover rounded-full border-2 md:border-8 border-base-black" src="../assets/img/png/alexmartinez.png" alt="" />
+          <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[40px] right-5 top-0 z-50 cursor-pointer" />
         </div>
         <div class="mt-4 p-2 text-center">
-          <p class="font-bold text-xl ">Alex Martinez</p>
+          <p class="font-bold text-xl">Alex Martinez</p>
           <p>2014 Chevrolet Traverse</p>
-          <p class="mt-4">“Selling my Chevy Traverse through AutoSensei was a fantastic experience. Took me only 2
-            days!”
-          </p>
+          <p class="mt-4">“Selling my Chevy Traverse through AutoSensei was a fantastic experience. Took me only 2 days!”</p>
         </div>
-
       </div>
     </div>
   </div>
   <div class="py-12 bg-[#F3F4F5] 2xl:px-20">
-    <h2 class="text-2xl md:text-4xl text-center  sm:p-5 leading-[40px] md:leading-[50px]"> <strong> What people are
-        saying
-      </strong> <br> about AutoSensei
+    <h2 class="text-2xl md:text-4xl text-center sm:p-5 leading-[40px] md:leading-[50px]">
+      <strong>What people are saying</strong>
+      <br />
+      about AutoSensei
     </h2>
     <!-- <div class="w-full justify-center  flex items-center">
       <div class="flex flex-col lg:flex-row items-center gap-2">
@@ -256,35 +248,38 @@
         <img class="w-[80px]" src="@/assets/svg/google-socila.svg" alt="">
       </div>
     </div> -->
-    <div
-      class="grid grid-cols-1 place-content-center place-items-center md:grid-cols-2 lg:grid-cols-3  p-2  mt-10  gap-5">
-      <div class="bg-white p-5 max-w-xl w-full h-full  shadow-lg flex rounded-2xl flex-col gap-2  justify-between ">
+    <div class="grid grid-cols-1 place-content-center place-items-center md:grid-cols-2 lg:grid-cols-3 p-2 mt-10 gap-5">
+      <div class="bg-white p-5 max-w-xl w-full h-full shadow-lg flex rounded-2xl flex-col gap-2 justify-between">
         <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
           <path
             d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
-            fill="#6D53B0" />
+            fill="#6D53B0"
+          />
         </svg>
-        <p>I was worried about selling my 2018 Mazda CX-5, but <span class="text-[#6D53B0]"> AutoSensei made it
-            incredibly
-            simple. </span> Their comprehensive
-          listing service attracted many potential dealers, and the platform's security measures ensured a safe and
-          smooth
-          sale.
+        <p>
+          I was worried about selling my 2018 Mazda CX-5, but
+          <span class="text-[#6D53B0]">AutoSensei made it incredibly simple.</span>
+          Their comprehensive listing service attracted many potential dealers, and the platform's security measures ensured a safe and smooth sale.
         </p>
         <div>
           <div class="py-4">
-            <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
-              :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
-              :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
-            </star-rating>
+            <star-rating
+              :starSize="20"
+              :rating="5"
+              :read-only="true"
+              :increment="0.01"
+              :active-color="['#FF333E', '#FF9A02', '#FBDB17']"
+              :show-rating="false"
+              :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']"
+            ></star-rating>
           </div>
           <div class="flex w-full justify-between items-center">
-            <div class="flex  gap-2 items-center">
-              <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                <img class="w-full h-full  rounded-full object-cover" src="../assets/img/png/SarahJohnson.png" alt="">
+            <div class="flex gap-2 items-center">
+              <div class="w-[50px] h-[50px] shadow-lg rounded-full overflow-hidden">
+                <img class="w-full h-full rounded-full object-cover" src="../assets/img/png/SarahJohnson.png" alt="" />
               </div>
               <div>
-                <p class=" font-semibold ">Sarah Johnson</p>
+                <p class="font-semibold">Sarah Johnson</p>
                 <p>2018 Mazda CX-5</p>
               </div>
             </div>
@@ -296,31 +291,36 @@
           </div>
         </div>
       </div>
-      <div class="bg-white p-5 max-w-xl w-full h-full shadow-lg flex rounded-2xl flex-col gap-2  justify-between ">
+      <div class="bg-white p-5 max-w-xl w-full h-full shadow-lg flex rounded-2xl flex-col gap-2 justify-between">
         <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
           <path
             d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
-            fill="#6D53B0" />
+            fill="#6D53B0"
+          />
         </svg>
-        <p>AutoSensei.ca helped me get the best value for my 2017 Honda CR-V. The platform's auction got me a fair deal.
-          <span class="text-[#6D53B0]"> AutoSensei made it
-            incredibly
-            simple. </span>
+        <p>
+          AutoSensei.ca helped me get the best value for my 2017 Honda CR-V. The platform's auction got me a fair deal.
+          <span class="text-[#6D53B0]">AutoSensei made it incredibly simple.</span>
         </p>
         <div>
           <div class="py-4">
-            <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
-              :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
-              :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
-            </star-rating>
+            <star-rating
+              :starSize="20"
+              :rating="5"
+              :read-only="true"
+              :increment="0.01"
+              :active-color="['#FF333E', '#FF9A02', '#FBDB17']"
+              :show-rating="false"
+              :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']"
+            ></star-rating>
           </div>
           <div class="flex w-full justify-between items-center">
-            <div class="flex  gap-2 items-center">
-              <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                <img class="w-full h-full rounded-full object-cover" src="../assets/img/png/MikeThompson.png" alt="">
+            <div class="flex gap-2 items-center">
+              <div class="w-[50px] h-[50px] shadow-lg rounded-full overflow-hidden">
+                <img class="w-full h-full rounded-full object-cover" src="../assets/img/png/MikeThompson.png" alt="" />
               </div>
               <div>
-                <p class=" font-semibold ">Mike Thompson</p>
+                <p class="font-semibold">Mike Thompson</p>
                 <p>2017 Honda CR-V</p>
               </div>
             </div>
@@ -332,31 +332,36 @@
           </div>
         </div>
       </div>
-      <div class="bg-white p-5 max-w-xl w-full h-full shadow-lg flex rounded-2xl flex-col gap-2  justify-between ">
+      <div class="bg-white p-5 max-w-xl w-full h-full shadow-lg flex rounded-2xl flex-col gap-2 justify-between">
         <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
           <path
             d="M13.637 4.75862C11.3021 4.89655 9.41426 5.47126 7.97356 6.48276C6.58253 7.49425 5.76282 8.87356 5.51442 10.6207C5.46474 11.2184 5.46474 11.8621 5.51442 12.5517C5.91186 12 6.40865 11.6092 7.00481 11.3793C7.60096 11.1494 8.32131 11.0345 9.16586 11.0345C10.5072 11.0345 11.6747 11.5172 12.6683 12.4828C13.6619 13.4483 14.1587 14.7126 14.1587 16.2759C14.1587 17.977 13.5625 19.3563 12.3702 20.4138C11.1779 21.4713 9.61298 22 7.67548 22C5.24119 22 3.35336 21.1724 2.01202 19.5172C0.670673 17.8161 0 15.5862 0 12.8276C0 9.47126 1.09295 6.57471 3.27885 4.13793C5.51442 1.65517 8.96715 0.275861 13.637 0V4.75862ZM30.4784 4.75862C28.0937 4.89655 26.2059 5.47126 24.8149 6.48276C23.4239 7.49425 22.6042 8.87356 22.3558 10.6207C22.3061 11.0345 22.2812 11.6782 22.2812 12.5517C22.7284 12 23.25 11.6092 23.8462 11.3793C24.4423 11.1494 25.1627 11.0345 26.0072 11.0345C27.3486 11.0345 28.516 11.5172 29.5096 12.4828C30.5032 13.4483 31 14.7126 31 16.2759C31 17.977 30.4038 19.3563 29.2115 20.4138C28.0192 21.4713 26.4543 22 24.5168 22C22.0329 22 20.1202 21.1724 18.7788 19.5172C17.4872 17.8161 16.8413 15.5862 16.8413 12.8276C16.8413 9.47126 17.9343 6.57471 20.1202 4.13793C22.3558 1.65517 25.8085 0.275861 30.4784 0V4.75862Z"
-            fill="#6D53B0" />
+            fill="#6D53B0"
+          />
         </svg>
-        <p>AutoSensei auction was a game-changer in selling my 2017 Nissan Rogue. The detailed listing options and
-          extensive reach helped me find the right buyer quickly.<span class="text-[#6D53B0]"> AutoSensei made it
-            incredibly
-            simple. </span>
+        <p>
+          AutoSensei auction was a game-changer in selling my 2017 Nissan Rogue. The detailed listing options and extensive reach helped me find the right buyer quickly.
+          <span class="text-[#6D53B0]">AutoSensei made it incredibly simple.</span>
         </p>
         <div>
           <div class="py-4">
-            <star-rating :starSize="20" :rating="5" :read-only="true" :increment="0.01"
-              :active-color="['#FF333E', '#FF9A02', '#FBDB17']" :show-rating="false"
-              :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']">
-            </star-rating>
+            <star-rating
+              :starSize="20"
+              :rating="5"
+              :read-only="true"
+              :increment="0.01"
+              :active-color="['#FF333E', '#FF9A02', '#FBDB17']"
+              :show-rating="false"
+              :active-border-color="['#FF333E', '#FF9A02', '#FBDB17']"
+            ></star-rating>
           </div>
           <div class="flex w-full justify-between items-center">
-            <div class="flex  gap-2 items-center">
-              <div class="w-[50px] h-[50px] shadow-lg  rounded-full overflow-hidden ">
-                <img class=" w-full h-full  object-top  object-cover" src="../assets/img/png/JamesBrown.png" alt="">
+            <div class="flex gap-2 items-center">
+              <div class="w-[50px] h-[50px] shadow-lg rounded-full overflow-hidden">
+                <img class="w-full h-full object-top object-cover" src="../assets/img/png/JamesBrown.png" alt="" />
               </div>
               <div>
-                <p class=" font-semibold ">James Brown</p>
+                <p class="font-semibold">James Brown</p>
                 <p>2017 Nissan Rogue</p>
               </div>
             </div>
@@ -369,72 +374,65 @@
         </div>
       </div>
     </div>
-
-
   </div>
   <div class="bg-primary relative pt-8 sm:pt-20 sm:py-20">
-
     <div class="relative flex flex-col items-center">
       <Heanding :type="'h2'" :color="'text-base-black '" :msg="'Sell Your Vehicle'" />
-      <p class=" text-xs md:text-lg font-semibold text-blue-dark text-center">No haggling. No obligation. No stress. No
-        fees
-      </p>
-      <button id="sellToday" @click="goToHome()" class="btn-free mt-5 text-white group  relative z-[500]  bg-[#6D53B0]">
-        <p class="font-bold transition-all ease-linear duration-600 group-hover:text-base-black ">Sell Your Car Today
-        </p>
+      <p class="text-xs md:text-lg font-semibold text-blue-dark text-center">No haggling. No obligation. No stress. No fees</p>
+      <button id="sellToday" @click="goToHome()" class="btn-free mt-5 text-white group relative z-[500] bg-[#6D53B0]">
+        <p class="font-bold transition-all ease-linear duration-600 group-hover:text-base-black">Sell Your Car Today</p>
         <p class="btn-free_card">Free</p>
-        <svg class=" absolute right-3 " xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
-          fill="none">
-          <path
-            d="M13.6715 12.0007L8.72168 7.05093L10.1359 5.63672L16.4999 12.0007L10.1359 18.3646L8.72168 16.9504L13.6715 12.0007Z"
-            fill="black" />
+        <svg class="absolute right-3" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+          <path d="M13.6715 12.0007L8.72168 7.05093L10.1359 5.63672L16.4999 12.0007L10.1359 18.3646L8.72168 16.9504L13.6715 12.0007Z" fill="black" />
         </svg>
       </button>
       <!--   <button id="sellToday" @click="goToHome()" class="btn mt-10 bg-base-black text-primary ">Sell Your Car
         Today</button> -->
-      <div class="flex-col p-5 lg:pt-20  h-full  w-full z-50 flex lg:flex-row items-center justify-center gap-10 ">
-        <div
-          class="bg-white shadow-2xl w-[259px] h-[259px] rounded-lg px-12 py-6 flex flex-col items-center justify-center gap-4 ">
-          <img class="w-[93px] h-[80px] object-cover " src="../assets/svg/arrow-social.svg" alt="">
-          <p class="text-[#6D53B0] text-4xl font-['Nohemi']  font-semibold  ">100s</p>
-          <p class=" font-semibold text-center ">of dealerships <br> compete for your car</p>
+      <div class="flex-col p-5 lg:pt-20 h-full w-full z-50 flex lg:flex-row items-center justify-center gap-10">
+        <div class="bg-white shadow-2xl w-[259px] h-[259px] rounded-lg px-12 py-6 flex flex-col items-center justify-center gap-4">
+          <img class="w-[93px] h-[80px] object-cover" src="../assets/svg/arrow-social.svg" alt="" />
+          <p class="text-[#6D53B0] text-4xl font-['Nohemi'] font-semibold">100s</p>
+          <p class="font-semibold text-center">
+            of dealerships
+            <br />
+            compete for your car
+          </p>
         </div>
-        <div
-          class="bg-white shadow-2xl w-[259px] h-[259px] rounded-lg px-12 py-6 flex flex-col items-center justify-center gap-4 ">
-          <img class="w-[93px] h-[80px] object-cover  " src="../assets/svg/like-social.svg" alt="">
-          <p class="text-[#6D53B0]  text-4xl font-['Nohemi'] font-semibold  ">3,000+</p>
-          <p class=" font-semibold text-center ">happy <br>
-            customers</p>
+        <div class="bg-white shadow-2xl w-[259px] h-[259px] rounded-lg px-12 py-6 flex flex-col items-center justify-center gap-4">
+          <img class="w-[93px] h-[80px] object-cover" src="../assets/svg/like-social.svg" alt="" />
+          <p class="text-[#6D53B0] text-4xl font-['Nohemi'] font-semibold">3,000+</p>
+          <p class="font-semibold text-center">
+            happy
+            <br />
+            customers
+          </p>
         </div>
-        <div
-          class="bg-white shadow-2xl w-[259px] h-[259px]   rounded-lg px-12 py-6 flex flex-col items-center justify-center gap-4 ">
-          <img class="w-[93px] h-[80px] object-cover  " src="../assets/svg/chat-social.svg" alt="">
-          <p class="text-[#6D53B0] text-4xl font-['Nohemi']  font-semibold  ">48hrs</p>
-          <p class=" font-semibold text-center ">till it’s gone, paid, <br>
-            and sold!</p>
+        <div class="bg-white shadow-2xl w-[259px] h-[259px] rounded-lg px-12 py-6 flex flex-col items-center justify-center gap-4">
+          <img class="w-[93px] h-[80px] object-cover" src="../assets/svg/chat-social.svg" alt="" />
+          <p class="text-[#6D53B0] text-4xl font-['Nohemi'] font-semibold">48hrs</p>
+          <p class="font-semibold text-center">
+            till it’s gone, paid,
+            <br />
+            and sold!
+          </p>
         </div>
       </div>
     </div>
 
-    <img class="relative mt-6 md:absolute w-full bottom-0 " src="@/assets/svg/bannerpeople.svg" alt="">
+    <img class="relative mt-6 md:absolute w-full bottom-0" src="@/assets/svg/bannerpeople.svg" alt="" />
   </div>
 
-  <div v-if="modalVideo"
-    class="fixed inset-0 flex items-end md:items-center z-50 md:justify-center bg-base-black  bg-opacity-50">
-    <div class="max-w-md w-full overflow-auto  bg-white rounded-lg shadow-xl animation-fade-modal">
-      <div class=" p-2 md:p-4 rounded-t-lg  gap-3 bg-[#22282F] flex items-center justify-between">
-        <p class=" text-sm md:text-xl text-white"> {{ nameVideo }} </p>
-        <svg @click="closeModalVideo" xmlns="http://www.w3.org/2000/svg"
-          class=" w-6 h-8 md:w-8   md:h-8  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  <div v-if="modalVideo" class="fixed inset-0 flex items-end md:items-center z-50 md:justify-center bg-base-black bg-opacity-50">
+    <div class="max-w-md w-full overflow-auto bg-white rounded-lg shadow-xl animation-fade-modal">
+      <div class="p-2 md:p-4 rounded-t-lg gap-3 bg-[#22282F] flex items-center justify-between">
+        <p class="text-sm md:text-xl text-white">{{ nameVideo }}</p>
+        <svg @click="closeModalVideo" xmlns="http://www.w3.org/2000/svg" class="w-6 h-8 md:w-8 md:h-8 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="#fff">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
       <div class="relative w-full h-[60vh]">
-        <IconPlay v-if="!isPlaying" @click="play"
-          class="absolute w-[50px] md:w-auto z-50 cursor-pointer top-[42%] left-[43%]" />
-        <video @click="isPlaying ? paused : play" ref="videoPlayer" poster :controls="isPlaying ? true : false"
-          class="w-full object-cover h-full">
+        <IconPlay v-if="!isPlaying" @click="play" class="absolute w-[50px] md:w-auto z-50 cursor-pointer top-[42%] left-[43%]" />
+        <video @click="isPlaying ? paused : play" ref="videoPlayer" poster :controls="isPlaying ? true : false" class="w-full object-cover h-full">
           <source :src="videoMedia" type="video/mp4" />
         </video>
       </div>
@@ -443,26 +441,26 @@
 </template>
 
 <script>
-import { ref, watch, onMounted, computed } from "vue";
-import IconCardFree from '../components/icons/home/IconCardFree.vue'
-import IconPlay from '../components/icons/home/iconPlay.vue'
-import iconCheckbox from '../components/icons/home/iconCheckbox.vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, watch, onMounted, computed } from 'vue';
+import IconCardFree from '../components/icons/home/IconCardFree.vue';
+import IconPlay from '../components/icons/home/iconPlay.vue';
+import iconCheckbox from '../components/icons/home/iconCheckbox.vue';
+import { useRoute, useRouter } from 'vue-router';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from '@/stores/auth';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import iconInstagram from '@/components/icons/redes/iconInstagram.vue'
-import iconFacebook from '@/components/icons/redes/iconFacebook.vue'
-import iconTwitter from '@/components/icons/redes/iconTwitter.vue'
-import iconYoutube from '@/components/icons/redes/iconYoutube.vue'
-import iconLinkedin from '@/components/icons/redes/iconLinkedin.vue'
+import iconInstagram from '@/components/icons/redes/iconInstagram.vue';
+import iconFacebook from '@/components/icons/redes/iconFacebook.vue';
+import iconTwitter from '@/components/icons/redes/iconTwitter.vue';
+import iconYoutube from '@/components/icons/redes/iconYoutube.vue';
+import iconLinkedin from '@/components/icons/redes/iconLinkedin.vue';
 
-import { WhyAutoSensei } from "../Json/Home";
-import Heanding from "../components/Headings/Heanding.vue";
+import { WhyAutoSensei } from '../Json/Home';
+import Heanding from '../components/Headings/Heanding.vue';
 export default {
   components: {
     Swiper,
@@ -478,58 +476,62 @@ export default {
     iconLinkedin,
   },
   setup() {
-    let videoPlayer = ref()
-    const isPlaying = ref(false)
+    let videoPlayer = ref();
+    const isPlaying = ref(false);
     const route = useRoute();
     const router = useRouter();
-    const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS))
-    const authStore = useAuthStore()
-    const modalVideo = ref(false)
-    const videoMedia = ref(null)
-    const nameVideo = ref(null)
+    const bucket = ref(computed(() => import.meta.env.VITE_BASE_URL_ASSETS));
+    const authStore = useAuthStore();
+    const modalVideo = ref(false);
+    const videoMedia = ref(null);
+    const nameVideo = ref(null);
 
     const opneModalVideo = (option, name) => {
       switch (option) {
         case 1:
-          nameVideo.value = name
-          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD3+(Render+V2).mp4'
+          nameVideo.value = name;
+          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD3+(Render+V2).mp4';
 
           break;
         case 2:
-          nameVideo.value = name
-          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD2+(Render+V2).mp4'
+          nameVideo.value = name;
+          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD2+(Render+V2).mp4';
 
           break;
         case 3:
-          nameVideo.value = name
-          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD1+(Render+V2).mp4'
+          nameVideo.value = name;
+          videoMedia.value = 'https://s3.us-east-2.amazonaws.com/files.autosensei.ca/public/video/AD1+(Render+V2).mp4';
 
           break;
         default:
           break;
-
       }
-      modalVideo.value = true
-    }
+      modalVideo.value = true;
+    };
 
     const closeModalVideo = () => {
-      modalVideo.value = false
-      videoMedia.value = null
-      isPlaying.value = false
-    }
-    const goToHome = async () => {
+      modalVideo.value = false;
+      videoMedia.value = null;
+      isPlaying.value = false;
+    };
+    const goToHome = async op => {
+      console.log('op', op);
+      if (op == 3) {
+        await router.push({ path: '/liveSeller' });
+        return;
+      }
       if (authStore.userData._id) {
         switch (authStore.userData.type) {
           case 0:
-            await router.push({ path: '/inicio' })
+            await router.push({ path: '/inicio' });
 
             break;
           case 1:
-            await router.push({ path: '/all' })
+            await router.push({ path: '/all' });
 
             break;
           case 2:
-            await router.push({ path: '/upcoming' })
+            await router.push({ path: '/upcoming' });
 
             break;
 
@@ -537,19 +539,17 @@ export default {
             break;
         }
       } else {
-        await router.push({ path: '/login/sellers' })
-
+        await router.push({ path: '/login/sellers' });
       }
-    }
+    };
     const play = () => {
       videoPlayer.value.play();
-      isPlaying.value = true
-    }
+      isPlaying.value = true;
+    };
     const paused = () => {
       videoPlayer.value.pause();
-      isPlaying.value = false
-    }
-
+      isPlaying.value = false;
+    };
 
     return {
       pagination: {
